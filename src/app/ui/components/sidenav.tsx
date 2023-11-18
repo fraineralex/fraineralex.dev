@@ -1,3 +1,11 @@
+import {
+  GitHubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  TwitterIcon
+} from './SvgIcons'
+import ItemLink from './item-link'
+
 export default function SideNav () {
   return (
     <header className='lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24'>
@@ -41,6 +49,26 @@ export default function SideNav () {
           </ul>
         </nav>
       </article>
+      <ul className='ml-1 mt-8 flex items-center' aria-label='Social media'>
+        <ItemLink title='Github' href='https://github.com/fraineralex'>
+          <GitHubIcon />
+        </ItemLink>
+
+        <ItemLink
+          title='Linkedin'
+          href='https://www.linkedin.com/in/fraineralex'
+        >
+          <LinkedinIcon />
+        </ItemLink>
+        
+        <ItemLink title='Instagram' href='https://instagram.com/frainer.alex'>
+          <InstagramIcon />
+        </ItemLink>
+
+        <ItemLink title='Twitter' href='https://twitter.com/fraineralex'>
+          <TwitterIcon />
+        </ItemLink>
+      </ul>
     </header>
   )
 }

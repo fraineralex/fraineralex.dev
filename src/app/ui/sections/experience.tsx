@@ -1,4 +1,5 @@
-import ExperienceCard from "../components/experience-card";
+import { ArrowRigthIcon, LinkIcon } from '../components/SvgIcons'
+import ExperienceCard from '../components/experience-card'
 
 export default function Experience () {
   return (
@@ -25,7 +26,48 @@ export default function Experience () {
             description='I work on a team that builds and maintains a design system for Dell’s internal applications. I also work on a team that builds and maintains a design system for Dell’s internal applications.'
             skills={['React', 'TypeScript', 'Storybook', 'Jest', 'Cypress']}
           />
+          <ExperienceCard
+            startDate='2018'
+            endDate='Present'
+            title='Senior Software Engineer'
+            company={{
+              name: 'Dell',
+              website: 'https://dell.com'
+            }}
+            description='I work on a team that builds and maintains a design system for Dell’s internal applications. I also work on a team that builds and maintains a design system for Dell’s internal applications.'
+            skills={['React', 'TypeScript', 'Storybook', 'Jest', 'Cypress']}
+          />
+          <ExperienceCard
+            startDate='2018'
+            endDate='Present'
+            title='Senior Software Engineer'
+            company={{
+              name: 'Dell',
+              website: 'https://dell.com'
+            }}
+            description='I work on a team that builds and maintains a design system for Dell’s internal applications. I also work on a team that builds and maintains a design system for Dell’s internal applications.'
+            skills={['React', 'TypeScript', 'Storybook', 'Jest', 'Cypress']}
+          />
         </ol>
+        <div className='mt-12'>
+          <a
+            className='inline-flex items-center font-medium leading-tight text-slate-200 font-semibold text-slate-200 group'
+            aria-label='View Full Résumé'
+            href='/resume.pdf'
+          >
+            <h6>
+              <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
+                View Full {' '}
+              </strong>
+              <span className='whitespace-nowrap'>
+                <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
+                  Résumé
+                </strong>
+                <ArrowRigthIcon />
+              </span>
+            </h6>
+          </a>
+        </div>
       </article>
     </section>
   )

@@ -5,6 +5,7 @@ import {
   TwitterIcon
 } from './SvgIcons'
 import ItemLink from './item-link'
+import Image from 'next/image'
 
 export default function SideNav () {
   return (
@@ -17,8 +18,7 @@ export default function SideNav () {
           Experienced Full Stack Developer
         </h2>
         <p className='mt-4 max-w-xs leading-normal'>
-          Dolore rem recusandae necessitatibus ab consequatur dolorum, libero
-          commodi.
+          I build outstanding and user-friendly digital journeys for the web.
         </p>
         <nav className='nav hidden lg:block' aria-label='In-page jump links'>
           <ul className='mt-16 w-max'>
@@ -60,7 +60,7 @@ export default function SideNav () {
         >
           <LinkedinIcon />
         </ItemLink>
-        
+
         <ItemLink title='Instagram' href='https://instagram.com/frainer.alex'>
           <InstagramIcon />
         </ItemLink>

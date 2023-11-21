@@ -1,4 +1,13 @@
-export default function About() {
+import Image from 'next/image'
+import ItemLink from '../components/item-link'
+import {
+  GitHubIcon,
+  InstagramIcon,
+  TwitterIcon,
+  LinkedinIcon
+} from '../components/SvgIcons'
+
+export default function About () {
   return (
     <section
       id='about'
@@ -11,18 +20,83 @@ export default function About() {
         </h2>
       </header>
       <article>
+        <figure className='flex justify-center'>
+          <Image
+            width={200}
+            height={200}
+            className='w-auto rounded-full'
+            src='/images/hero/profile.png'
+            alt='Frainer Encarnacion profile picture'
+          />
+        </figure>
+        <ul className='ml-1 mt-4 mb-4 flex items-center justify-center' aria-label='Social media'>
+          <ItemLink title='Github' href='https://github.com/fraineralex'>
+            <GitHubIcon />
+          </ItemLink>
+
+          <ItemLink
+            title='Linkedin'
+            href='https://www.linkedin.com/in/fraineralex'
+          >
+            <LinkedinIcon />
+          </ItemLink>
+
+          <ItemLink title='Instagram' href='https://instagram.com/frainer.alex'>
+            <InstagramIcon />
+          </ItemLink>
+
+          <ItemLink title='Twitter' href='https://twitter.com/fraineralex'>
+            <TwitterIcon />
+          </ItemLink>
+          <ItemLink title='Github' href='https://github.com/fraineralex'>
+            <GitHubIcon />
+          </ItemLink>
+
+          <ItemLink
+            title='Linkedin'
+            href='https://www.linkedin.com/in/fraineralex'
+          >
+            <LinkedinIcon />
+          </ItemLink>
+
+          <ItemLink title='Instagram' href='https://instagram.com/frainer.alex'>
+            <InstagramIcon />
+          </ItemLink>
+
+          <ItemLink title='Twitter' href='https://twitter.com/fraineralex'>
+            <TwitterIcon />
+          </ItemLink>
+          <ItemLink title='Github' href='https://github.com/fraineralex'>
+            <GitHubIcon />
+          </ItemLink>
+
+          <ItemLink
+            title='Linkedin'
+            href='https://www.linkedin.com/in/fraineralex'
+          >
+            <LinkedinIcon />
+          </ItemLink>
+
+          <ItemLink title='Instagram' href='https://instagram.com/frainer.alex'>
+            <InstagramIcon />
+          </ItemLink>
+
+          <ItemLink title='Twitter' href='https://twitter.com/fraineralex'>
+            <TwitterIcon />
+          </ItemLink>
+          
+        </ul>
         <p className='mb-4'>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod
           consequatur, distinctio, doloribus vitae expedita in consequuntur ipsa
-          laudantium labore asperiores quia impedit, sit animi dolores eligendi id
-          voluptates?
+          laudantium labore asperiores quia impedit, sit animi dolores eligendi
+          id voluptates?
         </p>
         <p className='mb-4'>
-          Doloribus corporis totam nostrum illo quisquam, nisi earum
-          iste! Sunt corrupti in, nostrum sint voluptates autem doloremque! Cum
-          aliquid at tempore odit quidem minima dignissimos molestiae quibusdam
-          non, facilis quo quaerat voluptate esse iure temporibus nostrum a ad
-          vel. 
+          Doloribus corporis totam nostrum illo quisquam, nisi earum iste! Sunt
+          corrupti in, nostrum sint voluptates autem doloremque! Cum aliquid at
+          tempore odit quidem minima dignissimos molestiae quibusdam non,
+          facilis quo quaerat voluptate esse iure temporibus nostrum a ad vel.
         </p>
         <p className='mb-4'>
           Dolore rem recusandae necessitatibus ab consequatur dolorum, libero

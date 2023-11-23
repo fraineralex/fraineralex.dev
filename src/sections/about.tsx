@@ -38,10 +38,11 @@ export default function About () {
             width={200}
             height={200}
             className='w-auto rounded-full'
-            src='/images/hero/profile.png'
+            src='/images/hero/profile.jpg'
             alt='Frainer Encarnacion profile picture'
           />
         </figure>
+        <FloatingComponents />
         <ul
           className='ml-1 mt-4 mb-4 flex items-center justify-center'
           aria-label='Social media'

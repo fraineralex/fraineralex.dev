@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import ProjectCard from '../components/project-card'
-import { ArrowRigthIcon } from '../components/SvgIcons'
+import ProjectCard from '../components/project/project-card'
+import { ArrowRigthIcon } from '../components/common/SvgIcons'
 
 export default function Projects () {
   return (

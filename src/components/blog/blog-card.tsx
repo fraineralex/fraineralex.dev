@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { LinkIcon } from './SvgIcons'
+import { LinkIcon } from '../common/SvgIcons'
 import Link from 'next/link'
 
 type Props = {

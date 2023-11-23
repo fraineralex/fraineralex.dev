@@ -1,4 +1,4 @@
-import { LinkIcon } from "./SvgIcons"
+import { LinkIcon } from '../common/SvgIcons'
 
 type Props = {
   startDate: string

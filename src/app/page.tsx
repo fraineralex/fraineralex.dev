@@ -1,9 +1,4 @@
-import About from './ui/sections/about'
-import Experience from './ui/sections/experience'
-import Projects from './ui/sections/projects'
-import Blog from './ui/sections/blog'
-import Footer from './ui/sections/footer'
-import SideNav from './ui/components/sidenav'
+import { About, Experience, Projects, Blog, Footer, SideNav } from '../sections'
 
 export default function Home () {
   return (

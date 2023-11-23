@@ -1,4 +1,4 @@
-import BlogCard from '../components/blog-card'
+import BlogCard from '../components/blog/blog-card'
 
 export default function Blog () {
   return (

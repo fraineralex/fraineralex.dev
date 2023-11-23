@@ -3,9 +3,8 @@ import {
   InstagramIcon,
   LinkedinIcon,
   TwitterIcon
-} from './SvgIcons'
+} from '../common/SvgIcons'
 import ItemLink from './item-link'
-import Image from 'next/image'
 
 export default function SideNav () {
   return (

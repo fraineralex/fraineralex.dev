@@ -1,5 +1,5 @@
-import { ArrowRigthIcon, LinkIcon } from '../components/SvgIcons'
-import ExperienceCard from '../components/experience-card'
+import { ArrowRigthIcon, LinkIcon } from '../components/common/SvgIcons'
+import ExperienceCard from '../components/experience/experience-card'
 
 export default function Experience () {
   return (
@@ -57,7 +57,7 @@ export default function Experience () {
           >
             <h6>
               <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
-                View Full {' '}
+                View Full{' '}
               </strong>
               <span className='whitespace-nowrap'>
                 <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>

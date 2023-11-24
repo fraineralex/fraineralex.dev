@@ -16,37 +16,49 @@ export default function Experience () {
       <article>
         <ol className='group/list'>
           <ExperienceCard
-            startDate='2018'
+            startDate='Jun 2023'
             endDate='Present'
             title='Senior Software Engineer'
             company={{
-              name: 'Dell',
-              website: 'https://dell.com'
+              name: 'Lifter',
+              website: 'https://lifterdo.com'
             }}
-            description='I work on a team that builds and maintains a design system for Dell’s internal applications. I also work on a team that builds and maintains a design system for Dell’s internal applications.'
-            skills={['React', 'TypeScript', 'Storybook', 'Jest', 'Cypress']}
+            description='My role is to develop and deliver customized solutions for our clients. I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.'
+            skills={['JavaScript', 'Python', 'Odoo', 'React', 'Node.js']}
+            contract='Full-time'
+            location='Santo Domingo, Dominican Republic'
+            locationType='Remote'
+            imageName='lifter.png'
           />
           <ExperienceCard
-            startDate='2018'
-            endDate='Present'
-            title='Senior Software Engineer'
+            startDate='Feb'
+            endDate='Jun 2023'
+            title='Full Stack Developer'
             company={{
-              name: 'Dell',
-              website: 'https://dell.com'
+              name: 'International Pack & Paper',
+              website: 'https://ippdr.com'
             }}
-            description='I work on a team that builds and maintains a design system for Dell’s internal applications. I also work on a team that builds and maintains a design system for Dell’s internal applications.'
-            skills={['React', 'TypeScript', 'Storybook', 'Jest', 'Cypress']}
+            description='My role involved creating and customizing features to meet the needs of our clients. This included developing new functionalities, conducting thorough testing, and documenting code, as well as building web solutions using technologies such as JavaScript, Python, and CSS.'
+            skills={['Python', 'JavaScript', 'Odoo', 'Docker', 'React']}
+            contract='Full-time'
+            location='Santo Domingo, Dominican Republic'
+            locationType='Remote'
+            imageName='ipp.png'
           />
           <ExperienceCard
-            startDate='2018'
-            endDate='Present'
-            title='Senior Software Engineer'
+            startDate='Sep 2022'
+            endDate='Feb 2023'
+            title='Full Stack Developer'
             company={{
-              name: 'Dell',
-              website: 'https://dell.com'
+              name: 'Nelmix',
+              website: 'https://nelmix.com'
             }}
-            description='I work on a team that builds and maintains a design system for Dell’s internal applications. I also work on a team that builds and maintains a design system for Dell’s internal applications.'
-            skills={['React', 'TypeScript', 'Storybook', 'Jest', 'Cypress']}
+            description='I worked on creating custom modules for Odoo, focusing on accounting and product management applications tailored to meet the unique needs of our clients. Additionally, I had the opportunity to contribute to the development of various features for web applications.'
+            skills={['JavaScript', 'TypeScript', 'Python', 'Odoo', 'Node.js']}
+            contract='Internship'
+            location='Santo Domingo, Dominican Republic'
+            locationType='Remote'
+            imageName='nelmix.png'
           />
         </ol>
         <div className='mt-12'>

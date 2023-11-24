@@ -1,6 +1,7 @@
 import { LinkIcon } from '../common/SvgIcons'
+import Image from 'next/image'
 
-type Props = {
+interface Props {
   startDate: string
   endDate: string
   title: string
@@ -11,6 +12,10 @@ type Props = {
   }
   description: string
   skills: string[]
+  location?: string
+  locationType?: 'Remote' | 'On-site' | 'Hybrid'
+  contract?: 'Full-time' | 'Part-time' | 'Contract' | 'Internship' | 'Freelance'
+  imageName: string
 }
 
 export default function ExperienceCard ({
@@ -20,19 +25,25 @@ export default function ExperienceCard ({
   otherTitles,
   company,
   description,
-  skills
+  skills,
+  location,
+  locationType,
+  contract,
+  imageName
 }: Props) {
   return (
     <li className='mb-12'>
       <div className='group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50'>
         <span className='absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg'></span>
-        <aside
-          className='z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2'
-          aria-label='2018 to Present'
-        >
-          {startDate} — {endDate}
-        </aside>
-        <article className='z-10 sm:col-span-6'>
+        <Image
+          width={200}
+          height={48}
+          alt={`Image of the job experience ${title} at ${company.name} of Frainer Encarnación`}
+          className='z-10 col-span-2 rounded group-hover:border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:col-span-2 mt-2'
+          src={`/images/experience/${imageName}`}
+          style={{ color: 'transparent' }}
+        />
+        <aside className='z-10 sm:col-span-6'>
           <header className='font-medium leading-snug text-slate-200'>
             <h3>
               <a
@@ -58,6 +69,14 @@ export default function ExperienceCard ({
                   {title}
                 </h5>
               ))}
+            <h5 className='text-slate-500 mt-1 text-sm' aria-hidden='true'>
+              {startDate} — {endDate} · {contract}
+            </h5>
+            {location && locationType && (
+              <h5 className='text-slate-500 mt-1 text-sm' aria-hidden='true'>
+                {location} · {locationType}
+              </h5>
+            )}
           </header>
           <p className='mt-2 text-sm leading-normal'>{description}</p>
           <ul className='mt-2 flex flex-wrap' aria-label='Technologies used'>
@@ -69,7 +88,7 @@ export default function ExperienceCard ({
               </li>
             ))}
           </ul>
-        </article>
+        </aside>
       </div>
     </li>
   )

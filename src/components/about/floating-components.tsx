@@ -11,7 +11,7 @@ export const FloatingComponents = () => {
         size={30}
         className='text-cyan-400 absolute -top-[320px] -right-[40px] animate-[levitate_14s_ease_infinite]'
       />
-
+      
       <FaNodeJs
         size={30}
         className='text-green-500 absolute -top-[320px] -right-[200px] animate-[levitate_14s_ease_infinite]'

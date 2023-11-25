@@ -19,66 +19,41 @@ export default function Projects () {
           <ProjectCard
             projectName='Hacker News Clone'
             description='Wep app that mimics Hacker News using React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience. Additionally, it provides easy access to the comments section for each story.'
-            technologies={[
-              'React',
-              'TypeScript',
-              'Styled Componets',
-              'SWR',
-            ]}
+            technologies={['React', 'TypeScript', 'Styled Componets', 'SWR']}
             deployUrl='https://frainer-hacker-news.surge.sh'
             githubRepositoryUrl='https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr'
             /* starsOnGithub={3} */
-            imageSrc='hacker-news.png'
+            imageSrc='hacker_news.png'
           />
           <ProjectCard
-            projectName='Project Example #1'
-            description='Doloribus corporis totam nostrum illo quisquam, nisi earum iste! Sunt corrupti in, nostrum sint voluptates autem doloremque! Cum aliquid at tempore odit quidem minima dignissimos molestiae quibusdam non, facilis quo quaerat voluptate esse iure temporibus nostrum a ad vel.'
-            technologies={[
-              'React',
-              'TypeScript',
-              'Storybook',
-              'Jest',
-              'Cypress'
-            ]}
-            deployUrl='https://www.github.com'
-            githubRepositoryUrl='https://www.github.com'
-            starsOnGithub={514}
-            imageSrc='trees.jpg'
+            projectName='To Do App'
+            description='An wep application built with React that allows users to create, update, delete, and filter the tasks. Additionally, the tasks are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.'
+            technologies={['React', 'TypeScript', 'Auto Animate', 'JSONBin']}
+            deployUrl='https://frainer-todo-app.surge.sh/'
+            githubRepositoryUrl='https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript'
+            imageSrc='todo.png'
           />
           <ProjectCard
-            projectName='Project Example #1'
-            description='Doloribus corporis totam nostrum illo quisquam, nisi earum iste! Sunt corrupti in, nostrum sint voluptates autem doloremque! Cum aliquid at tempore odit quidem minima dignissimos molestiae quibusdam non, facilis quo quaerat voluptate esse iure temporibus nostrum a ad vel.'
-            technologies={[
-              'React',
-              'TypeScript',
-              'Storybook',
-              'Jest',
-              'Cypress'
-            ]}
-            deployUrl='https://www.github.com'
-            githubRepositoryUrl='https://www.github.com'
-            starsOnGithub={514}
-            imageSrc='trees.jpg'
+            projectName='Chess AI'
+            description='Artificial Intelligence Chess developed with the minimax adversarial search algorithm with alpha beta pruning. It returns the best possible move it has been able to find at the given depth within a specified time interval, at each iteration the algorithm takes into account a series of Heuristics that tell it whether a particular move is good or bad based on the future outcome it might cause.'
+            technologies={['Python', 'Numpy', 'Pygame', 'MiniMax Algorithm']}
+            deployUrl='https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4'
+            githubRepositoryUrl='https://github.com/fraineralex/ChessAI'
+            /* starsOnGithub={514} */
+            imageSrc='chess.png'
           />
           <ProjectCard
-            projectName='Project Example #1'
-            description='Doloribus corporis totam nostrum illo quisquam, nisi earum iste! Sunt corrupti in, nostrum sint voluptates autem doloremque! Cum aliquid at tempore odit quidem minima dignissimos molestiae quibusdam non, facilis quo quaerat voluptate esse iure temporibus nostrum a ad vel.'
-            technologies={[
-              'React',
-              'TypeScript',
-              'Storybook',
-              'Jest',
-              'Cypress'
-            ]}
-            deployUrl='https://www.github.com'
-            githubRepositoryUrl='https://www.github.com'
-            starsOnGithub={514}
-            imageSrc='trees.jpg'
+            projectName='Real Estate App'
+            description='A real estate management web application with distinct roles (agent, client, admin, and developer), each offering specific functionalities within the system. The project utilizes an integrated RESTful API to facilitate seamless interactions. Developed under the ONION architecture in C# ASP .Net Core, it adheres to the SOLID principles for robust and scalable design.'
+            technologies={['C#', 'ASP.NET', 'JavaScript', 'SQL Server', 'CSS']}
+            deployUrl='https://github.com/fraineralex/RealEstate-App'
+            githubRepositoryUrl='https://github.com/fraineralex/RealEstate-App'
+            imageSrc='real-estate.png'
           />
         </ol>
         <div className='mt-12'>
           <Link
-            className='inline-flex items-center font-medium leading-tight text-slate-200 font-semibold text-slate-200 group'
+            className='inline-flex items-center leading-tight font-semibold text-slate-200 group'
             aria-label='View Full Project Achive'
             href='/projects'
           >

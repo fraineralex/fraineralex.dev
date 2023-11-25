@@ -84,16 +84,14 @@ export default function ProjectCard ({
             ))}
           </ul>
         </aside>
-        <figure>
-          <Image
-            alt={`Cover image of the project`}
-            width='200'
-            height='48'
-            className='rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1'
-            src={`/images/projects/${imageSrc}`}
-            style={{ color: 'transparent' }}
-          />
-        </figure>
+        <Image
+          alt={`Cover image of the project`}
+          width={200}
+          height={120}
+          className='rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 md:order-1 md:col-span-2 md:translate-y-1'
+          src={`/images/projects/${imageSrc}`}
+          style={{ color: 'transparent' }}
+        />
       </div>
     </li>
   )

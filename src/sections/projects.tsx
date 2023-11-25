@@ -17,19 +17,18 @@ export default function Projects () {
       <article>
         <ol className='group/list'>
           <ProjectCard
-            projectName='Project Example #1'
-            description='Doloribus corporis totam nostrum illo quisquam, nisi earum iste! Sunt corrupti in, nostrum sint voluptates autem doloremque! Cum aliquid at tempore odit quidem minima dignissimos molestiae quibusdam non, facilis quo quaerat voluptate esse iure temporibus nostrum a ad vel.'
+            projectName='Hacker News Clone'
+            description='Wep app that mimics Hacker News using React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience. Additionally, it provides easy access to the comments section for each story.'
             technologies={[
               'React',
               'TypeScript',
-              'Storybook',
-              'Jest',
-              'Cypress'
+              'Styled Componets',
+              'SWR',
             ]}
-            deployUrl='https://www.github.com'
-            githubRepositoryUrl='https://www.github.com'
-            starsOnGithub={514}
-            imageSrc='trees.jpg'
+            deployUrl='https://frainer-hacker-news.surge.sh'
+            githubRepositoryUrl='https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr'
+            /* starsOnGithub={3} */
+            imageSrc='hacker-news.png'
           />
           <ProjectCard
             projectName='Project Example #1'

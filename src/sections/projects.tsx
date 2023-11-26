@@ -1,6 +1,10 @@
 import Link from 'next/link'
 import ProjectCard from '../components/project/project-card'
 import { ArrowRigthIcon } from '../components/common/SvgIcons'
+import { FaReact } from 'react-icons/fa'
+import { TbBrandTypescript } from 'react-icons/tb'
+import { SWRIcon } from '../components/common/SvgIcons'
+import Image from 'next/image'
 
 export default function Projects () {
   return (
@@ -24,7 +28,23 @@ export default function Projects () {
             githubRepositoryUrl='https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr'
             /* starsOnGithub={3} */
             imageSrc='hacker_news.png'
-          />
+          >
+            <li className='mr-4'>
+              <FaReact size={30} className='text-cyan-400' />
+            </li>
+            <li className='mr-4'>
+              <TbBrandTypescript size={30} className='text-blue-500' />
+            </li>
+            <li className='mr-4'>
+              <Image src='/images/projects/styled-components.ico' width={30} height={30} alt='Styled ' />
+            </li>
+            <li className='mr-4'>
+            <span>SWR</span>
+            </li>
+            <li className='mr-4'>
+              <FaReact size={30} className='text-cyan-400' />
+            </li>
+          </ProjectCard>
           <ProjectCard
             projectName='To Do App'
             description='An wep application built with React that allows users to create, update, delete, and filter the tasks. Additionally, the tasks are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.'

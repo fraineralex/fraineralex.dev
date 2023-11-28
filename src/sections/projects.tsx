@@ -2,14 +2,17 @@ import Link from 'next/link'
 import ProjectCard from '../components/project/project-card'
 import { FaSquareJs } from 'react-icons/fa6'
 import { BsBootstrapFill } from 'react-icons/bs'
+import { FaHtml5, FaCss3 } from 'react-icons/fa'
 
 import {
   ArrowRigthIcon,
   CSharpIcon,
   DotNetIcon,
+  HTMLIcon,
   NumpyIcon,
   PythonIcon,
   SQLServerIcon,
+  SWCIcon,
   ViteIcon
 } from '../components/common/SvgIcons'
 import { FaReact } from 'react-icons/fa'
@@ -55,6 +58,12 @@ export default function Projects () {
               />
             </li>
             <li className='mr-4'>
+              <ViteIcon />
+            </li>
+            <li className='mr-4'>
+              <FaCss3 size={30} className='text-blue-500' />
+            </li>
+            <li className='mr-4'>
               <SWRIcon />
               <span
                 className='mx-2 font-extrabold hidden md:inline select-none'
@@ -64,7 +73,7 @@ export default function Projects () {
               </span>
             </li>
             <li className='mr-4'>
-              <ViteIcon />
+              <SWCIcon />
             </li>
           </ProjectCard>
           <ProjectCard
@@ -80,6 +89,9 @@ export default function Projects () {
             </li>
             <li className='mr-4'>
               <TbBrandTypescript size={30} className='text-blue-500' />
+            </li>
+            <li className='mr-4'>
+              <SWCIcon />
             </li>
             <li className='mr-4'>
               <Image
@@ -100,6 +112,9 @@ export default function Projects () {
             <li className='mr-4'>
               <ViteIcon />
             </li>
+            <li className='mr-4'>
+              <FaCss3 size={30} className='text-blue-500' />
+            </li>
           </ProjectCard>
           <ProjectCard
             projectName='Chess AI'
@@ -118,8 +133,8 @@ export default function Projects () {
             </li>
             <li className='mr-4'>
               <Image
-                src='/images/projects/pygame.ico'
-                width={30}
+                src='/images/projects/pygame.svg'
+                width={90}
                 height={30}
                 alt='Pygame Icon'
               />
@@ -132,15 +147,6 @@ export default function Projects () {
                 alt='Chess library icon'
                 className='border-2 border-transparent rounded-sm'
               />
-            </li>
-            <li className='mr-4'>
-              <SWRIcon className='px-2' />
-              <span
-                className='font-extrabold hidden md:inline tracking-tighter'
-                title='Minimax algorithm'
-              >
-                Minimax
-              </span>
             </li>
           </ProjectCard>
           <ProjectCard
@@ -164,7 +170,13 @@ export default function Projects () {
               <SQLServerIcon />
             </li>
             <li className='mr-4'>
-              <BsBootstrapFill size={30} className='text-violet-700' />
+              <HTMLIcon />
+            </li>
+            <li className='mr-4'>
+              <FaCss3 size={30} className='text-blue-500' />
+            </li>
+            <li className='mr-4'>
+              <BsBootstrapFill size={30} className='text-violet-500' />
             </li>
           </ProjectCard>
         </ol>

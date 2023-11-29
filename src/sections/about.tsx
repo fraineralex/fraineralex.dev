@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FloatingComponents } from '../components/about/floating-components'
 import { BsDownload } from 'react-icons/bs'
-import { FaEnvelope } from 'react-icons/fa'
+import { FaEnvelope } from "react-icons/fa";
 
 export default function About () {
   return (
@@ -21,7 +21,7 @@ export default function About () {
             width={200}
             height={200}
             className='w-auto rounded-full'
-            src='/images/hero/profile.png'
+            src='/images/hero/profile.jpg'
             alt='Frainer Encarnacion profile picture'
           />
         </figure>

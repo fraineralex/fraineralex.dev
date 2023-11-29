@@ -5,17 +5,29 @@ import {
   XIcon
 } from '../common/SvgIcons'
 import ItemLink from './item-link'
+import Image from 'next/image'
 
 export default function SideNav () {
   return (
     <header className='lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24'>
-      <article>
-        <h1 className='text-4xl font-bold tracking-tighter text-slate-200 sm:text-5xl'>
-          <a href='/'>Frainer Encarnación</a>
-        </h1>
-        <h2 className='mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl'>
-          Experienced Full Stack Developer
-        </h2>
+      <figure className='inline-flex place-items-center lg:ms-[-10px]'>
+        <Image
+          width={200}
+          height={200}
+          className='w-auto rounded-full lg:w-2/12 p-4'
+          src='/images/hero/profile.jpg'
+          alt='Frainer Encarnacion profile picture'
+        />
+        <aside className='lg:w-5/6'>
+          <h1 className='text-4xl font-bold tracking-tighter text-slate-200 sm:text-5xl ms-[-2px]'>
+            <a href='/'>Frainer Encarnación</a>
+          </h1>
+          <h2 className='mt-2 text-lg font-medium tracking-tight text-slate-200 sm:text-xl'>
+            Experienced Full Stack Developer
+          </h2>
+        </aside>
+      </figure>
+      <article className='px-6 md:px-12 lg:px-24'>
         <p className='mt-4 max-w-xs leading-normal'>
           I’m a software engineer specializing in building outstanding and
           accessible digital experiences.
@@ -57,7 +69,10 @@ export default function SideNav () {
           </ul>
         </nav>
       </article>
-      <ul className='ml-1 mt-8 flex items-center' aria-label='Social media'>
+      <ul
+        className='ml-1 mt-8 flex items-center px-6 md:px-12 lg:px-24'
+        aria-label='Social media'
+      >
         <ItemLink title='Github' href='https://github.com/fraineralex'>
           <GitHubIcon />
         </ItemLink>

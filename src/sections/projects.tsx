@@ -2,7 +2,7 @@ import Link from 'next/link'
 import ProjectCard from '../components/project/project-card'
 import { FaSquareJs } from 'react-icons/fa6'
 import { BsBootstrapFill } from 'react-icons/bs'
-import { FaHtml5, FaCss3 } from 'react-icons/fa'
+import { FaCss3 } from 'react-icons/fa'
 
 import {
   ArrowRigthIcon,
@@ -13,7 +13,8 @@ import {
   PythonIcon,
   SQLServerIcon,
   SWCIcon,
-  ViteIcon
+  ViteIcon,
+  ChessBoardIcon
 } from '../components/common/SvgIcons'
 import { FaReact } from 'react-icons/fa'
 import { TbBrandTypescript } from 'react-icons/tb'
@@ -140,13 +141,7 @@ export default function Projects () {
               />
             </li>
             <li className='mr-4'>
-              <Image
-                src='/images/projects/chess-library.png'
-                width={30}
-                height={30}
-                alt='Chess library icon'
-                className='border-2 border-transparent rounded-sm'
-              />
+              <ChessBoardIcon className='text-white bg-white rounded-md border-0' />
             </li>
           </ProjectCard>
           <ProjectCard
@@ -166,10 +161,10 @@ export default function Projects () {
             <li className='mr-3'>
               <FaSquareJs size={30} className='text-yellow-js' />
             </li>
-            <li className='mr-4'>
+            <li className='mr-2'>
               <SQLServerIcon />
             </li>
-            <li className='mr-4'>
+            <li className='mr-3'>
               <HTMLIcon />
             </li>
             <li className='mr-4'>

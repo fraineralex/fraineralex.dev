@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { FloatingComponents } from '../components/about/floating-components'
 import { BsDownload } from 'react-icons/bs'
+import { FaEnvelope } from 'react-icons/fa'
 
 export default function About () {
   return (
@@ -20,7 +21,7 @@ export default function About () {
             width={200}
             height={200}
             className='w-auto rounded-full'
-            src='/images/hero/profile.jpg'
+            src='/images/hero/profile.png'
             alt='Frainer Encarnacion profile picture'
           />
         </figure>
@@ -31,11 +32,11 @@ export default function About () {
         >
           <a
             type='button'
-            className='text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-3 text-center'
+            className='text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-3 text-center'
             href='mailto:fraineralex2001@gmail.com'
             target='_blank'
           >
-            Say Hello
+            {/* <FaEnvelope className='inline me-1' /> */} Contact me
           </a>
 
           <a

@@ -82,11 +82,11 @@ export default function ProjectCard ({
         </aside>
         <Image
           alt={`Cover image of the project`}
-          width={200}
-          height={120}
-          className='rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 md:order-1 md:col-span-2 md:translate-y-1'
+          width={543}
+          height={336}
+          className='rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 md:order-1 md:col-span-2 md:translate-y-1 bg-black opacity-60 group-hover:opacity-80'
           src={`/images/projects/${imageSrc}`}
-          style={{ color: 'transparent' }}
+          style={{ color: 'transparent', width: '100%' }}
         />
       </div>
     </li>

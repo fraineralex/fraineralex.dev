@@ -4,7 +4,7 @@ export default function Home () {
   return (
     <div className='lg:flex lg:justify-between lg:gap-10'>
       <SideNav />
-      <main id='content' className='pt-24 lg:w-1/2 lg:py-24'>
+      <main id='content' className='pt-24 lg:w-1/2 lg:py-24 pr-20'>
         <About />
         <Experience />
         <Projects />

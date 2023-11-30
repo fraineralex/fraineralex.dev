@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { BsDownload } from 'react-icons/bs'
-import { ConnectIcon } from '../common/SvgIcons'
+import { ConnectIcon, EmailIcon } from '../common/SvgIcons'
 
 export const LinkedinCard = () => {
   return (
@@ -76,7 +76,7 @@ export const LinkedinCard = () => {
           <a
             type='button'
             className='bg-blue-500 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-black border-0 border-blue-500 align-middle'
-            href='mailto:fraineralex2001@gmail.com'
+            href='https://www.linkedin.com/in/fraineralex/'
             target='_blank'
           >
             <ConnectIcon className='inline text-center' /> Connect
@@ -84,9 +84,9 @@ export const LinkedinCard = () => {
           <a
             className='font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-blue-500 border-2 border-blue-500'
             aria-label='View Full Résumé'
-            href='/resume.pdf'
+            href='mailto:fraineralex2001@gmail.com'
           >
-            Message
+            <EmailIcon className='inline w-4' /> Message
           </a>
           <a
             className='font-medium rounded-3xl text-sm px-5 py-1.5 text-center text-slate-300 border-2 border-slate-300'
@@ -96,15 +96,6 @@ export const LinkedinCard = () => {
             <BsDownload className='inline me-1' />
             Resumé
           </a>
-          {/* <a
-            className='relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800'
-            aria-label='View Full Résumé'
-            href='/resume.pdf'
-          >
-            <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
-              <BsDownload className='inline me-1' /> Résumé
-            </span>
-          </a> */}
         </span>
       </div>
     </article>

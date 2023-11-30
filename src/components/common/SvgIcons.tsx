@@ -541,17 +541,17 @@ export function ChessBoardIcon ({ className }: Props) {
   )
 }
 
-export function EmailIcon () {
+export function EmailIcon ({ className }: Props) {
   return (
     <svg
       aria-hidden='true'
       focusable='false'
       data-prefix='fas'
       data-icon='envelope'
-      className='svg-inline--fa fa-envelope'
       role='img'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 512 512'
+      className={className}
     >
       <path
         fill='currentColor'

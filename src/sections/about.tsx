@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FloatingComponents } from '../components/about/floating-components'
 import { BsDownload } from 'react-icons/bs'
-import { FaEnvelope } from "react-icons/fa";
+import { FaEnvelope } from 'react-icons/fa'
 
 export default function About () {
   return (
@@ -16,39 +16,6 @@ export default function About () {
         </h2>
       </header>
       <article>
-        <figure className='flex justify-center'>
-          <Image
-            width={200}
-            height={200}
-            className='w-auto rounded-full'
-            src='/images/hero/profile.jpg'
-            alt='Frainer Encarnacion profile picture'
-          />
-        </figure>
-        {/* <FloatingComponents /> */}
-        <ul
-          className='mt-6 mb-6 flex items-center justify-center gap-3'
-          aria-label='Cotact me'
-        >
-          <a
-            type='button'
-            className='text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-3 text-center'
-            href='mailto:fraineralex2001@gmail.com'
-            target='_blank'
-          >
-            {/* <FaEnvelope className='inline me-1' /> */} Contact me
-          </a>
-
-          <a
-            className='relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800'
-            aria-label='View Full Résumé'
-            href='/resume.pdf'
-          >
-            <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
-              <BsDownload className='inline me-1' /> Résumé
-            </span>
-          </a>
-        </ul>
         <p className='mb-4'>
           I’m Frainer, a passionate{' '}
           <strong className='font-medium text-slate-200'>

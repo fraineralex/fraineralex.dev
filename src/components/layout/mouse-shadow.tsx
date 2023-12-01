@@ -19,11 +19,9 @@ export function MouseShadow () {
   })
   return (
     <div
-      className="absolute before:h-[300px] before:w-[480px] before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[800px] after:w-[800px] after:rounded-full after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[400px] z-[-1]"
-        style={{
-        opacity: 0.2,
-        pointerEvents: 'none',
-        transform: `translate(${position.x - 560}px, ${position.y - 300}px)`
+      className='pointer-events-none fixed inset-0 z-30 transition duration-300 lg:absolute'
+      style={{
+        background: `radial-gradient(600px at ${position.x}px ${position.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
       }}
     ></div>
   )

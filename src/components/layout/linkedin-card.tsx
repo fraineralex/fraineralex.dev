@@ -92,9 +92,10 @@ export const LinkedinCard = () => {
             className='font-medium rounded-3xl text-sm px-5 py-1.5 text-center text-slate-300 border-2 border-slate-300'
             aria-label='View Full Résumé'
             href='/resume.pdf'
+            target='_blank'
           >
             <BsDownload className='inline me-1' />
-            Resumé
+            Résumé
           </a>
         </span>
       </div>

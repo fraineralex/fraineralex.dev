@@ -65,15 +65,15 @@ export default function ExperienceCard ({
             </h3>
             {otherTitles &&
               otherTitles.map((title, index) => (
-                <h5 className='text-slate-500' aria-hidden='true' key={index}>
+                <h5 className='text-gray-500' aria-hidden='true' key={index}>
                   {title}
                 </h5>
               ))}
-            <h5 className='text-slate-500 mt-1 text-sm' aria-hidden='true'>
+            <h5 className='text-gray-500 mt-1 text-sm' aria-hidden='true'>
               {startDate} — {endDate} · {contract}
             </h5>
             {location && locationType && (
-              <h5 className='text-slate-500 mt-1 text-sm' aria-hidden='true'>
+              <h5 className='text-gray-500 mt-1 text-sm' aria-hidden='true'>
                 {location} · {locationType}
               </h5>
             )}

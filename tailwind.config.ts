@@ -44,7 +44,10 @@ const config: Config = {
       animation: {
         heartbeat: 'heartbeat 1s ease-in-out infinite',
         levitate: 'levitate 5s ease infinite'
-      }
+      },
+      matrix3d: {
+        'identity': 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)',
+      },
     }
   },
   plugins: []

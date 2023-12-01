@@ -299,7 +299,7 @@ export function StyledComponentsIcon ({ className }: Props) {
 
 export function SWRIcon ({ className }: Props) {
   return (
-    <svg height='12' viewBox='0 0 291 69' fill='none' className={className}>
+    <svg height='10' viewBox='0 0 291 69' fill='none' className={className}>
       <path
         d='M0 36.53c.07 17.6 14.4 32.01 32.01 32.01a32.05 32.05 0 0032.01-32V32a13.2 13.2 0 0123.4-8.31h20.7A32.07 32.07 0 0077.2 0a32.05 32.05 0 00-32 32.01v4.52A13.2 13.2 0 0132 49.71a13.2 13.2 0 01-13.18-13.18 3.77 3.77 0 00-3.77-3.77H3.76A3.77 3.77 0 000 36.53zM122.49 68.54a32.14 32.14 0 01-30.89-23.7h20.67a13.16 13.16 0 0023.4-8.3V32A32.05 32.05 0 01167.68 0c17.43 0 31.64 14 32 31.33l.1 5.2a13.2 13.2 0 0023.4 8.31h20.7a32.07 32.07 0 01-30.91 23.7c-17.61 0-31.94-14.42-32.01-32l-.1-4.7v-.2a13.2 13.2 0 00-13.18-12.81 13.2 13.2 0 00-13.18 13.18v4.52a32.05 32.05 0 01-32.01 32.01zM247.94 23.7a13.16 13.16 0 0123.4 8.31 3.77 3.77 0 003.77 3.77h11.3a3.77 3.77 0 003.76-3.77A32.05 32.05 0 00258.16 0a32.07 32.07 0 00-30.92 23.7h20.7z'
         fill='currentColor'
@@ -308,49 +308,24 @@ export function SWRIcon ({ className }: Props) {
   )
 }
 
-export function ViteIcon ({ className }: Props) {
+export function AutoAnimateIcon ({ className }: Props) {
   return (
     <svg
+      viewBox='0 0 26 26'
+      version='1.1'
       xmlns='http://www.w3.org/2000/svg'
-      aria-hidden='true'
-      role='img'
-      className='iconify iconify--logos'
-      width='29.88'
+      className={className}
+      width='30'
       height='30'
-      preserveAspectRatio='xMidYMid meet'
-      viewBox='0 0 256 257'
+      fill='currentColor'
     >
-      <defs>
-        <linearGradient
-          id='IconifyId1813088fe1fbc01fb466'
-          x1='-.828%'
-          x2='57.636%'
-          y1='7.652%'
-          y2='78.411%'
-        >
-          <stop offset='0%' stop-color='#41D1FF'></stop>
-          <stop offset='100%' stop-color='#BD34FE'></stop>
-        </linearGradient>
-        <linearGradient
-          id='IconifyId1813088fe1fbc01fb467'
-          x1='43.376%'
-          x2='50.316%'
-          y1='2.242%'
-          y2='89.03%'
-        >
-          <stop offset='0%' stop-color='#FFEA83'></stop>
-          <stop offset='8.333%' stop-color='#FFDD35'></stop>
-          <stop offset='100%' stop-color='#FFA800'></stop>
-        </linearGradient>
-      </defs>
-      <path
-        fill='url(#IconifyId1813088fe1fbc01fb466)'
-        d='M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z'
-      ></path>
-      <path
-        fill='url(#IconifyId1813088fe1fbc01fb467)'
-        d='M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z'
-      ></path>
+      <g stroke='none' stroke-width='1' fill-rule='evenodd'>
+        <g transform='translate(-49.000000, -47.000000)'>
+          <g transform='translate(49.000000, 47.000000)'>
+            <path d='M24,21.01824 L24,25.01824 L12,25.01824 L12,21.01824 L24,21.01824 Z M4,17.01824 L4,21.01824 L0,21.01824 L0,17.01824 L4,17.01824 Z M8,13.01824 L8,17.01824 L4,17.01824 L4,13.01824 L8,13.01824 Z M12,9.01824 L12,13.01824 L8,13.01824 L8,9.01824 L12,9.01824 Z M8,5.01824 L8,9.01824 L4,9.01824 L4,5.01824 L8,5.01824 Z M4,1.01824 L4,5.01824 L0,5.01824 L0,1.01824 L4,1.01824 Z'></path>
+          </g>
+        </g>
+      </g>
     </svg>
   )
 }

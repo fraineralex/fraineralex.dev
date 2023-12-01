@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import ProjectCard from '../components/project/project-card'
-import { FaSquareJs } from 'react-icons/fa6'
+import ProjectCard from '@/components/project/project-card'
+import { FaSquareJs, FaPython } from 'react-icons/fa6'
 import { BsBootstrapFill } from 'react-icons/bs'
-import { FaCss3 } from 'react-icons/fa'
-
+import { FaCss3, FaChess, FaHtml5 } from 'react-icons/fa'
 import {
   ArrowRigthIcon,
   CSharpIcon,
@@ -13,13 +12,16 @@ import {
   PythonIcon,
   SQLServerIcon,
   SWCIcon,
-  ViteIcon,
-  ChessBoardIcon
-} from '../components/common/SvgIcons'
+  AutoAnimateIcon,
+  ChessBoardIcon,
+  SWRIcon
+} from '@/components/common/SvgIcons'
 import { FaReact } from 'react-icons/fa'
 import { TbBrandTypescript } from 'react-icons/tb'
-import { SWRIcon } from '../components/common/SvgIcons'
 import Image from 'next/image'
+import { TbBrandVite } from 'react-icons/tb'
+import { SiStyledcomponents, SiSwc, SiSwr, SiNumpy, SiCsharp, SiDotnet, SiMicrosoftsqlserver } from 'react-icons/si'
+import { VscJson } from 'react-icons/vsc'
 
 export default function Projects () {
   return (
@@ -44,37 +46,32 @@ export default function Projects () {
             /* starsOnGithub={3} */
             imageSrc='hacker_news.png'
           >
-            <li className='mr-4'>
-              <FaReact size={30} className='text-cyan-400' />
+            <li className='mr-4 self-center'>
+              <FaReact size={30} className='' />
             </li>
-            <li className='mr-4'>
-              <TbBrandTypescript size={30} className='text-blue-500' />
+            <li className='mr-4 self-center'>
+              <TbBrandTypescript size={30} className='' />
             </li>
-            <li className='mr-4'>
-              <Image
-                src='/images/projects/styled-components.ico'
-                width={30}
-                height={30}
-                alt='Styled '
-              />
+            <li className='mr-4 self-center'>
+              <SiStyledcomponents size={35} />
             </li>
-            <li className='mr-4'>
-              <ViteIcon />
+            <li className='mr-4 self-center'>
+              <TbBrandVite size={30} />
             </li>
-            <li className='mr-4'>
-              <FaCss3 size={30} className='text-blue-500' />
+            <li className='mr-4 self-center'>
+              <SiSwc size={30} />
             </li>
-            <li className='mr-4'>
-              <SWRIcon />
-              <span
-                className='mx-2 font-extrabold hidden md:inline select-none'
+            <li className='mr-4 self-center'>
+              <FaCss3 size={25} className='' />
+            </li>
+            <li className='mr-4 self-center'>
+              <SiSwr size={30} className='' />
+              {/* <span
+                className='text-xs font-extrabold hidden md:inline select-none -pt-2'
                 title='SWR: React Hooks for Data Fetching'
               >
                 SWR
-              </span>
-            </li>
-            <li className='mr-4'>
-              <SWCIcon />
+              </span> */}
             </li>
           </ProjectCard>
           <ProjectCard
@@ -85,36 +82,26 @@ export default function Projects () {
             githubRepositoryUrl='https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript'
             imageSrc='todo.png'
           >
-            <li className='mr-4'>
-              <FaReact size={30} className='text-cyan-400' />
+            <li className='mr-4 self-center'>
+              <FaReact size={30} className='' />
             </li>
-            <li className='mr-4'>
-              <TbBrandTypescript size={30} className='text-blue-500' />
+            <li className='mr-4 self-center'>
+              <TbBrandTypescript size={30} className='' />
             </li>
-            <li className='mr-4'>
-              <SWCIcon />
+            <li className='mr-4 self-center'>
+              <SiSwc size={30} />
             </li>
-            <li className='mr-4'>
-              <Image
-                src='/images/projects/autoanimate.ico'
-                width={30}
-                height={30}
-                alt='Auto Animate icon'
-              />
+            <li className='mr-4 self-center'>
+              <AutoAnimateIcon className='text-gray-400' />
             </li>
-            <li className='mr-4'>
-              <Image
-                src='/images/projects/jsonbin.ico'
-                width={30}
-                height={30}
-                alt='JsonBin icon'
-              />
+            <li className='mr-4 self-center'>
+              <VscJson size={30} />
             </li>
-            <li className='mr-4'>
-              <ViteIcon />
+            <li className='mr-4 self-center'>
+              <TbBrandVite size={30} />
             </li>
-            <li className='mr-4'>
-              <FaCss3 size={30} className='text-blue-500' />
+            <li className='mr-4 self-center'>
+              <FaCss3 size={25} className='' />
             </li>
           </ProjectCard>
           <ProjectCard
@@ -126,13 +113,13 @@ export default function Projects () {
             /* starsOnGithub={514} */
             imageSrc='chess.png'
           >
-            <li className='mr-4'>
-              <PythonIcon />
+            <li className='mr-4 self-center'>
+              <FaPython size={30} />
             </li>
-            <li className='mr-4'>
-              <NumpyIcon />
+            <li className='mr-4 self-center'>
+              <SiNumpy size={30} />
             </li>
-            <li className='mr-4'>
+            <li className='mr-4 self-center'>
               <Image
                 src='/images/projects/pygame.svg'
                 width={90}
@@ -140,8 +127,8 @@ export default function Projects () {
                 alt='Pygame Icon'
               />
             </li>
-            <li className='mr-4'>
-              <ChessBoardIcon className='text-white bg-white rounded-md border-0' />
+            <li className='mr-4 self-center'>
+              <FaChess size={30} />
             </li>
           </ProjectCard>
           <ProjectCard
@@ -152,26 +139,26 @@ export default function Projects () {
             githubRepositoryUrl='https://github.com/fraineralex/RealEstate-App'
             imageSrc='real-estate.png'
           >
-            <li className='mr-4'>
-              <CSharpIcon />
+            <li className='mr-4 self-center'>
+              <SiCsharp size={30} />
             </li>
-            <li className='mr-4'>
-              <DotNetIcon className='border-2 border-transparent rounded-md' />
+            <li className='mr-4 self-center'>
+              <SiDotnet size={30} />
             </li>
             <li className='mr-3'>
-              <FaSquareJs size={30} className='text-yellow-js' />
+              <FaSquareJs size={30} />
             </li>
             <li className='mr-2'>
-              <SQLServerIcon />
+              <SiMicrosoftsqlserver size={30} />
             </li>
             <li className='mr-3'>
-              <HTMLIcon />
+              <FaHtml5 size={30} />
             </li>
-            <li className='mr-4'>
-              <FaCss3 size={30} className='text-blue-500' />
+            <li className='mr-4 self-center'>
+              <FaCss3 size={30} />
             </li>
-            <li className='mr-4'>
-              <BsBootstrapFill size={30} className='text-violet-500' />
+            <li className='mr-4 self-center'>
+              <BsBootstrapFill size={30} />
             </li>
           </ProjectCard>
         </ol>

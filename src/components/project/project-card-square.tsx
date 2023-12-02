@@ -1,74 +1,90 @@
-export default function ProjectCardSquare () {
+'use client'
+
+import { FiExternalLink, FiGithub } from 'react-icons/fi'
+import { GoRepo } from 'react-icons/go'
+
+interface Props {
+  title: string
+  description: string
+  technologies: string[]
+  githubRepositoryUrl: string
+  deployUrl: string
+}
+
+export default function ProjectCardSquare ({
+  title,
+  description,
+  technologies,
+  githubRepositoryUrl,
+  deployUrl
+}: Props) {
+  const handleHover = () => {
+    const anchors = document.getElementsByTagName('a')
+    const titleAnchor = anchors.item(anchors.length - 1)
+    if (titleAnchor) {
+      titleAnchor.focus()
+    }
+  }
+
+  const handleClick = () => {
+    const anchors = document.getElementsByTagName('a')
+    const titleAnchor = anchors.item(anchors.length - 1)
+    if (titleAnchor) {
+      titleAnchor.click()
+    }
+  }
+
   return (
-    <li className='transition-all duration-250 ease-in-out opacity-100 transform matrix3d-identity relative '>
-      <article className='shadow-md flex justify-between flex-col items-center relative h-full p-8 py-7 rounded-md bg-gray-900 transition-all duration-300 ease-in-out overflow-auto'>
+    <li
+      className='relative group lg:hover:transform lg:hover:-translate-y-1.5 transition-all duration-300 ease-in-out overflow-auto'
+      onMouseEnter={handleHover}
+      onClick={handleClick}
+    >
+      <article className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded-md bg-gray-900'>
         <header>
-          <div className='flex justify-between items-center mb-9'>
+          <div className='flex justify-between items-center mb-7'>
             <span className='text-cyan-200'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                role='img'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                stroke-width='1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                className='w-10 h-10 fill-none align-middle'
-              >
-                <title>Folder</title>
-                <path d='M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z'></path>
-              </svg>
+              <GoRepo className='w-10 h-10 align-middle' />
             </span>
-            <span className='flex items-center -mr-3 text-gray-200'>
+            <span className='flex items-center text-gray-200'>
               <a
-                href=''
+                href={githubRepositoryUrl}
                 aria-label='External Link'
-                className='fles justify-center items-center px-1 py-2 relative'
+                className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:text-teal-300'
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  role='img'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  stroke-width='2'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  className='-mt-1 w-6 h-6'
-                >
-                  <title>External Link</title>
-                  <path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'></path>
-                  <polyline points='15 3 21 3 21 9'></polyline>
-                  <line x1='10' y1='14' x2='21' y2='3'></line>
-                </svg>
+                <FiGithub className='-mt-1 w-5 h-5 mr-2' />
+              </a>
+              <a
+                href={deployUrl}
+                aria-label='External Link'
+                className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:text-teal-300 deploy-link'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <FiExternalLink className='-mt-1 w-5 h-5' />
               </a>
             </span>
           </div>
-          <h3 className='mt-2 text-2xl text-white'>
+          <h3 className='mt-2 text-2xl font-bold leading-tight text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300'>
             <a
-              href=''
+              href={deployUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='inline-block decoration-none text-inherit transition-colors duration-200 ease-in-out hover:text-cyan-200'
+              className='deploy-link outline-none focus-visible:outline-none'
             >
-              Chess AI
+              {title}
             </a>
           </h3>
-          <p className='text-gray-200 text-base mt-3'>
-            Chess AI developed with the minimax adversarial search algorithm
-            with alpha beta pruning and a set of heuristics that ensure great
-            moves are made regardless of depth.
+          <p className='text-gray-300 text-base mt-3 leading-tight'>
+            {description}
           </p>
         </header>
         <footer>
-          <ul className='flex flex-wrap items-end list-none mt-5'>
-            <li className='mr-4'>Python</li>
-            <li className='mr-4'>Pygame</li>
-            <li className='mr-4'>Numpy</li>
-            <li className=''>Chess lib</li>
+          <ul className='flex flex-wrap items-end list-none mt-5 space-x-2'>
+            {technologies.length > 0 &&
+              technologies.map((tech, index) => <li key={index}>{tech}</li>)}
           </ul>
         </footer>
       </article>

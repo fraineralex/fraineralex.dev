@@ -28,10 +28,28 @@ export default function Projects () {
             All Projects
           </h1>
         </header>
-        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 list-none mt-10'>
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
+        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 list-none mt-10 lg:px-10'>
+          <ProjectCard
+            title='Frainer Encarnación'
+            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
+            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
+            githubRepositoryUrl=''
+            deployUrl='https://frainer.com'
+           />
+                     <ProjectCard
+            title='Frainer Encarnación'
+            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
+            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
+            githubRepositoryUrl=''
+            deployUrl='https://frainer.com'
+           />
+                     <ProjectCard
+            title='Frainer Encarnación'
+            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
+            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
+            githubRepositoryUrl=''
+            deployUrl='https://frainer.com'
+           />
         </ul>
       </section>
     </main>

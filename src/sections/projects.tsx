@@ -133,7 +133,7 @@ export default function Projects () {
           </ProjectCard>
           <ProjectCard
             projectName='Real Estate App'
-            description='A real estate management web application with distinct roles (agent, client, admin, and developer), each offering specific functionalities within the system. The project utilizes an integrated RESTful API to facilitate seamless interactions. Developed under the ONION architecture in C# ASP .Net Core, it adheres to the SOLID principles for robust and scalable design.'
+            description='A real estate management web app with distinct roles (agent, client, admin, and developer), each offering specific functionalities within the system. The project utilizes an integrated RESTful API to facilitate seamless interactions. Developed under the ONION architecture in C# ASP .Net Core, it adheres to the SOLID principles for robust and scalable design.'
             technologies={['C#', 'ASP.NET', 'JavaScript', 'SQL Server', 'CSS']}
             deployUrl='https://github.com/fraineralex/RealEstate-App'
             githubRepositoryUrl='https://github.com/fraineralex/RealEstate-App'

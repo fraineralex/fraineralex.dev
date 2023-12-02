@@ -1,5 +1,5 @@
-import ProjectCard from '@/components/project/project-card-square'
 import { FiArrowLeft } from 'react-icons/fi'
+import AllProjectsCard from '../ui/projects/all-projects-cards'
 
 export default function Projects () {
   return (
@@ -18,69 +18,7 @@ export default function Projects () {
           </h1>
         </header>
         <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 list-none mt-10 lg:px-10'>
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
-          <ProjectCard
-            title='Frainer Encarnación'
-            description='My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel. My personal website built with Next.js, Tailwind CSS, TypeScript, and deployed with Vercel.'
-            technologies={['Next.js', 'Tailwind CSS', 'TypeScript']}
-            githubRepositoryUrl=''
-            deployUrl='https://frainer.com'
-          />
+          <AllProjectsCard />
         </ul>
       </section>
     </main>

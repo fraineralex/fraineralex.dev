@@ -41,7 +41,7 @@ export default function ProjectCardSquare ({
       onClick={handleClick}
     >
       <article className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded-md bg-gray-900'>
-        <header>
+        <header className='lg:min-h-[30vh]'>
           <div className='flex justify-between items-center mb-7'>
             <span className='text-cyan-200'>
               <GoRepo className='w-10 h-10 align-middle' />
@@ -67,7 +67,7 @@ export default function ProjectCardSquare ({
               </a>
             </span>
           </div>
-          <h3 className='mt-2 text-2xl font-bold leading-tight text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300'>
+          <h3 className='mt-3 text-2xl font-bold leading-tight text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300'>
             <a
               href={deployUrl}
               target='_blank'
@@ -77,12 +77,12 @@ export default function ProjectCardSquare ({
               {title}
             </a>
           </h3>
-          <p className='text-gray-300 text-base mt-3 leading-tight'>
+          <p className='text-gray-300 mt-3 text-sm leading-relaxed font-[450px]'>
             {description}
           </p>
         </header>
-        <footer>
-          <ul className='flex flex-wrap items-end list-none mt-5 space-x-2'>
+        <footer className='self-start'>
+          <ul className='flex flex-wrap list-none mt-5 space-x-3 leading-tight text-sm font-light'>
             {technologies.length > 0 &&
               technologies.map((tech, index) => <li key={index}>{tech}</li>)}
           </ul>

@@ -36,7 +36,7 @@ export default function ProjectCardSquare ({
 
   return (
     <li
-      className='relative group lg:hover:transform lg:hover:-translate-y-1.5 transition-all duration-300 ease-in-out overflow-auto'
+      className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer'
       onMouseEnter={handleHover}
       onClick={handleClick}
     >

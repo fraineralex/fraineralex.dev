@@ -14,7 +14,7 @@ export default function AllProjectsCard () {
         title='To Do App'
         description='A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.'
         technologies={['React', 'TypeScript', 'Auto Animate', 'JSONBin']}
-        deployUrl='https://frainer-todo-app.surge.sh/'
+        deployUrl='https://frainer-todo-app.surge.sh'
         githubRepositoryUrl='https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript'
       />
       <ProjectCard
@@ -27,9 +27,48 @@ export default function AllProjectsCard () {
       <ProjectCard
         title='Real Estate App'
         description='A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.'
-        technologies={['C#', 'ASP.NET', 'JavaScript', 'SQL Server']}
-        deployUrl='https://github.com/fraineralex/RealEstate-App'
+        technologies={['C#', 'ASP.NET', 'SQL Server', 'Identity']}
         githubRepositoryUrl='https://github.com/fraineralex/RealEstate-App'
+      />
+      <ProjectCard
+        title='Programming Quizzes'
+        description='A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.'
+        technologies={['React', 'TypeScript', 'Zustand', 'Material UI']}
+        deployUrl='https://programming-quizzes.surge.sh'
+        githubRepositoryUrl='https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand'
+      />
+      <ProjectCard
+        title='Google Translate Clone'
+        description='A simple Google Translate clone, built with React and powered by the OpenAI API.'
+        technologies={['React', 'TypeScript', 'OpenAI API', 'Bootstrap']}
+        deployUrl='https://programming-quizzes.surge.sh'
+        githubRepositoryUrl='https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand'
+      />
+
+      <ProjectCard
+        title='To Do List'
+        description='
+        Node.js web app for task management with user-friendly features. Supports permanent/temporary logins and user info updates.'
+        technologies={['Node.js', 'Express', 'Handlerbars', 'Sequelize']}
+        deployUrl='https://programming-quizzes.surge.sh'
+        githubRepositoryUrl='https://todolist.3.us-1.fl0.io'
+      />
+
+      <ProjectCard
+        title='Net Banking App'
+        description='
+        Net banking app built in C# following ONION architecture and SOLID principles. Enables secure user logins and seamless financial transactions.'
+        technologies={['C#', 'ASP.NET', 'SQL Server', 'Entity Framwork']}
+        githubRepositoryUrl='https://github.com/fraineralex/InternetBanking-App'
+      />
+
+      <ProjectCard
+        title='Social Network App'
+        description='
+        A Node.js Social Network App for creating user profiles, sharing posts and events, commenting, connecting with friends, and ensuring secure account access.'
+        technologies={['Node.js', 'Express', 'Handlerbars', 'Sequelize']}
+        deployUrl='https://socialnetwork.up.railway.app'
+        githubRepositoryUrl='https://github.com/fraineralex/Social-Network-App'
       />
     </>
   )

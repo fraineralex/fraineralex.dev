@@ -6,9 +6,9 @@ import { MouseShadow } from '@/components/layout/mouse-shadow'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Frainer Encarnacion',
+  title: 'Frainer Encarnación',
   description:
-    'Frainer Encarnacion is a software engineer who builds accessible, inclusive products and digital experiences for the web.'
+    'Frainer Encarnación is a full stack developer who builds accessible, inclusive products and digital experiences for the web.'
 }
 
 export default function RootLayout ({

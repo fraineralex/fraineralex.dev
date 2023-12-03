@@ -2,13 +2,14 @@
 
 import { FiExternalLink, FiGithub } from 'react-icons/fi'
 import { GoRepo } from 'react-icons/go'
+import { useRef } from 'react'
 
 interface Props {
   title: string
   description: string
   technologies: string[]
   githubRepositoryUrl: string
-  deployUrl: string
+  deployUrl?: string
 }
 
 export default function ProjectCardSquare ({
@@ -18,19 +19,22 @@ export default function ProjectCardSquare ({
   githubRepositoryUrl,
   deployUrl
 }: Props) {
+  const deployLinkRef = useRef<HTMLAnchorElement>(null)
+  const githubLinkRef = useRef<HTMLAnchorElement>(null)
+
   const handleHover = () => {
-    const anchors = document.getElementsByTagName('a')
-    const titleAnchor = anchors.item(anchors.length - 1)
-    if (titleAnchor) {
-      titleAnchor.focus()
+    if (deployUrl && deployLinkRef.current) {
+      deployLinkRef.current.focus()
+    } else if (githubLinkRef.current) {
+      githubLinkRef.current.focus()
     }
   }
 
   const handleClick = () => {
-    const anchors = document.getElementsByTagName('a')
-    const titleAnchor = anchors.item(anchors.length - 1)
-    if (titleAnchor) {
-      titleAnchor.click()
+    if (deployUrl && deployLinkRef.current) {
+      deployLinkRef.current.click()
+    } else if (githubLinkRef.current) {
+      githubLinkRef.current.click()
     }
   }
 
@@ -40,7 +44,7 @@ export default function ProjectCardSquare ({
       onMouseEnter={handleHover}
       onClick={handleClick}
     >
-      <article className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded-md bg-gray-900'>
+      <article className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-gray-900'>
         <header className='lg:min-h-[30vh]'>
           <div className='flex justify-between items-center mb-7'>
             <span className='text-cyan-200'>
@@ -50,24 +54,28 @@ export default function ProjectCardSquare ({
               <a
                 href={githubRepositoryUrl}
                 aria-label='External Link'
-                className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:text-teal-300'
+                className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:outline-none'
                 target='_blank'
                 rel='noopener noreferrer'
+                ref={githubLinkRef}
               >
                 <FiGithub className='-mt-1 w-5 h-5 mr-2' />
               </a>
-              <a
-                href={deployUrl}
-                aria-label='External Link'
-                className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:text-teal-300 deploy-link'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <FiExternalLink className='-mt-1 w-5 h-5' />
-              </a>
+              {deployUrl && (
+                <a
+                  href={deployUrl}
+                  aria-label='External Link'
+                  className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:outline-none'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  ref={deployLinkRef}
+                >
+                  <FiExternalLink className='-mt-1 w-5 h-5' />
+                </a>
+              )}
             </span>
           </div>
-          <h3 className='mt-3 text-2xl font-bold leading-tight text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300'>
+          <h3 className='mt-3 text-2xl font-bold text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300 leading-none'>
             <a
               href={deployUrl}
               target='_blank'

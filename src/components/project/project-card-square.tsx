@@ -45,7 +45,7 @@ export default function ProjectCardSquare ({
       onClick={handleClick}
     >
       <article className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-gray-900'>
-        <header className='lg:min-h-[30vh]'>
+        <header className='lg:min-h-[20vh]'>
           <div className='flex justify-between items-center mb-7'>
             <span className='text-cyan-200'>
               <GoRepo className='w-10 h-10 align-middle' />
@@ -89,8 +89,8 @@ export default function ProjectCardSquare ({
             {description}
           </p>
         </header>
-        <footer className='self-start'>
-          <ul className='flex flex-wrap list-none mt-5 space-x-3 leading-tight text-sm font-light'>
+        <footer className='self-start mt-auto'>
+          <ul className='flex flex-wrap list-none mt-5 space-x-2 leading-tight text-sm font-light'>
             {technologies.length > 0 &&
               technologies.map((tech, index) => <li key={index}>{tech}</li>)}
           </ul>

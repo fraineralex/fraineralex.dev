@@ -17,7 +17,7 @@ export default function Projects () {
             All Projects
           </h1>
         </header>
-        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 list-none mt-10 lg:px-10'>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 list-none mt-10 lg:px-10'>
           <AllProjectsCard />
         </ul>
       </section>

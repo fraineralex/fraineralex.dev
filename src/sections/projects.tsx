@@ -174,7 +174,7 @@ export default function Projects () {
               </strong>
               <span className='whitespace-nowrap'>
                 <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
-                  Project Achive
+                  Project Archive
                 </strong>
                 <ArrowRigthIcon />
               </span>

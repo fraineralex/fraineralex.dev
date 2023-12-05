@@ -16,10 +16,10 @@ export const LinkedinCard = () => {
       <div className='w-content max-w-full mv-0 mx-auto grid gap-2 px-4'>
         <div className='relative flex justify-end items-center min-h-half-avatar py-2 mb-8'>
           <picture>
-            <img
+            <Image
               className='absolute top-0 transform bg-surface-4 -translate-y-1/2 left-0 rounded-full aspect-square w-avatar border-4 border-text-1'
               src='/images/hero/profile.jpg'
-              alt='Jhey'
+              alt='Frainer Profile Picture'
               width='100'
               height='100'
               loading='eager'

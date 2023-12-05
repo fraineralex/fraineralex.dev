@@ -20,7 +20,15 @@ import { FaReact } from 'react-icons/fa'
 import { TbBrandTypescript } from 'react-icons/tb'
 import Image from 'next/image'
 import { TbBrandVite } from 'react-icons/tb'
-import { SiStyledcomponents, SiSwc, SiSwr, SiNumpy, SiCsharp, SiDotnet, SiMicrosoftsqlserver } from 'react-icons/si'
+import {
+  SiStyledcomponents,
+  SiSwc,
+  SiSwr,
+  SiNumpy,
+  SiCsharp,
+  SiDotnet,
+  SiMicrosoftsqlserver
+} from 'react-icons/si'
 import { VscJson } from 'react-icons/vsc'
 
 export default function Projects () {

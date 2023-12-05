@@ -1,4 +1,11 @@
-import { About, Experience, Projects, Blog, Footer, SideNav } from '../sections'
+import {
+  About,
+  Experience,
+  Projects,
+  Blog,
+  Footer,
+  SideNav
+} from '../../sections'
 
 export default function Home () {
   return (

@@ -1,0 +1,13 @@
+{
+    "navigation": {
+        "about": "Acerca de",
+        "experience": "Experiencia",
+        "projects": "Proyectos"
+    },
+    "home": {
+        "fullname": "Frainer Encarnación",
+        "profession": "Profesión",
+        "description": "Descripción",
+        "about": "Acerca de"
+    }
+}

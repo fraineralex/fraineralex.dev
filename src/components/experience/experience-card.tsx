@@ -78,7 +78,7 @@ export default function ExperienceCard ({
               </h5>
             )}
           </header>
-          <p className='mt-2 text-sm leading-normal'>{description}</p>
+          <p className='mt-2.5 text-sm leading-normal'>{description}</p>
           <ul className='mt-2 flex flex-wrap' aria-label='Technologies used'>
             {skills.map((skill, index) => (
               <li className='mr-1.5 mt-2' key={index}>

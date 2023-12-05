@@ -24,7 +24,7 @@ export default function Experience () {
               website: 'https://lifterdo.com'
             }}
             description='My role is to develop and deliver customized solutions for our clients. I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.'
-            skills={['JavaScript', 'Python', 'Odoo', 'React', 'Node.js']}
+            skills={['JavaScript', 'Python', 'Odoo', 'React', 'Node.js', 'AWS']}
             contract='Full-time'
             location='Santo Domingo, Dominican Republic'
             locationType='Remote'

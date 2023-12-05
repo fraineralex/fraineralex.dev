@@ -24,11 +24,6 @@ export default function Blog () {
             imageName='trees.jpg'
             date=' October 2023'
           />
-          <BlogCard
-            title='Dolore rem recusandae necessitatibus ab consequatur dolorum'
-            imageName='trees.jpg'
-            date=' October 2023'
-          />
         </ol>
       </article>
     </section>

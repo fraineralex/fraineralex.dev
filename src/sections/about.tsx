@@ -1,7 +1,15 @@
-import Image from 'next/image'
-import { FloatingComponents } from '../components/about/floating-components'
-import { BsDownload } from 'react-icons/bs'
-import { FaEnvelope } from 'react-icons/fa'
+import { CgShapeTriangle } from 'react-icons/cg'
+const skills = [
+  'TypeScript',
+  'Next.js',
+  'Python',
+  'React',
+  'Node.js',
+  'Odoo',
+  'React Native',
+  'C#',
+  'ASP.NET'
+]
 
 export default function About () {
   return (
@@ -77,7 +85,18 @@ export default function About () {
             offering freelance services.
           </strong>
         </p>
-        <p className='mb-4'></p>
+        <p className='mb-5'>
+          Here are a few technologies I’ve been working with recently:
+        </p>
+        <ul className='grid grid-cols-3 gap-x-10 gap-y-0 p-0 overflow-hidden list-none'>
+          {skills &&
+            skills.map((skill, index) => (
+              <li key={index} className='text-sm flex items-center mb-2.5'>
+                <CgShapeTriangle className='rotate-90 inline me-2 w-2.5 text-white' />
+                {skill}
+              </li>
+            ))}
+        </ul>
       </article>
     </section>
   )

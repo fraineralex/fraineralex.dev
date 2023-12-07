@@ -112,7 +112,8 @@
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
-        "imageName": "lifter.png"
+        "imageName": "lifter.png",
+        "otherTitles": []
       },
       {
         "startDate": "Feb",
@@ -127,7 +128,8 @@
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
-        "imageName": "ipp.png"
+        "imageName": "ipp.png",
+        "otherTitles": []
       },
       {
         "startDate": "Sep 2022",
@@ -142,8 +144,14 @@
         "contract": "Prácticas",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
-        "imageName": "nelmix.png"
+        "imageName": "nelmix.png",
+        "otherTitles": []
       }
-    ]
+    ],
+    "resumeButton": {
+      "label": "Currículum Completo",
+      "url": "/curriculum.pdf",
+      "strong": "Ver"
+    }
   }
 }

@@ -144,7 +144,11 @@
         "locationType": "Remote",
         "imageName": "nelmix.png"
       }
-    ]
+    ],
+    "resumeButton": {
+      "label": "Résumé",
+      "url": "/resume.pdf",
+      "strong": "View Full"
+    }
   }
-  
 }

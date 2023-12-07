@@ -1,22 +1,6 @@
+import { ExperienceCardData } from '@/types/experience'
 import { LinkIcon } from '../common/SvgIcons'
 import Image from 'next/image'
-
-interface Props {
-  startDate: string
-  endDate: string
-  title: string
-  otherTitles?: string[]
-  company: {
-    name: string
-    website: string
-  }
-  description: string
-  skills: string[]
-  location?: string
-  locationType?: 'Remote' | 'On-site' | 'Hybrid'
-  contract?: 'Full-time' | 'Part-time' | 'Contract' | 'Internship' | 'Freelance'
-  imageName: string
-}
 
 export default function ExperienceCard ({
   startDate,
@@ -30,7 +14,7 @@ export default function ExperienceCard ({
   locationType,
   contract,
   imageName
-}: Props) {
+}: ExperienceCardData) {
   return (
     <li className='mb-12'>
       <div className='group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50'>

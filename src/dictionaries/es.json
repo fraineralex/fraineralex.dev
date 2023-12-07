@@ -1,13 +1,149 @@
 {
+  "sidenav": {
     "navigation": {
-        "about": "Acerca de",
-        "experience": "Experiencia",
-        "projects": "Proyectos"
+      "about": "Acerca de",
+      "experience": "Experiencia",
+      "projects": "Proyectos",
+      "githubUrl": "https://github.com/fraineralex",
+      "linkedinUrl": "https://www.linkedin.com/in/fraineralex/",
+      "twitterUrl": "https://twitter.com/fraineralex",
+      "instagramUrl": "https://www.instagram.com/frainer.alex/"
     },
-    "home": {
-        "fullname": "Frainer Encarnación",
-        "profession": "Profesión",
-        "description": "Descripción",
-        "about": "Acerca de"
+    "linkedinCard": {
+      "profileImage": "/images/hero/profile.jpg",
+      "lifterLink": {
+        "url": "https://lifterdo.com",
+        "logo": "/images/experience/lifter.png"
+      },
+      "itlaLink": {
+        "url": "https://itla.edu.do",
+        "logo": "/images/hero/itla.webp"
+      },
+      "fullname": "Frainer Encarnación",
+      "tagline": "Desarrollador Full Stack especializado en construir experiencias digitales excepcionales y accesibles.",
+      "location": "Santo Domingo, República Dominicana",
+      "contactInfo": "Información de contacto",
+      "connections": "500+ conexiones",
+      "connectButton": {
+        "label": "Conectar",
+        "url": "https://www.linkedin.com/in/fraineralex/"
+      },
+      "messageButton": {
+        "label": "Mensaje",
+        "url": "mailto:fraineralex2001@gmail.com"
+      },
+      "resumeButton": {
+        "label": "Currículum",
+        "url": "/curriculum.pdf"
+      }
     }
+  },
+  "about": {
+    "title": "Acerca de",
+    "paragraph1": {
+      "content": "Soy Frainer, un apasionado",
+      "strong": {
+        "content": "Desarrollador Full Stack"
+      },
+      "experience": "con más de 3 años de experiencia, especializado en dar vida a ideas en el vasto mundo del desarrollo web. A lo largo de mi trayectoria, he tenido el privilegio de contribuir al desarrollo de software para una",
+      "journey": {
+        "consultancy": {
+          "label": "consultoría de software",
+          "url": "https://nelmix.com/",
+          "name": "Nelmix"
+        },
+        "productCompany": {
+          "before": ", una",
+          "label": "empresa de productos",
+          "url": "https://ippdr.com/",
+          "name": "International Pack & Paper"
+        },
+        "financialConsultancy": {
+          "before": ", y una",
+          "label": "consultoría financiera",
+          "url": "https://lifterdo.com",
+          "name": "Lifter"
+        }
+      }
+    },
+    "paragraph2": {
+      "focus": "Actualmente, estoy principalmente enfocado en construir productos accesibles, crear soluciones excepcionales y experiencias digitales impactantes para nuestros clientes en",
+      "lifter": {
+        "label": "Lifter",
+        "url": "https://lifterdo.com"
+      },
+      "professionalRealm": "Fuera del ámbito profesional, me sumerjo en la exploración de nuevas tecnologías,",
+      "personalProjects": {
+        "label": "trabajando en proyectos personales,"
+      },
+      "freelanceServices": {
+        "before": "y",
+        "label": "ofreciendo servicios freelance"
+      }
+    },
+    "paragraph3": {
+      "technologies": "Aquí hay algunas tecnologías con las que he estado trabajando recientemente:"
+    },
+    "skills": [
+      "TypeScript",
+      "Next.js",
+      "Python",
+      "React",
+      "Node.js",
+      "Odoo",
+      "React Native",
+      "C#",
+      "ASP.NET"
+    ]
+  },
+  "experience": {
+    "title": "Experiencia",
+    "cards": [
+      {
+        "startDate": "Jun 2023",
+        "endDate": "Presente",
+        "title": "Ingeniero de Software Senior",
+        "company": {
+          "name": "Lifter",
+          "website": "https://lifterdo.com"
+        },
+        "description": "Mi rol es desarrollar y entregar soluciones personalizadas para nuestros clientes. Soy responsable de gestionar solicitudes directas de clientes, asignar tareas dentro del equipo y desarrollar nuevas características y módulos para cumplir con requisitos específicos. Además, también superviso las solicitudes de extracción del proceso para implementaciones en producción.",
+        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS"],
+        "contract": "Tiempo completo",
+        "location": "Santo Domingo, República Dominicana",
+        "locationType": "Remoto",
+        "imageName": "lifter.png"
+      },
+      {
+        "startDate": "Feb",
+        "endDate": "Jun 2023",
+        "title": "Desarrollador Full Stack",
+        "company": {
+          "name": "International Pack & Paper",
+          "website": "https://ippdr.com"
+        },
+        "description": "Mi rol implicaba crear y personalizar funciones para satisfacer las necesidades de nuestros clientes. Esto incluía desarrollar nuevas funcionalidades, realizar pruebas exhaustivas y documentar código, así como construir soluciones web utilizando tecnologías como JavaScript, Python y CSS.",
+        "skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
+        "contract": "Tiempo completo",
+        "location": "Santo Domingo, República Dominicana",
+        "locationType": "Remoto",
+        "imageName": "ipp.png"
+      },
+      {
+        "startDate": "Sep 2022",
+        "endDate": "Feb 2023",
+        "title": "Desarrollador Full Stack",
+        "company": {
+          "name": "Nelmix",
+          "website": "https://nelmix.com"
+        },
+        "description": "Trabajé en la creación de módulos personalizados para Odoo, centrándome en aplicaciones de contabilidad y gestión de productos adaptadas para satisfacer las necesidades únicas de nuestros clientes. Además, tuve la oportunidad de contribuir al desarrollo de diversas características para aplicaciones web.",
+        "skills": ["JavaScript", "TypeScript", "Python", "Odoo", "Node.js"],
+        "contract": "Prácticas",
+        "location": "Santo Domingo, República Dominicana",
+        "locationType": "Remoto",
+        "imageName": "nelmix.png"
+      }
+    ]
+  }
 }

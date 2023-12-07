@@ -6,7 +6,7 @@ import { i18n } from './i18n-config'
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 
-function getLocale (request: NextRequest): string | undefined {
+export function getLocale (request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
@@ -46,7 +46,7 @@ export function middleware (request: NextRequest) {
   )
 
   // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
+  /* if (pathnameIsMissingLocale) {
     const locale = getLocale(request)
 
     // e.g. incoming request is /products
@@ -57,7 +57,7 @@ export function middleware (request: NextRequest) {
         request.url
       )
     )
-  }
+  } */
 }
 
 export const config = {

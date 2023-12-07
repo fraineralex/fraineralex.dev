@@ -1,7 +1,8 @@
-import { ArrowRigthIcon, LinkIcon } from '../components/common/SvgIcons'
+import { ExperienceProps } from '@/types/experience'
+import { ArrowRigthIcon } from '../components/common/SvgIcons'
 import ExperienceCard from '../components/experience/experience-card'
 
-export default function Experience () {
+export default function Experience ({ dictionary }: ExperienceProps) {
   return (
     <section
       id='experience'

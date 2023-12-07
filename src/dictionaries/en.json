@@ -1,13 +1,150 @@
 {
+  "sidenav": {
     "navigation": {
-        "about": "About",
-        "experience": "Experience",
-        "projects": "Projects"
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects",
+      "githubUrl": "https://github.com/fraineralex",
+      "linkedinUrl": "https://www.linkedin.com/in/fraineralex/",
+      "twitterUrl": "https://twitter.com/fraineralex",
+      "instagramUrl": "https://www.instagram.com/frainer.alex/"
     },
-    "home": {
-        "fullname": "Frainer Encarnación",
-        "profession": "Profession",
-        "description": "Description",
-        "about": "About me"
+    "linkedinCard": {
+      "profileImage": "/images/hero/profile.jpg",
+      "lifterLink": {
+        "url": "https://lifterdo.com",
+        "logo": "/images/experience/lifter.png"
+      },
+      "itlaLink": {
+        "url": "https://itla.edu.do",
+        "logo": "/images/hero/itla.webp"
+      },
+      "fullname": "Frainer Encarnación",
+      "tagline": "Full Stack Developer specializing in building outstanding and accessible digital experiences.",
+      "location": "Santo Domingo, Dominican Republic",
+      "contactInfo": "Contact info",
+      "connections": "500+ connections",
+      "connectButton": {
+        "label": "Connect",
+        "url": "https://www.linkedin.com/in/fraineralex/"
+      },
+      "messageButton": {
+        "label": "Message",
+        "url": "mailto:fraineralex2001@gmail.com"
+      },
+      "resumeButton": {
+        "label": "Résumé",
+        "url": "/resume.pdf"
+      }
     }
+  },
+  "about": {
+    "title": "About",
+    "paragraph1": {
+      "content": "I’m Frainer, a passionate",
+      "strong": {
+        "content": "Full Stack Developer"
+      },
+      "experience": "with over 3 years of experience, specializing in bringing ideas to life in the vast world of web development. Throughout my journey, I’ve had the privilege of contributing to software development for a",
+      "journey": {
+        "consultancy": {
+          "label": "software consultancy",
+          "url": "https://nelmix.com/",
+          "name": "Nelmix"
+        },
+        "productCompany": {
+          "before": ", a",
+          "label": "product company",
+          "url": "https://ippdr.com/",
+          "name": "International Pack & Paper"
+        },
+        "financialConsultancy": {
+          "before": ", and a",
+          "label": "financial consultancy",
+          "url": "https://lifterdo.com",
+          "name": "Lifter"
+        }
+      }
+    },
+    "paragraph2": {
+      "focus": "Currently, I’m primarily focused on building accessible products and creating exceptional solutions and impactful digital experiences for our clients at",
+      "lifter": {
+        "label": "Lifter",
+        "url": "https://lifterdo.com"
+      },
+      "professionalRealm": "Outside the professional realm, I immerse myself in exploring new technologies,",
+      "personalProjects": {
+        "label": "working on personal projects,"
+      },
+      "freelanceServices": {
+        "before": "and",
+        "label": "offering freelance services"
+      }
+    },
+    "paragraph3": {
+      "technologies": "Here are a few technologies I’ve been working with recently:"
+    },
+    "skills": [
+      "TypeScript",
+      "Next.js",
+      "Python",
+      "React",
+      "Node.js",
+      "Odoo",
+      "React Native",
+      "C#",
+      "ASP.NET"
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "cards": [
+      {
+        "startDate": "Jun 2023",
+        "endDate": "Present",
+        "title": "Senior Software Engineer",
+        "company": {
+          "name": "Lifter",
+          "website": "https://lifterdo.com"
+        },
+        "description": "My role is to develop and deliver customized solutions for our clients. I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.",
+        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS"],
+        "contract": "Full-time",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "lifter.png"
+      },
+      {
+        "startDate": "Feb",
+        "endDate": "Jun 2023",
+        "title": "Full Stack Developer",
+        "company": {
+          "name": "International Pack & Paper",
+          "website": "https://ippdr.com"
+        },
+        "description": "My role involved creating and customizing features to meet the needs of our clients. This included developing new functionalities, conducting thorough testing, and documenting code, as well as building web solutions using technologies such as JavaScript, Python, and CSS.",
+        "skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
+        "contract": "Full-time",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "ipp.png"
+      },
+      {
+        "startDate": "Sep 2022",
+        "endDate": "Feb 2023",
+        "title": "Full Stack Developer",
+        "company": {
+          "name": "Nelmix",
+          "website": "https://nelmix.com"
+        },
+        "description": "I worked on creating custom modules for Odoo, focusing on accounting and product management applications tailored to meet the unique needs of our clients. Additionally, I had the opportunity to contribute to the development of various features for web applications.",
+        "skills": ["JavaScript", "TypeScript", "Python", "Odoo", "Node.js"],
+        "contract": "Internship",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "nelmix.png"
+      }
+    ]
+  }
+  
 }

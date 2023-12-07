@@ -1,17 +1,8 @@
 import { CgShapeTriangle } from 'react-icons/cg'
-const skills = [
-  'TypeScript',
-  'Next.js',
-  'Python',
-  'React',
-  'Node.js',
-  'Odoo',
-  'React Native',
-  'C#',
-  'ASP.NET'
-]
+import { AboutProps } from '@/types/about-types'
 
-export default function About () {
+export default function About ({ dictionary }: AboutProps) {
+  const { paragraph1, paragraph2, paragraph3, skills } = dictionary
   return (
     <section
       id='about'
@@ -20,74 +11,67 @@ export default function About () {
     >
       <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
         <h2 className='text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only'>
-          About
+          {dictionary.title}
         </h2>
       </header>
       <article>
         <p className='mb-4'>
-          I’m Frainer, a passionate{' '}
+          {paragraph1.content}{' '}
           <strong className='font-medium text-slate-200'>
-            Full Stack Developer
+            {paragraph1.strong.content}
           </strong>{' '}
-          with over 3 years of experience, specializing in bringing ideas to
-          life in the vast world of web development. Throughout my journey, I’ve
-          had the privilege of contributing to software development for a{' '}
+          {paragraph1.experience}{' '}
           <a
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
-            href='https://nelmix.com/'
+            href={paragraph1.journey.consultancy.url}
             target='_blank'
             rel='noreferrer'
-            aria-label='Nelmix'
+            aria-label={paragraph1.journey.consultancy.name}
           >
-            software consultancy
+            {paragraph1.journey.consultancy.label}
           </a>
-          , a{' '}
+          {paragraph1.journey.productCompany.before}{' '}
           <a
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
-            href='https://ippdr.com/'
+            href={paragraph1.journey.productCompany.url}
             target='_blank'
             rel='noreferrer'
-            aria-label='International Pack & Paper'
+            aria-label={paragraph1.journey.productCompany.name}
           >
-            product company
+            {paragraph1.journey.productCompany.label}
           </a>
-          , and a{' '}
+          {paragraph1.journey.financialConsultancy.before}{' '}
           <a
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
-            href='https://lifterdo.com'
+            href={paragraph1.journey.productCompany.url}
             target='_blank'
             rel='noreferrer'
-            aria-label='Lifter'
+            aria-label={paragraph1.journey.productCompany.name}
           >
-            financial consultancy.
+            {paragraph1.journey.productCompany.label}
           </a>
         </p>
         <p className='mb-4'>
-          Currently, I’m primarily focused on building accessible products and
-          creating exceptional solutions and impactful digital experiences for
-          our clients at{' '}
+          {paragraph2.focus}{' '}
           <a
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
-            href='https://lifterdo.com'
+            href={paragraph2.lifter.url}
             target='_blank'
             rel='noreferrer'
-            aria-label='Lifter'
+            aria-label={paragraph2.lifter.label}
           >
-            Lifter.
+            {paragraph2.lifter.label}.
           </a>{' '}
-          Outside the professional realm, I immerse myself in exploring new
-          technologies,{' '}
+          {paragraph2.professionalRealm}{' '}
           <strong className='font-medium text-slate-200'>
-            working on personal projects,{' '}
+            {paragraph2.personalProjects.label}{' '}
           </strong>
-          and{' '}
+          {paragraph2.freelanceServices.before}{' '}
           <strong className='font-medium text-slate-200'>
-            offering freelance services.
+            {paragraph2.freelanceServices.label}
           </strong>
         </p>
-        <p className='mb-5'>
-          Here are a few technologies I’ve been working with recently:
-        </p>
+        <p className='mb-5'>{paragraph3.technologies}</p>
         <ul className='grid grid-cols-3 gap-x-10 gap-y-0 p-0 overflow-hidden list-none'>
           {skills &&
             skills.map((skill, index) => (

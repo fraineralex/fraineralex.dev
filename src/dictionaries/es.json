@@ -200,6 +200,121 @@
       "strong": "Ver",
       "span": "Archivo Completo de Proyectos"
     }
+  },
+  "allProjects": {
+    "fullname": "Frainer Encarnación",
+    "title": "Todos los Proyectos",
+    "tableHeaders": {
+      "year": "Año",
+      "project": "Proyecto",
+      "description": "Descripción",
+      "technologies": "Tecnologías",
+      "links": "Links",
+      "deployText": "Ver"
+    },
+    "projects": [
+      {
+        "title": "Clon de Hacker News",
+        "shortDescription": "Un simple clon de Hacker News construido con React.",
+        "description": "Un simple clon de Hacker News construido con React y la API de Hacker News. Muestra las 20 mejores historias con desplazamiento infinito para una experiencia de navegación de noticias fluida.",
+        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
+        "deployUrl": "https://frainer-hacker-news.surge.sh",
+        "year": 2023
+      },
+      {
+        "title": "Aplicación de Lista de Tareas",
+        "shortDescription": "Una aplicación de una sola página para gestionar tareas con sincronización de datos.",
+        "description": "Una aplicación de una sola página para gestionar tareas, las tareas se sincronizan con un servicio backend proporcionado por jsonbin.io, asegurando la persistencia de datos.",
+        "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
+        "deployUrl": "https://frainer-todo-app.surge.sh",
+        "year": 2023
+      },
+      {
+        "title": "Ajedrez AI",
+        "shortDescription": "Proyecto de Ajedrez AI utilizando el algoritmo minimax.",
+        "description": "Proyecto de Ajedrez AI que utiliza el algoritmo de búsqueda adversaria minimax con poda alfa-beta y heurísticas. El sistema está diseñado para determinar el movimiento óptimo dentro de una profundidad especificada.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "year": 2022
+      },
+      {
+        "title": "Aplicación de Bienes Raíces",
+        "shortDescription": "Aplicación web para la gestión de bienes raíces.",
+        "description": "Una aplicación web de gestión inmobiliaria con cuatro roles distintos, cada uno ofrece funcionalidades específicas dentro del sistema para gestionar las propiedades inmobiliarias.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
+        "year": 2022
+      },
+      {
+        "title": "Quizzes de Programación",
+        "shortDescription": "Aplicación web basada en React para quizzes de programación.",
+        "description": "Una aplicación web simple basada en React para elegir un lenguaje de programación y responder a preguntas diversas y no repetitivas con fragmentos de código.",
+        "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
+        "year": 2023
+      },
+      {
+        "title": "Clon de Google Translate",
+        "shortDescription": "Clon simple de Google Translate construido con React.",
+        "description": "Un clon simple de Google Translate, construido con React y alimentado por la API de OpenAI.",
+        "technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
+        "deployUrl": "https://frainer-google-translate.surge.sh/",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "year": 2023
+      },
+      {
+        "title": "Lista de Tareas",
+        "shortDescription": "Aplicación web Node.js para la gestión de tareas.",
+        "description": "Aplicación web Node.js para la gestión de tareas con funciones amigables para el usuario. Admite accesos permanentes/temporales y actualizaciones de información del usuario.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://todolist.3.us-1.fl0.io",
+        "year": 2021
+      },
+      {
+        "title": "Aplicación de Banca en Línea",
+        "shortDescription": "Aplicación de banca en línea construida en C#.",
+        "description": "Aplicación de banca en línea construida en C# siguiendo la arquitectura ONION y los principios SOLID. Permite accesos seguros de usuarios y transacciones financieras sin problemas.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/InternetBanking-App",
+        "year": 2022
+      },
+      {
+        "title": "Aplicación de Red Social",
+        "shortDescription": "Aplicación de Red Social Node.js.",
+        "description": "Una aplicación de Red Social Node.js para crear perfiles de usuario, compartir publicaciones y eventos, comentar, conectarse con amigos y garantizar un acceso seguro a la cuenta.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Social-Network-App",
+        "year": 2021
+      },
+      {
+        "title": "Aplicación de Libros",
+        "shortDescription": "Aplicación basada en Node.js para registro de libros.",
+        "description": "Aplicación basada en Node.js para el registro de editores, categorías, autores y sus respectivos libros.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "year": 2021
+      },
+      {
+        "title": "Gestor de Bienes Raíces",
+        "shortDescription": "Módulo de Gestión de Bienes Raíces Odoo.",
+        "description": "El módulo de Gestión de Bienes Raíces de Odoo le permite gestionar propiedades, realizar búsquedas personalizadas, asignar agentes de ventas y mucho más.",
+        "technologies": ["Python", "Odoo", "PostgreSQL", "XML"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "year": 2023
+      },
+      {
+        "title": "E-Market",
+        "shortDescription": "Plataforma web C# ASP.NET Core siguiendo principios SOLID.",
+        "description": "Plataforma web C# ASP.NET Core que sigue principios SOLID, ofrece inicio de sesión seguro de usuario, gestión de anuncios y carga de imágenes.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/E-Market-App",
+        "year": 2022
+      }
+    ]
   }
-  
 }

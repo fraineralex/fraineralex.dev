@@ -1,50 +1,21 @@
-'use client'
-
 import { FiExternalLink, FiGithub } from 'react-icons/fi'
 import { GoRepo } from 'react-icons/go'
-import { useRef } from 'react'
-
-interface Props {
-  title: string
-  description: string
-  technologies: string[]
-  githubRepositoryUrl: string
-  deployUrl?: string
-}
+import { ProjectInfo } from '@/types/all-projects-type'
 
 export default function ProjectCardSquare ({
   title,
   description,
   technologies,
   githubRepositoryUrl,
-  deployUrl
-}: Props) {
-  const deployLinkRef = useRef<HTMLAnchorElement>(null)
-  const githubLinkRef = useRef<HTMLAnchorElement>(null)
-
-  const handleHover = () => {
-    if (deployUrl && deployLinkRef.current) {
-      deployLinkRef.current.focus()
-    } else if (githubLinkRef.current) {
-      githubLinkRef.current.focus()
-    }
-  }
-
-  const handleClick = () => {
-    if (deployUrl && deployLinkRef.current) {
-      deployLinkRef.current.click()
-    } else if (githubLinkRef.current) {
-      githubLinkRef.current.click()
-    }
-  }
-
+  deployUrl,
+  year
+}: ProjectInfo) {
   return (
-    <li
-      className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer'
-      onMouseEnter={handleHover}
-      onClick={handleClick}
-    >
-      <article className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-gray-900'>
+    <li className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer'>
+      <a
+        className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-gray-900'
+        href={deployUrl || githubRepositoryUrl}
+      >
         <header className='lg:min-h-[20vh]'>
           <div className='flex justify-between items-center mb-7'>
             <span className='text-cyan-200'>
@@ -57,7 +28,6 @@ export default function ProjectCardSquare ({
                 className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:outline-none'
                 target='_blank'
                 rel='noopener noreferrer'
-                ref={githubLinkRef}
               >
                 <FiGithub className='-mt-1 w-5 h-5 mr-2' />
               </a>
@@ -68,7 +38,6 @@ export default function ProjectCardSquare ({
                   className='flex justify-center items-center px-1 py-2 relative hover:text-teal-300 focus-visible:outline-none'
                   target='_blank'
                   rel='noopener noreferrer'
-                  ref={deployLinkRef}
                 >
                   <FiExternalLink className='-mt-1 w-5 h-5' />
                 </a>
@@ -95,7 +64,7 @@ export default function ProjectCardSquare ({
               technologies.map((tech, index) => <li key={index}>{tech}</li>)}
           </ul>
         </footer>
-      </article>
+      </a>
     </li>
   )
 }

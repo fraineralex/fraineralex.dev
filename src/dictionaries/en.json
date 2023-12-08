@@ -197,5 +197,121 @@
       "strong": "View Full",
       "span": "Project Archive"
     }
+  },
+  "allProjects": {
+    "fullname": "Frainer Encarnación",
+    "title": "All Projects",
+    "tableHeaders": {
+      "year": "Year",
+      "project": "Proyect",
+      "description": "Description",
+      "technologies": "Technologies",
+      "links": "Links",
+      "deployText": "Deploy"
+    },
+    "projects": [
+      {
+        "title": "Hacker News Clone",
+        "shortDescription": "A simple Hacker News clone built with React.",
+        "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
+        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
+        "deployUrl": "https://frainer-hacker-news.surge.sh",
+        "year": 2023
+      },
+      {
+        "title": "To Do App",
+        "shortDescription": "A single page app to manage todos with data synchronization.",
+        "description": "A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
+        "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
+        "deployUrl": "https://frainer-todo-app.surge.sh",
+        "year": 2023
+      },
+      {
+        "title": "Chess AI",
+        "shortDescription": "Chess AI project utilizing minimax algorithm.",
+        "description": "Chess AI project utilizing the minimax adversarial search algorithm with alpha-beta pruning and heuristics. The system is designed to determine the optimal move within a specified depth.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "year": 2022
+      },
+      {
+        "title": "Real Estate App",
+        "shortDescription": "Web app for real estate management.",
+        "description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
+        "year": 2022
+      },
+      {
+        "title": "Programming Quizzes",
+        "shortDescription": "React-based web app for programming quizzes.",
+        "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
+        "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
+        "year": 2023
+      },
+      {
+        "title": "Google Translate Clone",
+        "shortDescription": "Simple Google Translate clone built with React.",
+        "description": "A simple Google Translate clone, built with React and powered by the OpenAI API.",
+        "technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
+        "deployUrl": "https://frainer-google-translate.surge.sh/",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "year": 2023
+      },
+      {
+        "title": "To Do List",
+        "shortDescription": "Node.js web app for task management.",
+        "description": "Node.js web app for task management with user-friendly features. Supports permanent/temporary logins and user info updates.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://todolist.3.us-1.fl0.io",
+        "year": 2021
+      },
+      {
+        "title": "Net Banking App",
+        "shortDescription": "Net banking app built in C#.",
+        "description": "Net banking app built in C# following ONION architecture and SOLID principles. Enables secure user logins and seamless financial transactions.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/InternetBanking-App",
+        "year": 2022
+      },
+      {
+        "title": "Social Network App",
+        "shortDescription": "Node.js Social Network App.",
+        "description": "A Node.js Social Network App for creating user profiles, sharing posts and events, commenting, connecting with friends, and ensuring secure account access.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Social-Network-App",
+        "year": 2021
+      },
+      {
+        "title": "Books App",
+        "shortDescription": "Node.js-based Books App for registration.",
+        "description": "Node.js-based Books App for registration of publishers, categories, authors, and their respective books.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "year": 2021
+      },
+      {
+        "title": "Real Estate Manager",
+        "shortDescription": "Odoo Real Estate Management module.",
+        "description": "Odoo Real Estate Management module allows you to manage properties, perform custom searches, assign sales agents and much more.",
+        "technologies": ["Python", "Odoo", "PostgreSQL", "XML"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "year": 2023
+      },
+      {
+        "title": "E-Market",
+        "shortDescription": "C# ASP.NET Core web platform following SOLID principles.",
+        "description": "C# ASP.NET Core web platform following SOLID principles, offering secure user login, ad management, and image uploads.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/E-Market-App",
+        "year": 2022
+      }
+    ]
   }
 }

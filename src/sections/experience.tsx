@@ -1,4 +1,4 @@
-import { ExperienceProps } from '@/types/experience'
+import { ExperienceProps } from '@/types/experience-types'
 import { ArrowRigthIcon } from '../components/common/SvgIcons'
 import ExperienceCard from '../components/experience/experience-card'
 

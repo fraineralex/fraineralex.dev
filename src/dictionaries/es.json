@@ -153,5 +153,53 @@
       "url": "/curriculum.pdf",
       "strong": "Ver"
     }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "cards": [
+      {
+        "projectName": "Clon de Hacker News",
+        "description": "Aplicación web que imita Hacker News utilizando React y la API de Hacker News. Muestra las 20 mejores historias con desplazamiento infinito para una experiencia de navegación de noticias fluida. Además, proporciona fácil acceso a la sección de comentarios para cada historia.",
+        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
+        "deployUrl": "https://frainer-hacker-news.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
+        "imageSrc": "hacker_news.png",
+        "starsOnGithub": 2
+      },
+      {
+        "projectName": "Aplicación de Lista de Tareas",
+        "description": "Una aplicación web construida con React que permite a los usuarios crear, actualizar, eliminar y filtrar tareas. Además, las tareas se sincronizan con un servicio backend proporcionado por jsonbin.io, garantizando la persistencia de datos.",
+        "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
+        "deployUrl": "https://frainer-todo-app.surge.sh/",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
+        "imageSrc": "todo.png",
+        "starsOnGithub": 2
+      },
+      {
+        "projectName": "Ajedrez IA",
+        "description": "Ajedrez con Inteligencia Artificial desarrollado con el algoritmo minimax de búsqueda adversaria con podado alfa-beta. Devuelve el mejor movimiento posible que ha logrado encontrar en la profundidad dada dentro de un intervalo de tiempo especificado. En cada iteración, el algoritmo tiene en cuenta una serie de heurísticas que le indican si un movimiento en particular es bueno o malo según el resultado futuro que pueda causar.",
+        "technologies": ["Python", "Numpy", "Pygame", "Algoritmo MiniMax"],
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "imageSrc": "chess.png",
+        "starsOnGithub": 4
+      },
+      {
+        "projectName": "Aplicación de Bienes Raíces",
+        "description": "Una aplicación web de gestión inmobiliaria con roles distintos (agente, cliente, administrador y desarrollador), cada uno ofreciendo funcionalidades específicas dentro del sistema. El proyecto utiliza una API REST integrada para facilitar interacciones sin problemas. Desarrollado bajo la arquitectura ONION en C# ASP .Net Core, sigue los principios SOLID para un diseño robusto y escalable.",
+        "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server", "CSS"],
+        "deployUrl": "https://github.com/fraineralex/RealEstate-App",
+        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
+        "imageSrc": "real-estate.png",
+        "starsOnGithub": 4
+      }
+    ],
+    "link": {
+      "ariaLabel": "Ver Archivo Completo de Proyectos",
+      "url": "/projects",
+      "strong": "Ver",
+      "span": "Archivo Completo de Proyectos"
+    }
   }
+  
 }

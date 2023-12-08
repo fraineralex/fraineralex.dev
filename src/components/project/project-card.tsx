@@ -1,17 +1,6 @@
 import Image from 'next/image'
 import { GitHubIcon, LinkIcon, StarIcon } from '../common/SvgIcons'
-import { Children } from 'react'
-
-interface Props {
-  projectName: string
-  description: string
-  deployUrl: string
-  githubRepositoryUrl: string
-  starsOnGithub?: number
-  technologies: string[]
-  imageSrc: string
-  children?: React.ReactNode
-}
+import { Project } from '@/types/projects-types'
 
 export default function ProjectCard ({
   projectName,
@@ -20,9 +9,8 @@ export default function ProjectCard ({
   githubRepositoryUrl,
   starsOnGithub,
   technologies,
-  imageSrc,
-  children
-}: Props) {
+  imageSrc
+}: Project) {
   return (
     <li className='mb-12'>
       <div className='group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50'>
@@ -44,7 +32,7 @@ export default function ProjectCard ({
             </a>
           </h3>
           <p className='mt-2 text-sm leading-normal'>{description}</p>
-          {starsOnGithub && (
+          {starsOnGithub >= 16 && (
             <a
               className='relative mt-2 inline-flex items-center text-sm font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
               href={githubRepositoryUrl}
@@ -70,14 +58,14 @@ export default function ProjectCard ({
             </li>
           </ul>
           <ul className='mt-2 flex flex-wrap' aria-label='Technologies used:'>
-            {/* {technologies.map((technology, index) => (
+            {technologies.map((technology, index) => (
               <li className='mr-1.5 mt-2' key={index}>
                 <span className='flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 mr-1.5'>
                   {technology}
                 </span>
               </li>
-            ))} */}
-            {children}
+            ))}
+            {/* {children} */}
           </ul>
         </aside>
         <Image

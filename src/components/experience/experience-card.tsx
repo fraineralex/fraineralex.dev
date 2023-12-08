@@ -1,4 +1,4 @@
-import { ExperienceCardData } from '@/types/experience'
+import { ExperienceCardData } from '@/types/experience-types'
 import { LinkIcon } from '../common/SvgIcons'
 import Image from 'next/image'
 

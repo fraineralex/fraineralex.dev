@@ -27,6 +27,23 @@ export function getLocale (request: NextRequest): string | undefined {
 export function middleware (request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
+  // Remove the default locale from the pathname if present
+  if (pathname.startsWith(`/${i18n.defaultLocale}/`)) {
+    const newUrl = new URL(
+      pathname.replace(`/${i18n.defaultLocale}`, ''),
+      request.url
+    );
+    return NextResponse.redirect(newUrl);
+  }
+
+  if (pathname.startsWith(`/${i18n.defaultLocale}`)) {
+    const newUrl = new URL(
+      pathname.replace(`${i18n.defaultLocale}`, ''),
+      request.url
+    );
+    return NextResponse.redirect(newUrl);
+  }
+
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // // If you have one
   if (
@@ -46,8 +63,9 @@ export function middleware (request: NextRequest) {
   )
 
   // Redirect if there is no locale
-  /* if (pathnameIsMissingLocale) {
+  if (pathnameIsMissingLocale) {
     const locale = getLocale(request)
+    if(locale === i18n.defaultLocale) return
 
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
@@ -57,7 +75,7 @@ export function middleware (request: NextRequest) {
         request.url
       )
     )
-  } */
+  }
 }
 
 export const config = {

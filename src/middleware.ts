@@ -52,7 +52,8 @@ export function middleware (request: NextRequest) {
       '/favicon.ico',
       '/images/hero/profile.jpg',
       '/resume.pdf',
-      '/plane.html'
+      '/plane.html',
+      '/images/blog/trees.jpg'
     ].includes(pathname)
   )
     return

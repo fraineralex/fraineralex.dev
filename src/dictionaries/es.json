@@ -196,13 +196,14 @@
     ],
     "link": {
       "ariaLabel": "Ver Archivo Completo de Proyectos",
-      "url": "/projects",
+      "url": "/es/projects",
       "strong": "Ver",
       "span": "Archivo Completo de Proyectos"
     }
   },
   "allProjects": {
     "fullname": "Frainer Encarnación",
+    "goBackUrl": "/es",
     "title": "Todos los Proyectos",
     "tableHeaders": {
       "year": "Año",

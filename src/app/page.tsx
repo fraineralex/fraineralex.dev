@@ -16,9 +16,9 @@ export default async function Home ({ params }: Props) {
       <main id='content' className='pt-24 lg:w-1/2 lg:py-24 pr-20'>
         <About dictionary={dictionary.about} />
         <Experience dictionary={dictionary.experience} />
-        <Projects dictionary={dictionary.projects}/>
-        <Blog />
-        <Footer />
+        <Projects dictionary={dictionary.projects} />
+        <Blog dictionary={dictionary.writing} />
+        <Footer dictionary={dictionary.footer} />
       </main>
     </div>
   )

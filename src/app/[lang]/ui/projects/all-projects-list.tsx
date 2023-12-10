@@ -9,13 +9,13 @@ interface Props {
 export default function AllProjectsList ({ projects, tableHeaders }: Props) {
   return (
     <table id='content' className='mt-12 w-full border-collapse text-left'>
-      <thead className='sticky top-0 z-10 border-b border-black px-6 py-5 backdrop-blur'>
+      <thead className='sticky top-0 z-10 border-b border-slate-50/20 px-6 py-5 backdrop-blur'>
         <tr>
           <th className='py-4 pr-8 text-sm font-semibold text-slate-200'>
             {tableHeaders.year}
           </th>
           <th className='py-4 pr-8 text-sm font-semibold text-slate-200'>
-            {tableHeaders.year}
+            {tableHeaders.project}
           </th>
           <th className='hidden py-4 pr-8 text-sm font-semibold text-slate-200 lg:table-cell'>
             {tableHeaders.description}

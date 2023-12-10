@@ -21,7 +21,7 @@ export default function SwitchLanguage () {
 
   let newpath = `/es${pathname}`
 
-  if (pathname.startsWith('/es')) {
+  if (lang === 'es') {
     newpath = pathname.replace('/es', '/')
   }
 
@@ -33,18 +33,18 @@ export default function SwitchLanguage () {
     lang === 'en' ? 'Traducir a español' : 'Translate to english'
 
   return (
-    <header className=' fixed right-10 top-5'>
-      <UsaFlag className='inline' />
+    <header className='fixed right-10 top-5 z-50'>
+      <SpainFlag className='inline' />
       <Link href={newpath}>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} checked={lang === 'es'} />}
+          control={<MaterialUISwitch sx={{ m: 1 }} checked={lang === 'en'} />}
           label=''
           className='inline pl-2'
           aria-label={ariaLabel}
           onClick={handleSetLanguage}
         />
       </Link>
-      <SpainFlag className='inline -ml-5' />
+      <UsaFlag className='inline -ml-5' />
     </header>
   )
 }

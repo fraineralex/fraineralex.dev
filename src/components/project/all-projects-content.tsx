@@ -19,13 +19,12 @@ export default function AllProjectsContent ({ projects, tableHeaders }: Props) {
     setViewType(newViewType)
   }
 
+  const classNames = 'bg-gray-700 bg-opacity-80 text-white'
   const buttonListClassNames = (): string => {
-    const classNames = 'bg-gray-900 bg-opacity-80 text-white'
     return viewType === 'list' ? classNames : ''
   }
 
   const buttonGridClassNames = (): string => {
-    const classNames = 'bg-gray-900 bg-opacity-80 text-white'
     return viewType === 'grid' ? classNames : ''
   }
 

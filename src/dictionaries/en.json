@@ -156,7 +156,7 @@
     "cards": [
       {
         "projectName": "Hacker News Clone",
-        "description": "Wep app that mimics Hacker News using React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience. Additionally, it provides easy access to the comments section for each story.",
+        "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
         "technologies": ["React", "TypeScript", "Styled Componets", "SWR"],
         "deployUrl": "https://frainer-hacker-news.surge.sh",
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
@@ -165,7 +165,7 @@
       },
       {
         "projectName": "To Do App",
-        "description": "An wep application built with React that allows users to create, update, delete, and filter the tasks. Additionally, the tasks are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
+        "description": "A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
         "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
         "deployUrl": "https://frainer-todo-app.surge.sh/",
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
@@ -174,7 +174,7 @@
       },
       {
         "projectName": "Chess AI",
-        "description": "Artificial Intelligence Chess developed with the minimax adversarial search algorithm with alpha beta pruning. It returns the best possible move it has been able to find at the given depth within a specified time interval, at each iteration the algorithm takes into account a series of Heuristics that tell it whether a particular move is good or bad based on the future outcome it might cause.",
+        "description": "Chess Artificial Intelligence project utilizing the minimax adversarial search algorithm with alpha-beta pruning and heuristics. The system is designed to determine the optimal move within a specified depth.",
         "technologies": ["Python", "Numpy", "Pygame", "MiniMax Algorithm"],
         "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
         "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
@@ -183,7 +183,7 @@
       },
       {
         "projectName": "Real Estate App",
-        "description": "A real estate management web app with distinct roles (agent, client, admin, and developer), each offering specific functionalities within the system. The project utilizes an integrated RESTful API to facilitate seamless interactions. Developed under the ONION architecture in C# ASP .Net Core, it adheres to the SOLID principles for robust and scalable design.",
+        "description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.",
         "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server", "CSS"],
         "deployUrl": "https://github.com/fraineralex/RealEstate-App",
         "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
@@ -314,5 +314,29 @@
         "year": 2022
       }
     ]
+  },
+  "writing": {
+    "link": {
+      "ariaLabel": "Go to the blog page",
+      "url": "/blog",
+      "strong": "Go to the",
+      "span": "Blog Page"
+    }
+  },
+  "footer": {
+    "builtWith": "Built with",
+    "nextJs": "Next.js",
+    "tailwindCss": "Tailwind CSS",
+    "deployedWith": "deployed with",
+    "vercel": "Vercel",
+    "allTextSetIn": "All text is set in the",
+    "interTypeface": "Inter typeface",
+    "specialThanksTo": "Special thanks to",
+    "brittanyChiang": "Brittany Chiang",
+    "and": "and",
+    "jheyTompkins": "Jhey Tompkins",
+    "developerOfThe": "developer of the",
+    "dCssPlane": "3D CSS Plane",
+    "forInspiration": "for inspiration."
   }
 }

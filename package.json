@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@formatjs/intl-localematcher": "0.5.2",
+    "@mui/material": "^5.14.20",
     "@nextui-org/theme": "2.1.17",
     "clsx": "2.0.0",
     "negotiator": "0.6.3",

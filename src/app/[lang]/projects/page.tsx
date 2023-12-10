@@ -17,7 +17,7 @@ export default async function Projects ({ params }: Props) {
         <header className='lg:pb-3'>
           <a
             className='group mb-2 inline-flex items-center font-semibold leading-tight text-teal-300'
-            href='/'
+            href={allProjects.goBackUrl}
           >
             <FiArrowLeft className='mr-1 h-4 w-4 transition-transform group-hover:-translate-x-2' />
             {allProjects.fullname}

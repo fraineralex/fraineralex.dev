@@ -1,9 +1,12 @@
 'use client'
 
-import { Locale, i18n } from '@/i18n-config'
+import { Locale } from '@/i18n-config'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { SpainFlag, UsaFlag } from '../common/SvgIcons'
+import { MaterialUISwitch } from './switch'
 
 export default function SwitchLanguage () {
   const pathname = usePathname()
@@ -11,19 +14,37 @@ export default function SwitchLanguage () {
     pathname.startsWith('/es') ? 'es' : 'en'
   )
 
-  const newLang = lang === 'en' ? 'es' : 'en'
+  const handleSetLanguage = () => {
+    const newLang = lang === 'en' ? 'es' : 'en'
+    setLang(newLang)
+  }
+
+  let newpath = `/es${pathname}`
+
+  if (pathname.startsWith('/es')) {
+    newpath = pathname.replace('/es', '/')
+  }
+
+  if (pathname.startsWith('/es/')) {
+    newpath = pathname.replace('/es/', '/')
+  }
+
+  const ariaLabel =
+    lang === 'en' ? 'Traducir a español' : 'Translate to english'
 
   return (
-    <div className=' fixed right-10 top-5'>
-      <Link
-        href={`${lang === 'en' ? '/es' : '/'}`}
-        className='p-2.5 text-white bg-gray-900 bg-opacity-80 hover:text-teal-300'
-        onClick={() => {
-          setLang(newLang)
-        }}
-      >
-        {lang}
+    <header className=' fixed right-10 top-5'>
+      <UsaFlag className='inline' />
+      <Link href={newpath}>
+        <FormControlLabel
+          control={<MaterialUISwitch sx={{ m: 1 }} checked={lang === 'es'} />}
+          label=''
+          className='inline pl-2'
+          aria-label={ariaLabel}
+          onClick={handleSetLanguage}
+        />
       </Link>
-    </div>
+      <SpainFlag className='inline -ml-5' />
+    </header>
   )
 }

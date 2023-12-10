@@ -21,6 +21,7 @@ interface TableHeaders {
 
 interface AllProjectsInfo {
   fullname: string
+  goBackUrl: string
   title: string
   projects: ProjectInfo[]
   tableHeaders: TableHeaders

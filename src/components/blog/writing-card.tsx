@@ -8,7 +8,7 @@ type Props = {
   date: string
 }
 
-export default function BlogCard ({ title, imageName, date }: Props) {
+export default function WritingCard ({ title, imageName, date }: Props) {
   const titleArray = title.split(' ')
   const TitleLastWord = titleArray.pop()
   const partialTitle = titleArray.join(' ')

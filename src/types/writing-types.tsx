@@ -6,6 +6,7 @@ interface BlogLink {
 }
 
 interface WritingSection {
+  title: string
   link: BlogLink
 }
 

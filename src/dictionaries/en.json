@@ -316,10 +316,11 @@
     ]
   },
   "writing": {
+    "title": "Writing",
     "link": {
-      "ariaLabel": "Go to the blog page",
+      "ariaLabel": "View Blog Page",
       "url": "/blog",
-      "strong": "Go to the",
+      "strong": "View",
       "span": "Blog Page"
     }
   },

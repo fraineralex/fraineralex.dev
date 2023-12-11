@@ -319,11 +319,12 @@
     ]
   },
   "writing": {
+    "title": "Publicaciones",
     "link": {
       "ariaLabel": "Ir a la Página de Blog",
       "url": "/es/blog",
-      "strong": "Ir a la",
-      "span": "Página de Blog"
+      "strong": "Ver",
+      "span": "El Blog"
     }
   },
   "footer": {

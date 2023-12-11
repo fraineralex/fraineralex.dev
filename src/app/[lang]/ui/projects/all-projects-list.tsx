@@ -9,21 +9,21 @@ interface Props {
 export default function AllProjectsList ({ projects, tableHeaders }: Props) {
   return (
     <table id='content' className='mt-12 w-full border-collapse text-left'>
-      <thead className='sticky top-0 z-10 border-b border-slate-50/20 px-6 py-5 backdrop-blur'>
+      <thead className='sticky top-0 z-10 border-b border-shark-50/20 px-6 py-5 backdrop-blur'>
         <tr>
-          <th className='py-4 pr-8 text-sm font-semibold text-slate-200'>
+          <th className='py-4 pr-8 text-sm font-semibold text-shark-200'>
             {tableHeaders.year}
           </th>
-          <th className='py-4 pr-8 text-sm font-semibold text-slate-200'>
+          <th className='py-4 pr-8 text-sm font-semibold text-shark-200'>
             {tableHeaders.project}
           </th>
-          <th className='hidden py-4 pr-8 text-sm font-semibold text-slate-200 lg:table-cell'>
+          <th className='hidden py-4 pr-8 text-sm font-semibold text-shark-200 lg:table-cell'>
             {tableHeaders.description}
           </th>
-          <th className='hidden py-4 pr-8 text-sm font-semibold text-slate-200 lg:table-cell'>
+          <th className='hidden py-4 pr-8 text-sm font-semibold text-shark-200 lg:table-cell'>
             {tableHeaders.technologies}
           </th>
-          <th className='hidden py-4 pr-8 text-sm font-semibold text-slate-200 sm:table-cell'>
+          <th className='hidden py-4 pr-8 text-sm font-semibold text-shark-200 sm:table-cell'>
             {tableHeaders.links}
           </th>
         </tr>
@@ -45,18 +45,18 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                 index
               ) => (
                 <tr
-                  className='border-b border-slate-50/20 last:border-none'
+                  className='border-b border-shark-50/20 last:border-none'
                   key={index}
                 >
                   <td className='py-4 pr-4 align-top text-sm'>
                     <span className='translate-y-px'>{year}</span>
                   </td>
 
-                  <td className='py-4 pr-4 align-top font-semibold leading-snug text-slate-200'>
+                  <td className='py-4 pr-4 align-top font-semibold leading-snug text-shark-200'>
                     <div>
                       <span className='block sm:hidden'>
                         <a
-                          className='inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-slate-200 focus-visible:text-teal-300 sm:hidden group/link text-base'
+                          className='inline-flex items-baseline font-medium leading-tight text-shark-200 hover:text-shark-200 focus-visible:text-teal-300 sm:hidden group/link text-base'
                           href={deployUrl || githubRepositoryUrl}
                           target='_blank'
                           rel='noreferrer noopener'
@@ -107,7 +107,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                     <ul className='translate-y-1 inline-block space-x-3 whitespace-nowrap'>
                       <li className='mb-1 inline-flex items-center'>
                         <a
-                          className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-slate-400 focus-visible:text-teal-300 group/link text-sm'
+                          className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-shark-400 focus-visible:text-teal-300 group/link text-sm'
                           href={githubRepositoryUrl}
                           target='_blank'
                           rel='noreferrer'
@@ -122,7 +122,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                       {deployUrl && (
                         <li className='mb-1 inline-flex items-center'>
                           <a
-                            className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-slate-400 focus-visible:text-teal-300 group/link text-sm'
+                            className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-shark-400 focus-visible:text-teal-300 group/link text-sm'
                             href={deployUrl}
                             target='_blank'
                             rel='noreferrer noopener'

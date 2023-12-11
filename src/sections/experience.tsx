@@ -1,6 +1,7 @@
 import { ExperienceProps } from '@/types/experience-types'
 import { ArrowRigthIcon } from '../components/common/SvgIcons'
 import ExperienceCard from '../components/experience/experience-card'
+import Link from 'next/link'
 
 export default function Experience ({
   dictionary,
@@ -39,7 +40,7 @@ export default function Experience ({
             ))}
         </ol>
         <div className='mt-12'>
-          <a
+          <Link
             className='inline-flex items-center leading-tight text-slate-200 font-semibold group'
             aria-label={`${resumeButton.strong} ${resumeButton.label}`}
             href={resumeButton.url}
@@ -56,7 +57,7 @@ export default function Experience ({
                 <ArrowRigthIcon />
               </span>
             </h6>
-          </a>
+          </Link>
         </div>
       </article>
     </section>

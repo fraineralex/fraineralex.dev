@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { BsDownload } from 'react-icons/bs'
 import { ConnectIcon, EmailIcon } from '../common/SvgIcons'
 import { LinkedinCardProps } from '@/types/sidenav-types'
+import Link from 'next/link'
 
 export const LinkedinCard = ({ dictionary }: LinkedinCardProps) => {
   const {
@@ -40,7 +41,7 @@ export const LinkedinCard = ({ dictionary }: LinkedinCardProps) => {
               decoding='async'
             />
           </picture>
-          <a
+          <Link
             href={lifterLink.url}
             target='_blank'
             rel='noopener noreferrer'
@@ -52,15 +53,15 @@ export const LinkedinCard = ({ dictionary }: LinkedinCardProps) => {
               width='50'
               height='16'
             />
-          </a>
-          <a
+          </Link>
+          <Link
             href={itlaLink.url}
             target='_blank'
             rel='noopener noreferrer'
             className='items-center text-white bg-brand-fill absolute block me-8 mt-48'
           >
             <Image src={itlaLink.logo} alt='Itla Logo' width='50' height='25' />
-          </a>
+          </Link>
         </div>
         <h1 className='text-fluid-3 flex gap-x-2 items-center font-bold text-2xl text-shark-200'>
           {fullname}
@@ -79,22 +80,22 @@ export const LinkedinCard = ({ dictionary }: LinkedinCardProps) => {
           </p>
         </div>
         <span className='flex gap-x-3 items-center text-fluid--1 flex-wrap text-text-4'>
-          <a
+          <Link
             type='button'
             className='bg-teal-300 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-black border-0 border-teal-300 align-middle'
             href={connectButton.url}
             target='_blank'
           >
             <ConnectIcon className='inline text-center' /> {connectButton.label}
-          </a>
-          <a
+          </Link>
+          <Link
             className='font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-teal-300 border-2 border-teal-300'
             aria-label='View Full Résumé'
             href={messageButton.url}
           >
             <EmailIcon className='inline w-4' /> {messageButton.label}
-          </a>
-          <a
+          </Link>
+          <Link
             className='font-medium rounded-3xl text-sm px-5 py-1.5 text-center text-shark-300 border-2 border-shark-300'
             aria-label='View Full Résumé'
             href={resumeButton.url}
@@ -102,7 +103,7 @@ export const LinkedinCard = ({ dictionary }: LinkedinCardProps) => {
           >
             <BsDownload className='inline me-1' />
             {resumeButton.label}
-          </a>
+          </Link>
         </span>
       </div>
     </article>

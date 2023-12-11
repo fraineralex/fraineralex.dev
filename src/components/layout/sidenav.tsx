@@ -7,6 +7,7 @@ import {
 } from '../common/SvgIcons'
 import ItemLink from './item-link'
 import { LinkedinCard } from './linkedin-card'
+import Link from 'next/link'
 
 export default function SideNav ({ dictionary, inViews }: SidenavProps) {
   const { linkedinCard, navigation } = dictionary
@@ -17,7 +18,7 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
         <nav className='nav hidden lg:block' aria-label='In-page jump links'>
           <ul className='mt-12 w-max'>
             <li>
-              <a className='group flex items-center py-3 active' href='#about'>
+              <Link className='group flex items-center py-3 active' href='#about'>
                 <span
                   className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
                     inViews.inViewAbout ? 'w-16 bg-slate-200' : 'w-8 bg-slate-600'
@@ -30,10 +31,10 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                 >
                   {navigation.about}
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a className='group flex items-center py-3' href='#experience'>
+              <Link className='group flex items-center py-3' href='#experience'>
                 <span
                   className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
                     inViews.inViewExperience
@@ -50,10 +51,10 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                 >
                   {navigation.experience}
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a className='group flex items-center py-3' href='#projects'>
+              <Link className='group flex items-center py-3' href='#projects'>
                 <span
                   className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
                     inViews.inViewProjects || inViews.inViewWriting
@@ -68,7 +69,7 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                 >
                   {navigation.projects}
                 </span>
-              </a>
+              </Link>
             </li>
             {/* <li>
               <a className='group flex items-center py-3' href='#writing'>

@@ -1,5 +1,6 @@
 import { CgShapeTriangle } from 'react-icons/cg'
 import { AboutProps } from '@/types/about-types'
+import Link from 'next/link'
 
 export default function About ({ dictionary, refAbout }: AboutProps) {
   const { paragraph1, paragraph2, paragraph3, skills } = dictionary
@@ -22,7 +23,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
             {paragraph1.strong.content}
           </strong>{' '}
           {paragraph1.experience}{' '}
-          <a
+          <Link
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
             href={paragraph1.journey.consultancy.url}
             target='_blank'
@@ -30,9 +31,9 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
             aria-label={paragraph1.journey.consultancy.name}
           >
             {paragraph1.journey.consultancy.label}
-          </a>
+          </Link>
           {paragraph1.journey.productCompany.before}{' '}
-          <a
+          <Link
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
             href={paragraph1.journey.productCompany.url}
             target='_blank'
@@ -40,9 +41,9 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
             aria-label={paragraph1.journey.productCompany.name}
           >
             {paragraph1.journey.productCompany.label}
-          </a>
+          </Link>
           {paragraph1.journey.financialConsultancy.before}{' '}
-          <a
+          <Link
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
             href={paragraph1.journey.productCompany.url}
             target='_blank'
@@ -50,11 +51,11 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
             aria-label={paragraph1.journey.productCompany.name}
           >
             {paragraph1.journey.productCompany.label}
-          </a>
+          </Link>
         </p>
         <p className='mb-4'>
           {paragraph2.focus}{' '}
-          <a
+          <Link
             className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
             href={paragraph2.lifter.url}
             target='_blank'
@@ -62,7 +63,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
             aria-label={paragraph2.lifter.label}
           >
             {paragraph2.lifter.label}.
-          </a>{' '}
+          </Link>{' '}
           {paragraph2.professionalRealm}{' '}
           <strong className='font-medium text-slate-200'>
             {paragraph2.personalProjects.label}{' '}

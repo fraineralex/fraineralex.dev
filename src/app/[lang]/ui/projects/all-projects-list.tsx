@@ -1,5 +1,6 @@
 import { GitHubIcon } from '@/components/common/SvgIcons'
 import { ProjectInfo, TableHeaders } from '@/types/all-projects-type'
+import Link from 'next/link'
 
 interface Props {
   projects: ProjectInfo[]
@@ -55,7 +56,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                   <td className='py-4 pr-4 align-top font-semibold leading-snug text-shark-200'>
                     <div>
                       <span className='block sm:hidden'>
-                        <a
+                        <Link
                           className='inline-flex items-baseline font-medium leading-tight text-shark-200 hover:text-shark-200 focus-visible:text-teal-300 sm:hidden group/link text-base'
                           href={deployUrl || githubRepositoryUrl}
                           target='_blank'
@@ -81,7 +82,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                               </svg>
                             </span>
                           </p>
-                        </a>
+                        </Link>
                       </span>
                       <strong className='hidden sm:block font-semibold'>
                         {title}
@@ -106,7 +107,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                   <td className='hidden py-4 align-top sm:table-cell'>
                     <ul className='translate-y-1 inline-block space-x-3 whitespace-nowrap'>
                       <li className='mb-1 inline-flex items-center'>
-                        <a
+                        <Link
                           className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-shark-400 focus-visible:text-teal-300 group/link text-sm'
                           href={githubRepositoryUrl}
                           target='_blank'
@@ -117,11 +118,11 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                             GitHub
                             <GitHubIcon className='inline-block h-4 w-4 shrink-0 ml-1' />
                           </span>
-                        </a>
+                        </Link>
                       </li>
                       {deployUrl && (
                         <li className='mb-1 inline-flex items-center'>
-                          <a
+                          <Link
                             className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-shark-400 focus-visible:text-teal-300 group/link text-sm'
                             href={deployUrl}
                             target='_blank'
@@ -144,7 +145,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                                 ></path>
                               </svg>
                             </span>
-                          </a>
+                          </Link>
                         </li>
                       )}
                     </ul>

@@ -1,72 +1,73 @@
 import { FooterProps } from "@/types/footer-types";
+import Link from "next/link";
 
 export default function Footer ({ dictionary }: FooterProps) {
   return (
     <footer className='max-w-md pb-16 text-sm text-shark-400 sm:pb-0'>
       <p>
         {dictionary.builtWith}{' '}
-        <a
+        <Link
           href='https://nextjs.org/'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           {dictionary.nextJs}
-        </a>{' '}
+        </Link>{' '}
         {dictionary.and}{' '}
-        <a
+        <Link
           href='https://tailwindcss.com/'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           {dictionary.tailwindCss}
-        </a>
+        </Link>
         , {dictionary.deployedWith}{' '}
-        <a
+        <Link
           href='https://vercel.com/'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           {dictionary.vercel}
-        </a>
+        </Link>
         . {dictionary.allTextSetIn}{' '}
-        <a
+        <Link
           href='https://rsms.me/inter/'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           {dictionary.interTypeface}
-        </a>
+        </Link>
         . {dictionary.specialThanksTo}{' '}
-        <a
+        <Link
           href='https://brittanychiang.com'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           Brittany Chiang
-        </a>{' '}
+        </Link>{' '}
         {dictionary.and}{' '}
-        <a
+        <Link
           href='https://jhey.dev'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           Jhey Tompkins
-        </a>
+        </Link>
         ; {dictionary.developerOfThe}{' '}
-        <a
+        <Link
           href='/plane.html'
           className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
           {dictionary.dCssPlane}
-        </a>
+        </Link>
         , {dictionary.forInspiration}{' '}
       </p>
     </footer>

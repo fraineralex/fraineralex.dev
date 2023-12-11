@@ -2,12 +2,12 @@ import { FooterProps } from "@/types/footer-types";
 
 export default function Footer ({ dictionary }: FooterProps) {
   return (
-    <footer className='max-w-md pb-16 text-sm text-slate-400 sm:pb-0'>
+    <footer className='max-w-md pb-16 text-sm text-shark-400 sm:pb-0'>
       <p>
         {dictionary.builtWith}{' '}
         <a
           href='https://nextjs.org/'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -16,7 +16,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         {dictionary.and}{' '}
         <a
           href='https://tailwindcss.com/'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -25,7 +25,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         , {dictionary.deployedWith}{' '}
         <a
           href='https://vercel.com/'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -34,7 +34,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         . {dictionary.allTextSetIn}{' '}
         <a
           href='https://rsms.me/inter/'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -43,7 +43,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         . {dictionary.specialThanksTo}{' '}
         <a
           href='https://brittanychiang.com'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -52,7 +52,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         {dictionary.and}{' '}
         <a
           href='https://jhey.dev'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -61,7 +61,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         ; {dictionary.developerOfThe}{' '}
         <a
           href='/plane.html'
-          className='font-medium text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
+          className='font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >

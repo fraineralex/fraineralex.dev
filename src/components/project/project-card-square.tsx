@@ -13,7 +13,7 @@ export default function ProjectCardSquare ({
   return (
     <li className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer'>
       <a
-        className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-gray-900'
+        className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-gray-800/60'
         href={deployUrl || githubRepositoryUrl}
       >
         <header className='lg:min-h-[20vh]'>
@@ -21,7 +21,7 @@ export default function ProjectCardSquare ({
             <span className='text-cyan-200'>
               <GoRepo className='w-10 h-10 align-middle' />
             </span>
-            <span className='flex items-center text-gray-200'>
+            <span className='flex items-center text-shark-200'>
               <a
                 href={githubRepositoryUrl}
                 aria-label='External Link'
@@ -44,7 +44,7 @@ export default function ProjectCardSquare ({
               )}
             </span>
           </div>
-          <h3 className='mt-3 text-2xl font-bold text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300 leading-none'>
+          <h3 className='mt-3 text-2xl font-bold text-shark-200 group-hover:text-teal-300 group-focus-visible:text-teal-300 leading-none'>
             <a
               href={deployUrl}
               target='_blank'
@@ -54,7 +54,7 @@ export default function ProjectCardSquare ({
               {title}
             </a>
           </h3>
-          <p className='text-gray-300 mt-3 text-sm leading-relaxed font-[450px]'>
+          <p className='text-shark-300 mt-3 text-sm leading-relaxed font-[450px]'>
             {description}
           </p>
         </header>

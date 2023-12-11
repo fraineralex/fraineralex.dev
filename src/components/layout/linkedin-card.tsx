@@ -62,40 +62,40 @@ export const LinkedinCard = ({ dictionary }: LinkedinCardProps) => {
             <Image src={itlaLink.logo} alt='Itla Logo' width='50' height='25' />
           </a>
         </div>
-        <h1 className='text-fluid-3 flex gap-x-2 items-center font-bold text-2xl text-slate-200'>
+        <h1 className='text-fluid-3 flex gap-x-2 items-center font-bold text-2xl text-shark-200'>
           {fullname}
           <span className='w-6 aspect-square inline-block'></span>
         </h1>
         <div className='leading-tight'>
-          <p className='mb-2 font-semibold text-slate-400 pe-24'>{tagline}</p>
-          <p className='mb-2 text-sm font-semibold text-gray-500'>
+          <p className='mb-2 font-semibold text-shark-400 pe-24'>{tagline}</p>
+          <p className='mb-2 text-sm font-semibold text-shark-500'>
             {location} •{' '}
-            <span className='text-blue-500 hover:underline cursor-pointer'>
+            <span className='text-teal-300 hover:underline cursor-pointer'>
               {contactInfo}
             </span>
           </p>
-          <p className='mb-2 text-sm font-semibold text-blue-500'>
+          <p className='mb-2 text-sm font-semibold text-teal-300'>
             {connections}
           </p>
         </div>
         <span className='flex gap-x-3 items-center text-fluid--1 flex-wrap text-text-4'>
           <a
             type='button'
-            className='bg-blue-500 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-black border-0 border-blue-500 align-middle'
+            className='bg-teal-300 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-black border-0 border-teal-300 align-middle'
             href={connectButton.url}
             target='_blank'
           >
             <ConnectIcon className='inline text-center' /> {connectButton.label}
           </a>
           <a
-            className='font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-blue-500 border-2 border-blue-500'
+            className='font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-teal-300 border-2 border-teal-300'
             aria-label='View Full Résumé'
             href={messageButton.url}
           >
             <EmailIcon className='inline w-4' /> {messageButton.label}
           </a>
           <a
-            className='font-medium rounded-3xl text-sm px-5 py-1.5 text-center text-slate-300 border-2 border-slate-300'
+            className='font-medium rounded-3xl text-sm px-5 py-1.5 text-center text-shark-300 border-2 border-shark-300'
             aria-label='View Full Résumé'
             href={resumeButton.url}
             target='_blank'

@@ -11,4 +11,5 @@ interface WritingSection {
 
 export interface WiritingProps {
   dictionary: WritingSection
+  refWriting: (node?: Element | null | undefined) => void
 }

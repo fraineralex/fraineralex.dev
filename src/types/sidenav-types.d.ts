@@ -52,8 +52,16 @@ interface Sidenav {
   linkedinCard: LinkedinCard
 }
 
+interface inViews {
+  inViewAbout: boolean
+  inViewExperience: boolean
+  inViewProjects: boolean
+  inViewWriting: boolean
+}
+
 export interface SidenavProps {
   dictionary: Sidenav
+  inViews: inViews
 }
 
 export interface LinkedinCardProps {

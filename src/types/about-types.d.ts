@@ -58,4 +58,5 @@ interface MyJSONStructure {
 
 export interface AboutProps {
   dictionary: MyJSONStructure
+  refAbout: (node?: Element | null | undefined) => void
 }

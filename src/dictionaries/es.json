@@ -108,7 +108,7 @@
           "website": "https://lifterdo.com"
         },
         "description": "Mi rol es desarrollar y entregar soluciones personalizadas para nuestros clientes. Soy responsable de gestionar solicitudes directas de clientes, asignar tareas dentro del equipo y desarrollar nuevas características y módulos para cumplir con requisitos específicos. Además, también superviso las solicitudes de extracción del proceso para implementaciones en producción.",
-        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS", "PostgreSQL"],
+        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "PostgreSQL", "AWS", "Ubuntu"],
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",

@@ -24,7 +24,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           </strong>{' '}
           {paragraph1.experience}{' '}
           <Link
-            className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
+            className='font-medium text-slate-200 hover:text-teal-200 focus-visible:text-teal-200'
             href={paragraph1.journey.consultancy.url}
             target='_blank'
             rel='noreferrer'
@@ -34,7 +34,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           </Link>
           {paragraph1.journey.productCompany.before}{' '}
           <Link
-            className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
+            className='font-medium text-slate-200 hover:text-teal-200 focus-visible:text-teal-200'
             href={paragraph1.journey.productCompany.url}
             target='_blank'
             rel='noreferrer'
@@ -44,7 +44,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           </Link>
           {paragraph1.journey.financialConsultancy.before}{' '}
           <Link
-            className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
+            className='font-medium text-slate-200 hover:text-teal-200 focus-visible:text-teal-200'
             href={paragraph1.journey.financialConsultancy.url}
             target='_blank'
             rel='noreferrer'
@@ -56,7 +56,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
         <p className='mb-4'>
           {paragraph2.focus}{' '}
           <Link
-            className='font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
+            className='font-medium text-slate-200 hover:text-teal-200 focus-visible:text-teal-200'
             href={paragraph2.lifter.url}
             target='_blank'
             rel='noreferrer'

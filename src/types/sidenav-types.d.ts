@@ -66,4 +66,5 @@ export interface SidenavProps {
 
 export interface LinkedinCardProps {
   dictionary: LinkedinCard
+  navigation: Navigation
 }

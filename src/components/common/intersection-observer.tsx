@@ -12,13 +12,13 @@ export default function Observer ({
   lang: string
 }) {
   const [refAbout, inViewAbout] = useInView({
-    threshold: 0.5
+    threshold: 0.47
   })
   const [refExperience, inViewExperience] = useInView({
     threshold: 0.5
   })
   const [refProjects, inViewProjects] = useInView({
-    threshold: 0.22
+    threshold: 0.207
   })
   const [refWriting, inViewWriting] = useInView({
     threshold: 0.7

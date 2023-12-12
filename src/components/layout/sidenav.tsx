@@ -1,11 +1,4 @@
 import { SidenavProps } from '@/types/sidenav-types'
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  XIcon
-} from '../common/SvgIcons'
-import ItemLink from './item-link'
 import { LinkedinCard } from './linkedin-card'
 import Link from 'next/link'
 import SocialMedia from './social-media'
@@ -27,12 +20,12 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
                     inViews.inViewAbout
                       ? 'w-16 bg-slate-200'
-                      : 'w-8 bg-slate-600'
+                      : 'w-8 bg-slate-400/70'
                   }`}
                 ></span>
                 <span
                   className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
-                    inViews.inViewAbout ? 'text-slate-200' : 'text-slate-500'
+                    inViews.inViewAbout ? 'text-slate-200' : 'text-slate-400/70'
                   }`}
                 >
                   {navigation.about}
@@ -45,14 +38,14 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
                     inViews.inViewExperience
                       ? 'w-16 bg-slate-200'
-                      : 'w-8 bg-slate-600'
+                      : 'w-8 bg-slate-400/70'
                   }`}
                 ></span>
                 <span
                   className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
                     inViews.inViewExperience
                       ? 'text-slate-200'
-                      : 'text-slate-500'
+                      : 'text-slate-400/70'
                   }`}
                 >
                   {navigation.experience}
@@ -65,14 +58,14 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
                     inViews.inViewProjects || inViews.inViewWriting
                       ? 'w-16 bg-slate-200'
-                      : 'w-8 bg-slate-600 '
+                      : 'w-8 bg-slate-400/70 '
                   }`}
                 ></span>
                 <span
                   className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
                     inViews.inViewProjects || inViews.inViewWriting
                       ? 'text-slate-200'
-                      : 'text-slate-500'
+                      : 'text-slate-400/70'
                   }`}
                 >
                   {navigation.projects}
@@ -81,8 +74,8 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
             </li>
             {/* <li>
               <a className='group flex items-center py-3' href='#writing'>
-                <span className='nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none'></span>
-                <span className='nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200 group-focus-visible:text-slate-200'>
+                <span className='nav-indicator mr-4 h-px w-8 bg-slate-400/70 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none'></span>
+                <span className='nav-text text-xs font-bold uppercase tracking-widest text-slate-400/70 group-hover:text-slate-200 group-focus-visible:text-slate-200'>
                   Writing
                 </span>
               </a>

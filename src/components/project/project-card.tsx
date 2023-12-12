@@ -32,7 +32,7 @@ export default function ProjectCard ({
               </strong>
             </Link>
           </h3>
-          <p className='mt-2 text-sm leading-normal'>{description}</p>
+          <p className='mt-2 text-sm leading-normal text-slate-300/90'>{description}</p>
           {starsOnGithub >= 16 && (
             <Link
               className='relative mt-2 inline-flex items-center text-sm font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
@@ -48,7 +48,7 @@ export default function ProjectCard ({
           <ul className='mt-2 flex flex-wrap' aria-label='Related links'>
             <li className='mr-4'>
               <Link
-                className='relative mt-2 inline-flex items-center text-sm font-medium text-shark-300 hover:text-teal-300 focus-visible:text-teal-300'
+                className='relative mt-2 inline-flex items-center text-sm font-medium text-shark-300/80 hover:text-teal-300 focus-visible:text-teal-300'
                 href={githubRepositoryUrl}
                 target='_blank'
                 rel='noreferrer'
@@ -64,7 +64,7 @@ export default function ProjectCard ({
           >
             {technologies.map((technology, index) => (
               <li className='mr-1.5 mt-2' key={index}>
-                <span className='flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 mr-1.5'>
+                <span className='flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-200 mr-1.5'>
                   {technology}
                 </span>
               </li>

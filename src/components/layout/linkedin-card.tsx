@@ -72,10 +72,10 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           <span className='w-6 aspect-square inline-block'></span>
         </h1>
         <div className='leading-tight'>
-          <p className='mb-2 font-semibold text-shark-400 pe-20 sm:pe-24'>
+          <p className='mb-2 font-semibold text-shark-300 pe-20 sm:pe-24'>
             {tagline}
           </p>
-          <p className='mb-2 text-sm font-semibold text-shark-500'>
+          <p className='mb-2 text-sm font-semibold text-shark-400'>
             {location} <i className='hidden sm:inline me-1'>• </i>
             <span className='text-teal-300 hover:underline cursor-pointer block mt-2 sm:mt-0 sm:inline'>
               {contactInfo}
@@ -88,21 +88,21 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
         <span className='flex gap-x-3 items-center text-fluid--1 text-text-4 whitespace-nowrap'>
           <Link
             type='button'
-            className='bg-teal-300 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-black border-0 border-teal-300 align-middle'
+            className='bg-teal-300 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-black border-0 border-teal-300 align-middle hover:bg-teal-600 focus-visible:bg-teal-600'
             href={connectButton.url}
             target='_blank'
           >
             <ConnectIcon className='inline text-center' /> {connectButton.label}
           </Link>
           <Link
-            className='font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-teal-300 border-2 border-teal-300'
+            className='font-medium rounded-3xl text-sm px-4 py-1.5 text-center text-teal-300 border-2 border-teal-300 hover:bg-teal-50/10 focus-visible:bg-teal-50/10'
             aria-label='View Full Résumé'
             href={messageButton.url}
           >
             <EmailIcon className='inline w-4' /> {messageButton.label}
           </Link>
           <Link
-            className='font-medium rounded-3xl text-sm px-4 sm:px-5 py-1.5 text-center text-shark-300 border-2 border-shark-300'
+            className='font-medium rounded-3xl text-sm px-4 sm:px-5 py-1.5 text-center text-shark-300 border-2 border-shark-300 hover:bg-shark-50/10 focus-visible:bg-shark-50/10'
             aria-label='View Full Résumé'
             href={resumeButton.url}
             target='_blank'

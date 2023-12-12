@@ -31,7 +31,7 @@ export default function ExperienceCard ({
         <aside className='z-10 sm:col-span-6'>
           <header className='font-medium leading-snug text-shark-200'>
             <h5
-              className='text-slate-500 mb-1 text-sm block sm:hidden'
+              className='text-slate-300/60 mb-1 text-sm block sm:hidden'
               aria-hidden='true'
             >
               {startDate} — {endDate}
@@ -57,29 +57,35 @@ export default function ExperienceCard ({
             </h3>
             {otherTitles &&
               otherTitles.map((title, index) => (
-                <h5 className='text-slate-500' aria-hidden='true' key={index}>
+                <h5
+                  className='text-slate-300/60'
+                  aria-hidden='true'
+                  key={index}
+                >
                   {title}
                 </h5>
               ))}
             <h5
-              className='text-slate-500 mt-1 text-sm hidden sm:block'
+              className='text-slate-300/60 mt-1 text-sm hidden sm:block'
               aria-hidden='true'
             >
               {startDate} — {endDate}
               {/*  · {contract} */}
             </h5>
             {location && locationType && (
-              <h5 className='text-slate-500 mt-1 text-sm' aria-hidden='true'>
+              <h5 className='text-slate-300/60 mt-1 text-sm' aria-hidden='true'>
                 {location}
                 {/*  · {locationType} */}
               </h5>
             )}
           </header>
-          <p className='mt-2.5 text-sm leading-normal'>{description}</p>
+          <p className='mt-2.5 text-sm leading-normal text-slate-300/90'>
+            {description}
+          </p>
           <ul className='mt-2 flex flex-wrap' aria-label='Technologies used'>
             {skills.map((skill, index) => (
               <li className='mr-1.5 mt-2' key={index}>
-                <span className='flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 '>
+                <span className='flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-200 '>
                   {skill}
                 </span>
               </li>

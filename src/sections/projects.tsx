@@ -1,24 +1,7 @@
 import Link from 'next/link'
 import ProjectCard from '@/components/project/project-card'
-import { ArrowRigthIcon, AutoAnimateIcon } from '@/components/common/SvgIcons'
+import { ArrowRigthIcon } from '@/components/common/SvgIcons'
 import { ProjectsProps } from '@/types/projects-types'
-import { FaSquareJs, FaPython } from 'react-icons/fa6'
-import { BsBootstrapFill } from 'react-icons/bs'
-import { FaCss3, FaChess, FaHtml5 } from 'react-icons/fa'
-import { FaReact } from 'react-icons/fa'
-import { TbBrandTypescript } from 'react-icons/tb'
-import Image from 'next/image'
-import { TbBrandVite } from 'react-icons/tb'
-import {
-  SiStyledcomponents,
-  SiSwc,
-  SiSwr,
-  SiNumpy,
-  SiCsharp,
-  SiDotnet,
-  SiMicrosoftsqlserver
-} from 'react-icons/si'
-import { VscJson } from 'react-icons/vsc'
 
 export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
   const { title, cards, link } = dictionary
@@ -29,7 +12,7 @@ export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
       aria-label='Selected projects'
       ref={refProjects}
     >
-      <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
+      <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-gradient-to-r from-black-pear-950/75 to-shark-950/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
         <h2 className='text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only'>
           {title}
         </h2>

@@ -13,7 +13,7 @@ export default function Writing ({ dictionary, refWriting }: WiritingProps) {
       aria-label='Blog posts'
       ref={refWriting}
     >
-      <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
+      <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-gradient-to-r from-black-pear-950/75 to-shark-950/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
         <h2 className='text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only'>
           {title}
         </h2>
@@ -21,12 +21,12 @@ export default function Writing ({ dictionary, refWriting }: WiritingProps) {
       <article>
         <ol className='group/list'>
           <WritingCard
-            title='Dolore rem recusandae necessitatibus ab consequatur dolorum'
+            title='Dolore rem recusandae necessitatibus'
             imageName='trees.jpg'
             date=' October 2023'
           />
           <WritingCard
-            title='Dolore rem recusandae necessitatibus ab consequatur dolorum'
+            title='Dolore rem recusandae necessitatibus'
             imageName='trees.jpg'
             date=' October 2023'
           />

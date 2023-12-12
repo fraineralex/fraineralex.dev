@@ -33,7 +33,7 @@ export default function SwitchLanguage () {
     lang === 'en' ? 'Traducir a español' : 'Translate to english'
 
   return (
-    <header className='fixed right-10 top-5 z-50'>
+    <header className='absolute md:fixed right-4 md:right-10 top-1 md:top-5 z-50'>
       <SpainFlag className='inline' />
       <Link href={newpath}>
         <FormControlLabel

@@ -108,7 +108,7 @@
           "website": "https://lifterdo.com"
         },
         "description": "My role is to develop and deliver customized solutions for our clients. I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.",
-        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS"],
+        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS", "PostgreSQL"],
         "contract": "Full-time",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
@@ -138,7 +138,7 @@
           "website": "https://nelmix.com"
         },
         "description": "I worked on creating custom modules for Odoo, focusing on accounting and product management applications tailored to meet the unique needs of our clients. Additionally, I had the opportunity to contribute to the development of various features for web applications.",
-        "skills": ["JavaScript", "TypeScript", "Python", "Odoo", "Node.js"],
+        "skills": ["TypeScript", "Python", "Odoo", "Node.js", "SQL"],
         "contract": "Internship",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
@@ -175,7 +175,7 @@
       {
         "projectName": "Chess AI",
         "description": "Chess Artificial Intelligence project utilizing the minimax adversarial search algorithm with alpha-beta pruning and heuristics. The system is designed to determine the optimal move within a specified depth.",
-        "technologies": ["Python", "Numpy", "Pygame", "MiniMax Algorithm"],
+        "technologies": ["Python", "Numpy", "Pygame", "MiniMax Algrthm"],
         "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
         "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
         "imageSrc": "chess.png",
@@ -184,7 +184,7 @@
       {
         "projectName": "Real Estate App",
         "description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.",
-        "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server", "CSS"],
+        "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server"],
         "deployUrl": "https://github.com/fraineralex/RealEstate-App",
         "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
         "imageSrc": "real-estate.png",
@@ -302,7 +302,7 @@
         "shortDescription": "Odoo Real Estate Management module.",
         "description": "Odoo Real Estate Management module allows you to manage properties, perform custom searches, assign sales agents and much more.",
         "technologies": ["Python", "Odoo", "PostgreSQL", "XML"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "githubRepositoryUrl": "https://github.com/fraineralex/real_estate_manager",
         "year": 2023
       },
       {

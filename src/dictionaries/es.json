@@ -20,7 +20,7 @@
         "logo": "/images/hero/itla.webp"
       },
       "fullname": "Frainer Encarnación",
-      "tagline": "Desarrollador Full Stack especializado en construir experiencias digitales excepcionales y accesibles.",
+      "tagline": "Desarrollador Full Stack especializado en construir experiencias digitales excepcionales.",
       "location": "Santo Domingo, República Dominicana",
       "contactInfo": "Información de contacto",
       "connections": "500+ conexiones",
@@ -108,7 +108,7 @@
           "website": "https://lifterdo.com"
         },
         "description": "Mi rol es desarrollar y entregar soluciones personalizadas para nuestros clientes. Soy responsable de gestionar solicitudes directas de clientes, asignar tareas dentro del equipo y desarrollar nuevas características y módulos para cumplir con requisitos específicos. Además, también superviso las solicitudes de extracción del proceso para implementaciones en producción.",
-        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS"],
+        "skills": ["JavaScript", "Python", "Odoo", "React", "Node.js", "AWS", "PostgreSQL"],
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
@@ -140,7 +140,7 @@
           "website": "https://nelmix.com"
         },
         "description": "Trabajé en la creación de módulos personalizados para Odoo, centrándome en aplicaciones de contabilidad y gestión de productos adaptadas para satisfacer las necesidades únicas de nuestros clientes. Además, tuve la oportunidad de contribuir al desarrollo de diversas características para aplicaciones web.",
-        "skills": ["JavaScript", "TypeScript", "Python", "Odoo", "Node.js"],
+        "skills": ["TypeScript", "Python", "Odoo", "Node.js", "SQL"],
         "contract": "Prácticas",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
@@ -305,7 +305,7 @@
         "shortDescription": "Módulo de Gestión de Bienes Raíces Odoo.",
         "description": "El módulo de Gestión de Bienes Raíces de Odoo le permite gestionar propiedades, realizar búsquedas personalizadas, asignar agentes de ventas y mucho más.",
         "technologies": ["Python", "Odoo", "PostgreSQL", "XML"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "githubRepositoryUrl": "https://github.com/fraineralex/real_estate_manager",
         "year": 2023
       },
       {

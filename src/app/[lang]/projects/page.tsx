@@ -17,7 +17,7 @@ export default async function Projects ({ params }: Props) {
       <section className='lg:py-24'>
         <header className='lg:pb-3'>
           <Link
-            className='group mb-2 inline-flex items-center font-semibold leading-tight text-teal-300'
+            className='group mb-2 inline-flex items-center font-semibold leading-tight text-teal-200'
             href={allProjects.goBackUrl}
           >
             <FiArrowLeft className='mr-1 h-4 w-4 transition-transform group-hover:-translate-x-2' />

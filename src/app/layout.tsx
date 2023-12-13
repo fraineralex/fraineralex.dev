@@ -23,11 +23,15 @@ interface Props {
 
 export default function RootLayout ({ children }: Props) {
   return (
-    <html className={`${inter.className} scroll-smooth`} data-lt-installed='true' lang='en'>
+    <html
+      className={`${inter.className} scroll-smooth`}
+      data-lt-installed='true'
+      lang='en'
+    >
       <body
         className={`leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0`}
       >
-        <MouseShadow />
+        {/* <MouseShadow /> */}
         <SwitchLanguage />
         {children}
       </body>

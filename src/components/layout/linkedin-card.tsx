@@ -1,9 +1,6 @@
 import Image from 'next/image'
 import { BsDownload } from 'react-icons/bs'
-import {
-  ConnectIcon,
-  EmailIcon,
-} from '../common/SvgIcons'
+import { ConnectIcon, EmailIcon } from '../common/SvgIcons'
 import { LinkedinCardProps } from '@/types/sidenav-types'
 import Link from 'next/link'
 import SocialMedia from './social-media'
@@ -102,7 +99,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
             <EmailIcon className='inline w-4' /> {messageButton.label}
           </Link>
           <Link
-            className='font-medium rounded-3xl text-sm px-4 sm:px-5 py-1.5 text-center text-shark-300 border-2 border-shark-300 hover:bg-shark-50/10 focus-visible:bg-shark-50/10'
+            className='font-medium rounded-3xl text-sm px-4 sm:px-5 py-1.5 text-center text-shark-300 border-2 border-shark-300 hover:bg-shark-50/10 focus-visible:bg-shark-50/10 hover:text-shark-100 hover:border-shark-100'
             aria-label='View Full Résumé'
             href={resumeButton.url}
             target='_blank'
@@ -111,7 +108,10 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
             {resumeButton.label}
           </Link>
         </span>
-        <SocialMedia className='mt-10 flex lg:hidden items-center' navigation={navigation} />
+        <SocialMedia
+          className='mt-10 flex lg:hidden items-center'
+          navigation={navigation}
+        />
       </div>
     </article>
   )

@@ -1,12 +1,12 @@
 'use client'
 
-import { PointerEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function MouseShadow () {
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    const handleMove = (event: PointerEvent) => {
+    const handleMove = (event: MouseEvent) => {
       const { clientX, clientY } = event
       setPosition({ x: clientX, y: clientY })
     }

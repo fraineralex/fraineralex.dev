@@ -318,10 +318,10 @@
   "writing": {
     "title": "Writing",
     "link": {
-      "ariaLabel": "View Blog Page",
+      "ariaLabel": "View My Blog",
       "url": "/blog",
       "strong": "View",
-      "span": "Blog Page"
+      "span": "My Blog"
     }
   },
   "footer": {

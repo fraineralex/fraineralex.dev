@@ -1,6 +1,5 @@
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '../get-dictionary'
-import { About, Experience, Projects, Blog, Footer, SideNav } from '@/sections'
 import Observer from '@/components/common/intersection-observer'
 
 interface Props {

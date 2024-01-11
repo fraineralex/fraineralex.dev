@@ -204,10 +204,10 @@
       }
     ],
     "link": {
-      "ariaLabel": "Ver Archivo Completo de Proyectos",
+      "ariaLabel": "Ver Archivo de Proyectos",
       "url": "/es/projects",
       "strong": "Ver",
-      "span": "Archivo Completo de Proyectos"
+      "span": "Archivo de Proyectos"
     }
   },
   "allProjects": {
@@ -333,7 +333,7 @@
       "ariaLabel": "Ir a la Página de Blog",
       "url": "/es/blog",
       "strong": "Ver",
-      "span": "El Blog"
+      "span": "Mi Blog"
     }
   },
   "footer": {

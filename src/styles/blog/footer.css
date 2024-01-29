@@ -1,0 +1,21 @@
+@keyframes reveal-links {
+  0% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+div {
+  a {
+    view-timeline-name: --reveling-links;
+    view-timeline-axis: block;
+
+    animation: linear reveal-links both;
+    animation-timeline: --reveling-links;
+
+    animation-range: entry;
+  }
+}

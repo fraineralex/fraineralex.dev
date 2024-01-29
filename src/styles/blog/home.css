@@ -1,0 +1,30 @@
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-header {
+  animation: fade-down 2s both;
+
+  h1 {
+    @apply font-londrina !important;
+
+    font-size: min(max(3rem, 6.25vw), 7rem);
+    text-wrap: balance;
+
+    @supports (font-size: clamp(3rem, 6.25vw, 7rem)) {
+      font-size: clamp(3rem, 6.25vw, 7rem);
+    }
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}

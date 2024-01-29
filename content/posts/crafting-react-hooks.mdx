@@ -1,0 +1,751 @@
+---
+title: 'Crafting React Hooks: A Comprehensive Guide'
+description: 'In this article, I will reveal in a clear and simplified way how React Hooks can work magic in your projects, just as I would have liked to learn when I discovered them.'
+date: '2024-01-24'
+url: '/'
+hero: '/images/posts/cover/crafting-react-hooks.webp'
+tags: ['react', 'javascript', 'typescript']
+published: true
+---
+
+In this article, I will reveal in a clear and simplified way how React Hooks can work magic in your projects, just as I would have liked to learn when I discovered them.
+
+### 🪝 Hooks: The Magic of React
+
+In React, hooks are utilities that allow us to execute arbitrary code in our components based on specific actions. Hooks provide a way to reuse state and side-effect logic in functional components in a simpler and more declarative manner.
+
+> **🚨 Important:** This guide uses `TypeScript` code snippets to illustrate the concepts. If you are not familiar with TypeScript, feel free to ignore the typing in the examples.
+
+## 🌱 Basic Hooks
+
+This reference guide will discuss all the Hooks natively available in React, but first, let’s start with the basic React Hooks: `useState`, `useEffect`, and `useContext`.
+
+![React basic hooks image](https://frainer-blog.vercel.app/images/posts/content/basic-hooks.webp)
+
+## ⚡ useState
+
+It is a hook that allows functional components to manage and maintain their internal state. You can use it to declare state variables and access them in your functional components.
+
+**The signature for the `useState` Hook is as follows:**
+
+```tsx
+const [state, setState] = useState(initialState)
+```
+
+Here, `state` and `setState` refer to the state value and updater function returned on invoking `useState` with some `initialState`.
+
+It’s important to note that when your component first renders and invokes `useState`, the `initialState` is the returned state from `useState`.
+
+Also, to update state, the state updater function `setState` should be invoked with a new state value, as shown below:
+
+```tsx
+setState(newValue)
+```
+
+By doing this, a new re-render of the component is queued. `useState` guarantees that the `state` value will always be the most recent after applying updates.
+
+**Example of using `useState` in a React component about the follow card of X:**
+
+```tsx
+export function XFollowCard({ fullName, userName, initialIsFollowing }: Props) {
+  const [isFollowing, setIsFollowing] = useState(initialIsFollowing) // <-- Definition
+
+  const text = isFollowing ? 'Following' : 'Follow'
+
+  const buttonClassName = isFollowing
+    ? 'tw-followCard-button is-following'
+    : 'tw-followCard-button'
+
+  const handleClick = () => {
+    setIsFollowing(!isFollowing) // Changing the state
+  }
+
+  return (
+    <article className='tw-followCard'>
+      <header className='tw-followCard-header'>
+        <img
+          className='tw-followCard-avatar'
+          alt='Midudev avatar'
+          src={`https://unavatar.io/${userName}`}
+        />
+        <div className='tw-followCard-info'>
+          <strong>{fullName}</strong>
+          <span className='tw-followCard-infoUserName'>@{userName}</span>
+        </div>
+      </header>
+
+      <aside>
+        <button className={buttonClassName} onClick={handleClick}>
+          <span className='tw-followCard-text'>{text}</span>
+          <span className='tw-followCard-stopFollow'>Unfollow</span>
+        </button>
+      </aside>
+    </article>
+  )
+}
+
+```
+
+## 🎬 useEffect
+
+It is a React hook that allows performing side effects in functional components. You can use it to execute code in response to changes in the component, such as making API requests, subscribing to events, or updating the DOM. `useEffect` receives a function as an argument and executes it after the component is rendered or when certain dependencies change.
+
+The basic signature of `useEffect` is as follows:
+
+```tsx
+useEffect(() => {
+  //...
+})
+```
+
+**Example of using `useEffect` in a React component:**
+
+```tsx
+const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
+
+export function useCatImage({ fact }: { fact: string }) {
+  const [imageUrl, setImageUrl] = useState()
+
+  useEffect(() => {
+    if (!fact) return
+
+    const threeFirstWords = fact.split(' ', 3).join(' ')
+
+    fetch(
+      `https://cataas.com/cat/says/${threeFirstWords}?size=50&color=red&json=true`
+    )
+      .then((res) => res.json())
+      .then((response) => {
+        const { url } = response
+        setImageUrl(url)
+      })
+  }, [fact])
+
+  return { imageUrl: `${CAT_PREFIX_IMAGE_URL}${imageUrl}` }
+}
+
+```
+
+### 🧹 Cleaning up an effect
+
+Some imperative code need to be cleaned up e.g. to prevent memory leaks. For example, subscriptions need to be cleaned up, timers need to be invalidated etc. To do this return a function from the callback passed to `useEffect`:
+
+```tsx
+useEffect(() => {
+  const subscription = props.apiSubscripton()
+
+  return () => {
+    // clean up the subscription
+    subscription.unsubscribeApi()
+  }
+})
+```
+
+The clean-up function is guaranteed to be invoked before the component is removed from the user interface.
+
+### ⚠️ Avoid Infinite Loops
+
+When using `useEffect` in React, it's crucial to avoid infinite loops that can arise from incorrect effect configurations. One common mistake is modifying the state within the effect body in a way that triggers infinite renderings.
+
+> **Common Cause of Infinite Loops:** Directly Modifying State
+
+```tsx
+useEffect(() => {
+  // Incorrect: Modifying state within the effect body
+  setCount(count + 1)
+}, [count])
+```
+
+This example causes an infinite loop by updating the state within the effect, triggering new renderings and re-executing the effect.
+
+### ✅ Solution
+
+```tsx
+useEffect(() => {
+  // Correct: No dependencies in the array, avoiding the infinite loop
+  setCount(count + 1)
+}, [])
+```
+
+Avoid infinite loops by ensuring that the dependencies in the `useEffect` dependency array are stable and do not change within the effect body. In this case, by removing `count` from the dependency array, we prevent the infinite loop.
+
+## 🤝 useContext
+
+The problem that `useContext` solves lies in the need to pass data through the component hierarchy without resorting to prop drilling, which is when props are manually passed through multiple levels of components. This approach can become cumbersome and impractical as the application grows, as each intermediate component has to relay the props, generating less clean and error-prone code.
+
+### ❌ Prop Drilling: The Challenge
+
+Imagine a scenario where we have a `ComponentA` that needs to pass data to `ComponentD`. Traditional prop drilling would involve passing the props through all intermediate components, even if `ComponentB` and `ComponentC` do not need that data.
+
+```tsx
+// ComponentA.tsx
+const ComponentA = ({ dataForD }: Props) => {
+  return <ComponentB dataForD={dataForD} />
+}
+
+// ComponentB.tsx
+const ComponentB = ({ dataForD }: Props) => {
+  return <ComponentC dataForD={dataForD} />
+}
+
+// ComponentC.tsx
+const ComponentC = ({ dataForD }: Props) => {
+  return <ComponentD dataForD={dataForD} />
+}
+
+// ComponentD.tsx
+const ComponentD = ({ dataForD }: Props) => {
+  // Use dataForD here
+}
+
+```
+
+This process, known as prop drilling, can become unmanageable and complicated as more components are added to the hierarchy.
+
+### ✅ Solution: `useContext` to the Rescue
+
+`useContext` greatly simplifies this task by allowing us to create and consume a context without manually passing props through each component. First, we create a context using `createContext`:
+
+```tsx
+// ThemeContext.ts
+import { createContext } from 'react'
+export const ThemeContext = createContext()
+```
+
+Then, we use the `Provider` component to wrap our component tree with the desired value:
+
+```tsx
+// App.tsx
+import React from 'react'
+import { ThemeContext } from './ThemeContext'
+
+const App = () => {
+  return (
+    <ThemeContext.Provider value='dark'>
+      {/* Nested components here */}
+    </ThemeContext.Provider>
+  )
+}
+
+```
+
+Finally, in any component within this context, we can use `useContext` to access the data without manually passing props:
+
+```tsx
+// Button.tsx
+import React, { useContext } from 'react'
+import { ThemeContext } from './ThemeContext'
+
+export const Button = () => {
+  const theme = useContext(ThemeContext)
+  return <button className={theme}>Click here</button>
+}
+
+```
+
+> Note that the value passed to useContext must be the context object, i.e., the return value from invoking React.createContext, not ContextObject.Provider or ContextObject.Consumer.
+
+This solution avoids the cumbersome prop drilling and provides a cleaner and more efficient way to share data across components in a React application. `useContext` makes data management more elegant and easy to maintain.
+
+Goodbye, prop drilling! 👋
+
+## 🌟 Additional Hooks
+
+The following hooks are variants of the basic hooks discussed in the sections above. If you’re new to hooks don’t bother learning these right now. They are only needed for specific edge cases.
+
+![React additional hooks image](https://frainer-blog.vercel.app/images/posts/content/additional-hooks.webp)
+
+## 📌 useRef
+
+`useRef` in React is a hook that makes it easy to create mutable references. Unlike `useState`, `useRef` doesn't trigger component re-renders when its value changes, making it a powerful tool for holding data that doesn't directly affect the user interface.
+
+Here’s how the `useRef` hook is used:
+
+```tsx
+import { useRef } from 'react'
+
+const MyComponent = () => {
+  const myRef = useRef(initialValue)
+  // ...
+}
+
+```
+
+### 🥷🏻 Challenge
+
+The problem that `useRef` solves becomes apparent when we need to update values without triggering a visual representation update of the component. To illustrate this, let's consider a movie search scenario:
+
+```tsx
+export function useMovies({ search }: { search: string }) {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  const getMovies = async () => {
+    // ❌ This is a bad practice because we are fetching
+    // the movies and re-rendering the component again
+    // even if the search is the same as the previous one.
+
+    try {
+      setLoading(true)
+      setError(null)
+      const newMovies = await searchMovies({ search })
+      setMovies(newMovies)
+    } catch (error: any) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { movies, getMovies, loading, error }
+}
+
+```
+
+In this case, using `useState` for the search term causes unnecessary renderings every time the search term changes. This is where `useRef` becomes an efficient solution by allowing us to update `search` without affecting the user interface:
+
+```tsx
+export function useMovies({ search }: { search: string }) {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const previousSearch = useRef(search) // <-- Define a ref
+
+  const getMovies = async () => {
+    // ✅ If the current search is the same to before search: return
+    if (previousSearch.current === search) return
+
+    try {
+      setLoading(true)
+      setError(null)
+      previousSearch.current = search
+      const newMovies = await searchMovies({ search })
+      setMovies(newMovies)
+    } catch (error: any) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { movies, getMovies, loading, error }
+}
+
+```
+
+With this implementation, `useRef` helps manage the value of `search` without causing unwanted visual updates, improving efficiency and the user experience.
+
+## 🧠 useMemo
+
+The `useMemo` hook in React is a powerful tool for optimizing performance by memorizing the result of a function. Its main purpose is to prevent unnecessary computations, reusing the previously calculated value if the dependencies haven't changed.
+
+Here’s how the `useMemo` hook is used:
+
+```tsx
+const readTime = useMemo(() => {
+  const wordsPerMinute = 200
+  const words = text.trim().split(/\s+/).length
+  const value = Math.ceil(words / wordsPerMinute)
+  return `${value} min read`
+}, [text]) // only recompute if text changes
+```
+
+The problem that `useMemo` addresses becomes apparent when we need to perform expensive calculations in a component, but those calculations are not necessary every time the component renders. Let's take the example of the `Counter` component:
+
+```tsx
+export function Counter({ count }: { count: number }) {
+  const double = count * 2 // Costly calculation performed on every render
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <p>Doble: {double}</p>
+    </div>
+  )
+}
+
+```
+
+In this case, the double value is recalculated on every render, even if `count` hasn't changed. `useMemo` solves this by memorizing the result of the calculation only when the dependencies, in this case, the `count` prop, have changed:
+
+```tsx
+import { useMemo } from 'react'
+
+export function Counter({ count }: { count: number }) {
+  const double = useMemo(() => count * 2, [count])
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <p>Doble: {double}</p>
+    </div>
+  )
+}
+
+```
+
+With `useMemo`, if the `count` prop hasn't changed, the recalculation of double is avoided, and the previously calculated value is reused. This significantly improves the efficiency of the component, especially in situations where calculations are more resource-intensive.
+
+## ♻️ useCallback
+
+The `useCallback` hook in React provides a way to memorize functions. The main advantage is to avoid creating new functions on each render, returning the previously memorized function if the dependencies haven't changed.
+
+Here’s how the `useCallback` hook is used:
+
+```tsx
+const memoizedCallback = useCallback(callback, arrayDependency)
+```
+
+The problem that `useCallback` addresses becomes apparent when we need to pass functions to child components and want to avoid creating new instances of those functions on each render. Let's take the example of the `Counter` component:
+
+```tsx
+function Counter({ count, onIncrement }: Props) {
+  const handleIncrement = () => {
+    onIncrement(count)
+  }
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={handleIncrement}>Incrementar</button>
+    </div>
+  )
+}
+
+```
+
+In this case, `handleIncrement` is recreated on every render, which is not efficient, especially if `onIncrement` and `count` haven't changed. `useCallback` addresses this by memorizing the function only when the dependencies change:
+
+```tsx
+import { useCallback } from 'react'
+
+export function Counter({ count, onIncrement }: Props) {
+  const handleIncrement = useCallback(() => {
+    onIncrement(count)
+  }, [count, onIncrement]) // only re-create if count or onIncrement change
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={handleIncrement}>Incrementar</button>
+    </div>
+  )
+}
+
+```
+
+With `useCallback`, if `count` or `onIncrement` haven't changed, creating a new function is avoided, and the previously calculated function is reused. This improves efficiency and contributes to a more optimal component performance.
+
+## 🏷️ useId
+
+`useId` is a React hook designed to generate unique identifiers, ideal for assigning them to HTML tag attributes. This practice becomes especially useful for improving accessibility by establishing specific relationships between elements.
+
+Here’s how the `useId` hook is used:
+
+```tsx
+const passwordHintId = useId()
+```
+
+Next, the generated ID is used in different attributes:
+
+```tsx
+<>
+  <input type='password' aria-describedby={passwordHintId} />
+  <p id={passwordHintId}>
+</>
+
+```
+
+The problem that `useId` addresses arises when we need to assign unique identifiers to HTML elements, especially in situations where a component may appear multiple times on the screen. Let's take the example of the `PasswordField` component:
+
+```tsx
+import { useId } from 'react'
+
+export function PasswordField() {
+  const passwordHintId = useId()
+
+  return (
+    <>
+      <label>
+        Password:
+        <input type='password' aria-describedby={passwordHintId} />
+      </label>
+      <p id={passwordHintId}>
+        The password must be 18 characters long and contain special characters.
+      </p>
+    </>
+  )
+}
+
+```
+
+In this case, `useId` is used to generate a unique ID (`passwordHintId`) that is assigned to both the `aria-describedby` attribute of the input and the `id` of the paragraph. This ensures that even if `PasswordField` appears multiple times on the screen, the generated IDs will not conflict.
+
+```tsx
+export default function App() {
+  return (
+    <>
+      <h2>Choose password</h2>
+      <PasswordField />
+      <h2>Confirm password</h2>
+      <PasswordField />
+    </>
+  )
+}
+
+```
+
+In the `App` component, where `PasswordField` is used twice, `useId` ensures that automatically generated identifiers avoid duplicates and provide a robust solution for assigning unique IDs in repeated contexts. This contributes to improving accessibility and consistency in the application.
+
+## 🕹️ useReducer
+
+`useReducer` is a React hook designed to manage the state of a component using an action-based and reduction-oriented approach, similar to the pattern used in Redux. This hook becomes preferable over `useState` when the state of a component is more complex or when state updates depend on the previous state or previous actions.
+
+`useReducer` takes two arguments: a reducing function and the initial state. The reducing function receives two arguments: the current state and an action that describes how the state should change. The reducing function returns the new state.
+
+**Here’s how the `useReducer` hook is used:**
+
+```tsx
+const [state, dispatch] = useReducer(reducer, initialArgument, init)
+```
+
+The problem that `useReducer` addresses arises when the state of a component becomes more complex, and state updates depend on multiple factors or actions. Let's take the example of the `Counter` component:
+
+```tsx
+import { useState } from 'react'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0)
+
+  const handleIncrement = () => {
+    setCount(count + 1)
+  }
+
+  const handleDecrement = () => {
+    setCount(count - 1)
+  }
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+    </div>
+  )
+}
+
+```
+
+In this example, we use `useState` to manage the state of the counter. While this can work for simple cases, as the logic of the state becomes more complex or depends on previous actions, the code can become harder to maintain. `useReducer` provides a more organized structure and a more scalable solution for handling complex states and actions in situations where the code could become confusing using only `useState`. We would approach this problem with useReducer as follows:
+
+```tsx
+// Define the reducing function
+const counterReducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 }
+    case 'decrement':
+      return { count: state.count - 1 }
+    default:
+      return state
+  }
+}
+
+export const Counter = () => {
+  // Use useReducer to manage the state of the counter
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 })
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>Decrement</button>
+    </div>
+  )
+}
+
+```
+
+## ✨ useImperativeHandle
+
+`useImperativeHandle` in React is a handy tool when you need to control and customize the external interface of a functional component, especially when working with refs. Imagine the challenge you would face without this hook.
+
+### 🤔 Challenge Without `useImperativeHandle`:
+
+Let's assume we have a functional component called `FancyInput` that encapsulates a text input. We want the parent component to access and manipulate the input value directly and also trigger focus on that input. Without `useImperativeHandle`, we might end up with less efficient and error-prone code.
+
+```tsx
+export const FancyInput = () => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
+  return (
+    <div>
+      <input ref={inputRef} />
+      {/* Challenge: How to expose the `focusInput` method to the parent component? */}
+    </div>
+  )
+}
+
+```
+
+In this scenario, exposing the `focusInput` method to the parent component would be a challenging and inelegant task. This is where `useImperativeHandle` comes into play.
+
+### ✅ Solution with `useImperativeHandle`:
+
+```tsx
+export const FancyInput = forwardRef((props, ref) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // Use useImperativeHandle to customize the external interface
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (inputRef.current) {
+        inputRef.current.focus()
+      }
+    },
+    getValue: () => {
+      return inputRef.current ? inputRef.current.value : ''
+    },
+  }))
+
+  return (
+    <div>
+      <input ref={inputRef} />
+    </div>
+  )
+})
+```
+
+With `useImperativeHandle`, we can now selectively expose the functions we want the parent component to use. This solution improves code clarity and provides a more efficient and controlled external interface.
+
+## 🧩 useLayoutEffect
+
+`useLayoutEffect` in React is a powerful hook that allows you to perform synchronous operations after all mutations to the DOM have been completed but before the browser repaints the screen. Imagine the challenge you would face without this hook.
+
+### 🤔 Challenge Without `useLayoutEffect`:
+
+Imagine a scenario where we want to measure the dimensions of a DOM element and, based on those dimensions, perform certain actions in our functional component `ResizableBox`. Without `useLayoutEffect`, we could face issues when making these measurements asynchronously.
+
+```tsx
+export const ResizableBox = () => {
+  const boxRef = useRef<HTMLDivElement>(null)
+  const [boxWidth, setBoxWidth] = useState(0)
+
+  useEffect(() => {
+    // Challenge: How to measure the dimensions of boxRef synchronously?
+    // Measurements may not be available immediately.
+    // This can cause issues if we depend on dimensions to perform actions.
+  }, [])
+
+  return <div ref={boxRef}>{/* Resizable box content */}</div>
+}
+
+```
+
+In this scenario, performing synchronous measurements of the dimensions of `boxRef` is challenging with `useEffect` because the measurements may not be available immediately. This is where `useLayoutEffect` comes into play.
+
+### ✅ Solution with `useLayoutEffect`:
+
+```tsx
+export const ResizableBox = () => {
+  const boxRef = useRef<HTMLDivElement>(null)
+  const [boxWidth, setBoxWidth] = useState(0)
+
+  useLayoutEffect(() => {
+    // Use useLayoutEffect to measure the dimensions of boxRef synchronously
+    if (boxRef.current) {
+      setBoxWidth(boxRef.current.offsetWidth)
+    }
+  }, [])
+
+  return <div ref={boxRef}>{/* Resizable box content */}</div>
+}
+
+```
+
+With `useLayoutEffect`, we can perform synchronous measurements after the browser has completed all mutations to the DOM but before repainting the screen. This ensures that measurements are available immediately and avoids potential issues related to asynchrony.
+
+## 🐞 useDebugValue
+
+`useDebugValue` in React is a specialized hook designed to enhance the debugging experience by providing additional information about the state of a component. Its main utility is to facilitate component identification in browser development tools.
+
+The basic signature for `useDebugValue` is as follows:
+
+```tsx
+useDebugValue(value)
+```
+
+When debugging a React application, it's common to face the challenge of quickly identifying the component you're interested in within the browser development tools. Without `useDebugValue`, information about a component can be limited and nonspecific.
+
+**Here’s how the `useDebugValue` hook is used:**
+
+### 1. Adding a Descriptive Name:
+
+```tsx
+import { useDebugValue } from 'react'
+
+const useCustomHook = () => {
+  const state =
+    /* hook logic */
+
+    // Provide a descriptive name for easy identification in development tools
+    useDebugValue('Custom Hook')
+
+  return state
+}
+
+```
+
+### 2. Displaying Array Content:
+
+```tsx
+import { useDebugValue } from 'react'
+
+const useArrayHook = (array: string[]) => {
+  // hook logic
+
+  // Show the content of the array in development tools
+  useDebugValue(array.join(', '))
+
+  return /* result */
+}
+
+```
+
+### 3. Using State Information:
+
+```tsx
+import { useState, useDebugValue } from 'react'
+
+const useCounter = () => {
+  const [count, setCount] = useState(0)
+
+  // Use the counter value as information in development tools
+  useDebugValue(`Counter: ${count}`)
+
+  return [count, setCount]
+}
+
+```
+
+By using `useDebugValue`, you can customize the information displayed about your hook or component in development tools, making it easier to identify and debug during development.
+
+## 🚀 Conclusion
+
+In this exploration of React Hooks, from the most basic concepts to the most advanced, I trust you have discovered the fascinating world that these hooks offer to simplify and empower your developments in React. Happy coding! ✨
+
+### 🔗 References
+
+- https://react.dev/reference/react
+- [https://www.youtube.com/@midulive](https://youtube.com/playlist?list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29&si=38k-uyCK8hlf7DIk)
+
+### 🌐 Additional Resources
+
+- [React Hooks Documentation: An Easy to Read Version](https://blog.logrocket.com/react-hooks-cheat-sheet-solutions-common-problems/)

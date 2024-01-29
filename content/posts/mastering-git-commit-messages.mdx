@@ -1,0 +1,208 @@
+---
+title: "Mastering Git Commit Messages"
+description: "In this post, I'll show you how to improve your Git commit messages using industry best practices, with the goal of ensuring a clear and easily readable Git history for your projects."
+date: "2024-01-20"
+url: "/"
+hero: "/images/posts/cover/master-git-commit-message.webp"
+heroSource: "Source: Roman Synkevych on Unsplash"
+tags: ["git", "terminal"]
+published: true
+updated: "2024-01-21"
+---
+
+In this post, I'll show you how to improve your Git commit messages using industry best practices, aiming to ensure a clear and easily readable Git history for your projects.
+
+## 🧠 Understanding Git Commits
+
+A `commit` in Git captures a set of changes stored in a project's history, representing a logical unit of work. Commits are pivotal for version control, fostering effective collaboration among developers, organizing update records, and enabling easy rollback to previous versions.
+
+### Commit Structure
+
+**Basic:** `git commit -m <message>`
+
+**Detailed:** `git commit -m <title> -m <description>`
+
+```bash
+$ git add .
+$ git commit -m "Implement user sign-in feature"
+
+```
+
+> **🚨 Important:** This article assumes you already understand basic Git workflow. If not, I suggest reading through the [Git Handbook](https://guides.github.com/introduction/git-handbook/).
+
+## 🌟 **The Importance of Well-Crafted Commit Messages**
+
+Commits are not just snapshots of code changes; they serve as a roadmap for your project's history. A poorly written commit message can lead to confusion, making it challenging to understand the context of changes. Let's explore why crafting meaningful commit messages matters.
+
+![Example of wrong commit messages](https://frainer-blog.vercel.app/images/posts/content/git-commit.webp)
+_Source: [xkcd.com](http://xkcd.com/)_
+
+Think of your commit messages as letters to your future self or collaborators. By investing time in writing informative messages, you create a documentation trail that can save hours of troubleshooting and enhance project maintenance, especially in large-scale projects.
+
+## 🤔 **Why Commit Message Quality Matters**
+
+I challenge you to review old commit messages in your projects using `git log`. You may encounter unclear messages that provide little insight into the changes made. Without proper documentation, you might find yourself pondering over the purpose of certain code lines.
+
+By adhering to good commit practices, you future-proof your work. Clear messages become a valuable asset during collaborative efforts, fostering better communication within engineering teams.
+
+## 🎬 **6 Rules for Crafting Exceptional Commit Messages**
+
+There are 6 simple rules that will help maintain consistency, clarity, and effectiveness in your commit messages, improving communication within the development team and facilitating code history tracking. These rules are:
+
+### 1. Use Imperative Mood in the Subject Line
+
+When crafting a commit message, use the imperative mood in the subject line to convey the action taken. For example, instead of saying "Added feature," use "Add feature" or "Fix bug" rather than "Fixed bug." This provides a clear instruction on the intended state change.
+
+To come up with thoughtful commits, consider the following:
+
+- Why have I made these changes?
+- What effect have my changes made?
+- Why was the change needed?
+- What are the changes in reference to?
+
+The answer will be something like:
+
+```bash
+- Add the new login page
+- Fix a problem with the feed of the blog
+- Change the main font family to Inter
+- Remove a random article
+```
+
+### 2. Avoid Periods and Ellipses in Commit Messages
+
+Refrain from using unnecessary punctuation in commit messages. The first line of a commit serves as the title and should not end with a period. Additionally, ellipses should be avoided for clear and concise instructions.
+
+```bash
+git commit -m "Add the new login page." # ❌
+git commit -m "Add the new login page..." # ❌
+git commit -m "Add the new login page" # ✅
+
+```
+
+### 3. Keep the Subject Line Under 50 Characters
+
+Be brief and to the point. If your commit message is too lengthy, consider breaking it down into multiple commits. Ensure that the subject line accurately reflects the changes made.
+
+```bash
+git commit -m "Add the article 'How to install Bun on Windows' and update the blog's description in the home page" # ❌
+git commit -m "Add the article 'How to install Bun on Windows'" # ✅
+git commit -m "Update the blog's description in the home page" # ✅
+
+```
+
+### 4. Provide Necessary Context in the Commit Body
+
+When additional context is required, use the commit body instead of overcrowding the subject line. This can be achieved by using `git commit` without the `-m` flag.
+
+```bash
+# Example
+git commit fix: prevent racing of requests
+
+Introduce a request id and a reference to latest request. Dismiss
+incoming responses other than from latest request.
+
+Remove timeouts which were used to mitigate the racing issue but are
+obsolete now.
+
+```
+
+Remember that the first commit message line serves as the title, while subsequent lines form the body and should adhere to standard punctuation rules.
+
+### 5. Use Prefixes for Semantic Commits
+
+As your project grows, maintaining a readable history becomes crucial. To achieve this, you can add a prefix to give more meaning to the commits you make. This is called semantic commits and is done as follows:
+
+```bash
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+
+# Example:
+fix: resolve login authentication bug
+^-^  ^------------------------------^
+│     │
+│     └--> # Description of the changes
+│
+└──------> # Type of change
+
+[optional body]
+- Improved authentication logic to handle edge cases.
+- Updated relevant unit tests.
+
+[optional footer(s)]
+Reviewed-by: Z
+Refs: #123
+```
+
+In `monorepositories` with multiple packages, you can also add information about the package affected by the commit. This is known as scope and would look like this:
+
+```bash
+feat(backend): add a new table for the likes
+fix(web): update the main font family to Inter
+
+```
+
+The commit type can include the following:
+
+- `feat` – a new feature is introduced with the changes
+- `fix` – a bug fix has occurred
+- `chore` – changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+- `refactor` – refactored code that neither fixes a bug nor adds a feature
+- `docs` – updates to documentation such as a the README or other markdown files
+- `style` – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+- `test` – including new or correcting previous tests
+- `perf` – performance improvements
+- `ci` – continuous integration related
+- `build` – changes that affect the build system or external dependencies
+- `revert` – reverts a previous commit
+
+The commit type subject line should be all lowercase with a character limit to encourage succinct descriptions.
+
+The optional commit body should be used to provide further detail that cannot fit within the character limitations of the subject line description.
+
+It is also a good location to utilize `BREAKING CHANGE: <description>` to note the reason for a breaking change within the commit.
+
+### 6. Consider Using Commit Utilities
+
+Enhance your commit workflow by incorporating tools like `husky` for executing scripts before specific Git actions and `commitlint` to ensure commits follow a chosen convention. These utilities contribute to a more streamlined and standardized commit process.
+
+```bash
+npm install husky -D
+npx husky install
+npm set-script prepare "husky install"
+npm run prepare
+npx husky add .husky/pre-push "npm test"
+git add .husky/pre-push
+
+git commit -m "Keep calm and commit"
+git push -u origin master *# tests run before the push
+
+```
+
+With `commitlint`, you can enforce semantic, readable commits that adhere to predefined conventions.
+
+```bash
+# 1. Install commitlint cli and conventional config
+
+# For Mac and Linux:
+npm install --save-dev @commitlint/{config-conventional,cli}
+# For Windows:
+npm install --save-dev @commitlint/config-conventional @commitlint/cli
+
+# 2. Add hoook to check out the commit message
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+
+```
+
+These tools, combined with practices like `conventional-changelog` and `commitizen`, contribute to an efficient and standardized commit workflow, ultimately improving project maintainability and collaboration.
+
+By incorporating these rules and tools into your Git workflow, you'll contribute to a more readable and organized project history, making it easier for you and your collaborators to navigate and understand the changes made over time. Happy committing! 🚀
+
+## 🌐 Additional Resources
+
+- [Conventional Commits](https://www.conventionalcommits.org)
+- [Semantic Versioning](https://semver.org)
+- [freeCodeCamp.org](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages)

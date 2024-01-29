@@ -1,0 +1,162 @@
+---
+title: "How to Install Multiple Versions of Node.js"
+description: "In this article, I'll explain how you can install and manage multiple versions of Node.js using Node Version Manager (NVM) on Windows, Linux, and Mac."
+date: "2024-01-18"
+url: "/"
+hero: "/images/posts/cover/how-to-install-nvm.webp"
+heroSource: "Source: externlabs.com"
+tags: ["javascript", "nodejs", "terminal"]
+published: true
+updated: "2024-01-20"
+---
+
+In this article, I'll explain how you can install and manage multiple versions of Node.js with Node Version Manager (NVM) on Windows, Linux, and Mac and easily switch between them with a single command.
+
+## 🤔 What is NVM?
+
+Node Version Manager (NVM), as the name implies, is a tool for managing Node versions on your device.
+
+Different projects on your device may be using different versions of Node. Using only one version (the one installed by `npm`) for these different projects may not give you accurate execution results.
+
+For example, if you use a Node version of **18.0.0** for a project that uses **20.0.0**, you may get some errors. And if you update the Node version to **20.0.0** with npm and use it for a project that uses **18.0.0**, you may not get the expected experience.
+
+In fact, you would most likely get a warning that says:
+
+```bash
+This project requires Node version X
+
+```
+
+Instead of using npm to install and uninstall Node versions for your different projects, you can use **nvm**, which helps you effectively manage your node versions for each project.
+
+[NVM](https://github.com/nvm-sh/nvm) allows you to install different versions of Node and switch between these versions depending on the project that you're working on via the command line.
+
+> **🚨 Important:** This guide assumes that you don't have a previous installation of `Node.js`. If you do, it might cause issues and conflicts. Before proceeding, make sure you have uninstalled any previous installations of `Node.js` and `npm`.
+
+## 🐧 How to Install NVM on Mac, Linux or Windows WSL
+
+**This would be the recommended method if your operating system is based on UNIX** (like Mac, Linux, or Windows WSL), as it offers various advantages, such as handling different versions of Node simultaneously.
+
+### 1. Run the nvm installer
+
+To install and update _nvm_, you need to execute the installation script. You can download and run the code from the terminal using the following command:
+
+```bash
+curl -o- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh> | bash
+
+# or
+
+wget -qO- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh> | bash
+
+```
+
+You can use `curl` or `bash` depending on the command available on your device.
+
+This script will clone the [nvm repository](https://github.com/nvm-sh/nvm) into the `~/.nvm` directory and attempt to add the execution lines depending on your terminal language (`~/.bash_profile`, `~/.zshrc`, `~/.profile`, or `~/.bashrc`).
+
+### 2. Update your profile configuration
+
+In case it wasn't possible for some reason, it might ask you to manually add the code lines. **This is only necessary if it couldn't be done automatically.** The lines to add would be these:
+
+```bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \\\\. "$NVM_DIR/nvm.sh"
+
+```
+
+After doing this, you may need to restart the terminal or open a new tab to use the `nvm` command.
+
+This command above loads nvm for use.
+
+### 3. Reload the shell configuration
+
+With your profile configuration updated, now you will reload the configuration for your terminal to use:
+
+```bash
+source ~/.bashrc
+
+```
+
+With this command executed, nvm is ready for you to use. You can confirm that nvm is installed correctly by running:
+
+```bash
+nvm -v
+
+```
+
+This should show the version of nvm installed.
+
+## 🪟 How to Install NVM on Windows
+
+`nvm-windows`, although sharing the name with `nvm`, is not from the same creators and, therefore, has some differences. And among those differences is, of course, the way to install it. For `nvm-windows`, follow these steps:
+
+1. Go to the [nvm-windows releases section](https://github.com/coreybutler/nvm-windows/releases).
+2. Download and run the `nvm-setup.exe` file from the latest available release.
+3. Run the `nvm-setup.exe` file.
+4. Follow the guided package installation steps and choose the desired configuration.
+5. Once completed, open a `PowerShell` terminal and run:
+
+When done, you can confirm that nvm has been installed by running:
+
+```bash
+nvm -v
+
+```
+
+If nvm was installed correctly, this command will show you the nvm version installed.
+
+And with this, we are ready to work with `nvm-windows`. If you encounter any issues, you can **check the [Common Issues section of the repository](https://github.com/coreybutler/nvm-windows/wiki/Common-Issues) to see if your problem has a solution.**
+
+## 🕹️ How NVM Works?
+
+With nvm installed, you can now install, uninstall, and switch between different Node versions on your Windows, Linux, or Mac device.
+
+You can install Node versions like this:
+
+```bash
+nvm install --lts
+
+```
+
+This will install the **long-term support version of Node**. Currently, it is version 20, but in the future, it will be 22 and so on.
+
+> LTS or long-term support means that it is a version that will receive support for a longer period than other versions. Generally, it is up to 30 months of support for critical errors. If you are going to use Node in production, it's best to use only LTS versions.
+
+If you prefer, you can also install a specific version either by indicating the major or directly the exact version:
+
+```bash
+nvm install 21 # this will install the latest version 21 of Node.js
+nvm install 12.6.0 # this will install exactly version 21.6.0
+
+```
+
+## 🚀 Using a Node.js Version With NVM
+
+Sometimes you may have more than one installed version of Node.js on your user. To see all the versions of Node.js you have installed, you can use the `nvm ls` command. To see the versions available for installation, you have to use `nvm ls-remote`.
+
+Once you have more than one on your system, you'll want to switch between those versions. To do this, run `nvm use <version-you-want-to-use>` for example:
+
+```bash
+nvm use 20
+nvm use 21
+nvm use --lts
+
+```
+
+If you want one of these to be your default version, so that it is used the next time you open a tab, you have to create an alias for that version called `default`.
+
+For example, let's say you have version 16 and 18 installed, and now you install version 20, and you want this to be the default version from now on. You should do the following:
+
+```bash
+nvm install 20
+nvm alias default 20
+
+```
+
+> The first time you run `nvm install`, it will make that version the default.
+
+## ⚠️ Possible Problems
+
+- On Mac, you'll need to have Xcode development tools installed. When you run the `nvm` installation script for the first time, a window may appear asking you to do this. Once installed, try installing `nvm` again with the same script as before.
+- Remember, as I mentioned, after the installation, you may need to restart the terminal or create a new tab before you can run the `nvm` command.
+- If you have any further issues, you can check the [Troubleshooting on Linux section in the nvm repository.](https://github.com/nvm-sh/nvm#troubleshooting-on-linux)

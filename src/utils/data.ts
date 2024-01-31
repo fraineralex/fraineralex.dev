@@ -1,7 +1,4 @@
-import { allPosts as allPostsProd } from 'contentlayer/generated'
-import { allPostsDev } from '@/util/monks'
-const allPosts: typeof allPostsProd =
-  process.env.NODE_ENV === 'development' ? allPostsDev : allPostsProd
+import { allPosts } from 'contentlayer/generated'
 
 type tag = {
   name: string
@@ -46,7 +43,7 @@ export const allTags: tag[] = [
     description:
       "Python is a high-level, interpreted programming language with dynamic semantics. It's known for its simple, easy-to-read syntax which emphasizes readability and reduces the cost of program maintenance."
   },
-    {
+  {
     name: 'typescript',
     label: 'TypeScript',
     image: '/images/tags/typescript.webp',

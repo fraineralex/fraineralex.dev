@@ -1,13 +1,13 @@
 'use client'
 
 import { About, Blog, Experience, Footer, Projects, SideNav } from '@/sections'
-import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 export default function Observer ({
   dictionary,
   lang
 }: {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   dictionary: any
   lang: string
 }) {

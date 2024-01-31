@@ -221,9 +221,6 @@ const config: Config = {
         132: '34rem',
         140: '36rem'
       },
-      matrix3d: {
-        identity: 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
-      }
     }
   },
   plugins: [

@@ -6,6 +6,25 @@ const nextConfig = {
 	experimental: {
 		mdxRs: true,
 	},
+	async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/en',
+				locale: false
+      },
+			{
+        source: '/projects',
+        destination: '/en/projects',
+				locale: false
+      },
+			{
+        source: '/blog',
+        destination: '/en/blog',
+				locale: false
+      }
+    ]
+  }
 };
 
 export default withContentlayer(nextConfig);

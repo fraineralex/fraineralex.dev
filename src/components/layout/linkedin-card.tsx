@@ -27,7 +27,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           className='w-full h-full'
           loading='lazy'
           src='/plane.html'
-        ></iframe>
+        />
       </div>
       <div className='w-content max-w-full mv-0 mx-auto grid gap-2 px-4'>
         <div className='relative flex justify-end items-center min-h-half-avatar py-2 mb-8'>
@@ -66,7 +66,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
         </div>
         <h1 className='text-fluid-3 flex gap-x-2 items-center font-bold text-2xl text-shark-200'>
           {fullname}
-          <span className='w-6 aspect-square inline-block'></span>
+          <span className='w-6 aspect-square inline-block'/>
         </h1>
         <div className='leading-tight'>
           <p className='mb-2 font-semibold text-shark-300 pe-20 sm:pe-24'>

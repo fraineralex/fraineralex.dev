@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { MouseShadow } from '@/components/layout/mouse-shadow'
-import { i18n } from '../i18n-config'
+import { i18n } from '../../i18n-config'
 import SwitchLanguage from '@/components/layout/switch-language'
 
 export async function generateStaticParams () {
@@ -59,18 +59,17 @@ export const metadata: Metadata = {
 
 interface Props {
   children: React.ReactNode
+  params?: { lang: string }
 }
 
-export default function RootLayout ({ children }: Props) {
+export default function RootLayout ({ children, params }: Props) {
   return (
     <html
       className={`${inter.variable} scroll-smooth`}
       data-lt-installed='true'
-      lang='en'
+      lang={params?.lang || i18n.defaultLocale}
     >
-      <body
-        className={`leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0`}
-      >
+      <body className='leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <MouseShadow />
         <SwitchLanguage />
         {children}

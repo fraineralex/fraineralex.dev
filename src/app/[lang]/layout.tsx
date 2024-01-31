@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { MouseShadow } from '@/components/layout/mouse-shadow'
-import { i18n } from '../../i18n-config'
-import SwitchLanguage from '@/components/layout/switch-language'
+import { i18n } from '@/i18n-config'
 
 export async function generateStaticParams () {
   return i18n.locales.map(locale => ({ lang: locale }))
@@ -71,7 +70,6 @@ export default function RootLayout ({ children, params }: Props) {
     >
       <body className='leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <MouseShadow />
-        <SwitchLanguage />
         {children}
       </body>
     </html>

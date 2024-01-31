@@ -80,25 +80,17 @@ export default function RootLayout ({
   children: React.ReactNode
 }) {
   return (
-    <html
-      lang='en'
-      className={`blog ${[
-        inter.variable,
-        calSans.variable,
-        londrinaSolid.variable
-      ].join(' ')}`}
-    >
-      <head>{/* <Analytics /> */}</head>
-      <body
-        className={`${
-          process.env.NODE_ENV === 'development' ? 'debug-screens' : undefined
-        }`}
+    <>
+      <main
+        className={`blog relative min-h-screen bg-slate-900 ${[
+          inter.variable,
+          calSans.variable,
+          londrinaSolid.variable
+        ].join(' ')}`}
       >
-        <main className='relative min-h-screen blog'>
-          {children}
-          <Footer />
-        </main>
-      </body>
-    </html>
+        {children}
+        <Footer />
+      </main>
+    </>
   )
 }

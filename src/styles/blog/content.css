@@ -1,5 +1,5 @@
 .content h1 {
-  @apply font-londrina uppercase font-bold leading-none text-zinc-100;
+  @apply font-londrina uppercase font-bold leading-none text-slate-100;
   font-size: min(max(3rem, 6.25vw), 7rem);
   text-wrap: balance;
 }
@@ -10,33 +10,35 @@
 }
 .content h2 {
   text-wrap: balance;
-  @apply mt-10 scroll-m-20 border-b border-b-zinc-300 pb-1 text-3xl font-semibold tracking-tight first:mt-0 font-calsans text-white;
+  @apply mt-10 scroll-m-20 border-b border-b-slate-300 pb-1 text-3xl font-semibold tracking-tight first:mt-0 font-calsans text-white;
 }
 .content h3 {
   text-wrap: balance;
-  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-zinc-100;
+  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-slate-100;
 }
 .content h4 {
   text-wrap: balance;
-  @apply mt-8 scroll-m-20 text-xl font-semibold tracking-tight text-zinc-100;
+  @apply mt-8 scroll-m-20 text-xl font-semibold tracking-tight text-slate-100;
 }
 .content h5 {
   text-wrap: balance;
-  @apply mt-8 scroll-m-20 text-lg font-semibold tracking-tight text-zinc-100;
+  @apply mt-8 scroll-m-20 text-lg font-semibold tracking-tight text-slate-100;
 }
 .content h6 {
   text-wrap: balance;
-  @apply mt-8 scroll-m-20 text-base font-semibold tracking-tight text-zinc-100;
+  @apply mt-8 scroll-m-20 text-base font-semibold tracking-tight text-slate-100;
 }
 .content a {
   text-wrap: balance;
-  @apply font-bold text-hot-pink underline underline-offset-4 hover:text-white;
+  @apply font-bold text-teal-300 underline underline-offset-4 hover:text-white;
 }
-.content em, .content em > * {
-  @apply text-right text-sm text-zinc-600 italic font-normal;
+.content em,
+.content em > * {
+  @apply text-right text-sm text-slate-600 italic font-normal;
 }
-.content em a, .content em > * a {
-  @apply hover:text-zinc-500;
+.content em a,
+.content em > * a {
+  @apply hover:text-slate-500;
 }
 .content p:has(> em) {
   /* Estilos para el elemento p que tiene un hijo em */
@@ -59,49 +61,49 @@
   @apply mt-2;
 }
 .content blockquote {
-  @apply mt-6 border-l-2 border-hot-pink pl-6 italic text-zinc-400;
+  @apply mt-6 border-l-2 border-teal-300 pl-6 italic text-slate-400;
 }
 .content blockquote > * {
-  @apply text-zinc-400;
+  @apply text-slate-400;
 }
 .content img {
   @apply rounded-md border border-transparent;
 }
 .content hr {
-  @apply my-4 border-zinc-800 md:my-8;
+  @apply my-4 border-slate-800 md:my-8;
 }
 .content table {
   @apply w-full;
 }
 .content tr {
-  @apply m-0 border-t border-zinc-800 p-0 even:bg-zinc-700;
+  @apply m-0 border-t border-slate-800 p-0 even:bg-slate-700;
 }
 .content th {
-  @apply border border-zinc-800 px-4 py-2 text-left font-bold;
+  @apply border border-slate-800 px-4 py-2 text-left font-bold;
 }
-.content th[align=center] {
+.content th[align="center"] {
   @apply text-center;
 }
-.content th[align=right] {
+.content th[align="right"] {
   @apply text-right;
 }
 .content td {
-  @apply border border-zinc-800 px-4 py-2 text-left;
+  @apply border border-slate-800 px-4 py-2 text-left;
 }
-.content td[align=center] {
+.content td[align="center"] {
   @apply text-center;
 }
-.content td[align=right] {
+.content td[align="right"] {
   @apply text-right;
 }
 .content pre {
-  @apply mt-6 mb-4 overflow-x-auto rounded-lg bg-zinc-900 py-4 px-4;
+  @apply mt-6 mb-4 overflow-x-auto rounded-lg bg-slate-900 py-4 px-4;
 }
 .content code {
-  @apply relative rounded bg-zinc-700 border-zinc-600 py-[0.2rem] px-[0.4rem] font-mono text-zinc-100;
+  @apply relative rounded bg-slate-700 border-slate-600 py-[0.2rem] px-[0.4rem] font-mono text-slate-100;
 }
 .content strong {
-  @apply font-bold text-zinc-200;
+  @apply font-bold text-slate-200;
 }
 
 .content section > *:first-child {

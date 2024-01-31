@@ -1,5 +1,5 @@
 .blog-tags a {
-  @apply font-bold underline text-hot-pink;
+  @apply font-bold underline text-teal-300;
 }
 .blog-tags a:hover {
   @apply text-black;

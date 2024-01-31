@@ -8,12 +8,13 @@ const nextConfig = {
 	},
 	async rewrites() {
     return [
+
       {
-        source: '/',
-        destination: '/en',
-				locale: false
+        source: '/:path*',
+        destination: '/en/:path*',
+        locale: false
       },
-			{
+			/* {
         source: '/projects',
         destination: '/en/projects',
 				locale: false
@@ -22,7 +23,7 @@ const nextConfig = {
         source: '/blog',
         destination: '/en/blog',
 				locale: false
-      }
+      } */
     ]
   }
 };

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import WritingCard from '@/components/blog/writing-card'
+import WritingCard from '@/components/blog/writing-card-portfolio'
 import { WiritingProps } from '@/types/writing-types'
 import { ArrowRigthIcon } from '@/components/common/SvgIcons'
 

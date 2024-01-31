@@ -1,6 +1,6 @@
 import '@/styles/blog/tags.css'
 import Link from 'next/link'
-import { ReactIcon } from '../common/svg-icons'
+import { ReactIcon } from '@/components/blog/common/svg-icons'
 import Image from 'next/image'
 import { displayTags, allTags } from '@/utils/data'
 import React from 'react'
@@ -22,7 +22,7 @@ export function ArticlesByTags ({
           tags.map((tag, index) => (
             <Link
               key={index}
-              href={`/tags/${tag.name}`}
+              href={`/blog/tags/${tag.name}`}
               className='border-2 border-zinc-400 group hover:border-zinc-100 items-center rounded-full flex h-8 text-sm px-3 sm:h-12 sm:text-xl sm:px-6 relative transition-all mb-1 md:mb-0'
             >
               {tag.name === 'react' ? (

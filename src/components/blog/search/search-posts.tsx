@@ -42,7 +42,7 @@ export function SearchPosts ({ className }: { className?: string }) {
                   <div key={index}>
                     <Link
                       href={`/tags/${tag.name}`}
-                      className='text-hot-pink font-bold underline uppercase underline-offset-4 py-3 px-1 hover:text-pink-400'
+                      className='text-teal-300 font-bold underline uppercase underline-offset-4 py-3 px-1 hover:text-pink-400'
                     >
                       {tag.label}
                     </Link>

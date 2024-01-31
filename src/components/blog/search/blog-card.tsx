@@ -29,7 +29,9 @@ export function BlogCard ({ blog }: Props) {
               <time
                 dateTime={new Date(blog.updated || blog.date).toISOString()}
                 className={`${
-                  blog.updated ? 'underline underline-offset-4 text-xs' : undefined
+                  blog.updated
+                    ? 'underline underline-offset-4 text-xs'
+                    : undefined
                 }`}
               >
                 {Intl.DateTimeFormat(undefined, {
@@ -48,7 +50,7 @@ export function BlogCard ({ blog }: Props) {
                     <span key={index}>
                       <Link
                         href={`/tags/${tag?.name}`}
-                        className='text-hot-pink font-bold underline underline-offset-4 py-3 px-1 hover:text-white'
+                        className='text-teal-300 font-bold underline underline-offset-4 py-3 px-1 hover:text-white'
                       >
                         {tag?.label}
                       </Link>

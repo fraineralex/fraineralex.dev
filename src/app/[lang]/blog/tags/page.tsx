@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigation } from '@/components/blog/nav/nav'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
-import '@/styles/home.css'
+import '@/styles/blog/home.css'
 import { Metadata } from 'next'
 
 const BLOG_DOMAIN =

@@ -5,7 +5,7 @@ import { Redis } from '@upstash/redis'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
 import { allTags } from '@/utils/data'
 import { Metadata, ResolvingMetadata } from 'next'
-import '@/styles/home.css'
+import '@/styles/blog/home.css'
 import { allPosts } from 'contentlayer/generated'
 //import allPosts from '@/util/monks'
 

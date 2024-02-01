@@ -12,7 +12,8 @@ export function SearchPosts ({ className }: { className?: string }) {
   return (
     <>
       <button
-        aria-label='Search glog'
+        aria-label='Search article'
+        title='Search article'
         type='button'
         onClick={() => setOpen(!open)}
       >

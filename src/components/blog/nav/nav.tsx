@@ -33,6 +33,7 @@ export const Navigation: React.FC = () => {
             <SearchPosts />
             <Link
               href='https://fraineralex.substack.com/'
+              target='_blank'
               className=' text-slate-400 hover:text-slate-100 hover:scale-110'
               title='Newslatter'
             >

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { MouseShadow } from '@/components/layout/mouse-shadow'
-import { i18n } from '../i18n-config'
-import SwitchLanguage from '@/components/layout/switch-language'
+import { i18n } from '@/i18n-config'
 
 export async function generateStaticParams () {
   return i18n.locales.map(locale => ({ lang: locale }))
@@ -20,11 +19,11 @@ export const metadata: Metadata = {
     template: '%s | Frainer Encarnación'
   },
   description:
-    'Full Stack Developer who builds accessible products and digital experiences for the web.',
+    "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.",
   openGraph: {
     title: 'Frainer Encarnación',
     description:
-      'Full Stack Developer who builds accessible products and digital experiences for the web.',
+      'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
     url: 'https://fraineralex.com',
     siteName: 'fraineralex.com',
     images: [
@@ -59,20 +58,18 @@ export const metadata: Metadata = {
 
 interface Props {
   children: React.ReactNode
+  params?: { lang: string }
 }
 
-export default function RootLayout ({ children }: Props) {
+export default function RootLayout ({ children, params }: Props) {
   return (
     <html
       className={`${inter.variable} scroll-smooth`}
       data-lt-installed='true'
-      lang='en'
+      lang={params?.lang || i18n.defaultLocale}
     >
-      <body
-        className={`leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0`}
-      >
+      <body className='bg-slate-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <MouseShadow />
-        <SwitchLanguage />
         {children}
       </body>
     </html>

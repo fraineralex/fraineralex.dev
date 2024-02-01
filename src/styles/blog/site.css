@@ -49,23 +49,23 @@
   display: none;
 }
 
-.blog {
-  background: transparent !important;
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 5px;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background: #3f3f46;
-    border-radius: 5px;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4b5563;
-  }
+body {
+  background-color: #0f172a !important;
 }

@@ -34,21 +34,17 @@ marked.setOptions({
 })
 
 const renderPost = (md: string) => marked.parse(md)
-
 export async function GET () {
+  const DOMAIN =
+    `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
   const lastPostDate = posts[posts.length - 1].date
-  const site_url =
-    process.env.NODE_ENV === 'production'
-      ? 'https://fraineralex.vercel.app/blog'
-      : 'http://localhost:3000/blog'
-
   const feed = new RSS({
     title: "Frainer's Blog 📝",
     description:
       "Recent articles from Frainer's Blog. I write about tech, programming and whatever else I'm thinking about!",
-    site_url: `${site_url}/`,
-    feed_url: `${site_url}/feed.xml`,
-    image_url: `${site_url}/og.png`,
+    site_url: `${DOMAIN}/`,
+    feed_url: `${DOMAIN}/feed.xml`,
+    image_url: `${DOMAIN}/og.png`,
     pubDate: lastPostDate,
     language: 'en-US',
     categories: ['tech', 'programming', 'software'],
@@ -73,14 +69,14 @@ export async function GET () {
 
     feed.item({
       title: post.title,
-      url: `${site_url}/${post.slug}`,
+      url: `${DOMAIN}/${post.slug}`,
       date: post.updated || post.date,
       description: htmlArticle as string,
       categories: post.tags?.map((tag: string) => tag) || [],
-      guid: `${site_url}/${post.slug}`,
+      guid: `${DOMAIN}/${post.slug}`,
       author: 'Frainer Encarnación',
       enclosure: {
-        url: `${site_url}${post.hero
+        url: `${DOMAIN}${post.hero
           .replace('cover/', 'cover/rss/')
           .replace('webp', 'png')}`,
         type: 'png'

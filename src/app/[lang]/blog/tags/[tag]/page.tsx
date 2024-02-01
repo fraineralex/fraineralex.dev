@@ -38,11 +38,17 @@ export async function generateMetadata (
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
+  const BLOG_DOMAIN =
+    `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
 
   return {
     title: tag.label,
+    description: tag.description,
     openGraph: {
-      images: [tag.image, ...previousImages]
+      title: `${tag.label} | Frainer's Blog 📝`,
+      images: [tag.image, ...previousImages],
+      description: tag.description,
+      url: `${BLOG_DOMAIN}/tags/${tag.name}`
     }
   }
 }

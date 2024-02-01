@@ -2,6 +2,22 @@ import React from 'react'
 import { Navigation } from '@/components/blog/nav/nav'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
 import '@/styles/home.css'
+import { Metadata } from 'next'
+
+const BLOG_DOMAIN =
+  `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
+
+export const metadata: Metadata = {
+  title: 'Tags',
+  description:
+    'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
+  openGraph: {
+    title: "Tags | Frainer's Blog 📝",
+    description:
+      'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
+    url: `${BLOG_DOMAIN}/blog/tags`
+  }
+}
 
 export default async function TagsPage () {
   return (

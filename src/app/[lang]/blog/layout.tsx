@@ -8,7 +8,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: {
-    default: "Frainer's Blog 📝",
+    absolute: "Frainer's Blog 📝",
     template: "%s | Frainer's Blog"
   },
   description:

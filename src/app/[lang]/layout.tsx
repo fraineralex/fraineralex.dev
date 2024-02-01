@@ -68,7 +68,7 @@ export default function RootLayout ({ children, params }: Props) {
       data-lt-installed='true'
       lang={params?.lang || i18n.defaultLocale}
     >
-      <body className='leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
+      <body className='bg-slate-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <MouseShadow />
         {children}
       </body>

@@ -74,23 +74,17 @@ const londrinaSolid = LocalFont({
   variable: '--font-londrina'
 })
 
-export default function RootLayout ({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout ({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <main
-        className={`blog relative min-h-screen bg-slate-900 ${[
-          inter.variable,
-          calSans.variable,
-          londrinaSolid.variable
-        ].join(' ')}`}
-      >
-        {children}
-        <Footer />
-      </main>
-    </>
+    <main
+      className={`blog relative ${[
+        inter.variable,
+        calSans.variable,
+        londrinaSolid.variable
+      ].join(' ')}`}
+    >
+      {children}
+      <Footer />
+    </main>
   )
 }

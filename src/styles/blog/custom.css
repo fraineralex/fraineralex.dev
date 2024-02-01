@@ -15,14 +15,14 @@
 }
 
 .searchResultTitle {
-  color: #fd2d78 !important;
+  color: #5eead4 !important;
 }
 
 .blog ::-moz-selection {
   color: white;
-  background: #fd2d78;
+  background: #5eead4;
 }
 .blog ::selection {
   color: white;
-  background: #fd2d78;
+  background: #5eead4;
 }

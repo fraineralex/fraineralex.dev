@@ -10,7 +10,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 148,163, 184;
+    --foreground-rgb: 148, 163, 184;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
@@ -18,11 +18,4 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  /* background: linear-gradient(
-      to bottom,
-      transparent,
-      #232931
-    )
-    #0e1925; */
-    background-color: #1e293b;
 }

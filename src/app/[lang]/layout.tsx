@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     template: '%s | Frainer Encarnación'
   },
   description:
-    'Full Stack Developer who builds accessible products and digital experiences for the web.',
+    "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.",
   openGraph: {
     title: 'Frainer Encarnación',
     description:
-      'Full Stack Developer who builds accessible products and digital experiences for the web.',
+      'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
     url: 'https://fraineralex.com',
     siteName: 'fraineralex.com',
     images: [

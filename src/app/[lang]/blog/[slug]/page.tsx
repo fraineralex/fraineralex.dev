@@ -45,7 +45,8 @@ export async function generateMetadata (
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
-  const BLOG_DOMAIN = `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
+  const BLOG_DOMAIN =
+    `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
 
   return {
     title: post.title,
@@ -72,7 +73,7 @@ export default async function PostPage ({ params }: Props) {
 
   return (
     <section className='min-h-screen max-w-6xl md:max-w-5xl mx-auto px-4 md:px-8 text-zinc-300'>
-      <Header post={post} views={views} />
+      <Header views={views} />
       <ReportView slug={post.slug} />
       <header className='mx-auto w-full text-center content pt-20 md:pt-28 home-header'>
         <h1 className='text-white mb-8 w-full'>{post.title}</h1>

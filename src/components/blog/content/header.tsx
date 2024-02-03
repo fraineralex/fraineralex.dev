@@ -1,36 +1,16 @@
 'use client'
-import { ArrowLeft, Eye, Share2 } from 'lucide-react'
+import { Eye } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { SearchPosts } from '../search/search-posts'
 import { ProfileLink } from '../nav/profile-link'
 
 type Props = {
-  post: {
-    url?: string
-    title: string
-    description: string
-    repository?: string
-  }
-
   views: number
 }
-export const Header: React.FC<Props> = ({ post, views }) => {
+export const Header: React.FC<Props> = ({ views }) => {
   const ref = useRef<HTMLElement>(null)
   const [isIntersecting, setIntersecting] = useState(true)
 
-  const links: { label: string; href: string }[] = []
-  if (post.repository) {
-    links.push({
-      label: 'GitHub',
-      href: `https://github.com/${post.repository}`
-    })
-  }
-  if (post.url) {
-    links.push({
-      label: 'Website',
-      href: post.url
-    })
-  }
   useEffect(() => {
     if (!ref.current) return
     const observer = new IntersectionObserver(([entry]) =>
@@ -75,27 +55,7 @@ export const Header: React.FC<Props> = ({ post, views }) => {
                   : 'text-zinc-600 hover:text-zinc-400'
               } `}
             />
-            {/* <button>
-              <Share2
-                className={`w-6 h-6 duration-200 hover:font-medium ${
-                  isIntersecting
-                    ? ' text-zinc-400 hover:text-zinc-100'
-                    : 'text-zinc-600 hover:text-zinc-400'
-                } `}
-              />
-            </button> */}
           </div>
-
-          {/* <Link
-            href='/'
-            className={`duration-200 hover:font-medium ${
-              isIntersecting
-                ? ' text-zinc-400 hover:text-zinc-100'
-                : 'text-zinc-600 hover:text-zinc-900'
-            } `}
-          >
-            <ArrowLeft className='w-6 h-6 ' />
-          </Link> */}
           <ProfileLink
             className={
               isIntersecting ? '' : 'text-zinc-600 hover:text-zinc-400'

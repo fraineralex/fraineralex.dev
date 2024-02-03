@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import '@/styles/globals.css'
 import { MouseShadow } from '@/components/layout/mouse-shadow'
 import { i18n } from '@/i18n-config'
+import Navigation from '@/components/blog/nav/nav'
+import LocalFont from 'next/font/local'
+
+import '@/styles/globals.css'
+import '@/styles/site.css'
 
 export async function generateStaticParams () {
   return i18n.locales.map(locale => ({ lang: locale }))
@@ -11,6 +15,16 @@ export async function generateStaticParams () {
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
+})
+
+const calSans = LocalFont({
+  src: '../../../public/fonts/CalSans-SemiBold.ttf',
+  variable: '--font-calsans'
+})
+
+const londrinaSolid = LocalFont({
+  src: '../../../public/fonts/LondrinaSolid-Regular.ttf',
+  variable: '--font-londrina'
 })
 
 export const metadata: Metadata = {
@@ -64,12 +78,17 @@ interface Props {
 export default function RootLayout ({ children, params }: Props) {
   return (
     <html
-      className={`${inter.variable} scroll-smooth`}
+      className={`${[
+        inter.variable,
+        calSans.variable,
+        londrinaSolid.variable
+      ].join(' ')} scroll-smooth`}
       data-lt-installed='true'
       lang={params?.lang || i18n.defaultLocale}
     >
-      <body className='bg-slate-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
+      <body className='bg-slate-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <MouseShadow />
+        <Navigation />
         {children}
       </body>
     </html>

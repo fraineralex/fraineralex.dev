@@ -1,3 +1,7 @@
+body {
+  background-color: #1F222A !important;
+}
+
 @keyframes reveal-img {
   from {
     opacity: 0;

@@ -1,10 +1,9 @@
-import '@/styles/blog/main.css'
-import { Inter } from 'next/font/google'
-import LocalFont from 'next/font/local'
 import { Metadata } from 'next'
 import { Analytics } from '@/components/blog/articles/analytics'
 import Footer from '@/components/blog/footer/footer'
 import React from 'react'
+
+import '@/styles/blog/main.css'
 
 export const metadata: Metadata = {
   title: {
@@ -59,30 +58,9 @@ export const metadata: Metadata = {
   }
 }
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter'
-})
-
-const calSans = LocalFont({
-  src: '../../../../public/fonts/CalSans-SemiBold.ttf',
-  variable: '--font-calsans'
-})
-
-const londrinaSolid = LocalFont({
-  src: '../../../../public/fonts/LondrinaSolid-Regular.ttf',
-  variable: '--font-londrina'
-})
-
 export default function Layout ({ children }: { children: React.ReactNode }) {
   return (
-    <main
-      className={`blog relative ${[
-        inter.variable,
-        calSans.variable,
-        londrinaSolid.variable
-      ].join(' ')}`}
-    >
+    <main className='blog relative'>
       {children}
       <Footer />
     </main>

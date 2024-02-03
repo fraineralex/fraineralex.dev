@@ -1,7 +1,6 @@
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 import Observer from '@/components/common/intersection-observer'
-import SwitchLanguage from '@/components/layout/switch-language'
 
 interface Props {
   params?: { lang: Locale }

@@ -13,7 +13,6 @@ export default async function Home ({ params }: Props) {
 
   return (
     <>
-      <SwitchLanguage />
       <Observer dictionary={dictionary} lang={lang} />
     </>
   )

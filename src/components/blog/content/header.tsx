@@ -13,6 +13,7 @@ export const Header: React.FC<Props> = ({ views }) => {
 
   useEffect(() => {
     if (!ref.current) return
+
     const observer = new IntersectionObserver(([entry]) =>
       setIntersecting(entry.isIntersecting)
     )

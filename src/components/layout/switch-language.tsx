@@ -85,3 +85,5 @@ export function SwitchLanguage () {
     </div>
   )
 }
+
+export default SwitchLanguage

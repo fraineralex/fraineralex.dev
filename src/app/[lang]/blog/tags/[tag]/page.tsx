@@ -1,5 +1,4 @@
 import React from 'react'
-import { Navigation } from '@/components/blog/nav/nav'
 import { Article } from '@/components/blog/articles/article'
 import { Redis } from '@upstash/redis'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
@@ -81,7 +80,6 @@ export default async function BlogPage ({ params }: Props) {
 
   return (
     <div className='relative'>
-      <Navigation />
       <div className='px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-26'>
         <header className='mx-auto max-w-4xl text-center home-header tag'>
           <h1 className='font-bold leading-none font-londrina text-white'>

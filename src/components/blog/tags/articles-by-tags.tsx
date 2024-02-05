@@ -4,6 +4,7 @@ import { ReactIcon } from '@/components/blog/common/svg-icons'
 import Image from 'next/image'
 import { displayTags, allTags } from '@/utils/data'
 import React from 'react'
+import SubscribeNewsletter from '../common/subscribe-newsletter'
 
 export function ArticlesByTags ({
   displayAllTags
@@ -42,14 +43,9 @@ export function ArticlesByTags ({
             </Link>
           ))}
       </article>
-      <iframe
-        rel='preconnect'
-        title='Subscribe to my newsletter'
-        src='https://fraineralex.substack.com/embed'
-        width='480'
-        height='120'
-        className='flex mx-auto mt-10 z-0'
-      ></iframe>
+      <article className='flex mx-auto mt-10'>
+        <SubscribeNewsletter />
+      </article>
     </section>
   )
 }

@@ -50,9 +50,10 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           >
             <Image
               src={lifterLink.logo}
-              alt='Lifter Logo'
+              alt='Lifter logo'
               width='50'
               height='16'
+              className='w-50 h-auto'
             />
           </Link>
           <Link
@@ -61,12 +62,18 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
             rel='noopener noreferrer'
             className='items-center text-white bg-brand-fill absolute block me-8 mt-32 sm:mt-48'
           >
-            <Image src={itlaLink.logo} alt='Itla Logo' width='50' height='25' />
+            <Image
+              src={itlaLink.logo}
+              alt='Itla Logo'
+              width='50'
+              height='25'
+              className='w-50 h-auto'
+            />
           </Link>
         </div>
         <h1 className='text-fluid-3 flex gap-x-2 items-center font-bold text-2xl text-shark-200'>
           {fullname}
-          <span className='w-6 aspect-square inline-block'/>
+          <span className='w-6 aspect-square inline-block' />
         </h1>
         <div className='leading-tight'>
           <p className='mb-2 font-semibold text-shark-300 pe-20 sm:pe-24'>

@@ -1,4 +1,5 @@
-import { BlogCard } from './blog-card'
+import dynamic from 'next/dynamic'
+const BlogCard = dynamic(() => import('./blog-card'))
 import { Search } from 'lucide-react'
 import { allPosts } from 'contentlayer/generated'
 
@@ -52,3 +53,5 @@ export const SearchResult = ({ searchTerm }: { searchTerm: string }) => {
     </>
   )
 }
+
+export default SearchResult

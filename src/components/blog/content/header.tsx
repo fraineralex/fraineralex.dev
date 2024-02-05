@@ -3,6 +3,7 @@ import { Eye } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { SearchPosts } from '../search/search-posts'
 import { ProfileLink } from '../nav/profile-link'
+import SwitchLanguage from '@/components/layout/switch-language'
 
 type Props = {
   views: number
@@ -36,6 +37,7 @@ export const Header: React.FC<Props> = ({ views }) => {
       >
         <div className='container flex flex-row-reverse items-center justify-between p-6 mx-auto'>
           <div className='flex justify-between gap-6 pr-2'>
+            <SwitchLanguage />
             <span
               title='View counter for this page'
               className={`duration-200 hover:font-medium flex items-center gap-1 ${

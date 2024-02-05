@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import SubscribeModal from './subscribe-modal'
+import { useState, lazy } from 'react'
+const SubscribeModal = lazy(() => import('./subscribe-modal'))
 
 export default function SubscribeNewsletter () {
   const [open, setOpen] = useState(false)

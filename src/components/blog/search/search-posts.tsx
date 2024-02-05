@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+'use client'
+
+import React, { useState, lazy } from 'react'
 import { Search } from 'lucide-react'
-import { SearchResult } from './search-result'
-import { Modal } from '@/components/blog/common/modal'
+const SearchResult = lazy(() => import('./search-result'))
+const Modal = lazy(() => import('@/components/blog/common/modal'))
 import { displayTags } from '@/utils/data'
 import Link from 'next/link'
 
@@ -31,7 +33,7 @@ export function SearchPosts ({ className }: { className?: string }) {
             <input
               autoFocus
               type='text'
-              className='w-full placeholder-slate-500 bg-transparent border outline-none disabled:bg-slate-50 text-white border-slate-500 focus:bg-slate-900/50 focus:border-slate-400 rounded-full px-6 py-3'
+              className='w-full placeholder-slate-500 bg-transparent border outline-none disabled:bg-slate-50 text-white border-slate-400 focus:bg-slate-900/50 focus:border-slate-300  focus:border-2 rounded-full px-6 py-3'
               placeholder='Start typing to search'
               onChange={e => setSearchTerm(e.target.value)}
             />

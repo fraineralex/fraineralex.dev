@@ -1,5 +1,6 @@
 import { X } from 'lucide-react'
-import { Modal } from './modal'
+import { lazy } from 'react'
+const Modal = lazy(() => import('./modal'))
 
 interface Props {
   open: boolean

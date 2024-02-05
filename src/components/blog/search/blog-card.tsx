@@ -7,7 +7,7 @@ interface Props {
   blog: Post
 }
 
-export function BlogCard ({ blog }: Props) {
+export default function BlogCard ({ blog }: Props) {
   return (
     <Link
       tabIndex={0}

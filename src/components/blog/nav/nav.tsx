@@ -59,9 +59,9 @@ export const Navigation = () => {
               <div className='inline-flex pr-5'>
                 <Link
                   href='/'
-                  className={`ms-5 font-sans${
+                  className={`ms-5 font-semibold ${
                     isBlogPage === false
-                      ? 'text-slate-300 underline underline-offset-8'
+                      ? 'text-slate-100 underline underline-offset-8'
                       : 'hover:text-slate-100 hover:scale-105 duration-200'
                   }`}
                 >
@@ -71,7 +71,7 @@ export const Navigation = () => {
                   href='/blog'
                   className={`ms-5 font-semibold ${
                     isBlogPage === true
-                      ? 'text-slate-300 underline underline-offset-8'
+                      ? 'text-slate-100 underline underline-offset-8'
                       : 'hover:text-slate-100 hover:scale-105 duration-200'
                   }`}
                 >

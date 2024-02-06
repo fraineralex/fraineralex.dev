@@ -17,7 +17,7 @@ export function ArticlesByTags ({
       <h2 className='font-londrina text-3xl font-bold tracking-wide text-zinc-400 sm:text-4xl pb-5'>
         View posts by tag
       </h2>
-      <div className='w-full h-px bg-zinc-700' />
+      <div className='w-full h-px bg-zinc-500' />
       <article className='mt-5 md:mt-10 flex flex-rows flex-wrap gap-2 sm:gap-5 text-zinc-100 mx-auto'>
         {tags &&
           tags.map((tag, index) => (

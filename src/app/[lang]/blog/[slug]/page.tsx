@@ -11,6 +11,7 @@ import Link from 'next/link'
 const Subscribe = dynamic(() => import('@/components/blog/footer/subscribe'))
 import { allTags } from '@/utils/data'
 import { allPosts } from 'contentlayer/generated'
+import { Locale, i18n } from '@/i18n-config'
 //import allPosts from '@/util/monks'
 
 export const revalidate = 60
@@ -18,6 +19,7 @@ const redis = Redis.fromEnv()
 
 type Props = {
   params: {
+    lang: Locale
     slug: string
   }
 }
@@ -25,9 +27,13 @@ type Props = {
 export async function generateStaticParams (): Promise<Props['params'][]> {
   return allPosts
     .filter(post => post.published)
-    .map(p => ({
-      slug: p.slug
-    }))
+    .map(
+      p =>
+        ({
+          lang: p.lang,
+          slug: p.slug
+        } as { lang: Locale; slug: string })
+    )
 }
 
 export async function generateMetadata (
@@ -35,7 +41,8 @@ export async function generateMetadata (
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const slug = params?.slug
-  const post = allPosts.find(post => post.slug === slug)
+  const lang = params?.lang ?? i18n.defaultLocale
+  const post = allPosts.find(post => post.slug === slug && post.lang === lang)
 
   if (!post) {
     return {
@@ -46,7 +53,12 @@ export async function generateMetadata (
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
   const BLOG_DOMAIN =
-    `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
+    `${process.env.DOMAIN}/${
+      lang !== i18n.defaultLocale ? `${lang}/` : ''
+    }blog` ||
+    `https://fraineralex.vercel.app${
+      lang !== i18n.defaultLocale ? `${lang}/` : ''
+    }blog`
 
   return {
     title: post.title,
@@ -62,7 +74,8 @@ export async function generateMetadata (
 
 export default async function PostPage ({ params }: Props) {
   const slug = params?.slug
-  const post = allPosts.find(post => post.slug === slug)
+  const lang = params?.lang ?? i18n.defaultLocale
+  const post = allPosts.find(post => post.slug === slug && post.lang === lang)
 
   if (!post) {
     notFound()

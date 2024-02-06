@@ -64,6 +64,10 @@ export const Post = defineDocumentType(() => ({
     },
 		heroSource: {
 			type: 'string',
+		},
+		lang : {
+			type: 'string',
+			default: 'en'
 		}
 	},
 	computedFields,

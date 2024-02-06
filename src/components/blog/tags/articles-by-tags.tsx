@@ -5,13 +5,17 @@ import Image from 'next/image'
 import { displayTags, allTags } from '@/utils/data'
 import React from 'react'
 import SubscribeNewsletter from '../common/subscribe-newsletter'
+import { Locale, i18n } from '@/i18n-config'
 
-export function ArticlesByTags ({
-  displayAllTags
-}: {
+interface Props {
   displayAllTags?: boolean
-}) {
+  lang: Locale
+}
+
+export function ArticlesByTags ({ displayAllTags, lang }: Props) {
   const tags = displayAllTags ? allTags : displayTags
+  const locale = lang !== i18n.defaultLocale ? `/${lang}` : ''
+
   return (
     <section className='lg:mx-0 w-full animate-tags-section'>
       <h2 className='font-londrina text-3xl font-bold tracking-wide text-zinc-400 sm:text-4xl pb-5'>
@@ -23,7 +27,7 @@ export function ArticlesByTags ({
           tags.map((tag, index) => (
             <Link
               key={index}
-              href={`/blog/tags/${tag.name}`}
+              href={`${locale}/blog/tags/${tag.name}`}
               className='border-2 border-zinc-400 group hover:border-zinc-100 items-center rounded-full flex h-8 text-sm px-3 sm:h-12 sm:text-xl sm:px-6 relative transition-all mb-1 md:mb-0'
             >
               {tag.name === 'react' ? (

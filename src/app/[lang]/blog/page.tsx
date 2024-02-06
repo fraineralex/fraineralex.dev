@@ -3,7 +3,6 @@ import '@/styles/blog/home.css'
 import Link from 'next/link'
 import React from 'react'
 import dynamic from 'next/dynamic'
-const Navigation = dynamic(() => import('@/components/blog/nav/nav'))
 import { Article } from '@/components/blog/articles/article'
 import { Redis } from '@upstash/redis'
 import { Eye } from 'lucide-react'
@@ -12,6 +11,7 @@ const ArticlesByTags = dynamic(
   () => import('@/components/blog/tags/articles-by-tags')
 )
 import { allPosts } from 'contentlayer/generated'
+import { getDictionary } from '@/get-dictionary'
 //import allPosts from '@/util/monks'
 
 const redis = Redis.fromEnv()
@@ -24,6 +24,8 @@ interface Props {
 
 export default async function BlogPage ({ params }: Props) {
   const lang = params?.lang || i18n.defaultLocale
+  const dictionary = getDictionary(lang)
+
   let views: Record<string, number> = {}
 
   if (allPosts.length > 0) {
@@ -37,8 +39,8 @@ export default async function BlogPage ({ params }: Props) {
     }, {} as Record<string, number>)
   }
 
-  const thereAreFourPosts = allPosts.length >= 4
-  let sorted = allPosts
+  let sorted = allPosts.filter(post => post.lang === lang)
+  const thereAreFourPosts = sorted.length >= 4
 
   // define featured, top2, top3 as type Post
   let featured = allPosts[0]
@@ -74,7 +76,6 @@ export default async function BlogPage ({ params }: Props) {
 
   return (
     <div className='relative'>
-      {/* <Navigation inBlogPage={true} /> */}
       <div className='px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-26'>
         <header className='mx-auto max-w-2xl text-center home-header'>
           <h1 className='pb-2 md:pb-3 uppercase font-bold leading-none text-zinc-100'>
@@ -82,7 +83,7 @@ export default async function BlogPage ({ params }: Props) {
             {thereAreFourPosts ? 'Blog Posts' : 'Articles'}
           </h1>
           <p className='text-zinc-400 md:text-lg leading-relaxed text-sm'>
-            Some of my my learnings, tricks and thoughts on software
+            Some of my learnings, tricks and thoughts on software
             engineering, programming and tech.
           </p>
         </header>
@@ -207,7 +208,7 @@ export default async function BlogPage ({ params }: Props) {
               ))}
           </div>
         </div>
-        <ArticlesByTags />
+        <ArticlesByTags lang={lang} />
       </div>
     </div>
   )

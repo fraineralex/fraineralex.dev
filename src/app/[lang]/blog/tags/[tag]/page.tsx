@@ -6,12 +6,14 @@ import { allTags } from '@/utils/data'
 import { Metadata, ResolvingMetadata } from 'next'
 import '@/styles/blog/home.css'
 import { allPosts } from 'contentlayer/generated'
+import { Locale, i18n } from '@/i18n-config'
 //import allPosts from '@/util/monks'
 
 const redis = Redis.fromEnv()
 
 type Props = {
   params: {
+    lang: Locale
     tag: string
   }
 }
@@ -27,6 +29,7 @@ export async function generateMetadata (
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const tagName = params?.tag
+  const lang = params?.lang ?? i18n.defaultLocale
   const tag = allTags.find(tag => tag.name === tagName)
 
   if (!tag) {
@@ -38,7 +41,12 @@ export async function generateMetadata (
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
   const BLOG_DOMAIN =
-    `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
+    `${process.env.DOMAIN}/${
+      lang !== i18n.defaultLocale ? `${lang}/` : ''
+    }blog` ||
+    `https://fraineralex.vercel.app/${
+      lang !== i18n.defaultLocale ? `${lang}/` : ''
+    }blog`
 
   return {
     title: tag.label,
@@ -56,8 +64,12 @@ export const revalidate = 60
 
 export default async function BlogPage ({ params }: Props) {
   const tagName = params?.tag
+  const lang = params?.lang ?? i18n.defaultLocale
   const sortedPosts = allPosts
-    .filter(post => post.published && post.tags?.includes(tagName))
+    .filter(
+      post =>
+        post.published && post.tags?.includes(tagName) && post.lang === lang
+    )
     .sort(
       (a, b) =>
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
@@ -138,7 +150,7 @@ export default async function BlogPage ({ params }: Props) {
               ))}
           </div>
         </div>
-        <ArticlesByTags />
+        <ArticlesByTags lang={lang} />
       </div>
     </div>
   )

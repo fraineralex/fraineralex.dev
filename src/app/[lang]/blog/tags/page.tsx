@@ -2,6 +2,7 @@ import React from 'react'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
 import '@/styles/blog/home.css'
 import { Metadata } from 'next'
+import { Locale, i18n } from '@/i18n-config'
 
 const BLOG_DOMAIN =
   `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
@@ -18,7 +19,15 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function TagsPage () {
+interface Props {
+  params: {
+    lang: Locale
+  }
+}
+
+export default async function TagsPage ({ params }: Props) {
+  const lang = params?.lang ?? i18n.defaultLocale
+
   return (
     <div className='relative'>
       <div className='px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-26 home-header'>
@@ -31,7 +40,7 @@ export default async function TagsPage () {
             life.
           </p>
         </header>
-        <ArticlesByTags displayAllTags />
+        <ArticlesByTags displayAllTags lang={lang} />
       </div>
     </div>
   )

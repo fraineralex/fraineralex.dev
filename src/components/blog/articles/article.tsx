@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Card } from './card'
 import React, { useState, useEffect, useRef } from 'react'
 import '@/styles/blog/article.css'
+import { i18n } from '@/i18n-config'
 
 type Props = {
   post: Post
@@ -29,10 +30,11 @@ export const Article: React.FC<Props> = ({ post, views, isTopArticle }) => {
     ? { aspectRatio, objectFit: 'cover', height: '100%' }
     : { aspectRatio, objectFit: 'cover', width: '100%' }
 
+  const locale = post.lang !== i18n.defaultLocale ? `/${post.lang}` : ''
   return (
     <Link
       ref={containerRef}
-      href={`/blog/${post?.slug}`}
+      href={`${locale}/blog/${post?.slug}`}
       className={`bg-gradient-to-br opacity-100 via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group hover:border-zinc-200/50 border-zinc-600 lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out ${
         isTopArticle ? 'relative grid grid-cols-8 ' : 'md:gap-0'
       }`}

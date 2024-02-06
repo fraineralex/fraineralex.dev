@@ -25,6 +25,7 @@
   }
 
   p {
+    @apply font-sans;
     text-wrap: pretty;
   }
 }

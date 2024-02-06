@@ -24,8 +24,8 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   }`}
                 ></span>
                 <span
-                  className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
-                    inViews.inViewAbout ? 'text-slate-200' : 'text-slate-400/70'
+                  className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-white group-focus-visible:text-white ${
+                    inViews.inViewAbout ? 'text-white' : 'text-slate-400/80'
                   }`}
                 >
                   {navigation.about}
@@ -42,10 +42,10 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   }`}
                 ></span>
                 <span
-                  className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
+                  className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-white group-focus-visible:text-white ${
                     inViews.inViewExperience
-                      ? 'text-slate-200'
-                      : 'text-slate-400/70'
+                      ? 'text-white'
+                      : 'text-slate-400/80'
                   }`}
                 >
                   {navigation.experience}
@@ -62,10 +62,10 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   }`}
                 ></span>
                 <span
-                  className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
+                  className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-white group-focus-visible:text-white ${
                     inViews.inViewProjects || inViews.inViewWriting
-                      ? 'text-slate-200'
-                      : 'text-slate-400/70'
+                      ? 'text-white'
+                      : 'text-slate-400/80'
                   }`}
                 >
                   {navigation.projects}
@@ -75,7 +75,7 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
             {/* <li>
               <a className='group flex items-center py-3' href='#writing'>
                 <span className='nav-indicator mr-4 h-px w-8 bg-slate-400/70 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none'></span>
-                <span className='nav-text text-xs font-bold uppercase tracking-widest text-slate-400/70 group-hover:text-slate-200 group-focus-visible:text-slate-200'>
+                <span className='nav-text text-xs font-bold uppercase tracking-widest text-slate-400/80 group-hover:text-white group-focus-visible:text-white'>
                   Writing
                 </span>
               </a>

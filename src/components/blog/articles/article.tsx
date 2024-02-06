@@ -33,7 +33,7 @@ export const Article: React.FC<Props> = ({ post, views, isTopArticle }) => {
     <Link
       ref={containerRef}
       href={`/blog/${post?.slug}`}
-      className={`bg-gradient-to-br opacity-100 via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group hover:border-zinc-200/50 border-zinc-600 lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out font-sans ${
+      className={`bg-gradient-to-br opacity-100 via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group hover:border-zinc-200/50 border-zinc-600 lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out ${
         isTopArticle ? 'relative grid grid-cols-8 ' : 'md:gap-0'
       }`}
     >

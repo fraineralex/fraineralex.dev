@@ -93,7 +93,10 @@
       "Odoo",
       "React Native",
       "C#",
-      ".NET Core"
+      ".NET Core",
+      "SQL",
+      "CSS",
+      "Docker"
     ]
   },
   "experience": {
@@ -107,7 +110,7 @@
           "name": "Lifter",
           "website": "https://lifterdo.com"
         },
-        "description": "Mi rol es desarrollar y entregar soluciones personalizadas para nuestros clientes. Soy responsable de gestionar solicitudes directas de clientes, asignar tareas dentro del equipo y desarrollar nuevas características y módulos para cumplir con requisitos específicos. Además, también superviso las solicitudes de extracción del proceso para implementaciones en producción.",
+        "description": "Soy responsable de gestionar solicitudes directas de clientes, asignar tareas dentro del equipo y desarrollar nuevas características y módulos para cumplir con requisitos específicos.",
         "skills": [
           "JavaScript",
           "Python",
@@ -132,7 +135,7 @@
           "name": "International Pack & Paper",
           "website": "https://ippdr.com"
         },
-        "description": "Mi rol implicaba crear y personalizar funciones para satisfacer las necesidades de nuestros clientes. Esto incluía desarrollar nuevas funcionalidades, realizar pruebas exhaustivas y documentar código, así como construir soluciones web utilizando tecnologías como JavaScript, Python y CSS.",
+        "description": "Mi rol implicaba crear y personalizar funciones para satisfacer las necesidades de nuestros clientes. Esto incluía desarrollar nuevas funcionalidades, realizar pruebas exhaustivas y construir soluciones web.",
         "skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
@@ -148,7 +151,7 @@
           "name": "Nelmix",
           "website": "https://nelmix.com"
         },
-        "description": "Trabajé en la creación de módulos personalizados para Odoo, centrándome en aplicaciones de contabilidad y gestión de productos adaptadas para satisfacer las necesidades únicas de nuestros clientes. Además, tuve la oportunidad de contribuir al desarrollo de diversas características para aplicaciones web.",
+        "description": "Trabajé en la creación de módulos personalizados para Odoo, centrándome en aplicaciones de contabilidad y gestión de productos adaptadas para satisfacer las necesidades únicas de nuestros clientes.",
         "skills": ["TypeScript", "Python", "Odoo", "Node.js", "SQL"],
         "contract": "Prácticas",
         "location": "Santo Domingo, República Dominicana",

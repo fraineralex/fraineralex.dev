@@ -79,7 +79,10 @@ export default function ExperienceCard ({
               </h5>
             )}
           </header>
-          <p className='mt-2.5 text-sm leading-normal text-slate-300/80'>
+          <p
+            className='mt-2.5 text-sm leading-normal text-slate-300/80'
+            style={{ textWrap: 'pretty' }}
+          >
             {description}
           </p>
           <ul className='mt-2 flex flex-wrap' aria-label='Technologies used'>

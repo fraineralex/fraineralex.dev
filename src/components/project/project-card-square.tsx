@@ -60,9 +60,13 @@ export default function ProjectCardSquare ({
           </p>
         </header>
         <footer className='self-start mt-auto'>
-          <ul className='flex flex-wrap list-none mt-5 space-x-2 leading-tight text-sm font-light'>
+          <ul className='flex flex-wrap list-none mt-5 leading-tight text-sm font-light'>
             {technologies.length > 0 &&
-              technologies.map((tech, index) => <li key={index}>{tech}</li>)}
+              technologies.map((tech, index) => (
+                <li key={index} className='mt-1 me-2'>
+                  {tech}
+                </li>
+              ))}
           </ul>
         </footer>
       </Link>

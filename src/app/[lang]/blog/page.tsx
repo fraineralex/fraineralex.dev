@@ -82,8 +82,8 @@ export default async function BlogPage ({ params }: Props) {
             {thereAreFourPosts ? 'Blog Posts' : 'Articles'}
           </h1>
           <p className='text-zinc-400 md:text-lg leading-relaxed text-sm'>
-            Some of my thoughts on software engineering, web development, and
-            life.
+            Some of my my learnings, tricks and thoughts on software
+            engineering, programming and tech.
           </p>
         </header>
 

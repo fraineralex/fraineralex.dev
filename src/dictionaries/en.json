@@ -351,5 +351,52 @@
     "developerOfThe": "developer of the",
     "dCssPlane": "3D CSS Plane",
     "forInspiration": "for inspiration."
+  },
+  "blog": {
+    "home": {
+      "topArticles": {
+        "label": "Top Articles",
+        "featured": "mastering-git-commit-messages",
+        "top2": "crafting-react-hooks",
+        "top3": "how-to-install-multiple-versions-nodejs-nvm"
+      },
+      "title": {
+        "main": "Blog Posts",
+        "temporal": "Articles"
+      },
+      "description": "Some of my learnings, tricks and thoughts on software engineering, programming and tech.",
+      "soon": "SOON",
+      "just": "Just",
+      "minRead": "min read",
+      "latestArticles": "Latest Articles"
+    },
+    "postsByTags": {
+      "label": "View posts by tag",
+      "newsletter": {
+        "placeholder": "Type your email...",
+        "label": "Subscribe",
+        "description": "Susbcribe to the newsletter! Get the latest updates of the blog."
+      }
+    },
+    "tags": {
+      "title": "Articles",
+      "description": "Some of my learnings, tricks and thoughts on software engineering, programming and tech.",
+      "[tag]": {
+        "title": "Articles about",
+        "notFound": {
+          "first": "☹️ There are no articles about",
+          "second": "yet. Check back later!"
+        }
+      }
+    },
+    "[slug]": {
+      "updatedOn": "Updated on",
+      "minRead": "min read",
+      "newsletter": {
+        "description": "Subscribe to the newsletter",
+        "placeholder": "Type your email...",
+        "label": "Subscribe"
+      }
+    }
   }
 }

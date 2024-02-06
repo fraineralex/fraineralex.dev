@@ -352,5 +352,52 @@
     "developerOfThe": "desarrollador del",
     "dCssPlane": "Avión 3D CSS",
     "forInspiration": "por la inspiración."
+  },
+  "blog": {
+    "home": {
+      "topArticles": {
+        "label": "Artículos Destacados",
+        "featured": "mastering-git-commit-messages",
+        "top2": "crafting-react-hooks",
+        "top3": "how-to-install-multiple-versions-nodejs-nvm"
+      },
+      "title": {
+        "main": "Frainer's Blog",
+        "temporal": "Artículos"
+      },
+      "description": "Algunos de mis aprendizajes, trucos y tips sobre ingeniería de software, programación y tecnología.",
+      "soon": "PRONTO",
+      "just": "Justo",
+      "minRead": "min de lectura",
+      "latestArticles": "Últimos Artículos"
+    },
+    "postsByTags": {
+      "label": "Ver publicaciones por tema",
+      "newsletter": {
+        "placeholder": "Escribe tu correo electrónico...",
+        "label": "Suscribirse",
+        "description": "¡Suscríbete a la newsletter! Obtén las últimas actualizaciones del blog."
+      }
+    },
+    "tags": {
+      "title": "Artículos",
+      "description": "Algunos de mis aprendizajes, trucos y tips sobre ingeniería de software, programación y tecnología.",
+      "[tag]": {
+        "title": "Artículos sobre",
+        "notFound": {
+          "first": "☹️ No hay artículos sobre",
+          "second": "todavía. ¡Vuelve más tarde!"
+        }
+      }
+    },
+    "[slug]": {
+      "updatedOn": "Actualizado el",
+      "minRead": "min de lectura",
+      "newsletter": {
+        "description": "Suscríbete a la newsletter",
+        "placeholder": "Escribe tu correo electrónico...",
+        "label": "Suscribirse"
+      }
+    }
   }
 }

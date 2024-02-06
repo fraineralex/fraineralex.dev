@@ -4,6 +4,7 @@ import { MouseShadow } from '@/components/layout/mouse-shadow'
 import { i18n } from '@/i18n-config'
 import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
+import { Analytics } from '@vercel/analytics/react';
 
 import '@/styles/globals.css'
 import '@/styles/site.css'
@@ -90,6 +91,7 @@ export default function RootLayout ({ children, params }: Props) {
         <MouseShadow />
         <Navigation />
         {children}
+        <Analytics />
       </body>
     </html>
   )

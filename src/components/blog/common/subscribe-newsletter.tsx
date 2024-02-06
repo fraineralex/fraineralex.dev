@@ -1,9 +1,14 @@
 'use client'
 
+import { Newsletter } from '@/types/blog-types'
 import { useState, lazy } from 'react'
 const SubscribeModal = lazy(() => import('./subscribe-modal'))
 
-export default function SubscribeNewsletter () {
+interface Props {
+  dictionary: Newsletter
+}
+
+export default function SubscribeNewsletter ({ dictionary }: Props) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -12,7 +17,7 @@ export default function SubscribeNewsletter () {
         <form className='flex items-end pt-2'>
           <input
             className='flex h-10 w-full rounded-md border bg-gray-600/10 px-3 py-4 text-sm placeholder:text-slate-300 border-teal-300'
-            placeholder='Type your email...'
+            placeholder={dictionary.placeholder}
             type='email'
             onClick={() => setOpen(true)}
           />
@@ -21,11 +26,11 @@ export default function SubscribeNewsletter () {
             type='button'
             onClick={() => setOpen(true)}
           >
-            Subscribe
+            {dictionary.label}
           </button>
         </form>
         <p className='text-slate-400 mt-2 text-center px-2 text-sm'>
-          Susbcribe to the newsletter! Get the latest updates of the blog.
+          {dictionary.description}
         </p>
       </div>
 

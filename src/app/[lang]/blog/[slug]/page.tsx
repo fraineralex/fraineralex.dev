@@ -12,6 +12,7 @@ const Subscribe = dynamic(() => import('@/components/blog/footer/subscribe'))
 import { allTags } from '@/utils/data'
 import { allPosts } from 'contentlayer/generated'
 import { Locale, i18n } from '@/i18n-config'
+import { getDictionary } from '@/get-dictionary'
 //import allPosts from '@/util/monks'
 
 export const revalidate = 60
@@ -75,6 +76,8 @@ export async function generateMetadata (
 export default async function PostPage ({ params }: Props) {
   const slug = params?.slug
   const lang = params?.lang ?? i18n.defaultLocale
+  const dictionary = (await getDictionary(lang)).blog['[slug]']
+
   const post = allPosts.find(post => post.slug === slug && post.lang === lang)
 
   if (!post) {
@@ -111,7 +114,7 @@ export default async function PostPage ({ params }: Props) {
 
       <small className='text-xs md:text-sm text-zinc-400 flex flex-col font-bold uppercase md:flex-row text-center pb-8 place-content-center py-6 md:px-6'>
         <span className='mb-2 md:mb-0'>
-          {post.updated && <span>Updated on</span>}{' '}
+          {post.updated && <span>{dictionary.updatedOn}</span>}{' '}
           <time
             dateTime={new Date(post.updated || post.date).toISOString()}
             className={`${
@@ -123,7 +126,9 @@ export default async function PostPage ({ params }: Props) {
             }).format(new Date(post.updated || post.date))}
           </time>{' '}
           <span className='px-1 md:px-4'>•</span>
-          <span className='me-2 md:me-0'>{post.readTime} min read</span>
+          <span className='me-2 md:me-0'>
+            {post.readTime} {dictionary.minRead}
+          </span>
           {post.tags &&
             post.tags.slice(0, 2).map((tagName, index) => {
               const tag = allTags.find(tag => tag.name === tagName)
@@ -168,7 +173,7 @@ export default async function PostPage ({ params }: Props) {
       <article className='max-w-6xl mx-auto md:max-w-4xl px-4 md:px-8 content pb-12'>
         <Mdx code={post.body.code} />
       </article>
-      <Subscribe />
+      <Subscribe dictionary={dictionary.newsletter} />
     </section>
   )
 }

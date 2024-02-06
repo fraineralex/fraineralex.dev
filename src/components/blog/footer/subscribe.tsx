@@ -3,8 +3,13 @@
 import '@/styles/blog/mdx.css'
 import { useState } from 'react'
 import SubscribeModal from '../common/subscribe-modal'
+import { Newsletter } from '@/types/blog-types'
 
-export default function Subscribe () {
+interface Props {
+  dictionary: Newsletter
+}
+
+export default function Subscribe ({ dictionary }: Props) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -12,14 +17,14 @@ export default function Subscribe () {
       <aside className='text-center py-16 max-w-3x subscribe max-w-6xl mx-auto md:max-w-4xl px-4 md:px-8'>
         <div className='w-full border-t-2 mb-8 border-zinc-200 squiggle'></div>
         <h3 className='font-londrina text-4xl uppercase font-bold leading-none text-zinc-100 mb-4'>
-          Subscribe to the newsletter
+          {dictionary.description}
         </h3>
         <form className='mt-8 flex flex-wrap items-center md:w-2/3 mx-auto'>
           <input
             name='email'
             className='w-full flex-1 bg-zinc-500 py-3 px-6 rounded text-white border-zinc-500'
             type='email'
-            placeholder='Type your email...'
+            placeholder={dictionary.placeholder}
             onClick={() => setOpen(true)}
           />
           <button
@@ -27,7 +32,7 @@ export default function Subscribe () {
             type='button'
             onClick={() => setOpen(true)}
           >
-            Subscribe
+            {dictionary.label}
           </button>
         </form>
         <div className='w-full border-b-2 mt-8 border-zinc-200 squiggle'></div>

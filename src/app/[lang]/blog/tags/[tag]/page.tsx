@@ -7,6 +7,7 @@ import { Metadata, ResolvingMetadata } from 'next'
 import '@/styles/blog/home.css'
 import { allPosts } from 'contentlayer/generated'
 import { Locale, i18n } from '@/i18n-config'
+import { getDictionary } from '@/get-dictionary'
 //import allPosts from '@/util/monks'
 
 const redis = Redis.fromEnv()
@@ -65,6 +66,8 @@ export const revalidate = 60
 export default async function BlogPage ({ params }: Props) {
   const tagName = params?.tag
   const lang = params?.lang ?? i18n.defaultLocale
+  const dictionary = (await getDictionary(lang)).blog.tags['[tag]']
+
   const sortedPosts = allPosts
     .filter(
       post =>
@@ -95,7 +98,7 @@ export default async function BlogPage ({ params }: Props) {
       <div className='px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-26'>
         <header className='mx-auto max-w-4xl text-center home-header tag'>
           <h1 className='font-bold leading-none font-londrina text-white'>
-            Articles about{' '}
+            {dictionary.title}{' '}
             <code className='relative rounded bg-white bg-opacity-25 py-[0.2rem] px-[0.5rem] font-mono font-bold text-white lowercase'>
               {tag?.label || tagName}
             </code>
@@ -103,11 +106,11 @@ export default async function BlogPage ({ params }: Props) {
           <p className='text-zinc-400 mt-6 md:mt-6 text-xs md:text-lg leading-relaxed'>
             {sortedPosts.length === 0 ? (
               <>
-                ☹️ There are no articles about{' '}
+                {dictionary.notFound.first}{' '}
                 <strong className='text-zinc-300 font-bold'>
                   {tag?.label || tagName}
                 </strong>{' '}
-                yet. Check back later!
+                {dictionary.notFound.second}
               </>
             ) : (
               tag?.description

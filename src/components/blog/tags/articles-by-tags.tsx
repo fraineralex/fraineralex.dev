@@ -6,20 +6,22 @@ import { displayTags, allTags } from '@/utils/data'
 import React from 'react'
 import SubscribeNewsletter from '../common/subscribe-newsletter'
 import { Locale, i18n } from '@/i18n-config'
+import { getDictionary } from '@/get-dictionary'
 
 interface Props {
   displayAllTags?: boolean
   lang: Locale
 }
 
-export function ArticlesByTags ({ displayAllTags, lang }: Props) {
+export async function ArticlesByTags ({ displayAllTags, lang }: Props) {
+  const { postsByTags } = (await getDictionary(lang)).blog
   const tags = displayAllTags ? allTags : displayTags
   const locale = lang !== i18n.defaultLocale ? `/${lang}` : ''
 
   return (
     <section className='lg:mx-0 w-full animate-tags-section'>
       <h2 className='font-londrina text-3xl font-bold tracking-wide text-zinc-400 sm:text-4xl pb-5'>
-        View posts by tag
+        {postsByTags.label}
       </h2>
       <div className='w-full h-px bg-zinc-500' />
       <article className='mt-5 md:mt-10 flex flex-rows flex-wrap gap-2 sm:gap-5 text-zinc-100 mx-auto'>
@@ -48,7 +50,7 @@ export function ArticlesByTags ({ displayAllTags, lang }: Props) {
           ))}
       </article>
       <article className='flex mx-auto mt-10'>
-        <SubscribeNewsletter />
+        <SubscribeNewsletter dictionary={postsByTags.newsletter} />
       </article>
     </section>
   )

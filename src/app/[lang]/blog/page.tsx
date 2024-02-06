@@ -24,7 +24,7 @@ interface Props {
 
 export default async function BlogPage ({ params }: Props) {
   const lang = params?.lang || i18n.defaultLocale
-  const dictionary = getDictionary(lang)
+  const { home } = (await getDictionary(lang)).blog
 
   let views: Record<string, number> = {}
 
@@ -48,17 +48,11 @@ export default async function BlogPage ({ params }: Props) {
   let top3 = allPosts[0]
 
   if (thereAreFourPosts) {
-    featured = allPosts.find(
-      post => post?.slug === 'how-to-install-multiple-versions-nodejs-nvm'
-    )!
+    featured = allPosts.find(post => post?.slug === home.topArticles.featured)!
 
-    top2 = allPosts.find(
-      post => post?.slug === 'how-to-install-multiple-versions-nodejs-nvm'
-    )!
+    top2 = allPosts.find(post => post?.slug === home.topArticles.top2)!
 
-    top3 = allPosts.find(
-      post => post?.slug === 'how-to-install-multiple-versions-nodejs-nvm'
-    )!
+    top3 = allPosts.find(post => post?.slug === home.topArticles.top3)!
     sorted = allPosts
       .filter(post => post.published)
       .filter(
@@ -74,17 +68,18 @@ export default async function BlogPage ({ params }: Props) {
       )
   }
 
+  const locale = lang !== i18n.defaultLocale ? `/${lang}` : ''
+
   return (
     <div className='relative'>
       <div className='px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-26'>
         <header className='mx-auto max-w-2xl text-center home-header'>
           <h1 className='pb-2 md:pb-3 uppercase font-bold leading-none text-zinc-100'>
             {' '}
-            {thereAreFourPosts ? 'Blog Posts' : 'Articles'}
+            {thereAreFourPosts ? home.title.main : home.title.temporal}
           </h1>
           <p className='text-zinc-400 md:text-lg leading-relaxed text-sm'>
-            Some of my learnings, tricks and thoughts on software
-            engineering, programming and tech.
+            {home.description}
           </p>
         </header>
 
@@ -92,14 +87,14 @@ export default async function BlogPage ({ params }: Props) {
           <>
             <div className='mx-auto lg:mx-0 w-full'>
               <h2 className='text-3xl font-bold tracking-wide text-zinc-500 sm:text-4xl pb-5 font-londrina'>
-                Top Articles
+                {home.topArticles.label}
               </h2>
               <div className='w-full h-px bg-zinc-700' />
             </div>
 
             <div className='grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2'>
               <Link
-                href={`/${featured.slug}`}
+                href={`${locale}/${featured.slug}`}
                 className='bg-gradient-to-br opacity-100  via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600'
               >
                 <Image
@@ -124,7 +119,7 @@ export default async function BlogPage ({ params }: Props) {
                           }).format(new Date(featured.date))}
                         </time>
                       ) : (
-                        <span>SOON</span>
+                        <span>{home.soon}</span>
                       )}
                     </div>
                     <span className='flex items-center gap-1 text-xs text-zinc-500'>
@@ -146,7 +141,7 @@ export default async function BlogPage ({ params }: Props) {
                   </p>
                   <div className='absolute bottom-52'>
                     <p className='hidden text-zinc-200 hover:text-zinc-50 lg:block'>
-                      Just {featured.readTime} min read{' '}
+                      {home.just} {featured.readTime} {home.minRead}{' '}
                       <span aria-hidden='true'>&rarr;</span>
                     </p>
                   </div>
@@ -166,7 +161,7 @@ export default async function BlogPage ({ params }: Props) {
             </div>
             <div className='mx-auto lg:mx-0 w-full'>
               <h2 className='text-3xl font-bold tracking-wide text-zinc-500 sm:text-4xl pb-5 font-londrina'>
-                Latest Articles
+                {home.latestArticles}
               </h2>
               <div className='w-full h-px bg-zinc-700' />
             </div>
@@ -208,7 +203,7 @@ export default async function BlogPage ({ params }: Props) {
               ))}
           </div>
         </div>
-        <ArticlesByTags lang={lang} />
+        <ArticlesByTags lang={lang} dictionary={home.postsByTags} />
       </div>
     </div>
   )

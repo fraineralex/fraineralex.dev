@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { Analytics } from '@/components/blog/articles/analytics'
 import Footer from '@/components/blog/footer/footer'
 import React from 'react'
 

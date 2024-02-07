@@ -12,7 +12,7 @@ const computedFields = {
 	},
 	slug: {
 		type: "string",
-		resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+		resolve: (doc) => doc._raw.flattenedPath.split("/").slice(4).join("/"),
 	},
 	readTime: {
 		type: 'string',

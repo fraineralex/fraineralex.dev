@@ -13,15 +13,10 @@ type Props = {
   post: Post
   views: number
   isTopArticle?: boolean
-  lang: Locale
+  lang?: Locale
 }
 
-export const Article: React.FC<Props> = ({
-  post,
-  views,
-  isTopArticle,
-  lang
-}) => {
+export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang }) => {
   const [showDiv, setShowDiv] = useState(false)
   const containerRef = useRef<HTMLAnchorElement | null>(null)
 

@@ -35,7 +35,7 @@ export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
         </ol>
         <div className='mt-12'>
           <Link
-            className='inline-flex items-center leading-tight font-semibold text-slate-100 group'
+            className='inline-flex items-center leading-tight font-semibold text-slate-200 group'
             aria-label={link.ariaLabel}
             href={link.url}
           >

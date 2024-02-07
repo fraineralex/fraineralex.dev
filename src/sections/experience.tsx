@@ -41,7 +41,7 @@ export default function Experience ({
         </ol>
         <div className='mt-12'>
           <Link
-            className='inline-flex items-center leading-tight text-white font-semibold group'
+            className='inline-flex items-center leading-tight text-slate-200 font-semibold group'
             aria-label={`${resumeButton.strong} ${resumeButton.label}`}
             href={resumeButton.url}
             target='_blank'

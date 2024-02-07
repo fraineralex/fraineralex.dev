@@ -4,9 +4,10 @@ interface FooterSection {
   tailwindCss: string
   deployedWith: string
   vercel: string
-  allTextSetIn: string
-  interTypeface: string
+  takeALook: string
+  githubRepository: string
   specialThanksTo: string
+  repositoryLink: string
   and: string
   developerOfThe: string
   dCssPlane: string

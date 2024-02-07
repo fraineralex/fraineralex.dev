@@ -59,7 +59,7 @@ export const Navigation = () => {
               <div className='inline-flex pr-5'>
                 <Link
                   href='/'
-                  className={`ms-5 font-semibold ${
+                  className={`ms-5 font-medium ${
                     isBlogPage === false
                       ? 'text-slate-100 underline underline-offset-8'
                       : 'hover:text-slate-100 hover:scale-105 duration-200'
@@ -69,7 +69,7 @@ export const Navigation = () => {
                 </Link>
                 <Link
                   href='/blog'
-                  className={`ms-5 font-semibold ${
+                  className={`ms-5 font-medium ${
                     isBlogPage === true
                       ? 'text-slate-100 underline underline-offset-8'
                       : 'hover:text-slate-100 hover:scale-105 duration-200'

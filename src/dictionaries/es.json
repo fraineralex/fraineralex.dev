@@ -10,10 +10,10 @@
       "instagramUrl": "https://www.instagram.com/frainer.alex/"
     },
     "linkedinCard": {
-      "profileImage": "/images/hero/profile.jpg",
+      "profileImage": "/images/hero/profile.webp",
       "lifterLink": {
         "url": "https://lifterdo.com",
-        "logo": "/images/experience/lifter.png"
+        "logo": "/images/experience/lifter.webp"
       },
       "itlaLink": {
         "url": "https://itla.edu.do",
@@ -124,7 +124,7 @@
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
-        "imageName": "lifter.png",
+        "imageName": "lifter.webp",
         "otherTitles": []
       },
       {
@@ -140,7 +140,7 @@
         "contract": "Tiempo completo",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
-        "imageName": "ipp.png",
+        "imageName": "ipp.webp",
         "otherTitles": []
       },
       {
@@ -156,7 +156,7 @@
         "contract": "Prácticas",
         "location": "Santo Domingo, República Dominicana",
         "locationType": "Remoto",
-        "imageName": "nelmix.png",
+        "imageName": "nelmix.webp",
         "otherTitles": []
       }
     ],
@@ -193,7 +193,7 @@
         "technologies": ["Python", "Numpy", "Pygame", "Algoritmo MiniMax"],
         "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
         "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-        "imageSrc": "chess.png",
+        "imageSrc": "chess.webp",
         "starsOnGithub": 4
       },
       {

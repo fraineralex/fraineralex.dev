@@ -10,10 +10,10 @@
       "instagramUrl": "https://www.instagram.com/frainer.alex/"
     },
     "linkedinCard": {
-      "profileImage": "/images/hero/profile.jpg",
+      "profileImage": "/images/hero/profile.webp",
       "lifterLink": {
         "url": "https://lifterdo.com",
-        "logo": "/images/experience/lifter.png"
+        "logo": "/images/experience/lifter.webp"
       },
       "itlaLink": {
         "url": "https://itla.edu.do",
@@ -124,7 +124,7 @@
         "contract": "Full-time",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
-        "imageName": "lifter.png"
+        "imageName": "lifter.webp"
       },
       {
         "startDate": "Feb",
@@ -139,7 +139,7 @@
         "contract": "Full-time",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
-        "imageName": "ipp.png"
+        "imageName": "ipp.webp"
       },
       {
         "startDate": "Sep 2022",
@@ -154,7 +154,7 @@
         "contract": "Internship",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
-        "imageName": "nelmix.png"
+        "imageName": "nelmix.webp"
       }
     ],
     "resumeButton": {
@@ -172,16 +172,16 @@
         "technologies": ["React", "TypeScript", "Styled Componets", "SWR"],
         "deployUrl": "https://frainer-hacker-news.surge.sh",
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
-        "imageSrc": "hacker_news.png",
+        "imageSrc": "hacker_news.webp",
         "starsOnGithub": 2
       },
       {
-        "projectName": "To Do App",
-        "description": "A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
-        "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
-        "deployUrl": "https://frainer-todo-app.surge.sh/",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
-        "imageSrc": "todo.png",
+        "projectName": "Programming Quizzes",
+        "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
+        "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "imageSrc": "quizzes.webp",
         "starsOnGithub": 2
       },
       {
@@ -190,7 +190,7 @@
         "technologies": ["Python", "Numpy", "Pygame", "MiniMax Algrthm"],
         "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
         "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-        "imageSrc": "chess.png",
+        "imageSrc": "chess.webp",
         "starsOnGithub": 4
       },
       {
@@ -199,7 +199,7 @@
         "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server"],
         "deployUrl": "https://github.com/fraineralex/RealEstate-App",
         "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
-        "imageSrc": "real-estate.png",
+        "imageSrc": "real-estate.webp",
         "starsOnGithub": 4
       }
     ],
@@ -264,7 +264,7 @@
         "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
         "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
         "deployUrl": "https://programming-quizzes.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
         "year": 2023
       },
       {
@@ -273,7 +273,7 @@
         "description": "A simple Google Translate clone, built with React and powered by the OpenAI API.",
         "technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
         "deployUrl": "https://frainer-google-translate.surge.sh/",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
         "year": 2023
       },
       {

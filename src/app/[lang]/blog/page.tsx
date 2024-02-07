@@ -203,7 +203,7 @@ export default async function BlogPage ({ params }: Props) {
               ))}
           </div>
         </div>
-        <ArticlesByTags lang={lang} dictionary={home.postsByTags} />
+        <ArticlesByTags lang={lang} />
       </div>
     </div>
   )

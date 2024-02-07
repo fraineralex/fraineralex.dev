@@ -67,7 +67,7 @@ export const Post = defineDocumentType(() => ({
 		},
 		lang : {
 			type: 'string',
-			default: 'en'
+			default: "en"
 		}
 	},
 	computedFields,

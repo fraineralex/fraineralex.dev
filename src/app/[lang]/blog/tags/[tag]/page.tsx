@@ -19,7 +19,7 @@ type Props = {
   }
 }
 
-export async function generateStaticParams (): Promise<Props['params'][]> {
+/* export async function generateStaticParams (): Promise<Props['params'][]> {
   const allParams = allTags.map(tag => ({
     lang: 'en' as Locale,
     tag: tag.name
@@ -33,7 +33,7 @@ export async function generateStaticParams (): Promise<Props['params'][]> {
   })
 
   return allParams
-}
+} */
 
 export async function generateMetadata (
   { params }: Props,

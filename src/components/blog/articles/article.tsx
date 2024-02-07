@@ -7,15 +7,21 @@ import Image from 'next/image'
 import { Card } from './card'
 import React, { useState, useEffect, useRef } from 'react'
 import '@/styles/blog/article.css'
-import { i18n } from '@/i18n-config'
+import { Locale, i18n } from '@/i18n-config'
 
 type Props = {
   post: Post
   views: number
   isTopArticle?: boolean
+  lang: Locale
 }
 
-export const Article: React.FC<Props> = ({ post, views, isTopArticle }) => {
+export const Article: React.FC<Props> = ({
+  post,
+  views,
+  isTopArticle,
+  lang
+}) => {
   const [showDiv, setShowDiv] = useState(false)
   const containerRef = useRef<HTMLAnchorElement | null>(null)
 
@@ -30,7 +36,7 @@ export const Article: React.FC<Props> = ({ post, views, isTopArticle }) => {
     ? { aspectRatio, objectFit: 'cover', height: '100%' }
     : { aspectRatio, objectFit: 'cover', width: '100%' }
 
-  const locale = post.lang !== i18n.defaultLocale ? `/${post.lang}` : ''
+  const locale = lang !== i18n.defaultLocale ? `/${lang}` : ''
   return (
     <Link
       ref={containerRef}

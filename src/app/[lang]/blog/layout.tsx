@@ -57,7 +57,12 @@ export const metadata: Metadata = {
   }
 }
 
-export default function Layout ({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode
+  params?: { lang: string }
+}
+
+export default function Layout ({ children, params }: Props) {
   return (
     <main className='blog relative'>
       {children}

@@ -63,12 +63,9 @@ export default function ProjectCard ({
               </Link>
             </li>
           </ul>
-          <ul
-            className='mt-2 flex whitespace-nowrap'
-            aria-label='Technologies used:'
-          >
+          <ul className='mt-2 flex flex-wrap' aria-label='Technologies used:'>
             {technologies.map((technology, index) => (
-              <li className='mr-1.5 mt-2' key={index}>
+              <li className='mt-2' key={index}>
                 <span className='flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-200 mr-1.5'>
                   {technology}
                 </span>

@@ -1,5 +1,5 @@
-import { Locale, i18n } from '@/i18n-config'
 import '@/styles/blog/home.css'
+import { Locale, i18n } from '@/i18n-config'
 import Link from 'next/link'
 import React from 'react'
 import dynamic from 'next/dynamic'
@@ -15,7 +15,6 @@ import { getDictionary } from '@/get-dictionary'
 //import allPosts from '@/util/monks'
 
 const redis = Redis.fromEnv()
-
 export const revalidate = 60
 
 interface Props {
@@ -155,6 +154,7 @@ export default async function BlogPage ({ params }: Props) {
                     post={post}
                     views={views[post?.slug] ?? 0}
                     isTopArticle
+                    lang={lang}
                   />
                 ))}
               </div>
@@ -177,6 +177,7 @@ export default async function BlogPage ({ params }: Props) {
                   key={post?.slug || index}
                   post={post}
                   views={views[post?.slug] ?? 0}
+                  lang={lang}
                 />
               ))}
           </div>
@@ -188,6 +189,7 @@ export default async function BlogPage ({ params }: Props) {
                   key={post?.slug || index}
                   post={post}
                   views={views[post?.slug] ?? 0}
+                  lang={lang}
                 />
               ))}
           </div>
@@ -199,6 +201,7 @@ export default async function BlogPage ({ params }: Props) {
                   key={post?.slug || index}
                   post={post}
                   views={views[post?.slug] ?? 0}
+                  lang={lang}
                 />
               ))}
           </div>

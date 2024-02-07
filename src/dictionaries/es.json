@@ -7,7 +7,8 @@
       "githubUrl": "https://github.com/fraineralex",
       "linkedinUrl": "https://www.linkedin.com/in/fraineralex/",
       "twitterUrl": "https://twitter.com/fraineralex",
-      "instagramUrl": "https://www.instagram.com/frainer.alex/"
+      "instagramUrl": "https://www.instagram.com/frainer.alex/",
+      "codepenUrl": "https://codepen.io/fraineralex"
     },
     "linkedinCard": {
       "profileImage": "/images/hero/profile.webp",
@@ -170,22 +171,22 @@
     "title": "Proyectos",
     "cards": [
       {
-        "projectName": "Clon de Hacker News",
-        "description": "Un simple clon de Hacker News construido con React y la API de Hacker News. Muestra las 20 mejores historias con desplazamiento infinito para una experiencia de navegación de noticias fluida.",
-        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
-        "deployUrl": "https://frainer-hacker-news.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
-        "imageSrc": "hacker_news.png",
-        "starsOnGithub": 2
-      },
-      {
-        "projectName": "Aplicación de Lista de Tareas",
-        "description": "Una aplicación de una sola página para gestionar tareas, las tareas se sincronizan con un servicio backend proporcionado por jsonbin.io, asegurando la persistencia de datos.",
-        "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
-        "deployUrl": "https://frainer-todo-app.surge.sh/",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
-        "imageSrc": "todo.png",
-        "starsOnGithub": 2
+        "projectName": "Blog",
+        "description": "Un blog receptivo con animaciones CSS, feed RSS, búsqueda avanzada, filtrado por etiquetas y suscripción a newsletter. Registra y muestra el número de visitas por artículo para análisis de interacción del usuario.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "CSS",
+          "Contentlayer",
+          "Upstash",
+          "Redis"
+        ],
+        "deployUrl": "https://frainer-blog.vercel.app",
+        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "imageSrc": "blog.webp",
+        "starsOnGithub": 4
       },
       {
         "projectName": "Ajedrez IA",
@@ -197,13 +198,28 @@
         "starsOnGithub": 4
       },
       {
-        "projectName": "Aplicación de Bienes Raíces",
-        "description": "Una aplicación web de gestión inmobiliaria con cuatro roles distintos, cada uno ofrece funcionalidades específicas dentro del sistema para gestionar las propiedades inmobiliarias.",
-        "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server", "CSS"],
-        "deployUrl": "https://github.com/fraineralex/RealEstate-App",
-        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
-        "imageSrc": "real-estate.png",
-        "starsOnGithub": 4
+        "projectName": "Quizzes de Programación",
+        "description": "Una aplicación web simple basada en React para elegir un lenguaje de programación y responder a preguntas diversas y no repetitivas con fragmentos de código.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Zustand",
+          "Material UI",
+          "Vite"
+        ],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "imageSrc": "quizzes.webp",
+        "starsOnGithub": 2
+      },
+      {
+        "projectName": "Clon de Hacker News",
+        "description": "Un simple clon de Hacker News construido con React y la API de Hacker News. Muestra las 20 mejores historias con desplazamiento infinito para una experiencia de navegación de noticias fluida.",
+        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
+        "deployUrl": "https://frainer-hacker-news.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
+        "imageSrc": "hacker_news.webp",
+        "starsOnGithub": 2
       }
     ],
     "link": {

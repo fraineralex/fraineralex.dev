@@ -7,7 +7,8 @@
       "githubUrl": "https://github.com/fraineralex",
       "linkedinUrl": "https://www.linkedin.com/in/fraineralex/",
       "twitterUrl": "https://twitter.com/fraineralex",
-      "instagramUrl": "https://www.instagram.com/frainer.alex/"
+      "instagramUrl": "https://www.instagram.com/frainer.alex/",
+      "codepenUrl": "https://codepen.io/fraineralex"
     },
     "linkedinCard": {
       "profileImage": "/images/hero/profile.webp",
@@ -167,22 +168,22 @@
     "title": "Projects",
     "cards": [
       {
-        "projectName": "Hacker News Clone",
-        "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
-        "technologies": ["React", "TypeScript", "Styled Componets", "SWR"],
-        "deployUrl": "https://frainer-hacker-news.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
-        "imageSrc": "hacker_news.webp",
-        "starsOnGithub": 2
-      },
-      {
-        "projectName": "Programming Quizzes",
-        "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
-        "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
-        "deployUrl": "https://programming-quizzes.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
-        "imageSrc": "quizzes.webp",
-        "starsOnGithub": 2
+        "projectName": "Blog",
+        "description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "CSS",
+          "Contentlayer",
+          "Upstash",
+          "Redis"
+        ],
+        "deployUrl": "https://frainer-blog.vercel.app",
+        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "imageSrc": "blog.webp",
+        "starsOnGithub": 4
       },
       {
         "projectName": "Chess AI",
@@ -194,13 +195,34 @@
         "starsOnGithub": 4
       },
       {
-        "projectName": "Real Estate App",
-        "description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.",
-        "technologies": ["C#", "ASP.NET", "JavaScript", "SQL Server"],
-        "deployUrl": "https://github.com/fraineralex/RealEstate-App",
-        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
-        "imageSrc": "real-estate.webp",
-        "starsOnGithub": 4
+        "projectName": "Programming Quizzes",
+        "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Zustand",
+          "Material UI",
+          "Vite"
+        ],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "imageSrc": "quizzes.webp",
+        "starsOnGithub": 2
+      },
+      {
+        "projectName": "Hacker News Clone",
+        "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Vite",
+          "Styled Componets",
+          "SWR"
+        ],
+        "deployUrl": "https://frainer-hacker-news.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
+        "imageSrc": "hacker_news.webp",
+        "starsOnGithub": 2
       }
     ],
     "link": {

@@ -45,6 +45,7 @@ interface Navigation {
   linkedinUrl: string
   twitterUrl: string
   instagramUrl: string
+  codepenUrl: string
 }
 
 interface Sidenav {

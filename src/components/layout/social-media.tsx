@@ -6,6 +6,7 @@ import {
   XIcon
 } from '../common/SvgIcons'
 import ItemLink from './item-link'
+import { Codepen } from 'lucide-react'
 
 interface Props {
   className: string
@@ -29,6 +30,9 @@ export default function SocialMedia ({ className, navigation }: Props) {
 
       <ItemLink title='Twitter' href={navigation.twitterUrl}>
         <XIcon />
+      </ItemLink>
+      <ItemLink title='Codepen' href={navigation.codepenUrl}>
+        <Codepen />
       </ItemLink>
     </ul>
   )

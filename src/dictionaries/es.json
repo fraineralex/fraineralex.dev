@@ -86,17 +86,17 @@
     },
     "skills": [
       "TypeScript",
-      "Next.js",
       "Python",
       "React",
       "Node.js",
+      "Next.js",
       "Odoo",
       "React Native",
-      "C#",
-      ".NET Core",
-      "SQL",
       "CSS",
-      "Docker"
+      "Docker",
+      "SQL",
+      "C#",
+      ".NET"
     ]
   },
   "experience": {
@@ -345,8 +345,9 @@
     "tailwindCss": "Tailwind CSS",
     "deployedWith": "desplegado con",
     "vercel": "Vercel",
-    "allTextSetIn": "Todo el texto está configurado en la",
-    "interTypeface": "tipografía Inter",
+    "takeALook": "Echa un vistazo al código fuente del sitio en mi",
+    "githubRepository": "Repositorio de GitHub",
+    "repositoryLink": "https://github.com/fraineralex/portfolio",
     "specialThanksTo": "Agradecimientos especiales a",
     "and": "y",
     "developerOfThe": "desarrollador del",
@@ -372,9 +373,9 @@
       "latestArticles": "Últimos Artículos"
     },
     "postsByTags": {
-      "label": "Ver publicaciones por tema",
+      "label": "Ver artículos por tema",
       "newsletter": {
-        "placeholder": "Escribe tu correo electrónico...",
+        "placeholder": "Escribe tu correo...",
         "label": "Suscribirse",
         "description": "¡Suscríbete a la newsletter! Obtén las últimas actualizaciones del blog."
       }
@@ -395,7 +396,7 @@
       "minRead": "min de lectura",
       "newsletter": {
         "description": "Suscríbete a la newsletter",
-        "placeholder": "Escribe tu correo electrónico...",
+        "placeholder": "Escribe tu correo...",
         "label": "Suscribirse"
       }
     }

@@ -86,17 +86,17 @@
     },
     "skills": [
       "TypeScript",
-      "Next.js",
       "Python",
       "React",
       "Node.js",
+      "Next.js",
       "Odoo",
       "React Native",
-      "C#",
-      ".NET Core",
-      "SQL",
       "CSS",
-      "Docker"
+      "Docker",
+      "SQL",
+      "C#",
+      ".NET"
     ]
   },
   "experience": {
@@ -330,10 +330,10 @@
   "writing": {
     "title": "Writing",
     "link": {
-      "ariaLabel": "View My Blog",
+      "ariaLabel": "View Frainer's Blog",
       "url": "/blog",
       "strong": "View",
-      "span": "My Blog"
+      "span": "Frainer's Blog"
     }
   },
   "footer": {
@@ -342,8 +342,9 @@
     "tailwindCss": "Tailwind CSS",
     "deployedWith": "deployed with",
     "vercel": "Vercel",
-    "allTextSetIn": "All text is set in the",
-    "interTypeface": "Inter typeface",
+    "takeALook": "Take a look at the source code of the site on my",
+    "githubRepository": "GitHub Repository",
+    "repositoryLink": "https://github.com/fraineralex/portfolio",
     "specialThanksTo": "Special thanks to",
     "brittanyChiang": "Brittany Chiang",
     "and": "and",

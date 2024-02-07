@@ -22,12 +22,18 @@ export default function WritingCard ({ title, imageName, date }: Props) {
           height={48}
           alt={`Image of the blog ${title}`}
           className='z-10 col-span-2 rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:col-span-2'
-          src={`/images/blog/${imageName}`}
+          src={imageName}
           style={{ color: 'transparent' }}
         />
         <aside className='z-10 col-span-6'>
-          <p className='-mt-1 text-sm font-semibold leading-6 text-300/80'>
-            {date}
+          <p className='-mt-1 text-sm font-medium leading-6 text-300/80'>
+            {
+              <time dateTime={new Date(date).toISOString()}>
+                {Intl.DateTimeFormat(undefined, {
+                  dateStyle: 'medium'
+                }).format(new Date(date))}
+              </time>
+            }
           </p>
           <h3 className='-mt-1'>
             <Link

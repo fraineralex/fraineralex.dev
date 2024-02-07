@@ -2,9 +2,23 @@ import Link from 'next/link'
 import WritingCard from '@/components/blog/writing-card-portfolio'
 import { WiritingProps } from '@/types/writing-types'
 import { ArrowRigthIcon } from '@/components/common/SvgIcons'
+import { allPosts } from 'contentlayer/generated'
 
-export default function Writing ({ dictionary, refWriting }: WiritingProps) {
+export default function Writing ({
+  dictionary,
+  refWriting,
+  lang
+}: WiritingProps) {
   const { link, title } = dictionary
+
+  const sortedPosts = allPosts
+    .filter(post => post.published && post.lang === lang)
+    .sort(
+      (a, b) =>
+        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
+        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
+    )
+    .slice(0, 2)
 
   return (
     <section
@@ -20,20 +34,18 @@ export default function Writing ({ dictionary, refWriting }: WiritingProps) {
       </header>
       <article>
         <ol className='group/list'>
-          <WritingCard
-            title='Dolore rem recusandae necessitatibus'
-            imageName='trees.jpg'
-            date=' October 2023'
-          />
-          <WritingCard
-            title='Dolore rem recusandae necessitatibus'
-            imageName='trees.jpg'
-            date=' October 2023'
-          />
+          {sortedPosts.map((post, index) => (
+            <WritingCard
+              key={index}
+              title={post.title}
+              imageName={post.hero}
+              date={post.date}
+            />
+          ))}
         </ol>
         <div className='mt-12'>
           <Link
-            className='inline-flex items-center leading-tight font-semibold text-slate-100 group'
+            className='inline-flex items-center leading-tight font-semibold text-slate-200 group'
             aria-label={link.ariaLabel}
             href={link.url}
           >

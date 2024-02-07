@@ -19,11 +19,21 @@ type Props = {
   }
 }
 
-/* export async function generateStaticParams (): Promise<Props['params'][]> {
-  return allTags.map(tag => ({
+export async function generateStaticParams (): Promise<Props['params'][]> {
+  const allParams = allTags.map(tag => ({
+    lang: 'en' as Locale,
     tag: tag.name
   }))
-} */
+
+  allTags.forEach(tag => {
+    allParams.push({
+      lang: 'es' as Locale,
+      tag: tag.name
+    })
+  })
+
+  return allParams
+}
 
 export async function generateMetadata (
   { params }: Props,

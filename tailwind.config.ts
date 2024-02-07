@@ -220,7 +220,7 @@ const config: Config = {
         126: '32rem',
         132: '34rem',
         140: '36rem'
-      },
+      }
     }
   },
   plugins: [

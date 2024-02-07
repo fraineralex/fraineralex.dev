@@ -137,6 +137,7 @@ export default async function BlogPage ({ params }: Props) {
                   key={post?.slug || index}
                   post={post}
                   views={views[post?.slug] ?? 0}
+                  lang={lang}
                 />
               ))}
           </div>
@@ -148,6 +149,7 @@ export default async function BlogPage ({ params }: Props) {
                   key={post?.slug || index}
                   post={post}
                   views={views[post?.slug] ?? 0}
+                  lang={lang}
                 />
               ))}
           </div>
@@ -159,6 +161,7 @@ export default async function BlogPage ({ params }: Props) {
                   key={post?.slug || index}
                   post={post}
                   views={views[post?.slug] ?? 0}
+                  lang={lang}
                 />
               ))}
           </div>

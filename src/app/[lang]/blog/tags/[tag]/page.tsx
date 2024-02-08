@@ -64,7 +64,13 @@ export async function generateMetadata (
     description: tag.description,
     openGraph: {
       title: `${tag.label} | Frainer's Blog 📝`,
-      images: [tag.image, ...previousImages],
+      images: [
+        {
+          url: `${process.env.DOMAIN}/${tag.image}`,
+          width: 32,
+          height: 32
+        }
+      ],
       description: tag.description,
       url: `${BLOG_DOMAIN}/tags/${tag.name}`
     }

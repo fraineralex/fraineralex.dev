@@ -73,7 +73,13 @@ export async function generateMetadata (
     twitter: {
       title: `${post.title} | Frainer's Blog 📝`,
       description: post.description,
-      images: [post.hero]
+      images: [
+        {
+          url: `${process.env.DOMAIN}/${post.hero}`,
+          width: 1920,
+          height: 1080
+        }
+      ]
     }
   }
 }

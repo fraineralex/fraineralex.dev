@@ -33,13 +33,23 @@ export const metadata: Metadata = {
     default: 'Frainer Encarnación',
     template: '%s | Frainer Encarnación'
   },
+  category: 'Personal Portfolio',
+  keywords: [
+    'Frainer Encarnación',
+    'Frainer Alexander Encarnación Valenzuela',
+    'Web Developer',
+    'Full Stack Developer',
+    'Software Engineer',
+    'Frontend Developer',
+    'Backend Developer'
+  ],
   description:
     "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.",
   openGraph: {
     title: 'Frainer Encarnación',
     description:
       'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
-    url: 'https://fraineralex.com',
+    url: `${process.env.DOMAIN}`,
     siteName: 'fraineralex.com',
     images: [
       {
@@ -65,6 +75,10 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Frainer Encarnación',
     card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    description:
+      'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
     images: [
       {
         url: `${process.env.DOMAIN}/og.webp`,
@@ -75,6 +89,12 @@ export const metadata: Metadata = {
   },
   icons: {
     shortcut: '/favicon.ico'
+  },
+  alternates: {
+    types: {
+      // See the RSS Feed section for more details
+      'application/rss+xml': '/blog/feed.xml'
+    }
   }
 }
 

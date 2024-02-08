@@ -3,6 +3,64 @@ import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 import AllProjectsContent from '@/components/project/all-projects-content'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description:
+    'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
+  openGraph: {
+    title: 'Projects',
+    description:
+      'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
+    url: `${process.env.DOMAIN}/projects`,
+    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/projects/og-projects.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    locale: 'en-US',
+    type: 'website'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  twitter: {
+    title: 'Projects',
+    card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/projects/og-projects.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    description:
+      'A list of projects that I have worked on, including personal projects, open source projects, and client work.'
+  },
+  icons: {
+    shortcut: '/favicon.ico'
+  },
+  alternates: {
+    types: {
+      en: new URL(`${process.env.DOMAIN}/projects`),
+      es: new URL(`${process.env.DOMAIN}/es/projects`)
+    }
+  }
+}
 
 interface Props {
   params: { lang?: Locale }

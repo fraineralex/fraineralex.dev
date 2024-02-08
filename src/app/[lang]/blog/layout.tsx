@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'fraineralex.com',
     images: [
       {
-        url: 'https://frainer-blog.vercel.app/og.png',
+        url: `${process.env.DOMAIN}/images/blog/og.webp`,
         width: 1920,
         height: 1080
       }

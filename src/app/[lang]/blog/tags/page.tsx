@@ -16,7 +16,14 @@ export const metadata: Metadata = {
     title: "Tags | Frainer's Blog 📝",
     description:
       'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
-    url: `${BLOG_DOMAIN}/blog/tags`
+    url: `${BLOG_DOMAIN}/blog/tags`,
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ]
   }
 }
 

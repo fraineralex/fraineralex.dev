@@ -39,7 +39,7 @@ export function SearchPosts ({ className }: { className?: string }) {
             />
           </div>
           {!searchTerm && (
-            <small className='mb-4 text-slate-400 flex flex-col sm:flex-row text-center'>
+            <small className='mb-4 text-slate-400 md:flex flex-col md:flex-row text-center hidden'>
               <div className='flex flex-wrap'>
                 {displayTags &&
                   displayTags.map((tag, index) => (

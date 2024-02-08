@@ -130,12 +130,12 @@ export default async function PostPage ({ params }: Props) {
       </figure>
 
       <small className='text-xs md:text-sm text-zinc-400 flex flex-col font-bold uppercase md:flex-row text-center pb-8 place-content-center py-6 md:px-6'>
-        <span className='mb-2 md:mb-0'>
+        <span className='mb-2 md:mb-0 leading-loose'>
           {post.updated && <span>{dictionary.updatedOn}</span>}{' '}
           <time
             dateTime={new Date(post.updated || post.date).toISOString()}
             className={`${
-              post.updated ? 'underline underline-offset-4' : undefined
+              post.updated ? 'underline underline-offset-4 mb-2' : undefined
             }`}
           >
             {Intl.DateTimeFormat(undefined, {

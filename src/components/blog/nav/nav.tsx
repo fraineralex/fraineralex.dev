@@ -35,15 +35,12 @@ export const Navigation = () => {
   return (
     <>
       {isContentPage === false && (
-        <header
-          ref={ref}
-          className=''
-        >
+        <header ref={ref}>
           <div
             className={`fixed inset-x-0 top-0 z-50 backdrop-blur duration-200 animate-fade-in-down animate-duration-slower ${
               isIntersecting
                 ? 'bg-zinc-900/0 border-transparent'
-                : 'bg-zinc-900/500'
+                : 'bg-zinc-900/50'
             }`}
           >
             <div className='container flex items-center justify-between p-6 mx-auto'>

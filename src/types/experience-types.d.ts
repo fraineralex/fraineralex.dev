@@ -13,6 +13,7 @@ export interface ExperienceCardData {
   locationType: string
   imageName: string
   otherTitles?: string[]
+  id?: number
 }
 
 interface ResumeButton {

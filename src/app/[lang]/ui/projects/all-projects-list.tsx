@@ -9,7 +9,10 @@ interface Props {
 
 export default function AllProjectsList ({ projects, tableHeaders }: Props) {
   return (
-    <table id='content' className='mt-12 w-full border-collapse text-left'>
+    <table
+      id='content'
+      className='mt-12 w-full border-collapse text-left animate-fade-in-up animate-duration-slower'
+    >
       <thead className='sticky top-0 z-10 border-b border-shark-50/20 px-6 py-5 backdrop-blur'>
         <tr>
           <th className='py-4 pr-8 text-sm font-semibold text-shark-200'>
@@ -46,7 +49,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                 index
               ) => (
                 <tr
-                  className='border-b border-shark-50/20 last:border-none'
+                  className='border-b border-shark-50/20 last:border-none animate-tr'
                   key={index}
                 >
                   <td className='py-4 pr-4 align-top text-sm'>

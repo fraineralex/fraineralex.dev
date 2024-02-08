@@ -11,7 +11,7 @@ export default function Experience ({
   return (
     <section
       id='experience'
-      className='mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24'
+      className='mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 animate-fade-in-up animate-delay-400 animate-duration-slow'
       aria-label='Work experience'
       ref={refExperience}
     >
@@ -36,10 +36,11 @@ export default function Experience ({
                 location={card.location}
                 locationType={card.locationType}
                 imageName={card.imageName}
+                id={index}
               />
             ))}
         </ol>
-        <div className='mt-12'>
+        <div className='mt-12 animate-link'>
           <Link
             className='inline-flex items-center leading-tight text-slate-200 font-semibold group'
             aria-label={`${resumeButton.strong} ${resumeButton.label}`}

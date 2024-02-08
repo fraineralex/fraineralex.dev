@@ -35,9 +35,12 @@ export const Navigation = () => {
   return (
     <>
       {isContentPage === false && (
-        <header ref={ref}>
+        <header
+          ref={ref}
+          className=''
+        >
           <div
-            className={`fixed inset-x-0 top-0 z-50 backdrop-blur  duration-200 ${
+            className={`fixed inset-x-0 top-0 z-50 backdrop-blur duration-200 animate-fade-in-down animate-duration-slower ${
               isIntersecting
                 ? 'bg-zinc-900/0 border-transparent'
                 : 'bg-zinc-900/500'

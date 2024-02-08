@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "0.5.2",
+    "@midudev/tailwind-animations": "^0.0.5",
     "@next/mdx": "14.0.4",
     "@types/rss": "0.0.32",
     "@upstash/redis": "1.23.3",

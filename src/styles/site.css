@@ -65,3 +65,79 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+@keyframes reveal-cards {
+  0% {
+    opacity: 0;
+    translate: 0 50px;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes reveal-link {
+  0% {
+    opacity: 0;
+    translate: 0 100px;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes reveal-tr {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-card {
+  view-timeline-name: --reveling-cards;
+  view-timeline-axis: block;
+
+  animation: linear reveal-cards both;
+  animation-timeline: --reveling-cards;
+
+  animation-range: entry 5% cover 20%;
+}
+
+.animate-link {
+  view-timeline-name: --reveling-link;
+  view-timeline-axis: block;
+
+  animation: linear reveal-link both;
+  animation-timeline: --reveling-link;
+
+  animation-range: entry 5% cover 20%;
+}
+
+.animate-tr{
+  view-timeline-name: --reveling-tr;
+  view-timeline-axis: block;
+
+  animation: linear reveal-tr both;
+  animation-timeline: --reveling-tr;
+
+  animation-range: entry 5% cover 10%;
+}

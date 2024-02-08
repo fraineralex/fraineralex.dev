@@ -45,7 +45,7 @@ export default function Writing ({
                 />
               ))}
             </ol>
-            <div className='mt-12'>
+            <div className='mt-12 animate-link'>
               <Link
                 className='inline-flex items-center leading-tight font-semibold text-slate-200 group'
                 aria-label={link.ariaLabel}

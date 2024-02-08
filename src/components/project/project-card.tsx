@@ -78,7 +78,7 @@ export default function ProjectCard ({
           alt={`Cover image of the project`}
           width={200}
           height={48}
-          className='rounded border-2 border-shark-200/10 transition group-hover:border-shark-200/30 sm:order-1 sm:col-span-2 sm:transhark-y-1'
+          className='rounded transition sm:order-1 sm:col-span-2 sm:transhark-y-1 group-hover:scale-110'
           src={`/images/projects/${imageSrc}`}
           style={{ color: 'transparent' }}
         />

@@ -25,7 +25,7 @@ export default function ExperienceCard ({
           width={200}
           height={48}
           alt={`Image of the job experience ${title} at ${company.name} of Frainer Encarnación`}
-          className='z-10 rounded group-hover:border-2 border-shark-200/10 transition group-hover:border-shark-200/30 hidden md:inline-block md:col-span-2 mt-2 w-20 mx-auto'
+          className='z-10 rounded transitio hidden md:inline-block md:col-span-2 mt-2 w-20 mx-auto group-hover:scale-110'
           src={`/images/experience/${imageName}`}
           style={{ color: 'transparent' }}
         />

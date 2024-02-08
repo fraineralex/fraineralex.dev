@@ -21,7 +21,7 @@ export default function WritingCard ({ title, imageName, date }: Props) {
           width={200}
           height={48}
           alt={`Image of the blog ${title}`}
-          className='z-10 col-span-2 rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:col-span-2'
+          className='z-10 col-span-2 rounded transition sm:col-span-2 group-hover:scale-110'
           src={imageName}
           style={{ color: 'transparent' }}
         />

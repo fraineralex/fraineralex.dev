@@ -66,9 +66,14 @@ export async function generateMetadata (
     description: post.description,
     openGraph: {
       title: `${post.title} | Frainer's Blog 📝`,
-      images: [post.hero, ...previousImages],
+      images: [post.hero],
       description: post.description,
       url: `${BLOG_DOMAIN}/${post.slug}`
+    },
+    twitter: {
+      title: `${post.title} | Frainer's Blog 📝`,
+      description: post.description,
+      images: [post.hero]
     }
   }
 }

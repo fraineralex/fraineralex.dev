@@ -4,7 +4,7 @@ import { MouseShadow } from '@/components/layout/mouse-shadow'
 import { i18n } from '@/i18n-config'
 import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react'
 
 import '@/styles/globals.css'
 import '@/styles/site.css'
@@ -19,12 +19,12 @@ const inter = Inter({
 })
 
 const calSans = LocalFont({
-  src: '../../../public/fonts/CalSans-SemiBold.ttf',
+  src: '../../public/fonts/CalSans-SemiBold.ttf',
   variable: '--font-calsans'
 })
 
 const londrinaSolid = LocalFont({
-  src: '../../../public/fonts/LondrinaSolid-Regular.ttf',
+  src: '../../public/fonts/LondrinaSolid-Regular.ttf',
   variable: '--font-londrina'
 })
 
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     siteName: 'fraineralex.com',
     images: [
       {
-        url: 'https://fraineralex.com/og.jpg',
+        url: `${process.env.DOMAIN}/og.webp`,
         width: 1920,
         height: 1080
       }
@@ -64,7 +64,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Frainer Encarnación',
-    card: 'summary_large_image'
+    card: 'summary_large_image',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ]
   },
   icons: {
     shortcut: '/favicon.ico'

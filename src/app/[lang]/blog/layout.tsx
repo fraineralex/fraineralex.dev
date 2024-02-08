@@ -43,6 +43,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
     description:
       "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!"
   },

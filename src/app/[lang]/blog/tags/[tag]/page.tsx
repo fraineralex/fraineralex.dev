@@ -66,7 +66,7 @@ export async function generateMetadata (
       title: `${tag.label} | Frainer's Blog 📝`,
       images: [
         {
-          url: `${process.env.DOMAIN}/${tag.image}`,
+          url: `${process.env.DOMAIN}${tag.image}`,
           width: 32,
           height: 32
         }

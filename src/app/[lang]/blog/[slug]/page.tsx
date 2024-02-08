@@ -66,7 +66,13 @@ export async function generateMetadata (
     description: post.description,
     openGraph: {
       title: `${post.title} | Frainer's Blog 📝`,
-      images: [post.hero],
+      images: [
+        {
+          url: `${process.env.DOMAIN}${post.hero}`,
+          width: 1920,
+          height: 1080
+        }
+      ],
       description: post.description,
       url: `${BLOG_DOMAIN}/${post.slug}`
     },
@@ -75,7 +81,7 @@ export async function generateMetadata (
       description: post.description,
       images: [
         {
-          url: `${process.env.DOMAIN}/${post.hero}`,
+          url: `${process.env.DOMAIN}${post.hero}`,
           width: 1920,
           height: 1080
         }

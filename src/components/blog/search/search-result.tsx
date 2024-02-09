@@ -19,10 +19,12 @@ export const SearchResult = ({
     const search = searchTerm.toLowerCase()
 
     return (
-      (post.lang === lang && post.published && title.includes(search)) ||
-      description.includes(search) ||
-      tags?.includes(search) ||
-      body?.includes(search)
+      post.lang === lang &&
+      post.published &&
+      (title.includes(search) ||
+        description.includes(search) ||
+        tags?.includes(search) ||
+        body?.includes(search))
     )
   })
 

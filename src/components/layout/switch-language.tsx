@@ -49,7 +49,7 @@ export function SwitchLanguage () {
         locale: currentLocale === 'es' ? 'en' : 'es'
       }
     })
-  }, [pathname])
+  }, [pathname, currentLocale])
 
   let newpath = `/es${pathname}`
 
@@ -82,6 +82,7 @@ export function SwitchLanguage () {
             <Link
               className='rounded-md bg-black/30 hover:bg-black/70 whitespace-no-wrap inline-flex justify-start items-center w-full gap-x-2 px-3 py-2'
               href={newpath}
+              onClick={() => setCurrentLocale(lang?.new.locale ?? 'es')}
             >
               {lang?.new.flag}
               <span className='hidden md:inline'>{lang?.new.name}</span>

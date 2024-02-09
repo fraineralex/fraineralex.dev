@@ -12,7 +12,7 @@ export default function ProjectCardSquare ({
   year
 }: ProjectInfo) {
   return (
-    <li className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer animate-card'>
+    <li className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer animate-link'>
       <Link
         className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-slate-700/50'
         href={deployUrl || githubRepositoryUrl}

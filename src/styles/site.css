@@ -66,23 +66,7 @@
   background: #94a3b8;
 }
 
-@keyframes reveal-cards {
-  0% {
-    opacity: 0;
-    translate: 0 50px;
-  }
-
-  50% {
-    opacity: 0.1;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-
-@keyframes reveal-link {
+@keyframes reveal-card {
   0% {
     opacity: 0;
     translate: 0 100px;
@@ -113,26 +97,26 @@
 }
 
 .animate-card {
-  view-timeline-name: --reveling-cards;
+  view-timeline-name: --reveling-card;
   view-timeline-axis: block;
 
-  animation: linear reveal-cards both;
-  animation-timeline: --reveling-cards;
+  animation: linear reveal-card both;
+  animation-timeline: --reveling-card;
 
-  animation-range: entry 5% cover 20%;
+  animation-range: entry 5% cover 30%;
 }
 
 .animate-link {
   view-timeline-name: --reveling-link;
   view-timeline-axis: block;
 
-  animation: linear reveal-link both;
+  animation: linear reveal-card both;
   animation-timeline: --reveling-link;
 
   animation-range: entry 5% cover 20%;
 }
 
-.animate-tr{
+.animate-tr {
   view-timeline-name: --reveling-tr;
   view-timeline-axis: block;
 

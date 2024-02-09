@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     template: "%s | Frainer's Blog"
   },
   description:
-    "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic. I write about tech, projects and whatever else I'm thinking about! Here you will find articles about web development, software engineering, and many more geeky things in the world of programming.",
+    "I write about tech, projects and whatever else I'm thinking about! Here you will find articles about web development, software engineering, and many more geeky things in the world of programming.",
   openGraph: {
     title: "Frainer's Blog 📝",
     description:
-      "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!",
-    url: 'https://frainer-blog.vercel.app',
-    siteName: 'fraineralex.com',
+      "I write about tech, projects and whatever else I'm thinking about!",
+      url: `${process.env.DOMAIN}/blog`,
+      siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
       {
         url: `${process.env.DOMAIN}/images/blog/og.webp`,
@@ -53,15 +53,6 @@ export const metadata: Metadata = {
     description:
       "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!"
   },
-  icons: {
-    shortcut: '/favicon.ico'
-  },
-  alternates: {
-    types: {
-      // See the RSS Feed section for more details
-      'application/rss+xml': '/feed.xml'
-    }
-  }
 }
 
 interface Props {

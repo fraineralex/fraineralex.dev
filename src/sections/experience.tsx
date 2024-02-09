@@ -40,7 +40,7 @@ export default function Experience ({
               />
             ))}
         </ol>
-        <div className='mt-12 animate-link'>
+        <div className='mt-12 animate-card'>
           <Link
             className='inline-flex items-center leading-tight text-slate-200 font-semibold group'
             aria-label={`${resumeButton.strong} ${resumeButton.label}`}

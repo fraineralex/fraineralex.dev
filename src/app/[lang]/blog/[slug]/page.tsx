@@ -106,7 +106,7 @@ export default async function PostPage ({ params }: Props) {
 
   return (
     <section className='min-h-screen max-w-6xl md:max-w-5xl mx-auto px-4 md:px-8 text-zinc-300'>
-      <Header views={views} />
+      <Header views={views} lang={lang} />
       <ReportView slug={post.slug} />
       <header className='mx-auto w-full text-center content pt-20 md:pt-28 home-header'>
         <h1 className='text-white mb-8 w-full'>{post.title}</h1>

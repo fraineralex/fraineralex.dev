@@ -1,8 +1,17 @@
+import { Locale } from '@/i18n-config'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export function ProfileLink ({ className }: { className?: string }) {
+export function ProfileLink ({
+  className,
+  lang
+}: {
+  className?: string
+  lang: Locale
+}) {
+  const locale = lang !== 'en' ? `/${lang}` : ''
+
   return (
     <article className='block sm:pl-5 group'>
       <h2
@@ -11,7 +20,7 @@ export function ProfileLink ({ className }: { className?: string }) {
         }`}
       >
         <Link
-          href='/blog'
+          href={`${locale}/blog`}
           className='focus-ring-base flex flex-row items-center focus-ring-colors-light-header'
         >
           <figure className='mr-1 sm:mr-2 h-6 w-6 sm:h-8 sm:w-8 shrink-0 overflow-hidden rounded-full'>

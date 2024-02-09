@@ -6,8 +6,9 @@ const SearchResult = lazy(() => import('./search-result'))
 const Modal = lazy(() => import('@/components/blog/common/modal'))
 import { displayTags } from '@/utils/data'
 import Link from 'next/link'
+import { Locale } from '@/i18n-config'
 
-export function SearchPosts ({ className }: { className?: string }) {
+export function SearchPosts ({ className, lang }: { className?: string, lang: Locale }) {
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -68,7 +69,7 @@ export function SearchPosts ({ className }: { className?: string }) {
               </div>
             )}
           </div>
-          {searchTerm && <SearchResult searchTerm={searchTerm} />}
+          {searchTerm && <SearchResult searchTerm={searchTerm} lang={lang} />}
         </div>
       </Modal>
     </>

@@ -4,12 +4,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { SearchPosts } from '../search/search-posts'
 import { ProfileLink } from '../nav/profile-link'
 import SwitchLanguage from '@/components/layout/switch-language'
+import { Locale } from '@/i18n-config'
 
 type Props = {
   views: number
+  lang: Locale
 }
 
-export const Header: React.FC<Props> = ({ views }) => {
+export const Header: React.FC<Props> = ({ views, lang }) => {
   const ref = useRef<HTMLElement>(null)
   const [isIntersecting, setIntersecting] = useState(true)
 
@@ -53,6 +55,7 @@ export const Header: React.FC<Props> = ({ views }) => {
               )}
             </span>
             <SearchPosts
+              lang={lang}
               className={`w-6 h-6 duration-200 hover:font-medium ${
                 isIntersecting
                   ? ' text-zinc-400 hover:text-zinc-100'
@@ -61,6 +64,7 @@ export const Header: React.FC<Props> = ({ views }) => {
             />
           </div>
           <ProfileLink
+            lang={lang}
             className={
               isIntersecting
                 ? ''

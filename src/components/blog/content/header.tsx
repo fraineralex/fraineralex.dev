@@ -8,6 +8,7 @@ import SwitchLanguage from '@/components/layout/switch-language'
 type Props = {
   views: number
 }
+
 export const Header: React.FC<Props> = ({ views }) => {
   const ref = useRef<HTMLElement>(null)
   const [isIntersecting, setIntersecting] = useState(true)

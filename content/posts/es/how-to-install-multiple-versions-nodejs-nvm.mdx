@@ -24,6 +24,7 @@ De hecho, lo más probable es que recibas una advertencia que dice:
 
 ```bash
 This project requires Node version X
+
 ```
 
 En lugar de utilizar npm para instalar y desinstalar versiones de Node para tus diferentes proyectos, puedes usar **nvm**, que te ayuda a gestionar eficazmente las versiones de Node para cada proyecto.
@@ -32,7 +33,7 @@ En lugar de utilizar npm para instalar y desinstalar versiones de Node para tus 
 
 > **🚨 Importante:** Esta guía asume que no tienes una instalación previa de `Node.js`. Si la tienes, podría causar problemas y conflictos. Antes de continuar, asegúrate de haber desinstalado cualquier instalación previa de `Node.js` y `npm`.
 
-## 🐧 Cómo instalar NVM en Mac, Linux o Windows WSL
+## 🐧 ¿Cómo instalar NVM en Mac, Linux o Windows WSL?
 
 **Este sería el método recomendado si tu sistema operativo se basa en UNIX** (como Mac, Linux o Windows WSL), ya que ofrece varias ventajas, como manejar diferentes versiones de Node simultáneamente.
 
@@ -46,6 +47,7 @@ curl -o- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh> | bas
 # o
 
 wget -qO- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh> | bash
+
 ```
 
 Puedes usar `curl` o `bash` dependiendo del comando disponible en tu dispositivo.
@@ -59,6 +61,7 @@ En caso de que no haya sido posible por alguna razón, es posible que te pida ag
 ```bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \\\\. "$NVM_DIR/nvm.sh"
+
 ```
 
 Después de hacer esto, es posible que necesites reiniciar la terminal o abrir una nueva pestaña para usar el comando `nvm`.
@@ -71,17 +74,19 @@ Con tu configuración de perfil actualizada, ahora recargarás la configuración
 
 ```bash
 source ~/.bashrc
+
 ```
 
 Con este comando ejecutado, nvm está listo para que lo uses. Puedes confirmar que nvm está instalado correctamente ejecutando:
 
 ```bash
 nvm -v
+
 ```
 
 Esto debería mostrar la versión de nvm instalada.
 
-## 🪟 Cómo instalar NVM en Windows
+## 🪟 ¿Cómo instalar NVM en Windows?
 
 `nvm-windows`, aunque comparte el nombre con `nvm`, no es de los mismos creadores y, por lo tanto, tiene algunas diferencias. Y entre esas diferencias está, por supuesto, la forma de instalarlo. Para `nvm-windows`, sigue estos pasos:
 
@@ -95,13 +100,14 @@ Cuando hayas terminado, puedes confirmar que nvm se ha instalado ejecutando:
 
 ```bash
 nvm -v
+
 ```
 
 Si nvm se instaló correctamente, este comando te mostrará la versión de nvm instalada.
 
 Y con esto, estamos listos para trabajar con `nvm-windows`. Si encuentras algún problema, puedes **consultar la [sección de Problemas Comunes del repositorio](https://github.com/coreybutler/nvm-windows/wiki/Common-Issues) para ver si tu problema tiene solución.**
 
-## 🕹️ Cómo funciona NVM?
+## 🕹️ ¿Cómo funciona NVM?
 
 Con nvm instalado, ahora puedes instalar, desinstalar y cambiar entre diferentes versiones de Node en tu dispositivo Windows, Linux o Mac.
 
@@ -109,6 +115,7 @@ Puedes instalar versiones de Node de esta manera:
 
 ```bash
 nvm install --lts
+
 ```
 
 Esto instalará la **versión de soporte a largo plazo de Node**. Actualmente, es la versión 20, pero en el futuro será la 22 y así sucesivamente.
@@ -122,6 +129,7 @@ Si prefieres, también puedes instalar una versión específica indicando el nú
 ```bash
 nvm install 21 # esto instalará la última versión 21 de Node.js
 nvm install 12.6.0 # esto instalará exactamente la versión 21.6.0
+
 ```
 
 ## 🚀 Uso de una Versión de Node.js Con NVM
@@ -134,6 +142,7 @@ Una vez que tienes más de una en tu sistema, querrás cambiar entre esas versio
 nvm use 20
 nvm use 21
 nvm use --lts
+
 ```
 
 Si deseas que una de estas sea tu versión predeterminada, para que se use la próxima vez que abras una pestaña, debes crear un alias para esa versión llamado `default`.
@@ -143,6 +152,7 @@ Por ejemplo, supongamos que tienes instaladas las versiones 16 y 18, y ahora ins
 ```bash
 nvm install 20
 nvm alias default 20
+
 ```
 
 > La primera vez que ejecutas `nvm install`, esa versión se convierte en la predeterminada.

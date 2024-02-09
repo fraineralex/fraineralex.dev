@@ -34,6 +34,7 @@ $ git commit -m "Implement user sign-in feature"
 
 Los commits no son solo instantáneas de cambios de código; sirven como una hoja de ruta para la historia de tu proyecto. Un mensaje de commit mal escrito puede causar confusión, haciendo que sea difícil entender el contexto de los cambios. Exploraremos por qué la elaboración de mensajes de commit significativos es importante.
 
+**Échale un vistazo a una mala implementación de los mensajes de commit**
 ![Ejemplo de mensajes de commit incorrectos](https://fraineralex.vercel.app/images/blog/posts/content/git-commit.webp)
 _Fuente: [xkcd.com](http://xkcd.com/)_
 
@@ -104,6 +105,7 @@ incoming responses other than from latest request.
 
 Remove timeouts which were used to mitigate the racing issue but are
 obsolete now.
+
 ```
 
 Recuerda que la primera línea del mensaje del commit sirve como título, mientras que las líneas siguientes forman el cuerpo y deben adherirse a las reglas estándar de puntuación.
@@ -132,8 +134,9 @@ fix: resolve login authentication bug
 - Updated relevant unit tests.
 
 [pie(s) opcional(es)]
-Reviewed-by: @username
+Reviewed-by: X
 Refs: #123
+
 ```
 
 En `monorepositorios` con múltiples paquetes, también puedes agregar información sobre el paquete afectado por el commit. Esto se conoce como ámbito y se vería así:
@@ -141,6 +144,7 @@ En `monorepositorios` con múltiples paquetes, también puedes agregar informaci
 ```bash
 feat(backend): add a new table for the likes
 fix(web): update the main font family to Inter
+
 ```
 
 El tipo de commit puede incluir lo siguiente:
@@ -177,6 +181,7 @@ git add .husky/pre-push
 
 git commit -m "Keep calm and commit"
 git push -u origin master *# tests run before the push
+
 ```
 
 Con `commitlint`, puedes hacer cumplir commits semánticos y legibles que sigan convenciones predefinidas.
@@ -191,6 +196,7 @@ npm install --save-dev @commitlint/config-conventional @commitlint/cli
 
 # 2. Agregar gancho para verificar el mensaje de commit
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+
 ```
 
 Estas herramientas, combinadas con prácticas como `conventional-changelog` y `commitizen`, contribuyen a un flujo de trabajo de commit eficiente y estandarizado, mejorando en última instancia la mantenibilidad y la colaboración del proyecto.

@@ -66,7 +66,7 @@ export function XFollowCard({ fullName, username, initialFollowing }: Props) {
       <header className='tw-followCard-header'>
         <img
           className='tw-followCard-avatar'
-          alt='fraineralex avatar'
+          alt='user avatar'
           src={`https://unavatar.io/${username}`}
         />
         <div className='tw-followCard-info'>
@@ -84,6 +84,7 @@ export function XFollowCard({ fullName, username, initialFollowing }: Props) {
     </article>
   )
 }
+
 ```
 
 ## 🎬 useEffect
@@ -96,6 +97,7 @@ La firma básica de `useEffect` es la siguiente:
 useEffect(() => {
   //...
 })
+
 ```
 
 **Ejemplo de uso de `useEffect` en un componente React:**
@@ -123,6 +125,7 @@ export function useCatImage({ fact }: { fact: string }) {
 
   return { imageUrl: `${CAT_IMAGE_URL_PREFIX}${imageUrl}` }
 }
+
 ```
 
 ### 🧹 Limpiando un efecto
@@ -138,6 +141,7 @@ useEffect(() => {
     subscription.unsubscribeApi()
   }
 })
+
 ```
 
 Se garantiza que la función de limpieza se invoque antes de que el componente sea eliminado de la interfaz de usuario.
@@ -153,6 +157,7 @@ useEffect(() => {
   // Incorrecto: Modificar el estado dentro del cuerpo del efecto
   setCounter(counter + 1)
 }, [counter])
+
 ```
 
 Este ejemplo provoca un bucle infinito al actualizar el estado dentro del efecto, desencadenando nuevas renderizaciones y reejecutando el efecto.
@@ -164,6 +169,587 @@ useEffect(() => {
   // Correcto: Sin dependencias en el array, evitando el bucle infinito
   setCounter(counter + 1)
 }, [])
+
 ```
 
 Evita bucles infinitos asegurándote de que las dependencias en el array de dependencias de `useEffect` sean estables y no cambien dentro del efecto.
+
+## 🤝 useContext
+
+El problema que resuelve `useContext` radica en la necesidad de pasar datos a través de la jerarquía de componentes sin recurrir al prop drilling, que es cuando se pasan props manualmente a través de varios niveles de componentes. Este enfoque puede volverse engorroso e impráctico a medida que la aplicación crece, ya que cada componente intermedio tiene que transmitir las props, generando un código menos limpio y propenso a errores.
+
+### ❌ Prop Drilling: El Desafío
+
+Imagina un escenario en el que tenemos un `ComponentA` que necesita pasar datos a `ComponentD`. El prop drilling tradicional implicaría pasar las props a través de todos los componentes intermedios, incluso si `ComponentB` y `ComponentC` no necesitan esos datos.
+
+```tsx
+// ComponentA.tsx
+const ComponentA = ({ dataForD }: Props) => {
+  return <ComponentB dataForD={dataForD} />
+}
+
+// ComponentB.tsx
+const ComponentB = ({ dataForD }: Props) => {
+  return <ComponentC dataForD={dataForD} />
+}
+
+// ComponentC.tsx
+const ComponentC = ({ dataForD }: Props) => {
+  return <ComponentD dataForD={dataForD} />
+}
+
+// ComponentD.tsx
+const ComponentD = ({ dataForD }: Props) => {
+  // Todo para usar el dataForD aquí
+}
+
+```
+
+Este proceso, conocido como prop drilling, puede volverse inmanejable y complicado a medida que se agregan más componentes a la jerarquía.
+
+### ✅ Solución: ¡`useContext` al Rescate!
+
+`useContext` simplifica en gran medida esta tarea al permitirnos crear y consumir un contexto sin pasar manualmente las props a través de cada componente. Primero, creamos un contexto usando `createContext`:
+
+```tsx
+// ThemeContext.ts
+import { createContext } from 'react'
+export const ThemeContext = createContext()
+
+```
+
+Luego, usamos el componente `Provider` para envolver nuestro árbol de componentes con el valor deseado:
+
+```tsx
+// App.tsx
+import React from 'react'
+import { ThemeContext } from './ThemeContext'
+
+const App = () => {
+  return (
+    <ThemeContext.Provider value='dark'>
+      {/* Componentes anidados aquí */}
+    </ThemeContext.Provider>
+  )
+}
+
+```
+
+Finalmente, en cualquier componente dentro de este contexto, podemos usar `useContext` para acceder a los datos sin pasar manualmente las props:
+
+```tsx
+// Button.tsx
+import React, { useContext } from 'react'
+import { ThemeContext } from './ThemeContext'
+
+export const Button = () => {
+  const theme = useContext(ThemeContext)
+  return <button className={theme}>Haz clic aquí</button>
+}
+
+```
+
+> Ten en cuenta que el valor pasado a `useContext` debe ser el objeto de contexto, es decir, el valor devuelto al invocar `React.createContext`, no `ContextObject.Provider` o `ContextObject.Consumer`.
+
+Esta solución evita el engorroso prop drilling y proporciona una forma más limpia y eficiente de compartir datos entre componentes en una aplicación de React. `useContext` hace que la gestión de datos sea más elegante y fácil de mantener.
+
+¡Adiós, prop drilling! 👋
+
+## 🌟 Hooks Adicionales
+
+Los siguientes hooks son variantes de los hooks básicos discutidos en las secciones anteriores. Si eres nuevo en los hooks, no te molestes en aprender estos por ahora. Solo son necesarios para casos específicos.
+
+![Imagen de hooks adicionales de React](https://fraineralex.vercel.app/images/blog/posts/content/additional-hooks.webp)
+
+## 📌 useRef
+
+`useRef` en React es un hook que facilita la creación de referencias mutables. A diferencia de `useState`, `useRef` no desencadena la actualización de componentes cuando su valor cambia, convirtiéndolo en una herramienta poderosa para almacenar datos que no afectan directamente la interfaz de usuario.
+
+Así es como se utiliza el hook `useRef`:
+
+```tsx
+import { useRef } from 'react'
+
+const MyComponent = () => {
+  const myRef = useRef(initialValue)
+  // ...
+}
+
+```
+
+### 🥷🏻 Desafío
+
+El problema que resuelve `useRef` se hace evidente cuando necesitamos actualizar valores sin activar una actualización visual del componente. Para ilustrar esto, consideremos un escenario de búsqueda de películas:
+
+```tsx
+export function useMovies({ search }: { search: string }) {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  const getMovies = async () => {
+    // ❌ Esto es una mala práctica porque estamos obteniendo
+    // las películas y volviendo a renderizar el componente
+    // incluso si la búsqueda es la misma que la anterior.
+
+    try {
+      setLoading(true)
+      setError(null)
+      const newMovies = await searchMovies({ search })
+      setMovies(newMovies)
+    } catch (error: any) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { movies, getMovies, loading, error }
+}
+
+```
+
+En este caso, usar `useState` para el término de búsqueda provoca renderizaciones innecesarias cada vez que cambia el término de búsqueda. Aquí es donde `useRef` se convierte en una solución eficiente al permitirnos actualizar `search` sin afectar la interfaz de usuario:
+
+```tsx
+export function useMovies({ search }: { search: string }) {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const previousSearch = useRef(search) // <-- Define una ref
+
+  const getMovies = async () => {
+    // ✅ Si la búsqueda actual es igual a la anterior, retorna
+    if (previousSearch.current === search) return
+
+    try {
+      setLoading(true)
+      setError(null)
+      previousSearch.current = search
+      const newMovies = await searchMovies({ search })
+      setMovies(newMovies)
+    } catch (error: any) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { movies, getMovies, loading, error }
+}
+
+```
+
+Con esta implementación, `useRef` ayuda a gestionar el valor de `search` sin causar actualizaciones visuales no deseadas, mejorando la eficiencia y la experiencia del usuario.
+
+## 🧠 useMemo
+
+El hook `useMemo` en React es una herramienta poderosa para optimizar el rendimiento al memorizar el resultado de una función. Su propósito principal es evitar cálculos innecesarios, reutilizando el valor calculado anteriormente si las dependencias no han cambiado.
+
+Así es como se utiliza el hook `useMemo`:
+
+```tsx
+const readTime = useMemo(() => {
+  const wordsPerMinute = 200
+  const words = text.trim().split(/\s+/).length
+  const value = Math.ceil(words / wordsPerMinute)
+  return `${value} min de lectura`
+}, [text]) // solo recalcular si cambia el texto
+```
+
+El problema que aborda `useMemo` se hace evidente cuando necesitamos realizar cálculos costosos en un componente, pero esos cálculos no son necesarios cada vez que el componente se renderiza. Tomemos el ejemplo del componente `Counter`:
+
+```tsx
+export function Counter({ count }: { count: number }) {
+  const double = count * 2 // Costoso cálculo realizado en cada renderización
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <p>Doble: {double}</p>
+    </div>
+  )
+}
+
+```
+
+En este caso, el valor doble se recalcula en cada renderización, incluso si `count` no ha cambiado. `useMemo` resuelve esto al memorizar el resultado del cálculo solo cuando las dependencias, en este caso, la propiedad `count`, han cambiado:
+
+```tsx
+import { useMemo } from 'react'
+
+export function Counter({ count }: { count: number }) {
+  const double = useMemo(() => count * 2, [count])
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <p>Doble: {double}</p>
+    </div>
+  )
+}
+
+```
+
+Con `useMemo`, si la propiedad `count` no ha cambiado, se evita el recálculo del doble y se reutiliza el valor calculado anteriormente. Esto mejora significativamente la eficiencia del componente, especialmente en situaciones donde los cálculos son más intensivos en recursos.
+
+## ♻️ useCallback
+
+El hook `useCallback` en React proporciona una forma de memorizar funciones. La principal ventaja es evitar la creación de nuevas funciones en cada renderización, devolviendo la función memorizada previamente si las dependencias no han cambiado.
+
+Así es como se utiliza el hook `useCallback`:
+
+```tsx
+const callbackMemorizado = useCallback(callback, arrayDependencia)
+```
+
+El problema que aborda `useCallback` se hace evidente cuando necesitamos pasar funciones a componentes hijos y queremos evitar la creación de nuevas instancias de esas funciones en cada renderización. Tomemos el ejemplo del componente `Counter`:
+
+```tsx
+function Counter({ count, onIncrement }: Props) {
+  const handleIncrement = () => {
+    onIncrement(count)
+  }
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={handleIncrement}>Incrementar</button>
+    </div>
+  )
+}
+
+```
+
+En este caso, `handleIncrement` se recrea en cada renderización, lo cual no es eficiente, especialmente si `onIncrement` y `count` no han cambiado. `useCallback` aborda esto al memorizar la función solo cuando cambian las dependencias:
+
+```tsx
+import { useCallback } from 'react'
+
+export function Counter({ count, onIncrement }: Props) {
+  const handleIncrement = useCallback(() => {
+    onIncrement(count)
+  }, [count, onIncrement
+
+]) // solo recrear si count u onIncrement cambian
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={handleIncrement}>Incrementar</button>
+    </div>
+  )
+}
+
+```
+
+Con `useCallback`, si `count` o `onIncrement` no han cambiado, se evita la creación de una nueva función y se reutiliza la función calculada previamente. Esto mejora la eficiencia y contribuye a un rendimiento del componente más óptimo.
+
+## 🏷️ useId
+
+`useId` es un hook de React diseñado para generar identificadores únicos, ideales para asignarlos a atributos de etiquetas HTML. Esta práctica resulta especialmente útil para mejorar la accesibilidad al establecer relaciones específicas entre elementos.
+
+Así es como se utiliza el hook `useId`:
+
+```tsx
+const passwordHintId = useId()
+```
+
+A continuación, el ID generado se utiliza en diferentes atributos:
+
+```tsx
+<>
+  <input type='password' aria-describedby={passwordHintId} />
+  <p id={passwordHintId}>
+</>
+```
+
+El problema que aborda `useId` surge cuando necesitamos asignar identificadores únicos a elementos HTML, especialmente en situaciones en las que un componente puede aparecer múltiples veces en la pantalla. Tomemos el ejemplo del componente `PasswordField`:
+
+```tsx
+import { useId } from 'react'
+
+export function PasswordField() {
+  const passwordHintId = useId()
+
+  return (
+    <>
+      <label>
+        Contraseña:
+        <input type='password' aria-describedby={passwordHintId} />
+      </label>
+      <p id={passwordHintId}>
+        La contraseña debe tener 18 caracteres y contener caracteres especiales.
+      </p>
+    </>
+  )
+}
+```
+
+En este caso, `useId` se utiliza para generar un ID único (`passwordHintId`) que se asigna tanto al atributo `aria-describedby` del input como al `id` del párrafo. Esto asegura que aunque `PasswordField` aparezca varias veces en la pantalla, los IDs generados no entrarán en conflicto.
+
+```tsx
+export default function App() {
+  return (
+    <>
+      <h2>Elegir contraseña</h2>
+      <PasswordField />
+      <h2>Confirmar contraseña</h2>
+      <PasswordField />
+    </>
+  )
+}
+```
+
+En el componente `App`, donde se usa `PasswordField` dos veces, `useId` asegura que los identificadores generados automáticamente eviten duplicados y proporcionen una solución robusta para asignar IDs únicos en contextos repetidos. Esto contribuye a mejorar la accesibilidad y consistencia en la aplicación.
+
+## 🕹️ useReducer
+
+`useReducer` es un hook de React diseñado para gestionar el estado de un componente mediante un enfoque basado en acciones y reducciones, similar al patrón utilizado en Redux. Este hook se prefiere sobre `useState` cuando el estado de un componente es más complejo o cuando las actualizaciones de estado dependen del estado anterior o de acciones previas.
+
+`useReducer` toma dos argumentos: una función de reducción y el estado inicial. La función de reducción recibe dos argumentos: el estado actual y una acción que describe cómo debería cambiar el estado. La función de reducción devuelve el nuevo estado.
+
+**Así es como se utiliza el hook `useReducer`:**
+
+```tsx
+const [state, dispatch] = useReducer(reducer, argumentoInicial, init)
+```
+
+El problema que aborda `useReducer` surge cuando el estado de un componente se vuelve más complejo y las actualizaciones de estado dependen de múltiples factores o acciones. Tomemos el ejemplo del componente `Counter`:
+
+```tsx
+import { useState } from 'react'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0)
+
+  const handleIncrement = () => {
+    setCount(count + 1)
+  }
+
+  const handleDecrement = () => {
+    setCount(count - 1)
+  }
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={handleIncrement}>Incrementar</button>
+      <button onClick={handleDecrement}>Decrementar</button>
+    </div>
+  )
+}
+```
+
+En este ejemplo, usamos `useState` para gestionar el estado del contador. Si bien esto puede funcionar para casos simples, a medida que la lógica del estado se vuelve más compleja o depende de acciones previas, el código puede volverse más difícil de mantener. `useReducer` proporciona una estructura más organizada y una solución más escalable para manejar estados y acciones complejas en situaciones donde el código podría volverse confuso usando solo `useState`. Abordaríamos este problema con `useReducer` de la siguiente manera:
+
+```tsx
+// Define la función de reducción
+const counterReducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'incrementar':
+      return { count: state.count + 1 }
+    case 'decrementar':
+      return { count: state.count - 1 }
+    default:
+      return state
+  }
+}
+
+export const Counter = () => {
+  // Usa useReducer para gestionar el estado del contador
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 })
+
+  return (
+    <div>
+      <p>Contador: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'incrementar' })}>Incrementar</button>
+      <button onClick={() => dispatch({ type: 'decrementar' })}>Decrementar</button>
+    </div>
+  )
+}
+```
+
+## ✨ useImperativeHandle
+
+`useImperativeHandle` en React es una herramienta útil cuando necesitas controlar y personalizar la interfaz externa de un componente funcional, especialmente al trabajar con refs. Imagina el desafío al que te enfrentarías sin este gancho.
+
+### 🤔 Desafío Sin `useImperativeHandle`:
+
+Supongamos que tenemos un componente funcional llamado `FancyInput` que encapsula un campo de texto. Queremos que el componente padre acceda y manipule el valor del campo directamente y también active el enfoque en ese campo. Sin `useImperativeHandle`, podríamos terminar con un código menos eficiente y propenso a errores.
+
+```tsx
+export const FancyInput = () => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
+  return (
+    <div>
+      <input ref={inputRef} />
+      {/* Desafío: ¿Cómo exponer el método `focusInput` al componente padre? */}
+    </div>
+  )
+}
+
+```
+
+En este escenario, exponer el método `focusInput` al componente padre sería una tarea desafiante e inelegante. Aquí es donde entra en juego `useImperativeHandle`.
+
+### ✅ Solución con `useImperativeHandle`:
+
+```tsx
+export const FancyInput = forwardRef((props, ref) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // Usa useImperativeHandle para personalizar la interfaz externa
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (inputRef.current) {
+        inputRef.current.focus()
+      }
+    },
+    getValue: () => {
+      return inputRef.current ? inputRef.current.value : ''
+    },
+  }))
+
+  return (
+    <div>
+      <input ref={inputRef} />
+    </div>
+  )
+})
+
+```
+
+Con `useImperativeHandle`, ahora podemos exponer selectivamente las funciones que queremos que el componente padre utilice. Esta solución mejora la claridad del código y proporciona una interfaz externa más eficiente y controlada.
+
+## 🧩 useLayoutEffect
+
+`useLayoutEffect` en React es un gancho potente que te permite realizar operaciones síncronas después de que se hayan completado todas las mutaciones en el DOM, pero antes de que el navegador repinte la pantalla. Imagina el desafío al que te enfrentarías sin este gancho.
+
+### 🤔 Desafío Sin `useLayoutEffect`:
+
+Imagina un escenario en el que queremos medir las dimensiones de un elemento DOM y, basándonos en esas dimensiones, realizar ciertas acciones en nuestro componente funcional `ResizableBox`. Sin `useLayoutEffect`, podríamos tener problemas al realizar estas mediciones de manera asíncrona.
+
+```tsx
+export const ResizableBox = () => {
+  const boxRef = useRef<HTMLDivElement>(null)
+  const [boxWidth, setBoxWidth] = useState(0)
+
+  useEffect(() => {
+    // Desafío: ¿Cómo medir las dimensiones de boxRef de manera síncrona?
+    // Las mediciones pueden no estar disponibles de inmediato.
+    // Esto puede causar problemas si dependemos de las dimensiones para realizar acciones.
+  }, [])
+
+  return <div ref={boxRef}>{/* Contenido de la caja redimensionable */}</div>
+}
+
+```
+
+En este escenario, realizar mediciones síncronas de las dimensiones de `boxRef` es desafiante con `useEffect` porque las mediciones pueden no estar disponibles de inmediato. Aquí es donde entra en juego `useLayoutEffect`.
+
+### ✅ Solución con `useLayoutEffect`:
+
+```tsx
+export const ResizableBox = () => {
+  const boxRef = useRef<HTMLDivElement>(null)
+  const [boxWidth, setBoxWidth] = useState(0)
+
+  useLayoutEffect(() => {
+    // Usa useLayoutEffect para medir las dimensiones de boxRef de manera síncrona
+    if (boxRef.current) {
+      setBoxWidth(boxRef.current.offsetWidth)
+    }
+  }, [])
+
+  return <div ref={boxRef}>{/* Contenido de la caja redimensionable */}</div>
+}
+
+```
+
+Con `useLayoutEffect`, podemos realizar mediciones síncronas después de que el navegador haya completado todas las mutaciones en el DOM pero antes de repintar la pantalla. Esto asegura que las mediciones estén disponibles de inmediato y evita problemas potenciales relacionados con la asincronía.
+
+## 🐞 useDebugValue
+
+`useDebugValue` en React es un gancho especializado diseñado para mejorar la experiencia de depuración al proporcionar información adicional sobre el estado de un componente. Su principal utilidad es facilitar la identificación de componentes en las herramientas de desarrollo del navegador.
+
+La firma básica para `useDebugValue` es la siguiente:
+
+```tsx
+useDebugValue(value)
+```
+
+Al depurar una aplicación de React, es común enfrentarse al desafío de identificar rápidamente el componente de interés dentro de las herramientas de desarrollo del navegador. Sin `useDebugValue`, la información sobre un componente puede ser limitada y no específica.
+
+**Así es cómo se usa el gancho `useDebugValue`:**
+
+### 1. Agregar un Nombre Descriptivo:
+
+```tsx
+import { useDebugValue } from 'react'
+
+const useCustomHook = () => {
+  const state =
+    /* lógica del gancho */
+
+    // Proporcionar un nombre descriptivo para facilitar la identificación en las herramientas de desarrollo
+    useDebugValue('Custom Hook')
+
+  return state
+}
+
+```
+
+### 2. Mostrar Contenido de un Array:
+
+```tsx
+import { useDebugValue } from 'react'
+
+const useArrayHook = (array: string[]) => {
+  // lógica del gancho
+
+  // Mostrar el contenido del array en las herramientas de desarrollo
+  useDebugValue(array.join(', '))
+
+  return /* resultado */
+}
+
+```
+
+### 3. Utilizar Información del Estado:
+
+```tsx
+import { useState, useDebugValue } from 'react'
+
+const useCounter = () => {
+  const [count, setCount] = useState(0)
+
+  // Utilizar el valor del contador como información en las herramientas de desarrollo
+  useDebugValue(`Contador: ${count}`)
+
+  return [count, setCount]
+}
+
+```
+
+Al usar `useDebugValue`, puedes personalizar la información que se muestra sobre tu gancho o componente en las herramientas de desarrollo, facilitando su identificación y depuración durante el desarrollo.
+
+## 🚀 Conclusión
+
+En esta exploración de React Hooks, desde los conceptos más básicos hasta los más avanzados, confío en que hayas descubierto el fascinante mundo que estos ganchos ofrecen para simplificar y potenciar tus desarrollos en React. ¡Feliz codificación! ✨
+
+### 🔗 Referencias
+
+- https://react.dev/reference/react
+- [https://www.youtube.com/@midulive](https://youtube.com/playlist?list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29&si=38k-uyCK8hlf7DIk)
+
+### 🌐 Recursos Adicionales
+
+- [Documentación de React Hooks: Una versión fácil de leer](https://blog.logrocket.com/react-hooks-cheat-sheet-solutions-common-problems/)

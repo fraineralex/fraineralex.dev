@@ -66,7 +66,7 @@ export function XFollowCard({ fullName, userName, initialIsFollowing }: Props) {
       <header className='tw-followCard-header'>
         <img
           className='tw-followCard-avatar'
-          alt='fraineralex avatar'
+          alt='user avatar'
           src={`https://unavatar.io/${userName}`}
         />
         <div className='tw-followCard-info'>
@@ -97,6 +97,7 @@ The basic signature of `useEffect` is as follows:
 useEffect(() => {
   //...
 })
+
 ```
 
 **Example of using `useEffect` in a React component:**
@@ -140,6 +141,7 @@ useEffect(() => {
     subscription.unsubscribeApi()
   }
 })
+
 ```
 
 The clean-up function is guaranteed to be invoked before the component is removed from the user interface.
@@ -155,6 +157,7 @@ useEffect(() => {
   // Incorrect: Modifying state within the effect body
   setCount(count + 1)
 }, [count])
+
 ```
 
 This example causes an infinite loop by updating the state within the effect, triggering new renderings and re-executing the effect.
@@ -166,6 +169,7 @@ useEffect(() => {
   // Correct: No dependencies in the array, avoiding the infinite loop
   setCount(count + 1)
 }, [])
+
 ```
 
 Avoid infinite loops by ensuring that the dependencies in the `useEffect` dependency array are stable and do not change within the effect body. In this case, by removing `count` from the dependency array, we prevent the infinite loop.

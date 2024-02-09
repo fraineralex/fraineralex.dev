@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { MouseShadow } from '@/components/layout/mouse-shadow'
-import { i18n } from '@/i18n-config'
+import { Locale, i18n } from '@/i18n-config'
 import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
@@ -100,10 +100,11 @@ export const metadata: Metadata = {
 
 interface Props {
   children: React.ReactNode
-  params?: { lang: string }
+  params?: { lang: Locale }
 }
 
 export default function RootLayout ({ children, params }: Props) {
+  const lang = params?.lang || i18n.defaultLocale
   return (
     <html
       className={`${[
@@ -112,11 +113,11 @@ export default function RootLayout ({ children, params }: Props) {
         londrinaSolid.variable
       ].join(' ')} scroll-smooth`}
       data-lt-installed='true'
-      lang={params?.lang || i18n.defaultLocale}
+      lang={lang}
     >
       <body className='bg-gray-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <MouseShadow />
-        <Navigation />
+        <Navigation lang={lang} />
         {children}
         <Analytics />
       </body>

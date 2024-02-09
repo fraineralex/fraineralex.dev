@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation'
 const SwitchLanguage = lazy(() => import('@/components/layout/switch-language'))
 import { allPosts } from 'contentlayer/generated'
 import { Search } from 'lucide-react'
+import { Locale } from '@/i18n-config'
 
-export const Navigation = () => {
+export const Navigation = ({ lang }: { lang: Locale }) => {
   const pathname = usePathname()
   const [isBlogPage, setIsBlogPage] = useState<null | boolean>(null)
   const [isContentPage, setIsContentPage] = useState<null | boolean>(null)
@@ -51,7 +52,7 @@ export const Navigation = () => {
                       <Search className='h-6 w-6 text-slate-400 hover:text-slate-100 hover:scale-110' />
                     }
                   >
-                    <SearchPosts />
+                    <SearchPosts lang={lang} />
                   </Suspense>
                 )}
                 <SwitchLanguage />

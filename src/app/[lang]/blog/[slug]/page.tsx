@@ -57,7 +57,7 @@ export async function generateMetadata (
     `${process.env.DOMAIN}/${
       lang !== i18n.defaultLocale ? `${lang}/` : ''
     }blog` ||
-    `https://fraineralex.vercel.app${
+    `https://fraineralex.dev${
       lang !== i18n.defaultLocale ? `${lang}/` : ''
     }blog`
 

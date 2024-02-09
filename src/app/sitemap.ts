@@ -2,7 +2,7 @@ import { allPosts } from 'contentlayer/generated'
 import { allTags } from '@/utils/data'
 
 export default async function sitemap () {
-  const DOMAIN = process.env.DOMAIN || 'https://fraineralex.vercel.app'
+  const DOMAIN = process.env.DOMAIN || 'https://fraineralex.dev'
 
   const lastPostDate = allPosts[allPosts.length - 1].date
 

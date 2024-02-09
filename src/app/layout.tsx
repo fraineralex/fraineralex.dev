@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     'Backend Developer'
   ],
   description:
-    "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.",
-  metadataBase: new URL(process.env.DOMAIN || 'https://fraineralex.vercel.app'),
+    "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.",
+  metadataBase: new URL(process.env.DOMAIN || 'https://fraineralex.dev'),
   alternates: {
     canonical: '/',
     languages: {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Frainer Encarnación',
     description:
-      'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
+      'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
     url: `${process.env.DOMAIN}`,
     siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     creator: '@fraineralex',
     site: '@fraineralex',
     description:
-      'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
+      'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
     images: [
       {
         url: '/og.webp',

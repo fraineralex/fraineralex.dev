@@ -1,5 +1,5 @@
 export default function robots () {
-  const DOMAIN = process.env.DOMAIN || 'https://fraineralex.vercel.app'
+  const DOMAIN = process.env.DOMAIN || 'https://fraineralex.dev'
   return {
     rules: [
       {

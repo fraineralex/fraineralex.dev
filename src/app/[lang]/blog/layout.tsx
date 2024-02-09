@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     title: "Frainer's Blog 📝",
     description:
       "I write about tech, projects and whatever else I'm thinking about!",
-      url: `${process.env.DOMAIN}/blog`,
-      siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    url: `${process.env.DOMAIN}/blog`,
+    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
       {
         url: `${process.env.DOMAIN}/images/blog/og.webp`,
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
       }
     ],
     description:
-      "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!"
-  },
+      "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!"
+  }
 }
 
 interface Props {

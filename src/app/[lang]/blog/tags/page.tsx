@@ -6,7 +6,7 @@ import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 
 const BLOG_DOMAIN =
-  `${process.env.DOMAIN}/blog` || 'https://fraineralex.vercel.app/blog'
+  `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
 
 export const metadata: Metadata = {
   title: 'Tags',

@@ -1,0 +1,204 @@
+---
+title: "Dominando los Mensajes de Commit en Git"
+description: "En esta publicación, te mostraré cómo mejorar tus mensajes de commit en Git utilizando las mejores prácticas de la industria, con el objetivo de asegurar un historial de Git claro y fácilmente legible para tus proyectos."
+date: "2024-01-20"
+url: "/"
+hero: "/images/blog/posts/cover/master-git-commit-message.webp"
+heroSource: "Fuente: Roman Synkevych en Unsplash"
+tags: ["git", "terminal"]
+published: true
+lang: 'es'
+---
+
+En esta publicación, te mostraré cómo mejorar tus mensajes de commit en Git utilizando las mejores prácticas de la industria, con el objetivo de asegurar un historial de Git claro y fácilmente legible para tus proyectos.
+
+## 🧠 Comprendiendo los Commits en Git
+
+Un `commit` en Git captura un conjunto de cambios almacenados en la historia de un proyecto, representando una unidad lógica de trabajo. Los commits son fundamentales para el control de versiones, fomentando la colaboración efectiva entre desarrolladores, organizando registros de actualizaciones y facilitando el retorno a versiones anteriores.
+
+### Estructura del Commit
+
+**Básico:** `git commit -m <mensaje>`
+
+**Detallado:** `git commit -m <título> -m <descripción>`
+
+```bash
+$ git add .
+$ git commit -m "Implement user sign-in feature"
+
+```
+
+> **🚨 Importante:** Este artículo asume que ya comprendes el flujo básico de trabajo con Git. Si no es así, te sugiero leer el [Manual de Git](https://guides.github.com/introduction/git-handbook/).
+
+## 🌟 **La Importancia de Mensajes de Commit Bien Elaborados**
+
+Los commits no son solo instantáneas de cambios de código; sirven como una hoja de ruta para la historia de tu proyecto. Un mensaje de commit mal escrito puede causar confusión, haciendo que sea difícil entender el contexto de los cambios. Exploraremos por qué la elaboración de mensajes de commit significativos es importante.
+
+![Ejemplo de mensajes de commit incorrectos](https://fraineralex.vercel.app/images/blog/posts/content/git-commit.webp)
+_Fuente: [xkcd.com](http://xkcd.com/)_
+
+Piensa en tus mensajes de commit como cartas para tu yo futuro o colaboradores. Al invertir tiempo en escribir mensajes informativos, creas un rastro de documentación que puede ahorrar horas de solución de problemas y mejorar el mantenimiento del proyecto, especialmente en proyectos a gran escala.
+
+## 🤔 **Por qué Importa la Calidad del Mensaje de Commit**
+
+Te desafío a revisar viejos mensajes de commit en tus proyectos usando `git log`. Puedes encontrarte con mensajes poco claros que brindan poca información sobre los cambios realizados. Sin una documentación adecuada, podrías encontrarte pensando en el propósito de ciertas líneas de código.
+
+Al adherirse a buenas prácticas de commit, aseguras el futuro de tu trabajo. Los mensajes claros se convierten en un activo valioso durante los esfuerzos colaborativos, fomentando una mejor comunicación dentro de los equipos de ingeniería.
+
+## 🎬 **6 Reglas para Elaborar Mensajes de Commit Excepcionales**
+
+Hay 6 reglas simples que ayudarán a mantener consistencia, claridad y eficacia en tus mensajes de commit, mejorando la comunicación dentro del equipo de desarrollo y facilitando el seguimiento del historial de código. Estas reglas son:
+
+### 1. Usa el Modo Imperativo en la Línea del Asunto
+
+Al redactar un mensaje de commit, usa el modo imperativo en la línea del asunto para transmitir la acción realizada. Por ejemplo, en lugar de decir "Añadida funcionalidad", usa "Añadir funcionalidad" o "Corregir error" en lugar de "Corregido error". Esto proporciona una instrucción clara sobre el cambio de estado previsto.
+
+Para crear commits reflexivos, considera lo siguiente:
+
+- ¿Por qué he realizado estos cambios?
+- ¿Qué efecto han tenido mis cambios?
+- ¿Por qué se necesitaba el cambio?
+- ¿A qué se refieren los cambios?
+
+La respuesta podría ser algo así:
+
+```bash
+- Añadir la nueva página de inicio de sesión
+- Corregir un problema con el feed del blog
+- Cambiar la familia de fuentes principal a Inter
+- Eliminar un artículo al azar
+```
+
+### 2. Evita Puntos y Puntos Suspensivos en los Mensajes de Commit
+
+Evita el uso de puntuación innecesaria en los mensajes de commit. La primera línea de un commit sirve como título y no debe terminar con un punto. Además, se deben evitar los puntos suspensivos para obtener instrucciones claras y concisas.
+
+```bash
+git commit -m "Add the new login page." # ❌
+git commit -m "Add the new login page..." # ❌
+git commit -m "Add the new login page" # ✅
+
+```
+
+### 3. Mantén la Línea del Asunto por Debajo de 50 Caracteres
+
+Sé breve y directo al punto. Si tu mensaje de commit es demasiado extenso, considera dividirlo en varios commits. Asegúrate de que la línea del asunto refleje con precisión los cambios realizados.
+
+```bash
+git commit -m "Add the article 'How to install Bun on Windows' and update the blog's description in the home page" # ❌
+git commit -m "Add the article 'How to install Bun on Windows'" # ✅
+git commit -m "Update the blog's description in the home page" # ✅
+
+```
+
+### 4. Proporciona Contexto Necesario en el Cuerpo del Commit
+
+Cuando se requiere contexto adicional, utiliza el cuerpo del commit en lugar de saturar la línea del asunto. Esto se puede lograr usando `git commit` sin la bandera `-m`.
+
+```bash
+# Ejemplo
+git commit fix: prevent racing of requests
+
+Introduce a request id and a reference to latest request. Dismiss
+incoming responses other than from latest request.
+
+Remove timeouts which were used to mitigate the racing issue but are
+obsolete now.
+```
+
+Recuerda que la primera línea del mensaje del commit sirve como título, mientras que las líneas siguientes forman el cuerpo y deben adherirse a las reglas estándar de puntuación.
+
+### 5. Usa Prefijos para Commits Semánticos
+
+A medida que tu proyecto crece, mantener un historial legible se vuelve crucial. Para lograr esto, puedes agregar un prefijo para dar más significado a los commits que realizas. Esto se llama commits semánticos y se hace de la siguiente manera:
+
+```bash
+<tipo>[ámbito opcional]: <descripción>
+
+[cuerpo opcional]
+
+[pie(s) opcional(es)]
+
+# Ejemplo:
+fix: resolve login authentication bug
+^-^  ^------------------------------^
+│     │
+│     └--> # Descripción de los cambios
+│
+└──------> # Tipo de cambio
+
+[cuerpo opcional]
+- Improved authentication logic to handle edge cases.
+- Updated relevant unit tests.
+
+[pie(s) opcional(es)]
+Reviewed-by: @username
+Refs: #123
+```
+
+En `monorepositorios` con múltiples paquetes, también puedes agregar información sobre el paquete afectado por el commit. Esto se conoce como ámbito y se vería así:
+
+```bash
+feat(backend): add a new table for the likes
+fix(web): update the main font family to Inter
+```
+
+El tipo de commit puede incluir lo siguiente:
+
+- `feat` – se introduce una nueva funcionalidad con los cambios
+- `fix` – se ha corregido un error
+- `chore` – cambios que no están relacionados con una corrección o funcionalidad y no modifican archivos de código fuente o de prueba (por ejemplo, actualizaciones de dependencias)
+- `refactor` – código refactorizado que no soluciona un error ni agrega una funcionalidad
+- `docs` – actualizaciones de la documentación como el README u otros archivos markdown
+- `style` – cambios que no afectan el significado del código, probablemente relacionados con el formato del código como espacios en blanco, falta de punto y coma, etc.
+- `test` – inclusión de pruebas nuevas o corrección de pruebas anteriores
+- `perf` – mejoras de rendimiento
+- `ci` – relacionado con la integración continua
+- `build` – cambios que afectan al sistema de construcción o a dependencias externas
+- `revert` – revierte un commit anterior
+
+La línea del asunto del tipo de commit debe estar en minúsculas con un límite de caracteres para fomentar descripciones concisas.
+
+El cuerpo opcional del commit debe usarse para proporcionar más detalles que no pueden ajustarse a las limitaciones de caracteres de la descripción de la línea del asunto.
+
+También es un buen lugar para utilizar `BREAKING CHANGE: <descripción>` para señalar la razón de un cambio incompatible dentro del commit.
+
+### 6. Considera Usar Utilidades de Commit
+
+Mejora tu flujo de trabajo de commit incorporando herramientas como `husky` para ejecutar scripts antes de acciones específicas de Git y `commitlint` para asegurar que los commits sigan una convención elegida. Estas utilidades contribuyen a un proceso de commit más eficiente y estandarizado.
+
+```bash
+npm install husky -D
+npx husky install
+npm set-script prepare "husky install"
+npm run prepare
+npx husky add .husky/pre-push "npm test"
+git add .husky/pre-push
+
+git commit -m "Keep calm and commit"
+git push -u origin master *# tests run before the push
+```
+
+Con `commitlint`, puedes hacer cumplir commits semánticos y legibles que sigan convenciones predefinidas.
+
+```bash
+# 1. Instalar commitlint cli y configuración convencional
+
+# Para Mac y Linux:
+npm install --save-dev @commitlint/{config-conventional,cli}
+# Para Windows:
+npm install --save-dev @commitlint/config-conventional @commitlint/cli
+
+# 2. Agregar gancho para verificar el mensaje de commit
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+
+Estas herramientas, combinadas con prácticas como `conventional-changelog` y `commitizen`, contribuyen a un flujo de trabajo de commit eficiente y estandarizado, mejorando en última instancia la mantenibilidad y la colaboración del proyecto.
+
+Al incorporar estas reglas y herramientas en tu flujo de trabajo de Git, contribuirás a un historial de proyecto más legible y organizado, facilitando que tú y tus colaboradores naveguen y comprendan los cambios realizados a lo largo del tiempo. ¡Felices commits! 🚀
+
+## 🌐 Recursos Adicionales
+
+- [Commits Convencionales](https://www.conventionalcommits.org)
+- [Versionado Semántico](https://semver.org)
+- [freeCodeCamp.org](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages)

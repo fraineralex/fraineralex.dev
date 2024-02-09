@@ -1,0 +1,154 @@
+---
+title: "Cómo instalar múltiples versiones de Node.js"
+description: "En este artículo, explicaré cómo instalar y gestionar múltiples versiones de Node.js con Node Version Manager (NVM) en Windows, Linux y Mac, y cambiar fácilmente entre ellas con un solo comando."
+date: "2024-01-18"
+url: "/"
+hero: "/images/blog/posts/cover/how-to-install-nvm.webp"
+heroSource: "Fuente: externlabs.com"
+tags: ["javascript", "nodejs", "terminal"]
+published: true
+lang: 'es'
+---
+
+En este artículo, explicaré cómo instalar y gestionar múltiples versiones de Node.js con Node Version Manager (NVM) en Windows, Linux y Mac, y cambiar fácilmente entre ellas con un solo comando.
+
+## 🤔 ¿Qué es NVM?
+
+Node Version Manager (NVM), como su nombre indica, es una herramienta para gestionar versiones de Node en tu dispositivo.
+
+Diferentes proyectos en tu dispositivo pueden estar utilizando diferentes versiones de Node. Usar solo una versión (la instalada por `npm`) para estos proyectos puede no proporcionarte resultados de ejecución precisos.
+
+Por ejemplo, si utilizas una versión de Node como **18.0.0** para un proyecto que usa **20.0.0**, puedes obtener algunos errores. Y si actualizas la versión de Node a **20.0.0** con npm y la usas para un proyecto que usa **18.0.0**, es posible que no obtengas la experiencia esperada.
+
+De hecho, lo más probable es que recibas una advertencia que dice:
+
+```bash
+This project requires Node version X
+```
+
+En lugar de utilizar npm para instalar y desinstalar versiones de Node para tus diferentes proyectos, puedes usar **nvm**, que te ayuda a gestionar eficazmente las versiones de Node para cada proyecto.
+
+[NVM](https://github.com/nvm-sh/nvm) te permite instalar diferentes versiones de Node y cambiar entre estas versiones dependiendo del proyecto en el que estés trabajando a través de la línea de comandos.
+
+> **🚨 Importante:** Esta guía asume que no tienes una instalación previa de `Node.js`. Si la tienes, podría causar problemas y conflictos. Antes de continuar, asegúrate de haber desinstalado cualquier instalación previa de `Node.js` y `npm`.
+
+## 🐧 Cómo instalar NVM en Mac, Linux o Windows WSL
+
+**Este sería el método recomendado si tu sistema operativo se basa en UNIX** (como Mac, Linux o Windows WSL), ya que ofrece varias ventajas, como manejar diferentes versiones de Node simultáneamente.
+
+### 1. Ejecuta el instalador de nvm
+
+Para instalar y actualizar _nvm_, debes ejecutar el script de instalación. Puedes descargar y ejecutar el código desde la terminal usando el siguiente comando:
+
+```bash
+curl -o- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh> | bash
+
+# o
+
+wget -qO- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh> | bash
+```
+
+Puedes usar `curl` o `bash` dependiendo del comando disponible en tu dispositivo.
+
+Este script clonará el [repositorio de nvm](https://github.com/nvm-sh/nvm) en el directorio `~/.nvm` e intentará agregar las líneas de ejecución dependiendo del idioma de tu terminal (`~/.bash_profile`, `~/.zshrc`, `~/.profile` o `~/.bashrc`).
+
+### 2. Actualiza la configuración de tu perfil
+
+En caso de que no haya sido posible por alguna razón, es posible que te pida agregar manualmente las líneas de código. **Esto solo es necesario si no se pudo hacer automáticamente.** Las líneas a agregar serían estas:
+
+```bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \\\\. "$NVM_DIR/nvm.sh"
+```
+
+Después de hacer esto, es posible que necesites reiniciar la terminal o abrir una nueva pestaña para usar el comando `nvm`.
+
+Este comando anterior carga nvm para su uso.
+
+### 3. Recarga la configuración de la shell
+
+Con tu configuración de perfil actualizada, ahora recargarás la configuración de tu terminal para usar:
+
+```bash
+source ~/.bashrc
+```
+
+Con este comando ejecutado, nvm está listo para que lo uses. Puedes confirmar que nvm está instalado correctamente ejecutando:
+
+```bash
+nvm -v
+```
+
+Esto debería mostrar la versión de nvm instalada.
+
+## 🪟 Cómo instalar NVM en Windows
+
+`nvm-windows`, aunque comparte el nombre con `nvm`, no es de los mismos creadores y, por lo tanto, tiene algunas diferencias. Y entre esas diferencias está, por supuesto, la forma de instalarlo. Para `nvm-windows`, sigue estos pasos:
+
+1. Ve a la [sección de lanzamientos de nvm-windows](https://github.com/coreybutler/nvm-windows/releases).
+2. Descarga y ejecuta el archivo `nvm-setup.exe` de la última versión disponible.
+3. Ejecuta el archivo `nvm-setup.exe`.
+4. Sigue los pasos de instalación guiada y elige la configuración deseada.
+5. Una vez completado, abre una terminal de `PowerShell` y ejecuta:
+
+Cuando hayas terminado, puedes confirmar que nvm se ha instalado ejecutando:
+
+```bash
+nvm -v
+```
+
+Si nvm se instaló correctamente, este comando te mostrará la versión de nvm instalada.
+
+Y con esto, estamos listos para trabajar con `nvm-windows`. Si encuentras algún problema, puedes **consultar la [sección de Problemas Comunes del repositorio](https://github.com/coreybutler/nvm-windows/wiki/Common-Issues) para ver si tu problema tiene solución.**
+
+## 🕹️ Cómo funciona NVM?
+
+Con nvm instalado, ahora puedes instalar, desinstalar y cambiar entre diferentes versiones de Node en tu dispositivo Windows, Linux o Mac.
+
+Puedes instalar versiones de Node de esta manera:
+
+```bash
+nvm install --lts
+```
+
+Esto instalará la **versión de soporte a largo plazo de Node**. Actualmente, es la versión 20, pero en el futuro será la 22 y así sucesivamente.
+
+> LTS o soporte a largo plazo significa que es una versión que recibirá soporte durante un período más largo que otras versiones. Generalmente, es hasta 30 meses de
+
+ soporte para errores críticos. Si vas a usar Node en producción, es mejor usar solo versiones LTS.
+
+Si prefieres, también puedes instalar una versión específica indicando el número de versión principal o directamente la versión exacta:
+
+```bash
+nvm install 21 # esto instalará la última versión 21 de Node.js
+nvm install 12.6.0 # esto instalará exactamente la versión 21.6.0
+```
+
+## 🚀 Uso de una Versión de Node.js Con NVM
+
+A veces, puedes tener más de una versión instalada de Node.js en tu usuario. Para ver todas las versiones de Node.js que tienes instaladas, puedes usar el comando `nvm ls`. Para ver las versiones disponibles para la instalación, debes usar `nvm ls-remote`.
+
+Una vez que tienes más de una en tu sistema, querrás cambiar entre esas versiones. Para hacerlo, ejecuta `nvm use <versión-que-quieres-usar>`, por ejemplo:
+
+```bash
+nvm use 20
+nvm use 21
+nvm use --lts
+```
+
+Si deseas que una de estas sea tu versión predeterminada, para que se use la próxima vez que abras una pestaña, debes crear un alias para esa versión llamado `default`.
+
+Por ejemplo, supongamos que tienes instaladas las versiones 16 y 18, y ahora instalas la versión 20, y quieres que esta sea la versión predeterminada a partir de ahora. Deberías hacer lo siguiente:
+
+```bash
+nvm install 20
+nvm alias default 20
+```
+
+> La primera vez que ejecutas `nvm install`, esa versión se convierte en la predeterminada.
+
+## ⚠️ Problemas Posibles
+
+- En Mac, necesitarás tener instaladas las herramientas de desarrollo de Xcode. Cuando ejecutas el script de instalación de `nvm` por primera vez, puede aparecer una ventana pidiéndote que hagas esto. Una vez instalado, intenta instalar `nvm` nuevamente con el mismo script que antes.
+- Recuerda, como mencioné, después de la instalación, es posible que necesites reiniciar la terminal o crear una nueva pestaña antes de poder ejecutar el comando `nvm`.
+- Si tienes problemas adicionales, puedes consultar la [sección de Resolución de Problemas en Linux en el repositorio de nvm](https://github.com/nvm-sh/nvm#troubleshooting-on-linux).

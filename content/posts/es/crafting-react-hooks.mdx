@@ -1,0 +1,169 @@
+---
+title: 'Conquistando los Hooks en React: Una Guía Completa'
+description: 'En este artículo, revelaré de manera clara y simplificada cómo React Hooks puede hacer magia en tus proyectos, tal como me hubiera gustado aprender cuando los descubrí.'
+date: '2024-01-24'
+url: '/'
+hero: '/images/blog/posts/cover/crafting-react-hooks.webp'
+tags: ['react', 'javascript', 'typescript']
+published: true
+lang: 'es'
+---
+
+En este artículo, revelaré de manera clara y simplificada cómo React Hooks puede hacer magia en tus proyectos, tal como me hubiera gustado aprender cuando los descubrí.
+
+### 🪝 Hooks: La magia de React
+
+En React, los hooks son utilidades que nos permiten ejecutar código arbitrario en nuestros componentes basados en acciones específicas. Los hooks proporcionan una forma de reutilizar la lógica de estado y efectos secundarios en componentes funcionales de manera más simple y declarativa.
+
+> **🚨 Importante:** Esta guía utiliza fragmentos de código `TypeScript` para ilustrar los conceptos. Si no estás familiarizado con TypeScript, siéntete libre de ignorar la escritura de tipos en los ejemplos.
+
+## 🌱 Hooks Básicos
+
+Esta guía de referencia discutirá todos los hooks disponibles nativamente en React, pero primero, comencemos con los hooks básicos de React: `useState`, `useEffect` y `useContext`.
+
+![Imagen de los hooks básicos de React](https://fraineralex.vercel.app/images/blog/posts/content/basic-hooks.webp)
+
+## ⚡ useState
+
+Es un hook que permite a los componentes funcionales gestionar y mantener su estado interno. Puedes usarlo para declarar variables de estado y acceder a ellas en tus componentes funcionales.
+
+**La firma para el hook `useState` es la siguiente:**
+
+```tsx
+const [state, setState] = useState(initialState)
+```
+
+Aquí, `state` y `setState` se refieren al valor del estado y a la función de actualización devuelta al invocar `useState` con algún `initialState`.
+
+Es importante tener en cuenta que cuando tu componente se renderiza por primera vez e invoca `useState`, el `initialState` es el estado devuelto por `useState`.
+
+Además, para actualizar el estado, la función de actualización del estado `setState` debe invocarse con un nuevo valor de estado, como se muestra a continuación:
+
+```tsx
+setState(newValue)
+```
+
+Al hacer esto, se encola un nuevo renderizado del componente. `useState` garantiza que el valor del `state` siempre será el más reciente después de aplicar actualizaciones.
+
+**Ejemplo de uso de `useState` en un componente React acerca de la tarjeta de seguimiento de X:**
+
+```tsx
+export function XFollowCard({ fullName, username, initialFollowing }: Props) {
+  const [following, setFollowing] = useState(initialFollowing) // <-- Definición
+
+  const text = following ? 'Siguiendo' : 'Seguir'
+
+  const buttonClassName = following
+    ? 'tw-followCard-button is-following'
+    : 'tw-followCard-button'
+
+  const handleClick = () => {
+    setFollowing(!following) // Cambiando el estado
+  }
+
+  return (
+    <article className='tw-followCard'>
+      <header className='tw-followCard-header'>
+        <img
+          className='tw-followCard-avatar'
+          alt='fraineralex avatar'
+          src={`https://unavatar.io/${username}`}
+        />
+        <div className='tw-followCard-info'>
+          <strong>{fullName}</strong>
+          <span className='tw-followCard-infoUserName'>@{username}</span>
+        </div>
+      </header>
+
+      <aside>
+        <button className={buttonClassName} onClick={handleClick}>
+          <span className='tw-followCard-text'>{text}</span>
+          <span className='tw-followCard-stopFollow'>Dejar de seguir</span>
+        </button>
+      </aside>
+    </article>
+  )
+}
+```
+
+## 🎬 useEffect
+
+Es un hook de React que permite realizar efectos secundarios en componentes funcionales. Puedes usarlo para ejecutar código en respuesta a cambios en el componente, como hacer solicitudes a API, suscribirte a eventos o actualizar el DOM. `useEffect` recibe una función como argumento y la ejecuta después de que el componente se renderiza o cuando ciertas dependencias cambian.
+
+La firma básica de `useEffect` es la siguiente:
+
+```tsx
+useEffect(() => {
+  //...
+})
+```
+
+**Ejemplo de uso de `useEffect` en un componente React:**
+
+```tsx
+const CAT_IMAGE_URL_PREFIX = 'https://cataas.com'
+
+export function useCatImage({ fact }: { fact: string }) {
+  const [imageUrl, setImageUrl] = useState()
+
+  useEffect(() => {
+    if (!fact) return
+
+    const firstThreeWords = fact.split(' ', 3).join(' ')
+
+    fetch(
+      `${CAT_IMAGE_URL_PREFIX}/cat/says/${firstThreeWords}?size=50&color=red&json=true`
+    )
+      .then((res) => res.json())
+      .then((response) => {
+        const { url } = response
+        setImageUrl(url)
+      })
+  }, [fact])
+
+  return { imageUrl: `${CAT_IMAGE_URL_PREFIX}${imageUrl}` }
+}
+```
+
+### 🧹 Limpiando un efecto
+
+Algun código imperativo necesita ser limpiado para prevenir fugas de memoria. Por ejemplo, las suscripciones deben ser limpiadas, los temporizadores deben ser invalidados, etc. Para hacer esto, se retorna una función desde el callback pasado a `useEffect`:
+
+```tsx
+useEffect(() => {
+  const subscription = props.apiSubscription()
+
+  return () => {
+    // limpiar la suscripción
+    subscription.unsubscribeApi()
+  }
+})
+```
+
+Se garantiza que la función de limpieza se invoque antes de que el componente sea eliminado de la interfaz de usuario.
+
+### ⚠️ Evitar bucles infinitos
+
+Cuando se utiliza `useEffect` en React, es crucial evitar bucles infinitos que pueden surgir de configuraciones incorrectas del efecto. Un error común es modificar el estado dentro del cuerpo del efecto de una manera que desencadene renderizaciones infinitas.
+
+> **Causa común de bucles infinitos:** Modificación directa del estado
+
+```tsx
+useEffect(() => {
+  // Incorrecto: Modificar el estado dentro del cuerpo del efecto
+  setCounter(counter + 1)
+}, [counter])
+```
+
+Este ejemplo provoca un bucle infinito al actualizar el estado dentro del efecto, desencadenando nuevas renderizaciones y reejecutando el efecto.
+
+### ✅ Solución
+
+```tsx
+useEffect(() => {
+  // Correcto: Sin dependencias en el array, evitando el bucle infinito
+  setCounter(counter + 1)
+}, [])
+```
+
+Evita bucles infinitos asegurándote de que las dependencias en el array de dependencias de `useEffect` sean estables y no cambien dentro del efecto.

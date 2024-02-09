@@ -36,7 +36,7 @@ export const Header: React.FC<Props> = ({ views }) => {
         }`}
       >
         <div className='container flex flex-row-reverse items-center justify-between p-6 mx-auto'>
-          <div className='flex justify-between gap-6 pr-2'>
+          <div className='flex justify-between gap-3 md:gap-6 pr-2'>
             <SwitchLanguage />
             <span
               title='View counter for this page'

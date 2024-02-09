@@ -45,15 +45,27 @@ export const metadata: Metadata = {
   ],
   description:
     "I'm Frainer Encarnación, a Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.",
+  metadataBase: new URL(process.env.DOMAIN || 'https://fraineralex.vercel.app'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/',
+      'es-DO': '/es'
+    },
+    types: {
+      // See the RSS Feed section for more details
+      'application/rss+xml': '/blog/feed.xml'
+    }
+  },
   openGraph: {
     title: 'Frainer Encarnación',
     description:
       'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
     url: `${process.env.DOMAIN}`,
-    siteName: 'fraineralex.com',
+    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
       {
-        url: `${process.env.DOMAIN}/og.webp`,
+        url: '/og.webp',
         width: 1920,
         height: 1080
       }
@@ -81,7 +93,7 @@ export const metadata: Metadata = {
       'Full Stack Developer in Dominican Republic who builds accessible products and digital experiences for the web.',
     images: [
       {
-        url: `${process.env.DOMAIN}/og.webp`,
+        url: '/og.webp',
         width: 1920,
         height: 1080
       }
@@ -89,12 +101,6 @@ export const metadata: Metadata = {
   },
   icons: {
     shortcut: '/favicon.ico'
-  },
-  alternates: {
-    types: {
-      // See the RSS Feed section for more details
-      'application/rss+xml': '/blog/feed.xml'
-    }
   }
 }
 

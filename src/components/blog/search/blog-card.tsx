@@ -2,22 +2,25 @@ import { Post } from 'contentlayer/generated'
 import { allTags } from '@/utils/data'
 import Image from 'next/image'
 import Link from 'next/link'
+import { i18n } from '@/i18n-config'
 
 interface Props {
   blog: Post
 }
 
 export default function BlogCard ({ blog }: Props) {
+  const locale = blog.lang !== i18n.defaultLocale ? `/${blog.lang}` : ''
+
   return (
     <Link
       tabIndex={0}
       data-testid='blog-search-result'
-      href={blog.slug}
+      href={`${locale}/blog/${blog.slug}`}
       className='block px-2 focus:outline-none border-slate-600 hover:bg-slate-700 focus:bg-slate-600 rounded md:max-w-5xl md:mr-5'
     >
       <div className='flex flex-col items-start justify-between py-8 border-slate-700 md:flex-row md:py-5 border-b '>
         <div className='md:mr-4 md:w-3/4'>
-          <h1 className='mb-2 break-words text-2xl font-bold leading-normal tracking-tighthn-break-words text-slate-300 font-londrina text-center md:text-left'>
+          <h1 className='mb-2 break-words text-2xl font-bold leading-normal tracking-tighthn-break-words text-slate-300/90 font-londrina text-center md:text-left'>
             {blog.title}
           </h1>
           <div className='mb-4 flex flex-row flex-wrap items-center font-medium text-slate-400 md:pr-5'>
@@ -49,7 +52,7 @@ export default function BlogCard ({ blog }: Props) {
                   return (
                     <span key={index}>
                       <Link
-                        href={`/tags/${tag?.name}`}
+                        href={`tags/${tag?.name}`}
                         className='text-teal-300 font-bold underline underline-offset-4 py-3 px-1 hover:text-white'
                       >
                         {tag?.label}

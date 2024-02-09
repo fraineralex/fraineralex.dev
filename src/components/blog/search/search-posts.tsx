@@ -6,11 +6,14 @@ const SearchResult = lazy(() => import('./search-result'))
 const Modal = lazy(() => import('@/components/blog/common/modal'))
 import { displayTags } from '@/utils/data'
 import Link from 'next/link'
-import { Locale } from '@/i18n-config'
+import { i18n } from '@/i18n-config'
+import { usePathname } from 'next/navigation'
 
-export function SearchPosts ({ className, lang }: { className?: string, lang: Locale }) {
+export function SearchPosts ({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const pathname = usePathname()
+  const lang = pathname.startsWith('/es') ? 'es' : i18n.defaultLocale
 
   return (
     <>

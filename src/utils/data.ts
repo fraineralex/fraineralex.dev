@@ -104,12 +104,14 @@ export const allTags: tag[] = [
 
 export const displayTags: tag[] = [
   ...new Set(
-    allPosts.flatMap(post => {
-      return (
-        post.tags.map(
-          tag => allTags.find(t => t.name === tag) || ({} as tag)
-        ) || []
-      )
-    })
+    allPosts
+      .flatMap(post => {
+        return (
+          post.tags.map(
+            tag => allTags.find(t => t.name === tag) || ({} as tag)
+          ) || []
+        )
+      })
+      .sort((a, b) => a.label.length - b.label.length)
   )
 ]

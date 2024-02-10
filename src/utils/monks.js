@@ -1,6 +1,4 @@
-import { Post } from 'contentlayer/generated'
-
-export const allPosts: Post[] = [
+export const allPosts = [
   {
     published: true,
     title: 'Descubriendo Los Hooks en React: Una Guia Comprensiva',
@@ -115,5 +113,3 @@ export const allPosts: Post[] = [
     readTime: '7'
   }
 ]
-
-export default allPosts

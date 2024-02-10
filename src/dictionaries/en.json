@@ -246,6 +246,51 @@
     },
     "projects": [
       {
+        "title": "Blog",
+        "shortDescription": "Web app featuring RSS feed, advanced search, and tag filtering.",
+        "description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "CSS",
+          "Contentlayer",
+          "Upstash",
+          "Redis"
+        ],
+        "deployUrl": "https://frainer-blog.vercel.app",
+        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "year": 2024
+      },
+      {
+        "title": "Easy Route",
+        "shortDescription": "An efficient loan management solution for streamlined loan processes.",
+        "description": "Java web app developed to efficiently manage loan requests, streamline the customer registration and evaluation process, and monitor and approve loans.",
+        "technologies": [
+          "Java",
+          "Sprint Boot",
+          "MySQL",
+          "JavaScript",
+          "CSS",
+          "Hybernate"
+        ],
+        "githubRepositoryUrl": "https://github.com/fraineralex/EasyRoute",
+        "year": 2023
+      },
+      {
+        "title": "Batch Payment Export",
+        "shortDescription": "Odoo module that allows you to export registered payments.",
+        "description": "Odoo module that allows you to export registered payments from the 'account.payment' model to a xls format.",
+        "technologies": [
+          "Python",
+          "Odoo",
+          "xlwt"
+        ],
+        "githubRepositoryUrl": "https://github.com/fraineralex/batch_payment_export",
+        "year": 2023
+      },
+      {
         "title": "Hacker News Clone",
         "shortDescription": "A simple Hacker News clone built with React.",
         "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",

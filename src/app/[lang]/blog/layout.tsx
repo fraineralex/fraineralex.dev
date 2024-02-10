@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import Footer from '@/components/blog/footer/footer'
+import dynamic from 'next/dynamic'
+const Footer = dynamic(() => import('@/components/blog/footer'))
 import React from 'react'
 
 import '@/styles/blog/main.css'

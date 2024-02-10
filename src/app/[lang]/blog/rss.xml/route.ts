@@ -1,30 +1,11 @@
 export const runtime = 'nodejs'
 
 import RSS from 'rss'
-import fs from 'fs'
-import path from 'path'
 import { marked } from 'marked'
-import matter from 'gray-matter'
 import { RSSHeader } from '@/components/blog/content/rss-header'
-import { Locale } from '@/i18n-config'
+import { readPosts } from '../feed.xml/route'
 
-export const readPosts = (lang: Locale) =>
-  fs
-    .readdirSync(`./content/posts/${lang}`)
-    .filter(file => path.extname(file) === '.mdx')
-    .map(file => {
-      const postContent = fs.readFileSync(`./content/posts/${lang}/${file}`, 'utf8')
-      const { data, content }: { data: any; content: string } =
-        matter(postContent)
-      return { ...data, body: content, slug: file.replace('.mdx', '') }
-    })
-    .sort(
-      (a, b) =>
-        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
-    )
-
-const posts = readPosts('en')
+const posts = readPosts('es')
 const renderer = new marked.Renderer()
 
 renderer.link = (href: string, _: any, text: string) =>
@@ -40,16 +21,16 @@ const renderPost = (md: string) => marked.parse(md)
 export async function GET () {
   const DOMAIN = `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
   const lastPostDate = posts[posts.length - 1].date
-  const feed = new RSS({
+  const rss = new RSS({
     title: "Frainer's Blog 📝",
     description:
-      "Recent articles from Frainer's Blog. I write about tech, programming and whatever else I'm thinking about!",
+      "Articulos recientes de Frainer's Blog. Escribo sobre tecnología, programación y cualquier otra cosa en la que esté pensando!",
     site_url: `${DOMAIN}/`,
-    feed_url: `${DOMAIN}/feed.xml`,
-    image_url: `${DOMAIN}/og.png`,
+    feed_url: `${DOMAIN}/rss.xml`,
+    image_url: `${process.env.DOMAIN}/images/blog/og.webp`,
     pubDate: lastPostDate,
-    language: 'en-US',
-    categories: ['tech', 'programming', 'software'],
+    language: 'es-DO',
+    categories: ['tecnología', 'programación', 'software'],
     custom_elements: [{ 'dc:creator': 'Frainer Encarnación' }]
   })
 
@@ -61,7 +42,8 @@ export async function GET () {
       heroSource: post.heroSource || '',
       tags: post.tags,
       date: post.updated || post.date,
-      readTime: readTime
+      readTime: readTime,
+      minRead: 'min de lectura',
     }
 
     const articleHeader = RSSHeader(props)
@@ -69,7 +51,7 @@ export async function GET () {
       post.body
     )}</article>`
 
-    feed.item({
+    rss.item({
       title: post.title,
       url: `${DOMAIN}/${post.slug}`,
       date: post.updated || post.date,
@@ -86,7 +68,7 @@ export async function GET () {
     })
   })
 
-  return new Response(feed.xml({ indent: true }), {
+  return new Response(rss.xml({ indent: true }), {
     headers: { 'Content-Type': 'application/xml' },
     status: 200,
     statusText: 'OK'

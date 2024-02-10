@@ -1,6 +1,9 @@
 import { Instagram, Rss } from 'lucide-react'
 import Link from 'next/link'
 import '@/styles/blog/footer.css'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+const RssLink = dynamic(() => import('./rss-link'))
 
 export default function SocialMedia () {
   return (
@@ -129,15 +132,14 @@ export default function SocialMedia () {
           </g>
         </svg>
       </Link>
-      <Link
-        href='/feed.xml'
-        className='ml-4'
-        target='_blank'
-        aria-label='Rss'
-        rel='noopener'
+
+      <Suspense
+        fallback={
+          <Rss className='ml-4 h-6 w-6 text-slate-300 hover:text-white hover:scale-110' />
+        }
       >
-        <Rss className='h-6 w-6 text-slate-300 hover:text-white hover:scale-110' />
-      </Link>
+        <RssLink />
+      </Suspense>
     </div>
   )
 }

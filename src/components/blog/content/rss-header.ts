@@ -7,6 +7,7 @@ interface Props {
   tags: string[]
   date: string
   readTime: string
+  minRead?: string
 }
 
 export function RSSHeader ({
@@ -15,7 +16,8 @@ export function RSSHeader ({
   title,
   tags,
   date,
-  readTime
+  readTime,
+  minRead
 }: Props) {
   const site_url =
     process.env.NODE_ENV === 'production'
@@ -45,7 +47,9 @@ export function RSSHeader ({
             }).format(new Date(date))}</time
           >
           <span style="padding-left: 1rem; padding-right: 1rem;">•</span
-          ><span style="margin-inline-end: 0;">${readTime} min read</span>
+          ><span style="margin-inline-end: 0;">${readTime} ${
+    minRead || 'min read'
+  }</span>
           <span style="padding-left: 1rem; padding-right: 1rem;">|</span>
           ${tags
             .map((tagName, index) => {

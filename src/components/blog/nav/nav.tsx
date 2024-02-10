@@ -14,6 +14,10 @@ export const Navigation = () => {
   const ref = useRef<HTMLElement>(null)
   const [isIntersecting, setIntersecting] = useState(true)
 
+  const [locale, setLocale] = useState(
+    pathname.startsWith('/es') ? '/es/' : '/'
+  )
+
   useEffect(() => {
     if (!ref.current) return
     const observer = new IntersectionObserver(([entry]) =>
@@ -30,6 +34,8 @@ export const Navigation = () => {
       pathname.includes(post.slug)
     )
     setIsContentPage(newIsContentPage.length > 0)
+
+    setLocale(pathname.startsWith('/es') ? '/es/' : '/')
   }, [pathname])
 
   return (
@@ -58,7 +64,7 @@ export const Navigation = () => {
               </div>
               <div className='inline-flex pr-5'>
                 <Link
-                  href='/'
+                  href={`${locale}`}
                   className={`ms-5 font-medium ${
                     isBlogPage === false
                       ? 'text-slate-100 underline underline-offset-8'
@@ -68,7 +74,7 @@ export const Navigation = () => {
                   Portfolio
                 </Link>
                 <Link
-                  href='/blog'
+                  href={`${locale}blog`}
                   className={`ms-5 font-medium ${
                     isBlogPage === true
                       ? 'text-slate-100 underline underline-offset-8'

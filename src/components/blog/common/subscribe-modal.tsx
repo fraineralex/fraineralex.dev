@@ -21,7 +21,6 @@ export default function SubscribeModal ({ open, setOpen }: Props) {
           rel='preconnect'
           title='Subscribe to my newsletter'
           src='https://fraineralex.substack.com/embed'
-          width='480'
           height='320'
           className='flex mx-auto align-middle border-0'
         />

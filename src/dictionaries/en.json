@@ -196,7 +196,7 @@
       },
       {
         "projectName": "Programming Quizzes",
-        "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
+        "description": "A React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
         "technologies": [
           "React",
           "TypeScript",
@@ -211,7 +211,7 @@
       },
       {
         "projectName": "Hacker News Clone",
-        "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
+        "description": "A Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
         "technologies": [
           "React",
           "TypeScript",
@@ -292,8 +292,8 @@
       },
       {
         "title": "Hacker News Clone",
-        "shortDescription": "A simple Hacker News clone built with React.",
-        "description": "A simple Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
+        "shortDescription": "A Hacker News clone built with React.",
+        "description": "A Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
         "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
         "deployUrl": "https://frainer-hacker-news.surge.sh",
@@ -328,7 +328,7 @@
       {
         "title": "Programming Quizzes",
         "shortDescription": "React-based web app for programming quizzes.",
-        "description": "A simple React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
+        "description": "A React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
         "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
         "deployUrl": "https://programming-quizzes.surge.sh",
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
@@ -337,7 +337,7 @@
       {
         "title": "Google Translate Clone",
         "shortDescription": "Simple Google Translate clone built with React.",
-        "description": "A simple Google Translate clone, built with React and powered by the OpenAI API.",
+        "description": "A Google Translate clone, built with React and powered by the OpenAI API.",
         "technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
         "deployUrl": "https://frainer-google-translate.surge.sh/",
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",

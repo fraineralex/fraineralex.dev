@@ -3,7 +3,7 @@ export const runtime = 'nodejs'
 import RSS from 'rss'
 import { marked } from 'marked'
 import { RSSHeader } from '@/components/blog/content/rss-header'
-import { readPosts } from '../feed.xml/route'
+import { readPosts } from '@/utils/readPosts'
 
 const posts = readPosts('es')
 const renderer = new marked.Renderer()
@@ -43,7 +43,7 @@ export async function GET () {
       tags: post.tags,
       date: post.updated || post.date,
       readTime: readTime,
-      minRead: 'min de lectura',
+      minRead: 'min de lectura'
     }
 
     const articleHeader = RSSHeader(props)

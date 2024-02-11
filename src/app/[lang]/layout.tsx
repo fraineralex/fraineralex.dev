@@ -6,9 +6,6 @@ import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
 
-import '@/styles/globals.css'
-import '@/styles/site.css'
-
 export async function generateStaticParams () {
   return i18n.locales.map(locale => ({ lang: locale }))
 }

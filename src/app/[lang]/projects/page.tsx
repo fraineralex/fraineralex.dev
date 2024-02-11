@@ -6,11 +6,12 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 const englishMetadata: Metadata = {
-  title: 'Projects',
+  title: 'Projects | Frainer Encarnación',
   description:
     'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
+  keywords: ['Side Projects', 'Open Source Projects', 'Client Work', 'Web Development Projects', 'Software Engineering Projects'],
   openGraph: {
-    title: 'Projects',
+    title: 'Projects | Frainer Encarnación',
     description:
       'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
     url: `${process.env.DOMAIN}/projects`,
@@ -37,7 +38,7 @@ const englishMetadata: Metadata = {
     }
   },
   twitter: {
-    title: 'Projects',
+    title: 'Projects | Frainer Encarnación',
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
@@ -55,22 +56,24 @@ const englishMetadata: Metadata = {
     shortcut: '/favicon.ico'
   },
   alternates: {
-    types: {
-      en: new URL(`${process.env.DOMAIN}/projects`),
-      es: new URL(`${process.env.DOMAIN}/es/projects`)
-    }
+    canonical: '/',
+    languages: {
+      'es-DO': `${process.env.DOMAIN}/es/projects` || 'https://fraineralex.dev/es/projects',
+      'en-US': `${process.env.DOMAIN}/projects` || 'https://fraineralex.dev/projects'
+    },
   }
 }
 
 const spanishMetadata: Metadata = {
-  title: 'Proyectos',
+  title: 'Proyectos | Frainer Encarnación',
   description:
     'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
+  keywords: ['Proyectos Personales', 'Proyectos de Código Abierto', 'Trabajo para Clientes', 'Proyectos de Desarrollo Web', 'Proyectos de Ingeniería de Software'],
   openGraph: {
-    title: 'Proyectos',
+    title: 'Proyectos | Frainer Encarnación',
     description:
       'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
-    url: `${process.env.DOMAIN}/es/proyectos`,
+    url: `${process.env.DOMAIN}/es/projects`,
     siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
       {
@@ -94,7 +97,7 @@ const spanishMetadata: Metadata = {
     }
   },
   twitter: {
-    title: 'Proyectos',
+    title: 'Proyectos | Frainer Encarnación',
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
@@ -112,10 +115,11 @@ const spanishMetadata: Metadata = {
     shortcut: '/favicon.ico'
   },
   alternates: {
+    canonical: '/',
     languages: {
-      'es-DO': '/es/projects',
-      'en-US': '/projects'
-    }
+      'es-DO': `${process.env.DOMAIN}/es/projects` || 'https://fraineralex.dev/es/projects',
+      'en-US': `${process.env.DOMAIN}/projects` || 'https://fraineralex.dev/projects'
+    },
   }
 }
 

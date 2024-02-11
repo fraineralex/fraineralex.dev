@@ -4,6 +4,7 @@ import '@/styles/blog/home.css'
 import { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
+import { allTags } from '@/utils/data'
 
 const BLOG_DOMAIN =
   `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
@@ -12,6 +13,7 @@ const englishMetadata: Metadata = {
   title: 'Tags',
   description:
     'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
+  keywords: [allTags.map(tag => tag.label).join(', ')],
   openGraph: {
     title: "Tags | Frainer's Blog 📝",
     description:
@@ -24,18 +26,34 @@ const englishMetadata: Metadata = {
         height: 1080
       }
     ]
+  },
+  twitter: {
+    title: "Tags | Frainer's Blog 📝",
+    card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    description:
+      'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.'
   }
 }
 
 const spanishMetadata: Metadata = {
-  title: 'Etiquetas',
+  title: "Etiquetas | Frainer's Blog 📝",
   description:
     'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.',
+  keywords: [allTags.map(tag => tag.label).join(', ')],
   openGraph: {
     title: "Etiquetas | Frainer's Blog 📝",
     description:
       'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.',
-    url: `${BLOG_DOMAIN}/blog/etiquetas`,
+    url: `${process.env.DOMAIN}/es/blog/tags`,
     images: [
       {
         url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
@@ -43,6 +61,21 @@ const spanishMetadata: Metadata = {
         height: 1080
       }
     ]
+  },
+  twitter: {
+    title: "Etiquetas | Frainer's Blog 📝",
+    card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    description:
+      'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.'
   }
 }
 

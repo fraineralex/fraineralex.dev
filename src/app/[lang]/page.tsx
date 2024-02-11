@@ -105,8 +105,8 @@ const spanishMetadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'es-DO': '/es',
-      'en-US': '/'
+      'es-DO': '/',
+      'en-US': `${process.env.DOMAIN}` || 'https://fraineralex.dev'
     },
     types: {
       'application/rss+xml': '/blog/rss.xml'
@@ -120,7 +120,7 @@ const spanishMetadata: Metadata = {
     siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
       {
-        url: '/es-og.webp',
+        url: `${process.env.DOMAIN}/es-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -148,7 +148,7 @@ const spanishMetadata: Metadata = {
       'Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
     images: [
       {
-        url: '/es-og.webp',
+        url: `${process.env.DOMAIN}/es-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -162,7 +162,6 @@ const spanishMetadata: Metadata = {
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   return params?.lang === 'es' ? spanishMetadata : englishMetadata
 }
-
 
 export default async function Home ({ params }: Props) {
   const lang = params?.lang || i18n.defaultLocale

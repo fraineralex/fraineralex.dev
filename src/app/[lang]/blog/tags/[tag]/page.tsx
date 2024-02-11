@@ -50,6 +50,12 @@ const englishMetadata = async (tagName: string): Promise<Metadata> => {
   return {
     title: tag.label,
     description: tag.description,
+    keywords: [
+      tag.label,
+      `Articles about ${tag.label}`,
+      `Tutorials about ${tag.label}`,
+      `Best practices in ${tag.label}`
+    ],
     openGraph: {
       title: `${tag.label} | Frainer's Blog 📝`,
       images: [
@@ -66,6 +72,25 @@ const englishMetadata = async (tagName: string): Promise<Metadata> => {
       ],
       description: tag.description,
       url: `${BLOG_DOMAIN}/tags/${tag.name}`
+    },
+    twitter: {
+      title: `${tag.label} | Frainer's Blog 📝`,
+      card: 'summary_large_image',
+      creator: '@fraineralex',
+      site: '@fraineralex',
+      images: [
+        {
+          url: `${process.env.DOMAIN}${tag.image}`,
+          width: 32,
+          height: 32
+        },
+        {
+          url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+          width: 1920,
+          height: 1080
+        }
+      ],
+      description: tag.description
     }
   }
 }
@@ -83,10 +108,16 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
     `${process.env.DOMAIN}/es/blog` || `https://fraineralex.dev/es/blog`
 
   return {
-    title: tag.label,
-    description: tag.description,
+    title: tag.spanishLabel || tag.label,
+    description: tag.spanishDescription,
+    keywords: [
+      tag.label,
+      `Artículos sobre ${tag.spanishLabel || tag.label}`,
+      `Tutoriales sobre ${tag.spanishLabel || tag.label}`,
+      `Buenas prácticas en ${tag.spanishLabel || tag.label}`
+    ],
     openGraph: {
-      title: `${tag.label} | Frainer's Blog 📝`,
+      title: `${tag.spanishLabel || tag.label} | Frainer's Blog 📝`,
       images: [
         {
           url: `${process.env.DOMAIN}${tag.image}`,
@@ -99,8 +130,27 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
           height: 1080
         }
       ],
-      description: tag.description,
-      url: `${BLOG_DOMAIN}/es/tags/${tag.name}`
+      description: tag.spanishDescription,
+      url: `${BLOG_DOMAIN}/tags/${tag.name}`
+    },
+    twitter: {
+      title: `${tag.spanishLabel || tag.label} | Frainer's Blog 📝`,
+      card: 'summary_large_image',
+      creator: '@fraineralex',
+      site: '@fraineralex',
+      images: [
+        {
+          url: `${process.env.DOMAIN}${tag.image}`,
+          width: 32,
+          height: 32
+        },
+        {
+          url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+          width: 1920,
+          height: 1080
+        }
+      ],
+      description: tag.spanishDescription
     }
   }
 }

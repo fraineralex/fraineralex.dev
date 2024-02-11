@@ -105,10 +105,7 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
   }
 }
 
-export async function getMetadata (params: {
-  lang?: Locale
-  tag: string
-}): Promise<Metadata> {
+export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const metadata = params.lang === 'es' ? spanishMetadata : englishMetadata
   return await metadata(params.tag)
 }

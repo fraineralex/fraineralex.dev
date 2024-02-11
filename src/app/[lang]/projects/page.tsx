@@ -119,7 +119,7 @@ const spanishMetadata: Metadata = {
   }
 }
 
-export async function getMetadata (params: { lang: Locale }) {
+export async function generateMetadata ({ params }: Props) {
   return params.lang === 'es' ? spanishMetadata : englishMetadata
 }
 

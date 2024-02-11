@@ -19,7 +19,7 @@ marked.setOptions({
 
 const renderPost = (md: string) => marked.parse(md)
 export async function GET () {
-  const DOMAIN = `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
+  const DOMAIN = `${process.env.DOMAIN}/es/blog` || 'https://fraineralex.dev/es/blog'
   const lastPostDate = posts[posts.length - 1].date
   const rss = new RSS({
     title: "Frainer's Blog 📝",
@@ -27,7 +27,7 @@ export async function GET () {
       "Articulos recientes de Frainer's Blog. Escribo sobre tecnología, programación y cualquier otra cosa en la que esté pensando!",
     site_url: `${DOMAIN}/`,
     feed_url: `${DOMAIN}/rss.xml`,
-    image_url: `${process.env.DOMAIN}/images/blog/og.webp`,
+    image_url: `${process.env.DOMAIN}/images/blog/es-og.webp`,
     pubDate: lastPostDate,
     language: 'es-DO',
     categories: ['tecnología', 'programación', 'software'],

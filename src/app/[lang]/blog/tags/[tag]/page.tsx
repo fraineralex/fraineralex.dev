@@ -199,7 +199,9 @@ export default async function BlogPage ({ params }: Props) {
           <h1 className='font-bold leading-none font-londrina text-white'>
             {dictionary.title}{' '}
             <code className='relative rounded bg-white bg-opacity-25 py-[0.2rem] px-[0.5rem] font-mono font-bold text-white lowercase'>
-              {tag?.label || tagName}
+              {lang !== i18n.defaultLocale
+                ? tag?.spanishLabel
+                : tag?.label || tagName}
             </code>
           </h1>
           <p className='text-zinc-400 mt-6 md:mt-6 text-xs md:text-lg leading-relaxed'>
@@ -211,6 +213,8 @@ export default async function BlogPage ({ params }: Props) {
                 </strong>{' '}
                 {dictionary.notFound.second}
               </>
+            ) : lang !== i18n.defaultLocale ? (
+              tag?.spanishDescription
             ) : (
               tag?.description
             )}

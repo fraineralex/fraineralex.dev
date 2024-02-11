@@ -62,11 +62,11 @@ const spanishMetadata: Metadata = {
     template: "%s | Frainer's Blog"
   },
   description:
-    "Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando. Aquí encontrarás artículos sobre desarrollo web, ingeniería de software y muchas cosas más relacionadas con el mundo geek de la programación.",
+    'Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando. Aquí encontrarás artículos sobre desarrollo web, ingeniería de software y muchas cosas más relacionadas con el mundo geek de la programación.',
   openGraph: {
     title: "Frainer's Blog 📝",
     description:
-      "Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando.",
+      'Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando.',
     url: `${process.env.DOMAIN}/es/blog`,
     siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
@@ -91,7 +91,7 @@ const spanishMetadata: Metadata = {
     }
   },
   twitter: {
-    title: "Blog de Frainer 📝",
+    title: 'Blog de Frainer 📝',
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
@@ -103,10 +103,13 @@ const spanishMetadata: Metadata = {
       }
     ],
     description:
-      "Soy Frainer Encarnación, un Desarrollador Full Stack basado en la República Dominicana. ¡Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando!"
+      'Soy Frainer Encarnación, un Desarrollador Full Stack basado en la República Dominicana. ¡Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando!'
   }
 }
 
+export async function generateMetadata ({ params }: Props): Promise<Metadata> {
+  return params?.lang === 'es' ? spanishMetadata : englishmetadata
+}
 
 interface Props {
   children: React.ReactNode

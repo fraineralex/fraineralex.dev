@@ -5,7 +5,7 @@ import AllProjectsContent from '@/components/project/all-projects-content'
 import Link from 'next/link'
 import { Metadata } from 'next'
 
-export const metadata: Metadata = {
+const englishMetadata: Metadata = {
   title: 'Projects',
   description:
     'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
@@ -60,6 +60,67 @@ export const metadata: Metadata = {
       es: new URL(`${process.env.DOMAIN}/es/projects`)
     }
   }
+}
+
+const spanishMetadata: Metadata = {
+  title: 'Proyectos',
+  description:
+    'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
+  openGraph: {
+    title: 'Proyectos',
+    description:
+      'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
+    url: `${process.env.DOMAIN}/es/proyectos`,
+    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/projects/es-og-projects.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    locale: 'es-DO',
+    type: 'website'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  twitter: {
+    title: 'Proyectos',
+    card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/projects/es-og-projects.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    description:
+      'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.'
+  },
+  icons: {
+    shortcut: '/favicon.ico'
+  },
+  alternates: {
+    languages: {
+      'es-DO': '/es/projects',
+      'en-US': '/projects'
+    }
+  }
+}
+
+export async function getMetadata (params: { lang: Locale }) {
+  return params.lang === 'es' ? spanishMetadata : englishMetadata
 }
 
 interface Props {

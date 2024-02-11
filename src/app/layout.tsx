@@ -28,7 +28,7 @@ const londrinaSolid = LocalFont({
   variable: '--font-londrina'
 })
 
-export const metadata: Metadata = {
+const englishMetadata: Metadata = {
   title: {
     default: 'Frainer Encarnación',
     template: '%s | Frainer Encarnación'
@@ -53,7 +53,6 @@ export const metadata: Metadata = {
       'es-DO': '/es'
     },
     types: {
-      // See the RSS Feed section for more details
       'application/rss+xml': '/blog/feed.xml'
     }
   },
@@ -104,12 +103,93 @@ export const metadata: Metadata = {
   }
 }
 
+const spanishMetadata: Metadata = {
+  title: {
+    default: 'Frainer Encarnación',
+    template: '%s | Frainer Encarnación'
+  },
+  category: 'Portafolio Personal',
+  keywords: [
+    'Frainer Encarnación',
+    'Frainer Alexander Encarnación Valenzuela',
+    'Desarrollador Web',
+    'Desarrollador Full Stack',
+    'Ingeniero de Software',
+    'Desarrollador Frontend',
+    'Desarrollador Backend'
+  ],
+  description:
+    'Soy Frainer Encarnación, un Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
+  metadataBase: new URL(
+    `${process.env.DOMAIN}/es` || 'https://fraineralex.dev/es'
+  ),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'es-DO': '/es',
+      'en-US': '/'
+    },
+    types: {
+      'application/rss+xml': '/blog/rss.xml'
+    }
+  },
+  openGraph: {
+    title: 'Frainer Encarnación',
+    description:
+      'Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
+    url: `${process.env.DOMAIN}/es`,
+    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    images: [
+      {
+        url: '/es-og.webp',
+        width: 1920,
+        height: 1080
+      }
+    ],
+    locale: 'es-DO',
+    type: 'website'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  twitter: {
+    title: 'Frainer Encarnación',
+    card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    description:
+      'Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
+    images: [
+      {
+        url: '/es-og.webp',
+        width: 1920,
+        height: 1080
+      }
+    ]
+  },
+  icons: {
+    shortcut: '/favicon.ico'
+  }
+}
+
+export async function getMetadata (params: { lang: Locale }) {
+  return params.lang === 'es' ? spanishMetadata : englishMetadata
+}
+
 interface Props {
   children: React.ReactNode
   params?: { lang: Locale }
 }
 
-export default function RootLayout ({ children, params }: Props) {
+export default function LangLayout ({ children, params }: Props) {
   const lang = params?.lang || i18n.defaultLocale
   return (
     <html

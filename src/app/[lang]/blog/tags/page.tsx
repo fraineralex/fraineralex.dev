@@ -8,7 +8,7 @@ import { getDictionary } from '@/get-dictionary'
 const BLOG_DOMAIN =
   `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
 
-export const metadata: Metadata = {
+const englishMetadata: Metadata = {
   title: 'Tags',
   description:
     'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
@@ -25,6 +25,29 @@ export const metadata: Metadata = {
       }
     ]
   }
+}
+
+const spanishMetadata: Metadata = {
+  title: 'Etiquetas',
+  description:
+    'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.',
+  openGraph: {
+    title: "Etiquetas | Frainer's Blog 📝",
+    description:
+      'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.',
+    url: `${BLOG_DOMAIN}/blog/etiquetas`,
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ]
+  }
+}
+
+export async function getMetadata (params: { lang: Locale }) {
+  return params.lang === 'es' ? spanishMetadata : englishMetadata
 }
 
 interface Props {

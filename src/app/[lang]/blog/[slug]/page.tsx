@@ -13,7 +13,6 @@ import { allTags } from '@/utils/data'
 import { allPosts } from 'contentlayer/generated'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
-//import allPosts from '@/util/monks'
 
 export const revalidate = 60
 const redis = Redis.fromEnv()
@@ -53,6 +52,7 @@ export async function generateMetadata (
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
+
   const BLOG_DOMAIN =
     `${process.env.DOMAIN}/${
       lang !== i18n.defaultLocale ? `${lang}/` : ''
@@ -71,7 +71,8 @@ export async function generateMetadata (
           url: `${process.env.DOMAIN}${post.hero}`,
           width: 1920,
           height: 1080
-        }
+        },
+        ...previousImages
       ],
       description: post.description,
       url: `${BLOG_DOMAIN}/${post.slug}`

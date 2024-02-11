@@ -35,12 +35,7 @@ type Props = {
   return allParams
 } */
 
-export async function generateMetadata (
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const tagName = params?.tag
-  const lang = params?.lang ?? i18n.defaultLocale
+const englishMetadata = async (tagName: string): Promise<Metadata> => {
   const tag = allTags.find(tag => tag.name === tagName)
 
   if (!tag) {
@@ -49,15 +44,8 @@ export async function generateMetadata (
     }
   }
 
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
   const BLOG_DOMAIN =
-    `${process.env.DOMAIN}/${
-      lang !== i18n.defaultLocale ? `${lang}/` : ''
-    }blog` ||
-    `https://fraineralex.dev/${
-      lang !== i18n.defaultLocale ? `${lang}/` : ''
-    }blog`
+    `${process.env.DOMAIN}/blog` || `https://fraineralex.dev/blog`
 
   return {
     title: tag.label,
@@ -69,12 +57,57 @@ export async function generateMetadata (
           url: `${process.env.DOMAIN}${tag.image}`,
           width: 32,
           height: 32
+        },
+        {
+          url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+          width: 1920,
+          height: 1080
         }
       ],
       description: tag.description,
       url: `${BLOG_DOMAIN}/tags/${tag.name}`
     }
   }
+}
+
+const spanishMetadata = async (tagName: string): Promise<Metadata> => {
+  const tag = allTags.find(tag => tag.name === tagName)
+
+  if (!tag) {
+    return {
+      title: 'Etiqueta no encontrada'
+    }
+  }
+
+  const BLOG_DOMAIN =
+    `${process.env.DOMAIN}/es/blog` || `https://fraineralex.dev/es/blog`
+
+  return {
+    title: tag.label,
+    description: tag.description,
+    openGraph: {
+      title: `${tag.label} | Frainer's Blog 📝`,
+      images: [
+        {
+          url: `${process.env.DOMAIN}${tag.image}`,
+          width: 32,
+          height: 32
+        },
+        {
+          url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+          width: 1920,
+          height: 1080
+        }
+      ],
+      description: tag.description,
+      url: `${BLOG_DOMAIN}/es/tags/${tag.name}`
+    }
+  }
+}
+
+export async function getMetadata (params: { lang: Locale; tag: string }) {
+  const metadata = params.lang === 'es' ? spanishMetadata : englishMetadata
+  return metadata(params.tag)
 }
 
 export const revalidate = 60

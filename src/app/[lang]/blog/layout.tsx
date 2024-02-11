@@ -5,7 +5,7 @@ import React from 'react'
 
 import '@/styles/blog/main.css'
 
-export const metadata: Metadata = {
+const englishmetadata: Metadata = {
   title: {
     absolute: "Frainer's Blog 📝",
     template: "%s | Frainer's Blog"
@@ -55,6 +55,58 @@ export const metadata: Metadata = {
       "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!"
   }
 }
+
+const spanishMetadata: Metadata = {
+  title: {
+    absolute: "Frainer's Blog 📝",
+    template: "%s | Frainer's Blog"
+  },
+  description:
+    "Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando. Aquí encontrarás artículos sobre desarrollo web, ingeniería de software y muchas cosas más relacionadas con el mundo geek de la programación.",
+  openGraph: {
+    title: "Frainer's Blog 📝",
+    description:
+      "Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando.",
+    url: `${process.env.DOMAIN}/es/blog`,
+    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/es-og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    locale: 'es-DO',
+    type: 'website'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  twitter: {
+    title: "Blog de Frainer 📝",
+    card: 'summary_large_image',
+    creator: '@fraineralex',
+    site: '@fraineralex',
+    images: [
+      {
+        url: `${process.env.DOMAIN}/images/blog/es-og.webp`,
+        width: 1920,
+        height: 1080
+      }
+    ],
+    description:
+      "Soy Frainer Encarnación, un Desarrollador Full Stack basado en la República Dominicana. ¡Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando!"
+  }
+}
+
 
 interface Props {
   children: React.ReactNode

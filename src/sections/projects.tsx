@@ -39,7 +39,7 @@ export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
             aria-label={link.ariaLabel}
             href={link.url}
           >
-            <h6>
+            <>
               <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
                 {link.strong}{' '}
               </strong>
@@ -49,7 +49,7 @@ export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
                 </strong>
                 <ArrowRigthIcon />
               </span>
-            </h6>
+            </>
           </Link>
         </div>
       </article>

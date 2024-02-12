@@ -51,7 +51,7 @@ export default function Writing ({
                 aria-label={link.ariaLabel}
                 href={link.url}
               >
-                <h6>
+                <>
                   <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
                     {link.strong}{' '}
                   </strong>
@@ -61,7 +61,7 @@ export default function Writing ({
                     </strong>
                     <ArrowRigthIcon />
                   </span>
-                </h6>
+                </>
               </Link>
             </div>
           </article>

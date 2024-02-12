@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { LinkIcon } from '../common/SvgIcons'
 import Link from 'next/link'
+import TimeISO from '../common/time-iso'
 
 type Props = {
   title: string
@@ -27,13 +28,7 @@ export default function WritingCard ({ title, imageName, date }: Props) {
         />
         <aside className='z-10 col-span-6'>
           <p className='-mt-1 text-sm font-medium leading-6 text-300/80'>
-            {
-              <time dateTime={new Date(date).toISOString()}>
-                {Intl.DateTimeFormat(undefined, {
-                  dateStyle: 'medium'
-                }).format(new Date(date))}
-              </time>
-            }
+            <TimeISO stringDate={date} />
           </p>
           <h3 className='-mt-1'>
             <Link

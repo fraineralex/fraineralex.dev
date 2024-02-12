@@ -67,14 +67,14 @@ export default function ExperienceCard ({
                 </h5>
               ))}
             <h5
-              className='text-slate-400/80 mt-1 text-sm hidden sm:block'
+              className='text-slate-400/90 mt-1 text-sm hidden sm:block'
               aria-hidden='true'
             >
               {startDate} — {endDate}
               {/*  · {contract} */}
             </h5>
             {location && locationType && (
-              <h5 className='text-slate-400/80 mt-1 text-sm' aria-hidden='true'>
+              <h5 className='text-slate-400/90 mt-1 text-sm' aria-hidden='true'>
                 {location}
                 {/*  · {locationType} */}
               </h5>

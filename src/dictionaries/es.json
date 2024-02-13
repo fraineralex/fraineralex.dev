@@ -213,13 +213,22 @@
         "starsOnGithub": 2
       },
       {
-        "projectName": "Clon de Hacker News",
-        "description": "Un clon del sitio web Hacker News construido con React y la API de Hacker News. Muestra las 20 mejores historias con desplazamiento infinito para una experiencia de navegación de noticias fluida.",
-        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
-        "deployUrl": "https://frainer-hacker-news.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
-        "imageSrc": "hacker_news.webp",
-        "starsOnGithub": 2
+        "projectName": "Aplicación de Bienes Raíces",
+        "description": "Una aplicación web de gestión inmobiliaria con cuatro roles distintos, cada uno ofrece funcionalidades específicas dentro del sistema para gestionar las propiedades.",
+        "technologies": [
+          "C#",
+          "ASP.NET",
+          "JavaScript",
+          "SQL Server",
+          "Blazor",
+          "Identity",
+          "Arquitectura ONION",
+          "CSS"
+        ],
+        "deployUrl": "https://github.com/fraineralex/RealEstate-App",
+        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
+        "imageSrc": "realestate.webp",
+        "starsOnGithub": 4
       }
     ],
     "link": {

@@ -210,19 +210,22 @@
         "starsOnGithub": 2
       },
       {
-        "projectName": "Hacker News Clone",
-        "description": "A Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
+        "projectName": "Real Estate App",
+        "description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the properties.",
         "technologies": [
-          "React",
-          "TypeScript",
-          "Vite",
-          "Styled Componets",
-          "SWR"
+          "C#",
+          "ASP.NET",
+          "JavaScript",
+          "SQL Server",
+          "Blazor",
+          "Identity",
+          "ONION Architecture",
+          "CSS"
         ],
-        "deployUrl": "https://frainer-hacker-news.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
-        "imageSrc": "hacker_news.webp",
-        "starsOnGithub": 2
+        "deployUrl": "https://github.com/fraineralex/RealEstate-App",
+        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
+        "imageSrc": "realestate.webp",
+        "starsOnGithub": 4
       }
     ],
     "link": {
@@ -282,11 +285,7 @@
         "title": "Batch Payment Export",
         "shortDescription": "Odoo module that allows you to export registered payments.",
         "description": "Odoo module that allows you to export registered payments from the 'account.payment' model to a xls format.",
-        "technologies": [
-          "Python",
-          "Odoo",
-          "xlwt"
-        ],
+        "technologies": ["Python", "Odoo", "xlwt"],
         "githubRepositoryUrl": "https://github.com/fraineralex/batch_payment_export",
         "year": 2023
       },

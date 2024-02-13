@@ -47,7 +47,7 @@ export default function Experience ({
             href={resumeButton.url}
             target='_blank'
           >
-            <>
+            <p>
               <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
                 {resumeButton.strong}{' '}
               </strong>
@@ -57,7 +57,7 @@ export default function Experience ({
                 </strong>
                 <ArrowRigthIcon />
               </span>
-            </>
+            </p>
           </Link>
         </div>
       </article>

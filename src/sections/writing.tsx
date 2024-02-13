@@ -51,17 +51,17 @@ export default function Writing ({
                 aria-label={link.ariaLabel}
                 href={link.url}
               >
-                <>
+                <p>
                   <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
                     {link.strong}{' '}
                   </strong>
-                  <span className='whitespace-nowrap'>
+                  <span className='marker:whitespace-nowrap'>
                     <strong className='border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none font-semibold'>
                       {link.span}
                     </strong>
                     <ArrowRigthIcon />
                   </span>
-                </>
+                </p>
               </Link>
             </div>
           </article>

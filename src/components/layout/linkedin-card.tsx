@@ -32,7 +32,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
       <div className='w-content max-w-full mv-0 mx-auto grid gap-2 px-4'>
         <div className='relative flex justify-end items-center min-h-half-avatar py-2 mb-8'>
           <picture>
-            <img
+            <Image
               className='absolute -top-2 transform bg-surface-4 -translate-y-1/2 left-0 rounded-full aspect-square w-avatar border-4 border-text-1'
               src={profileImage}
               alt={`${fullname} profile picture`}

@@ -49,8 +49,10 @@ export function middleware (request: NextRequest) {
   if (
     [
       '/manifest.json',
+      '/manifest.webmanifest',
       '/favicon.ico',
       '/images/hero/profile.jpg',
+      'blog/rss.xml',
       '/resume.pdf',
       '/curriculum.pdf',
       '/plane.html',
@@ -100,17 +102,19 @@ export function middleware (request: NextRequest) {
       '/images/blog/posts/cover/crafting-react-hooks.webp',
       '/images/blog/posts/cover/how-to-install-nvm.webp',
       '/images/blog/posts/cover/master-git-commit-message.webp',
-
       // Posts / Cover / RSS
       '/images/blog/posts/cover/rss/crafting-react-hooks.png',
       '/images/blog/posts/cover/rss/how-to-install-nvm.png',
-      '/images/blog/posts/cover/rss/master-git-commit-message.png'
+      '/images/blog/posts/cover/rss/master-git-commit-message.png',
+      // Fonts
+      '/fonts/CircularXXWeb-Bold.woff2',
+      '/fonts/CircularXXWeb-Book.woff2',
     ].includes(pathname)
   )
     return
 
   // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = i18n.locales.every(
+ /* const pathnameIsMissingLocale = i18n.locales.every(
     locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   )
 
@@ -127,7 +131,7 @@ export function middleware (request: NextRequest) {
         request.url
       )
     )
-  }
+  } */
 }
 
 export const config = {

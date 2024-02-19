@@ -3,9 +3,9 @@ export const runtime = 'nodejs'
 import RSS from 'rss'
 import { marked } from 'marked'
 import { RSSHeader } from '@/components/blog/content/rss-header'
-import { readPosts } from '@/utils/readPosts'
+//import { readPosts } from '@/utils/readPosts'
 
-const posts = readPosts('es')
+const posts = [] as any
 const renderer = new marked.Renderer()
 
 renderer.link = (href: string, _: any, text: string) =>
@@ -20,7 +20,7 @@ marked.setOptions({
 const renderPost = (md: string) => marked.parse(md)
 export async function GET () {
   const DOMAIN = `${process.env.DOMAIN}/es/blog` || 'https://fraineralex.dev/es/blog'
-  const lastPostDate = posts[posts.length - 1].date
+  const lastPostDate = posts.length > 0 ? posts[posts.length - 1].date : ''
   const rss = new RSS({
     title: "Frainer's Blog 📝",
     description:
@@ -34,7 +34,7 @@ export async function GET () {
     custom_elements: [{ 'dc:creator': 'Frainer Encarnación' }]
   })
 
-  posts.map(post => {
+  posts.map((post: any) => {
     const readTime = Math.ceil(post.body.split(/\s+/).length / 200).toString()
 
     const props = {

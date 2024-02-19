@@ -16,7 +16,7 @@ export default function RSSLink () {
   }, [pathname])
 
   const href =
-    lang !== i18n.defaultLocale ? `/${lang}/blog/rss.xml` : '/blog/feed.xml'
+    lang !== i18n.defaultLocale ? `/${lang}/blog/rss.xml` : `/${lang}/blog/feed.xml`
 
   return (
     <Link

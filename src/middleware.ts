@@ -55,9 +55,10 @@ export function middleware (request: NextRequest) {
     [
       '/manifest.json',
       '/manifest.webmanifest',
+      '/robots.txt',
+      '/sitemap.xml',
       '/favicon.ico',
       '/images/hero/profile.jpg',
-      '/blog/rss.xml',
       '/resume.pdf',
       '/curriculum.pdf',
       '/plane.html',

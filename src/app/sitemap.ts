@@ -1,5 +1,6 @@
 import { allPosts } from 'contentlayer/generated'
 import { allTags } from '@/utils/data'
+import { i18n } from '@/i18n-config'
 
 export default async function sitemap () {
   const DOMAIN = process.env.DOMAIN || 'https://fraineralex.dev'
@@ -11,10 +12,24 @@ export default async function sitemap () {
     lastModified: lastPostDate
   }))
 
+  const articlesByLocale = i18n.locales.map(locale => {
+    allPosts.map(post => ({
+      url: `${DOMAIN}/${locale}/blog/${post.slug}`,
+      lastModified: lastPostDate
+    }))
+  })
+
   const tags = allTags.map(tag => ({
     url: `${DOMAIN}/blog/${tag.name}`,
     lastModified: lastPostDate
   }))
+
+  const tagsByLocale = i18n.locales.map(locale => {
+    allTags.map(tag => ({
+      url: `${DOMAIN}/${locale}/blog/${tag.name}`,
+      lastModified: lastPostDate
+    }))
+  })
 
   const routes = [
     '',
@@ -22,12 +37,26 @@ export default async function sitemap () {
     '/blog',
     '/blog/tags',
     '/blog/feed.xml',
-    'resume',
-    'curriculum'
+    '/resume',
+    '/curriculum'
   ].map(route => ({
     url: `${DOMAIN}${route}`,
     lastModified: lastPostDate
   }))
 
-  return [...routes, ...articles, ...tags]
+  const routesByLocale = i18n.locales.map(locale => {
+    ;['', '/projects', '/blog', '/blog/tags', '/blog/feed.xml'].map(route => ({
+      url: `${DOMAIN}/${locale}${route}`,
+      lastModified: lastPostDate
+    }))
+  })
+
+  return [
+    ...routes,
+    ...articles,
+    ...tags,
+    ...articlesByLocale,
+    ...tagsByLocale,
+    ...routesByLocale
+  ]
 }

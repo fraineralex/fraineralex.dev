@@ -56,11 +56,11 @@ export function SwitchLanguage () {
   let newpath = `/es${pathname}`
 
   if (currentLocale === 'es') {
-    newpath = pathname.replace('/es', '/')
+    newpath = pathname.replace('/es', '/en')
   }
 
   if (pathname.startsWith('/es/')) {
-    newpath = pathname.replace('/es/', '/')
+    newpath = pathname.replace('/es/', '/en/')
   }
 
   return (

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-
 import { i18n } from './i18n-config'
 
 import { match as matchLocale } from '@formatjs/intl-localematcher'
@@ -28,7 +27,10 @@ export function middleware (request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   // Remove the default locale from the pathname if present
-  if (pathname.startsWith(`/${i18n.defaultLocale}/`)) {
+  if (
+    pathname.startsWith(`/${i18n.defaultLocale}/`) &&
+    getLocale(request) === i18n.defaultLocale
+  ) {
     const newUrl = new URL(
       pathname.replace(`/${i18n.defaultLocale}`, ''),
       request.url
@@ -36,7 +38,10 @@ export function middleware (request: NextRequest) {
     return NextResponse.redirect(newUrl)
   }
 
-  if (pathname.startsWith(`/${i18n.defaultLocale}`)) {
+  if (
+    pathname.startsWith(`/${i18n.defaultLocale}`) &&
+    getLocale(request) === i18n.defaultLocale
+  ) {
     const newUrl = new URL(
       pathname.replace(`${i18n.defaultLocale}`, ''),
       request.url
@@ -52,12 +57,12 @@ export function middleware (request: NextRequest) {
       '/manifest.webmanifest',
       '/favicon.ico',
       '/images/hero/profile.jpg',
-      'blog/rss.xml',
+      '/blog/rss.xml',
       '/resume.pdf',
       '/curriculum.pdf',
       '/plane.html',
-      'es-og.webp',
-      'og.webp',
+      '/es-og.webp',
+      '/og.webp',
       // Projects
       '/images/projects/blog.webp',
       '/images/projects/chess.webp',
@@ -108,13 +113,13 @@ export function middleware (request: NextRequest) {
       '/images/blog/posts/cover/rss/master-git-commit-message.png',
       // Fonts
       '/fonts/CircularXXWeb-Bold.woff2',
-      '/fonts/CircularXXWeb-Book.woff2',
+      '/fonts/CircularXXWeb-Book.woff2'
     ].includes(pathname)
   )
     return
 
   // Check if there is any supported locale in the pathname
- /* const pathnameIsMissingLocale = i18n.locales.every(
+  const pathnameIsMissingLocale = i18n.locales.every(
     locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   )
 
@@ -131,7 +136,7 @@ export function middleware (request: NextRequest) {
         request.url
       )
     )
-  } */
+  }
 }
 
 export const config = {

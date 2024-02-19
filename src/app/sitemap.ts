@@ -45,10 +45,18 @@ export default async function sitemap () {
   }))
 
   const routesByLocale = i18n.locales.map(locale => {
-    ;['', '/projects', '/blog', '/blog/tags', '/blog/feed.xml'].map(route => ({
+    const routes = [
+      '',
+      '/projects',
+      '/blog',
+      '/blog/tags',
+      '/blog/feed.xml'
+    ].map(route => ({
       url: `${DOMAIN}/${locale}${route}`,
       lastModified: lastPostDate
     }))
+
+    return routes
   })
 
   return [

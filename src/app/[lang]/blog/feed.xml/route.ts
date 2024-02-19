@@ -3,9 +3,9 @@ export const runtime = 'nodejs'
 import RSS from 'rss'
 import { marked } from 'marked'
 import { RSSHeader } from '@/components/blog/content/rss-header'
-//import { readPosts } from '@/utils/readPosts'
+import { readPosts } from '@/utils/readPosts'
 
-const posts = [] as any
+const posts = readPosts('en')
 const renderer = new marked.Renderer()
 
 renderer.link = (href: string, _: any, text: string) =>
@@ -34,7 +34,7 @@ export async function GET () {
     custom_elements: [{ 'dc:creator': 'Frainer Encarnación' }]
   })
 
-  posts.map((post:any) => {
+  posts.map(post => {
     const readTime = Math.ceil(post.body.split(/\s+/).length / 200).toString()
 
     const props = {

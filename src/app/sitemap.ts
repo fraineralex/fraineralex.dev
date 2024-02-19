@@ -13,7 +13,7 @@ export default async function sitemap () {
   }))
 
   const articlesByLocale = i18n.locales.flatMap(locale => {
-    allPosts.map(post => ({
+    return allPosts.map(post => ({
       url: `${DOMAIN}/${locale}/blog/${post.slug}`,
       lastModified: lastPostDate
     }))
@@ -25,7 +25,7 @@ export default async function sitemap () {
   }))
 
   const tagsByLocale = i18n.locales.flatMap(locale => {
-    allTags.map(tag => ({
+    return allTags.map(tag => ({
       url: `${DOMAIN}/${locale}/blog/${tag.name}`,
       lastModified: lastPostDate
     }))

@@ -8,10 +8,10 @@ import { Locale } from '@/i18n-config'
 
 export const readPosts = (lang: Locale) =>
   fs
-    .readdirSync(`../content/posts/${lang}`)
+    .readdirSync(`../../content/posts/${lang}`)
     .filter(file => path.extname(file) === '.mdx')
     .map(file => {
-      const postContent = fs.readFileSync(`../content/posts/${lang}/${file}`, 'utf8')
+      const postContent = fs.readFileSync(`../../content/posts/${lang}/${file}`, 'utf8')
       const { data, content }: { data: any; content: string } =
         matter(postContent)
       return { ...data, body: content, slug: file.replace('.mdx', '') }

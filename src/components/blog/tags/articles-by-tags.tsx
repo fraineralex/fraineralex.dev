@@ -16,7 +16,6 @@ interface Props {
 export async function ArticlesByTags ({ displayAllTags, lang }: Props) {
   const { postsByTags } = (await getDictionary(lang)).blog
   const tags = displayAllTags ? allTags : displayTags
-  const locale = lang !== i18n.defaultLocale ? `/${lang}` : ''
 
   return (
     <section className='lg:mx-0 w-full animate-tags-section'>
@@ -29,7 +28,7 @@ export async function ArticlesByTags ({ displayAllTags, lang }: Props) {
           tags.map((tag, index) => (
             <Link
               key={index}
-              href={`${locale}/blog/tags/${tag.name}`}
+              href={`/${lang}/blog/tags/${tag.name}`}
               className='border-2 border-zinc-400 group hover:border-zinc-100 items-center rounded-full flex h-8 text-sm px-3 sm:h-12 sm:text-xl sm:px-6 relative transition-all mb-1 md:mb-0'
             >
               {tag.name === 'react' ? (

@@ -2,7 +2,7 @@
 import { ChevronDown } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { Locale } from '@/i18n-config'
+import { Locale, i18n } from '@/i18n-config'
 import Link from 'next/link'
 import { SpainFlag, UsaFlag } from '../common/SvgIcons'
 
@@ -54,6 +54,10 @@ export function SwitchLanguage () {
   }, [pathname])
 
   let newpath = `/es${pathname}`
+
+  if (currentLocale === i18n.defaultLocale && pathname.startsWith('/en')) {
+    newpath = pathname.replace('/en', '/es')
+  }
 
   if (currentLocale === 'es') {
     newpath = pathname.replace('/es', '/en')

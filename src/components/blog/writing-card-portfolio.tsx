@@ -2,14 +2,17 @@ import Image from 'next/image'
 import { LinkIcon } from '../common/SvgIcons'
 import Link from 'next/link'
 import TimeISO from '../common/time-iso'
+import { Locale } from '@/i18n-config'
 
 type Props = {
   title: string
   imageName: string
   date: string
+  slug: string
+  lang: Locale
 }
 
-export default function WritingCard ({ title, imageName, date }: Props) {
+export default function WritingCard ({ title, imageName, date, slug, lang }: Props) {
   const titleArray = title.split(' ')
   const TitleLastWord = titleArray.pop()
   const partialTitle = titleArray.join(' ')
@@ -33,8 +36,7 @@ export default function WritingCard ({ title, imageName, date }: Props) {
           <h3 className='-mt-1'>
             <Link
               className='inline-flex items-baseline font-medium leading-tight text-white hover:text-teal-300 focus-visible:text-teal-300  group/link text-base'
-              href={`blog/${title}`}
-              target='_blank'
+              href={`/${lang}/blog/${slug}`}
               rel='noreferrer'
               aria-label={title}
             >

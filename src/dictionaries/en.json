@@ -230,14 +230,14 @@
     ],
     "link": {
       "ariaLabel": "View Full Project Achive",
-      "url": "/projects",
+      "url": "/en/projects",
       "strong": "View Full",
       "span": "Project Archive"
     }
   },
   "allProjects": {
     "fullname": "Frainer Encarnación",
-    "goBackUrl": "/",
+    "goBackUrl": "/en",
     "title": "All Projects",
     "tableHeaders": {
       "year": "Year",
@@ -397,7 +397,7 @@
     "title": "Writing",
     "link": {
       "ariaLabel": "View Frainer's Blog",
-      "url": "/blog",
+      "url": "/en/blog",
       "strong": "View",
       "span": "Frainer's Blog"
     }

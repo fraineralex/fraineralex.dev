@@ -155,7 +155,7 @@ export default async function PostPage ({ params }: Props) {
                 <>
                   <Link
                     key={index}
-                    href={`/blog/tags/${tag?.name || tagName}`}
+                    href={`/${lang}/blog/tags/${tag?.name || tagName}`}
                     className='text-teal-300 font-bold underline underline-offset-4 py-3 md:px-1 hover:text-white text-xs inline md:hidden'
                   >
                     {tag?.label || tagName}
@@ -175,7 +175,7 @@ export default async function PostPage ({ params }: Props) {
               return (
                 <div key={index}>
                   <Link
-                    href={`/blog/tags/${tag?.name || tagName}`}
+                    href={`/${lang}/blog/tags/${tag?.name || tagName}`}
                     className='text-teal-300 font-medium md:font-bold underline underline-offset-4 py-3 md:px-1 hover:text-white'
                   >
                     {tag?.label || tagName}

@@ -15,7 +15,7 @@ export default function BlogCard ({ blog }: Props) {
     <Link
       tabIndex={0}
       data-testid='blog-search-result'
-      href={`${locale}/blog/${blog.slug}`}
+      href={`/${blog.lang}/blog/${blog.slug}`}
       className='block px-2 focus:outline-none border-slate-600 hover:bg-slate-700 focus:bg-slate-600 rounded md:max-w-5xl md:mr-5'
     >
       <div className='flex flex-col items-start justify-between py-8 border-slate-700 md:flex-row md:py-5 border-b '>

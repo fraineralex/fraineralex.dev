@@ -15,7 +15,7 @@ export const Navigation = () => {
   const [isIntersecting, setIntersecting] = useState(true)
 
   const [locale, setLocale] = useState(
-    pathname.startsWith('/es') ? '/es/' : '/'
+    pathname.startsWith('/es') ? '/es/' : '/en/'
   )
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const Navigation = () => {
     )
     setIsContentPage(newIsContentPage.length > 0)
 
-    setLocale(pathname.startsWith('/es') ? '/es/' : '/')
+    setLocale(pathname.startsWith('/es') ? '/es/' : '/en/')
   }, [pathname])
 
   return (

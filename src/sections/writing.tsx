@@ -3,6 +3,7 @@ import WritingCard from '@/components/blog/writing-card-portfolio'
 import { WiritingProps } from '@/types/writing-types'
 import { ArrowRigthIcon } from '@/components/common/SvgIcons'
 import { allPosts } from 'contentlayer/generated'
+import { Locale } from '@/i18n-config'
 
 export default function Writing ({
   dictionary,
@@ -42,6 +43,8 @@ export default function Writing ({
                   title={post.title}
                   imageName={post.hero}
                   date={post.date}
+                  lang={post.lang as Locale}
+                  slug={post.slug}
                 />
               ))}
             </ol>

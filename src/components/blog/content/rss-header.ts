@@ -19,10 +19,7 @@ export function RSSHeader ({
   readTime,
   minRead
 }: Props) {
-  const site_url =
-    process.env.NODE_ENV === 'production'
-      ? 'https://frainer-blog.vercel.app'
-      : 'http://localhost:3000'
+  const site_url = process.env.DOMAIN || 'http://localhost:3000'
 
   return `
     <header>

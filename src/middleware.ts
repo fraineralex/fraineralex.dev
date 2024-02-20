@@ -114,7 +114,14 @@ export function middleware (request: NextRequest) {
       '/images/blog/posts/cover/rss/master-git-commit-message.png',
       // Fonts
       '/fonts/CircularXXWeb-Bold.woff2',
-      '/fonts/CircularXXWeb-Book.woff2'
+      '/fonts/CircularXXWeb-Book.woff2',
+      // Content
+      '/content/posts/en/mastering-git-commit-messages.mdx',
+      '/content/posts/en/how-to-install-multiple-versions-nodejs-nvm.mdx',
+      '/content/posts/en/mastering-git-commit-messages.mdx',
+      '/content/posts/es/mastering-git-commit-messages.mdx',
+      '/content/posts/es/how-to-install-multiple-versions-nodejs-nvm.mdx',
+      '/content/posts/es/mastering-git-commit-messages.mdx'
     ].includes(pathname)
   )
     return

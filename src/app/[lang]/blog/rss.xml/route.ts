@@ -19,8 +19,9 @@ marked.setOptions({
 
 const renderPost = (md: string) => marked.parse(md)
 export async function GET () {
-  const DOMAIN = `${process.env.DOMAIN}/es/blog` || 'https://fraineralex.dev/es/blog'
-  const lastPostDate = posts[posts.length - 1].date
+  const DOMAIN =
+    `${process.env.DOMAIN}/es/blog` || 'https://fraineralex.dev/es/blog'
+  const lastPostDate = posts.length > 0 ? posts[posts.length - 1].date : ''
   const rss = new RSS({
     title: "Frainer's Blog 📝",
     description:

@@ -7,7 +7,7 @@ import { Locale } from '@/i18n-config'
 
 export const readPosts = (lang: Locale) => {
   console.log('process.cwd()', process.cwd())
-  const postsDirectory = path.resolve(process.cwd(), `../../content/posts/${lang}`);
+  const postsDirectory = path.resolve(process.cwd(), `./content/posts/${lang}`);
   console.log('postsDirectory', postsDirectory)
 
   

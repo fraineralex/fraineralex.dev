@@ -5,6 +5,7 @@ import { Locale, i18n } from '@/i18n-config'
 import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import '@/styles/globals.css'
 import '@/styles/site.css'
@@ -125,6 +126,7 @@ export default function RootLayout ({ children, params }: Props) {
         <Navigation />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

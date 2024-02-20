@@ -1,4 +1,9 @@
 import ArticleSkeleton from '@/components/blog/articles/article-skeleton'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Frainer's Blog 📝"
+}
 
 export default function Loading () {
   return (

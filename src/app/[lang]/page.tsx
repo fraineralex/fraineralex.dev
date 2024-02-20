@@ -8,10 +8,6 @@ interface Props {
 }
 
 const englishMetadata: Metadata = {
-  title: {
-    default: 'Frainer Encarnación',
-    template: '%s | Frainer Encarnación'
-  },
   category: 'Personal Portfolio',
   keywords: [
     'Frainer Encarnación',

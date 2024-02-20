@@ -1,4 +1,9 @@
 import { Eye, Search } from 'lucide-react'
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Loading..."
+}
 
 export default function Loading () {
   return (

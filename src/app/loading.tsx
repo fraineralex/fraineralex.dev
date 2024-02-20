@@ -2,7 +2,12 @@
 
 import '@/styles/loading.css'
 import anime from 'animejs/lib/anime.es.js'
+import { Metadata } from 'next'
 import React, { useEffect } from 'react'
+
+export const metadata: Metadata = {
+  title: "Frainer Encarnación"
+}
 
 export default function Loading () {
   useEffect(() => {

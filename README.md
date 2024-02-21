@@ -35,7 +35,11 @@ My personal website, built with Next.js, TypeScript, Tailwind CSS, and deployed 
 </a> &#xa0; &#xa0;
 
 <a href="">
-  <img width="50" title="CSS" alt="CSS Logo" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg">
+  <img width="60" title="CSS" alt="CSS Logo" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg">
+</a> &#xa0; &#xa0;
+
+<a href="https:nodejs.org">
+  <img width="43" title="Node.js" alt="Node.js Logo" src="https://static-00.iconduck.com/assets.00/node-js-icon-454x512-nztofx17.png">
 </a> &#xa0; &#xa0;
 
 ###

@@ -166,13 +166,14 @@ This example causes an infinite loop by updating the state within the effect, tr
 
 ```tsx
 useEffect(() => {
-  // Correct: No dependencies in the array, avoiding the infinite loop
-  setCount(count + 1)
-}, [])
+  // Correct: Use the setCount callback to update the state based on the previous state.
+  // This ensures that the state update doesn't cause an infinite loop.
+  setCount(prevCount => prevCount + 1)
+}, [count])
 
 ```
 
-Avoid infinite loops by ensuring that the dependencies in the `useEffect` dependency array are stable and do not change within the effect body. In this case, by removing `count` from the dependency array, we prevent the infinite loop.
+Avoid infinite loops by ensuring that the dependencies in the `useEffect` dependency array are stable and do not change within the effect body. In this case, by using the `setCount` callback to update the state based on the previous state, we prevent the infinite loop.
 
 ## 🤝 useContext
 

@@ -166,13 +166,14 @@ Este ejemplo provoca un bucle infinito al actualizar el estado dentro del efecto
 
 ```tsx
 useEffect(() => {
-  // Correcto: Sin dependencias en el array, evitando el bucle infinito
-  setCounter(counter + 1)
-}, [])
+  // Correcto: Usa el callback the setCount para actualizar el estado basándo en el estado anterior.
+  // Esto asegura que la actualización del estado no desencadene un bucle infinito.
+  setCount(prevCount => prevCount + 1)
+}, [count])
 
 ```
 
-Evita bucles infinitos asegurándote de que las dependencias en el array de dependencias de `useEffect` sean estables y no cambien dentro del efecto.
+Evita bucles infinitos asegurándote de que las dependencias en el array de dependencias del `useEffect` son estables y no cambian dentro del cuerpo del efecto. En este caso, al utilizar el callback de `setCount` para actualizar el estado basándose en el estado anterior, evitamos el bucle infinito.
 
 ## 🤝 useContext
 

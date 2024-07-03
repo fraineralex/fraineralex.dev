@@ -83,21 +83,21 @@
 			}
 		},
 		"paragraph3": {
-			"technologies": "Aquí hay algunas tecnologías con las que he estado trabajando recientemente:"
+			"technologies": "Aquí algunas de las tecnologías en las que tengo experiencia:"
 		},
 		"skills": [
-			"TypeScript",
-			"Python",
-			"C#",
 			"React",
-			"Next.js",
-			".NET",
 			"Node.js",
+			"TypeScript",
+			"Redux",
+			"Next.js",
+			"Jest",
 			"AWS",
+			"Firebase",
 			"Docker",
 			"PostgreSQL",
-			"Firebase",
-			"MongoDB"
+			"MongoDB",
+			"Python"
 		]
 	},
 	"experience": {
@@ -218,22 +218,13 @@
 				"starsOnGithub": 4
 			},
 			{
-				"projectName": "Aplicación de Bienes Raíces",
-				"description": "Una aplicación web de gestión inmobiliaria con cuatro roles distintos, cada uno ofrece funcionalidades específicas dentro del sistema para gestionar las propiedades.",
-				"technologies": [
-					"C#",
-					"ASP.NET",
-					"JavaScript",
-					"SQL Server",
-					"Blazor",
-					"Identity",
-					"Arquitectura ONION",
-					"CSS"
-				],
-				"deployUrl": "https://github.com/fraineralex/RealEstate-App",
-				"githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
-				"imageSrc": "realestate.webp",
-				"starsOnGithub": 4
+				"projectName": "Manejo de Reportes ARS",
+				"description": "Módulo de Odoo creado para la gestión eficiente de informes de ARS. Ofrece una interfaz robusta e intuitiva que facilita la creación, gestión y exportación de informes.",
+				"technologies": ["Python", "Odoo", "XML", "CSS", "PostgreSQL"],
+				"deployUrl": "https://github.com/fraineralex/health_risk_management_reporter",
+				"githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
+				"imageSrc": "hrm-reporter.webp",
+				"starsOnGithub": 5
 			}
 		],
 		"link": {
@@ -298,7 +289,7 @@
 				"title": "Manejo de Reportes ARS",
 				"shortDescription": "Módulo de Odoo diseñado para gestionar informes de Asociación de Riesgos de Salud.",
 				"description": "Módulo de Odoo creado para la gestión eficiente de informes de ARS. Ofrece una interfaz robusta e intuitiva que facilita la creación, gestión y exportación de informes.",
-				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
+				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "CSS"],
 				"githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
 				"year": 2024
 			},

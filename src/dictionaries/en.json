@@ -83,21 +83,21 @@
 			}
 		},
 		"paragraph3": {
-			"technologies": "Here are a few technologies I’ve been working with recently:"
+			"technologies": "Here are a few technologies I have experience with:"
 		},
 		"skills": [
-			"TypeScript",
-			"Python",
-			"C#",
 			"React",
-			"Next.js",
-			".NET",
 			"Node.js",
+			"TypeScript",
+			"Redux",
+			"Next.js",
+			"Jest",
 			"AWS",
+			"Firebase",
 			"Docker",
 			"PostgreSQL",
-			"Firebase",
-			"MongoDB"
+			"MongoDB",
+			"Python"
 		]
 	},
 	"experience": {
@@ -136,7 +136,7 @@
 					"website": "https://ippdr.com"
 				},
 				"description": "My role involved creating and customizing features to meet the needs of our clients. This included developing new functionalities, conducting thorough testing, as well as building web solutions.",
-				"skills": ["Python", "JavaScript", "Odoo", "Docker", "React", "CSS"],
+				"skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
 				"contract": "Full-time",
 				"location": "Santo Domingo, Dominican Republic",
 				"locationType": "Remote",
@@ -215,22 +215,13 @@
 				"starsOnGithub": 6
 			},
 			{
-				"projectName": "Real Estate App",
-				"description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the properties.",
-				"technologies": [
-					"C#",
-					"ASP.NET",
-					"JavaScript",
-					"SQL Server",
-					"Blazor",
-					"Identity",
-					"ONION Architecture",
-					"CSS"
-				],
-				"deployUrl": "https://github.com/fraineralex/RealEstate-App",
-				"githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
-				"imageSrc": "realestate.webp",
-				"starsOnGithub": 7
+				"projectName": "Health Risk Management Reporter",
+				"description": "Odoo module crafted for streamlined HRM report management. It offers a robust and intuitive interface facilitating the creation, management, and exportation of reports.",
+				"technologies": ["Python", "Odoo", "XML", "CSS", "PostgreSQL"],
+				"deployUrl": "https://github.com/fraineralex/health_risk_management_reporter",
+				"githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
+				"imageSrc": "hrm-reporter.webp",
+				"starsOnGithub": 5
 			}
 		],
 		"link": {
@@ -295,7 +286,7 @@
 				"title": "Health Risk Management Reporter",
 				"shortDescription": "Odoo Module designed to manage Health Risk Management reports.",
 				"description": "Odoo module crafted for streamlined HRM report management. It offers a robust and intuitive interface facilitating the creation, management, and exportation of reports.",
-				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
+				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "CSS"],
 				"githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
 				"year": 2024
 			},

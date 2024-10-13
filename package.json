@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbo",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"
@@ -11,7 +11,7 @@
 	"dependencies": {
 		"@formatjs/intl-localematcher": "0.5.2",
 		"@midudev/tailwind-animations": "0.0.5",
-		"@next/mdx": "14.0.4",
+		"@next/mdx": "14.2.15",
 		"@types/animejs": "3.1.12",
 		"@types/rss": "0.0.32",
 		"@upstash/redis": "1.23.3",
@@ -25,7 +25,7 @@
 		"markdown-wasm": "1.2.0",
 		"marked": "11.1.1",
 		"negotiator": "0.6.3",
-		"next": "14.0.4",
+		"next": "14.2.15",
 		"next-contentlayer": "0.3.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",

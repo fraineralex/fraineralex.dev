@@ -2,7 +2,7 @@
 
 My personal website, built with Next.js, TypeScript, Tailwind CSS, and deployed to Vercel. This website showcases my experience, skills, projects, and blog where I share insights into web development, software engineering, and whatever else I'm thinking about!
 
-![website image example](/public/og.webp)
+![website image example](/public/og.jpg)
 
 ## 🛠️ Main Technologies
 

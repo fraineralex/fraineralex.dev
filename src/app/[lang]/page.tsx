@@ -20,7 +20,7 @@ const englishMetadata: Metadata = {
   ],
   description:
     "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.",
-  metadataBase: new URL(process.env.DOMAIN || 'https://fraineralex.dev'),
+  metadataBase: new URL(process.env.DOMAIN ?? 'https://fraineralex.dev'),
   alternates: {
     canonical: '/',
     languages: {
@@ -39,9 +39,9 @@ const englishMetadata: Metadata = {
     siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
     images: [
       {
-        url: '/og.webp',
-        width: 1920,
-        height: 1080
+        url: '/og.jpg',
+        width: 2880,
+        height: 1620
       }
     ],
     locale: 'en-US',
@@ -67,9 +67,9 @@ const englishMetadata: Metadata = {
       'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
     images: [
       {
-        url: '/og.webp',
-        width: 1920,
-        height: 1080
+        url: '/og.jpg',
+        width: 2880,
+        height: 1620
       }
     ]
   },

@@ -63,7 +63,7 @@ export function middleware (request: NextRequest) {
       '/curriculum.pdf',
       '/plane.html',
       '/es-og.webp',
-      '/og.webp',
+      '/og.jpg',
       // Projects
       '/images/projects/blog.webp',
       '/images/projects/chess.webp',

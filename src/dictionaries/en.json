@@ -1,525 +1,553 @@
 {
-	"sidenav": {
-		"navigation": {
-			"about": "About",
-			"experience": "Experience",
-			"projects": "Projects",
-			"githubUrl": "https://github.com/fraineralex",
-			"linkedinUrl": "https://www.linkedin.com/in/fraineralex/",
-			"twitterUrl": "https://twitter.com/fraineralex",
-			"instagramUrl": "https://www.instagram.com/frainer.alex/",
-			"codepenUrl": "https://codepen.io/fraineralex"
-		},
-		"linkedinCard": {
-			"profileImage": "/images/blog/profile.webp",
-			"lifterLink": {
-				"url": "https://lifterdo.com",
-				"logo": "/images/experience/lifter.webp"
-			},
-			"itlaLink": {
-				"url": "https://itla.edu.do",
-				"logo": "/images/hero/itla.webp"
-			},
-			"fullname": "Frainer Encarnación",
-			"tagline": "Experienced Software Engineer skilled in crafting performant & accessible products mainly for the web.",
-			"location": "Santo Domingo, Dominican Republic",
-			"contactInfo": "Contact info",
-			"connections": "1,144 followers • 500+ connections",
-			"connectButton": {
-				"label": "Connect",
-				"url": "https://www.linkedin.com/in/fraineralex/"
-			},
-			"messageButton": {
-				"label": "Message",
-				"url": "mailto:fraineralex2001@gmail.com"
-			},
-			"resumeButton": {
-				"label": "Resume",
-				"url": "/resume.pdf"
-			}
-		}
-	},
-	"about": {
-		"title": "About",
-		"paragraph1": {
-			"content": "I’m Frainer, a passionate",
-			"strong": {
-				"content": "Full Stack Engineer"
-			},
-			"experience": "with over 3 years of experience, specializing in bringing ideas to life in the vast world of web development. Throughout my journey, I’ve had the privilege of contributing to software development for a",
-			"journey": {
-				"consultancy": {
-					"label": "software consultancy",
-					"url": "https://nelmix.com/",
-					"name": "Nelmix"
-				},
-				"productCompany": {
-					"before": ", a",
-					"label": "product company",
-					"url": "https://ippdr.com/",
-					"name": "International Pack & Paper"
-				},
-				"financialConsultancy": {
-					"before": ", and a",
-					"label": "financial consultancy",
-					"url": "https://lifterdo.com",
-					"name": "Lifter"
-				}
-			}
-		},
-		"paragraph2": {
-			"focus": "Currently, I’m primarily focused on building accessible products and creating exceptional solutions and impactful digital experiences for our clients at",
-			"lifter": {
-				"label": "Lifter",
-				"url": "https://lifterdo.com"
-			},
-			"professionalRealm": "Outside the professional realm, I immerse myself in exploring new technologies,",
-			"personalProjects": {
-				"label": "working on personal projects,"
-			},
-			"freelanceServices": {
-				"before": "and",
-				"label": "offering freelance services"
-			}
-		},
-		"paragraph3": {
-			"technologies": "Here are a few technologies I have experience with:"
-		},
-		"skills": [
-			"React",
-			"Node.js",
-			"TypeScript",
-			"Redux",
-			"Next.js",
-			"Jest",
-			"AWS",
-			"Firebase",
-			"Docker",
-			"PostgreSQL",
-			"MongoDB",
-			"Python"
-		]
-	},
-	"experience": {
-		"title": "Experience",
-		"cards": [
-			{
-				"startDate": "Jun 2023",
-				"endDate": "Present",
-				"title": "Senior Software Engineer",
-				"company": {
-					"name": "Lifter",
-					"website": "https://lifterdo.com"
-				},
-				"description": "I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.",
-				"skills": [
-					"JavaScript",
-					"Python",
-					"Odoo",
-					"React",
-					"Node.js",
-					"PostgreSQL",
-					"AWS",
-					"Ubuntu"
-				],
-				"contract": "Full-time",
-				"location": "Santo Domingo, Dominican Republic",
-				"locationType": "Remote",
-				"imageName": "lifter.webp"
-			},
-			{
-				"startDate": "Feb",
-				"endDate": "Jun 2023",
-				"title": "Full Stack Developer",
-				"company": {
-					"name": "International Pack & Paper",
-					"website": "https://ippdr.com"
-				},
-				"description": "My role involved creating and customizing features to meet the needs of our clients. This included developing new functionalities, conducting thorough testing, as well as building web solutions.",
-				"skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
-				"contract": "Full-time",
-				"location": "Santo Domingo, Dominican Republic",
-				"locationType": "Remote",
-				"imageName": "ipp.webp"
-			},
-			{
-				"startDate": "Sep 2022",
-				"endDate": "Feb 2023",
-				"title": "Full Stack Developer",
-				"company": {
-					"name": "Nelmix",
-					"website": "https://nelmix.com"
-				},
-				"description": "I worked on creating custom modules for Odoo, focusing on accounting and product management applications tailored to meet the needs of our clients. Additionally, I had the opportunity to contribute to the development of various features for web applications.",
-				"skills": ["TypeScript", "Python", "Odoo", "Node.js", "SQL"],
-				"contract": "Internship",
-				"location": "Santo Domingo, Dominican Republic",
-				"locationType": "Remote",
-				"imageName": "nelmix.webp"
-			}
-		],
-		"resumeButton": {
-			"label": "Resume",
-			"url": "/resume.pdf",
-			"strong": "View Full"
-		}
-	},
-	"projects": {
-		"title": "Projects",
-		"cards": [
-			{
-				"projectName": "Chatify",
-				"description": "Realtime chat app that allows you to sign in/sign up easily using OAuth 2.0 (Google, GitHub, email/password). Users can connect with others and send text messages, emojis, stickers, media, files, and more.",
-				"technologies": [
-					"TypeScript",
-					"React",
-					"Zustand",
-					"Tailwind",
-					"Auth0",
-					"Node.js",
-					"Socket.io",
-					"AWS",
-					"Turso",
-					"Cloudflare"
-				],
-				"deployUrl": "https://chatify.fraineralex.dev",
-				"githubRepositoryUrl": "https://github.com/fraineralex/chatify",
-				"imageSrc": "chatify.webp",
-				"starsOnGithub": 1
-			},
-			{
-				"projectName": "Blog",
-				"description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
-				"technologies": [
-					"React",
-					"TypeScript",
-					"Next.js",
-					"Tailwind",
-					"CSS",
-					"Contentlayer",
-					"Upstash",
-					"Redis"
-				],
-				"deployUrl": "https://frainer-blog.vercel.app",
-				"githubRepositoryUrl": "https://github.com/fraineralex/blog",
-				"imageSrc": "blog.webp",
-				"starsOnGithub": 5
-			},
-			{
-				"projectName": "Chess AI",
-				"description": "Chess Artificial Intelligence project utilizing the minimax adversarial search algorithm with alpha-beta pruning and heuristics. The system is designed to determine the optimal move within a specified depth.",
-				"technologies": ["Python", "Numpy", "Pygame", "MiniMax Algrthm"],
-				"deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-				"githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-				"imageSrc": "chess.webp",
-				"starsOnGithub": 6
-			},
-			{
-				"projectName": "Health Risk Management Reporter",
-				"description": "Odoo module crafted for streamlined HRM report management. It offers a robust and intuitive interface facilitating the creation, management, and exportation of reports.",
-				"technologies": ["Python", "Odoo", "XML", "CSS", "PostgreSQL"],
-				"deployUrl": "https://github.com/fraineralex/health_risk_management_reporter",
-				"githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
-				"imageSrc": "hrm-reporter.webp",
-				"starsOnGithub": 5
-			}
-		],
-		"link": {
-			"ariaLabel": "View Full Project Achive",
-			"url": "/en/projects",
-			"strong": "View Full",
-			"span": "Project Archive"
-		}
-	},
-	"allProjects": {
-		"fullname": "Frainer Encarnación",
-		"goBackUrl": "/en",
-		"title": "All Projects",
-		"tableHeaders": {
-			"year": "Year",
-			"project": "Proyect",
-			"description": "Description",
-			"technologies": "Technologies",
-			"links": "Links",
-			"deployText": "View"
-		},
-		"projects": [
-			{
-				"title": "Chatify",
-				"shortDescription": "Realtime chat app with robust support for messages, stickers, and media.",
-				"description": "Realtime chat app that allows you to sign in/sign up easily using OAuth 2.0 (Google, GitHub, email/password). Users can connect with others and send text messages, emojis, stickers, media, files, and more.",
-				"technologies": [
-					"TypeScript",
-					"React",
-					"Zustand",
-					"Tailwind",
-					"Auth0",
-					"Node.js",
-					"Socket.io",
-					"AWS",
-					"Turso",
-					"Cloudflare"
-				],
-				"deployUrl": "https://chatify.fraineralex.dev",
-				"githubRepositoryUrl": "https://github.com/fraineralex/chatify",
-				"year": 2024
-			},
-			{
-				"title": "Blog",
-				"shortDescription": "Web app featuring RSS feed, advanced search, and tag filtering.",
-				"description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
-				"technologies": [
-					"React",
-					"TypeScript",
-					"Next.js",
-					"Tailwind",
-					"CSS",
-					"Contentlayer",
-					"Upstash",
-					"Redis"
-				],
-				"deployUrl": "https://frainer-blog.vercel.app",
-				"githubRepositoryUrl": "https://github.com/fraineralex/blog",
-				"year": 2024
-			},
-			{
-				"title": "Health Risk Management Reporter",
-				"shortDescription": "Odoo Module designed to manage Health Risk Management reports.",
-				"description": "Odoo module crafted for streamlined HRM report management. It offers a robust and intuitive interface facilitating the creation, management, and exportation of reports.",
-				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "CSS"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
-				"year": 2024
-			},
-			{
-				"title": "Easy Route",
-				"shortDescription": "An efficient loan management solution for streamlined loan processes.",
-				"description": "Java web app developed to efficiently manage loan requests, streamline the customer registration and evaluation process, and monitor and approve loans.",
-				"technologies": [
-					"Java",
-					"Sprint Boot",
-					"MySQL",
-					"JavaScript",
-					"CSS",
-					"Hybernate"
-				],
-				"githubRepositoryUrl": "https://github.com/fraineralex/EasyRoute",
-				"year": 2023
-			},
-			{
-				"title": "Batch Payment Export",
-				"shortDescription": "Odoo module that allows you to export registered payments.",
-				"description": "Odoo module that allows you to export registered payments from the 'account.payment' model to a xls format.",
-				"technologies": ["Python", "Odoo", "xlwt"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/batch_payment_export",
-				"year": 2023
-			},
-			{
-				"title": "Salary Changes Report",
-				"shortDescription": "Odoo module that allows you to export a report of salary changes for employees to Excel.",
-				"description": "Odoo module that exports organized Excel reports of employee salary changes by filtering the salary changes recorded in the hr.contract model through the mail.tracking.value model.",
-				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/salary_changes_report",
-				"year": 2023
-			},
-			{
-				"title": "DGT-2 Overtime Report",
-				"shortDescription": "Odoo module that exports detailed DGT-2 format overtime reports, including costs, to Excel.",
-				"description": "Odoo module that exports detailed DGT-2 format overtime reports, including costs, to Excel. This module streamlines compliance and optimizes resource management.",
-				"technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/dgt2_overtime_report",
-				"year": 2023
-			},
-			{
-				"title": "Hacker News Clone",
-				"shortDescription": "A Hacker News clone built with React.",
-				"description": "A Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
-				"technologies": ["React", "TypeScript", "Styled Components", "SWR"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
-				"deployUrl": "https://frainer-hacker-news.surge.sh",
-				"year": 2023
-			},
-			{
-				"title": "To Do App",
-				"shortDescription": "A single page app to manage todos with data synchronization.",
-				"description": "A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
-				"technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
-				"deployUrl": "https://frainer-todo-app.surge.sh",
-				"year": 2023
-			},
-			{
-				"title": "Chess AI",
-				"shortDescription": "Chess AI project utilizing minimax algorithm.",
-				"description": "Chess AI project utilizing the minimax adversarial search algorithm with alpha-beta pruning and heuristics. The system is designed to determine the optimal move within a specified depth.",
-				"technologies": ["Python", "Numpy", "Pygame"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-				"deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-				"year": 2022
-			},
-			{
-				"title": "Real Estate App",
-				"shortDescription": "Web app for real estate management.",
-				"description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.",
-				"technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
-				"year": 2022
-			},
-			{
-				"title": "Programming Quizzes",
-				"shortDescription": "React-based web app for programming quizzes.",
-				"description": "A React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
-				"technologies": ["React", "TypeScript", "Zustand", "Material UI"],
-				"deployUrl": "https://programming-quizzes.surge.sh",
-				"githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
-				"year": 2023
-			},
-			{
-				"title": "Google Translate Clone",
-				"shortDescription": "Simple Google Translate clone built with React.",
-				"description": "A Google Translate clone, built with React and powered by the OpenAI API.",
-				"technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
-				"deployUrl": "https://frainer-google-translate.surge.sh/",
-				"githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
-				"year": 2023
-			},
-			{
-				"title": "To Do List",
-				"shortDescription": "Node.js web app for task management.",
-				"description": "Node.js web app for task management with user-friendly features. Supports permanent/temporary logins and user info updates.",
-				"technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
-				"deployUrl": "https://programming-quizzes.surge.sh",
-				"githubRepositoryUrl": "https://todolist.3.us-1.fl0.io",
-				"year": 2021
-			},
-			{
-				"title": "Net Banking App",
-				"shortDescription": "Net banking app built in C#.",
-				"description": "Net banking app built in C# following ONION architecture and SOLID principles. Enables secure user logins and seamless financial transactions.",
-				"technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/InternetBanking-App",
-				"year": 2022
-			},
-			{
-				"title": "Social Network App",
-				"shortDescription": "Node.js Social Network App.",
-				"description": "A Node.js Social Network App for creating user profiles, sharing posts and events, commenting, connecting with friends, and ensuring secure account access.",
-				"technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/Social-Network-App",
-				"year": 2021
-			},
-			{
-				"title": "Books App",
-				"shortDescription": "Node.js-based Books App for registration.",
-				"description": "Node.js-based Books App for registration of publishers, categories, authors, and their respective books.",
-				"technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
-				"year": 2021
-			},
-			{
-				"title": "Real Estate Manager",
-				"shortDescription": "Odoo Real Estate Management module.",
-				"description": "Odoo Real Estate Management module allows you to manage properties, perform custom searches, assign sales agents and much more.",
-				"technologies": ["Python", "Odoo", "PostgreSQL", "XML"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/real_estate_manager",
-				"year": 2023
-			},
-			{
-				"title": "E-Market",
-				"shortDescription": "C# ASP.NET Core web platform following SOLID principles.",
-				"description": "C# ASP.NET Core web platform following SOLID principles, offering secure user login, ad management, and image uploads.",
-				"technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/E-Market-App",
-				"year": 2022
-			},
-			{
-				"title": "Journal App",
-				"shortDescription": "React Native journaling app built with TypeScript and Expo.",
-				"description": "React Native mobile app build with TypeScript using Expo to record our personal experiences like a journal.",
-				"technologies": ["TypeScript", "React Native", "Expo", "SQLite"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/journal-app/",
-				"year": 2021
-			},
-			{
-				"title": "Emergency App",
-				"shortDescription": "React Native mobile app build with Expo for logging emergency calls.",
-				"description": "React Native mobile app built with TypeScript using Expo to log emergency calls received by the emergency team.",
-				"technologies": ["TypeScript", "React Native", "Expo", "SQLite"],
-				"githubRepositoryUrl": "https://github.com/fraineralex/emergency-app",
-				"year": 2021
-			}
-		]
-	},
-	"writing": {
-		"title": "Writing",
-		"link": {
-			"ariaLabel": "View Frainer's Blog",
-			"url": "/en/blog",
-			"strong": "View",
-			"span": "Frainer's Blog"
-		}
-	},
-	"footer": {
-		"builtWith": "Built with",
-		"nextJs": "Next.js",
-		"tailwindCss": "Tailwind CSS",
-		"deployedWith": "deployed with",
-		"vercel": "Vercel",
-		"takeALook": "Take a look at the source code of the site on my",
-		"githubRepository": "GitHub Repository",
-		"repositoryLink": "https://github.com/fraineralex/fraineralex.dev",
-		"specialThanksTo": "Special thanks to",
-		"brittanyChiang": "Brittany Chiang",
-		"and": "and",
-		"jheyTompkins": "Jhey Tompkins",
-		"developerOfThe": "developer of the",
-		"dCssPlane": "3D CSS Plane",
-		"forInspiration": "for inspiration."
-	},
-	"blog": {
-		"home": {
-			"topArticles": {
-				"label": "Top Articles",
-				"featured": "mastering-git-commit-messages",
-				"top2": "crafting-react-hooks",
-				"top3": "how-to-install-multiple-versions-nodejs-nvm"
-			},
-			"title": {
-				"main": "Blog Posts",
-				"temporal": "Articles"
-			},
-			"description": "Some of my learnings, tricks and thoughts on software engineering, programming and tech.",
-			"soon": "SOON",
-			"just": "Just",
-			"minRead": "min read",
-			"latestArticles": "Latest Articles"
-		},
-		"postsByTags": {
-			"label": "View posts by tag",
-			"newsletter": {
-				"placeholder": "Type your email...",
-				"label": "Subscribe",
-				"description": "Susbcribe to the newsletter! Get the latest updates of the blog."
-			}
-		},
-		"tags": {
-			"title": "Articles",
-			"description": "Some of my learnings, tricks and thoughts on software engineering, programming and tech.",
-			"[tag]": {
-				"title": "Articles about",
-				"notFound": {
-					"first": "☹️ There are no articles about",
-					"second": "yet. Check back later!"
-				}
-			}
-		},
-		"[slug]": {
-			"updatedOn": "Updated on",
-			"minRead": "min read",
-			"newsletter": {
-				"description": "Subscribe to the newsletter",
-				"placeholder": "Type your email...",
-				"label": "Subscribe"
-			}
-		}
-	}
+  "sidenav": {
+    "navigation": {
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects",
+      "githubUrl": "https://github.com/fraineralex",
+      "linkedinUrl": "https://www.linkedin.com/in/fraineralex/",
+      "twitterUrl": "https://twitter.com/fraineralex",
+      "instagramUrl": "https://www.instagram.com/frainer.alex/",
+      "codepenUrl": "https://codepen.io/fraineralex"
+    },
+    "linkedinCard": {
+      "profileImage": "/images/blog/profile.webp",
+      "lifterLink": {
+        "url": "https://lifterdo.com",
+        "logo": "/images/experience/lifter.webp"
+      },
+      "itlaLink": {
+        "url": "https://itla.edu.do",
+        "logo": "/images/hero/itla.webp"
+      },
+      "fullname": "Frainer Encarnación",
+      "tagline": "Experienced software engineer skilled in crafting performant & accessible products mainly for the web.",
+      "location": "Santo Domingo, Dominican Republic",
+      "contactInfo": "Contact info",
+      "connections": "1,198 followers • 500+ connections",
+      "connectButton": {
+        "label": "Connect",
+        "url": "https://www.linkedin.com/in/fraineralex/"
+      },
+      "messageButton": {
+        "label": "Message",
+        "url": "mailto:fraineralex2001@gmail.com"
+      },
+      "resumeButton": {
+        "label": "Resume",
+        "url": "/resume.pdf"
+      }
+    }
+  },
+  "about": {
+    "title": "About",
+    "paragraph1": {
+      "content": "I’m Frainer, a passionate",
+      "strong": {
+        "content": "Full Stack Engineer"
+      },
+      "experience": "with over 3 years of experience, specializing in bringing ideas to life in the vast world of web development. Throughout my journey, I’ve had the privilege of contributing to software development for a",
+      "journey": {
+        "consultancy": {
+          "label": "software consultancy",
+          "url": "https://nelmix.com/",
+          "name": "Nelmix"
+        },
+        "productCompany": {
+          "before": ", a",
+          "label": "product company",
+          "url": "https://ippdr.com/",
+          "name": "International Pack & Paper"
+        },
+        "financialConsultancy": {
+          "before": ", and a",
+          "label": "financial consultancy",
+          "url": "https://lifterdo.com",
+          "name": "Lifter"
+        }
+      }
+    },
+    "paragraph2": {
+      "focus": "Currently, I’m primarily focused on building accessible products and creating exceptional solutions and impactful digital experiences for our clients at",
+      "lifter": {
+        "label": "Lifter",
+        "url": "https://lifterdo.com"
+      },
+      "professionalRealm": "Outside the professional realm, I immerse myself in exploring new technologies,",
+      "personalProjects": {
+        "label": "working on personal projects,"
+      },
+      "freelanceServices": {
+        "before": "and",
+        "label": "offering freelance services"
+      }
+    },
+    "paragraph3": {
+      "technologies": "Here are a few technologies I have experience with:"
+    },
+    "skills": [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Next.js",
+      "AWS",
+      "PostgreSQL",
+      "Firebase",
+      "Docker",
+      "MongoDB",
+      "Python",
+      "Tailwind",
+      "Prisma"
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "cards": [
+      {
+        "startDate": "Jun 2023",
+        "endDate": "Present",
+        "title": "Senior Software Engineer",
+        "company": {
+          "name": "Lifter",
+          "website": "https://lifterdo.com"
+        },
+        "description": "I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.",
+        "skills": [
+          "JavaScript",
+          "Python",
+          "Odoo",
+          "React",
+          "Node.js",
+          "PostgreSQL",
+          "AWS",
+          "Nginx",
+          "Next.js"
+        ],
+        "contract": "Full-time",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "lifter.webp"
+      },
+      {
+        "startDate": "Feb",
+        "endDate": "Jun 2023",
+        "title": "Full Stack Developer",
+        "company": {
+          "name": "International Pack & Paper",
+          "website": "https://ippdr.com"
+        },
+        "description": "My role involved creating and customizing features to meet the needs of our clients. This included developing new functionalities, conducting thorough testing, as well as building web solutions.",
+        "skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
+        "contract": "Full-time",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "ipp.webp"
+      },
+      {
+        "startDate": "Sep 2022",
+        "endDate": "Feb 2023",
+        "title": "Full Stack Developer",
+        "company": {
+          "name": "Nelmix",
+          "website": "https://nelmix.com"
+        },
+        "description": "I worked on creating custom modules for Odoo, focusing on accounting and product management applications tailored to meet the needs of our clients. Additionally, I had the opportunity to contribute to the development of various features for web applications.",
+        "skills": ["TypeScript", "Python", "Odoo", "Node.js", "SQL"],
+        "contract": "Internship",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "nelmix.webp"
+      }
+    ],
+    "resumeButton": {
+      "label": "Resume",
+      "url": "/resume.pdf",
+      "strong": "View Full"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "cards": [
+      {
+        "projectName": "Tracky",
+        "description": "A smart, robust, and minimalist fitness tracking web app with AI-powered features for quick logging of meals and exercises. Designed to guide users through their fitness journey with simplicity and precision.",
+        "technologies": [
+          "TypeScript",
+          "Next.js",
+          "Drizzle",
+          "PostgreSQL",
+          "Clerk",
+          "Tailwind",
+          "Framer Motion",
+          "shadcn/ui",
+          "OpenAI API"
+        ],
+        "deployUrl": "https://tracky.fraineralex.dev",
+        "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
+        "imageSrc": "tracky.webp",
+        "starsOnGithub": 5
+      },
+      {
+        "projectName": "Chatify",
+        "description": "Realtime chat app with robust support for text messages, emojis, stickers, GIFs, media, files, and more, allowing users to easily connect and interact with each other.",
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Zustand",
+          "Tailwind",
+          "Auth0",
+          "Node.js",
+          "Socket.io",
+          "AWS",
+          "Turso",
+          "Cloudflare"
+        ],
+        "deployUrl": "https://chatify.fraineralex.dev",
+        "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
+        "imageSrc": "chatify.webp",
+        "starsOnGithub": 1
+      },
+      {
+        "projectName": "Blog",
+        "description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "CSS",
+          "Contentlayer",
+          "Upstash",
+          "Redis"
+        ],
+        "deployUrl": "https://frainer-blog.vercel.app",
+        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "imageSrc": "blog.webp",
+        "starsOnGithub": 5
+      },
+      {
+        "projectName": "Chess AI",
+        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It’s designed to determine the optimal move within a specified depth.",
+        "technologies": ["Python", "Numpy", "Pygame", "MiniMax Algrthm"],
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "imageSrc": "chess.webp",
+        "starsOnGithub": 6
+      }
+    ],
+    "link": {
+      "ariaLabel": "View Full Project Achive",
+      "url": "/en/projects",
+      "strong": "View Full",
+      "span": "Project Archive"
+    }
+  },
+  "allProjects": {
+    "fullname": "Frainer Encarnación",
+    "goBackUrl": "/en",
+    "title": "All Projects",
+    "tableHeaders": {
+      "year": "Year",
+      "project": "Proyect",
+      "description": "Description",
+      "technologies": "Technologies",
+      "links": "Links",
+      "deployText": "View"
+    },
+    "projects": [
+      {
+        "title": "Tracky",
+        "shortDescription": "A smart and minimalist fitness tracking web app with powerful AI-driven features.",
+        "description": "A smart, robust, and minimalist fitness tracking web app with AI-powered features for quick logging of meals and exercises. Designed to guide users through their fitness journey with simplicity and precision.",
+        "technologies": [
+          "Next.js",
+          "Drizzle",
+          "PostgreSQL",
+          "OpenAI API",
+          "Clerk",
+          "Tailwind",
+          "Framer Motion",
+          "shadcn/ui"
+        ],
+        "deployUrl": "https://tracky.fraineralex.dev",
+        "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
+        "year": 2024
+      },
+      {
+        "title": "Chatify",
+        "shortDescription": "Realtime chat app with robust support for messages, stickers, and media.",
+        "description": "Realtime chat app with robust support for text messages, emojis, stickers, GIFs, media, files, and more, allowing users to easily connect and interact with each other.",
+        "technologies": [
+          "React",
+          "Zustand",
+          "Tailwind",
+          "Auth0",
+          "Node.js",
+          "Socket.io",
+          "AWS",
+          "Cloudflare",
+          "Turso"
+        ],
+        "deployUrl": "https://chatify.fraineralex.dev",
+        "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
+        "year": 2024
+      },
+      {
+        "title": "Blog",
+        "shortDescription": "Web app featuring RSS feed, advanced search, and tag filtering.",
+        "description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "CSS",
+          "Contentlayer",
+          "Upstash",
+          "Redis"
+        ],
+        "deployUrl": "https://frainer-blog.vercel.app",
+        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "year": 2024
+      },
+      {
+        "title": "Health Risk Management Reporter",
+        "shortDescription": "Odoo Module designed to manage Health Risk Management reports.",
+        "description": "Odoo module crafted for streamlined HRM report management. It offers a robust and intuitive interface facilitating the creation, management, and exportation of reports.",
+        "technologies": ["Python", "Odoo", "PostgreSQL", "XML", "CSS"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/health_risk_management_reporter",
+        "year": 2024
+      },
+      {
+        "title": "Easy Route",
+        "shortDescription": "An efficient loan management solution for streamlined loan processes.",
+        "description": "Java web app developed to efficiently manage loan requests, streamline the customer registration and evaluation process, and monitor and approve loans.",
+        "technologies": [
+          "Java",
+          "Sprint Boot",
+          "MySQL",
+          "JavaScript",
+          "CSS",
+          "Hybernate"
+        ],
+        "githubRepositoryUrl": "https://github.com/fraineralex/EasyRoute",
+        "year": 2023
+      },
+      {
+        "title": "Batch Payment Export",
+        "shortDescription": "Odoo module that allows you to export registered payments.",
+        "description": "Odoo module that allows you to export registered payments from the 'account.payment' model to a xls format.",
+        "technologies": ["Python", "Odoo", "xlwt"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/batch_payment_export",
+        "year": 2023
+      },
+      {
+        "title": "Salary Changes Report",
+        "shortDescription": "Odoo module that allows you to export a report of salary changes for employees to Excel.",
+        "description": "Odoo module that exports organized Excel reports of employee salary changes by filtering the salary changes recorded in the hr.contract model through the mail.tracking.value model.",
+        "technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/salary_changes_report",
+        "year": 2023
+      },
+      {
+        "title": "DGT-2 Overtime Report",
+        "shortDescription": "Odoo module that exports detailed DGT-2 format overtime reports, including costs, to Excel.",
+        "description": "Odoo module that exports detailed DGT-2 format overtime reports, including costs, to Excel. This module streamlines compliance and optimizes resource management.",
+        "technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/dgt2_overtime_report",
+        "year": 2023
+      },
+      {
+        "title": "Hacker News Clone",
+        "shortDescription": "A Hacker News clone built with React.",
+        "description": "A Hacker News clone built with React and the Hacker News API. It showcases the top 20 stories with infinite scrolling for a seamless news browsing experience.",
+        "technologies": ["React", "TypeScript", "Styled Components", "SWR"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/15-hacker-news-with-typescript-and-swr",
+        "deployUrl": "https://frainer-hacker-news.surge.sh",
+        "year": 2023
+      },
+      {
+        "title": "To Do App",
+        "shortDescription": "A single page app to manage todos with data synchronization.",
+        "description": "A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
+        "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
+        "deployUrl": "https://frainer-todo-app.surge.sh",
+        "year": 2023
+      },
+      {
+        "title": "Chess AI",
+        "shortDescription": "Chess AI project utilizing minimax algorithm.",
+        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It’s designed to determine the optimal move within a specified depth.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "year": 2022
+      },
+      {
+        "title": "Real Estate App",
+        "shortDescription": "Web app for real estate management.",
+        "description": "A real estate management web app with four distinct roles, each offering specific functionalities within the system to manage the real estate properties.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/RealEstate-App",
+        "year": 2022
+      },
+      {
+        "title": "Programming Quizzes",
+        "shortDescription": "React-based web app for programming quizzes.",
+        "description": "A React-based web app to choose a programming language and respond to diverse and non-repetitive questions with code snippets.",
+        "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "year": 2023
+      },
+      {
+        "title": "Google Translate Clone",
+        "shortDescription": "Simple Google Translate clone built with React.",
+        "description": "A Google Translate clone, built with React and powered by the OpenAI API.",
+        "technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
+        "deployUrl": "https://frainer-google-translate.surge.sh/",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
+        "year": 2023
+      },
+      {
+        "title": "To Do List",
+        "shortDescription": "Node.js web app for task management.",
+        "description": "Node.js web app for task management with user-friendly features. Supports permanent/temporary logins and user info updates.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "deployUrl": "https://programming-quizzes.surge.sh",
+        "githubRepositoryUrl": "https://todolist.3.us-1.fl0.io",
+        "year": 2021
+      },
+      {
+        "title": "Net Banking App",
+        "shortDescription": "Net banking app built in C#.",
+        "description": "Net banking app built in C# following ONION architecture and SOLID principles. Enables secure user logins and seamless financial transactions.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/InternetBanking-App",
+        "year": 2022
+      },
+      {
+        "title": "Social Network App",
+        "shortDescription": "Node.js Social Network App.",
+        "description": "A Node.js Social Network App for creating user profiles, sharing posts and events, commenting, connecting with friends, and ensuring secure account access.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Social-Network-App",
+        "year": 2021
+      },
+      {
+        "title": "Books App",
+        "shortDescription": "Node.js-based Books App for registration.",
+        "description": "Node.js-based Books App for registration of publishers, categories, authors, and their respective books.",
+        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
+        "year": 2021
+      },
+      {
+        "title": "Real Estate Manager",
+        "shortDescription": "Odoo Real Estate Management module.",
+        "description": "Odoo Real Estate Management module allows you to manage properties, perform custom searches, assign sales agents and much more.",
+        "technologies": ["Python", "Odoo", "PostgreSQL", "XML"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/real_estate_manager",
+        "year": 2023
+      },
+      {
+        "title": "E-Market",
+        "shortDescription": "C# ASP.NET Core web platform following SOLID principles.",
+        "description": "C# ASP.NET Core web platform following SOLID principles, offering secure user login, ad management, and image uploads.",
+        "technologies": ["C#", "ASP.NET", "SQL Server", "Identity"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/E-Market-App",
+        "year": 2022
+      },
+      {
+        "title": "Journal App",
+        "shortDescription": "React Native journaling app built with TypeScript and Expo.",
+        "description": "React Native mobile app build with TypeScript using Expo to record our personal experiences like a journal.",
+        "technologies": ["TypeScript", "React Native", "Expo", "SQLite"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/journal-app/",
+        "year": 2021
+      },
+      {
+        "title": "Emergency App",
+        "shortDescription": "React Native mobile app build with Expo for logging emergency calls.",
+        "description": "React Native mobile app built with TypeScript using Expo to log emergency calls received by the emergency team.",
+        "technologies": ["TypeScript", "React Native", "Expo", "SQLite"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/emergency-app",
+        "year": 2021
+      }
+    ]
+  },
+  "writing": {
+    "title": "Writing",
+    "link": {
+      "ariaLabel": "View Frainer's Blog",
+      "url": "/en/blog",
+      "strong": "View",
+      "span": "Frainer's Blog"
+    }
+  },
+  "footer": {
+    "builtWith": "Built with",
+    "nextJs": "Next.js",
+    "tailwindCss": "Tailwind CSS",
+    "deployedWith": "deployed with",
+    "vercel": "Vercel",
+    "takeALook": "Take a look at the source code of the site on my",
+    "githubRepository": "GitHub Repository",
+    "repositoryLink": "https://github.com/fraineralex/fraineralex.dev",
+    "specialThanksTo": "Special thanks to",
+    "brittanyChiang": "Brittany Chiang",
+    "and": "and",
+    "jheyTompkins": "Jhey Tompkins",
+    "developerOfThe": "developer of the",
+    "dCssPlane": "3D CSS Plane",
+    "forInspiration": "for inspiration."
+  },
+  "blog": {
+    "home": {
+      "topArticles": {
+        "label": "Top Articles",
+        "featured": "mastering-git-commit-messages",
+        "top2": "crafting-react-hooks",
+        "top3": "how-to-install-multiple-versions-nodejs-nvm"
+      },
+      "title": {
+        "main": "Blog Posts",
+        "temporal": "Articles"
+      },
+      "description": "Some of my learnings, tricks and thoughts on software engineering, programming and tech.",
+      "soon": "SOON",
+      "just": "Just",
+      "minRead": "min read",
+      "latestArticles": "Latest Articles"
+    },
+    "postsByTags": {
+      "label": "View posts by tag",
+      "newsletter": {
+        "placeholder": "Type your email...",
+        "label": "Subscribe",
+        "description": "Susbcribe to the newsletter! Get the latest updates of the blog."
+      }
+    },
+    "tags": {
+      "title": "Articles",
+      "description": "Some of my learnings, tricks and thoughts on software engineering, programming and tech.",
+      "[tag]": {
+        "title": "Articles about",
+        "notFound": {
+          "first": "☹️ There are no articles about",
+          "second": "yet. Check back later!"
+        }
+      }
+    },
+    "[slug]": {
+      "updatedOn": "Updated on",
+      "minRead": "min read",
+      "newsletter": {
+        "description": "Subscribe to the newsletter",
+        "placeholder": "Type your email...",
+        "label": "Subscribe"
+      }
+    }
+  }
 }

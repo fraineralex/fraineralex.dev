@@ -3,12 +3,12 @@ import Link from 'next/link'
 
 export default function Footer ({ dictionary }: FooterProps) {
   return (
-    <footer className='max-w-md pb-16 text-sm text-slate-400/80 sm:pb-0 animate-link'>
+    <footer className='max-w-md pb-16 text-sm text-slate-300/90 sm:pb-0 animate-link'>
       <p>
         {dictionary.takeALook}{' '}
         <Link
           href={dictionary.repositoryLink}
-          className='font-medium text-slate-300/90 hover:text-teal-200 focus-visible:text-teal-200'
+          className='font-semibold text-slate-300 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -17,7 +17,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         . {dictionary.specialThanksTo}{' '}
         <Link
           href='https://brittanychiang.com'
-          className='font-medium text-slate-300/90 hover:text-teal-200 focus-visible:text-teal-200'
+          className='font-semibold text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -26,7 +26,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         {dictionary.and}{' '}
         <Link
           href='https://jhey.dev'
-          className='font-medium text-slate-300/90 hover:text-teal-200 focus-visible:text-teal-200'
+          className='font-semibold text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >
@@ -35,7 +35,7 @@ export default function Footer ({ dictionary }: FooterProps) {
         ; {dictionary.developerOfThe}{' '}
         <Link
           href='/plane.html'
-          className='font-medium text-slate-300/90 hover:text-teal-200 focus-visible:text-teal-200'
+          className='font-semibold text-slate-200 hover:text-teal-300 focus-visible:text-teal-300'
           target='_blank'
           rel='noreferrer'
         >

@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/og.jpg',
-        width: 2880,
-        height: 1620
+        width: 1200,
+        height: 675
       }
     ],
     locale: 'en-US',
@@ -94,8 +94,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/og.jpg',
-        width: 2880,
-        height: 1620
+        width: 1200,
+        height: 675,
+        alt: 'Frainer Encarnación',
       }
     ]
   },

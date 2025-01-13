@@ -184,10 +184,10 @@
           "Framer Motion",
           "shadcn/ui"
         ],
-        "deployUrl": "https://tracky.fraineralex.dev",
+        "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "imageSrc": "tracky.webp",
-        "starsOnGithub": 5
+        "starsOnGithub": 10
       },
       {
         "projectName": "Chatify",
@@ -206,7 +206,7 @@
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
         "imageSrc": "chatify.webp",
-        "starsOnGithub": 1
+        "starsOnGithub": 11
       },
       {
         "projectName": "Blog",
@@ -271,7 +271,7 @@
           "shadcn/ui",
           "OpenAI API"
         ],
-        "deployUrl": "https://tracky.fraineralex.dev",
+        "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "year": 2024
       },

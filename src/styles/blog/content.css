@@ -97,10 +97,13 @@
   @apply text-right;
 }
 .content pre {
-  @apply mt-6 mb-4 overflow-x-auto rounded-lg bg-slate-900 py-4 px-4;
+  @apply mt-6 mb-4 overflow-x-auto rounded-lg bg-slate-900 py-4 px-4 border-0;
 }
-.content code {
-  @apply relative rounded bg-slate-700 border-slate-600 py-[0.2rem] px-[0.4rem] font-mono text-slate-100;
+.content :not(pre) > code {
+  @apply relative rounded bg-slate-700 py-[0.2rem] px-[0.4rem] font-mono text-slate-100;
+}
+.content pre code {
+  @apply bg-transparent p-0 rounded-none;
 }
 .content strong {
   @apply font-bold text-slate-200;

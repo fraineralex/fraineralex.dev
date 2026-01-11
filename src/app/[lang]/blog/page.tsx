@@ -4,35 +4,35 @@ import Link from 'next/link'
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { Article } from '@/components/blog/articles/article'
-import { Redis } from '@upstash/redis'
+import { getRedis } from '@/lib/redis'
 import { Eye } from 'lucide-react'
 import Image from 'next/image'
 const ArticlesByTags = dynamic(
   () => import('@/components/blog/tags/articles-by-tags')
 )
-import { allPosts } from 'contentlayer/generated'
+import { allPosts } from '@/lib/posts'
 import { getDictionary } from '@/get-dictionary'
-//import allPosts from '@/util/monks'
 
-const redis = Redis.fromEnv()
 export const revalidate = 60
 
 interface Props {
-  params: { lang?: Locale }
+  params: Promise<{ lang?: Locale }>
 }
 
 export default async function BlogPage ({ params }: Props) {
-  const lang = params?.lang || i18n.defaultLocale
+  const { lang: paramLang } = await params
+  const lang = paramLang || i18n.defaultLocale
   const { home } = (await getDictionary(lang)).blog
 
   let views: Record<string, number> = {}
 
-  if (allPosts.length > 0) {
+  const redis = getRedis()
+  if (redis && allPosts.length > 0) {
     views = (
       await redis.mget<number[]>(
         ...allPosts.map(post => ['pageviews', 'posts', post?.slug].join(':'))
       )
-    ).reduce((acc, v, i) => {
+    ).reduce((acc: Record<string, number>, v: number | null, i: number) => {
       acc[allPosts[i].slug] = v ?? 0
       return acc
     }, {} as Record<string, number>)

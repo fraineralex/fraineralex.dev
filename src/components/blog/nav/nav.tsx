@@ -4,13 +4,11 @@ import React, { useEffect, useRef, useState, lazy, Suspense } from 'react'
 const SearchPosts = lazy(() => import('../search/search-posts'))
 import { usePathname } from 'next/navigation'
 const SwitchLanguage = lazy(() => import('@/components/layout/switch-language'))
-import { allPosts } from 'contentlayer/generated'
 import { Search } from 'lucide-react'
 
 export const Navigation = () => {
   const pathname = usePathname()
   const [isBlogPage, setIsBlogPage] = useState<null | boolean>(null)
-  const [isContentPage, setIsContentPage] = useState<null | boolean>(null)
   const ref = useRef<HTMLElement>(null)
   const [isIntersecting, setIntersecting] = useState(true)
 
@@ -29,18 +27,21 @@ export const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    setIsBlogPage(pathname.includes('/blog'))
-    const newIsContentPage = allPosts.filter(post =>
-      pathname.includes(post.slug)
-    )
-    setIsContentPage(newIsContentPage.length > 0)
-
+    const isBlog = pathname.includes('/blog') || pathname === '/blog'
+    setIsBlogPage(isBlog)
     setLocale(pathname.startsWith('/es') ? '/es/' : '/en/')
+    
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+      setIntersecting(true)
+    }
   }, [pathname])
+
+  const isBlogPostRoute = /^(\/(?:en|es))?\/blog\/(?!tags(?:\/|$))[^/]+\/?$/.test(pathname)
+  if (isBlogPostRoute) return null
 
   return (
     <>
-      {isContentPage === false && (
         <header ref={ref}>
           <div
             className={`fixed inset-x-0 top-0 z-50 backdrop-blur duration-200 animate-fade-in-down animate-duration-slower ${
@@ -87,7 +88,6 @@ export const Navigation = () => {
             </div>
           </div>
         </header>
-      )}
     </>
   )
 }

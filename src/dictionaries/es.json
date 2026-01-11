@@ -41,12 +41,13 @@
   },
   "about": {
     "title": "Acerca de",
-    "paragraph1": {
+"paragraph1": {
       "content": "Soy Frainer, un apasionado",
       "strong": {
         "content": "Desarrollador Full Stack"
       },
-      "experience": "con más de 3 años de experiencia, especializado en dar vida a ideas en el vasto mundo del desarrollo web. A lo largo de mi trayectoria, he tenido el privilegio de contribuir al desarrollo de software para una",
+      "experiencePrefix": "con más de",
+      "experienceSuffix": "años de experiencia, especializado en dar vida a ideas en el vasto mundo del desarrollo web. A lo largo de mi trayectoria, he tenido el privilegio de contribuir al desarrollo de software para una",
       "journey": {
         "consultancy": {
           "label": "consultoría de software",

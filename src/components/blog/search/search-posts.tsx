@@ -4,7 +4,7 @@ import React, { useState, lazy } from 'react'
 import { Search } from 'lucide-react'
 const SearchResult = lazy(() => import('./search-result'))
 const Modal = lazy(() => import('@/components/blog/common/modal'))
-import { displayTags } from '@/utils/data'
+import { allTags } from '@/utils/tags'
 import Link from 'next/link'
 import { i18n } from '@/i18n-config'
 import { usePathname } from 'next/navigation'
@@ -45,8 +45,8 @@ export function SearchPosts ({ className }: { className?: string }) {
           {!searchTerm && (
             <small className='mb-4 text-slate-400 md:flex flex-col md:flex-row text-center hidden'>
               <div className='flex flex-wrap'>
-                {displayTags &&
-                  displayTags.map((tag, index) => (
+                {allTags &&
+                  allTags.map((tag, index) => (
                     <div key={index}>
                       <Link
                         href={`/${lang}/tags/${tag.name}`}
@@ -54,7 +54,7 @@ export function SearchPosts ({ className }: { className?: string }) {
                       >
                         {tag.label}
                       </Link>
-                      {index !== (displayTags?.length ?? 0) - 1 && (
+                      {index !== (allTags?.length ?? 0) - 1 && (
                         <span className='px-1'>•</span>
                       )}
                     </div>

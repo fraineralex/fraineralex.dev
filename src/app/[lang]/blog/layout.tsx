@@ -132,15 +132,16 @@ const spanishMetadata: Metadata = {
 }
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
-  return params?.lang === 'es' ? spanishMetadata : englishmetadata
+  const { lang } = await params
+  return lang === 'es' ? spanishMetadata : englishmetadata
 }
 
 interface Props {
   children: React.ReactNode
-  params?: { lang: string }
+  params: Promise<{ lang: string }>
 }
 
-export default function Layout ({ children, params }: Props) {
+export default function Layout ({ children }: Props) {
   return (
     <main className='blog relative'>
       {children}

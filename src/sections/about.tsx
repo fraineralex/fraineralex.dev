@@ -2,8 +2,15 @@ import { CgShapeTriangle } from 'react-icons/cg'
 import { AboutProps } from '@/types/about-types'
 import Link from 'next/link'
 
+function getYearsOfExperience(): number {
+  const startDate = new Date(2021, 0, 1)
+  const now = new Date()
+  return now.getFullYear() - startDate.getFullYear()
+}
+
 export default function About ({ dictionary, refAbout }: AboutProps) {
   const { paragraph1, paragraph2, paragraph3, skills } = dictionary
+  const yearsOfExperience = getYearsOfExperience()
   return (
     <section
       id='about'
@@ -22,7 +29,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           <strong className='font-medium text-slate-50'>
             {paragraph1.strong.content}
           </strong>{' '}
-          {paragraph1.experience}{' '}
+          {paragraph1.experiencePrefix} {yearsOfExperience} {paragraph1.experienceSuffix}{' '}
           <Link
             className='font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
             href={paragraph1.journey.consultancy.url}

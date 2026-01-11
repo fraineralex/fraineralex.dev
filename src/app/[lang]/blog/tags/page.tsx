@@ -80,17 +80,19 @@ const spanishMetadata: Metadata = {
 }
 
 export async function generateMetadata ({ params }: Props) {
-  return params.lang === 'es' ? spanishMetadata : englishMetadata
+  const { lang } = await params
+  return lang === 'es' ? spanishMetadata : englishMetadata
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     lang: Locale
-  }
+  }>
 }
 
 export default async function TagsPage ({ params }: Props) {
-  const lang = params?.lang ?? i18n.defaultLocale
+  const { lang: paramLang } = await params
+  const lang = paramLang ?? i18n.defaultLocale
   const { tags } = (await getDictionary(lang)).blog
   return (
     <div className='relative'>

@@ -18,7 +18,8 @@ interface Strong {
 interface Paragraph1 {
   content: string
   strong: Strong
-  experience: string
+  experiencePrefix: string
+  experienceSuffix: string
   journey: Journey
 }
 

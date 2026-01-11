@@ -3,10 +3,9 @@ import Link from 'next/link'
 import { ReactIcon } from '@/components/blog/common/svg-icons'
 import Image from 'next/image'
 import { displayTags, allTags } from '@/utils/data'
-import React from 'react'
-import SubscribeNewsletter from '../common/subscribe-newsletter'
-import { Locale, i18n } from '@/i18n-config'
+import { Locale } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
+import SubscribeNewsletter from '../common/subscribe-newsletter'
 
 interface Props {
   displayAllTags?: boolean

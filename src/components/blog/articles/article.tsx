@@ -1,31 +1,20 @@
-'use client'
-
 import type { Post } from '@/lib/posts'
 import Link from 'next/link'
 import { Eye } from 'lucide-react'
 import Image from 'next/image'
 import { Card } from './card'
-import React, { useState, useEffect, useRef } from 'react'
 import '@/styles/blog/article.css'
-import { Locale, i18n } from '@/i18n-config'
+import { Locale } from '@/i18n-config'
 
 type Props = {
   post: Post
   views: number
   isTopArticle?: boolean
   lang?: Locale
+  priority?: boolean
 }
 
-export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang }) => {
-  const [showDiv, setShowDiv] = useState(false)
-  const containerRef = useRef<HTMLAnchorElement | null>(null)
-
-  useEffect(() => {
-    if (containerRef.current && containerRef.current.offsetHeight > 500) {
-      setShowDiv(true)
-    }
-  }, [])
-
+export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang, priority }) => {
   const aspectRatio = isTopArticle ? '8 / 11' : '15 / 7'
   const imageStyles: {} = isTopArticle
     ? { aspectRatio, objectFit: 'cover', height: '100%' }
@@ -33,7 +22,6 @@ export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang }) =>
 
   return (
     <Link
-      ref={containerRef}
       href={`/${lang}/blog/${post?.slug}`}
       className={`bg-gradient-to-br opacity-100 via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group hover:border-zinc-200/50 border-zinc-600 lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out ${
         isTopArticle ? 'relative grid grid-cols-8 ' : 'md:gap-0'
@@ -48,6 +36,7 @@ export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang }) =>
         alt={post.title}
         width='360'
         height='192'
+        priority={priority}
       />
 
       <Card className={`${isTopArticle ? 'col-span-6' : ''}`}>
@@ -79,13 +68,12 @@ export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang }) =>
           </p>
         </article>
       </Card>
-      {showDiv && (
-        <div className='absolute bottom-1 px-4 md:px-8 py-2'>
-          <p className='hidden text-zinc-200 group-hover:text-white lg:block'>
-            Just {post.readTime} min read <span aria-hidden='true'>&rarr;</span>
-          </p>
-        </div>
-      )}
+      {/* Always show read time for better UX - no JS height check needed */}
+      <div className='absolute bottom-1 px-4 md:px-8 py-2'>
+        <p className='hidden text-zinc-200 group-hover:text-white lg:block'>
+          Just {post.readTime} min read <span aria-hidden='true'>&rarr;</span>
+        </p>
+      </div>
     </Link>
   )
 }

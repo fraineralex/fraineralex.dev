@@ -1,11 +1,11 @@
 'use client'
 
 import { createContext, useContext, ReactNode } from 'react'
-import type { Post } from '@/types/post'
+import type { PostMeta } from '@/types/post'
 
-const PostsContext = createContext<Post[]>([])
+const PostsContext = createContext<PostMeta[]>([])
 
-export function PostsProvider({ children, posts }: { children: ReactNode; posts: Post[] }) {
+export function PostsProvider({ children, posts }: { children: ReactNode; posts: PostMeta[] }) {
   return <PostsContext.Provider value={posts}>{children}</PostsContext.Provider>
 }
 

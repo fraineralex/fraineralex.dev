@@ -1,6 +1,6 @@
 import React from 'react'
 import { Article } from '@/components/blog/articles/article'
-import { getRedis } from '@/lib/redis'
+import { getAllViewCounts } from '@/lib/views'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
 import { allTags } from '@/utils/data'
 import { Metadata, ResolvingMetadata } from 'next'
@@ -16,21 +16,16 @@ type Props = {
   }>
 }
 
-/* export async function generateStaticParams (): Promise<Props['params'][]> {
-  const allParams = allTags.map(tag => ({
-    lang: 'en' as Locale,
-    tag: tag.name
-  }))
-
-  allTags.forEach(tag => {
-    allParams.push({
-      lang: 'es' as Locale,
-      tag: tag.name
-    })
-  })
+export async function generateStaticParams(): Promise<{ lang: Locale; tag: string }[]> {
+  const allParams: { lang: Locale; tag: string }[] = []
+  
+  for (const tag of allTags) {
+    allParams.push({ lang: 'en', tag: tag.name })
+    allParams.push({ lang: 'es', tag: tag.name })
+  }
 
   return allParams
-} */
+}
 
 const englishMetadata = async (tagName: string): Promise<Metadata> => {
   const tag = allTags.find(tag => tag.name === tagName)
@@ -158,7 +153,8 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   return await metadata(tag)
 }
 
-export const revalidate = 60
+// Static pages - only regenerate on new deploy
+export const revalidate = false
 
 export default async function BlogPage ({ params }: Props) {
   const { tag: tagName, lang: paramLang } = await params
@@ -175,19 +171,10 @@ export default async function BlogPage ({ params }: Props) {
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
         new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
     )
-  const postKeys = sortedPosts
-    .filter(post => post.tags?.includes(tagName))
-    .map(post => ['pageviews', 'posts', post?.slug].join(':'))
 
-  let views: Record<string, number> = {}
-
-  const redis = getRedis()
-  if (redis && postKeys.length > 0) {
-    views = (await redis.mget<number[]>(...postKeys)).reduce((acc: Record<string, number>, v: number | null, i: number) => {
-      acc[sortedPosts[i].slug] = v ?? 0
-      return acc
-    }, {} as Record<string, number>)
-  }
+  // Use cached view counts (5 minute cache) for better performance
+  const slugs = sortedPosts.map(post => post.slug)
+  const views = await getAllViewCounts(slugs)
 
   const tag = allTags.find(tag => tag.name === tagName)
 

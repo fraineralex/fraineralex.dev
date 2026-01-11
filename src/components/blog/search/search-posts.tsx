@@ -49,7 +49,7 @@ export function SearchPosts ({ className }: { className?: string }) {
                   allTags.map((tag, index) => (
                     <div key={index}>
                       <Link
-                        href={`/${lang}/tags/${tag.name}`}
+                        href={`/${lang}/blog/tags/${tag.name}`}
                         className='text-teal-300 font-bold underline uppercase underline-offset-4 py-3 px-1 hover:text-pink-400'
                       >
                         {tag.label}

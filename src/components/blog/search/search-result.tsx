@@ -16,7 +16,6 @@ export const SearchResult = ({
     const title = post.title.toLowerCase()
     const description = post.description.toLowerCase()
     const tags = post.tags?.map(tag => tag.toLowerCase())
-    const body = post.body.raw?.toLowerCase()
     const search = searchTerm.toLowerCase()
 
     return (
@@ -24,8 +23,7 @@ export const SearchResult = ({
       post.published &&
       (title.includes(search) ||
         description.includes(search) ||
-        tags?.includes(search) ||
-        body?.includes(search))
+        tags?.some(tag => tag.includes(search)))
     )
   })
 

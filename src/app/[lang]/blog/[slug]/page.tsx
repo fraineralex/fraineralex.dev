@@ -1,10 +1,11 @@
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { Mdx } from '@/components/blog/articles/mdx'
 import dynamic from 'next/dynamic'
 const Header = dynamic(() => import('@/components/blog/content/header'))
 import '@/styles/blog/mdx.css'
 import { ReportView } from '@/components/blog/content/view'
-import { getRedis } from '@/lib/redis'
+import { ViewCount, ViewCountSkeleton } from '@/components/blog/content/view-count'
 import Image from 'next/image'
 import { Metadata, ResolvingMetadata } from 'next'
 import Link from 'next/link'
@@ -14,7 +15,8 @@ import { allPosts, getPostContent } from '@/lib/posts'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 
-export const revalidate = 60
+// Static pages - only regenerate on new deploy
+export const revalidate = false
 
 type Props = {
   params: Promise<{
@@ -106,14 +108,17 @@ export default async function PostPage ({ params }: Props) {
     notFound()
   }
 
-  const redis = getRedis()
-  const views = redis
-    ? (await redis.get<number>(['pageviews', 'posts', slug].join(':'))) ?? 0
-    : 0
+  // ViewCount is wrapped in Suspense for streaming - the view count 
+  // loads async while the rest of the static page renders immediately
+  const viewsSlot = (
+    <Suspense fallback={<ViewCountSkeleton />}>
+      <ViewCount slug={slug} />
+    </Suspense>
+  )
 
   return (
     <section className='min-h-screen max-w-6xl md:max-w-5xl mx-auto px-4 md:px-8 text-zinc-300'>
-      <Header views={views} lang={lang} />
+      <Header viewsSlot={viewsSlot} lang={lang} />
       <ReportView slug={post.slug} />
       <header className='mx-auto w-full text-center content pt-20 md:pt-28 home-header'>
         <h1 className='text-white mb-8 w-full'>{post.title}</h1>
@@ -123,11 +128,11 @@ export default async function PostPage ({ params }: Props) {
         <Image
           className='rounded-xl mx-auto w-full'
           style={{ minWidth: '80%' }}
-          loading='lazy'
           src={post.hero}
           alt={post.title}
           width={800}
           height={427}
+          priority
         />
         {post.heroSource && (
           <figcaption className='text-right text-sm text-zinc-600 pe-8 pt-1 italic'>

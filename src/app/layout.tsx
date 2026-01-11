@@ -7,7 +7,7 @@ import LocalFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { PostsProvider } from '@/context/posts-context'
-import { allPosts } from '@/lib/posts'
+import { allPostsMeta } from '@/lib/posts'
 
 import '@/styles/globals.css'
 import '@/styles/site.css'
@@ -126,7 +126,7 @@ export default async function RootLayout ({ children, params }: Props) {
       lang={lang}
     >
       <body className='bg-gray-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
-        <PostsProvider posts={allPosts}>
+        <PostsProvider posts={allPostsMeta}>
           <MouseShadow />
           <Navigation />
           {children}

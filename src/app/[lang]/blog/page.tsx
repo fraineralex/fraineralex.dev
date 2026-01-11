@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { Article } from '@/components/blog/articles/article'
-import { getRedis } from '@/lib/redis'
+import { getAllViewCounts } from '@/lib/views'
 import { Eye } from 'lucide-react'
 import Image from 'next/image'
 const ArticlesByTags = dynamic(
@@ -13,7 +13,8 @@ const ArticlesByTags = dynamic(
 import { allPosts } from '@/lib/posts'
 import { getDictionary } from '@/get-dictionary'
 
-export const revalidate = 60
+// Static pages - only regenerate on new deploy
+export const revalidate = false
 
 interface Props {
   params: Promise<{ lang?: Locale }>
@@ -24,19 +25,9 @@ export default async function BlogPage ({ params }: Props) {
   const lang = paramLang || i18n.defaultLocale
   const { home } = (await getDictionary(lang)).blog
 
-  let views: Record<string, number> = {}
-
-  const redis = getRedis()
-  if (redis && allPosts.length > 0) {
-    views = (
-      await redis.mget<number[]>(
-        ...allPosts.map(post => ['pageviews', 'posts', post?.slug].join(':'))
-      )
-    ).reduce((acc: Record<string, number>, v: number | null, i: number) => {
-      acc[allPosts[i].slug] = v ?? 0
-      return acc
-    }, {} as Record<string, number>)
-  }
+  // Use cached view counts (5 minute cache) for better performance
+  const slugs = allPosts.map(post => post.slug)
+  const views = await getAllViewCounts(slugs)
 
   let sorted = allPosts.filter(post => post.lang === lang)
   const thereAreFourPosts = sorted.length >= 4
@@ -107,6 +98,7 @@ export default async function BlogPage ({ params }: Props) {
                   alt={featured.title}
                   width='360'
                   height='192'
+                  priority
                 />
                 <article className='relative w-full h-full p-4 md:p-8'>
                   <div className='flex items-center justify-between gap-2'>
@@ -155,6 +147,7 @@ export default async function BlogPage ({ params }: Props) {
                     views={views[post?.slug] ?? 0}
                     isTopArticle
                     lang={lang}
+                    priority={index === 0}
                   />
                 ))}
               </div>

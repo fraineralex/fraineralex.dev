@@ -2,9 +2,9 @@ import 'server-only'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import type { Post } from '@/types/post'
+import type { Post, PostMeta } from '@/types/post'
 
-export type { Post }
+export type { Post, PostMeta }
 
 const postsDirectory = path.join(process.cwd(), 'content/posts')
 
@@ -72,3 +72,10 @@ export function getPostContent(slug: string, lang: string): string | null {
 }
 
 export const allPosts = getAllPosts()
+
+// Lightweight version for client-side search (excludes raw MDX body)
+export function getAllPostsMeta(): PostMeta[] {
+  return allPosts.map(({ body, ...meta }) => meta)
+}
+
+export const allPostsMeta = getAllPostsMeta()

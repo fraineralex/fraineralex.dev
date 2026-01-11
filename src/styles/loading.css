@@ -8,13 +8,11 @@
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-  box-sizing: inherit;
 }
 
 .container-loading {
   width: max-content;
   max-width: 100px;
-  box-sizing: inherit;
 }
 
 .loading-svg {
@@ -23,5 +21,39 @@
   display: block;
   margin: 0 auto;
   fill: none;
-  box-sizing: inherit;
+}
+
+/* CSS-only hexagon stroke animation */
+.loading-svg path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw-hexagon 2s ease-in-out infinite alternate;
+}
+
+@keyframes draw-hexagon {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* CSS-only letter F fade animation */
+.loading-svg #F {
+  opacity: 0;
+  animation: fade-in-f 2s ease-in-out infinite alternate;
+  animation-delay: 0.8s;
+}
+
+@keyframes fade-in-f {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

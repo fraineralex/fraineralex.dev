@@ -1,11 +1,11 @@
-import type { Post } from '@/types/post'
+import type { PostMeta } from '@/types/post'
 import { allTags } from '@/utils/tags'
 import Image from 'next/image'
 import Link from 'next/link'
 import { i18n } from '@/i18n-config'
 
 interface Props {
-  blog: Post
+  blog: PostMeta
 }
 
 export default function BlogCard ({ blog }: Props) {
@@ -52,7 +52,7 @@ export default function BlogCard ({ blog }: Props) {
                   return (
                     <span key={index}>
                       <Link
-                        href={`tags/${tag?.name}`}
+                        href={`/${blog.lang}/blog/tags/${tag?.name}`}
                         className='text-teal-300 font-bold underline underline-offset-4 py-3 px-1 hover:text-white'
                       >
                         {tag?.label}

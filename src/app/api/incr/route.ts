@@ -3,9 +3,22 @@ export const runtime = 'edge'
 import { Redis } from '@upstash/redis'
 import { NextRequest, NextResponse } from 'next/server'
 
-const redis = Redis.fromEnv()
+const getRedis = () => {
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    return null
+  }
+  return new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN
+  })
+}
 
 export async function POST (req: NextRequest): Promise<NextResponse> {
+  const redis = getRedis()
+  if (!redis) {
+    return new NextResponse('Redis not configured', { status: 503 })
+  }
+
   if (req.headers.get('Content-Type') !== 'application/json') {
     return new NextResponse('must be json', { status: 400 })
   }
@@ -18,7 +31,7 @@ export async function POST (req: NextRequest): Promise<NextResponse> {
   if (!slug) {
     return new NextResponse('Slug not found', { status: 400 })
   }
-  const ip = req.ip
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? req.headers.get('x-real-ip')
   if (ip) {
     // Hash the IP in order to not store it directly in your db.
     const buf = await crypto.subtle.digest(
@@ -35,7 +48,7 @@ export async function POST (req: NextRequest): Promise<NextResponse> {
       ex: 24 * 60 * 60
     })
     if (!isNew) {
-      new NextResponse(null, { status: 202 })
+      return new NextResponse(null, { status: 202 })
     }
   }
   await redis.incr(['pageviews', 'posts', slug].join(':'))

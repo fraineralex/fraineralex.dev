@@ -1,22 +1,19 @@
 import React from 'react'
 import { Article } from '@/components/blog/articles/article'
-import { Redis } from '@upstash/redis'
+import { getRedis } from '@/lib/redis'
 import { ArticlesByTags } from '@/components/blog/tags/articles-by-tags'
 import { allTags } from '@/utils/data'
 import { Metadata, ResolvingMetadata } from 'next'
 import '@/styles/blog/home.css'
-import { allPosts } from 'contentlayer/generated'
+import { allPosts } from '@/lib/posts'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
-//import allPosts from '@/util/monks'
-
-const redis = Redis.fromEnv()
 
 type Props = {
-  params: {
+  params: Promise<{
     lang: Locale
     tag: string
-  }
+  }>
 }
 
 /* export async function generateStaticParams (): Promise<Props['params'][]> {
@@ -156,15 +153,16 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
 }
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
-  const metadata = params.lang === 'es' ? spanishMetadata : englishMetadata
-  return await metadata(params.tag)
+  const { lang, tag } = await params
+  const metadata = lang === 'es' ? spanishMetadata : englishMetadata
+  return await metadata(tag)
 }
 
 export const revalidate = 60
 
 export default async function BlogPage ({ params }: Props) {
-  const tagName = params?.tag
-  const lang = params?.lang ?? i18n.defaultLocale
+  const { tag: tagName, lang: paramLang } = await params
+  const lang = paramLang ?? i18n.defaultLocale
   const dictionary = (await getDictionary(lang)).blog.tags['[tag]']
 
   const sortedPosts = allPosts
@@ -183,8 +181,9 @@ export default async function BlogPage ({ params }: Props) {
 
   let views: Record<string, number> = {}
 
-  if (postKeys.length > 0) {
-    views = (await redis.mget<number[]>(...postKeys)).reduce((acc, v, i) => {
+  const redis = getRedis()
+  if (redis && postKeys.length > 0) {
+    views = (await redis.mget<number[]>(...postKeys)).reduce((acc: Record<string, number>, v: number | null, i: number) => {
       acc[sortedPosts[i].slug] = v ?? 0
       return acc
     }, {} as Record<string, number>)

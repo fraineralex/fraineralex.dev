@@ -6,11 +6,7 @@ import matter from 'gray-matter'
 import { Locale } from '@/i18n-config'
 
 export const readPosts = (lang: Locale) => {
-  console.log('process.cwd()', process.cwd())
   const postsDirectory = path.resolve(process.cwd(), `./content/posts/${lang}`);
-  console.log('postsDirectory', postsDirectory)
-
-  
   return fs
     .readdirSync(postsDirectory)
     .filter(file => path.extname(file) === '.mdx')

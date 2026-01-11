@@ -49,11 +49,7 @@ export default function Loading () {
               id='F'
               transform='translate(36, 33)'
               fill='#64FFDA'
-              style={{ opacity: 0 }}
-              font-family='system-ui,Calibre-Medium, Calibre,sans-serif'
-              font-size='50'
-              font-weight='500'
-              letter-spacing='4.16666603'
+              style={{ opacity: 0, fontFamily: 'system-ui,Calibre-Medium, Calibre,sans-serif', fontSize: 50, fontWeight: 500, letterSpacing: '4.16666603' }}
             >
               <text>
                 <tspan x='0.141666985' y='33'>
@@ -63,9 +59,9 @@ export default function Loading () {
             </g>
             <path
               stroke='#64FFDA'
-              stroke-width='5'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='5'
+              strokeLinecap='round'
+              strokeLinejoin='round'
               d='M 50, 5
             L 11, 27
             L 11, 72

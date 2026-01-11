@@ -1,4 +1,4 @@
-import { allPosts } from 'contentlayer/generated'
+import { allPosts } from '@/lib/posts'
 import { allTags } from '@/utils/data'
 import { i18n } from '@/i18n-config'
 

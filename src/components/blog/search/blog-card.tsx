@@ -1,5 +1,5 @@
-import { Post } from 'contentlayer/generated'
-import { allTags } from '@/utils/data'
+import type { Post } from '@/types/post'
+import { allTags } from '@/utils/tags'
 import Image from 'next/image'
 import Link from 'next/link'
 import { i18n } from '@/i18n-config'

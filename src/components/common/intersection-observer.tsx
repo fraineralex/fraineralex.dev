@@ -3,14 +3,17 @@
 import { Locale } from '@/i18n-config'
 import { About, Blog, Experience, Footer, Projects, SideNav } from '@/sections'
 import { useInView } from 'react-intersection-observer'
+import { WritingPost } from '@/types/writing-types'
 
 export default function Observer ({
   dictionary,
-  lang
+  lang,
+  posts
 }: {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   dictionary: any
   lang: Locale
+  posts: WritingPost[]
 }) {
   const [refAbout, inViewAbout] = useInView({
     threshold: 0.47
@@ -45,7 +48,7 @@ export default function Observer ({
           refExperience={refExperience}
         />
         <Projects dictionary={dictionary.projects} refProjects={refProjects} />
-        <Blog dictionary={dictionary.writing} refWriting={refWriting} lang={lang} />
+        <Blog dictionary={dictionary.writing} refWriting={refWriting} lang={lang} posts={posts} />
         <Footer dictionary={dictionary.footer} />
       </main>
     </div>

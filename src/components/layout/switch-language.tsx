@@ -1,7 +1,7 @@
 'use client'
 import { ChevronDown } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactElement } from 'react'
 import { Locale, i18n } from '@/i18n-config'
 import Link from 'next/link'
 import { SpainFlag, UsaFlag } from '../common/SvgIcons'
@@ -9,12 +9,12 @@ import { SpainFlag, UsaFlag } from '../common/SvgIcons'
 type langType = {
   current: {
     name: string
-    flag: JSX.Element
+    flag: ReactElement
     locale: Locale
   }
   new: {
     name: string
-    flag: JSX.Element
+    flag: ReactElement
     locale: Locale
   }
 }

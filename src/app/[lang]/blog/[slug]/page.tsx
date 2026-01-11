@@ -4,27 +4,26 @@ import dynamic from 'next/dynamic'
 const Header = dynamic(() => import('@/components/blog/content/header'))
 import '@/styles/blog/mdx.css'
 import { ReportView } from '@/components/blog/content/view'
-import { Redis } from '@upstash/redis'
+import { getRedis } from '@/lib/redis'
 import Image from 'next/image'
 import { Metadata, ResolvingMetadata } from 'next'
 import Link from 'next/link'
 const Subscribe = dynamic(() => import('@/components/blog/footer/subscribe'))
 import { allTags } from '@/utils/data'
-import { allPosts } from 'contentlayer/generated'
+import { allPosts, getPostContent } from '@/lib/posts'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 
 export const revalidate = 60
-const redis = Redis.fromEnv()
 
 type Props = {
-  params: {
+  params: Promise<{
     lang: Locale
     slug: string
-  }
+  }>
 }
 
-export async function generateStaticParams (): Promise<Props['params'][]> {
+export async function generateStaticParams (): Promise<{ lang: Locale; slug: string }[]> {
   return allPosts
     .filter(post => post.published)
     .map(
@@ -40,8 +39,8 @@ export async function generateMetadata (
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const slug = params?.slug
-  const lang = params?.lang ?? i18n.defaultLocale
+  const { slug, lang: paramLang } = await params
+  const lang = paramLang ?? i18n.defaultLocale
   const post = allPosts.find(post => post.slug === slug && post.lang === lang)
 
   if (!post) {
@@ -50,7 +49,6 @@ export async function generateMetadata (
     }
   }
 
-  // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
   const BLOG_DOMAIN =
@@ -66,7 +64,7 @@ export async function generateMetadata (
     description: post.description,
     keywords: post.tags,
     openGraph: {
-      title: `${post.title} | Frainer's Blog 📝`,
+      title: `${post.title} | Frainer's Blog`,
       images: [
         {
           url: `${process.env.DOMAIN}${post.hero}`,
@@ -79,7 +77,7 @@ export async function generateMetadata (
       url: `${BLOG_DOMAIN}/${post.slug}`
     },
     twitter: {
-      title: `${post.title} | Frainer's Blog 📝`,
+      title: `${post.title} | Frainer's Blog`,
       description: post.description,
       images: [
         {
@@ -93,8 +91,8 @@ export async function generateMetadata (
 }
 
 export default async function PostPage ({ params }: Props) {
-  const slug = params?.slug
-  const lang = params?.lang ?? i18n.defaultLocale
+  const { slug, lang: paramLang } = await params
+  const lang = paramLang ?? i18n.defaultLocale
   const dictionary = (await getDictionary(lang)).blog['[slug]']
 
   const post = allPosts.find(post => post.slug === slug && post.lang === lang)
@@ -103,8 +101,15 @@ export default async function PostPage ({ params }: Props) {
     notFound()
   }
 
-  const views =
-    (await redis.get<number>(['pageviews', 'posts', slug].join(':'))) ?? 0
+  const content = getPostContent(slug, lang)
+  if (!content) {
+    notFound()
+  }
+
+  const redis = getRedis()
+  const views = redis
+    ? (await redis.get<number>(['pageviews', 'posts', slug].join(':'))) ?? 0
+    : 0
 
   return (
     <section className='min-h-screen max-w-6xl md:max-w-5xl mx-auto px-4 md:px-8 text-zinc-300'>
@@ -144,7 +149,7 @@ export default async function PostPage ({ params }: Props) {
               dateStyle: 'medium'
             }).format(new Date(post.updated || post.date))}
           </time>{' '}
-          <span className='px-1 md:px-4'>•</span>
+          <span className='px-1 md:px-4'>-</span>
           <span className='me-2 md:me-0'>
             {post.readTime} {dictionary.minRead}
           </span>
@@ -152,18 +157,17 @@ export default async function PostPage ({ params }: Props) {
             post.tags.slice(0, 2).map((tagName, index) => {
               const tag = allTags.find(tag => tag.name === tagName)
               return (
-                <>
+                <span key={index}>
                   <Link
-                    key={index}
                     href={`/${lang}/blog/tags/${tag?.name || tagName}`}
                     className='text-teal-300 font-bold underline underline-offset-4 py-3 md:px-1 hover:text-white text-xs inline md:hidden'
                   >
                     {tag?.label || tagName}
                   </Link>
                   {index !== (post.tags?.length ?? 0) - 1 && (
-                    <span className='px-1 inline md:hidden'>•</span>
+                    <span className='px-1 inline md:hidden'>-</span>
                   )}
-                </>
+                </span>
               )
             })}
         </span>
@@ -181,7 +185,7 @@ export default async function PostPage ({ params }: Props) {
                     {tag?.label || tagName}
                   </Link>
                   {index !== (post.tags?.length ?? 0) - 1 && (
-                    <span className='px-1'>•</span>
+                    <span className='px-1'>-</span>
                   )}
                 </div>
               )
@@ -190,7 +194,7 @@ export default async function PostPage ({ params }: Props) {
       </small>
 
       <article className='max-w-6xl mx-auto md:max-w-4xl px-4 md:px-8 content pb-12'>
-        <Mdx code={post.body.code} />
+        <Mdx source={content} />
       </article>
       <Subscribe dictionary={dictionary.newsletter} />
     </section>

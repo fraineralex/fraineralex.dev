@@ -2,9 +2,10 @@ import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 import Observer from '@/components/common/intersection-observer'
 import { Metadata } from 'next'
+import { allPosts } from '@/lib/posts'
 
 interface Props {
-  params?: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
 const englishMetadata: Metadata = {
@@ -156,16 +157,27 @@ const spanishMetadata: Metadata = {
 }
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
-  return params?.lang === 'es' ? spanishMetadata : englishMetadata
+  const { lang } = await params
+  return lang === 'es' ? spanishMetadata : englishMetadata
 }
 
 export default async function Home ({ params }: Props) {
-  const lang = params?.lang || i18n.defaultLocale
+  const { lang: paramLang } = await params
+  const lang = paramLang || i18n.defaultLocale
   const dictionary = await getDictionary(lang)
+
+  const posts = allPosts.map(post => ({
+    title: post.title,
+    hero: post.hero,
+    date: post.date,
+    slug: post.slug,
+    lang: post.lang,
+    published: post.published
+  }))
 
   return (
     <>
-      <Observer dictionary={dictionary} lang={lang} />
+      <Observer dictionary={dictionary} lang={lang} posts={posts} />
     </>
   )
 }

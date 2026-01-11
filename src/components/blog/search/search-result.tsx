@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 const BlogCard = dynamic(() => import('./blog-card'))
 import { Search } from 'lucide-react'
-import { allPosts } from 'contentlayer/generated'
+import { usePosts } from '@/context/posts-context'
 import { Locale } from '@/i18n-config'
 
 export const SearchResult = ({
@@ -11,11 +11,12 @@ export const SearchResult = ({
   searchTerm: string
   lang: Locale
 }) => {
-  const filteredPosts = allPosts.filter(post => {
+  const posts = usePosts()
+  const filteredPosts = posts.filter(post => {
     const title = post.title.toLowerCase()
     const description = post.description.toLowerCase()
     const tags = post.tags?.map(tag => tag.toLowerCase())
-    const body = post.body.code?.toLowerCase()
+    const body = post.body.raw?.toLowerCase()
     const search = searchTerm.toLowerCase()
 
     return (

@@ -2,17 +2,17 @@ import Link from 'next/link'
 import WritingCard from '@/components/blog/writing-card-portfolio'
 import { WiritingProps } from '@/types/writing-types'
 import { ArrowRigthIcon } from '@/components/common/SvgIcons'
-import { allPosts } from 'contentlayer/generated'
 import { Locale } from '@/i18n-config'
 
 export default function Writing ({
   dictionary,
   refWriting,
-  lang
+  lang,
+  posts
 }: WiritingProps) {
   const { link, title } = dictionary
 
-  const sortedPosts = allPosts
+  const sortedPosts = posts
     .filter(post => post.published && post.lang === lang)
     .sort(
       (a, b) =>

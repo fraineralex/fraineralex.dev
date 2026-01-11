@@ -1,12 +1,9 @@
-import { withContentlayer } from "next-contentlayer";
+import createMDX from '@next/mdx'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   productionBrowserSourceMaps: true,
-	experimental: {
-		mdxRs: true,
-	},
 	async rewrites() {
     return [
       {
@@ -28,4 +25,6 @@ const nextConfig = {
   }
 };
 
-export default withContentlayer(nextConfig);
+const withMDX = createMDX({})
+
+export default withMDX(nextConfig);

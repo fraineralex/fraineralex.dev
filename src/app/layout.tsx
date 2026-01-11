@@ -6,6 +6,8 @@ import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { PostsProvider } from '@/context/posts-context'
+import { allPosts } from '@/lib/posts'
 
 import '@/styles/globals.css'
 import '@/styles/site.css'
@@ -107,11 +109,12 @@ export const metadata: Metadata = {
 
 interface Props {
   children: React.ReactNode
-  params?: { lang: Locale }
+  params: Promise<{ lang?: Locale }>
 }
 
-export default function RootLayout ({ children, params }: Props) {
-  const lang = params?.lang || i18n.defaultLocale
+export default async function RootLayout ({ children, params }: Props) {
+  const { lang: paramLang } = await params
+  const lang = paramLang || i18n.defaultLocale
   return (
     <html
       className={`${[
@@ -123,9 +126,11 @@ export default function RootLayout ({ children, params }: Props) {
       lang={lang}
     >
       <body className='bg-gray-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
-        <MouseShadow />
-        <Navigation />
-        {children}
+        <PostsProvider posts={allPosts}>
+          <MouseShadow />
+          <Navigation />
+          {children}
+        </PostsProvider>
         <Analytics />
         <SpeedInsights />
       </body>

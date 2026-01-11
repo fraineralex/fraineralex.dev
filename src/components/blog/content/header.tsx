@@ -38,7 +38,15 @@ export const Header: React.FC<Props> = ({ views, lang }) => {
             : 'bg-slate-700/40  border-zinc-200 lg:border-transparent text-zinc-400'
         }`}
       >
-        <div className='container flex flex-row-reverse items-center justify-between p-6 mx-auto'>
+        <div className='container flex items-center justify-between p-6 mx-auto'>
+          <ProfileLink
+            lang={lang}
+            className={
+              isIntersecting
+                ? ''
+                : 'md:text-zinc-600 md:hover:text-zinc-400 text-zinc-400 hover:text-zinc-200'
+            }
+          />
           <div className='flex justify-between gap-3 md:gap-6 pr-2'>
             <SwitchLanguage />
             <span
@@ -62,14 +70,6 @@ export const Header: React.FC<Props> = ({ views, lang }) => {
               } `}
             />
           </div>
-          <ProfileLink
-            lang={lang}
-            className={
-              isIntersecting
-                ? ''
-                : 'md:text-zinc-600 md:hover:text-zinc-400 text-zinc-400 hover:text-zinc-200'
-            }
-          />
         </div>
       </div>
     </header>

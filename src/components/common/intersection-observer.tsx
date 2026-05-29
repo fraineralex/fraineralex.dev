@@ -40,7 +40,7 @@ export default function Observer ({
       <SideNav dictionary={dictionary.sidenav} inViews={inViews} />
       <main
         id='content'
-        className='pt-24 lg:w-1/2 lg:py-24 lg:pr-20 xl:pr-20 2xl:pr-20 px-6 lg:px-0 xl:px-0 2xl:px-0'
+        className='pt-16 sm:pt-20 lg:w-1/2 lg:py-24 lg:pr-20 xl:pr-20 2xl:pr-20 px-6 lg:px-0 xl:px-0 2xl:px-0'
       >
         <About dictionary={dictionary.about} refAbout={refAbout} />
         <Experience

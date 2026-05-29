@@ -8,7 +8,7 @@ import SocialMedia from './social-media'
 export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
   const {
     profileImage,
-    lifterLink,
+    vbsLink,
     itlaLink,
     fullname,
     tagline,
@@ -21,7 +21,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
   } = dictionary
   return (
     <article className='w-feature max-w-lg mx-auto'>
-      <div className='w-full aspect-[3/1] bg-surface-4 mt-2 md:mt-0'>
+      <div className='w-full aspect-[5/1] max-h-16 sm:aspect-[3/1] sm:max-h-none bg-surface-4 mt-1 md:mt-0'>
         <iframe
           title='3D CSS Plane Demo'
           className='w-full h-full'
@@ -29,11 +29,11 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           src='/plane.html'
         />
       </div>
-      <div className='w-content max-w-full mv-0 mx-auto grid gap-2 px-4'>
-        <div className='relative flex justify-end items-center min-h-half-avatar py-2 mb-8'>
+      <div className='w-content max-w-full mv-0 mx-auto grid gap-1 sm:gap-2 px-4'>
+        <div className='relative flex justify-end items-center min-h-12 sm:min-h-20 py-1 mb-2 sm:mb-6'>
           <picture>
             <img
-              className='absolute -top-2 transform bg-surface-4 -translate-y-1/2 left-0 rounded-full aspect-square w-avatar border-4 border-text-1'
+              className='absolute -top-1 sm:-top-2 transform bg-surface-4 -translate-y-1/2 left-0 rounded-full aspect-square w-[4.5rem] sm:w-[6.875rem] border-2 sm:border-4 border-text-1'
               src={profileImage}
               alt={`${fullname} profile picture`}
               width='110'
@@ -42,71 +42,73 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
               decoding='async'
             />
           </picture>
-          <Link
-            href={lifterLink.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='items-center text-white bg-brand-fill absolute block me-8 mt-16 sm:mt-32'
-          >
-            <Image
-              src={lifterLink.logo}
-              alt='Lifter logo'
-              width='50'
-              height='16'
-              className='w-50 h-auto'
-            />
-          </Link>
-          <Link
-            href={itlaLink.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='items-center text-white bg-brand-fill absolute block me-8 mt-32 sm:mt-48'
-          >
-            <Image
-              src={itlaLink.logo}
-              alt='Itla Logo'
-              width='50'
-              height='25'
-              className='w-50 h-auto'
-            />
-          </Link>
+          <div className='absolute right-0 top-0 flex flex-col items-end gap-3 sm:gap-4 me-4 sm:me-8 mt-8 sm:mt-20'>
+            <Link
+              href={vbsLink.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='items-center text-white bg-brand-fill block'
+            >
+              <Image
+                src={vbsLink.logo}
+                alt='VB Solutions logo'
+                width='28'
+                height='9'
+                className='w-7 h-auto'
+              />
+            </Link>
+            <Link
+              href={itlaLink.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='items-center text-white bg-brand-fill block'
+            >
+              <Image
+                src={itlaLink.logo}
+                alt='Itla Logo'
+                width='50'
+                height='25'
+                className='w-10 sm:w-50 h-auto'
+              />
+            </Link>
+          </div>
         </div>
-        <h1 className='text-fluid-3 flex gap-x-2 items-center font-bold text-2xl text-white'>
+        <h1 className='text-fluid-3 font-bold text-xl sm:text-2xl text-white leading-tight'>
           {fullname}
-          <span className='w-6 aspect-square inline-block' />
         </h1>
-        <div className='leading-tight'>
-          <p className='mb-2 font-medium text-shark-300 pe-20 sm:pe-24'>
+        <div className='leading-snug'>
+          <p className='mb-1.5 sm:mb-2 text-sm font-medium text-shark-300 pe-14 sm:pe-20'>
             {tagline}
           </p>
-          <p className='mb-2 text-sm font-medium text-shark-400'>
-            {location} <i className='hidden sm:inline me-1'>• </i>
-            <span className='text-teal-300 hover:underline cursor-pointer block mt-2 sm:mt-0 sm:inline font-semibold'>
+          <p className='mb-1 text-xs sm:text-sm font-medium text-shark-400'>
+            {location}
+            <span className='hidden sm:inline'> · </span>
+            <span className='text-teal-300 sm:inline block sm:mt-0 font-semibold'>
               {contactInfo}
             </span>
           </p>
-          <p className='mb-2 text-sm font-semibold text-teal-300'>
+          <p className='mb-2 text-xs sm:text-sm font-semibold text-teal-300 hidden sm:block'>
             {connections}
           </p>
         </div>
-        <span className='flex gap-x-2 sm:gap-x-3 items-center text-fluid--1 text-text-4 whitespace-nowrap'>
+        <span className='flex flex-wrap gap-1.5 sm:gap-x-3 sm:flex-nowrap items-center text-fluid--1 text-text-4'>
           <Link
             type='button'
-            className='bg-teal-300 font-medium rounded-3xl text-xs sm:text-sm px-3 sm:px-4 py-1.5 text-center text-black border-1 border-teal-300 align-middle hover:bg-teal-600 focus-visible:bg-teal-600'
+            className='bg-teal-300 font-medium rounded-3xl text-xs px-2.5 sm:px-4 py-1 sm:py-1.5 text-center text-black border-1 border-teal-300 align-middle hover:bg-teal-600 focus-visible:bg-teal-600'
             href={connectButton.url}
             target='_blank'
           >
             <ConnectIcon className='inline text-center' /> {connectButton.label}
           </Link>
           <Link
-            className='font-medium rounded-3xl text-xs sm:text-sm px-3 sm:px-4 py-1.5 text-center text-teal-300 border-2 border-teal-300 hover:bg-teal-50/10 focus-visible:bg-teal-50/10'
+            className='font-medium rounded-3xl text-xs px-2.5 sm:px-4 py-1 sm:py-1.5 text-center text-teal-300 border-2 border-teal-300 hover:bg-teal-50/10 focus-visible:bg-teal-50/10'
             aria-label='View Full Résumé'
             href={messageButton.url}
           >
-            <EmailIcon className='inline w-4' /> {messageButton.label}
+            <EmailIcon className='inline w-3.5 sm:w-4' /> {messageButton.label}
           </Link>
           <Link
-            className='font-medium rounded-3xl text-xs sm:text-sm px-3 sm:px-5 py-1.5 text-center text-shark-200 border-2 border-shark-200 hover:bg-shark-50/10 focus-visible:bg-shark-50/10 hover:text-shark-100 hover:border-shark-100'
+            className='font-medium rounded-3xl text-xs px-2.5 sm:px-5 py-1 sm:py-1.5 text-center text-shark-200 border-2 border-shark-200 hover:bg-shark-50/10 focus-visible:bg-shark-50/10 hover:text-shark-100 hover:border-shark-100'
             aria-label='View Full Résumé'
             href={resumeButton.url}
             target='_blank'
@@ -116,7 +118,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           </Link>
         </span>
         <SocialMedia
-          className='mt-10 flex lg:hidden items-center'
+          className='mt-3 sm:mt-6 flex lg:hidden items-center pb-2'
           navigation={navigation}
         />
       </div>

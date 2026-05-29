@@ -1,4 +1,3 @@
-import { CgShapeTriangle } from 'react-icons/cg'
 import { AboutProps } from '@/types/about-types'
 import Link from 'next/link'
 
@@ -8,8 +7,11 @@ function getYearsOfExperience(): number {
   return now.getFullYear() - startDate.getFullYear()
 }
 
+const linkClass =
+  'font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
+
 export default function About ({ dictionary, refAbout }: AboutProps) {
-  const { paragraph1, paragraph2, paragraph3, skills } = dictionary
+  const { paragraph1, paragraph2, paragraph3, paragraph4 } = dictionary
   const yearsOfExperience = getYearsOfExperience()
   return (
     <section
@@ -29,70 +31,78 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           <strong className='font-medium text-slate-50'>
             {paragraph1.strong.content}
           </strong>{' '}
-          {paragraph1.experiencePrefix} {yearsOfExperience} {paragraph1.experienceSuffix}{' '}
-          <Link
-            className='font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
-            href={paragraph1.journey.consultancy.url}
-            target='_blank'
-            rel='noreferrer'
-            aria-label={paragraph1.journey.consultancy.name}
-          >
-            {paragraph1.journey.consultancy.label}
-          </Link>
-          {paragraph1.journey.productCompany.before}{' '}
-          <Link
-            className='font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
-            href={paragraph1.journey.productCompany.url}
-            target='_blank'
-            rel='noreferrer'
-            aria-label={paragraph1.journey.productCompany.name}
-          >
-            {paragraph1.journey.productCompany.label}
-          </Link>
-          {paragraph1.journey.financialConsultancy.before}{' '}
-          <Link
-            className='font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
-            href={paragraph1.journey.financialConsultancy.url}
-            target='_blank'
-            rel='noreferrer'
-            aria-label={paragraph1.journey.financialConsultancy.name}
-          >
-            {paragraph1.journey.financialConsultancy.label}
-          </Link>
+          {paragraph1.experiencePrefix} {yearsOfExperience}{' '}
+          {paragraph1.experienceSuffix}
         </p>
         <p className='mb-4'>
-          {paragraph2.focus}{' '}
+          {paragraph2.before}{' '}
           <Link
-            className='font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
-            href={paragraph2.lifter.url}
+            className={linkClass}
+            href={paragraph2.company.url}
             target='_blank'
             rel='noreferrer'
-            aria-label={paragraph2.lifter.label}
+            aria-label={paragraph2.company.name}
           >
-            {paragraph2.lifter.label}.
-          </Link>{' '}
-          {paragraph2.professionalRealm}{' '}
-          <strong className='font-medium text-white'>
-            {paragraph2.personalProjects.label}{' '}
-          </strong>
-          {paragraph2.freelanceServices.before}{' '}
-          <strong className='font-medium text-white'>
-            {paragraph2.freelanceServices.label}
-          </strong>
+            {paragraph2.company.label}
+          </Link>
+          {paragraph2.after}
         </p>
-        <p className='mb-5'>{paragraph3.technologies}</p>
-        <ul className='grid grid-cols-3 gap-x-6 md:gap-x-10 gap-y-0 p-0 overflow-hidden list-none'>
-          {skills &&
-            skills.map((skill, index) => (
-              <li
-                key={index}
-                className='text-sm flex items-center mb-2.5 text-slate-300'
-              >
-                <CgShapeTriangle className='rotate-90 inline me-2 w-2.5 text-teal-300' />
-                {skill}
-              </li>
-            ))}
-        </ul>
+        <p className='mb-4'>
+          {paragraph3.before}{' '}
+          <Link
+            className={linkClass}
+            href={paragraph3.lifter.url}
+            target='_blank'
+            rel='noreferrer'
+            aria-label={paragraph3.lifter.name}
+          >
+            {paragraph3.lifter.label}
+          </Link>
+          {paragraph3.middle}{' '}
+          <Link
+            className={linkClass}
+            href={paragraph3.ipp.url}
+            target='_blank'
+            rel='noreferrer'
+            aria-label={paragraph3.ipp.name}
+          >
+            {paragraph3.ipp.label}
+          </Link>
+          {paragraph3.end}{' '}
+          <Link
+            className={linkClass}
+            href={paragraph3.nelmix.url}
+            target='_blank'
+            rel='noreferrer'
+            aria-label={paragraph3.nelmix.name}
+          >
+            {paragraph3.nelmix.label}
+          </Link>
+          {paragraph3.closing}
+        </p>
+        <p className='mb-4'>
+          {paragraph4.content}{' '}
+          <Link
+            className={linkClass}
+            href={paragraph4.viollet.url}
+            target='_blank'
+            rel='noreferrer'
+            aria-label={paragraph4.viollet.name}
+          >
+            {paragraph4.viollet.label}
+          </Link>{' '}
+          {paragraph4.middle}{' '}
+          <Link
+            className={linkClass}
+            href={paragraph4.tracky.url}
+            target='_blank'
+            rel='noreferrer'
+            aria-label={paragraph4.tracky.name}
+          >
+            {paragraph4.tracky.label}
+          </Link>
+          {paragraph4.closing}
+        </p>
       </article>
     </section>
   )

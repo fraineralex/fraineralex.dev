@@ -12,19 +12,19 @@
     },
     "linkedinCard": {
       "profileImage": "/images/blog/profile.webp",
-      "lifterLink": {
-        "url": "https://lifterdo.com",
-        "logo": "/images/experience/lifter.webp"
+      "vbsLink": {
+        "url": "https://vbsolutions.info",
+        "logo": "/images/experience/vbs.avif"
       },
       "itlaLink": {
         "url": "https://itla.edu.do",
         "logo": "/images/hero/itla.webp"
       },
       "fullname": "Frainer Encarnación",
-      "tagline": "Experienced software engineer skilled in crafting performant & accessible products mainly for the web.",
+      "tagline": "Senior Full Stack Engineer building accessible digital experiences.",
       "location": "Santo Domingo, Dominican Republic",
       "contactInfo": "Contact info",
-      "connections": "1,198 followers • 500+ connections",
+      "connections": "1,276 followers • 500+ connections",
       "connectButton": {
         "label": "Connect",
         "url": "https://www.linkedin.com/in/fraineralex/"
@@ -41,88 +41,109 @@
   },
   "about": {
     "title": "About",
-"paragraph1": {
-      "content": "I'm Frainer, a dedicated",
+    "paragraph1": {
+      "content": "I'm Frainer, a",
       "strong": {
-        "content": "Full Stack Engineer"
+        "content": "Senior Full Stack Engineer"
       },
       "experiencePrefix": "with over",
-      "experienceSuffix": "years of experience, specializing in bringing ideas to life in the vast world of web development. Throughout my journey, I've had the privilege of contributing to software development for a",
-      "journey": {
-        "consultancy": {
-          "label": "software consultancy",
-          "url": "https://nelmix.com/",
-          "name": "Nelmix"
-        },
-        "productCompany": {
-          "before": ", a",
-          "label": "product company",
-          "url": "https://ippdr.com/",
-          "name": "International Pack & Paper"
-        },
-        "financialConsultancy": {
-          "before": ", and a",
-          "label": "financial consultancy",
-          "url": "https://lifterdo.com",
-          "name": "Lifter"
-        }
-      }
+      "experienceSuffix": "years of experience building web apps and business systems. I like turning rough requirements into software people can actually use, from Odoo modules and API integrations to React apps. I care about code that is clear enough to hand off and solid enough to stay in production."
     },
     "paragraph2": {
-      "focus": "Currently, I’m primarily focused on building accessible products and creating exceptional solutions and impactful digital experiences for our clients at",
-      "lifter": {
-        "label": "Lifter",
-        "url": "https://lifterdo.com"
+      "before": "Currently, I'm at",
+      "company": {
+        "label": "VB Solutions",
+        "url": "https://vbsolutions.info",
+        "name": "VB Solutions"
       },
-      "professionalRealm": "Outside the professional realm, I immerse myself in exploring new technologies,",
-      "personalProjects": {
-        "label": "working on personal projects,"
-      },
-      "freelanceServices": {
-        "before": "and",
-        "label": "offering freelance services"
-      }
+      "after": ", a software consultancy where I build web apps, Odoo implementations, and automation tools for clients. I work on APIs, payments, AWS, reporting, and AI features depending on what the project needs."
     },
     "paragraph3": {
-      "technologies": "Here are a few technologies I have experience with:"
+      "before": "Before that, I spent nearly three years at",
+      "lifter": {
+        "label": "Lifter",
+        "url": "https://lifterdo.com",
+        "name": "Lifter"
+      },
+      "middle": ", another software consultancy focused on financial clients. There I built Odoo modules, web apps, and electronic invoicing for the DGII. I also worked at",
+      "ipp": {
+        "label": "International Pack & Paper",
+        "url": "https://ippdr.com",
+        "name": "International Pack & Paper"
+      },
+      "end": " on e-commerce with React, and started my career at ",
+      "nelmix": {
+        "label": "Nelmix",
+        "url": "https://nelmix.com",
+        "name": "Nelmix"
+      },
+      "closing": " during an internship working on Odoo modules."
     },
-    "skills": [
-      "TypeScript",
-      "React",
-      "Node.js",
-      "Next.js",
-      "AWS",
-      "PostgreSQL",
-      "Firebase",
-      "Docker",
-      "MongoDB",
-      "Python",
-      "Tailwind",
-      "Prisma"
-    ]
+    "paragraph4": {
+      "content": "Outside of work, I build side projects where architecture, performance, and user experience are the priority. Recent ones include",
+      "viollet": {
+        "label": "Viollet",
+        "url": "https://viollet.app",
+        "name": "Viollet"
+      },
+      "middle": "and",
+      "tracky": {
+        "label": "Tracky",
+        "url": "https://tracky.fit",
+        "name": "Tracky"
+      },
+      "closing": ". I also take on freelance work when I have the time."
+    }
   },
   "experience": {
     "title": "Experience",
     "cards": [
       {
-        "startDate": "Jun 2023",
+        "startDate": "Jan 2025",
         "endDate": "Present",
+        "title": "Senior Software Engineer",
+        "company": {
+          "name": "VB Solutions",
+          "website": "https://vbsolutions.info"
+        },
+        "description": "I build custom web apps, Odoo setups, and automation tools for clients. I work on APIs, payments, AWS, reporting with Power BI, and AI features when a project calls for it.",
+        "skills": [
+          "TypeScript",
+          "Node.js",
+          "React",
+          "Next.js",
+          "Python",
+          "Odoo",
+          ".NET",
+          "AWS",
+          "PostgreSQL",
+          "Power BI"
+        ],
+        "contract": "Full-time",
+        "location": "Santo Domingo, Dominican Republic",
+        "locationType": "Remote",
+        "imageName": "vbs.avif"
+      },
+      {
+        "startDate": "Jun 2023",
+        "endDate": "May 2026",
         "title": "Senior Software Engineer",
         "company": {
           "name": "Lifter",
           "website": "https://lifterdo.com"
         },
-        "description": "I’m responsible for managing direct client requests, assigning tasks within the team, and developing new features and modules to meet specific requirements. Additionally, I also monitor the process pull requests for production deployments.",
+        "description": "I built web apps and Odoo modules for financial clients, including DGII electronic invoicing with C# and .NET, plus internal tools with React, Next.js, and Node.js.",
         "skills": [
-          "JavaScript",
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Node.js",
           "Python",
           "Odoo",
-          "React",
-          "Node.js",
+          "C#",
+          ".NET",
           "PostgreSQL",
-          "AWS",
-          "Nginx",
-          "Next.js"
+          "AWS"
         ],
         "contract": "Full-time",
         "location": "Santo Domingo, Dominican Republic",
@@ -130,15 +151,15 @@
         "imageName": "lifter.webp"
       },
       {
-        "startDate": "Feb",
+        "startDate": "Feb 2023",
         "endDate": "Jun 2023",
         "title": "Full Stack Developer",
         "company": {
           "name": "International Pack & Paper",
           "website": "https://ippdr.com"
         },
-        "description": "My role involved creating and customizing features to meet the needs of our clients. This included developing new functionalities, conducting thorough testing, as well as building web solutions.",
-        "skills": ["Python", "JavaScript", "Odoo", "Docker", "React"],
+        "description": "I improved e-commerce sites with React and built invoicing and web apps with Node.js and Python.",
+        "skills": ["React", "Node.js", "Python", "JavaScript", "Odoo"],
         "contract": "Full-time",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
@@ -149,11 +170,11 @@
         "endDate": "Feb 2023",
         "title": "Full Stack Developer",
         "company": {
-          "name": "Nelmix",
+          "name": "Nelmix Solutions",
           "website": "https://nelmix.com"
         },
-        "description": "I worked on creating custom modules for Odoo, focusing on accounting and product management applications tailored to meet the needs of our clients. Additionally, I had the opportunity to contribute to the development of various features for web applications.",
-        "skills": ["TypeScript", "Python", "Odoo", "Node.js", "SQL"],
+        "description": "I worked on Odoo modules with Python and JavaScript and helped the team adopt code reviews and Agile.",
+        "skills": ["Python", "JavaScript", "Odoo", "TypeScript", "Node.js"],
         "contract": "Internship",
         "location": "Santo Domingo, Dominican Republic",
         "locationType": "Remote",
@@ -170,8 +191,26 @@
     "title": "Projects",
     "cards": [
       {
+        "projectName": "Viollet",
+        "description": "An AI-powered personal finance platform that automatically tracks and categorizes expenses from bank transaction emails, turning inbox notifications into actionable spending insights with zero manual entry.",
+        "technologies": [
+          "TypeScript",
+          "Next.js",
+          "SQLite",
+          "Clerk",
+          "AI SDK",
+          "Gmail API",
+          "Google Pub/Sub",
+          "Webhooks"
+        ],
+        "deployUrl": "https://viollet.app",
+        "githubRepositoryUrl": "",
+        "imageSrc": "viollet.avif",
+        "starsOnGithub": 0
+      },
+      {
         "projectName": "Tracky",
-        "description": "A smart, robust, and minimalist fitness tracking web app with AI-powered features for quick logging of meals and exercises. Designed to guide users through their fitness journey with simplicity and precision.",
+        "description": "A smart, robust, and minimalist fitness tracking web app with AI-powered features for quick logging of meals and exercises, currently serving 100+ active users.",
         "technologies": [
           "TypeScript",
           "Next.js",
@@ -209,15 +248,6 @@
         "starsOnGithub": 14
       },
       {
-        "projectName": "Chess AI",
-        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It's designed to determine the optimal move within a specified depth.",
-        "technologies": ["Python", "Numpy", "Pygame", "MiniMax Algrthm"],
-        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-        "imageSrc": "chess.webp",
-        "starsOnGithub": 10
-      },
-      {
         "projectName": "VB Solutions",
         "description": "Modern landing page for a business automation consultancy specializing in Odoo and AI solutions. Features smooth animations, responsive design, and an intuitive interface to showcase digital transformation services.",
         "technologies": ["TypeScript", "Next.js", "React", "Tailwind", "Shadcn/ui"],
@@ -248,6 +278,24 @@
     },
     "projects": [
       {
+        "title": "Viollet",
+        "shortDescription": "AI-powered personal finance platform that tracks expenses from bank emails.",
+        "description": "An AI-powered personal finance platform that automatically tracks and categorizes expenses from bank transaction emails, turning inbox notifications into actionable spending insights with zero manual entry.",
+        "technologies": [
+          "TypeScript",
+          "Next.js",
+          "SQLite",
+          "Clerk",
+          "AI SDK",
+          "Gmail API",
+          "Google Pub/Sub",
+          "Webhooks"
+        ],
+        "deployUrl": "https://viollet.app",
+        "githubRepositoryUrl": "",
+        "year": 2026
+      },
+      {
         "title": "VB Solutions",
         "shortDescription": "Landing page for a business automation consultancy with Odoo and AI.",
         "description": "Modern landing page for a business automation consultancy specializing in Odoo and AI solutions. Features smooth animations, responsive design, and an intuitive interface to showcase digital transformation services.",
@@ -260,7 +308,7 @@
         ],
         "deployUrl": "https://vbsolutions.info",
         "githubRepositoryUrl": "https://github.com/fraineralex/vbs-landing",
-        "year": 2024
+        "year": 2025
       },
       {
         "title": "Tracky",

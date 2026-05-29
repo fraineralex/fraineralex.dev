@@ -66,7 +66,7 @@ export function proxy (request: NextRequest) {
       '/og.jpg',
       // Projects
       '/images/projects/blog.webp',
-      '/images/projects/chess.webp',
+      '/images/projects/viollet.avif',
       '/images/projects/es-og-projects.webp',
       '/images/projects/hacker_news.webp',
       '/images/projects/og-projects.webp',
@@ -77,6 +77,7 @@ export function proxy (request: NextRequest) {
       '/images/hero/profile.webp',
       // Experience
       '/images/experience/ipp.webp',
+      '/images/experience/vbs.avif',
       '/images/experience/lifter.webp',
       '/images/experience/nelmix.webp',
       // blog

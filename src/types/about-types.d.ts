@@ -1,14 +1,7 @@
-interface Consultancy {
+interface CompanyLink {
   label: string
   url: string
   name: string
-  before?: string
-}
-
-interface Journey {
-  consultancy: Consultancy
-  productCompany: Consultancy
-  financialConsultancy: Consultancy
 }
 
 interface Strong {
@@ -20,33 +13,30 @@ interface Paragraph1 {
   strong: Strong
   experiencePrefix: string
   experienceSuffix: string
-  journey: Journey
-}
-
-interface Lifter {
-  label: string
-  url: string
-}
-
-interface PersonalProjects {
-  label: string
-}
-
-interface FreelanceServices {
-  label: string
-  before: string
 }
 
 interface Paragraph2 {
-  focus: string
-  lifter: Lifter
-  professionalRealm: string
-  personalProjects: PersonalProjects
-  freelanceServices: FreelanceServices
+  before: string
+  company: CompanyLink
+  after: string
 }
 
 interface Paragraph3 {
-  technologies: string
+  before: string
+  lifter: CompanyLink
+  middle: string
+  ipp: CompanyLink
+  end: string
+  nelmix: CompanyLink
+  closing: string
+}
+
+interface Paragraph4 {
+  content: string
+  viollet: CompanyLink
+  middle: string
+  tracky: CompanyLink
+  closing: string
 }
 
 interface MyJSONStructure {
@@ -54,7 +44,7 @@ interface MyJSONStructure {
   paragraph1: Paragraph1
   paragraph2: Paragraph2
   paragraph3: Paragraph3
-  skills: string[]
+  paragraph4: Paragraph4
 }
 
 export interface AboutProps {

@@ -13,20 +13,15 @@ interface ResumeButton {
   url: string
 }
 
-interface LifterLink {
-  url: string
-  logo: string
-}
-
-interface ItlaLink {
+interface CompanyLink {
   url: string
   logo: string
 }
 
 interface LinkedinCard {
   profileImage: string
-  lifterLink: LifterLink
-  itlaLink: ItlaLink
+  vbsLink: CompanyLink
+  itlaLink: CompanyLink
   fullname: string
   tagline: string
   location: string

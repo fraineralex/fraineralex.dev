@@ -4,6 +4,13 @@ import Link from 'next/link'
 import SocialMedia from './social-media'
 import { sidebarContent, sidebarPadding } from './sidebar-layout'
 
+const lineBase =
+  'h-px shrink-0 origin-left transition-[width,background-color] group-hover:w-24 group-hover:bg-slate-200 group-focus-visible:w-24 group-focus-visible:bg-slate-200 motion-reduce:transition-none'
+
+function navLineClass (active: boolean) {
+  return `${lineBase} ${active ? 'w-24 bg-slate-200' : 'w-8 bg-slate-400/70'}`
+}
+
 export default function SideNav ({ dictionary, inViews }: SidenavProps) {
   const { linkedinCard, navigation } = dictionary
   return (
@@ -18,13 +25,7 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   className='group flex items-center gap-4 py-2.5 lg:py-3'
                   href='#about'
                 >
-                  <span
-                    className={`h-px w-8 shrink-0 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
-                      inViews.inViewAbout
-                        ? 'w-16 bg-slate-200'
-                        : 'bg-slate-400/70'
-                    }`}
-                  />
+                  <span className={navLineClass(inViews.inViewAbout)} />
                   <span
                     className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-white group-focus-visible:text-white ${
                       inViews.inViewAbout ? 'text-white' : 'text-slate-400/80'
@@ -39,13 +40,7 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   className='group flex items-center gap-4 py-2.5 lg:py-3'
                   href='#experience'
                 >
-                  <span
-                    className={`h-px w-8 shrink-0 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
-                      inViews.inViewExperience
-                        ? 'w-16 bg-slate-200'
-                        : 'bg-slate-400/70'
-                    }`}
-                  />
+                  <span className={navLineClass(inViews.inViewExperience)} />
                   <span
                     className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-white group-focus-visible:text-white ${
                       inViews.inViewExperience
@@ -63,11 +58,9 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
                   href='#projects'
                 >
                   <span
-                    className={`h-px w-8 shrink-0 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
+                    className={navLineClass(
                       inViews.inViewProjects || inViews.inViewWriting
-                        ? 'w-16 bg-slate-200'
-                        : 'bg-slate-400/70'
-                    }`}
+                    )}
                   />
                   <span
                     className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-white group-focus-visible:text-white ${

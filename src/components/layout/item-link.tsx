@@ -8,7 +8,7 @@ type Props = {
 
 export default function ItemLink ({ title, href, children }: Props) {
   return (
-    <li className='mr-5 text-xs' aria-label={title} title={title}>
+    <li className='mr-3 sm:mr-5 text-xs' aria-label={title} title={title}>
       <Link
         className='block hover:text-slate-200'
         href={href}

@@ -74,6 +74,7 @@ export function proxy (request: NextRequest) {
       '/images/projects/realestate.webp',
       // Hero
       '/images/hero/itla.webp',
+      '/images/hero/unibe.png',
       '/images/hero/profile.webp',
       // Experience
       '/images/experience/ipp.webp',

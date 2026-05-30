@@ -2,7 +2,7 @@
 
 import { mainPadding } from '@/components/layout/content-layout'
 import { Locale } from '@/i18n-config'
-import { About, Blog, Experience, Footer, Projects, SideNav } from '@/sections'
+import { About, Blog, Education, Experience, Footer, Projects, SideNav } from '@/sections'
 import { useInView } from 'react-intersection-observer'
 import { WritingPost } from '@/types/writing-types'
 
@@ -50,6 +50,7 @@ export default function Observer ({
         />
         <Projects dictionary={dictionary.projects} refProjects={refProjects} />
         <Blog dictionary={dictionary.writing} refWriting={refWriting} lang={lang} posts={posts} />
+        <Education dictionary={dictionary.education} />
         <Footer dictionary={dictionary.footer} />
       </main>
     </div>

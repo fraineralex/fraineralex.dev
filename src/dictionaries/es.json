@@ -16,6 +16,10 @@
         "url": "https://vbsolutions.info",
         "logo": "/images/experience/vbs.avif"
       },
+      "unibeLink": {
+        "url": "https://www.unibe.edu.do",
+        "logo": "/images/hero/unibe.png"
+      },
       "itlaLink": {
         "url": "https://itla.edu.do",
         "logo": "/images/hero/itla.webp"
@@ -544,6 +548,28 @@
       "strong": "Ver",
       "span": "Mi Blog"
     }
+  },
+  "education": {
+    "title": "Educación",
+    "cards": [
+      {
+        "degree": "Ingeniería en Tecnologías Computacionales",
+        "school": {
+          "name": "Universidad Iberoamericana (UNIBE)",
+          "website": "https://www.unibe.edu.do"
+        },
+        "imageSrc": "/images/hero/unibe.png"
+      },
+      {
+        "degree": "Técnico Superior en Desarrollo de Software",
+        "school": {
+          "name": "Instituto Tecnológico de las Américas (ITLA)",
+          "website": "https://itla.edu.do"
+        },
+        "imageSrc": "/images/hero/itla.webp",
+        "invertLogo": true
+      }
+    ]
   },
   "footer": {
     "builtWith": "Desarrollado con",

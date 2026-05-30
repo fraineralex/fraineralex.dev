@@ -9,6 +9,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
   const {
     profileImage,
     vbsLink,
+    unibeLink,
     itlaLink,
     fullname,
     tagline,
@@ -61,7 +62,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
             {connections}
           </p>
         </div>
-        <div className='flex shrink-0 flex-col items-end gap-2 pt-0.5 sm:gap-2.5 sm:pt-1'>
+        <div className='flex shrink-0 flex-col items-center gap-4 pt-0.5 sm:gap-3 sm:pt-1'>
           <Link
             href={vbsLink.url}
             target='_blank'
@@ -73,7 +74,21 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
               alt='VB Solutions logo'
               width='28'
               height='9'
-              className='h-auto w-6 sm:w-7'
+              className='h-auto w-7 sm:w-7'
+            />
+          </Link>
+          <Link
+            href={unibeLink.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='block leading-none'
+          >
+            <Image
+              src={unibeLink.logo}
+              alt='UNIBE logo'
+              width='120'
+              height='32'
+              className='h-auto w-[4rem] sm:w-14'
             />
           </Link>
           <Link
@@ -87,7 +102,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
               alt='Itla Logo'
               width='44'
               height='22'
-              className='h-auto w-9 sm:w-10'
+              className='h-auto w-10 brightness-0 invert sm:w-10'
             />
           </Link>
         </div>

@@ -21,6 +21,7 @@ interface CompanyLink {
 interface LinkedinCard {
   profileImage: string
   vbsLink: CompanyLink
+  unibeLink: CompanyLink
   itlaLink: CompanyLink
   fullname: string
   tagline: string

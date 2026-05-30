@@ -2,7 +2,7 @@ import '@/styles/loading.css'
 
 export default function Loading() {
   return (
-    <section className='loading-section fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-slate-900'>
+    <section className='loading-section' aria-busy='true' aria-label='Loading'>
       <div className='container-loading'>
         <svg
           id='hexagon'

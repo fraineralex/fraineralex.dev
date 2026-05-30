@@ -1,7 +1,21 @@
 .loading-section {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
   box-sizing: border-box;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  min-height: 100vh;
   margin: 0;
+  padding: 0;
+  background-color: #0f172a;
   font-family: sans-serif;
 }
 
@@ -18,7 +32,6 @@
   fill: none;
 }
 
-/* CSS-only hexagon stroke animation */
 .loading-svg path {
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
@@ -34,7 +47,6 @@
   }
 }
 
-/* CSS-only letter F fade animation */
 .loading-svg #F {
   opacity: 0;
   animation: fade-in-f 2s ease-in-out infinite alternate;

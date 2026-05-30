@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Footer ({ dictionary }: FooterProps) {
   return (
-    <footer className='max-w-md pb-16 text-sm text-slate-300/90 sm:pb-0 animate-link'>
+    <footer className='max-w-md pb-32 text-sm text-slate-300/90 sm:pb-0 animate-link'>
       <p>
         {dictionary.takeALook}{' '}
         <Link

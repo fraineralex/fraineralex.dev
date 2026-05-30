@@ -18,7 +18,7 @@
       },
       "unibeLink": {
         "url": "https://www.unibe.edu.do",
-        "logo": "/images/hero/unibe.png"
+        "logo": "/images/hero/unibe.avif"
       },
       "itlaLink": {
         "url": "https://itla.edu.do",
@@ -554,7 +554,7 @@
           "name": "Universidad Iberoamericana (UNIBE)",
           "website": "https://www.unibe.edu.do"
         },
-        "imageSrc": "/images/hero/unibe.png"
+        "imageSrc": "/images/hero/unibe.avif"
       },
       {
         "degree": "Associate Degree in Software Development",

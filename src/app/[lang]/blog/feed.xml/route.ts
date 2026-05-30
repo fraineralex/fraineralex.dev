@@ -6,18 +6,19 @@ import { RSSHeader } from '@/components/blog/content/rss-header'
 import { readPosts } from '@/utils/readPosts'
 
 const posts = readPosts('en')
-const renderer = new marked.Renderer()
 
-renderer.link = (href: string, _: any, text: string) =>
-  `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`
-
-marked.setOptions({
+marked.use({
   gfm: true,
   breaks: true,
-  renderer
+  renderer: {
+    link ({ href, tokens }) {
+      const text = this.parser.parseInline(tokens)
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`
+    }
+  }
 })
 
-const renderPost = (md: string) => marked.parse(md)
+const renderPost = (md: string) => marked.parse(md) as string
 export async function GET () {
   const DOMAIN = `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
   const lastPostDate = posts.length > 0 ? posts[posts.length - 1].date : ''

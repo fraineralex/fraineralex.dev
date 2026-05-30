@@ -24,7 +24,7 @@ export function ViewCountSkeleton({ className }: { className?: string }) {
   return (
     <span className={`flex items-center gap-1 ${className ?? ''}`}>
       <Eye className='w-5 h-5' />
-      <span className='inline-block w-8 h-4 bg-zinc-700 rounded animate-pulse' />
+      <span className='inline-block w-8 h-4 bg-slate-700 rounded animate-pulse' />
     </span>
   )
 }

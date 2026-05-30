@@ -22,7 +22,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
   } = dictionary
   return (
     <div className='flex flex-col gap-3 sm:block'>
-      <div className='relative left-1/2 h-28 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden bg-surface-4 sm:relative sm:left-auto sm:h-24 sm:w-full sm:max-w-none sm:translate-x-0 sm:rounded-sm lg:rounded-sm'>
+      <div className='relative left-1/2 h-28 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden bg-slate-900 sm:relative sm:left-auto sm:h-24 sm:w-full sm:max-w-none sm:translate-x-0 sm:rounded-sm lg:rounded-sm'>
         <iframe
           title='3D CSS Plane Demo'
           className='h-full w-full'
@@ -33,7 +33,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
       <div className='relative h-10 sm:mt-0 sm:h-10'>
         <picture>
           <img
-            className='absolute left-0 top-0 z-10 -translate-y-[55%] rounded-full border-[3px] border-text-1 bg-surface-4 aspect-square w-[4.25rem] h-[4.25rem] sm:w-20 sm:h-20'
+            className='absolute left-0 top-0 z-10 -translate-y-[55%] rounded-full border-[3px] border-slate-100 bg-slate-900 aspect-square w-[4.25rem] h-[4.25rem] sm:w-20 sm:h-20'
             src={profileImage}
             alt={`${fullname} profile picture`}
             width='80'

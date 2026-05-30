@@ -2,11 +2,11 @@ export default function ArticleSkeleton () {
   return (
     <span
       role='status'
-      className='bg-gradient-to-br opacity-100  via-zinc-100/10 overflow-hidden relative border rounded-xl bg-zinc-800/10 group border-zinc-700 md:gap-0'
+      className='bg-gradient-to-br opacity-100 via-slate-100/10 overflow-hidden relative border rounded-xl bg-slate-800/10 group border-slate-700 md:gap-0'
     >
-      <figure className='flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700 w-full'>
+      <figure className='flex items-center justify-center h-48 mb-4 bg-slate-800 rounded w-full'>
         <svg
-          className='w-full h-10 text-gray-200 dark:text-gray-600'
+          className='w-full h-10 text-slate-600'
           aria-hidden='true'
           xmlns='http://www.w3.org/2000/svg'
           fill='currentColor'
@@ -18,14 +18,14 @@ export default function ArticleSkeleton () {
       </figure>
       <article className='px-4 md:px-8 pb-10 mt-8'>
         <div className='flex flex-row justify-between'>
-          <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-20' />
-          <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-16' />
+          <div className='h-2 bg-slate-700 rounded-full w-20' />
+          <div className='h-2 bg-slate-700 rounded-full w-16' />
         </div>
-        <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 mt-4' />
-        <div className='h-6 bg-gray-200 rounded-lg dark:bg-gray-700 mb-8 mt-4 w-5/6' />
-        <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-3' />
-        <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-3' />
-        <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-3' />
+        <div className='h-6 bg-slate-700 rounded-lg mt-4' />
+        <div className='h-6 bg-slate-700 rounded-lg mb-8 mt-4 w-5/6' />
+        <div className='h-2 bg-slate-700 rounded-full mb-3' />
+        <div className='h-2 bg-slate-700 rounded-full mb-3' />
+        <div className='h-2 bg-slate-700 rounded-full mb-3' />
       </article>
     </span>
   )

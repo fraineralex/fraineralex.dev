@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 
 export default function Loading () {
   return (
-    <div className='min-h-screen max-w-6xl md:max-w-5xl mx-auto px-4 md:px-8 text-zinc-300'>
+    <div className='min-h-screen max-w-6xl md:max-w-5xl mx-auto px-4 md:px-8 text-slate-300 bg-slate-900'>
       <header className='mx-auto text-center mb-8 w-full'>
         <div className='flex items-center justify-center min-h-screen p-5 min-w-screen'>
         <div className='flex space-x-4 animate-pulse'>

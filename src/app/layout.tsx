@@ -121,7 +121,7 @@ export default async function RootLayout ({ children, params }: Props) {
         inter.variable,
         calSans.variable,
         londrinaSolid.variable
-      ].join(' ')} scroll-smooth`}
+      ].join(' ')} scroll-smooth bg-slate-900`}
       data-lt-installed='true'
       lang={lang}
     >

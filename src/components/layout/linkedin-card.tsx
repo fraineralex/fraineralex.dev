@@ -20,8 +20,8 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
     resumeButton
   } = dictionary
   return (
-    <>
-      <div className='h-20 w-full overflow-hidden rounded-sm bg-surface-4 sm:h-24'>
+    <div className='flex flex-col gap-3 sm:block'>
+      <div className='relative left-1/2 h-28 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden bg-surface-4 sm:relative sm:left-auto sm:h-24 sm:w-full sm:max-w-none sm:translate-x-0 sm:rounded-sm lg:rounded-sm'>
         <iframe
           title='3D CSS Plane Demo'
           className='h-full w-full'
@@ -29,7 +29,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           src='/plane.html'
         />
       </div>
-      <div className='relative h-8 sm:h-10'>
+      <div className='relative h-10 sm:mt-0 sm:h-10'>
         <picture>
           <img
             className='absolute left-0 top-0 z-10 -translate-y-[55%] rounded-full border-[3px] border-text-1 bg-surface-4 aspect-square w-[4.25rem] h-[4.25rem] sm:w-20 sm:h-20'
@@ -42,8 +42,8 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           />
         </picture>
       </div>
-      <div className='mt-1 flex items-start justify-between gap-3 sm:mt-2'>
-        <div className='min-w-0 flex-1 space-y-1'>
+      <div className='flex items-start justify-between gap-3 sm:mt-2'>
+        <div className='min-w-0 flex-1 space-y-1.5 sm:space-y-1'>
           <h1 className='text-base font-bold leading-tight text-white sm:text-xl'>
             {fullname}
           </h1>
@@ -92,7 +92,7 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
           </Link>
         </div>
       </div>
-      <div className='mt-2 flex flex-wrap items-center gap-1.5 sm:mt-3 sm:gap-2'>
+      <div className='flex flex-wrap items-center gap-2 sm:mt-3 sm:gap-2'>
         <Link
           type='button'
           className='rounded-3xl border-1 border-teal-300 bg-teal-300 px-2.5 py-1 text-[11px] font-medium text-black hover:bg-teal-600 focus-visible:bg-teal-600 sm:px-3.5 sm:text-xs'
@@ -119,9 +119,9 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
         </Link>
       </div>
       <SocialMedia
-        className='mt-3 flex items-center pb-1 lg:hidden sm:mt-4'
+        className='mt-5 flex items-center pb-1 sm:mt-4 lg:hidden'
         navigation={navigation}
       />
-    </>
+    </div>
   )
 }

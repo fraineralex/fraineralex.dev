@@ -2,7 +2,12 @@ import { SidenavProps } from '@/types/sidenav-types'
 import { LinkedinCard } from './linkedin-card'
 import Link from 'next/link'
 import SocialMedia from './social-media'
-import { sidebarContent, sidebarPadding } from './sidebar-layout'
+import {
+  sidebarColumn,
+  sidebarContent,
+  sidebarInner,
+  sidebarPadding
+} from './sidebar-layout'
 
 const lineBase =
   'h-px shrink-0 origin-left transition-[width,background-color] group-hover:w-24 group-hover:bg-slate-200 group-focus-visible:w-24 group-focus-visible:bg-slate-200 motion-reduce:transition-none'
@@ -14,12 +19,19 @@ function navLineClass (active: boolean) {
 export default function SideNav ({ dictionary, inViews }: SidenavProps) {
   const { linkedinCard, navigation } = dictionary
   return (
-    <header className='lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-20'>
-      <article className={`${sidebarPadding} mb-2 text-gray-200`}>
-        <div className={sidebarContent}>
-          <LinkedinCard dictionary={linkedinCard} navigation={navigation} />
-          <nav className='nav block' aria-label='In-page jump links'>
-            <ul className='mt-6 lg:mt-8'>
+    <header className={sidebarColumn}>
+      <article
+        className={`${sidebarPadding} mb-2 text-gray-200 lg:mb-0 lg:flex lg:h-full lg:min-h-0 lg:flex-col`}
+      >
+        <div className={`${sidebarContent} ${sidebarInner}`}>
+          <div className='lg:shrink-0'>
+            <LinkedinCard dictionary={linkedinCard} navigation={navigation} />
+          </div>
+          <nav
+            className='nav mt-6 hidden shrink-0 lg:mt-8 lg:block'
+            aria-label='In-page jump links'
+          >
+            <ul>
               <li>
                 <Link
                   className='group flex items-center gap-4 py-2.5 lg:py-3'
@@ -75,8 +87,9 @@ export default function SideNav ({ dictionary, inViews }: SidenavProps) {
               </li>
             </ul>
           </nav>
+          <div className='hidden min-h-0 lg:block lg:flex-1' aria-hidden='true' />
           <SocialMedia
-            className='mt-6 hidden items-center lg:mt-10 lg:flex'
+            className='mt-6 hidden shrink-0 items-center lg:mt-0 lg:flex'
             navigation={navigation}
           />
         </div>

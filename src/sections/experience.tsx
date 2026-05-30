@@ -2,6 +2,10 @@ import { ExperienceProps } from '@/types/experience-types'
 import { ArrowRigthIcon } from '../components/common/SvgIcons'
 import ExperienceCard from '../components/experience/experience-card'
 import Link from 'next/link'
+import {
+  sectionFullWidth,
+  stickySectionHeader
+} from '@/components/layout/content-layout'
 
 export default function Experience ({
   dictionary,
@@ -11,11 +15,11 @@ export default function Experience ({
   return (
     <section
       id='experience'
-      className='mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 animate-fade-in-up animate-delay-400 animate-duration-slow'
+      className={`mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 animate-fade-in-up animate-delay-400 animate-duration-slow ${sectionFullWidth}`}
       aria-label='Work experience'
       ref={refExperience}
     >
-      <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-gradient-to-r from-black-pear-950/75 to-shark-950/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
+      <header className={stickySectionHeader}>
         <h2 className='text-sm font-bold uppercase tracking-widest text-white lg:sr-only'>
           {title}
         </h2>

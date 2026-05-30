@@ -1,5 +1,10 @@
 import { AboutProps } from '@/types/about-types'
 import Link from 'next/link'
+import {
+  aboutSectionWidth,
+  sectionFullWidth,
+  stickySectionHeader
+} from '@/components/layout/content-layout'
 
 function getYearsOfExperience(): number {
   const startDate = new Date(2021, 0, 1)
@@ -10,23 +15,25 @@ function getYearsOfExperience(): number {
 const linkClass =
   'font-medium text-white hover:text-teal-300 focus-visible:text-teal-300'
 
+const paragraphClass = 'mb-4 text-pretty'
+
 export default function About ({ dictionary, refAbout }: AboutProps) {
   const { paragraph1, paragraph2, paragraph3, paragraph4 } = dictionary
   const yearsOfExperience = getYearsOfExperience()
   return (
     <section
       id='about'
-      className='mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 lg:pr-6'
+      className={`mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 ${sectionFullWidth} ${aboutSectionWidth}`}
       aria-label='About me'
       ref={refAbout}
     >
-      <header className='sticky top-0 z-20 -mx-6 mb-4 w-screen bg-gradient-to-r from-black-pear-950/75 to-shark-950/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0'>
+      <header className={stickySectionHeader}>
         <h2 className='text-sm font-bold uppercase tracking-widest text-white lg:sr-only'>
           {dictionary.title}
         </h2>
       </header>
-      <article>
-        <p className='mb-4'>
+      <article className='w-full max-w-none'>
+        <p className={paragraphClass} style={{ textWrap: 'pretty' }}>
           {paragraph1.content}{' '}
           <strong className='font-medium text-slate-50'>
             {paragraph1.strong.content}
@@ -34,7 +41,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           {paragraph1.experiencePrefix} {yearsOfExperience}{' '}
           {paragraph1.experienceSuffix}
         </p>
-        <p className='mb-4'>
+        <p className={paragraphClass} style={{ textWrap: 'pretty' }}>
           {paragraph2.before}{' '}
           <Link
             className={linkClass}
@@ -47,7 +54,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           </Link>
           {paragraph2.after}
         </p>
-        <p className='mb-4'>
+        <p className={paragraphClass} style={{ textWrap: 'pretty' }}>
           {paragraph3.before}{' '}
           <Link
             className={linkClass}
@@ -80,7 +87,7 @@ export default function About ({ dictionary, refAbout }: AboutProps) {
           </Link>
           {paragraph3.closing}
         </p>
-        <p className='mb-4'>
+        <p className={paragraphClass} style={{ textWrap: 'pretty' }}>
           {paragraph4.content}{' '}
           <Link
             className={linkClass}

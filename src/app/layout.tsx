@@ -125,7 +125,7 @@ export default async function RootLayout ({ children, params }: Props) {
       data-lt-installed='true'
       lang={lang}
     >
-      <body className='bg-gray-800 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
+      <body className='bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
         <PostsProvider posts={allPostsMeta}>
           <MouseShadow />
           <Navigation />

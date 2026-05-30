@@ -1,5 +1,6 @@
 export interface EducationCardData {
   degree: string
+  description: string
   school: {
     name: string
     website: string

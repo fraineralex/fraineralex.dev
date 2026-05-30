@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export default function EducationCard ({
   degree,
+  description,
   school,
   imageSrc,
   invertLogo,
@@ -42,7 +43,7 @@ export default function EducationCard ({
               </Link>
             </h3>
             <p className='mt-1 text-xs leading-normal text-slate-300/80 min-[400px]:text-sm'>
-              {degree}
+              {degree}, {description}
             </p>
           </header>
         </aside>

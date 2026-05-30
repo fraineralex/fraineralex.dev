@@ -554,6 +554,7 @@
     "cards": [
       {
         "degree": "Ingeniería en Tecnologías Computacionales",
+        "description": "enfocada en Ingeniería de Software, Sistemas Distribuidos, Bases de Datos y Redes de Computadoras",
         "school": {
           "name": "Universidad Iberoamericana (UNIBE)",
           "website": "https://www.unibe.edu.do"
@@ -562,6 +563,7 @@
       },
       {
         "degree": "Tecnólogo en Desarrollo de Software",
+        "description": "enfocado en Desarrollo Full Stack, Aplicaciones Móviles y Arquitectura de Software",
         "school": {
           "name": "Instituto Tecnológico de las Américas (ITLA)",
           "website": "https://itla.edu.do"

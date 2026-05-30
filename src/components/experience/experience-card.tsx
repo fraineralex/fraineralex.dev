@@ -42,7 +42,7 @@ export default function ExperienceCard ({
             </h5>
             <h3>
               <Link
-                className='inline-flex items-baseline font-medium leading-tight text-white hover:text-teal-300 focus-visible:text-teal-300  group/link text-base'
+                className='inline-flex items-baseline font-medium leading-tight text-white hover:text-teal-300 focus-visible:text-teal-300 group/link'
                 href={company.website}
                 target='_blank'
                 rel='noreferrer'
@@ -83,7 +83,7 @@ export default function ExperienceCard ({
             )}
           </header>
           <p
-            className='mt-2.5 text-sm leading-normal text-slate-300/80'
+            className='mt-2.5 text-xs leading-normal text-slate-300/80 min-[400px]:text-sm'
             style={{ textWrap: 'pretty' }}
           >
             {description}

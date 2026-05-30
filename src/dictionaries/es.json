@@ -11,7 +11,7 @@
       "codepenUrl": "https://codepen.io/fraineralex"
     },
     "linkedinCard": {
-      "profileImage": "/images/blog/profile.webp",
+      "profileImage": "/images/hero/profile.avif",
       "vbsLink": {
         "url": "https://vbsolutions.info",
         "logo": "/images/experience/vbs.avif"
@@ -21,7 +21,7 @@
         "logo": "/images/hero/itla.webp"
       },
       "fullname": "Frainer Encarnación",
-      "tagline": "Ingeniero Full Stack Senior construyendo experiencias digitales accesibles.",
+      "tagline": "Ingeniero Full Stack construyendo experiencias digitales.",
       "location": "Santo Domingo, República Dominicana",
       "contactInfo": "Información de contacto",
       "connections": "1,276 seguidores • 500+ conexiones",

@@ -208,7 +208,7 @@
           "Webhooks"
         ],
         "deployUrl": "https://viollet.app",
-        "githubRepositoryUrl": "https://github.com/fraineralex/viollet",
+        "githubRepositoryUrl": "",
         "imageSrc": "viollet.avif",
         "starsOnGithub": 0
       },
@@ -297,7 +297,7 @@
           "Webhooks"
         ],
         "deployUrl": "https://viollet.app",
-        "githubRepositoryUrl": "https://github.com/fraineralex/viollet",
+        "githubRepositoryUrl": "",
         "year": 2026
       },
       {

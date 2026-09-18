@@ -9,6 +9,15 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { PostsProvider } from '@/context/posts-context'
 import { allPostsMeta } from '@/lib/posts'
 
+import { SiteJsonLd } from '@/components/layout/json-ld'
+import {
+  EN_SITE_DESCRIPTION,
+  EN_SITE_KEYWORDS,
+  EN_SITE_OG_DESCRIPTION,
+  EN_SITE_TITLE,
+  SITE_URL
+} from '@/lib/site-metadata'
+
 import '@/styles/globals.css'
 import '@/styles/site.css'
 
@@ -33,22 +42,13 @@ const londrinaSolid = LocalFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Frainer Encarnación',
+    default: EN_SITE_TITLE,
     template: '%s | Frainer Encarnación'
   },
   category: 'Personal Portfolio',
-  keywords: [
-    'Frainer Encarnación',
-    'Frainer Alexander Encarnación Valenzuela',
-    'Web Developer',
-    'Full Stack Developer',
-    'Software Engineer',
-    'Frontend Developer',
-    'Backend Developer'
-  ],
-  description:
-    "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.",
-  metadataBase: new URL(process.env.DOMAIN ?? 'https://fraineralex.dev'),
+  keywords: EN_SITE_KEYWORDS,
+  description: EN_SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
     languages: {
@@ -60,11 +60,10 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: 'Frainer Encarnación',
-    description:
-      'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
-    url: `${process.env.DOMAIN}`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    title: EN_SITE_TITLE,
+    description: EN_SITE_OG_DESCRIPTION,
+    url: SITE_URL,
+    siteName: 'fraineralex.dev',
     images: [
       {
         url: '/og.jpg',
@@ -87,12 +86,11 @@ export const metadata: Metadata = {
     }
   },
   twitter: {
-    title: 'Frainer Encarnación',
+    title: EN_SITE_TITLE,
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
-    description:
-      'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
+    description: EN_SITE_OG_DESCRIPTION,
     images: [
       {
         url: '/og.jpg',
@@ -126,6 +124,7 @@ export default async function RootLayout ({ children, params }: Props) {
       lang={lang}
     >
       <body className='bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-400 selection:text-white mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:py-20 lg:py-0'>
+        <SiteJsonLd />
         <PostsProvider posts={allPostsMeta}>
           <MouseShadow />
           <Navigation />

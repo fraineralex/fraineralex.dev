@@ -61,7 +61,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                       <span className='block sm:hidden'>
                         <Link
                           className='inline-flex items-baseline font-medium leading-tight text-shark-200 hover:text-shark-200 focus-visible:text-teal-300 sm:hidden group/link text-base'
-                          href={deployUrl || githubRepositoryUrl}
+                          href={deployUrl || githubRepositoryUrl || '#'}
                           target='_blank'
                           rel='noreferrer noopener'
                           aria-label={`${title} (open in a new tab)`}
@@ -109,20 +109,22 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                   </td>
                   <td className='hidden py-4 align-top sm:table-cell'>
                     <ul className='translate-y-1 inline-block space-x-3 whitespace-nowrap'>
-                      <li className='mb-1 inline-flex items-center'>
-                        <Link
-                          className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-shark-400 focus-visible:text-teal-300 group/link text-sm'
-                          href={githubRepositoryUrl}
-                          target='_blank'
-                          rel='noreferrer'
-                          aria-label={`${title} repositoty (open in a new tab)`}
-                        >
-                          <span className='inline-block text-sm font-medium'>
-                            GitHub
-                            <GitHubIcon className='inline-block h-4 w-4 shrink-0 ml-1' />
-                          </span>
-                        </Link>
-                      </li>
+                      {githubRepositoryUrl && (
+                        <li className='mb-1 inline-flex items-center'>
+                          <Link
+                            className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300  text-shark-400 focus-visible:text-teal-300 group/link text-sm'
+                            href={githubRepositoryUrl}
+                            target='_blank'
+                            rel='noreferrer'
+                            aria-label={`${title} repository (open in a new tab)`}
+                          >
+                            <span className='inline-block text-sm font-medium'>
+                              GitHub
+                              <GitHubIcon className='inline-block h-4 w-4 shrink-0 ml-1' />
+                            </span>
+                          </Link>
+                        </li>
+                      )}
                       {deployUrl && (
                         <li className='mb-1 inline-flex items-center'>
                           <Link

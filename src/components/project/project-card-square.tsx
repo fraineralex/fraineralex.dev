@@ -9,14 +9,19 @@ export default function ProjectCardSquare ({
   technologies,
   githubRepositoryUrl,
   deployUrl,
+  caseStudyUrl,
   year
 }: ProjectInfo) {
-  const projectUrl = deployUrl || githubRepositoryUrl || '#'
+  const projectUrl = caseStudyUrl || deployUrl || githubRepositoryUrl || '#'
+  const projectExternal = !caseStudyUrl
   return (
     <li className='relative group lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-auto cursor-pointer animate-link'>
       <Link
         className='decoration-none shadow-md flex flex-col items-center relative h-full p-8 py-7 rounded bg-slate-700/50'
         href={projectUrl}
+        {...(projectExternal
+          ? { target: '_blank', rel: 'noopener noreferrer' }
+          : {})}
       >
         <header className='lg:min-h-[20vh]'>
           <div className='flex justify-between items-center mb-7'>
@@ -51,8 +56,9 @@ export default function ProjectCardSquare ({
           <h3 className='mt-3 text-2xl font-bold text-shark-200 group-hover:text-teal-300 group-focus-visible:text-teal-300 leading-none'>
             <Link
               href={projectUrl}
-              target='_blank'
-              rel='noopener noreferrer'
+              {...(projectExternal
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
               className='deploy-link outline-none focus-visible:outline-none'
             >
               {title}

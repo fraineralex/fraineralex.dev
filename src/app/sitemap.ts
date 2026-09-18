@@ -34,6 +34,7 @@ export default async function sitemap () {
   const routes = [
     '',
     '/projects',
+    '/projects/viollet',
     '/blog',
     '/blog/tags',
     '/blog/feed.xml',
@@ -48,6 +49,7 @@ export default async function sitemap () {
     const routes = [
       '',
       '/projects',
+      '/projects/viollet',
       '/blog',
       '/blog/tags',
       '/blog/feed.xml'

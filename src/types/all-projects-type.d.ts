@@ -7,6 +7,7 @@ export interface ProjectInfo {
   technologies: ProjectTechnologies
   githubRepositoryUrl: string
   deployUrl?: string
+  caseStudyUrl?: string
   year: number
 }
 
@@ -17,6 +18,7 @@ interface TableHeaders {
   technologies: string
   links: string
   deployText: string
+  caseStudyText: string
 }
 
 interface AllProjectsInfo {

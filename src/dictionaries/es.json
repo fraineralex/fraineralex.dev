@@ -212,6 +212,7 @@
           "Webhooks"
         ],
         "deployUrl": "https://viollet.app",
+        "caseStudyUrl": "/es/projects/viollet",
         "githubRepositoryUrl": "",
         "imageSrc": "viollet.avif",
         "starsOnGithub": 0
@@ -268,7 +269,9 @@
       "url": "/es/projects",
       "strong": "Ver",
       "span": "Archivo de Proyectos"
-    }
+    },
+    "caseStudyLabel": "Caso de estudio",
+    "liveDemoLabel": "Demo en vivo"
   },
   "allProjects": {
     "fullname": "Frainer Encarnación",
@@ -280,7 +283,8 @@
       "description": "Descripción",
       "technologies": "Tecnologías",
       "links": "Links",
-      "deployText": "Ver"
+      "deployText": "Ver",
+      "caseStudyText": "Caso de estudio"
     },
     "projects": [
       {
@@ -299,6 +303,7 @@
           "Webhooks"
         ],
         "deployUrl": "https://viollet.app",
+        "caseStudyUrl": "/es/projects/viollet",
         "githubRepositoryUrl": "",
         "year": 2026
       },
@@ -588,6 +593,124 @@
     "developerOfThe": "desarrollador del",
     "dCssPlane": "Avión 3D CSS",
     "forInspiration": "por la inspiración."
+  },
+  "caseStudies": {
+    "viollet": {
+      "meta": {
+        "title": "Viollet",
+        "description": "Cómo construí un producto de finanzas personales con IA que convierte notificaciones bancarias por correo en gastos categorizados—sin credenciales bancarias ni entrada manual.",
+        "role": "Constructor en solitario — de arquitectura a producción",
+        "year": "2026",
+        "readTime": "8 min de lectura"
+      },
+      "backLink": {
+        "label": "Volver a proyectos",
+        "url": "/es/projects"
+      },
+      "hero": {
+        "eyebrow": "Caso de estudio",
+        "summary": "Viollet es un proyecto personal que diseñé y construí de punta a punta: conectar Gmail, ingerir notificaciones de transacciones bancarias, categorizar gastos con IA y mostrar presupuestos e insights—sin pedir credenciales de banca en línea.",
+        "technologies": [
+          "TypeScript",
+          "Next.js",
+          "Turso",
+          "Drizzle",
+          "Clerk",
+          "AI SDK",
+          "Gmail API",
+          "Google Pub/Sub",
+          "Webhooks"
+        ]
+      },
+      "sections": {
+        "context": {
+          "title": "1. Contexto",
+          "paragraphs": [
+            "La mayoría de apps de finanzas personales aún dependen de registro manual o integraciones bancarias directas difíciles de lanzar, costosas de mantener y a menudo no disponibles para bancos regionales.",
+            "En República Dominicana, muchas personas ya reciben alertas de crédito, débito y transferencias por correo. La oportunidad era encontrar a los usuarios donde ya viven sus datos: convertir esas notificaciones en transacciones estructuradas, categorías y vistas de gasto sin entrada manual."
+          ]
+        },
+        "constraints": {
+          "title": "2. Restricciones",
+          "paragraphs": [
+            "Viollet es un proyecto personal en solitario, así que el alcance debía centrarse en una ruta de ingesta confiable en lugar de construir una plataforma open-banking completa desde el día uno.",
+            "Los datos financieros exigen más rigor en seguridad y confianza: sin contraseñas bancarias, acceso de solo lectura a Gmail con consentimiento explícito, y un repositorio privado mientras el producto sigue en beta pública."
+          ],
+          "bullets": [
+            "Sin recolección de credenciales bancarias—solo notificaciones por correo que el usuario ya recibe",
+            "Los permisos restringidos de Gmail requieren verificación de Google y revisión de seguridad continua",
+            "Los formatos de notificación varían entre más de 15 instituciones dominicanas y difieren entre tarjeta y cuenta",
+            "Verdad de stack para almacenamiento: Turso con Drizzle—no una etiqueta genérica de SQLite"
+          ]
+        },
+        "responsibility": {
+          "title": "3. Mi responsabilidad",
+          "paragraphs": [
+            "Asumí el producto desde la definición del problema hasta producción: límites del sistema, modelo de datos, flujo Gmail/OAuth, ingesta por webhooks, categorización asistida por IA, UX del dashboard y despliegue.",
+            "Eso incluyó decidir qué automatizar primero (captura y categorización por correo), qué posponer (APIs bancarias directas) y cómo explicar los trade-offs en el sitio público para que los usuarios entiendan acceso y revocación."
+          ]
+        },
+        "architecture": {
+          "title": "4. Arquitectura",
+          "paragraphs": [
+            "El runtime se divide en tres caminos cooperantes: app orientada al usuario (Next.js con Clerk), ingesta asíncrona de correo (Gmail watch + push de Pub/Sub hacia una ruta webhook) y persistencia/consulta con Drizzle sobre Turso.",
+            "Cuando llega una notificación soportada, el pipeline parsea el mensaje, extrae campos de la transacción, ejecuta categorización con el AI SDK y escribe registros normalizados que el dashboard agrega para presupuestos, tendencias y alertas."
+          ],
+          "diagramCaption": "Flujo de alto nivel desde notificaciones bancarias por correo hasta registros categorizados en Turso."
+        },
+        "tradeOffs": {
+          "title": "5. Decisiones y trade-offs",
+          "items": [
+            {
+              "decision": "Notificaciones por correo en lugar de APIs bancarias",
+              "rationale": "Las APIs bancarias y agregadores ampliarían cobertura en teoría, pero añaden overhead de partnerships y soporte regional desigual. Las alertas por correo ya llegan a los usuarios y permiten lanzar una beta funcional sin almacenar credenciales bancarias."
+            },
+            {
+              "decision": "Turso + Drizzle para la capa de datos",
+              "rationale": "Una base libSQL administrada en el edge reduce la carga operativa para un constructor en solitario, mientras Drizzle aporta migraciones y consultas tipadas. El trade-off es diseñar ingesta idempotente y segura para webhooks en lugar de un worker monolítico."
+            },
+            {
+              "decision": "Categorización asistida por IA junto a reglas de parsing",
+              "rationale": "Las reglas puras fallan cuando los bancos cambian plantillas o redacción. El AI SDK ayuda a clasificar comercios y categorías ambiguos, con restricciones de parsing para mantener salidas estructuradas. El trade-off es vigilar calidad y acotar prompts a metadatos financieros—no al correo personal general."
+            },
+            {
+              "decision": "Clerk para autenticación",
+              "rationale": "Clerk redujo el tiempo hasta producción para gestión de sesiones y me permitió enfocar ingeniería en sincronización Gmail e ingesta confiable. El trade-off es acoplarse a un proveedor hospedado, aceptable en una beta donde importan velocidad y defaults de seguridad."
+            }
+          ]
+        },
+        "impact": {
+          "title": "6. Impacto",
+          "paragraphs": [
+            "Viollet está en vivo en viollet.app como beta pública gratuita. Los usuarios conectan Gmail, seleccionan remitentes financieros autorizados y obtienen seguimiento automatizado de gastos desde notificaciones—reemplazando el registro manual en el flujo soportado.",
+            "El alcance público actual incluye soporte para más de 15 bancos y tarjetas dominicanas (con evaluación de instituciones adicionales que envían alertas por correo), además de presupuestos, tendencias de gasto e insights proactivos derivados de transacciones categorizadas."
+          ],
+          "bullets": [
+            "Automatización Gmail → gastos categorizados sin entrada manual para cuentas conectadas",
+            "Sin recolección de usuarios ni contraseñas de banca en línea",
+            "Los usuarios pueden revocar acceso a Gmail desde Google o dentro del flujo del producto"
+          ]
+        },
+        "operationalQuality": {
+          "title": "7. Calidad operativa",
+          "paragraphs": [
+            "Como el producto maneja metadatos financieros, la implementación cuida transporte y almacenamiento: datos cifrados en tránsito y en reposo, permisos Gmail de solo lectura acotados a remitentes elegidos por el usuario, y copy claro en el sitio público sobre el proceso de verificación de Google para permisos restringidos.",
+            "La ingesta está pensada para confiabilidad en el límite del webhook: validar entregas push, hacer escrituras idempotentes cuando sea posible y aislar parsing/categorización para que una plantilla defectuosa no corrompa datos ajenos."
+          ],
+          "bullets": [
+            "Verificación de app de Google completada; permisos Gmail restringidos siguen el ciclo de evaluación de seguridad de Google",
+            "FAQ pública documenta acceso, revocación y uso de datos sin reventa publicitaria",
+            "Ruta Webhook + Pub/Sub desacopla la entrega de correo de la latencia UI request/response"
+          ]
+        },
+        "proof": {
+          "demoLabel": "8. Prueba",
+          "demoUrl": "https://viollet.app",
+          "screenshotAlt": "Dashboard de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
+          "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública."
+        }
+      }
+    }
   },
   "blog": {
     "home": {

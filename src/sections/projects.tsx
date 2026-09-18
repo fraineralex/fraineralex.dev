@@ -4,7 +4,7 @@ import { ArrowRigthIcon } from '@/components/common/SvgIcons'
 import { ProjectsProps } from '@/types/projects-types'
 
 export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
-  const { title, cards, link } = dictionary
+  const { title, cards, link, caseStudyLabel, liveDemoLabel } = dictionary
   return (
     <section
       id='projects'
@@ -30,6 +30,9 @@ export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
                 githubRepositoryUrl={card.githubRepositoryUrl}
                 starsOnGithub={card.starsOnGithub}
                 imageSrc={card.imageSrc}
+                caseStudyUrl={card.caseStudyUrl}
+                caseStudyLabel={caseStudyLabel}
+                liveDemoLabel={liveDemoLabel}
               />
             ))}
         </ol>

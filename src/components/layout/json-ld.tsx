@@ -11,7 +11,7 @@ const personSchema = {
   alternateName: 'Frainer Alexander Encarnación Valenzuela',
   url: SITE_URL,
   image: `${SITE_URL}/og.jpg`,
-  jobTitle: 'Senior Software Engineer & Tech Lead',
+  jobTitle: 'Senior Software Engineer',
   worksFor: {
     '@type': 'Organization',
     name: 'VB Solutions',

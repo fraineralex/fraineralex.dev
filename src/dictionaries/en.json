@@ -25,7 +25,7 @@
         "logo": "/images/hero/itla.webp"
       },
       "fullname": "Frainer Encarnación",
-      "tagline": "Senior Software Engineer & Tech Lead | Software Architecture, TypeScript, React, Node.js, AWS & Python | Building Reliable Cloud Products",
+      "tagline": "Senior Software Engineer | Software Architecture, TypeScript, React, Node.js, AWS & Python | Building Reliable Cloud Products",
       "location": "Santo Domingo, Dominican Republic",
       "contactInfo": "Contact info",
       "connectButton": {
@@ -47,7 +47,7 @@
     "paragraph1": {
       "content": "I'm Frainer, a",
       "strong": {
-        "content": "Senior Software Engineer & Tech Lead"
+        "content": "Senior Software Engineer"
       },
       "experiencePrefix": "with over",
       "experienceSuffix": "years of experience building web apps and business systems. I like turning rough requirements into software people can actually use, from Odoo modules and API integrations to React apps. I care about code that is clear enough to hand off and solid enough to stay in production."

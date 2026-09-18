@@ -2,6 +2,10 @@ import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 const Footer = dynamic(() => import('@/components/blog/footer'))
 import React from 'react'
+import {
+  EN_SITE_OG_DESCRIPTION,
+  ES_SITE_OG_DESCRIPTION
+} from '@/lib/site-metadata'
 
 import '@/styles/blog/main.css'
 
@@ -64,7 +68,8 @@ const englishmetadata: Metadata = {
       }
     ],
     description:
-      "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic. I write about tech, projects and whatever else I'm thinking about!"
+      EN_SITE_OG_DESCRIPTION +
+      ' I write about tech, projects and whatever else I\'m thinking about!'
   }
 }
 
@@ -127,7 +132,8 @@ const spanishMetadata: Metadata = {
       }
     ],
     description:
-      'Soy Frainer Encarnación, un Desarrollador Full Stack basado en la República Dominicana. ¡Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando!'
+      ES_SITE_OG_DESCRIPTION +
+      ' Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando.'
   }
 }
 

@@ -25,10 +25,9 @@
         "logo": "/images/hero/itla.webp"
       },
       "fullname": "Frainer Encarnación",
-      "tagline": "Ingeniero de Software Senior | Arquitectura en la Nube | TypeScript, Node.js, Python y AWS | Construyendo Soluciones Empresariales Escalables",
+      "tagline": "Senior Software Engineer y Tech Lead | Arquitectura de software, TypeScript, React, Node.js, AWS y Python | Productos cloud confiables",
       "location": "Santo Domingo, República Dominicana",
       "contactInfo": "Información de contacto",
-      "connections": "1,276 seguidores • 500+ conexiones",
       "connectButton": {
         "label": "Conectar",
         "url": "https://www.linkedin.com/in/fraineralex/"
@@ -48,7 +47,7 @@
     "paragraph1": {
       "content": "Soy Frainer, un",
       "strong": {
-        "content": "Ingeniero Full Stack Senior"
+        "content": "Senior Software Engineer y Tech Lead"
       },
       "experiencePrefix": "con más de",
       "experienceSuffix": "años de experiencia construyendo apps web y sistemas de negocio. Me gusta convertir requisitos difíciles en software que la gente pueda usar de verdad, desde módulos de Odoo e integraciones con APIs hasta apps con React. Me importa escribir código claro y que aguante en producción."
@@ -204,7 +203,8 @@
         "technologies": [
           "TypeScript",
           "Next.js",
-          "SQLite",
+          "Turso",
+          "Drizzle",
           "Clerk",
           "AI SDK",
           "Gmail API",
@@ -290,7 +290,8 @@
         "technologies": [
           "TypeScript",
           "Next.js",
-          "SQLite",
+          "Turso",
+          "Drizzle",
           "Clerk",
           "AI SDK",
           "Gmail API",
@@ -369,8 +370,8 @@
           "Upstash",
           "Redis"
         ],
-        "deployUrl": "https://frainer-blog.vercel.app",
-        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "deployUrl": "https://fraineralex.dev/es/blog",
+        "githubRepositoryUrl": "https://github.com/fraineralex/fraineralex.dev",
         "year": 2024
       },
       {
@@ -387,11 +388,11 @@
         "description": "App web Java desarrollada para gestionar eficientemente solicitudes de préstamos, simplificar el proceso de registro y evaluación del cliente, supervisar y aprobar préstamos.",
         "technologies": [
           "Java",
-          "Sprint Boot",
+          "Spring Boot",
           "MySQL",
           "JavaScript",
           "CSS",
-          "Hybernate"
+          "Hibernate"
         ],
         "githubRepositoryUrl": "https://github.com/fraineralex/EasyRoute",
         "year": 2023
@@ -451,7 +452,7 @@
         "shortDescription": "Una app de una sola página para gestionar tareas con sincronización de datos.",
         "description": "Una app de una sola página para gestionar tareas, las tareas se sincronizan con un servicio backend proporcionado por jsonbin.io, asegurando la persistencia de datos.",
         "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/08-todo-app-typescript",
         "deployUrl": "https://frainer-todo-app.surge.sh",
         "year": 2023
       },
@@ -461,7 +462,7 @@
         "description": "Una app web basada en React para elegir un lenguaje de programación y responder a preguntas diversas y no repetitivas con fragmentos de código.",
         "technologies": ["React", "TypeScript", "Zustand", "Material UI"],
         "deployUrl": "https://programming-quizzes.surge.sh",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
         "year": 2023
       },
       {
@@ -470,16 +471,16 @@
         "description": "Un clon de Google Translate, construido con React y alimentado por la API de OpenAI.",
         "technologies": ["React", "TypeScript", "OpenAI API", "Bootstrap"],
         "deployUrl": "https://frainer-google-translate.surge.sh/",
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/14-programming-quizzes-with-zustand",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/09-google-translate-clone",
         "year": 2023
       },
       {
         "title": "Lista de Tareas",
         "shortDescription": "App web Node.js para la gestión de tareas.",
         "description": "App web Node.js para la gestión de tareas con funciones amigables para el usuario. Admite accesos permanentes/temporales y actualizaciones de información del usuario.",
-        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
-        "deployUrl": "https://programming-quizzes.surge.sh",
-        "githubRepositoryUrl": "https://todolist.3.us-1.fl0.io",
+        "technologies": ["Node.js", "Express", "Handlebars", "Sequelize"],
+        "deployUrl": "https://todolist.3.us-1.fl0.io",
+        "githubRepositoryUrl": "https://github.com/fraineralex/ToDoList-App",
         "year": 2021
       },
       {
@@ -494,7 +495,7 @@
         "title": "Red Social",
         "shortDescription": "App de Red Social Node.js.",
         "description": "Una app de Red Social Node.js para crear perfiles de usuario, compartir publicaciones y eventos, comentar, conectarse con amigos y garantizar un acceso seguro a la cuenta.",
-        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "technologies": ["Node.js", "Express", "Handlebars", "Sequelize"],
         "githubRepositoryUrl": "https://github.com/fraineralex/Social-Network-App",
         "year": 2021
       },
@@ -502,7 +503,7 @@
         "title": "App de Libros",
         "shortDescription": "App basada en Node.js para registro de libros.",
         "description": "App basada en Node.js para el registro de editores, categorías, autores y sus respectivos libros.",
-        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "technologies": ["Node.js", "Express", "Handlebars", "Sequelize"],
         "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
         "year": 2021
       },

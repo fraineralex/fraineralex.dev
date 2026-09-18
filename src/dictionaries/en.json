@@ -25,10 +25,9 @@
         "logo": "/images/hero/itla.webp"
       },
       "fullname": "Frainer Encarnación",
-      "tagline": "Full Stack Engineer building cool stuff.",
+      "tagline": "Senior Software Engineer & Tech Lead | Software Architecture, TypeScript, React, Node.js, AWS & Python | Building Reliable Cloud Products",
       "location": "Santo Domingo, Dominican Republic",
       "contactInfo": "Contact info",
-      "connections": "1,276 followers • 500+ connections",
       "connectButton": {
         "label": "Connect",
         "url": "https://www.linkedin.com/in/fraineralex/"
@@ -48,7 +47,7 @@
     "paragraph1": {
       "content": "I'm Frainer, a",
       "strong": {
-        "content": "Senior Full Stack Engineer"
+        "content": "Senior Software Engineer & Tech Lead"
       },
       "experiencePrefix": "with over",
       "experienceSuffix": "years of experience building web apps and business systems. I like turning rough requirements into software people can actually use, from Odoo modules and API integrations to React apps. I care about code that is clear enough to hand off and solid enough to stay in production."
@@ -200,7 +199,8 @@
         "technologies": [
           "TypeScript",
           "Next.js",
-          "SQLite",
+          "Turso",
+          "Drizzle",
           "Clerk",
           "AI SDK",
           "Gmail API",
@@ -262,7 +262,7 @@
       }
     ],
     "link": {
-      "ariaLabel": "View Full Project Achive",
+      "ariaLabel": "View Full Project Archive",
       "url": "/en/projects",
       "strong": "View Full",
       "span": "Project Archive"
@@ -274,7 +274,7 @@
     "title": "All Projects",
     "tableHeaders": {
       "year": "Year",
-      "project": "Proyect",
+      "project": "Project",
       "description": "Description",
       "technologies": "Technologies",
       "links": "Links",
@@ -288,7 +288,8 @@
         "technologies": [
           "TypeScript",
           "Next.js",
-          "SQLite",
+          "Turso",
+          "Drizzle",
           "Clerk",
           "AI SDK",
           "Gmail API",
@@ -365,8 +366,8 @@
           "Upstash",
           "Redis"
         ],
-        "deployUrl": "https://frainer-blog.vercel.app",
-        "githubRepositoryUrl": "https://github.com/fraineralex/blog",
+        "deployUrl": "https://fraineralex.dev/en/blog",
+        "githubRepositoryUrl": "https://github.com/fraineralex/fraineralex.dev",
         "year": 2024
       },
       {
@@ -383,11 +384,11 @@
         "description": "Java web app developed to efficiently manage loan requests, streamline the customer registration and evaluation process, and monitor and approve loans.",
         "technologies": [
           "Java",
-          "Sprint Boot",
+          "Spring Boot",
           "MySQL",
           "JavaScript",
           "CSS",
-          "Hybernate"
+          "Hibernate"
         ],
         "githubRepositoryUrl": "https://github.com/fraineralex/EasyRoute",
         "year": 2023
@@ -430,7 +431,7 @@
         "shortDescription": "A single page app to manage todos with data synchronization.",
         "description": "A single page app to manage todos, the todos are synchronized with a backend service provided by jsonbin.io, ensuring data persistence.",
         "technologies": ["React", "TypeScript", "Auto Animate", "JSONBin"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/blob/main/projects/08-todo-app-typescript",
+        "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/08-todo-app-typescript",
         "deployUrl": "https://frainer-todo-app.surge.sh",
         "year": 2023
       },
@@ -473,9 +474,9 @@
         "title": "To Do List",
         "shortDescription": "Node.js web app for task management.",
         "description": "Node.js web app for task management with user-friendly features. Supports permanent/temporary logins and user info updates.",
-        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
-        "deployUrl": "https://programming-quizzes.surge.sh",
-        "githubRepositoryUrl": "https://todolist.3.us-1.fl0.io",
+        "technologies": ["Node.js", "Express", "Handlebars", "Sequelize"],
+        "deployUrl": "https://todolist.3.us-1.fl0.io",
+        "githubRepositoryUrl": "https://github.com/fraineralex/ToDoList-App",
         "year": 2021
       },
       {
@@ -490,7 +491,7 @@
         "title": "Social Network App",
         "shortDescription": "Node.js Social Network App.",
         "description": "A Node.js Social Network App for creating user profiles, sharing posts and events, commenting, connecting with friends, and ensuring secure account access.",
-        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "technologies": ["Node.js", "Express", "Handlebars", "Sequelize"],
         "githubRepositoryUrl": "https://github.com/fraineralex/Social-Network-App",
         "year": 2021
       },
@@ -498,7 +499,7 @@
         "title": "Books App",
         "shortDescription": "Node.js-based Books App for registration.",
         "description": "Node.js-based Books App for registration of publishers, categories, authors, and their respective books.",
-        "technologies": ["Node.js", "Express", "Handlerbars", "Sequelize"],
+        "technologies": ["Node.js", "Express", "Handlebars", "Sequelize"],
         "githubRepositoryUrl": "https://github.com/fraineralex/Books-App",
         "year": 2021
       },

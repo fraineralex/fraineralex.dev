@@ -15,7 +15,6 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
     tagline,
     location,
     contactInfo,
-    connections,
     connectButton,
     messageButton,
     resumeButton
@@ -57,9 +56,6 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
             <span className='block font-semibold text-teal-300 sm:inline'>
               {contactInfo}
             </span>
-          </p>
-          <p className='hidden text-xs font-semibold text-teal-300 sm:block sm:text-sm'>
-            {connections}
           </p>
         </div>
         <div className='flex shrink-0 flex-col items-center gap-4 pt-0.5 sm:gap-3 sm:pt-1'>

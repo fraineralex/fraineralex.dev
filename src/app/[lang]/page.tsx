@@ -3,25 +3,28 @@ import { getDictionary } from '@/get-dictionary'
 import Observer from '@/components/common/intersection-observer'
 import { Metadata } from 'next'
 import { allPosts } from '@/lib/posts'
+import {
+  EN_SITE_DESCRIPTION,
+  EN_SITE_KEYWORDS,
+  EN_SITE_OG_DESCRIPTION,
+  EN_SITE_TITLE,
+  ES_SITE_DESCRIPTION,
+  ES_SITE_KEYWORDS,
+  ES_SITE_OG_DESCRIPTION,
+  ES_SITE_TITLE,
+  SITE_URL
+} from '@/lib/site-metadata'
 
 interface Props {
   params: Promise<{ lang: Locale }>
 }
 
 const englishMetadata: Metadata = {
+  title: EN_SITE_TITLE,
   category: 'Personal Portfolio',
-  keywords: [
-    'Frainer Encarnación',
-    'Frainer Alexander Encarnación Valenzuela',
-    'Web Developer',
-    'Full Stack Developer',
-    'Software Engineer',
-    'Frontend Developer',
-    'Backend Developer'
-  ],
-  description:
-    "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.",
-  metadataBase: new URL(process.env.DOMAIN ?? 'https://fraineralex.dev'),
+  keywords: EN_SITE_KEYWORDS,
+  description: EN_SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
     languages: {
@@ -33,11 +36,10 @@ const englishMetadata: Metadata = {
     }
   },
   openGraph: {
-    title: 'Frainer Encarnación',
-    description:
-      'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
-    url: `${process.env.DOMAIN}`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    title: EN_SITE_TITLE,
+    description: EN_SITE_OG_DESCRIPTION,
+    url: SITE_URL,
+    siteName: 'fraineralex.dev',
     images: [
       {
         url: '/og.jpg',
@@ -60,12 +62,11 @@ const englishMetadata: Metadata = {
     }
   },
   twitter: {
-    title: 'Frainer Encarnación',
+    title: EN_SITE_TITLE,
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
-    description:
-      'Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.',
+    description: EN_SITE_OG_DESCRIPTION,
     images: [
       {
         url: '/og.jpg',
@@ -80,41 +81,26 @@ const englishMetadata: Metadata = {
 }
 
 const spanishMetadata: Metadata = {
-  title: {
-    default: 'Frainer Encarnación',
-    template: '%s | Frainer Encarnación'
-  },
+  title: ES_SITE_TITLE,
   category: 'Portafolio Personal',
-  keywords: [
-    'Frainer Encarnación',
-    'Frainer Alexander Encarnación Valenzuela',
-    'Desarrollador Web',
-    'Desarrollador Full Stack',
-    'Ingeniero de Software',
-    'Desarrollador Frontend',
-    'Desarrollador Backend'
-  ],
-  description:
-    'Soy Frainer Encarnación, un Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
-  metadataBase: new URL(
-    `${process.env.DOMAIN}/es` || 'https://fraineralex.dev/es'
-  ),
+  keywords: ES_SITE_KEYWORDS,
+  description: ES_SITE_DESCRIPTION,
+  metadataBase: new URL(`${SITE_URL}/es`),
   alternates: {
     canonical: '/',
     languages: {
       'es-DO': '/',
-      'en-US': `${process.env.DOMAIN}` || 'https://fraineralex.dev'
+      'en-US': SITE_URL
     },
     types: {
       'application/rss+xml': '/blog/rss.xml'
     }
   },
   openGraph: {
-    title: 'Frainer Encarnación',
-    description:
-      'Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
-    url: `${process.env.DOMAIN}/es`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    title: ES_SITE_TITLE,
+    description: ES_SITE_OG_DESCRIPTION,
+    url: `${SITE_URL}/es`,
+    siteName: 'fraineralex.dev',
     images: [
       {
         url: `${process.env.DOMAIN}/es-og.webp`,
@@ -137,12 +123,11 @@ const spanishMetadata: Metadata = {
     }
   },
   twitter: {
-    title: 'Frainer Encarnación',
+    title: ES_SITE_TITLE,
     card: 'summary_large_image',
     creator: '@fraineralex',
     site: '@fraineralex',
-    description:
-      'Desarrollador Full Stack basado en la República Dominicana que construye productos accesibles y experiencias digitales para la web.',
+    description: ES_SITE_OG_DESCRIPTION,
     images: [
       {
         url: `${process.env.DOMAIN}/es-og.webp`,

@@ -1,11 +1,14 @@
 import { MetadataRoute } from 'next'
+import {
+  EN_SITE_DESCRIPTION,
+  EN_SITE_TITLE
+} from '@/lib/site-metadata'
 
 export default function manifest (): MetadataRoute.Manifest {
   return {
-    name: 'Frainer Encarnación',
+    name: EN_SITE_TITLE,
     short_name: 'Frainer Encarnación',
-    description:
-      "I'm Frainer Encarnación, a Full Stack Developer based in Dominican Republic who builds accessible products and digital experiences for the web.",
+    description: EN_SITE_DESCRIPTION,
     start_url: '/',
     display: 'standalone',
     background_color: '#1F222A',

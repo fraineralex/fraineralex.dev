@@ -27,7 +27,6 @@ interface LinkedinCard {
   tagline: string
   location: string
   contactInfo: string
-  connections: string
   connectButton: ConnectButton
   messageButton: MessageButton
   resumeButton: ResumeButton

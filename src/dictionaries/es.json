@@ -598,8 +598,8 @@
     "viollet": {
       "meta": {
         "title": "Viollet",
-        "description": "Cómo construí un producto de finanzas personales con IA que convierte notificaciones bancarias por correo en gastos categorizados—sin credenciales bancarias ni entrada manual.",
-        "role": "Constructor en solitario — de arquitectura a producción",
+        "description": "Cómo construí un producto de finanzas personales con IA que convierte notificaciones bancarias por correo en gastos categorizados sin credenciales bancarias ni entrada manual.",
+        "role": "Constructor en solitario, de arquitectura a producción",
         "year": "2026",
         "readTime": "8 min de lectura"
       },
@@ -609,7 +609,7 @@
       },
       "hero": {
         "eyebrow": "Caso de estudio",
-        "summary": "Viollet es un proyecto personal que diseñé y construí de punta a punta: conectar Gmail, ingerir notificaciones de transacciones bancarias, categorizar gastos con IA y mostrar presupuestos e insights—sin pedir credenciales de banca en línea.",
+        "summary": "Viollet es un proyecto personal que diseñé y construí de punta a punta. Conecta Gmail, ingiere notificaciones de transacciones bancarias, categoriza gastos con IA y muestra presupuestos e insights sin pedir credenciales de banca en línea.",
         "technologies": [
           "TypeScript",
           "Next.js",
@@ -637,10 +637,10 @@
             "Los datos financieros exigen más rigor en seguridad y confianza: sin contraseñas bancarias, acceso de solo lectura a Gmail con consentimiento explícito, y un repositorio privado mientras el producto sigue en beta pública."
           ],
           "bullets": [
-            "Sin recolección de credenciales bancarias—solo notificaciones por correo que el usuario ya recibe",
+            "Sin recolección de credenciales bancarias, solo notificaciones por correo que el usuario ya recibe",
             "Los permisos restringidos de Gmail requieren verificación de Google y revisión de seguridad continua",
             "Los formatos de notificación varían entre más de 15 instituciones dominicanas y difieren entre tarjeta y cuenta",
-            "Verdad de stack para almacenamiento: Turso con Drizzle—no una etiqueta genérica de SQLite"
+            "El almacenamiento usa Turso con Drizzle, no una etiqueta genérica de SQLite"
           ]
         },
         "responsibility": {
@@ -671,7 +671,7 @@
             },
             {
               "decision": "Categorización asistida por IA junto a reglas de parsing",
-              "rationale": "Las reglas puras fallan cuando los bancos cambian plantillas o redacción. El AI SDK ayuda a clasificar comercios y categorías ambiguos, con restricciones de parsing para mantener salidas estructuradas. El trade-off es vigilar calidad y acotar prompts a metadatos financieros—no al correo personal general."
+              "rationale": "Las reglas puras fallan cuando los bancos cambian plantillas o redacción. El AI SDK ayuda a clasificar comercios y categorías ambiguos, con restricciones de parsing para mantener salidas estructuradas. El trade-off es vigilar calidad y acotar prompts a metadatos financieros, no al correo personal general."
             },
             {
               "decision": "Clerk para autenticación",
@@ -682,7 +682,7 @@
         "impact": {
           "title": "6. Impacto",
           "paragraphs": [
-            "Viollet está en vivo en viollet.app como beta pública gratuita. Los usuarios conectan Gmail, seleccionan remitentes financieros autorizados y obtienen seguimiento automatizado de gastos desde notificaciones—reemplazando el registro manual en el flujo soportado.",
+            "Viollet está en vivo en viollet.app como beta pública gratuita. Los usuarios conectan Gmail, seleccionan remitentes financieros autorizados y obtienen seguimiento automatizado de gastos desde notificaciones. Esto reemplaza el registro manual en el flujo soportado.",
             "El alcance público actual incluye soporte para más de 15 bancos y tarjetas dominicanas (con evaluación de instituciones adicionales que envían alertas por correo), además de presupuestos, tendencias de gasto e insights proactivos derivados de transacciones categorizadas."
           ],
           "bullets": [
@@ -705,6 +705,10 @@
         },
         "proof": {
           "demoLabel": "8. Prueba",
+          "videoLabel": "Recorrido del producto",
+          "videoDescription": "Un recorrido grabado del dashboard, los gastos y los presupuestos en vivo.",
+          "videoSrc": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/viollet-demo-es.mp4",
+          "videoPoster": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/poster-es-dashboard.png",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Dashboard de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
           "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública."

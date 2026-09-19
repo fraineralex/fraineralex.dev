@@ -131,10 +131,10 @@ export default function CaseStudyPageContent ({ content }: Props) {
             loop
             muted
             playsInline
-            poster='/images/projects/viollet.avif'
+            poster={sections.proof.videoPoster}
             preload='metadata'
           >
-            <source src='/videos/viollet-demo.mp4' type='video/mp4' />
+            <source src={sections.proof.videoSrc} type='video/mp4' />
           </video>
         </section>
 

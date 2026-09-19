@@ -707,6 +707,8 @@
           "demoLabel": "8. Prueba",
           "videoLabel": "Recorrido del producto",
           "videoDescription": "Un recorrido grabado del dashboard, los gastos y los presupuestos en vivo.",
+          "videoSrc": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/viollet-demo-es.mp4",
+          "videoPoster": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/poster-es-dashboard.png",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Dashboard de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
           "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública."

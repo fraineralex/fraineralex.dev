@@ -13,6 +13,8 @@ export interface CaseStudyProof {
   demoLabel: string
   videoLabel: string
   videoDescription: string
+  videoSrc: string
+  videoPoster: string
   demoUrl: string
   screenshotAlt: string
   note: string

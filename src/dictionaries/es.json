@@ -706,7 +706,7 @@
         "proof": {
           "demoLabel": "8. Prueba",
           "videoLabel": "Recorrido del producto",
-          "videoDescription": "Una breve mirada al dashboard, los presupuestos y los insights de gastos en Viollet.",
+          "videoDescription": "Se está preparando un recorrido grabado del dashboard, los presupuestos y los insights de gastos.",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Dashboard de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
           "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública."

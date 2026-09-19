@@ -11,6 +11,8 @@ export interface CaseStudyTradeOff {
 
 export interface CaseStudyProof {
   demoLabel: string
+  videoLabel: string
+  videoDescription: string
   demoUrl: string
   screenshotAlt: string
   note: string

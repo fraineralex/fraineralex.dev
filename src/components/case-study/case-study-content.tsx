@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FiArrowLeft, FiExternalLink } from 'react-icons/fi'
+import { FiArrowLeft, FiExternalLink, FiPlay } from 'react-icons/fi'
 import type { CaseStudyContent } from '@/types/case-study-types'
 
 interface Props {
@@ -103,6 +103,41 @@ export default function CaseStudyPageContent ({ content }: Props) {
           />
         </figure>
 
+        <section
+          className='mb-14 overflow-hidden rounded-xl border border-teal-400/20 bg-slate-950/50'
+          aria-labelledby='viollet-product-walkthrough'
+        >
+          <div className='flex items-start gap-3 border-b border-slate-700/60 px-5 py-4 sm:px-6'>
+            <span className='mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-400/10 text-teal-200'>
+              <FiPlay className='ml-0.5 h-4 w-4' aria-hidden='true' />
+            </span>
+            <div>
+              <h2
+                id='viollet-product-walkthrough'
+                className='text-lg font-semibold tracking-tight text-slate-100'
+              >
+                {sections.proof.videoLabel}
+              </h2>
+              <p className='mt-1 text-sm leading-relaxed text-slate-400'>
+                {sections.proof.videoDescription}
+              </p>
+            </div>
+          </div>
+          <video
+            className='aspect-video w-full bg-slate-900 object-cover'
+            aria-label={sections.proof.videoLabel}
+            autoPlay
+            controls
+            loop
+            muted
+            playsInline
+            poster='/images/projects/viollet.avif'
+            preload='metadata'
+          >
+            <source src='/videos/viollet-demo.mp4' type='video/mp4' />
+          </video>
+        </section>
+
         <SectionBlock section={sections.context} />
         <SectionBlock section={sections.constraints} />
         <SectionBlock section={sections.responsibility} />
@@ -110,7 +145,7 @@ export default function CaseStudyPageContent ({ content }: Props) {
         <SectionBlock section={sections.architecture}>
           <figure className='mt-6 overflow-x-auto rounded-lg border border-slate-700/60 bg-slate-950/60 p-4 sm:p-6'>
             <svg
-              viewBox='0 0 920 220'
+              viewBox='0 0 920 258'
               role='img'
               aria-label={sections.architecture.diagramCaption}
               className='mx-auto min-w-[640px] w-full max-w-4xl text-slate-300'
@@ -178,9 +213,12 @@ export default function CaseStudyPageContent ({ content }: Props) {
               </text>
               <line x1='780' y1='98' x2='800' y2='98' stroke='#5eead4' markerEnd='url(#arrow)' />
               <line x1='560' y1='144' x2='560' y2='178' stroke='#64748b' strokeDasharray='4 4' />
-              <rect x='485' y='178' width='150' height='34' rx='8' fill='#0f172a' stroke='#64748b' />
-              <text x='560' y='199' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                Gmail OAuth sync (user-initiated)
+              <rect x='460' y='178' width='200' height='56' rx='8' fill='#0f172a' stroke='#64748b' />
+              <text x='560' y='200' textAnchor='middle' fill='#e2e8f0' fontSize='11'>
+                Gmail OAuth sync
+              </text>
+              <text x='560' y='217' textAnchor='middle' fill='#94a3b8' fontSize='11'>
+                (user-initiated)
               </text>
             </svg>
             <figcaption className='mt-4 text-center text-sm text-slate-500'>

@@ -596,8 +596,8 @@
     "viollet": {
       "meta": {
         "title": "Viollet",
-        "description": "How I built an AI-assisted personal finance product that turns bank email notifications into categorized spending—without bank credentials or manual entry.",
-        "role": "Solo builder — architecture through production",
+        "description": "How I built an AI-assisted personal finance product that turns bank email notifications into categorized spending without bank credentials or manual entry.",
+        "role": "Solo builder, from architecture through production",
         "year": "2026",
         "readTime": "8 min read"
       },
@@ -607,7 +607,7 @@
       },
       "hero": {
         "eyebrow": "Case study",
-        "summary": "Viollet is a side project I designed and built end to end: connect Gmail, ingest bank transaction notifications, categorize spend with AI, and surface budgets and insights—without asking users for online banking credentials.",
+        "summary": "Viollet is a side project I designed and built end to end. It connects Gmail, ingests bank transaction notifications, categorizes spending with AI, and surfaces budgets and insights without asking for online banking credentials.",
         "technologies": [
           "TypeScript",
           "Next.js",
@@ -635,10 +635,10 @@
             "Financial data raised the bar for security and trust: no bank passwords, read-only Gmail access with explicit user consent, and a codebase that stays private while the product is still in public beta."
           ],
           "bullets": [
-            "No bank credential collection—only email notifications the user already receives",
+            "No bank credential collection, only email notifications the user already receives",
             "Gmail restricted scopes require Google verification and ongoing security review",
             "Bank notification formats vary across 15+ Dominican institutions and differ by card vs. account",
-            "Stack truth for storage: Turso with Drizzle—not a generic SQLite label"
+            "Storage uses Turso with Drizzle, not a generic SQLite label"
           ]
         },
         "responsibility": {
@@ -669,7 +669,7 @@
             },
             {
               "decision": "AI-assisted categorization alongside parsing rules",
-              "rationale": "Pure rules break when banks change templates or wording. The AI SDK helps classify ambiguous merchants and categories, with parsing constraints to keep outputs structured. The trade-off is monitoring quality and keeping prompts bounded to financial metadata—not general inbox content."
+              "rationale": "Pure rules break when banks change templates or wording. The AI SDK helps classify ambiguous merchants and categories, with parsing constraints to keep outputs structured. The trade-off is monitoring quality and keeping prompts focused on financial metadata, not general inbox content."
             },
             {
               "decision": "Clerk for authentication",
@@ -680,7 +680,7 @@
         "impact": {
           "title": "6. Impact",
           "paragraphs": [
-            "Viollet is live at viollet.app as a free public beta. Users connect Gmail, select authorized financial senders, and get automated expense tracking from notifications—replacing manual logging for the supported flow.",
+            "Viollet is live at viollet.app as a free public beta. Users connect Gmail, select authorized financial senders, and get automated expense tracking from notifications. This replaces manual logging for the supported flow.",
             "Public product scope today includes support for 15+ Dominican banks and cards (with evaluation for additional institutions that send email alerts), plus budgets, spending trends, and proactive insights derived from categorized transactions."
           ],
           "bullets": [
@@ -703,6 +703,8 @@
         },
         "proof": {
           "demoLabel": "8. Proof",
+          "videoLabel": "Product walkthrough",
+          "videoDescription": "A short look at the dashboard, budgets, and spending insights in Viollet.",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Viollet dashboard showing automated expense tracking from bank email notifications",
           "note": "Explore the live public beta at viollet.app. The source repository stays private during beta; this case study and the deployed product are the public evidence."

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { GitHubIcon, LinkIcon, StarIcon } from "../common/SvgIcons";
-import { Project } from "@/types/projects-types";
+import { Project, ProjectCardLabels } from "@/types/projects-types";
 import Link from "next/link";
 
 export default function ProjectCard({
@@ -11,7 +11,13 @@ export default function ProjectCard({
   starsOnGithub,
   technologies,
   imageSrc,
-}: Project) {
+  caseStudyUrl,
+  caseStudyLabel,
+  liveDemoLabel,
+}: Project & ProjectCardLabels) {
+  const primaryHref = caseStudyUrl || deployUrl;
+  const primaryExternal = !caseStudyUrl;
+
   return (
     <li className="mb-12 animate-card">
       <div className="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
@@ -20,15 +26,16 @@ export default function ProjectCard({
           <h3>
             <Link
               className="inline-flex items-baseline font-medium leading-tight text-white hover:text-teal-300 focus-visible:text-teal-300 group/link"
-              href={deployUrl}
-              target="_blank"
-              rel="noreferrer"
+              href={primaryHref}
+              {...(primaryExternal
+                ? { target: "_blank", rel: "noreferrer" }
+                : {})}
               aria-label={projectName}
             >
               <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
               <strong className="inline-block">
                 {projectName}
-                <LinkIcon />
+                {primaryExternal && <LinkIcon />}
               </strong>
             </Link>
           </h3>
@@ -38,9 +45,34 @@ export default function ProjectCard({
           >
             {description}
           </p>
-          {githubRepositoryUrl && (
-            <ul className="mt-2 flex flex-wrap" aria-label="Related links">
-              <li className="mr-4">
+          <ul className="mt-2 flex flex-wrap gap-x-4" aria-label="Related links">
+            {caseStudyUrl && (
+              <li>
+                <Link
+                  className="relative mt-2 inline-flex items-center text-sm font-medium text-teal-200 hover:text-teal-300 focus-visible:text-teal-300"
+                  href={caseStudyUrl}
+                >
+                  {caseStudyLabel}
+                </Link>
+              </li>
+            )}
+            {deployUrl && (
+              <li>
+                <Link
+                  className="relative mt-2 inline-flex items-center text-sm font-medium text-shark-100 hover:text-teal-300 focus-visible:text-teal-300"
+                  href={deployUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>{liveDemoLabel}</span>
+                  <span className="ml-1.5 inline-flex shrink-0">
+                    <LinkIcon />
+                  </span>
+                </Link>
+              </li>
+            )}
+            {githubRepositoryUrl && (
+              <li>
                 <Link
                   className="relative mt-2 inline-flex items-center text-sm font-medium text-shark-100 hover:text-teal-300 focus-visible:text-teal-300"
                   href={githubRepositoryUrl}
@@ -68,8 +100,8 @@ export default function ProjectCard({
                   )}
                 </Link>
               </li>
-            </ul>
-          )}
+            )}
+          </ul>
           <ul className="mt-2 flex flex-wrap" aria-label="Technologies used:">
             {technologies.map((technology, index) => (
               <li className="mt-2" key={index}>
@@ -78,7 +110,6 @@ export default function ProjectCard({
                 </span>
               </li>
             ))}
-            {/* {children} */}
           </ul>
         </aside>
         <Image

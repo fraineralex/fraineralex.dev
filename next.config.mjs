@@ -20,6 +20,11 @@ const nextConfig = {
         locale: false
       },
       {
+        source: '/projects/viollet',
+        destination: '/en/projects/viollet',
+        locale: false
+      },
+      {
         source: '/blog/:slug*',
         destination: '/en/blog/:slug*',
         locale: false

@@ -44,6 +44,7 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                   githubRepositoryUrl,
                   technologies,
                   deployUrl,
+                  caseStudyUrl,
                   year
                 },
                 index
@@ -61,15 +62,17 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                       <span className='block sm:hidden'>
                         <Link
                           className='inline-flex items-baseline font-medium leading-tight text-shark-200 hover:text-shark-200 focus-visible:text-teal-300 sm:hidden group/link text-base'
-                          href={deployUrl || githubRepositoryUrl || '#'}
-                          target='_blank'
-                          rel='noreferrer noopener'
-                          aria-label={`${title} (open in a new tab)`}
+                          href={caseStudyUrl || deployUrl || githubRepositoryUrl || '#'}
+                          {...(caseStudyUrl || !deployUrl
+                            ? {}
+                            : { target: '_blank', rel: 'noreferrer noopener' })}
+                          aria-label={`${title}${caseStudyUrl ? '' : ' (open in a new tab)'}`}
                         >
                           <p>
                             {' '}
                             <span className='inline-block'>
                               {title}
+                              {!caseStudyUrl && (
                               <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 viewBox='0 0 20 20'
@@ -83,12 +86,22 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                                   clipRule='evenodd'
                                 ></path>
                               </svg>
+                              )}
                             </span>
                           </p>
                         </Link>
                       </span>
                       <strong className='hidden sm:block font-semibold'>
-                        {title}
+                        {caseStudyUrl ? (
+                          <Link
+                            href={caseStudyUrl}
+                            className='hover:text-teal-300 focus-visible:text-teal-300'
+                          >
+                            {title}
+                          </Link>
+                        ) : (
+                          title
+                        )}
                       </strong>
                     </div>
                   </td>
@@ -109,6 +122,19 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
                   </td>
                   <td className='hidden py-4 align-top sm:table-cell'>
                     <ul className='translate-y-1 inline-block space-x-3 whitespace-nowrap'>
+                      {caseStudyUrl && (
+                        <li className='mb-1 inline-flex items-center'>
+                          <Link
+                            className='inline-flex items-baseline font-medium leading-tight hover:text-teal-300 text-shark-400 focus-visible:text-teal-300 group/link text-sm'
+                            href={caseStudyUrl}
+                            aria-label={`${title} case study`}
+                          >
+                            <span className='inline-block text-sm font-medium'>
+                              {tableHeaders.caseStudyText}
+                            </span>
+                          </Link>
+                        </li>
+                      )}
                       {githubRepositoryUrl && (
                         <li className='mb-1 inline-flex items-center'>
                           <Link

@@ -6,6 +6,7 @@ export interface Project {
   githubRepositoryUrl: string
   imageSrc: string
   starsOnGithub: number
+  caseStudyUrl?: string
 }
 
 interface Link {
@@ -19,9 +20,16 @@ interface ProjectsSection {
   title: string
   cards: Project[]
   link: Link
+  caseStudyLabel: string
+  liveDemoLabel: string
 }
 
 export interface ProjectsProps {
   dictionary: ProjectsSection
   refProjects: (node?: Element | null | undefined) => void
+}
+
+export interface ProjectCardLabels {
+  caseStudyLabel: string
+  liveDemoLabel: string
 }

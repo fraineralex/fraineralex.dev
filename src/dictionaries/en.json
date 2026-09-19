@@ -208,6 +208,7 @@
           "Webhooks"
         ],
         "deployUrl": "https://viollet.app",
+        "caseStudyUrl": "/projects/viollet",
         "githubRepositoryUrl": "",
         "imageSrc": "viollet.avif",
         "starsOnGithub": 0
@@ -266,7 +267,9 @@
       "url": "/en/projects",
       "strong": "View Full",
       "span": "Project Archive"
-    }
+    },
+    "caseStudyLabel": "Case study",
+    "liveDemoLabel": "Live demo"
   },
   "allProjects": {
     "fullname": "Frainer Encarnación",
@@ -278,7 +281,8 @@
       "description": "Description",
       "technologies": "Technologies",
       "links": "Links",
-      "deployText": "View"
+      "deployText": "View",
+      "caseStudyText": "Case study"
     },
     "projects": [
       {
@@ -297,6 +301,7 @@
           "Webhooks"
         ],
         "deployUrl": "https://viollet.app",
+        "caseStudyUrl": "/projects/viollet",
         "githubRepositoryUrl": "",
         "year": 2026
       },
@@ -586,6 +591,124 @@
     "developerOfThe": "developer of the",
     "dCssPlane": "3D CSS Plane",
     "forInspiration": "for inspiration."
+  },
+  "caseStudies": {
+    "viollet": {
+      "meta": {
+        "title": "Viollet",
+        "description": "How I built an AI-assisted personal finance product that turns bank email notifications into categorized spending—without bank credentials or manual entry.",
+        "role": "Solo builder — architecture through production",
+        "year": "2026",
+        "readTime": "8 min read"
+      },
+      "backLink": {
+        "label": "Back to projects",
+        "url": "/projects"
+      },
+      "hero": {
+        "eyebrow": "Case study",
+        "summary": "Viollet is a side project I designed and built end to end: connect Gmail, ingest bank transaction notifications, categorize spend with AI, and surface budgets and insights—without asking users for online banking credentials.",
+        "technologies": [
+          "TypeScript",
+          "Next.js",
+          "Turso",
+          "Drizzle",
+          "Clerk",
+          "AI SDK",
+          "Gmail API",
+          "Google Pub/Sub",
+          "Webhooks"
+        ]
+      },
+      "sections": {
+        "context": {
+          "title": "1. Context",
+          "paragraphs": [
+            "Most personal finance apps still depend on manual logging or direct bank integrations that are hard to ship, expensive to maintain, and often unavailable for regional banks.",
+            "In the Dominican Republic, many people already receive credit, debit, and transfer alerts by email. The product opportunity was to meet users where their data already lives: turn those notifications into structured transactions, categories, and spending views with zero manual entry."
+          ]
+        },
+        "constraints": {
+          "title": "2. Constraints",
+          "paragraphs": [
+            "Viollet is a solo side project, so scope had to stay focused on one reliable ingestion path instead of building a full open-banking platform on day one.",
+            "Financial data raised the bar for security and trust: no bank passwords, read-only Gmail access with explicit user consent, and a codebase that stays private while the product is still in public beta."
+          ],
+          "bullets": [
+            "No bank credential collection—only email notifications the user already receives",
+            "Gmail restricted scopes require Google verification and ongoing security review",
+            "Bank notification formats vary across 15+ Dominican institutions and differ by card vs. account",
+            "Stack truth for storage: Turso with Drizzle—not a generic SQLite label"
+          ]
+        },
+        "responsibility": {
+          "title": "3. My responsibility",
+          "paragraphs": [
+            "I owned the product from problem framing through production: system boundaries, data model, Gmail/OAuth flow, webhook ingestion, AI-assisted categorization, dashboard UX, and deployment.",
+            "That included choosing what to automate first (email-based capture and categorization), what to defer (direct bank APIs), and how to explain trade-offs clearly on the public site so users understand access and revocation."
+          ]
+        },
+        "architecture": {
+          "title": "4. Architecture",
+          "paragraphs": [
+            "The runtime splits into three cooperating paths: user-facing app (Clerk-authenticated Next.js), asynchronous email ingestion (Gmail watch + Pub/Sub push into a webhook route), and persistence/query through Drizzle on Turso.",
+            "When a supported notification arrives, the pipeline parses the message, extracts transaction fields, runs categorization through the AI SDK, and writes normalized records the dashboard can aggregate for budgets, trends, and alerts."
+          ],
+          "diagramCaption": "High-level flow from bank email notifications to categorized records in Turso."
+        },
+        "tradeOffs": {
+          "title": "5. Decisions and trade-offs",
+          "items": [
+            {
+              "decision": "Email notifications instead of bank APIs",
+              "rationale": "Bank APIs and aggregators would expand coverage faster in theory, but they add partnership overhead and uneven regional support. Email alerts are already delivered to users and let Viollet ship a working beta without storing banking credentials."
+            },
+            {
+              "decision": "Turso + Drizzle for the data layer",
+              "rationale": "A managed libSQL edge database keeps operational overhead low for a solo builder while Drizzle gives typed schema migrations and queries. The trade-off is designing ingestion to be idempotent and webhook-safe rather than relying on a single monolithic worker."
+            },
+            {
+              "decision": "AI-assisted categorization alongside parsing rules",
+              "rationale": "Pure rules break when banks change templates or wording. The AI SDK helps classify ambiguous merchants and categories, with parsing constraints to keep outputs structured. The trade-off is monitoring quality and keeping prompts bounded to financial metadata—not general inbox content."
+            },
+            {
+              "decision": "Clerk for authentication",
+              "rationale": "Clerk reduced time-to-ship for session management and let me focus engineering time on Gmail sync and ingestion reliability. The trade-off is coupling auth to a hosted provider, acceptable for a beta where speed and security defaults matter."
+            }
+          ]
+        },
+        "impact": {
+          "title": "6. Impact",
+          "paragraphs": [
+            "Viollet is live at viollet.app as a free public beta. Users connect Gmail, select authorized financial senders, and get automated expense tracking from notifications—replacing manual logging for the supported flow.",
+            "Public product scope today includes support for 15+ Dominican banks and cards (with evaluation for additional institutions that send email alerts), plus budgets, spending trends, and proactive insights derived from categorized transactions."
+          ],
+          "bullets": [
+            "Gmail → categorized spend automation with zero manual entry for connected accounts",
+            "No online banking usernames or passwords collected",
+            "Users can revoke Gmail access from Google or inside the product workflow"
+          ]
+        },
+        "operationalQuality": {
+          "title": "7. Operational quality",
+          "paragraphs": [
+            "Because the product handles financial metadata, the implementation treats transport and storage carefully: encrypted data in transit and at rest, read-only Gmail scopes scoped to user-selected senders, and clear copy on the public site about Google's verification process for restricted permissions.",
+            "Ingestion is built for reliability at the webhook boundary: validate push deliveries, make writes idempotent where possible, and keep the parsing/categorization path isolated so a bad template does not corrupt unrelated user data."
+          ],
+          "bullets": [
+            "Google app verification completed; restricted Gmail scopes follow Google's security assessment cycle",
+            "Public FAQ documents access, revocation, and data use without advertising resale",
+            "Webhook + Pub/Sub path decouples mail delivery from request/response UI latency"
+          ]
+        },
+        "proof": {
+          "demoLabel": "8. Proof",
+          "demoUrl": "https://viollet.app",
+          "screenshotAlt": "Viollet dashboard showing automated expense tracking from bank email notifications",
+          "note": "Explore the live public beta at viollet.app. The source repository stays private during beta; this case study and the deployed product are the public evidence."
+        }
+      }
+    }
   },
   "blog": {
     "home": {

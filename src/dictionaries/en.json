@@ -718,7 +718,7 @@
     "home": {
       "topArticles": {
         "label": "Top Articles",
-        "featured": "mastering-git-commit-messages",
+        "featured": "jev-generative-ui",
         "top2": "crafting-react-hooks",
         "top3": "how-to-install-multiple-versions-nodejs-nvm"
       },

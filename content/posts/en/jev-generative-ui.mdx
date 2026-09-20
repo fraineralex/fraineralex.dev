@@ -67,15 +67,10 @@ Classic structured output asks a large model to write a full JSON tree token by 
 
 Chris Tate's public experiment paired `json-render` with **jev** (TypeSafe AI), a structured decision model, via `experimental_composeSpec` and `experimental_createEvaluator`.
 
-<video
+<BlogAutoplayVideo
   className="jev-tall-media rounded-xl border border-zinc-700 my-6"
-  controls
-  playsInline
-  preload="metadata"
   src="https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/blog/jev/ctatedev-jev-demo.mp4"
->
-  Your browser does not support the video tag.
-</video>
+/>
 _Demo from [Chris Tate on X](https://x.com/ctatedev/status/2101022101750571357)._
 
 ![Diagram: LLM JSON vs jev evaluation](/images/blog/posts/content/jev-diagram-3.webp)
@@ -103,7 +98,7 @@ Treat `experimental_*` APIs as unreleased and pin versions. Confirm Gateway perm
 
 ## Try a catalog composition (interactive)
 
-The playground below sends its prompt to a server route that composes a Spec with live **jev** through Vercel AI Gateway. The API key stays on the server and never enters the browser bundle.
+The playground below sends its prompt to a server route that composes a Spec with live **jev** through Vercel AI Gateway. The API key stays on the server and never enters the browser bundle. If the route is unavailable, the playground shows an inline error state.
 
 <JevPlayground />
 

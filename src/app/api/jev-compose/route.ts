@@ -5,7 +5,10 @@ import {
   experimental_createEvaluator
 } from '@json-render/core'
 import { NextRequest, NextResponse } from 'next/server'
-import { jevCandidates, jevCatalog } from '@/lib/jev-catalog'
+import { jevCandidates } from '@/lib/jev-candidates'
+import { jevCatalog } from '@/lib/jev-catalog'
+
+export const runtime = 'nodejs'
 
 const MAX_PROMPT_LENGTH = 600
 

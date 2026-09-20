@@ -103,7 +103,7 @@ Treat `experimental_*` APIs as unreleased and pin versions. Confirm Gateway perm
 
 ## Try a catalog composition (interactive)
 
-The playground below uses a small catalog and a **choice style evaluator** in the same shape as compose/evaluate. On this site it runs as a local demo so you can feel the loop without a Gateway key in the browser. Swap the evaluator for `experimental_createEvaluator({ model: "typesafe-ai/jev" })` on your server when you want live jev.
+The playground below sends its prompt to a server route that composes a Spec with live **jev** through Vercel AI Gateway. The API key stays on the server and never enters the browser bundle.
 
 <JevPlayground />
 

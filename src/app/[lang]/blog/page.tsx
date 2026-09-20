@@ -133,16 +133,17 @@ export default async function BlogPage ({ params }: Props) {
                 </article>
               </Link>
 
-              <div className='flex flex-col w-full gap-9 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 '>
+              <div className='flex flex-col w-full gap-9 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 lg:h-full'>
                 {[top2, top3].map((post, index) => (
-                  <Article
-                    key={post?.slug || index}
-                    post={post}
-                    views={views[post?.slug] ?? 0}
-                    isTopArticle
-                    lang={lang}
-                    priority={index === 0}
-                  />
+                  <div key={post?.slug || index} className='flex-1 min-h-0'>
+                    <Article
+                      post={post}
+                      views={views[post?.slug] ?? 0}
+                      isTopArticle
+                      lang={lang}
+                      priority={index === 0}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

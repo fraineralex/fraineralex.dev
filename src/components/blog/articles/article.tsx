@@ -15,31 +15,32 @@ type Props = {
 }
 
 export const Article: React.FC<Props> = ({ post, views, isTopArticle, lang, priority }) => {
-  const aspectRatio = isTopArticle ? '4 / 3' : '15 / 7'
+  const imageSrc = isTopArticle ? (post.heroCard || post.hero) : post.hero
+  const aspectRatio = isTopArticle ? '8 / 11' : '15 / 7'
   const imageStyles: {} = isTopArticle
-    ? { aspectRatio, objectFit: 'contain', width: '100%', height: '100%' }
+    ? { aspectRatio, objectFit: 'cover', height: '100%' }
     : { aspectRatio, objectFit: 'cover', width: '100%' }
 
   return (
     <Link
       href={`/${lang}/blog/${post?.slug}`}
       className={`bg-gradient-to-br opacity-100 via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group hover:border-zinc-200/50 border-zinc-600 lg:hover:transform lg:hover:-translate-y-2 transition-all duration-300 ease-in-out ${
-        isTopArticle ? 'relative grid grid-cols-8 min-h-[250px]' : 'md:gap-0'
+        isTopArticle ? 'relative grid grid-cols-8 h-full' : 'md:gap-0'
       }`}
     >
       <Image
         style={imageStyles}
         className={`squiggle z-50 ${
-          isTopArticle ? 'h-full w-full col-span-2 bg-slate-950 p-2' : ''
+          isTopArticle ? 'h-full md:h-auto col-span-2' : ''
         } transform transition-transform group-hover:scale-110`}
-        src={post.hero}
+        src={imageSrc}
         alt={post.title}
         width='360'
         height='192'
         priority={priority}
       />
 
-      <Card className={`${isTopArticle ? 'col-span-6 h-full flex' : ''}`}>
+      <Card className={`${isTopArticle ? 'col-span-6 h-full' : ''}`}>
         <article className={`p-4 md:p-8 h-full flex flex-col ${isTopArticle ? 'col-span-6' : ''}`}>
           <div className='flex justify-between gap-2 items-center'>
             <span className='text-xs duration-1000 text-zinc-300 group-hover:text-zinc-200 group-hover:border-zinc-200 drop-shadow-orange'>

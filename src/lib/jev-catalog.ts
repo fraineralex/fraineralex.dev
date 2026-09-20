@@ -36,7 +36,8 @@ export const jevCatalog = defineCatalog(schema, {
       }),
       description: 'A short checklist of next steps'
     }
-  }
+  },
+  actions: {}
 })
 
 export const jevCandidates = [

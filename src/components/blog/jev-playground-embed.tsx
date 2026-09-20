@@ -1,7 +1,7 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { Component, type ReactNode } from 'react'
+import JevPlayground from '@/components/blog/jev-playground'
 
 type EmbedBoundaryState = {
   hasError: boolean
@@ -27,15 +27,6 @@ class EmbedBoundary extends Component<{ children: ReactNode }, EmbedBoundaryStat
     return this.props.children
   }
 }
-
-const JevPlayground = dynamic(() => import('@/components/blog/jev-playground'), {
-  ssr: false,
-  loading: () => (
-    <section className='my-8 rounded-2xl border border-zinc-700/80 bg-zinc-950/60 p-4'>
-      <p className='text-sm text-zinc-400'>Loading the interactive playground...</p>
-    </section>
-  )
-})
 
 export default function JevPlaygroundEmbed () {
   return (

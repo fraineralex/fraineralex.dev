@@ -1,6 +1,6 @@
 'use client'
 
-import { defineRegistry, Renderer, StateProvider, type Spec } from '@json-render/react'
+import { JSONUIProvider, defineRegistry, Renderer, type Spec } from '@json-render/react'
 import { Component, type ReactNode, useMemo, useState } from 'react'
 import { jevCatalog } from '@/lib/jev-catalog'
 
@@ -46,13 +46,7 @@ class RendererBoundary extends Component<RendererBoundaryProps, RendererBoundary
   }
 
   render (): ReactNode {
-    if (this.state.hasError) {
-      return (
-        <p className='text-sm text-rose-300'>
-          The composed spec could not be rendered. Try another prompt.
-        </p>
-      )
-    }
+    if (this.state.hasError) return null
     return this.props.children
   }
 }
@@ -70,16 +64,16 @@ function buildRegistry () {
   return defineRegistry(jevCatalog, {
     components: {
       Card: ({ props, children }) => (
-        <div className='rounded-xl border border-teal-400/30 bg-slate-950/70 p-4 shadow-lg'>
+        <div className='rounded-xl border border-teal-500/30 bg-zinc-950/80 p-4 shadow-[0_0_0_1px_rgba(45,212,191,0.08)] backdrop-blur-sm'>
           <h3 className='mb-3 text-base font-semibold text-teal-100'>
             {asText(props.title, 'Composed card')}
           </h3>
           <div className='space-y-3'>{children}</div>
         </div>
       ),
-      Text: ({ props }) => <p className='text-sm text-zinc-300'>{asText(props.text)}</p>,
+      Text: ({ props }) => <p className='text-sm leading-relaxed text-zinc-300'>{asText(props.text)}</p>,
       Metric: ({ props }) => (
-        <div className='flex items-baseline justify-between rounded-lg bg-slate-900/80 px-3 py-2'>
+        <div className='flex items-baseline justify-between rounded-lg border border-zinc-700/80 bg-zinc-900/70 px-3 py-2'>
           <span className='text-xs uppercase tracking-wide text-zinc-400'>
             {asText(props.label, 'Metric')}
           </span>
@@ -87,7 +81,7 @@ function buildRegistry () {
         </div>
       ),
       Button: ({ props }) => (
-        <span className='inline-flex rounded-lg bg-teal-500/90 px-3 py-2 text-sm font-medium text-slate-950'>
+        <span className='inline-flex rounded-lg border border-teal-300/40 bg-teal-400/90 px-3 py-2 text-sm font-semibold text-zinc-950'>
           {asText(props.label, 'Action')}
         </span>
       ),
@@ -111,18 +105,73 @@ function buildRegistry () {
 }
 
 function isRenderableSpec (input: unknown): input is Spec {
-  if (!input || typeof input !== 'object') return false
-  const maybeSpec = input as { root?: unknown; elements?: unknown }
-  if (typeof maybeSpec.root !== 'string') return false
-  if (!maybeSpec.elements || typeof maybeSpec.elements !== 'object' || Array.isArray(maybeSpec.elements)) {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) return false
+  const candidate = input as {
+    root?: unknown
+    elements?: Record<string, unknown>
+  }
+  if (!candidate.elements || typeof candidate.elements !== 'object' || Array.isArray(candidate.elements)) {
     return false
+  }
+  if (Object.keys(candidate.elements).length === 0) return false
+  return true
+}
+
+function normalizeSpec (input: unknown): Spec | null {
+  if (!isRenderableSpec(input)) return null
+
+  const rawSpec = input as {
+    root?: unknown
+    state?: unknown
+    elements: Record<string, unknown>
+  }
+  const elements: Record<string, any> = {}
+
+  for (const [key, value] of Object.entries(rawSpec.elements)) {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) continue
+    const source = value as Record<string, unknown>
+    const children = Array.isArray(source.children)
+      ? source.children.filter((child): child is string => typeof child === 'string')
+      : []
+    const props = source.props && typeof source.props === 'object' && !Array.isArray(source.props)
+      ? source.props
+      : {}
+    const element: Record<string, unknown> = {
+      type: typeof source.type === 'string' ? source.type : 'Text',
+      props,
+      children
+    }
+
+    if (source.slots && typeof source.slots === 'object' && !Array.isArray(source.slots)) {
+      const slots = Object.entries(source.slots as Record<string, unknown>).reduce<Record<string, string[]>>((acc, [slotName, slotValue]) => {
+        if (Array.isArray(slotValue)) {
+          acc[slotName] = slotValue.filter((item): item is string => typeof item === 'string')
+        }
+        return acc
+      }, {})
+
+      if (Object.keys(slots).length > 0) {
+        element.slots = slots
+      }
+    }
+
+    if (source.visible && typeof source.visible === 'object' && !Array.isArray(source.visible)) {
+      element.visible = source.visible
+    }
+    if (source.on && typeof source.on === 'object' && !Array.isArray(source.on)) {
+      element.on = source.on
+    }
+    elements[key] = element
   }
 
-  try {
-    return jevCatalog.validate(input).success
-  } catch {
-    return false
-  }
+  const firstKey = Object.keys(elements)[0]
+  if (!firstKey) return null
+  const root = typeof rawSpec.root === 'string' && elements[rawSpec.root] ? rawSpec.root : firstKey
+  const state = rawSpec.state && typeof rawSpec.state === 'object' && !Array.isArray(rawSpec.state)
+    ? rawSpec.state as Record<string, unknown>
+    : {}
+
+  return { root, elements, state }
 }
 
 function normalizeSteps (steps: unknown): Array<{ choice: string; description: string; elapsedMs: number }> {
@@ -190,11 +239,12 @@ export default function JevPlayground () {
       if (!response.ok) {
         throw new Error(result.error || `Live composition failed with status ${response.status}.`)
       }
-      if (!isRenderableSpec(result.spec)) {
-        throw new Error('Live composition returned an incompatible spec.')
+      const normalizedSpec = normalizeSpec(result.spec)
+      if (!normalizedSpec) {
+        throw new Error('Live composition returned an incompatible spec payload.')
       }
 
-      setSpec(result.spec)
+      setSpec(normalizedSpec)
       setSteps(normalizeSteps(result.steps))
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
@@ -211,17 +261,18 @@ export default function JevPlayground () {
   const renderKey = spec ? `${spec.root}:${Object.keys(spec.elements ?? {}).length}` : 'empty'
 
   return (
-    <section className='my-8 overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-950/60'>
-      <div className='border-b border-zinc-800 px-4 py-3 sm:px-5'>
-        <p className='text-sm font-medium text-zinc-100'>Interactive catalog playground</p>
-        <p className='mt-1 text-xs text-zinc-400'>
-          Live jev composes the catalog through Vercel AI Gateway on a server route. The key stays on
-          the server only.
-        </p>
+    <section className='my-8 overflow-hidden rounded-2xl border border-zinc-700/80 bg-gradient-to-b from-zinc-900/70 via-zinc-950/80 to-zinc-950/95 shadow-[0_0_0_1px_rgba(15,23,42,0.6)]'>
+      <div className='border-b border-zinc-800/90 px-4 py-4 sm:px-5'>
+        <div className='inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-400/10 px-3 py-1 text-xs text-teal-100'>
+          <span className='h-2 w-2 rounded-full bg-teal-300' />
+          Live jev playground
+        </div>
+        <p className='mt-3 text-sm text-zinc-100'>Compose a UI spec from the catalog using AI Gateway on the server.</p>
+        <p className='mt-1 text-xs text-zinc-400'>The key stays server-only and never enters the browser.</p>
       </div>
-      <div className='grid gap-4 p-4 sm:p-5 lg:grid-cols-2'>
-        <div className='space-y-3'>
-          <label className='block text-xs font-medium uppercase tracking-wide text-zinc-400'>
+      <div className='grid gap-4 p-4 sm:p-5 lg:grid-cols-[1.05fr_1fr]'>
+        <div className='space-y-4'>
+          <label className='block text-xs font-semibold tracking-[0.12em] text-zinc-400'>
             Prompt
           </label>
           <div className='flex flex-wrap gap-2'>
@@ -230,10 +281,10 @@ export default function JevPlayground () {
                 key={item}
                 type='button'
                 onClick={() => setPrompt(item)}
-                className={`rounded-full border px-3 py-1 text-left text-xs ${
+                className={`rounded-full border px-3 py-2 text-left text-sm leading-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300/70 ${
                   prompt === item
-                    ? 'border-teal-400/60 bg-teal-400/10 text-teal-100'
-                    : 'border-zinc-700 text-zinc-300 hover:border-zinc-500'
+                    ? 'border-teal-300/70 bg-teal-400/15 text-teal-100'
+                    : 'border-zinc-600/90 text-zinc-200 hover:border-zinc-400'
                 }`}
               >
                 {item}
@@ -245,65 +296,84 @@ export default function JevPlayground () {
             onChange={(e) => setPrompt(e.target.value)}
             rows={3}
             maxLength={MAX_PROMPT_LENGTH}
-            className='w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-teal-400/50'
+            className='w-full rounded-xl border border-zinc-700 bg-zinc-900/90 px-3 py-3 text-lg text-zinc-100 outline-none transition-colors focus:border-teal-300/70'
           />
-          <p className='text-xs text-zinc-500'>
+          <p className='text-sm text-zinc-400'>
             Catalog: Card, Text, Metric, Button, List · {prompt.trim().length}/{MAX_PROMPT_LENGTH}
           </p>
-          <button
-            type='button'
-            disabled={busy || !prompt.trim()}
-            onClick={runCompose}
-            className='rounded-lg bg-zinc-100 px-3 py-2 text-sm font-semibold text-zinc-900 disabled:opacity-50'
-          >
-            {busy ? 'Composing with live jev...' : 'Compose with live jev'}
-          </button>
+          <div className='flex flex-wrap items-center gap-3'>
+            <button
+              type='button'
+              disabled={busy || !prompt.trim()}
+              onClick={runCompose}
+              className='rounded-xl bg-zinc-100 px-4 py-3 text-base font-semibold text-zinc-950 transition-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50'
+            >
+              {busy ? 'Composing with live jev...' : 'Compose with live jev'}
+            </button>
+            <span className='text-xs text-zinc-500'>
+              {busy ? 'Composing live spec...' : 'Ready'}
+            </span>
+          </div>
           {error && (
-            <p role='alert' className='text-sm text-rose-300'>
+            <p role='alert' className='rounded-lg border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-sm text-rose-200'>
               {error}
             </p>
           )}
           {steps && steps.length > 0 && (
-            <ol className='list-decimal space-y-1 pl-4 text-xs text-zinc-400'>
-              {steps.map((step, index) => (
-                <li key={`${step.choice}-${index}`}>
-                  {step.description} ({step.elapsedMs} ms)
-                </li>
-              ))}
-            </ol>
+            <div className='rounded-xl border border-zinc-700/80 bg-zinc-900/60 px-3 py-3'>
+              <p className='mb-2 text-xs font-medium tracking-[0.1em] text-zinc-400'>Trace</p>
+              <ol className='space-y-2 text-sm text-zinc-300'>
+                {steps.map((step, index) => (
+                  <li key={`${step.choice}-${index}`} className='flex items-start gap-2'>
+                    <span className='mt-1 h-2 w-2 rounded-full bg-teal-300/90' />
+                    <span>
+                      {step.description} <span className='text-zinc-500'>({step.elapsedMs} ms)</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
           )}
         </div>
-        <div className='min-h-[220px] rounded-xl border border-dashed border-zinc-700 bg-zinc-900/40 p-3'>
+        <div className='min-h-[260px] rounded-xl border border-zinc-700/80 bg-zinc-900/50 p-3 shadow-inner shadow-zinc-950/40'>
           {registryInit.error && <p className='text-sm text-rose-300'>{registryInit.error}</p>}
 
           {!registryInit.error && busy && (
-            <p className='text-sm text-zinc-400'>Composing with jev through /api/jev-compose...</p>
+            <div className='flex h-full min-h-[220px] items-center justify-center'>
+              <p className='text-sm text-zinc-300'>Composing with jev through /api/jev-compose...</p>
+            </div>
           )}
 
           {!registryInit.error && !busy && !spec && (
-            <p className='text-sm text-zinc-500'>
-              Choose a prompt and compose to render a live spec from the catalog.
-            </p>
+            <div className='flex h-full min-h-[220px] items-center justify-center rounded-lg border border-dashed border-zinc-700/90 bg-zinc-950/50 px-4'>
+              <p className='text-sm text-zinc-400'>
+                Choose a prompt and compose to render a live spec in this canvas.
+              </p>
+            </div>
           )}
 
-          {!registryInit.error && renderError && <p className='text-sm text-rose-300'>{renderError}</p>}
+          {!registryInit.error && renderError && (
+            <p className='rounded-lg border border-rose-400/40 bg-rose-500/10 px-3 py-3 text-sm text-rose-200'>
+              {renderError}
+            </p>
+          )}
 
           {!registryInit.error && !busy && spec && registryInit.registry && (
             <RendererBoundary
               resetKey={renderKey}
-              onError={() => setRenderError('The composed spec could not be rendered safely.')}
+              onError={() => setRenderError('The composed spec could not be rendered. Try another prompt.')}
             >
-              <StateProvider initialState={spec.state}>
+              <JSONUIProvider registry={registryInit.registry} initialState={spec.state}>
                 <Renderer
                   spec={spec}
                   registry={registryInit.registry}
                   fallback={({ element }: { element: { type?: string } }) => (
-                    <p className='text-sm text-zinc-500'>
+                    <p className='rounded-lg border border-zinc-700 bg-zinc-950/70 px-3 py-2 text-sm text-zinc-400'>
                       Unsupported component received: {asText(element.type, 'unknown')}
                     </p>
                   )}
                 />
-              </StateProvider>
+              </JSONUIProvider>
             </RendererBoundary>
           )}
         </div>

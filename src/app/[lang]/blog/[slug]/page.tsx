@@ -53,13 +53,10 @@ export async function generateMetadata (
 
   const previousImages = (await parent).openGraph?.images || []
 
-  const BLOG_DOMAIN =
-    `${process.env.DOMAIN}/${
-      lang !== i18n.defaultLocale ? `${lang}/` : ''
-    }blog` ||
-    `https://fraineralex.dev${
-      lang !== i18n.defaultLocale ? `${lang}/` : ''
-    }blog`
+  const siteUrl = process.env.DOMAIN || 'https://fraineralex.dev'
+  const blogDomain = `${siteUrl}/${
+    lang !== i18n.defaultLocale ? `${lang}/` : ''
+  }blog`
 
   return {
     title: post.title,
@@ -69,21 +66,21 @@ export async function generateMetadata (
       title: `${post.title} | Frainer's Blog`,
       images: [
         {
-          url: `${process.env.DOMAIN}${post.hero}`,
+          url: `${siteUrl}${post.hero}`,
           width: 1920,
           height: 1080
         },
         ...previousImages
       ],
       description: post.description,
-      url: `${BLOG_DOMAIN}/${post.slug}`
+      url: `${blogDomain}/${post.slug}`
     },
     twitter: {
       title: `${post.title} | Frainer's Blog`,
       description: post.description,
       images: [
         {
-          url: `${process.env.DOMAIN}${post.hero}`,
+          url: `${siteUrl}${post.hero}`,
           width: 1920,
           height: 1080
         }

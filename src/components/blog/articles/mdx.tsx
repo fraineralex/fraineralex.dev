@@ -6,9 +6,11 @@ import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import JevPlayground from "@/components/blog/jev-playground";
 
 const components = {
 	Image,
+	JevPlayground,
 };
 
 interface MdxProps {

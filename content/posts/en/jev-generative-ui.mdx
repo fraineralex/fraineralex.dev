@@ -1,173 +1,86 @@
 ---
 title: "Generative UI Gets Practical with json-render and jev"
-description: "How a constrained component catalog and evaluation driven composition can make AI generated interfaces more useful, safer, and faster."
+description: "How a constrained catalog plus evaluation driven composition can make AI interfaces safer and faster, including a live demo pattern and Vercel AI Gateway."
 date: "2026-09-19"
 url: "/"
 hero: "/images/blog/posts/cover/jev-generative-ui.webp"
-heroSource: "Diagram: json-render pipeline (Excalidraw-style)"
 tags: ["react", "typescript", "nextjs", "performance"]
 published: true
 lang: 'en'
 ---
 
-# Generative UI Gets Practical with json-render and jev
+Most AI products still put the model inside a fixed chat window. That works for answers. It is a weak fit for booking flows, support checklists, or ops dashboards that need cards, forms, tables, and actions.
 
-Most AI products still put the model inside a fixed chat window. A person types a request, the model writes text, and the application places that text in a message bubble. That is a useful interaction pattern, but it is not a good fit for every product.
+Generative UI means the model helps compose the interface. The useful version is not freeform pixels or unreviewed React. It is a model that selects from a **catalog** of components and actions your team already owns.
 
-A train booking flow needs route cards, filters, a date picker, and a clear action. A support workflow may need a checklist and a form. An operations dashboard may need a table, a status summary, and a confirmation step. In those cases, a paragraph that describes the answer is only part of the experience.
-
-Generative UI is the idea that the model can help compose the interface itself. The practical version is not an AI that can invent arbitrary pixels or ship unreviewed React code. It is a model that selects from a catalog of components and actions that the product team already owns.
-
-This post explains how Vercel Labs' `json-render` approaches that problem, why the experimental `jev` integration is interesting, and where the approach fits among structured output, tool calling, and code generation.
+This post covers Vercel Labs' `json-render`, the experimental `jev` pairing, where AI Gateway fits, and a small interactive demo you can try below.
 
 ## Why jev is getting attention on Vercel AI Gateway
 
-Vercel reported that **Jev was adopted faster than any other model in AI Gateway history**. In the first day, TypeSafe AI reached about **13% of teams**, roughly **2x the GPT-5.6 family** and **6x Fable 5.1**. That share is calculated among paid teams on the Gateway.
+Vercel reported that **Jev was adopted faster than any other model in AI Gateway history**. In the first day, TypeSafe AI reached about **13% of teams**, roughly **2x the GPT-5.6 family** and **6x Fable 5.1**.
 
 ![Vercel AI Gateway chart: Jev fastest adoption in first 24 hours](/images/blog/posts/content/vercel-jev-adoption-chart.webp)
-_Source: [Vercel on X](https://x.com/vercel). Team share among paid teams only._
+_Source: [Vercel on X](https://x.com/vercel)._
 
-Starting recently, **Jev is also free to use on Vercel AI Gateway until September 25**. That window is a practical chance to try `typesafe-ai/jev` on real composition workloads without adding a new vendor bill for the experiment.
+**Jev is free on Vercel AI Gateway until September 25**, which is a practical window to try `typesafe-ai/jev` on real composition workloads.
 
 ![Vercel AI Gateway promo: Jev free until September 25](/images/blog/posts/content/vercel-jev-free-until-sep25.webp)
 _Source: [Vercel Developers on X](https://x.com/vercel_dev)._
 
-Adoption speed is not the same as production fitness. It does show that teams want a model that is good at structured decisions, not only at writing long text. The rest of this post focuses on how that idea shows up in Generative UI with `json-render`.
+Adoption is not the same as production fitness. It does show demand for models that are good at structured decisions, not only long text.
 
+## Fixed chat vs Generative UI
+
+```text
+Fixed:   request -> LLM text -> chat bubble
+Generative UI: request -> choose composition -> render approved components
+```
 
 ![Diagram: fixed chat UI versus Generative UI](/images/blog/posts/content/jev-diagram-1.webp)
 
-## Fixed chat UI versus Generative UI
-
-A conventional assistant has a fixed shell:
-
-```text
-User request -> model generates text -> chat bubble renders the answer
-```
-
-The model changes the content, not the shape of the application. The surrounding interface stays the same whether the answer is a recipe, a booking result, or a troubleshooting plan.
-
-A Generative UI flow has another decision point:
-
-```text
-User request -> model chooses a composition -> application renders approved components
-```
-
-The model can help decide which information belongs together, which components are useful, and which actions should be exposed. The application still owns the actual components, data access, event handlers, validation, and permissions.
-
-That boundary matters. Freeform frontend generation can be creative, but it also creates a large security and maintenance surface. Arbitrary code can bypass design rules, call the wrong action, expose data, or simply produce an interface that no one can support. A catalog gives the model room to compose without giving it ownership of the product.
+The application still owns components, data access, handlers, validation, and permissions. A catalog gives the model room to compose without owning the product.
 
 ## What json-render contributes
 
-`json-render` from Vercel Labs is a Generative UI framework built around a developer defined catalog. The catalog describes the components and actions that are available. The model produces a JSON specification constrained to those capabilities. Your real React components render that specification.
+[`json-render`](https://json-render.dev/) is a Generative UI framework from Vercel Labs:
 
-The output is not Markdown, an iframe, or an arbitrary program. It is a structured description of a UI tree. A typical system can validate it, apply application policy, and pass it to a renderer that maps catalog names to components.
-
-The central flow looks like this:
-
-```text
-prompt -> catalog -> constrained JSON spec -> validation -> real components
-```
-
-The catalog is valuable because it is also product documentation for the model. A component can carry a description, a Zod props schema, slots, and action definitions. The renderer remains a normal part of the codebase. Teams can review it, test it, instrument it, and evolve it without asking a model to recreate it.
-
-`json-render` also has SpecStream concepts for progressive updates. JSONL patches can let an interface appear as the model makes progress instead of waiting for one large response. That is useful, but it also creates a cost: the system may spend time streaming the tokens needed to describe a large tree one token at a time.
+1. You define a **catalog** (components, actions, Zod props).
+2. The model emits a **JSON Spec** constrained to that catalog.
+3. Your real React (or RN) components render it.
+4. **SpecStream** can stream JSONL patches so UI appears progressively.
 
 ![Diagram: json-render pipeline](/images/blog/posts/content/jev-diagram-2.webp)
 
-### A catalog is a product boundary
+The catalog is a product boundary. Creativity stays inside the design system.
 
-A catalog should be treated as a capability boundary, not as a list of visual widgets. Components should have narrow responsibilities. Actions should map to explicit server side behavior. Data references should be allowlisted. The renderer should reject unknown types and malformed props.
+## Why token-by-token UI trees get slow
 
-For example, a simplified catalog might include a card, a ticket list, and a button. The exact catalog shape depends on the `json-render` version and schema package you use. The current core API documents `defineCatalog` with the renderer schema:
+Classic structured output asks a large model to write a full JSON tree token by token. For UI that tree can be wide and deep. Time to first useful render suffers.
 
-```ts
-import { z } from "zod";
-import { defineCatalog } from "@json-render/core";
-import { schema } from "@json-render/react/schema";
+Chris Tate's public experiment paired `json-render` with **jev** (TypeSafe AI), a structured decision model, via `experimental_composeSpec` and `experimental_createEvaluator`.
 
-export const catalog = defineCatalog(schema, {
-  components: {
-    Card: {
-      props: z.object({
-        title: z.string(),
-      }),
-      slots: ["default"],
-      description: "A container card for one coherent piece of information",
-    },
-    TicketList: {
-      props: z.object({
-        routeIds: z.array(z.string()).max(10),
-      }),
-      description: "A list of available train routes",
-    },
-    Button: {
-      props: z.object({
-        label: z.string().max(80),
-      }),
-      description: "A button connected to an allowlisted action",
-    },
-  },
-  actions: {
-    selectTicket: {
-      params: z.object({ ticketId: z.string() }),
-      description: "Select one ticket for the booking flow",
-    },
-  },
-});
-```
+<video
+  className="w-full rounded-xl border border-zinc-700 my-6"
+  controls
+  playsInline
+  preload="metadata"
+  src="https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/blog/jev/ctatedev-jev-demo.mp4"
+>
+  Your browser does not support the video tag.
+</video>
+_Demo from [Chris Tate on X](https://x.com/ctatedev/status/2101022101750571357). Same train ticket UI: default JSONL mode about **3.21s**, jev about **0.88s** (public experiment timings, not a general benchmark)._
 
-The catalog's validation is more important than the prompt. Prompts guide behavior. Schemas and server checks enforce the boundary.
+![Diagram: LLM JSON vs jev evaluation](/images/blog/posts/content/jev-diagram-3.webp)
 
-## Why the JSON tree can become the bottleneck
+jev focuses on **which** components and **where** they go. Your renderer still draws the UI.
 
-A large UI specification contains many decisions: the root component, child components, nesting, properties, layout, actions, and data bindings. With a conventional structured output flow, the model emits the JSON representation token by token.
-
-Streaming can improve perceived progress, but it does not remove the work of serializing the whole tree. It also makes partial states more complicated. The renderer must be able to handle incomplete patches, and the application must decide when a partially described interface is safe to show.
-
-This is the problem that makes the public `jev` experiment worth studying. The experiment pairs `json-render` with a TypeSafe AI structured decision model. Instead of treating UI composition only as long JSON generation, it evaluates a bounded set of choices about which elements belong in the interface and how they fit together.
-
-## jev and evaluation driven composition
-
-Jev is an experimental structured decision model. In the public experiment described by Chris Tate, it is used with `json-render` through `experimental_composeSpec` and `experimental_createEvaluator`.
-
-The mental model changes from this:
+## Architecture with Vercel AI Gateway
 
 ```text
-Write every node in a large JSON tree
+Client -> your API (server) -> AI Gateway (typesafe-ai/jev) -> Spec -> React
 ```
 
-to this:
-
-```text
-Evaluate bounded composition questions, then publish a validated tree
-```
-
-That does not mean the system has no generation step. It means the composition protocol can ask for higher level decisions in batches, rather than requiring a long sequence of tokens for every brace, property, and repeated visual detail. The default batched strategy in the current documentation selects a root and required elements, then resolves parent and sibling placement. A sequential strategy is available for one operation at a time and is used for edits.
-
-![Diagram: token generation versus jev evaluation](/images/blog/posts/content/jev-diagram-3.webp)
-
-The public train ticket demo reports approximately 3.21 seconds for the JSONL approach and approximately 0.88 seconds for the jev approach for the same UI. These are timings from that public experiment, not a general benchmark. They do not predict production latency for a different catalog, prompt, model configuration, network, or workload.
-
-The useful product lesson is narrower and more durable: the composition protocol is part of the performance design. If the application already has a bounded set of components, asking for bounded decisions can be a better match than asking for a model to serialize every token of a large tree.
-
-## A practical architecture
-
-A production oriented request can be organized into five boundaries:
-
-1. The client sends user intent to a server endpoint.
-2. The server builds a prompt and supplies the catalog and candidates.
-3. The composer asks an evaluator to choose from bounded options.
-4. The server validates the resulting spec and applies policy.
-5. The React renderer turns approved elements into the UI.
-
-The Vercel AI Gateway belongs on the server side of that boundary. It provides the transport to the evaluation model while the API key stays in the server environment.
-
-![Diagram: Vercel AI Gateway architecture](/images/blog/posts/content/jev-diagram-4.webp)
-
-### Creating the evaluator through AI Gateway
-
-The current `json-render` core API documents the evaluator as a server side helper. It does not require an AI SDK provider constructor. The model is a plain Gateway evaluation model ID:
+![Diagram: AI Gateway architecture](/images/blog/posts/content/jev-diagram-4.webp)
 
 ```ts
 import { experimental_createEvaluator } from "@json-render/core";
@@ -175,127 +88,43 @@ import { experimental_createEvaluator } from "@json-render/core";
 const evaluate = experimental_createEvaluator({
   apiKey: process.env.AI_GATEWAY_API_KEY!,
   model: "typesafe-ai/jev",
-  timeoutMs: 10_000,
 });
 ```
 
-Keep `AI_GATEWAY_API_KEY` out of browser bundles and client accessible environment variables. The Gateway team may need to enable or permit the TypeSafe AI model for an account. These are experimental and unreleased APIs, so pin versions and verify the current documentation before deploying.
+Treat `experimental_*` APIs as unreleased and pin versions. Confirm Gateway permits TypeSafe AI for your team. Validate every Spec before render. Handle `finish`, `limit`, and `unavailable`.
 
-### Composing a spec
+## Try a catalog composition (interactive)
 
-The core API accepts a standard flat catalog, app owned candidates, a prompt, and an evaluator. The following is intentionally a small server side sketch. Candidate details should reflect the actual component recipes in your application.
+The playground below uses a small catalog and a **choice style evaluator** in the same shape as compose/evaluate. On this site it runs as a local demo so you can feel the loop without a Gateway key in the browser. Swap the evaluator for `experimental_createEvaluator({ model: "typesafe-ai/jev" })` on your server when you want live jev.
 
-```ts
-import {
-  experimental_composeSpec,
-  experimental_createEvaluator,
-} from "@json-render/core";
+<JevPlayground />
 
-const evaluate = experimental_createEvaluator({
-  apiKey: process.env.AI_GATEWAY_API_KEY!,
-  model: "typesafe-ai/jev",
-  timeoutMs: 10_000,
-});
+## When to use which approach
 
-const candidates = [
-  {
-    id: "booking-card",
-    description: "A card that groups the train booking experience",
-    element: { type: "Card", props: { title: "Train options" } },
-    root: true,
-  },
-  {
-    id: "route-list",
-    description: "A list of routes that can be selected",
-    element: { type: "TicketList", props: { routeIds: [] } },
-  },
-];
+![Diagram: when to use which approach](/images/blog/posts/content/jev-diagram-5.webp)
 
-export async function composeBookingSpec(prompt: string) {
-  const events = experimental_composeSpec({
-    catalog,
-    candidates,
-    prompt,
-    evaluate,
-    initialState: {},
-    strategy: "batch",
-    maxElements: 20,
-    maxSteps: 20,
-    maxDepth: 8,
-  });
+| Approach | Best when |
+| --- | --- |
+| Catalog + jev / evaluator | You have a design system and need dynamic layouts with hard guardrails |
+| LLM structured JSON | Specs are small and latency is acceptable |
+| Tool calling | The model should call APIs, not compose screens |
+| Freeform codegen / pixels | Exploration only. High freedom, high risk |
 
-  let latest;
-  for await (const event of events) {
-    if (event.type === "step" || event.type === "complete") {
-      latest = event;
-    }
-  }
+## Checklist before shipping
 
-  return latest;
-}
-```
+- Keep `AI_GATEWAY_API_KEY` server side only
+- Confirm Gateway access for `typesafe-ai/jev`
+- Validate catalog + Spec with Zod
+- Cap `maxElements` / `maxSteps` / `maxDepth`
+- Provide a fixed UI fallback
+- Measure your own latency and cost (do not copy the demo timings)
 
-The documented API returns composition events and full detached snapshots. A `complete` event includes the final or nullable spec, steps, elapsed time, token information when available, and a stop reason such as `finish`, `limit`, or `unavailable`. A production endpoint should handle provider errors and incomplete results explicitly rather than assuming that completion means semantic correctness.
+Generative UI does not replace frontend engineering. It makes catalog quality, actions, and validation more important. The model becomes a layer between intent and capabilities you already shipped.
 
-The exact `UIElement` shape for candidates is coupled to the schema version and renderer you install. Treat the example as a minimal integration shape, then verify it against the pinned version of `@json-render/core` and `@json-render/react` in your repository.
+## References
 
-## Guardrails belong after composition too
-
-A good catalog is necessary, but it is not the only guardrail. Before rendering, validate and apply policy:
-
-- Reject unknown components, actions, slots, and data references.
-- Set a maximum number of elements and a maximum depth.
-- Set a maximum number of evaluator steps.
-- Treat confidence as a signal, not proof of correctness.
-- Keep business logic and authorization outside the generated spec.
-- Use an explicit `finish` or `unavailable` state.
-- Return a smaller safe UI, ask a clarifying question, or fall back to the fixed interface when composition fails.
-- Log the prompt shape, stop reason, elapsed time, and validation outcome without logging sensitive data.
-
-The model can propose that a user select a ticket. It should not be the authority that decides whether that user is allowed to purchase it. The server action still performs authorization, pricing, inventory checks, and the final mutation.
-
-## When to choose this approach
-
-The catalog plus evaluator approach is a strong fit when the product has a real design system and the interface needs to vary with context. Enterprise dashboards, commerce flows, booking experiences, and internal tools are common examples. These systems benefit from dynamic composition but also need stable visual language and predictable behavior.
-
-Use ordinary structured output when the UI is fixed and the model only needs to return data. An invoice extraction object, a classification result, or a small set of filters does not need a generated UI tree.
-
-Use tool calling when the central requirement is to perform an action. If a user asks an assistant to create a record, call a service, or update a setting, a tool contract may be a better boundary than a generated layout.
-
-Use freeform code generation only when the environment is isolated, the output is reviewed, and the product can tolerate the maintenance and security implications. It is a good experimentation technique in the right sandbox, but it is a difficult default for a customer facing application.
-
-![Diagram: choosing an approach](/images/blog/posts/content/jev-diagram-5.webp)
-
-## Tradeoffs for product engineers
-
-The first tradeoff is capability. `json-render` does not eliminate the need to build components. It makes those components reusable primitives for a model to compose. A team still needs a well named catalog, a renderer, actions, data contracts, and a design system.
-
-The second tradeoff is operational. Evaluation and token generation have different latency and cost profiles. Batching may reduce time spent serializing a tree, but evaluator calls, catalog size, network distance, and retries still matter. Measure first render, final render, validation failures, and fallback rates with the workloads that matter to your product.
-
-The third tradeoff is stability. `experimental_composeSpec` and `experimental_createEvaluator` are unreleased APIs. The signatures, event types, and provider requirements can change. Pin exact package versions, keep an adapter around the experimental boundary, and make it easy to switch back to a classic structured generation path.
-
-The fourth tradeoff is product judgment. A dynamic interface is not automatically a better interface. Some flows are clearer when they stay fixed. Generative UI should remove friction for a user, not make the product feel different on every request.
-
-## The bigger lesson
-
-Generative UI does not reduce the value of frontend engineering. It increases it. The quality of the generated experience depends on the quality of the components, catalog descriptions, actions, schemas, and fallback states that a team designs.
-
-The likely direction is not that a model replaces the entire application with pixels. A more useful direction is that a model becomes an interface layer between user intent and a product's existing capabilities. The product team defines what is possible. The evaluator helps choose what is appropriate now. The renderer keeps the final experience inside a system that can be tested and maintained.
-
-That is why the json-render and jev pairing is interesting. It treats generative UI as a product engineering problem, not only a prompt engineering trick. Composition, evaluation, validation, and rendering each have a boundary. When those boundaries are explicit, AI generated interfaces become easier to reason about and easier to ship.
-
-## Technical checklist before shipping
-
-- [ ] Pin and verify the versions of `@json-render/core` and renderer packages.
-- [ ] Treat `experimental_composeSpec` and `experimental_createEvaluator` as experimental and unreleased.
-- [ ] Keep `AI_GATEWAY_API_KEY` server side only.
-- [ ] Confirm that Vercel AI Gateway permits `typesafe-ai/jev` for the project.
-- [ ] Define and validate the catalog with Zod backed props and action parameters.
-- [ ] Enforce `maxElements`, `maxSteps`, and `maxDepth` for the workload.
-- [ ] Validate every generated spec before passing it to React.
-- [ ] Keep authorization and business logic outside the generated UI.
-- [ ] Handle `finish`, `limit`, and `unavailable` outcomes.
-- [ ] Provide a fixed UI or clarification fallback.
-- [ ] Measure your own first useful render, final render, errors, and costs.
-- [ ] Treat the public 3.21 second versus 0.88 second comparison as experiment timings only.
-- [ ] Recheck the API documentation when upgrading because experimental APIs may change.
+1. [json-render](https://json-render.dev/) and [@json-render/core API](https://json-render.dev/docs/api/core)
+2. [vercel-labs/json-render](https://github.com/vercel-labs/json-render)
+3. [Chris Tate: json-render + jev demo (X)](https://x.com/ctatedev/status/2101022101750571357)
+4. [Vercel: Jev fastest adoption on AI Gateway (X)](https://x.com/vercel)
+5. [Vercel Developers: Jev free on AI Gateway until Sept 25 (X)](https://x.com/vercel_dev)

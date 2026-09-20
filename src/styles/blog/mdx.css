@@ -53,6 +53,23 @@
     animation-range: entry 5% cover 30%;
   }
 
+  & .jev-tall-media {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: min(70vh, 620px);
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  @media (max-width: 767px) {
+    & .jev-tall-media {
+      width: 100%;
+      max-height: none;
+    }
+  }
+
   & pre {
     view-timeline-name: --reveling-code;
     view-timeline-axis: block;

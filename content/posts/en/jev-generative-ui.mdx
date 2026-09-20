@@ -19,12 +19,20 @@ This post covers Vercel Labs' `json-render`, the experimental `jev` pairing, whe
 
 Vercel reported that **Jev was adopted faster than any other model in AI Gateway history**. In the first day, TypeSafe AI reached about **13% of teams**, roughly **2x the GPT-5.6 family** and **6x Fable 5.1**.
 
-![Vercel AI Gateway chart: Jev fastest adoption in first 24 hours](/images/blog/posts/content/vercel-jev-adoption-chart.webp)
+<img
+  className="jev-tall-media"
+  src="/images/blog/posts/content/vercel-jev-adoption-chart.webp"
+  alt="Vercel AI Gateway chart: Jev fastest adoption in first 24 hours"
+/>
 _Source: [Vercel on X](https://x.com/vercel)._
 
 **Jev is free on Vercel AI Gateway until September 25**, which is a practical window to try `typesafe-ai/jev` on real composition workloads.
 
-![Vercel AI Gateway promo: Jev free until September 25](/images/blog/posts/content/vercel-jev-free-until-sep25.webp)
+<img
+  className="jev-tall-media"
+  src="/images/blog/posts/content/vercel-jev-free-until-sep25.webp"
+  alt="Vercel AI Gateway promo: Jev free until September 25"
+/>
 _Source: [Vercel Developers on X](https://x.com/vercel_dev)._
 
 Adoption is not the same as production fitness. It does show demand for models that are good at structured decisions, not only long text.
@@ -60,7 +68,7 @@ Classic structured output asks a large model to write a full JSON tree token by 
 Chris Tate's public experiment paired `json-render` with **jev** (TypeSafe AI), a structured decision model, via `experimental_composeSpec` and `experimental_createEvaluator`.
 
 <video
-  className="w-full rounded-xl border border-zinc-700 my-6"
+  className="jev-tall-media rounded-xl border border-zinc-700 my-6"
   controls
   playsInline
   preload="metadata"
@@ -68,7 +76,7 @@ Chris Tate's public experiment paired `json-render` with **jev** (TypeSafe AI), 
 >
   Your browser does not support the video tag.
 </video>
-_Demo from [Chris Tate on X](https://x.com/ctatedev/status/2101022101750571357). Same train ticket UI: default JSONL mode about **3.21s**, jev about **0.88s** (public experiment timings, not a general benchmark)._
+_Demo from [Chris Tate on X](https://x.com/ctatedev/status/2101022101750571357)._
 
 ![Diagram: LLM JSON vs jev evaluation](/images/blog/posts/content/jev-diagram-3.webp)
 

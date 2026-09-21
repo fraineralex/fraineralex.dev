@@ -18,10 +18,6 @@ My personal website, built with Next.js, TypeScript, Tailwind CSS, and deployed 
   <img width="50" title="Next.js" alt="Next.js Logo" src="https://nextjs.org/favicon.ico">
 </a> &#xa0; &#xa0;
 
-<a href="https://tailwind.org">
-  <img width="50" title="Tailwind" alt="Tailwind Logo" src="https://camo.githubusercontent.com/0568e2de313626b2bd9b96f326941b012d45e9a4db1a23aa78bd8036207e57f8/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f7461696c77696e646373732f7461696c77696e646373732d69636f6e2e737667">
-</a> &#xa0; &#xa0;
-
 <a href="https://contentlayer.dev">
   <img width="50" title="ContentLayer" alt="Contentlayer Logo" src="https://contentlayer.dev/favicon/favicon-196x196.png">
 </a> &#xa0; &#xa0;
@@ -32,10 +28,6 @@ My personal website, built with Next.js, TypeScript, Tailwind CSS, and deployed 
 
 <a href="">
   <img width="60" title="CSS" alt="CSS Logo" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg">
-</a> &#xa0; &#xa0;
-
-<a href="https:nodejs.org">
-  <img width="43" title="Node.js" alt="Node.js Logo" src="https://static-00.iconduck.com/assets.00/node-js-icon-454x512-nztofx17.png">
 </a> &#xa0; &#xa0;
 
 ###

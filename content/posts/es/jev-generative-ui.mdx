@@ -19,12 +19,12 @@ En este artículo veremos `json-render` de Vercel Labs, la combinación experime
 
 Vercel informó que **Jev fue el modelo adoptado más rápido en la historia de AI Gateway**. Durante el primer día, TypeSafe AI llegó aproximadamente al **13 % de los equipos**, cerca de **2 veces** la familia GPT-5.6 y **6 veces** Fable 5.1.
 
-<img className="jev-tall-media" src="/images/blog/posts/content/vercel-jev-adoption-chart-es.svg" alt="Gráfico de Vercel AI Gateway: Jev tuvo la adopción más rápida en las primeras 24 horas" />
+<img className="jev-tall-media" src="/images/blog/posts/content/vercel-jev-adoption-chart-es.webp" alt="Gráfico de Vercel AI Gateway: Jev tuvo la adopción más rápida en las primeras 24 horas" />
 _Fuente: [Vercel en X](https://x.com/vercel)._ 
 
 **Jev es gratis en Vercel AI Gateway hasta el 25 de septiembre**, una buena oportunidad para probar `typesafe-ai/jev` con composiciones reales.
 
-<img className="jev-tall-media" src="/images/blog/posts/content/vercel-jev-free-until-sep25-es.svg" alt="Promoción de Vercel AI Gateway: Jev gratis hasta el 25 de septiembre" />
+<img className="jev-tall-media" src="/images/blog/posts/content/vercel-jev-free-until-sep25-es.webp" alt="Promoción de Vercel AI Gateway: Jev gratis hasta el 25 de septiembre" />
 _Fuente: [Vercel Developers en X](https://x.com/vercel_dev)._ 
 
 La adopción no equivale a estar listo para producción. Sí demuestra que existe demanda por modelos capaces de tomar decisiones estructuradas, no solo de escribir textos largos.
@@ -36,7 +36,7 @@ Chat fijo:      solicitud -> texto del LLM -> burbuja de chat
 UI generativa:  solicitud -> elegir composición -> renderizar componentes aprobados
 ```
 
-![Diagrama: chat fijo frente a UI generativa](/images/blog/posts/content/jev-diagram-1-es.svg)
+![Diagrama: chat fijo frente a UI generativa](/images/blog/posts/content/jev-diagram-1-es.webp)
 
 La aplicación sigue siendo dueña de los componentes, el acceso a datos, los manejadores, la validación y los permisos. El catálogo le da al modelo espacio para componer sin entregarle el control del producto.
 
@@ -49,7 +49,7 @@ La aplicación sigue siendo dueña de los componentes, el acceso a datos, los ma
 3. Tus componentes reales de React, o React Native, la renderizan.
 4. **SpecStream** puede enviar parches JSONL para que la interfaz aparezca de forma progresiva.
 
-![Diagrama: flujo de json-render](/images/blog/posts/content/jev-diagram-2-es.svg)
+![Diagrama: flujo de json-render](/images/blog/posts/content/jev-diagram-2-es.webp)
 
 El catálogo es un límite del producto. La creatividad permanece dentro del sistema de diseño.
 
@@ -62,7 +62,7 @@ El experimento público de Chris Tate combinó `json-render` con **jev** de Type
 <BlogAutoplayVideo className="jev-tall-media rounded-xl border border-zinc-700 my-6" src="https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/blog/jev/ctatedev-jev-demo.mp4" />
 _Demo de [Chris Tate en X](https://x.com/ctatedev/status/2101022101750571357)._ 
 
-![Diagrama: JSON de un LLM frente a evaluación con jev](/images/blog/posts/content/jev-diagram-3-es.svg)
+![Diagrama: JSON de un LLM frente a evaluación con jev](/images/blog/posts/content/jev-diagram-3-es.webp)
 
 jev se concentra en **qué** componentes usar y **dónde** colocarlos. Tu renderer sigue dibujando la interfaz.
 
@@ -72,7 +72,7 @@ jev se concentra en **qué** componentes usar y **dónde** colocarlos. Tu render
 Cliente -> tu API (servidor) -> AI Gateway (typesafe-ai/jev) -> Spec -> React
 ```
 
-![Diagrama: arquitectura con AI Gateway](/images/blog/posts/content/jev-diagram-4-es.svg)
+![Diagrama: arquitectura con AI Gateway](/images/blog/posts/content/jev-diagram-4-es.webp)
 
 ```ts
 import { experimental_createEvaluator } from "@json-render/core";
@@ -93,7 +93,7 @@ El playground envía la instrucción a una ruta del servidor que compone una Spe
 
 ## Cuándo usar cada enfoque
 
-![Diagrama: cuándo usar cada enfoque](/images/blog/posts/content/jev-diagram-5-es.svg)
+![Diagrama: cuándo usar cada enfoque](/images/blog/posts/content/jev-diagram-5-es.webp)
 
 | Enfoque | Úsalo cuando |
 | --- | --- |

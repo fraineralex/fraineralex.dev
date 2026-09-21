@@ -180,7 +180,7 @@ function normalizeSpec (input: unknown): Spec | null {
   return { root, elements, state }
 }
 
-function normalizeSteps (steps: unknown): Array<{ choice: string; description: string; elapsedMs: number }> {
+function normalizeSteps (steps: unknown, isSpanish: boolean): Array<{ choice: string; description: string; elapsedMs: number }> {
   if (!Array.isArray(steps)) return []
   return steps
     .filter((step): step is { choice: unknown; description: unknown; elapsedMs: unknown } => {
@@ -188,7 +188,12 @@ function normalizeSteps (steps: unknown): Array<{ choice: string; description: s
     })
     .map(step => ({
       choice: asText(step.choice, 'choice'),
-      description: asText(step.description, 'Composed one decision'),
+      description: isSpanish
+        ? {
+            'Select catalog elements in parallel': 'Seleccionar elementos del catálogo en paralelo',
+            'Arrange selected elements in parallel': 'Organizar los elementos seleccionados en paralelo'
+          }[asText(step.description)] ?? asText(step.description, 'Decisión compuesta')
+        : asText(step.description, 'Composed one decision'),
       elapsedMs: typeof step.elapsedMs === 'number' ? step.elapsedMs : 0
     }))
 }
@@ -253,7 +258,7 @@ export default function JevPlayground () {
       }
 
       setSpec(normalizedSpec)
-      setSteps(normalizeSteps(result.steps))
+      setSteps(normalizeSteps(result.steps, isSpanish))
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
         setError(isSpanish ? 'La composición tardó demasiado. Prueba una instrucción más corta.' : 'Live composition timed out. Try a shorter prompt.')

@@ -13,6 +13,7 @@ export const runtime = 'nodejs'
 const MAX_PROMPT_LENGTH = 600
 
 export async function POST (request: NextRequest): Promise<NextResponse> {
+  let isSpanish = false
   if (!request.headers.get('content-type')?.includes('application/json')) {
     return NextResponse.json({ error: 'Expected a JSON request body.' }, { status: 400 })
   }
@@ -24,17 +25,19 @@ export async function POST (request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: 'Request body must be valid JSON.' }, { status: 400 })
   }
 
+  isSpanish = typeof body === 'object' && body !== null && 'lang' in body && body.lang === 'es'
+
   const prompt = typeof body === 'object' && body !== null && 'prompt' in body
     ? body.prompt
     : undefined
 
   if (typeof prompt !== 'string' || !prompt.trim()) {
-    return NextResponse.json({ error: 'A prompt is required.' }, { status: 400 })
+    return NextResponse.json({ error: isSpanish ? 'Se necesita una instrucción.' : 'A prompt is required.' }, { status: 400 })
   }
 
   if (prompt.length > MAX_PROMPT_LENGTH) {
     return NextResponse.json(
-      { error: `Prompt must be ${MAX_PROMPT_LENGTH} characters or fewer.` },
+      { error: isSpanish ? `La instrucción debe tener ${MAX_PROMPT_LENGTH} caracteres o menos.` : `Prompt must be ${MAX_PROMPT_LENGTH} characters or fewer.` },
       { status: 400 }
     )
   }
@@ -42,7 +45,7 @@ export async function POST (request: NextRequest): Promise<NextResponse> {
   const apiKey = process.env.AI_GATEWAY_API_KEY
   if (!apiKey) {
     return NextResponse.json(
-      { error: 'Live composition is not configured for this environment.' },
+      { error: isSpanish ? 'La composición en vivo no está configurada en este entorno.' : 'Live composition is not configured for this environment.' },
       { status: 503 }
     )
   }
@@ -81,7 +84,7 @@ export async function POST (request: NextRequest): Promise<NextResponse> {
 
     if (!spec) {
       return NextResponse.json(
-        { error: 'Live composition did not return a usable spec.' },
+        { error: isSpanish ? 'La composición en vivo no devolvió una Spec utilizable.' : 'Live composition did not return a usable spec.' },
         { status: 502 }
       )
     }
@@ -89,7 +92,7 @@ export async function POST (request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ spec, steps })
   } catch {
     return NextResponse.json(
-      { error: 'Live composition is unavailable. Please try again.' },
+      { error: isSpanish ? 'La composición en vivo no está disponible. Inténtalo de nuevo.' : 'Live composition is unavailable. Please try again.' },
       { status: 502 }
     )
   }

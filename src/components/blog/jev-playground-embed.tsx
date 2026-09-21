@@ -19,7 +19,7 @@ class EmbedBoundary extends Component<{ children: ReactNode }, EmbedBoundaryStat
       return (
         <section className='my-8 rounded-2xl border border-zinc-700/80 bg-zinc-950/60 p-4'>
           <p className='text-sm text-rose-300'>
-            The interactive playground is unavailable in this browser.
+            El playground interactivo no está disponible en este navegador.
           </p>
         </section>
       )

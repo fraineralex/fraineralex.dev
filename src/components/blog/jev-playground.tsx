@@ -2,12 +2,18 @@
 
 import { JSONUIProvider, defineRegistry, Renderer, type Spec } from '@json-render/react'
 import { Component, type ReactNode, useMemo, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { jevCatalog } from '@/lib/jev-catalog'
 
-const PROMPTS = [
+const PROMPTS_EN = [
   'Show a train ticket summary with price and book action',
   'Show spending overview with two metrics',
   'Show a support checklist with next steps'
+] as const
+const PROMPTS_ES = [
+  'Muestra un resumen de un boleto de tren con precio y acción para reservar',
+  'Muestra un resumen de gastos con dos métricas',
+  'Muestra una lista de soporte con los próximos pasos'
 ] as const
 
 const MAX_PROMPT_LENGTH = 600
@@ -188,7 +194,9 @@ function normalizeSteps (steps: unknown): Array<{ choice: string; description: s
 }
 
 export default function JevPlayground () {
-  const [prompt, setPrompt] = useState<string>(PROMPTS[0])
+  const isSpanish = usePathname()?.startsWith('/es/') ?? false
+  const prompts = isSpanish ? PROMPTS_ES : PROMPTS_EN
+  const [prompt, setPrompt] = useState<string>(prompts[0])
   const [busy, setBusy] = useState(false)
   const [spec, setSpec] = useState<Spec | null>(null)
   const [steps, setSteps] = useState<Array<{ choice: string; description: string; elapsedMs: number }>>([])
@@ -211,11 +219,11 @@ export default function JevPlayground () {
 
     const trimmedPrompt = prompt.trim()
     if (!trimmedPrompt) {
-      setError('Enter a prompt before composing.')
+        setError(isSpanish ? 'Escribe una instrucción antes de componer.' : 'Enter a prompt before composing.')
       return
     }
     if (trimmedPrompt.length > MAX_PROMPT_LENGTH) {
-      setError(`Prompt must be ${MAX_PROMPT_LENGTH} characters or fewer.`)
+        setError(isSpanish ? `La instrucción debe tener ${MAX_PROMPT_LENGTH} caracteres o menos.` : `Prompt must be ${MAX_PROMPT_LENGTH} characters or fewer.`)
       return
     }
 
@@ -231,7 +239,7 @@ export default function JevPlayground () {
       const response = await fetch('/api/jev-compose', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: trimmedPrompt }),
+        body: JSON.stringify({ prompt: trimmedPrompt, lang: isSpanish ? 'es' : 'en' }),
         signal: controller.signal
       })
       const result = (await response.json().catch(() => ({}))) as CompositionResponse
@@ -248,9 +256,9 @@ export default function JevPlayground () {
       setSteps(normalizeSteps(result.steps))
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
-        setError('Live composition timed out. Try a shorter prompt.')
+        setError(isSpanish ? 'La composición tardó demasiado. Prueba una instrucción más corta.' : 'Live composition timed out. Try a shorter prompt.')
       } else {
-        setError(error instanceof Error ? error.message : 'Live composition is unavailable.')
+        setError(error instanceof Error ? error.message : (isSpanish ? 'La composición en vivo no está disponible.' : 'Live composition is unavailable.'))
       }
     } finally {
       window.clearTimeout(timeout)
@@ -265,18 +273,18 @@ export default function JevPlayground () {
       <div className='border-b border-zinc-800/90 px-4 py-4 sm:px-5'>
         <div className='inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-400/10 px-3 py-1 text-xs text-teal-100'>
           <span className='h-2 w-2 rounded-full bg-teal-300' />
-          Live jev playground
+          {isSpanish ? 'Playground de jev en vivo' : 'Live jev playground'}
         </div>
-        <p className='mt-3 text-sm text-zinc-100'>Compose a UI spec from the catalog using AI Gateway on the server.</p>
-        <p className='mt-1 text-xs text-zinc-400'>The key stays server-only and never enters the browser.</p>
+        <p className='mt-3 text-sm text-zinc-100'>{isSpanish ? 'Compón una especificación de interfaz desde el catálogo usando AI Gateway en el servidor.' : 'Compose a UI spec from the catalog using AI Gateway on the server.'}</p>
+        <p className='mt-1 text-xs text-zinc-400'>{isSpanish ? 'La clave permanece en el servidor y nunca llega al navegador.' : 'The key stays server-only and never enters the browser.'}</p>
       </div>
       <div className='grid gap-4 p-4 sm:p-5 lg:grid-cols-[1.05fr_1fr]'>
         <div className='space-y-4'>
           <label className='block text-xs font-semibold tracking-[0.12em] text-zinc-400'>
-            Prompt
+            {isSpanish ? 'Instrucción' : 'Prompt'}
           </label>
           <div className='flex flex-wrap gap-2'>
-            {PROMPTS.map((item) => (
+            {prompts.map((item) => (
               <button
                 key={item}
                 type='button'
@@ -299,7 +307,7 @@ export default function JevPlayground () {
             className='w-full rounded-xl border border-zinc-700 bg-zinc-900/90 px-3 py-3 text-lg text-zinc-100 outline-none transition-colors focus:border-teal-300/70'
           />
           <p className='text-sm text-zinc-400'>
-            Catalog: Card, Text, Metric, Button, List · {prompt.trim().length}/{MAX_PROMPT_LENGTH}
+            {isSpanish ? 'Catálogo' : 'Catalog'}: Card, Text, Metric, Button, List · {prompt.trim().length}/{MAX_PROMPT_LENGTH}
           </p>
           <div className='flex flex-wrap items-center gap-3'>
             <button
@@ -308,10 +316,10 @@ export default function JevPlayground () {
               onClick={runCompose}
               className='rounded-xl bg-zinc-100 px-4 py-3 text-base font-semibold text-zinc-950 transition-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50'
             >
-              {busy ? 'Composing with live jev...' : 'Compose with live jev'}
+              {busy ? (isSpanish ? 'Componiendo con jev en vivo...' : 'Composing with live jev...') : (isSpanish ? 'Componer con jev en vivo' : 'Compose with live jev')}
             </button>
             <span className='text-xs text-zinc-500'>
-              {busy ? 'Composing live spec...' : 'Ready'}
+              {busy ? (isSpanish ? 'Componiendo especificación...' : 'Composing live spec...') : (isSpanish ? 'Listo' : 'Ready')}
             </span>
           </div>
           {error && (
@@ -321,7 +329,7 @@ export default function JevPlayground () {
           )}
           {steps && steps.length > 0 && (
             <div className='rounded-xl border border-zinc-700/80 bg-zinc-900/60 px-3 py-3'>
-              <p className='mb-2 text-xs font-medium tracking-[0.1em] text-zinc-400'>Trace</p>
+              <p className='mb-2 text-xs font-medium tracking-[0.1em] text-zinc-400'>{isSpanish ? 'Traza' : 'Trace'}</p>
               <ol className='space-y-2 text-sm text-zinc-300'>
                 {steps.map((step, index) => (
                   <li key={`${step.choice}-${index}`} className='flex items-start gap-2'>
@@ -340,14 +348,14 @@ export default function JevPlayground () {
 
           {!registryInit.error && busy && (
             <div className='flex h-full min-h-[220px] items-center justify-center'>
-              <p className='text-sm text-zinc-300'>Composing with jev through /api/jev-compose...</p>
+              <p className='text-sm text-zinc-300'>{isSpanish ? 'Componiendo con jev mediante /api/jev-compose...' : 'Composing with jev through /api/jev-compose...'}</p>
             </div>
           )}
 
           {!registryInit.error && !busy && !spec && (
             <div className='flex h-full min-h-[220px] items-center justify-center rounded-lg border border-dashed border-zinc-700/90 bg-zinc-950/50 px-4'>
               <p className='text-sm text-zinc-400'>
-                Choose a prompt and compose to render a live spec in this canvas.
+                {isSpanish ? 'Elige una instrucción y compón para mostrar una especificación en este lienzo.' : 'Choose a prompt and compose to render a live spec in this canvas.'}
               </p>
             </div>
           )}

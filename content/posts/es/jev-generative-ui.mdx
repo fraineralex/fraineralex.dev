@@ -1,0 +1,122 @@
+---
+title: "La UI generativa se vuelve práctica con json-render y jev"
+description: "Cómo un catálogo limitado y una composición guiada por evaluaciones pueden crear interfaces de IA más seguras y rápidas, con una demo en vivo y Vercel AI Gateway."
+date: "2026-09-19"
+url: "/"
+hero: "/images/blog/posts/cover/jev-generative-ui.webp"
+tags: ["react", "typescript", "nextjs", "performance"]
+published: true
+lang: 'es'
+---
+
+La mayoría de los productos de IA todavía coloca el modelo dentro de una ventana de chat fija. Eso funciona para responder preguntas, pero se queda corto en flujos de reservas, listas de soporte o paneles operativos que necesitan tarjetas, formularios, tablas y acciones.
+
+La UI generativa permite que el modelo ayude a componer la interfaz. La versión útil no genera píxeles sin control ni React que nadie revisó. Selecciona componentes y acciones de un **catálogo** que tu equipo ya mantiene.
+
+En este artículo veremos `json-render` de Vercel Labs, la combinación experimental con `jev`, el papel de AI Gateway y una pequeña demo interactiva.
+
+## Por qué jev está llamando la atención en Vercel AI Gateway
+
+Vercel informó que **Jev fue el modelo adoptado más rápido en la historia de AI Gateway**. Durante el primer día, TypeSafe AI llegó aproximadamente al **13 % de los equipos**, cerca de **2 veces** la familia GPT-5.6 y **6 veces** Fable 5.1.
+
+<img className="jev-tall-media" src="/images/blog/posts/content/vercel-jev-adoption-chart-es.svg" alt="Gráfico de Vercel AI Gateway: Jev tuvo la adopción más rápida en las primeras 24 horas" />
+_Fuente: [Vercel en X](https://x.com/vercel)._ 
+
+**Jev es gratis en Vercel AI Gateway hasta el 25 de septiembre**, una buena oportunidad para probar `typesafe-ai/jev` con composiciones reales.
+
+<img className="jev-tall-media" src="/images/blog/posts/content/vercel-jev-free-until-sep25-es.svg" alt="Promoción de Vercel AI Gateway: Jev gratis hasta el 25 de septiembre" />
+_Fuente: [Vercel Developers en X](https://x.com/vercel_dev)._ 
+
+La adopción no equivale a estar listo para producción. Sí demuestra que existe demanda por modelos capaces de tomar decisiones estructuradas, no solo de escribir textos largos.
+
+## Chat fijo frente a UI generativa
+
+```text
+Chat fijo:      solicitud -> texto del LLM -> burbuja de chat
+UI generativa:  solicitud -> elegir composición -> renderizar componentes aprobados
+```
+
+![Diagrama: chat fijo frente a UI generativa](/images/blog/posts/content/jev-diagram-1-es.svg)
+
+La aplicación sigue siendo dueña de los componentes, el acceso a datos, los manejadores, la validación y los permisos. El catálogo le da al modelo espacio para componer sin entregarle el control del producto.
+
+## Qué aporta json-render
+
+[`json-render`](https://json-render.dev/) es un framework de UI generativa de Vercel Labs:
+
+1. Defines un **catálogo** con componentes, acciones y propiedades de Zod.
+2. El modelo genera una **especificación JSON** limitada a ese catálogo.
+3. Tus componentes reales de React, o React Native, la renderizan.
+4. **SpecStream** puede enviar parches JSONL para que la interfaz aparezca de forma progresiva.
+
+![Diagrama: flujo de json-render](/images/blog/posts/content/jev-diagram-2-es.svg)
+
+El catálogo es un límite del producto. La creatividad permanece dentro del sistema de diseño.
+
+## Por qué las UI que generan árboles token a token pueden ser lentas
+
+Una salida estructurada clásica le pide a un modelo grande que escriba un árbol JSON completo token a token. En una UI, ese árbol puede ser ancho y profundo, lo que retrasa la primera renderización útil.
+
+El experimento público de Chris Tate combinó `json-render` con **jev** de TypeSafe AI, un modelo de decisiones estructuradas, mediante `experimental_composeSpec` y `experimental_createEvaluator`.
+
+<BlogAutoplayVideo className="jev-tall-media rounded-xl border border-zinc-700 my-6" src="https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/blog/jev/ctatedev-jev-demo.mp4" />
+_Demo de [Chris Tate en X](https://x.com/ctatedev/status/2101022101750571357)._ 
+
+![Diagrama: JSON de un LLM frente a evaluación con jev](/images/blog/posts/content/jev-diagram-3-es.svg)
+
+jev se concentra en **qué** componentes usar y **dónde** colocarlos. Tu renderer sigue dibujando la interfaz.
+
+## Arquitectura con Vercel AI Gateway
+
+```text
+Cliente -> tu API (servidor) -> AI Gateway (typesafe-ai/jev) -> Spec -> React
+```
+
+![Diagrama: arquitectura con AI Gateway](/images/blog/posts/content/jev-diagram-4-es.svg)
+
+```ts
+import { experimental_createEvaluator } from "@json-render/core";
+
+const evaluate = experimental_createEvaluator({
+  apiKey: process.env.AI_GATEWAY_API_KEY!,
+  model: "typesafe-ai/jev",
+});
+```
+
+Trata las APIs `experimental_*` como versiones no publicadas y fija sus versiones. Confirma que Gateway permite TypeSafe AI en tu equipo. Valida cada Spec antes de renderizar y maneja los estados `finish`, `limit` y `unavailable`.
+
+## Prueba una composición desde el catálogo
+
+El playground envía la instrucción a una ruta del servidor que compone una Spec con **jev** en Vercel AI Gateway. La clave de API permanece en el servidor y nunca entra en el bundle del navegador. Si la ruta no está disponible, el playground muestra el error dentro de la interfaz.
+
+<JevPlayground />
+
+## Cuándo usar cada enfoque
+
+![Diagrama: cuándo usar cada enfoque](/images/blog/posts/content/jev-diagram-5-es.svg)
+
+| Enfoque | Úsalo cuando |
+| --- | --- |
+| Catálogo + jev / evaluator | Tienes un sistema de diseño y necesitas layouts dinámicos con límites claros |
+| JSON estructurado con un LLM | Las Specs son pequeñas y la latencia es aceptable |
+| Llamadas a herramientas | El modelo debe llamar APIs, no componer pantallas |
+| Generación libre de código o píxeles | Solo estás explorando. Hay mucha libertad y también mucho riesgo |
+
+## Lista antes de publicar
+
+- Mantén `AI_GATEWAY_API_KEY` solo en el servidor.
+- Confirma el acceso de Gateway a `typesafe-ai/jev`.
+- Valida el catálogo y la Spec con Zod.
+- Limita `maxElements`, `maxSteps` y `maxDepth`.
+- Ofrece una interfaz fija como alternativa.
+- Mide tu propia latencia y coste. No copies los tiempos de la demo.
+
+La UI generativa no reemplaza la ingeniería frontend. Hace que la calidad del catálogo, las acciones y la validación sean todavía más importantes. El modelo se convierte en una capa entre la intención y las capacidades que ya publicaste.
+
+## Referencias
+
+1. [json-render](https://json-render.dev/) y [API de @json-render/core](https://json-render.dev/docs/api/core)
+2. [vercel-labs/json-render](https://github.com/vercel-labs/json-render)
+3. [Demo de Chris Tate: json-render + jev en X](https://x.com/ctatedev/status/2101022101750571357)
+4. [Vercel: Jev tuvo la adopción más rápida en AI Gateway](https://x.com/vercel)
+5. [Vercel Developers: Jev gratis en AI Gateway hasta el 25 de septiembre](https://x.com/vercel_dev)

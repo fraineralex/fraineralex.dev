@@ -12,6 +12,42 @@ export const runtime = 'nodejs'
 
 const MAX_PROMPT_LENGTH = 600
 
+const spanishCandidateText: Record<string, { description: string; title?: string; text?: string; label?: string; items?: string[] }> = {
+  'train-ticket-card': { description: 'Tarjeta raíz para un resumen de reserva de tren', title: 'Boleto de tren' },
+  'train-route': { description: 'Ruta y hora de salida de un boleto de tren', text: 'Santo Domingo a Santiago, hoy a las 4:30 p. m.' },
+  'train-fare': { description: 'Precio del tren para el boleto seleccionado', label: 'Precio' },
+  'book-seat': { description: 'Acción para reservar el boleto de tren seleccionado', label: 'Reservar asiento' },
+  'spending-overview-card': { description: 'Tarjeta raíz para un resumen de gastos personales', title: 'Resumen de gastos' },
+  'weekly-spending': { description: 'Monto gastado durante la semana actual', label: 'Esta semana' },
+  'budget-left': { description: 'Monto de presupuesto restante', label: 'Presupuesto restante' },
+  'top-category': { description: 'Categoría principal del resumen de gastos', text: 'Categoría principal: supermercado' },
+  'support-checklist-card': { description: 'Tarjeta raíz para una lista de resolución de soporte', title: 'Lista de soporte' },
+  'support-steps': { description: 'Próximos pasos seguros para resolver una solicitud de soporte', items: ['Confirma el correo de la cuenta', 'Restablece la sesión', 'Escala si hay una factura pendiente'] },
+  'resolve-support': { description: 'Acción para una lista de soporte completada', label: 'Marcar como resuelto' }
+}
+
+function getCandidates (isSpanish: boolean) {
+  if (!isSpanish) return jevCandidates
+  return jevCandidates.map(candidate => {
+    const localized = spanishCandidateText[candidate.id]
+    if (!localized) return candidate
+    return {
+      ...candidate,
+      description: localized.description,
+      element: {
+        ...candidate.element,
+        props: {
+          ...candidate.element.props,
+          ...(localized.title ? { title: localized.title } : {}),
+          ...(localized.text ? { text: localized.text } : {}),
+          ...(localized.label ? { label: localized.label } : {}),
+          ...(localized.items ? { items: localized.items } : {})
+        }
+      }
+    }
+  })
+}
+
 export async function POST (request: NextRequest): Promise<NextResponse> {
   let isSpanish = false
   if (!request.headers.get('content-type')?.includes('application/json')) {
@@ -61,8 +97,10 @@ export async function POST (request: NextRequest): Promise<NextResponse> {
 
     for await (const event of experimental_composeSpec({
       catalog: jevCatalog,
-      candidates: jevCandidates,
-      prompt: prompt.trim(),
+      candidates: getCandidates(isSpanish),
+      prompt: isSpanish
+        ? `Genera todos los textos visibles de la interfaz en español. ${prompt.trim()}`
+        : prompt.trim(),
       initialState: {},
       evaluate,
       maxElements: 8,

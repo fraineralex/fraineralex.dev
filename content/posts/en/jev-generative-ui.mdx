@@ -1,0 +1,133 @@
+---
+title: "Generative UI Gets Practical with json-render and jev"
+description: "How a constrained catalog plus evaluation driven composition can make AI interfaces safer and faster, including a live demo pattern and Vercel AI Gateway."
+date: "2026-09-19"
+url: "/"
+hero: "/images/blog/posts/cover/jev-generative-ui.webp"
+tags: ["react", "typescript", "nextjs", "performance"]
+published: true
+lang: 'en'
+---
+
+Most AI products still put the model inside a fixed chat window. That works for answers. It is a weak fit for booking flows, support checklists, or ops dashboards that need cards, forms, tables, and actions.
+
+Generative UI means the model helps compose the interface. The useful version is not freeform pixels or unreviewed React. It is a model that selects from a **catalog** of components and actions your team already owns.
+
+This post covers Vercel Labs' `json-render`, the experimental `jev` pairing, where AI Gateway fits, and a small interactive demo you can try below.
+
+## Why jev is getting attention on Vercel AI Gateway
+
+Vercel reported that **Jev was adopted faster than any other model in AI Gateway history**. In the first day, TypeSafe AI reached about **13% of teams**, roughly **2x the GPT-5.6 family** and **6x Fable 5.1**.
+
+<img
+  className="jev-tall-media"
+  src="/images/blog/posts/content/vercel-jev-adoption-chart.webp"
+  alt="Vercel AI Gateway chart: Jev fastest adoption in first 24 hours"
+/>
+_Source: [Vercel on X](https://x.com/vercel)._
+
+**Jev is free on Vercel AI Gateway until September 25**, which is a practical window to try `typesafe-ai/jev` on real composition workloads.
+
+<img
+  className="jev-tall-media"
+  src="/images/blog/posts/content/vercel-jev-free-until-sep25.webp"
+  alt="Vercel AI Gateway promo: Jev free until September 25"
+/>
+_Source: [Vercel Developers on X](https://x.com/vercel_dev)._
+
+Adoption is not the same as production fitness. It does show demand for models that are good at structured decisions, not only long text.
+
+## Fixed chat vs Generative UI
+
+```text
+Fixed:   request -> LLM text -> chat bubble
+Generative UI: request -> choose composition -> render approved components
+```
+
+![Diagram: fixed chat UI versus Generative UI](/images/blog/posts/content/jev-diagram-1.webp)
+
+The application still owns components, data access, handlers, validation, and permissions. A catalog gives the model room to compose without owning the product.
+
+## What json-render contributes
+
+[`json-render`](https://json-render.dev/) is a Generative UI framework from Vercel Labs:
+
+1. You define a **catalog** (components, actions, Zod props).
+2. The model emits a **JSON Spec** constrained to that catalog.
+3. Your real React (or RN) components render it.
+4. **SpecStream** can stream JSONL patches so UI appears progressively.
+
+![Diagram: json-render pipeline](/images/blog/posts/content/jev-diagram-2.webp)
+
+The catalog is a product boundary. Creativity stays inside the design system.
+
+## Why token-by-token UI trees get slow
+
+Classic structured output asks a large model to write a full JSON tree token by token. For UI that tree can be wide and deep. Time to first useful render suffers.
+
+Chris Tate's public experiment paired `json-render` with **jev** (TypeSafe AI), a structured decision model, via `experimental_composeSpec` and `experimental_createEvaluator`.
+
+<BlogAutoplayVideo
+  className="jev-tall-media rounded-xl border border-zinc-700 my-6"
+  src="https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/blog/jev/ctatedev-jev-demo.mp4"
+/>
+_Demo from [Chris Tate on X](https://x.com/ctatedev/status/2101022101750571357)._
+
+![Diagram: LLM JSON vs jev evaluation](/images/blog/posts/content/jev-diagram-3.webp)
+
+jev focuses on **which** components and **where** they go. Your renderer still draws the UI.
+
+## Architecture with Vercel AI Gateway
+
+```text
+Client -> your API (server) -> AI Gateway (typesafe-ai/jev) -> Spec -> React
+```
+
+![Diagram: AI Gateway architecture](/images/blog/posts/content/jev-diagram-4.webp)
+
+```ts
+import { experimental_createEvaluator } from "@json-render/core";
+
+const evaluate = experimental_createEvaluator({
+  apiKey: process.env.AI_GATEWAY_API_KEY!,
+  model: "typesafe-ai/jev",
+});
+```
+
+Treat `experimental_*` APIs as unreleased and pin versions. Confirm Gateway permits TypeSafe AI for your team. Validate every Spec before render. Handle `finish`, `limit`, and `unavailable`.
+
+## Try a catalog composition (interactive)
+
+The playground below sends its prompt to a server route that composes a Spec with live **jev** through Vercel AI Gateway. The API key stays on the server and never enters the browser bundle. If the route is unavailable, the playground shows an inline error state.
+
+<JevPlayground />
+
+## When to use which approach
+
+![Diagram: when to use which approach](/images/blog/posts/content/jev-diagram-5.webp)
+
+| Approach | Best when |
+| --- | --- |
+| Catalog + jev / evaluator | You have a design system and need dynamic layouts with hard guardrails |
+| LLM structured JSON | Specs are small and latency is acceptable |
+| Tool calling | The model should call APIs, not compose screens |
+| Freeform codegen / pixels | Exploration only. High freedom, high risk |
+
+## Checklist before shipping
+
+- Keep `AI_GATEWAY_API_KEY` server side only
+- Confirm Gateway access for `typesafe-ai/jev`
+- Validate catalog + Spec with Zod
+- Cap `maxElements` / `maxSteps` / `maxDepth`
+- Provide a fixed UI fallback
+- Measure your own latency and cost (do not copy the demo timings)
+
+Generative UI does not replace frontend engineering. It makes catalog quality, actions, and validation more important. The model becomes a layer between intent and capabilities you already shipped.
+
+## References
+
+1. [json-render](https://json-render.dev/) and [@json-render/core API](https://json-render.dev/docs/api/core)
+2. [vercel-labs/json-render](https://github.com/vercel-labs/json-render)
+3. [Chris Tate: json-render + jev demo (X)](https://x.com/ctatedev/status/2101022101750571357)
+4. [Vercel: Jev fastest adoption on AI Gateway (X)](https://x.com/vercel)
+5. [Vercel Developers: Jev free on AI Gateway until Sept 25 (X)](https://x.com/vercel_dev)

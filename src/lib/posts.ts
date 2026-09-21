@@ -37,6 +37,7 @@ export function getAllPosts(): Post[] {
         date: data.date,
         updated: data.updated,
         hero: data.hero,
+        heroCard: data.heroCard,
         heroSource: data.heroSource,
         tags: data.tags || [],
         published: data.published ?? false,

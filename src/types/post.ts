@@ -4,6 +4,7 @@ export type Post = {
   date: string
   updated?: string
   hero: string
+  heroCard?: string
   heroSource?: string
   tags: string[]
   published: boolean

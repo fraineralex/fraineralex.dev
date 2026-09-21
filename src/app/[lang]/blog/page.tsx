@@ -29,36 +29,30 @@ export default async function BlogPage ({ params }: Props) {
   const slugs = allPosts.map(post => post.slug)
   const views = await getAllViewCounts(slugs)
 
-  let sorted = allPosts.filter(post => post.lang === lang)
-  const thereAreFourPosts = sorted.length >= 4
+  const localizedPosts = allPosts
+    .filter(post => post.lang === lang && post.published)
+    .sort(
+      (a, b) =>
+        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
+        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
+    )
+  let sorted = localizedPosts
+  const thereAreFourPosts = localizedPosts.length >= 4
 
-  // define featured, top2, top3 as type Post
-  let featured = allPosts[0]
-  let top2 = allPosts[0]
-  let top3 = allPosts[0]
+  let featured = localizedPosts[0]
+  let top2 = localizedPosts[1]
+  let top3 = localizedPosts[2]
 
   if (thereAreFourPosts) {
-    featured = allPosts.find(post => post?.slug === home.topArticles.featured)!
+    featured =
+      localizedPosts.find(post => post?.slug === home.topArticles.featured) ?? localizedPosts[0]
 
-    top2 = allPosts.find(post => post?.slug === home.topArticles.top2)!
+    top2 = localizedPosts.find(post => post?.slug === home.topArticles.top2) ?? localizedPosts[1]
 
-    top3 = allPosts.find(post => post?.slug === home.topArticles.top3)!
-    sorted = allPosts
-      .filter(post => post.published)
-      .filter(
-        post =>
-          post?.slug !== featured.slug &&
-          post?.slug !== top2?.slug &&
-          post?.slug !== top3?.slug
-      )
-      .sort(
-        (a, b) =>
-          new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-          new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
-      )
+    top3 = localizedPosts.find(post => post?.slug === home.topArticles.top3) ?? localizedPosts[2]
+    const excludedSlugs = new Set([featured?.slug, top2?.slug, top3?.slug].filter(Boolean))
+    sorted = localizedPosts.filter(post => !excludedSlugs.has(post.slug))
   }
-
-  const locale = lang !== i18n.defaultLocale ? `/${lang}` : ''
 
   return (
     <div className='relative'>
@@ -84,7 +78,7 @@ export default async function BlogPage ({ params }: Props) {
 
             <div className='grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2'>
               <Link
-                href={`${locale}/${featured.slug}`}
+                href={`/${lang}/blog/${featured.slug}`}
                 className='bg-gradient-to-br opacity-100  via-zinc-100/10 overflow-hidden relative border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600'
               >
                 <Image
@@ -100,7 +94,7 @@ export default async function BlogPage ({ params }: Props) {
                   height='192'
                   priority
                 />
-                <article className='relative w-full h-full p-4 md:p-8'>
+                <article className='relative w-full h-full p-4 md:p-8 flex flex-col'>
                   <div className='flex items-center justify-between gap-2'>
                     <div className='text-xs text-zinc-100'>
                       {featured.date ? (
@@ -127,10 +121,10 @@ export default async function BlogPage ({ params }: Props) {
                   >
                     {featured.title}
                   </h2>
-                  <p className='mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300'>
+                  <p className='mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300 line-clamp-3'>
                     {featured.description}
                   </p>
-                  <div className='absolute bottom-52'>
+                  <div className='mt-auto pt-6'>
                     <p className='hidden text-zinc-200 hover:text-zinc-50 lg:block'>
                       {home.just} {featured.readTime} {home.minRead}{' '}
                       <span aria-hidden='true'>&rarr;</span>
@@ -139,16 +133,17 @@ export default async function BlogPage ({ params }: Props) {
                 </article>
               </Link>
 
-              <div className='flex flex-col w-full gap-9 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 '>
+              <div className='flex flex-col w-full gap-9 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 lg:h-full'>
                 {[top2, top3].map((post, index) => (
-                  <Article
-                    key={post?.slug || index}
-                    post={post}
-                    views={views[post?.slug] ?? 0}
-                    isTopArticle
-                    lang={lang}
-                    priority={index === 0}
-                  />
+                  <div key={post?.slug || index} className='flex-1 min-h-0'>
+                    <Article
+                      post={post}
+                      views={views[post?.slug] ?? 0}
+                      isTopArticle
+                      lang={lang}
+                      priority={index === 0}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

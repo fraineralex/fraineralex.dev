@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 import Observer from '@/components/common/intersection-observer'
@@ -141,13 +142,17 @@ const spanishMetadata: Metadata = {
   }
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const { lang } = await params
+  if (!i18n.locales.some(locale => locale === lang)) notFound()
   return lang === 'es' ? spanishMetadata : englishMetadata
 }
 
 export default async function Home ({ params }: Props) {
   const { lang: paramLang } = await params
+  if (!i18n.locales.some(locale => locale === paramLang)) notFound()
   const lang = paramLang || i18n.defaultLocale
   const dictionary = await getDictionary(lang)
 

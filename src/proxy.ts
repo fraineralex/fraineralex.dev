@@ -26,6 +26,13 @@ export function getLocale (request: NextRequest): string | undefined {
 export function proxy (request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
+  // Feed routes still need locale redirects; all other files bypass the proxy.
+  const isBlogFeed = /^\/(?:en\/|es\/)?blog\/(?:rss|feed)\.xml$/.test(pathname)
+  if (
+    /^\/(?:images|fonts|content)(?:\/|$)/.test(pathname) ||
+    (pathname.includes('.') && !isBlogFeed)
+  ) return
+
   // Remove the default locale from the pathname if present
   if (
     pathname.startsWith(`/${i18n.defaultLocale}/`) &&
@@ -49,85 +56,6 @@ export function proxy (request: NextRequest) {
     return NextResponse.redirect(newUrl)
   }
 
-  // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  // // If you have one
-  if (
-    [
-      '/manifest.json',
-      '/manifest.webmanifest',
-      '/robots.txt',
-      '/sitemap.xml',
-      '/favicon.ico',
-      '/images/hero/profile.jpg',
-      '/resume.pdf',
-      '/curriculum.pdf',
-      '/plane.html',
-      '/es-og.webp',
-      '/og.jpg',
-      // Projects
-      '/images/projects/blog.webp',
-      '/images/projects/viollet.avif',
-      '/images/projects/es-og-projects.webp',
-      '/images/projects/hacker_news.webp',
-      '/images/projects/og-projects.webp',
-      '/images/projects/quizzes.webp',
-      '/images/projects/realestate.webp',
-      // Hero
-      '/images/hero/itla.webp',
-      '/images/hero/unibe.avif',
-      '/images/hero/profile.webp',
-      // Experience
-      '/images/experience/ipp.webp',
-      '/images/experience/vbs.avif',
-      '/images/experience/lifter.webp',
-      '/images/experience/nelmix.webp',
-      // blog
-      '/images/blog/es-og.webp',
-      '/images/blog/og.webp',
-      '/images/blog/es-tags-og.webp',
-      '/images/blog/profile.webp',
-      '/images/blog/tags-og.webp',
-      // Tags
-      '/images/blog/tags/css.webp',
-      '/images/blog/tags/git.ico',
-      '/images/blog/tags/go.webp',
-      '/images/blog/tags/javascript.webp',
-      '/images/blog/tags/next.ico',
-      '/images/blog/tags/node.webp',
-      '/images/blog/tags/odoo.ico',
-      '/images/blog/tags/performance.webp',
-      '/images/blog/tags/personal.webp',
-      '/images/blog/tags/productivity.webp',
-      '/images/blog/tags/python.webp',
-      '/images/blog/tags/terminal.webp',
-      '/images/blog/tags/typescript.webp',
-      '/images/blog/tags/work.webp',
-      // Posts / Content
-      '/images/blog/posts/content/additional-hooks.webp',
-      '/images/blog/posts/content/basic-hooks.webp',
-      '/images/blog/posts/content/git-commit.webp',
-      // Posts / Cover
-      '/images/blog/posts/cover/crafting-react-hooks.webp',
-      '/images/blog/posts/cover/how-to-install-nvm.webp',
-      '/images/blog/posts/cover/master-git-commit-message.webp',
-      // Posts / Cover / RSS
-      '/images/blog/posts/cover/rss/crafting-react-hooks.png',
-      '/images/blog/posts/cover/rss/how-to-install-nvm.png',
-      '/images/blog/posts/cover/rss/master-git-commit-message.png',
-      // Fonts
-      '/fonts/CircularXXWeb-Bold.woff2',
-      '/fonts/CircularXXWeb-Book.woff2',
-      // Content
-      '/content/posts/en/mastering-git-commit-messages.mdx',
-      '/content/posts/en/how-to-install-multiple-versions-nodejs-nvm.mdx',
-      '/content/posts/en/mastering-git-commit-messages.mdx',
-      '/content/posts/es/mastering-git-commit-messages.mdx',
-      '/content/posts/es/how-to-install-multiple-versions-nodejs-nvm.mdx',
-      '/content/posts/es/mastering-git-commit-messages.mdx'
-    ].includes(pathname)
-  )
-    return
-
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
     locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
@@ -150,6 +78,6 @@ export function proxy (request: NextRequest) {
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+  // Ignore framework endpoints and public asset directories.
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images/|fonts/|content/).*)']
 }

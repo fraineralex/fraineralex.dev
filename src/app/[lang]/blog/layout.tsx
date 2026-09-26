@@ -1,3 +1,5 @@
+import { i18n } from '@/i18n-config'
+import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 const Footer = dynamic(() => import('@/components/blog/footer'))
@@ -139,6 +141,7 @@ const spanishMetadata: Metadata = {
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const { lang } = await params
+  if (!i18n.locales.some(locale => locale === lang)) notFound()
   return lang === 'es' ? spanishMetadata : englishmetadata
 }
 
@@ -147,7 +150,9 @@ interface Props {
   params: Promise<{ lang: string }>
 }
 
-export default function Layout ({ children }: Props) {
+export default async function Layout ({ children, params }: Props) {
+  const { lang } = await params
+  if (!i18n.locales.some(locale => locale === lang)) notFound()
   return (
     <main className='blog relative'>
       {children}

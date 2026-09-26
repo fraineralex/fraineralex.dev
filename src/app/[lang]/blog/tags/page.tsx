@@ -79,6 +79,8 @@ const spanishMetadata: Metadata = {
   }
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata ({ params }: Props) {
   const { lang } = await params
   return lang === 'es' ? spanishMetadata : englishMetadata

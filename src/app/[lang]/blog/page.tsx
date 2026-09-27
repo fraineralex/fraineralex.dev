@@ -14,6 +14,8 @@ import { allPosts } from '@/lib/posts'
 import { getDictionary } from '@/get-dictionary'
 
 // Static pages - only regenerate on new deploy
+export const dynamicParams = false
+
 export const revalidate = false
 
 interface Props {

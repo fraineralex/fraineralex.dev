@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import CaseStudyPageContent from '@/components/case-study/case-study-content'
 import { getDictionary } from '@/get-dictionary'
@@ -12,8 +13,11 @@ function caseStudyPath (lang: Locale) {
   return lang === i18n.defaultLocale ? '/projects/viollet' : `/${lang}/projects/viollet`
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const { lang: paramLang } = await params
+  if (!i18n.locales.some(locale => locale === paramLang)) notFound()
   const lang = paramLang || i18n.defaultLocale
   const { caseStudies } = await getDictionary(lang)
   const content = caseStudies.viollet
@@ -64,6 +68,7 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
 
 export default async function ViolletCaseStudyPage ({ params }: Props) {
   const { lang: paramLang } = await params
+  if (!i18n.locales.some(locale => locale === paramLang)) notFound()
   const lang = paramLang || i18n.defaultLocale
   const { caseStudies } = await getDictionary(lang)
 

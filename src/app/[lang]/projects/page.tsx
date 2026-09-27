@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { FiArrowLeft } from 'react-icons/fi'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
@@ -123,8 +124,11 @@ const spanishMetadata: Metadata = {
   }
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata ({ params }: Props) {
   const { lang } = await params
+  if (!i18n.locales.some(locale => locale === lang)) notFound()
   return lang === 'es' ? spanishMetadata : englishMetadata
 }
 
@@ -134,6 +138,7 @@ interface Props {
 
 export default async function Projects ({ params }: Props) {
   const { lang: paramLang } = await params
+  if (!i18n.locales.some(locale => locale === paramLang)) notFound()
   const lang = paramLang || i18n.defaultLocale
   const { allProjects } = await getDictionary(lang)
 

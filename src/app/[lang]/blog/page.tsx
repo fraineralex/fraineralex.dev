@@ -12,6 +12,8 @@ const ArticlesByTags = dynamic(
 )
 import { allPosts } from '@/lib/posts'
 import { getDictionary } from '@/get-dictionary'
+import { Metadata } from 'next'
+import { localizedUrl } from '@/lib/site-metadata'
 
 // Static pages - only regenerate on new deploy
 export const dynamicParams = false
@@ -20,6 +22,25 @@ export const revalidate = false
 
 interface Props {
   params: Promise<{ lang?: Locale }>
+}
+
+export async function generateMetadata ({ params }: Props): Promise<Metadata> {
+  const { lang: paramLang } = await params
+  const lang = paramLang || i18n.defaultLocale
+
+  return {
+    alternates: {
+      canonical: localizedUrl(lang, '/blog'),
+      languages: {
+        'en-US': localizedUrl('en', '/blog'),
+        'es-DO': localizedUrl('es', '/blog'),
+        'x-default': localizedUrl('en', '/blog')
+      },
+      types: {
+        'application/rss+xml': localizedUrl(lang, '/blog/feed.xml')
+      }
+    }
+  }
 }
 
 export default async function BlogPage ({ params }: Props) {

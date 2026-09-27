@@ -6,7 +6,9 @@ const Footer = dynamic(() => import('@/components/blog/footer'))
 import React from 'react'
 import {
   EN_SITE_OG_DESCRIPTION,
-  ES_SITE_OG_DESCRIPTION
+  ES_SITE_OG_DESCRIPTION,
+  SITE_URL,
+  localizedUrl
 } from '@/lib/site-metadata'
 
 import '@/styles/blog/main.css'
@@ -34,11 +36,11 @@ const englishmetadata: Metadata = {
     title: "Frainer's Blog 📝",
     description:
       "I write about tech, projects and whatever else I'm thinking about!",
-    url: `${process.env.DOMAIN}/blog`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    url: localizedUrl('en', '/blog'),
+    siteName: new URL(SITE_URL).host,
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/og.webp`,
+        url: `${SITE_URL}/images/blog/og.webp`,
         width: 1920,
         height: 1080
       }
@@ -64,7 +66,7 @@ const englishmetadata: Metadata = {
     site: '@fraineralex',
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/og.webp`,
+        url: `${SITE_URL}/images/blog/og.webp`,
         width: 1920,
         height: 1080
       }
@@ -98,11 +100,11 @@ const spanishMetadata: Metadata = {
     title: "Frainer's Blog 📝",
     description:
       'Escribo sobre tecnología, proyectos y cualquier otra cosa en la que esté pensando.',
-    url: `${process.env.DOMAIN}/es/blog`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    url: localizedUrl('es', '/blog'),
+    siteName: new URL(SITE_URL).host,
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/es-og.webp`,
+        url: `${SITE_URL}/images/blog/es-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -128,7 +130,7 @@ const spanishMetadata: Metadata = {
     site: '@fraineralex',
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/es-og.webp`,
+        url: `${SITE_URL}/images/blog/es-og.webp`,
         width: 1920,
         height: 1080
       }

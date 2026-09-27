@@ -4,6 +4,7 @@ import RSS from 'rss'
 import { marked } from 'marked'
 import { RSSHeader } from '@/components/blog/content/rss-header'
 import { readPosts } from '@/utils/readPosts'
+import { localizedUrl } from '@/lib/site-metadata'
 
 const posts = readPosts('en')
 
@@ -20,7 +21,7 @@ marked.use({
 
 const renderPost = (md: string) => marked.parse(md) as string
 export async function GET () {
-  const DOMAIN = `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
+  const DOMAIN = localizedUrl('en', '/blog')
   const lastPostDate = posts.length > 0 ? posts[posts.length - 1].date : ''
   const feed = new RSS({
     title: "Frainer's Blog 📝",

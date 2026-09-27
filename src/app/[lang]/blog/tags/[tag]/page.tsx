@@ -8,6 +8,7 @@ import '@/styles/blog/home.css'
 import { allPosts } from '@/lib/posts'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
+import { localizedUrl, SITE_URL } from '@/lib/site-metadata'
 
 type Props = {
   params: Promise<{
@@ -16,7 +17,7 @@ type Props = {
   }>
 }
 
-export async function generateStaticParams(): Promise<{ lang: Locale; tag: string }[]> {
+export async function generateStaticParams (): Promise<{ lang: Locale; tag: string }[]> {
   const allParams: { lang: Locale; tag: string }[] = []
   
   for (const tag of allTags) {
@@ -36,9 +37,6 @@ const englishMetadata = async (tagName: string): Promise<Metadata> => {
     }
   }
 
-  const BLOG_DOMAIN =
-    `${process.env.DOMAIN}/blog` || `https://fraineralex.dev/blog`
-
   return {
     title: tag.label,
     description: tag.description,
@@ -48,22 +46,33 @@ const englishMetadata = async (tagName: string): Promise<Metadata> => {
       `Tutorials about ${tag.label}`,
       `Best practices in ${tag.label}`
     ],
+    alternates: {
+      canonical: localizedUrl('en', `/blog/tags/${tag.name}`),
+      languages: {
+        'en-US': localizedUrl('en', `/blog/tags/${tag.name}`),
+        'es-DO': localizedUrl('es', `/blog/tags/${tag.name}`),
+        'x-default': localizedUrl('en', `/blog/tags/${tag.name}`)
+      },
+      types: {
+        'application/rss+xml': localizedUrl('en', '/blog/feed.xml')
+      }
+    },
     openGraph: {
       title: `${tag.label} | Frainer's Blog 📝`,
       images: [
         {
-          url: `${process.env.DOMAIN}${tag.image}`,
+          url: `${SITE_URL}${tag.image}`,
           width: 32,
           height: 32
         },
         {
-          url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+          url: `${SITE_URL}/images/blog/tags-og.webp`,
           width: 1920,
           height: 1080
         }
       ],
       description: tag.description,
-      url: `${BLOG_DOMAIN}/tags/${tag.name}`
+      url: localizedUrl('en', `/blog/tags/${tag.name}`)
     },
     twitter: {
       title: `${tag.label} | Frainer's Blog 📝`,
@@ -72,12 +81,12 @@ const englishMetadata = async (tagName: string): Promise<Metadata> => {
       site: '@fraineralex',
       images: [
         {
-          url: `${process.env.DOMAIN}${tag.image}`,
+          url: `${SITE_URL}${tag.image}`,
           width: 32,
           height: 32
         },
         {
-          url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+          url: `${SITE_URL}/images/blog/tags-og.webp`,
           width: 1920,
           height: 1080
         }
@@ -96,9 +105,6 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
     }
   }
 
-  const BLOG_DOMAIN =
-    `${process.env.DOMAIN}/es/blog` || `https://fraineralex.dev/es/blog`
-
   return {
     title: tag.spanishLabel || tag.label,
     description: tag.spanishDescription,
@@ -108,22 +114,33 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
       `Tutoriales sobre ${tag.spanishLabel || tag.label}`,
       `Buenas prácticas en ${tag.spanishLabel || tag.label}`
     ],
+    alternates: {
+      canonical: localizedUrl('es', `/blog/tags/${tag.name}`),
+      languages: {
+        'en-US': localizedUrl('en', `/blog/tags/${tag.name}`),
+        'es-DO': localizedUrl('es', `/blog/tags/${tag.name}`),
+        'x-default': localizedUrl('en', `/blog/tags/${tag.name}`)
+      },
+      types: {
+        'application/rss+xml': localizedUrl('es', '/blog/feed.xml')
+      }
+    },
     openGraph: {
       title: `${tag.spanishLabel || tag.label} | Frainer's Blog 📝`,
       images: [
         {
-          url: `${process.env.DOMAIN}${tag.image}`,
+          url: `${SITE_URL}${tag.image}`,
           width: 32,
           height: 32
         },
         {
-          url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+          url: `${SITE_URL}/images/blog/es-tags-og.webp`,
           width: 1920,
           height: 1080
         }
       ],
       description: tag.spanishDescription,
-      url: `${BLOG_DOMAIN}/tags/${tag.name}`
+      url: localizedUrl('es', `/blog/tags/${tag.name}`)
     },
     twitter: {
       title: `${tag.spanishLabel || tag.label} | Frainer's Blog 📝`,
@@ -132,12 +149,12 @@ const spanishMetadata = async (tagName: string): Promise<Metadata> => {
       site: '@fraineralex',
       images: [
         {
-          url: `${process.env.DOMAIN}${tag.image}`,
+          url: `${SITE_URL}${tag.image}`,
           width: 32,
           height: 32
         },
         {
-          url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+          url: `${SITE_URL}/images/blog/es-tags-og.webp`,
           width: 1920,
           height: 1080
         }
@@ -155,6 +172,7 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
 
 // Static pages - only regenerate on new deploy
 export const revalidate = false
+export const dynamicParams = false
 
 export default async function BlogPage ({ params }: Props) {
   const { tag: tagName, lang: paramLang } = await params

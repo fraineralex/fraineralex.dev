@@ -1,5 +1,6 @@
+import { SITE_URL } from '@/lib/site-metadata'
+
 export default function robots () {
-  const DOMAIN = process.env.DOMAIN || 'https://fraineralex.dev'
   return {
     rules: [
       {
@@ -7,7 +8,7 @@ export default function robots () {
         allow: ['/']
       }
     ],
-    sitemap: `${DOMAIN}/sitemap.xml`,
-    host: DOMAIN
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL
   }
 }

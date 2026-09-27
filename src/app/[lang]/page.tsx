@@ -13,7 +13,8 @@ import {
   ES_SITE_KEYWORDS,
   ES_SITE_OG_DESCRIPTION,
   ES_SITE_TITLE,
-  SITE_URL
+  SITE_URL,
+  localizedUrl
 } from '@/lib/site-metadata'
 
 interface Props {
@@ -27,10 +28,11 @@ const englishMetadata: Metadata = {
   description: EN_SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: '/',
+    canonical: localizedUrl('en', ''),
     languages: {
-      'en-US': '/',
-      'es-DO': '/es'
+      'en-US': localizedUrl('en', ''),
+      'es-DO': localizedUrl('es', ''),
+      'x-default': localizedUrl('en', '')
     },
     types: {
       'application/rss+xml': '/blog/feed.xml'
@@ -86,12 +88,13 @@ const spanishMetadata: Metadata = {
   category: 'Portafolio Personal',
   keywords: ES_SITE_KEYWORDS,
   description: ES_SITE_DESCRIPTION,
-  metadataBase: new URL(`${SITE_URL}/es`),
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: '/',
+    canonical: localizedUrl('es', ''),
     languages: {
-      'es-DO': '/',
-      'en-US': SITE_URL
+      'en-US': localizedUrl('en', ''),
+      'es-DO': localizedUrl('es', ''),
+      'x-default': localizedUrl('en', '')
     },
     types: {
       'application/rss+xml': '/blog/rss.xml'
@@ -104,7 +107,7 @@ const spanishMetadata: Metadata = {
     siteName: 'fraineralex.dev',
     images: [
       {
-        url: `${process.env.DOMAIN}/es-og.webp`,
+        url: `${SITE_URL}/es-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -131,7 +134,7 @@ const spanishMetadata: Metadata = {
     description: ES_SITE_OG_DESCRIPTION,
     images: [
       {
-        url: `${process.env.DOMAIN}/es-og.webp`,
+        url: `${SITE_URL}/es-og.webp`,
         width: 1920,
         height: 1080
       }

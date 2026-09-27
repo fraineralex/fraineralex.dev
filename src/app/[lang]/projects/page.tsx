@@ -5,6 +5,7 @@ import { getDictionary } from '@/get-dictionary'
 import AllProjectsContent from '@/components/project/all-projects-content'
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { localizedUrl, SITE_URL } from '@/lib/site-metadata'
 
 const englishMetadata: Metadata = {
   title: 'Projects | Frainer Encarnación',
@@ -15,11 +16,11 @@ const englishMetadata: Metadata = {
     title: 'Projects | Frainer Encarnación',
     description:
       'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
-    url: `${process.env.DOMAIN}/projects`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    url: `${SITE_URL}/projects`,
+    siteName: new URL(SITE_URL).host,
     images: [
       {
-        url: `${process.env.DOMAIN}/images/projects/og-projects.webp`,
+        url: `${SITE_URL}/images/projects/og-projects.webp`,
         width: 1920,
         height: 1080
       }
@@ -45,7 +46,7 @@ const englishMetadata: Metadata = {
     site: '@fraineralex',
     images: [
       {
-        url: `${process.env.DOMAIN}/images/projects/og-projects.webp`,
+        url: `${SITE_URL}/images/projects/og-projects.webp`,
         width: 1920,
         height: 1080
       }
@@ -57,10 +58,11 @@ const englishMetadata: Metadata = {
     shortcut: '/favicon.ico'
   },
   alternates: {
-    canonical: '/',
+    canonical: localizedUrl('en', '/projects'),
     languages: {
-      'es-DO': `${process.env.DOMAIN}/es/projects` || 'https://fraineralex.dev/es/projects',
-      'en-US': `${process.env.DOMAIN}/projects` || 'https://fraineralex.dev/projects'
+      'es-DO': localizedUrl('es', '/projects'),
+      'en-US': localizedUrl('en', '/projects'),
+      'x-default': localizedUrl('en', '/projects')
     },
   }
 }
@@ -74,11 +76,11 @@ const spanishMetadata: Metadata = {
     title: 'Proyectos | Frainer Encarnación',
     description:
       'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
-    url: `${process.env.DOMAIN}/es/projects`,
-    siteName: `${process.env.DOMAIN?.replace('https://', '')}`,
+    url: `${SITE_URL}/es/projects`,
+    siteName: new URL(SITE_URL).host,
     images: [
       {
-        url: `${process.env.DOMAIN}/images/projects/es-og-projects.webp`,
+        url: `${SITE_URL}/images/projects/es-og-projects.webp`,
         width: 1920,
         height: 1080
       }
@@ -104,7 +106,7 @@ const spanishMetadata: Metadata = {
     site: '@fraineralex',
     images: [
       {
-        url: `${process.env.DOMAIN}/images/projects/es-og-projects.webp`,
+        url: `${SITE_URL}/images/projects/es-og-projects.webp`,
         width: 1920,
         height: 1080
       }
@@ -116,10 +118,11 @@ const spanishMetadata: Metadata = {
     shortcut: '/favicon.ico'
   },
   alternates: {
-    canonical: '/',
+    canonical: localizedUrl('es', '/projects'),
     languages: {
-      'es-DO': `${process.env.DOMAIN}/es/projects` || 'https://fraineralex.dev/es/projects',
-      'en-US': `${process.env.DOMAIN}/projects` || 'https://fraineralex.dev/projects'
+      'es-DO': localizedUrl('es', '/projects'),
+      'en-US': localizedUrl('en', '/projects'),
+      'x-default': localizedUrl('en', '/projects')
     },
   }
 }

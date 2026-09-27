@@ -14,9 +14,11 @@ import { allTags } from '@/utils/data'
 import { allPosts, getPostContent } from '@/lib/posts'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
+import { localizedUrl, SITE_URL } from '@/lib/site-metadata'
 
 // Static pages - only regenerate on new deploy
 export const revalidate = false
+export const dynamicParams = false
 
 type Props = {
   params: Promise<{
@@ -45,42 +47,70 @@ export async function generateMetadata (
   const lang = paramLang ?? i18n.defaultLocale
   const post = allPosts.find(post => post.slug === slug && post.lang === lang)
 
-  if (!post) {
+  if (!post?.published) {
     return {
-      title: 'Not Found'
+      title: 'Not Found',
+      robots: {
+        index: false,
+        follow: false
+      }
     }
   }
 
   const previousImages = (await parent).openGraph?.images || []
+  const postUrl = localizedUrl(lang, `/blog/${post.slug}`)
+  const englishPost = allPosts.find(
+    candidate =>
+      candidate.slug === slug && candidate.lang === 'en' && candidate.published
+  )
+  const spanishPost = allPosts.find(
+    candidate =>
+      candidate.slug === slug && candidate.lang === 'es' && candidate.published
+  )
+  const languages: Record<string, string> = {}
 
-  const siteUrl = process.env.DOMAIN || 'https://fraineralex.dev'
-  const blogDomain = `${siteUrl}/${
-    lang !== i18n.defaultLocale ? `${lang}/` : ''
-  }blog`
+  if (englishPost) {
+    languages['en-US'] = localizedUrl('en', `/blog/${slug}`)
+    languages['x-default'] = localizedUrl('en', `/blog/${slug}`)
+  }
+  if (spanishPost) {
+    languages['es-DO'] = localizedUrl('es', `/blog/${slug}`)
+  }
 
   return {
     title: post.title,
     description: post.description,
     keywords: post.tags,
+    alternates: {
+      canonical: postUrl,
+      languages,
+      types: {
+        'application/rss+xml': localizedUrl(lang, '/blog/feed.xml')
+      }
+    },
     openGraph: {
       title: `${post.title} | Frainer's Blog`,
       images: [
         {
-          url: `${siteUrl}${post.hero}`,
+          url: `${SITE_URL}${post.hero}`,
           width: 1920,
           height: 1080
         },
         ...previousImages
       ],
       description: post.description,
-      url: `${blogDomain}/${post.slug}`
+      url: postUrl,
+      type: 'article',
+      locale: lang === 'es' ? 'es_DO' : 'en_US',
+      publishedTime: post.date,
+      modifiedTime: post.updated || post.date
     },
     twitter: {
       title: `${post.title} | Frainer's Blog`,
       description: post.description,
       images: [
         {
-          url: `${siteUrl}${post.hero}`,
+          url: `${SITE_URL}${post.hero}`,
           width: 1920,
           height: 1080
         }
@@ -96,7 +126,7 @@ export default async function PostPage ({ params }: Props) {
 
   const post = allPosts.find(post => post.slug === slug && post.lang === lang)
 
-  if (!post) {
+  if (!post?.published) {
     notFound()
   }
 

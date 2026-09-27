@@ -5,23 +5,32 @@ import { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 import { allTags } from '@/utils/data'
-
-const BLOG_DOMAIN =
-  `${process.env.DOMAIN}/blog` || 'https://fraineralex.dev/blog'
+import { localizedUrl, SITE_URL } from '@/lib/site-metadata'
 
 const englishMetadata: Metadata = {
   title: 'Tags',
   description:
     'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
   keywords: [allTags.map(tag => tag.label).join(', ')],
+  alternates: {
+    canonical: localizedUrl('en', '/blog/tags'),
+    languages: {
+      'en-US': localizedUrl('en', '/blog/tags'),
+      'es-DO': localizedUrl('es', '/blog/tags'),
+      'x-default': localizedUrl('en', '/blog/tags')
+    },
+    types: {
+      'application/rss+xml': localizedUrl('en', '/blog/feed.xml')
+    }
+  },
   openGraph: {
     title: "Tags | Frainer's Blog 📝",
     description:
       'Here you will find the tags of articles about web development, software engineering, and many more geeky things in the world of programming.',
-    url: `${BLOG_DOMAIN}/blog/tags`,
+    url: localizedUrl('en', '/blog/tags'),
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+        url: `${SITE_URL}/images/blog/tags-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -34,7 +43,7 @@ const englishMetadata: Metadata = {
     site: '@fraineralex',
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/tags-og.webp`,
+        url: `${SITE_URL}/images/blog/tags-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -49,14 +58,25 @@ const spanishMetadata: Metadata = {
   description:
     'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.',
   keywords: [allTags.map(tag => tag.label).join(', ')],
+  alternates: {
+    canonical: localizedUrl('es', '/blog/tags'),
+    languages: {
+      'en-US': localizedUrl('en', '/blog/tags'),
+      'es-DO': localizedUrl('es', '/blog/tags'),
+      'x-default': localizedUrl('en', '/blog/tags')
+    },
+    types: {
+      'application/rss+xml': localizedUrl('es', '/blog/feed.xml')
+    }
+  },
   openGraph: {
     title: "Etiquetas | Frainer's Blog 📝",
     description:
       'Aquí encontrarás las etiquetas de artículos sobre desarrollo web, ingeniería de software y muchas otras cosas geek en el mundo de la programación.',
-    url: `${process.env.DOMAIN}/es/blog/tags`,
+    url: localizedUrl('es', '/blog/tags'),
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+        url: `${SITE_URL}/images/blog/es-tags-og.webp`,
         width: 1920,
         height: 1080
       }
@@ -69,7 +89,7 @@ const spanishMetadata: Metadata = {
     site: '@fraineralex',
     images: [
       {
-        url: `${process.env.DOMAIN}/images/blog/es-tags-og.webp`,
+        url: `${SITE_URL}/images/blog/es-tags-og.webp`,
         width: 1920,
         height: 1080
       }

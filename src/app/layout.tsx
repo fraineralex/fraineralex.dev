@@ -50,11 +50,6 @@ export const metadata: Metadata = {
   description: EN_SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/',
-      'es-DO': '/es'
-    },
     types: {
       'application/rss+xml': '/blog/feed.xml'
     }

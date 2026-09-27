@@ -1,4 +1,5 @@
 import { allTags } from '@/utils/data'
+import { SITE_URL } from '@/lib/site-metadata'
 
 interface Props {
   hero: string
@@ -19,7 +20,7 @@ export function RSSHeader ({
   readTime,
   minRead
 }: Props) {
-  const site_url = process.env.DOMAIN || 'http://localhost:3000'
+  const site_url = SITE_URL
 
   return `
     <header>

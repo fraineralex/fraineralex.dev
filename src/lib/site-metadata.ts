@@ -1,4 +1,13 @@
-export const SITE_URL = process.env.DOMAIN ?? 'https://fraineralex.dev'
+import { i18n } from '@/i18n-config'
+
+export const SITE_URL = (
+  process.env.DOMAIN ?? 'https://www.fraineralex.dev'
+).replace(/\/$/, '')
+
+export function localizedUrl (lang: string, path: string) {
+  const localePrefix = lang === i18n.defaultLocale ? '' : `/${lang}`
+  return `${SITE_URL}${localePrefix}${path}`
+}
 
 export const EN_SITE_TITLE =
   'Frainer Encarnación | Senior Software Engineer'

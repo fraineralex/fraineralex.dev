@@ -709,7 +709,13 @@
           "videoPoster": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/poster-en-dashboard.png",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Viollet dashboard showing automated expense tracking from bank email notifications",
-          "note": "Explore the live public beta at viollet.app. The source repository stays private during beta; this case study and the deployed product are the public evidence."
+          "note": "Explore the live public beta at viollet.app. The source repository stays private during beta; this case study and the deployed product are the public evidence. I also wrote about expense tracking in the Dominican Republic on the Viollet blog.",
+          "relatedLinks": [
+            {
+              "label": "Expense tracking in the Dominican Republic",
+              "url": "https://viollet.app/blog/control-gastos-republica-dominicana"
+            }
+          ]
         }
       }
     }

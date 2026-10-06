@@ -271,6 +271,23 @@ export default function CaseStudyPageContent ({ content }: Props) {
             viollet.app
             <FiExternalLink className='ml-2 h-4 w-4' />
           </Link>
+          {sections.proof.relatedLinks?.length ? (
+            <ul className='mt-5 space-y-2 text-sm text-slate-300/90 min-[400px]:text-base'>
+              {sections.proof.relatedLinks.map((item) => (
+                <li key={item.url}>
+                  <Link
+                    href={item.url}
+                    target='_blank'
+                    rel='noreferrer noopener'
+                    className='inline-flex items-center font-medium text-teal-200/90 underline decoration-teal-400/40 underline-offset-4 transition hover:text-teal-100 hover:decoration-teal-300'
+                  >
+                    {item.label}
+                    <FiExternalLink className='ml-1.5 h-3.5 w-3.5 shrink-0' />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </section>
       </article>
     </main>

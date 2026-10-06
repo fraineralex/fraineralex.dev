@@ -711,7 +711,13 @@
           "videoPoster": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/poster-es-dashboard.png",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Dashboard de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
-          "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública."
+          "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública. También escribí sobre control de gastos en República Dominicana en el blog de Viollet.",
+          "relatedLinks": [
+            {
+              "label": "Control de gastos en República Dominicana",
+              "url": "https://viollet.app/blog/control-gastos-republica-dominicana"
+            }
+          ]
         }
       }
     }

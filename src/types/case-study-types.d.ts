@@ -9,6 +9,11 @@ export interface CaseStudyTradeOff {
   rationale: string
 }
 
+export interface CaseStudyRelatedLink {
+  label: string
+  url: string
+}
+
 export interface CaseStudyProof {
   demoLabel: string
   videoLabel: string
@@ -18,6 +23,7 @@ export interface CaseStudyProof {
   demoUrl: string
   screenshotAlt: string
   note: string
+  relatedLinks?: CaseStudyRelatedLink[]
 }
 
 export interface CaseStudyContent {

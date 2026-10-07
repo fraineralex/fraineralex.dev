@@ -1,10 +1,59 @@
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { FiArrowLeft, FiExternalLink, FiPlay } from 'react-icons/fi'
+import type { ReactNode } from 'react'
+import { FiArrowLeft, FiExternalLink } from 'react-icons/fi'
+import type { Locale } from '@/i18n-config'
 import type { CaseStudyContent } from '@/types/case-study-types'
+
+function InteractiveFallback () {
+  return (
+    <div
+      className='mt-6 h-36 animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none'
+      aria-hidden='true'
+    />
+  )
+}
+
+function HeroFallback () {
+  return (
+    <div
+      className='h-36 animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none'
+      aria-hidden='true'
+    />
+  )
+}
+
+const AppReplica = dynamic(() => import('./viollet/app-replica'), {
+  loading: HeroFallback
+})
+const InboxExplorer = dynamic(() => import('./viollet/inbox-explorer'), {
+  loading: InteractiveFallback
+})
+const AccessGate = dynamic(() => import('./viollet/access-gate'), {
+  loading: InteractiveFallback
+})
+const OwnershipMap = dynamic(() => import('./viollet/ownership-map'), {
+  loading: InteractiveFallback
+})
+const ArchitectureDiagram = dynamic(() => import('./viollet/architecture-diagram'), {
+  loading: InteractiveFallback
+})
+const ParsePipeline = dynamic(() => import('./viollet/parse-pipeline'), {
+  loading: InteractiveFallback
+})
+const BankCoverage = dynamic(() => import('./viollet/bank-coverage'), {
+  loading: InteractiveFallback
+})
+const ChatSim = dynamic(() => import('./viollet/chat-sim'), {
+  loading: InteractiveFallback
+})
+const GmailSync = dynamic(() => import('./viollet/gmail-sync'), {
+  loading: InteractiveFallback
+})
 
 interface Props {
   content: CaseStudyContent
+  lang: Locale
 }
 
 function SectionBlock ({
@@ -12,7 +61,7 @@ function SectionBlock ({
   children
 }: {
   section: { title: string; paragraphs: string[]; bullets?: string[] }
-  children?: React.ReactNode
+  children?: ReactNode
 }) {
   return (
     <section className='mb-14 scroll-mt-24'>
@@ -20,15 +69,15 @@ function SectionBlock ({
         {section.title}
       </h2>
       <div className='space-y-4 text-sm leading-relaxed text-slate-300/90 min-[400px]:text-base'>
-        {section.paragraphs.map((paragraph, index) => (
-          <p key={index} style={{ textWrap: 'pretty' }}>
+        {section.paragraphs.map((paragraph) => (
+          <p key={paragraph} style={{ textWrap: 'pretty' }}>
             {paragraph}
           </p>
         ))}
         {section.bullets && section.bullets.length > 0 && (
           <ul className='list-disc space-y-2 pl-5 marker:text-teal-300/80'>
-            {section.bullets.map((bullet, index) => (
-              <li key={index}>{bullet}</li>
+            {section.bullets.map((bullet) => (
+              <li key={bullet}>{bullet}</li>
             ))}
           </ul>
         )}
@@ -38,18 +87,18 @@ function SectionBlock ({
   )
 }
 
-export default function CaseStudyPageContent ({ content }: Props) {
-  const { meta, backLink, hero, sections } = content
+export default function CaseStudyPageContent ({ content, lang }: Props) {
+  const { meta, backLink, hero, sections, interactives } = content
 
   return (
     <main className='mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0'>
       <article className='lg:py-24'>
         <header className='mb-10 lg:mb-14'>
           <Link
-            className='group mb-4 inline-flex items-center font-semibold leading-tight text-teal-200'
+            className='group mb-4 inline-flex items-center font-semibold leading-tight text-teal-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
             href={backLink.url}
           >
-            <FiArrowLeft className='mr-1 h-4 w-4 transition-transform group-hover:-translate-x-2' />
+            <FiArrowLeft className='mr-1 h-4 w-4 transition-transform group-hover:-translate-x-2 motion-reduce:transition-none' />
             {backLink.label}
           </Link>
           <p className='mb-3 text-sm font-medium uppercase tracking-widest text-teal-300/80'>
@@ -92,139 +141,39 @@ export default function CaseStudyPageContent ({ content }: Props) {
           </ul>
         </header>
 
-        <figure className='mb-14 overflow-hidden rounded-lg border border-slate-700/60 bg-slate-800/40'>
-          <Image
-            src='/images/projects/viollet.avif'
-            alt={sections.proof.screenshotAlt}
-            width={1200}
-            height={675}
-            className='w-full'
-            priority
-          />
-        </figure>
-
         <section
-          className='mb-14 overflow-hidden rounded-xl border border-teal-400/20 bg-slate-950/50'
+          className='mb-14'
           aria-labelledby='viollet-product-walkthrough'
         >
-          <div className='flex items-start gap-3 border-b border-slate-700/60 px-5 py-4 sm:px-6'>
-            <span className='mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-400/10 text-teal-200'>
-              <FiPlay className='ml-0.5 h-4 w-4' aria-hidden='true' />
-            </span>
-            <div>
-              <h2
-                id='viollet-product-walkthrough'
-                className='text-lg font-semibold tracking-tight text-slate-100'
-              >
-                {sections.proof.videoLabel}
-              </h2>
-              <p className='mt-1 text-sm leading-relaxed text-slate-400'>
-                {sections.proof.videoDescription}
-              </p>
-            </div>
+          <div className='mb-4'>
+            <h2
+              id='viollet-product-walkthrough'
+              className='text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl'
+            >
+              {sections.proof.appLabel}
+            </h2>
+            <p className='mt-2 max-w-3xl text-sm leading-relaxed text-slate-400 min-[400px]:text-base'>
+              {sections.proof.appDescription}
+            </p>
           </div>
-          <video
-            className='aspect-video w-full bg-slate-900 object-cover'
-            aria-label={sections.proof.videoLabel}
-            autoPlay
-            controls
-            loop
-            muted
-            playsInline
-            poster={sections.proof.videoPoster}
-            preload='metadata'
-          >
-            <source src={sections.proof.videoSrc} type='video/mp4' />
-          </video>
+          <AppReplica copy={interactives.app} lang={lang} />
         </section>
 
-        <SectionBlock section={sections.context} />
-        <SectionBlock section={sections.constraints} />
-        <SectionBlock section={sections.responsibility} />
+        <SectionBlock section={sections.context}>
+          <InboxExplorer copy={interactives.inbox} />
+        </SectionBlock>
+        <SectionBlock section={sections.constraints}>
+          <AccessGate copy={interactives.access} />
+        </SectionBlock>
+        <SectionBlock section={sections.responsibility}>
+          <OwnershipMap copy={interactives.ownership} />
+        </SectionBlock>
 
         <SectionBlock section={sections.architecture}>
-          <figure className='mt-6 overflow-x-auto rounded-lg border border-slate-700/60 bg-slate-950/60 p-4 sm:p-6'>
-            <svg
-              viewBox='0 0 920 258'
-              role='img'
-              aria-label={sections.architecture.diagramCaption}
-              className='mx-auto min-w-[640px] w-full max-w-4xl text-slate-300'
-            >
-              <defs>
-                <marker
-                  id='arrow'
-                  markerWidth='8'
-                  markerHeight='8'
-                  refX='6'
-                  refY='3'
-                  orient='auto'
-                >
-                  <path d='M0,0 L6,3 L0,6 Z' fill='#5eead4' />
-                </marker>
-              </defs>
-              <rect x='10' y='70' width='120' height='56' rx='8' fill='#0f172a' stroke='#5eead4' />
-              <text x='70' y='104' textAnchor='middle' fill='#e2e8f0' fontSize='13'>
-                Gmail
-              </text>
-              <line x1='130' y1='98' x2='165' y2='98' stroke='#5eead4' markerEnd='url(#arrow)' />
-              <rect x='165' y='70' width='130' height='56' rx='8' fill='#0f172a' stroke='#64748b' />
-              <text x='230' y='96' textAnchor='middle' fill='#e2e8f0' fontSize='12'>
-                Google Pub/Sub
-              </text>
-              <text x='230' y='112' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                push notifications
-              </text>
-              <line x1='295' y1='98' x2='330' y2='98' stroke='#5eead4' markerEnd='url(#arrow)' />
-              <rect x='330' y='70' width='120' height='56' rx='8' fill='#0f172a' stroke='#64748b' />
-              <text x='390' y='96' textAnchor='middle' fill='#e2e8f0' fontSize='12'>
-                Webhook
-              </text>
-              <text x='390' y='112' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                ingest route
-              </text>
-              <line x1='450' y1='98' x2='485' y2='98' stroke='#5eead4' markerEnd='url(#arrow)' />
-              <rect x='485' y='48' width='150' height='96' rx='8' fill='#0f172a' stroke='#5eead4' />
-              <text x='560' y='78' textAnchor='middle' fill='#e2e8f0' fontSize='12'>
-                Next.js app
-              </text>
-              <text x='560' y='98' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                Clerk auth
-              </text>
-              <text x='560' y='114' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                AI SDK categorization
-              </text>
-              <text x='560' y='130' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                Drizzle data layer
-              </text>
-              <line x1='635' y1='98' x2='670' y2='98' stroke='#5eead4' markerEnd='url(#arrow)' />
-              <rect x='670' y='70' width='110' height='56' rx='8' fill='#0f172a' stroke='#64748b' />
-              <text x='725' y='96' textAnchor='middle' fill='#e2e8f0' fontSize='12'>
-                Turso
-              </text>
-              <text x='725' y='112' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                libSQL
-              </text>
-              <rect x='800' y='70' width='110' height='56' rx='8' fill='#0f172a' stroke='#64748b' />
-              <text x='855' y='96' textAnchor='middle' fill='#e2e8f0' fontSize='12'>
-                Dashboard
-              </text>
-              <text x='855' y='112' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                budgets & insights
-              </text>
-              <line x1='780' y1='98' x2='800' y2='98' stroke='#5eead4' markerEnd='url(#arrow)' />
-              <line x1='560' y1='144' x2='560' y2='178' stroke='#64748b' strokeDasharray='4 4' />
-              <rect x='460' y='178' width='200' height='56' rx='8' fill='#0f172a' stroke='#64748b' />
-              <text x='560' y='200' textAnchor='middle' fill='#e2e8f0' fontSize='11'>
-                Gmail OAuth sync
-              </text>
-              <text x='560' y='217' textAnchor='middle' fill='#94a3b8' fontSize='11'>
-                (user-initiated)
-              </text>
-            </svg>
-            <figcaption className='mt-4 text-center text-sm text-slate-500'>
-              {sections.architecture.diagramCaption}
-            </figcaption>
-          </figure>
+          <ArchitectureDiagram copy={interactives.architecture} />
+          <p className='mt-3 text-center text-sm text-slate-500'>
+            {sections.architecture.diagramCaption}
+          </p>
         </SectionBlock>
 
         <section className='mb-14 scroll-mt-24'>
@@ -247,10 +196,18 @@ export default function CaseStudyPageContent ({ content }: Props) {
               </li>
             ))}
           </ul>
+          <ParsePipeline copy={interactives.parse} controls={interactives.controls} lang={lang} />
         </section>
 
-        <SectionBlock section={sections.impact} />
-        <SectionBlock section={sections.operationalQuality} />
+        <SectionBlock section={sections.impact}>
+          <BankCoverage copy={interactives.banks} />
+        </SectionBlock>
+        <SectionBlock section={sections.assistant}>
+          <ChatSim copy={interactives.chat} />
+        </SectionBlock>
+        <SectionBlock section={sections.operationalQuality}>
+          <GmailSync copy={interactives.sync} />
+        </SectionBlock>
 
         <section className='rounded-xl border border-teal-400/20 bg-teal-400/5 p-6 sm:p-8'>
           <h2 className='mb-3 text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl'>
@@ -279,7 +236,7 @@ export default function CaseStudyPageContent ({ content }: Props) {
                     href={item.url}
                     target='_blank'
                     rel='noreferrer noopener'
-                    className='inline-flex items-center font-medium text-teal-200/90 underline decoration-teal-400/40 underline-offset-4 transition hover:text-teal-100 hover:decoration-teal-300'
+                    className='inline-flex items-center font-medium text-teal-200/90 underline decoration-teal-400/40 underline-offset-4 transition hover:text-teal-100 hover:decoration-teal-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
                   >
                     {item.label}
                     <FiExternalLink className='ml-1.5 h-3.5 w-3.5 shrink-0' />

@@ -1,197 +1,131 @@
 'use client'
 
-import { Bot, Send, Sparkles, User, Wrench } from 'lucide-react'
-import { useReducedMotion } from 'framer-motion'
-import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from 'react'
+import { Bot, User, Wrench } from 'lucide-react'
 import type { ViolletChatAnswer, ViolletChatCopy } from '@/types/case-study-types'
-import { InteractivePanel } from './ui'
-import { button, focusRing, v } from './tokens'
+import { linear, span, typed, useSceneTimeline } from '../kit/scene'
+import { L, LC } from './light'
+import { AppSurface, InteractivePanel } from './ui'
 
-interface Turn {
-  id: string
-  prompt: string
-  answer: ViolletChatAnswer | null
-  phase: 'thinking' | 'tool' | 'done'
+const TURN_MS = 11000
+const QUESTION_END = 2300
+const TOOL_START = 2800
+const REPLY_START = 4300
+const REPLY_END = 8500
+
+function ResultCard ({ answer, copy }: { answer: ViolletChatAnswer; copy: ViolletChatCopy }) {
+  const budget = answer.tool === 'create_budget'
+  const bankContext = !budget && /transport|bank|banco|qik|banreservas/i.test(`${answer.id} ${answer.prompt} ${answer.result}`)
+  const amounts = Array.from(answer.result.matchAll(/RD\$([\d,]+(?:\.\d+)?)/g), match => Number(match[1].replaceAll(',', '')))
+  const maximum = Math.max(1, ...amounts)
+  const rows = answer.result.split(' · ')
+
+  return (
+    <figure className={`${L.card} overflow-hidden p-3`}>
+      <figcaption className={`mb-2 text-xs font-medium ${L.muted}`}>{copy.result}</figcaption>
+      {bankContext && (
+        <div className={`mb-3 flex items-center gap-4 border-b ${L.border} pb-3`} aria-hidden='true'>
+          {/* Brands illustrate the ledger context, without inventing a bank breakdown. */}
+          <img src='/case-studies/viollet/banks/qik.svg' alt='' className='h-6 w-12 object-contain' />
+          <img src='/case-studies/viollet/banks/banreservas.svg' alt='' className='h-6 w-24 object-contain' />
+        </div>
+      )}
+      <div className='space-y-3'>
+        {rows.map((row, index) => (
+          <div key={row}>
+            <p className={`text-xs leading-relaxed ${L.fg}`}>{row}</p>
+            <div className={`mt-2 h-2 overflow-hidden rounded-full ${L.secondary}`} aria-hidden='true'>
+              <div
+                className='h-full rounded-full'
+                style={{
+                  // The budget result has no numeric outcome, so its bar is decorative.
+                  width: budget ? '100%' : `${((amounts[index] ?? maximum) / maximum) * 100}%`,
+                  background: budget ? LC.primarySoft : LC.primary
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </figure>
+  )
 }
 
 export default function ChatSim ({ copy }: { copy: ViolletChatCopy }) {
-  const reduced = useReducedMotion()
-  const [draft, setDraft] = useState('')
-  const [turns, setTurns] = useState<Turn[]>([])
-  const timers = useRef<number[]>([])
-  const viewportRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => () => {
-    timers.current.forEach(timer => window.clearTimeout(timer))
-  }, [])
-
-  useEffect(() => {
-    const node = viewportRef.current
-    if (!node) return
-    node.scrollTop = node.scrollHeight
-  }, [turns])
-
-  function resolve (prompt: string): ViolletChatAnswer | null {
-    const text = prompt.toLowerCase()
-    let best: ViolletChatAnswer | null = null
-    let bestHits = 0
-    for (const answer of copy.answers) {
-      const hits = answer.keywords.filter(keyword => text.includes(keyword.toLowerCase())).length
-      if (hits > bestHits) {
-        best = answer
-        bestHits = hits
-      }
-    }
-    return best
-  }
-
-  function ask (prompt: string) {
-    const trimmed = prompt.trim()
-    if (!trimmed) return
-    const answer = resolve(trimmed)
-    const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`
-    setDraft('')
-    setTurns(current => [...current, { id, prompt: trimmed, answer, phase: 'thinking' }])
-    const toolDelay = reduced ? 0 : 450
-    const doneDelay = reduced ? 0 : 900
-    timers.current.push(window.setTimeout(() => {
-      setTurns(current => current.map(turn => turn.id === id ? { ...turn, phase: answer ? 'tool' : 'done' } : turn))
-    }, toolDelay))
-    timers.current.push(window.setTimeout(() => {
-      setTurns(current => current.map(turn => turn.id === id ? { ...turn, phase: 'done' } : turn))
-    }, doneDelay))
-  }
-
-  function onSubmit (event: FormEvent) {
-    event.preventDefault()
-    ask(draft)
-  }
-
-  function onComposerKeyDown (event: KeyboardEvent<HTMLTextAreaElement>) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault()
-      ask(draft)
-    }
-  }
+  const duration = Math.max(1, copy.answers.length) * TURN_MS
+  const timeline = useSceneTimeline(duration, { loop: true, hold: 3400 })
+  const index = Math.min(copy.answers.length - 1, Math.floor(timeline.elapsed / TURN_MS))
+  const answer = copy.answers[index]
+  const elapsed = timeline.elapsed >= duration ? TURN_MS : timeline.elapsed % TURN_MS
+  const question = answer ? typed(answer.prompt, span(elapsed, 0, QUESTION_END, linear)) : ''
+  const reply = answer ? typed(answer.reply, span(elapsed, REPLY_START, REPLY_END, linear)) : ''
+  const toolVisible = elapsed >= TOOL_START
+  const replyVisible = elapsed >= REPLY_START
 
   return (
-    <InteractivePanel label={copy.title} title={copy.title} description={copy.description}>
-      <div className={`flex min-w-0 flex-col overflow-hidden rounded-xl border ${v.border} bg-slate-900/50 ${v.fg}`}>
-        <div className={`flex gap-2 overflow-x-auto border-b ${v.border} px-4 py-2`} aria-label={copy.suggestionsLabel}>
-          {copy.answers.map(answer => (
-            <button
-              key={answer.id}
-              type='button'
-              className={`inline-flex min-h-8 max-w-[16rem] shrink-0 items-center justify-start gap-1.5 whitespace-normal rounded-md border border-slate-700/60 bg-slate-900/60 px-3 py-1.5 text-left text-sm font-medium leading-snug text-slate-200 transition-colors hover:border-teal-300/40 hover:bg-slate-800/60 hover:text-teal-100 motion-reduce:transition-none ${focusRing}`}
-              onClick={() => ask(answer.prompt)}
-            >
-              {answer.prompt}
-            </button>
-          ))}
-        </div>
-
-        <div className='relative flex min-h-0 flex-1 flex-col overflow-hidden'>
-          <div
-            ref={viewportRef}
-            className='max-h-96 min-h-48 min-w-0 overflow-y-auto overscroll-contain px-4'
-            aria-live='polite'
-            aria-label={copy.transcriptLabel}
-          >
-            <div className='flex min-h-full flex-col gap-4 py-4'>
-              {turns.length === 0 && (
-                <div className={`group/marker relative flex min-h-4 w-full items-center gap-2 text-left text-sm ${v.muted} before:mr-1 before:h-px before:min-w-0 before:flex-1 before:bg-slate-700/60 before:content-[''] after:ml-1 after:h-px after:min-w-0 after:flex-1 after:bg-slate-700/60 after:content-['']`}>
-                  <span className={`min-w-0 flex-none text-center ${v.subtle}`}>{copy.placeholder}</span>
-                </div>
-              )}
-              {turns.map(turn => (
-                <div key={turn.id} className='flex min-w-0 flex-col gap-4'>
-                  <div className='flex min-w-0 flex-col gap-2'>
-                    <div data-align='end' className='group/message relative flex w-full min-w-0 flex-row-reverse gap-2 text-sm'>
-                      <div className='flex size-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-slate-800/60 text-slate-300'>
-                        <User className='size-4' aria-hidden='true' />
-                      </div>
-                      <div className='flex w-full min-w-0 flex-col items-end gap-2.5'>
-                        <div data-align='end' data-variant='default' className='group/bubble relative flex w-fit max-w-[80%] min-w-0 flex-col gap-1 self-end'>
-                          <div className='w-fit max-w-full min-w-0 overflow-hidden break-words rounded-xl border border-transparent bg-teal-400/15 px-3 py-2 text-sm leading-relaxed text-teal-100'>
-                            <span className='sr-only'>{copy.you}: </span>
-                            {turn.prompt}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='flex min-w-0 flex-col gap-2'>
-                    <div data-align='start' className='group/message relative flex w-full min-w-0 gap-2 text-sm'>
-                      <div className='flex size-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-slate-800/60 text-teal-300'>
-                        <Bot className='size-4' aria-hidden='true' />
-                      </div>
-                      <div className='flex w-full min-w-0 flex-col gap-2.5'>
-                        <div className={`flex max-w-full min-w-0 items-center text-xs font-medium ${v.muted}`}>
-                          {copy.assistant}
-                        </div>
-                        {turn.phase === 'thinking' && (
-                          <div className={`group/marker relative flex min-h-4 w-full items-center gap-2 text-left text-sm ${v.muted}`}>
-                            <span className='flex size-4 shrink-0 items-center justify-center text-teal-300' aria-hidden='true'>
-                              <Sparkles className='size-4 motion-safe:animate-pulse' />
-                            </span>
-                            <span className='min-w-0 break-words'>{copy.thinking}</span>
-                          </div>
-                        )}
-                        {turn.answer && turn.phase !== 'thinking' && (
-                          <div className={`group/marker relative flex min-h-4 w-full items-start gap-2 text-left text-sm ${v.muted}`}>
-                            <span className='mt-0.5 flex size-4 shrink-0 items-center justify-center text-teal-300' aria-hidden='true'>
-                              <Wrench className='size-4' />
-                            </span>
-                            <span className='min-w-0 break-words'>
-                              <span className={`block ${v.fg}`}>{copy.tool}: {turn.answer.tool}</span>
-                              <span className={`mt-0.5 block font-mono text-xs ${v.subtle}`}>{turn.answer.args}</span>
-                              {turn.phase === 'done' && (
-                                <span className={`mt-1 block ${v.fg}`}>{copy.result}: {turn.answer.result}</span>
-                              )}
-                            </span>
-                          </div>
-                        )}
-                        {turn.phase === 'done' && (
-                          <div data-align='start' data-variant='ghost' className='group/bubble relative flex w-full min-w-0 max-w-full flex-col gap-1'>
-                            <div className={`w-fit max-w-full min-w-0 overflow-hidden break-words bg-transparent p-0 text-sm leading-relaxed ${v.fg}`}>
-                              {turn.answer ? turn.answer.reply : copy.unknown}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <InteractivePanel label={copy.title} title={copy.title} description={copy.description} timeline={timeline}>
+      <AppSurface>
+        <div className={`overflow-hidden rounded-xl border ${L.border} bg-white`}>
+          <div className={`flex items-center gap-2 border-b ${L.border} px-4 py-3`}>
+            <Bot className={`size-4 ${L.primaryText}`} aria-hidden='true' />
+            <span className={`text-sm font-medium ${L.fg}`}>{copy.assistant}</span>
+            <div className='ml-auto flex gap-1.5' aria-hidden='true'>
+              {copy.answers.map((item, position) => (
+                <span key={item.id} className='size-1.5 rounded-full' style={{ background: position === index ? LC.primary : LC.border }} />
               ))}
             </div>
           </div>
-        </div>
 
-        <form className={`border-t ${v.border} p-4`} onSubmit={onSubmit}>
-          <label className='sr-only' htmlFor='viollet-chat-input'>{copy.placeholder}</label>
-          <textarea
-            id='viollet-chat-input'
-            value={draft}
-            onChange={event => setDraft(event.target.value)}
-            onKeyDown={onComposerKeyDown}
-            placeholder={copy.placeholder}
-            aria-label={copy.placeholder}
-            rows={3}
-            className={`min-h-20 w-full resize-none rounded-md border border-slate-700/60 bg-slate-950 px-3 py-2 text-base text-slate-100 shadow-sm transition-[color,box-shadow] placeholder:text-slate-500 motion-reduce:transition-none md:text-sm ${focusRing}`}
-          />
-          <div className='mt-2 flex items-center justify-end gap-2'>
-            <button
-              type='submit'
-              className={`inline-flex h-8 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 text-sm font-medium leading-none transition-colors motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-45 ${focusRing} ${button.primary}`}
-              disabled={!draft.trim()}
-            >
-              <Send className='size-3.5' aria-hidden='true' />
-              {copy.send}
-            </button>
+          {/* A fixed viewport and reserved text keep typing and turn changes from moving the page. */}
+          <div className='h-[620px] overflow-y-auto overscroll-contain p-4 sm:h-[560px] sm:p-5' role='region' aria-label={copy.transcriptLabel}>
+            {answer && (
+              <div className='flex min-w-0 flex-col gap-5'>
+                <div className='flex flex-row-reverse items-start gap-2'>
+                  <div className={`flex size-8 shrink-0 items-center justify-center rounded-full ${L.secondary}`}>
+                    <User className={`size-4 ${L.muted}`} aria-hidden='true' />
+                  </div>
+                  <div className='max-w-[85%] min-w-0'>
+                    <p className={`mb-1 text-right text-xs ${L.muted}`}>{copy.you}</p>
+                    <div className={`grid rounded-xl ${L.primaryTint} px-3 py-2 text-sm leading-relaxed ${L.fg}`}>
+                      <span className='invisible col-start-1 row-start-1 break-words' aria-hidden='true'>{answer.prompt}</span>
+                      <span className='col-start-1 row-start-1 break-words'>
+                        {question}
+                        {elapsed < QUESTION_END && <span className={`ml-0.5 inline-block h-4 w-px align-middle ${L.primaryBg}`} aria-hidden='true' />}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='flex items-start gap-2'>
+                  <div className={`flex size-8 shrink-0 items-center justify-center rounded-full ${L.primaryTint}`}>
+                    <Bot className={`size-4 ${L.primaryText}`} aria-hidden='true' />
+                  </div>
+                  <div className='min-w-0 flex-1 space-y-3'>
+                    <p className={`text-xs font-medium ${L.muted}`}>{copy.assistant}</p>
+                    <div className={`flex items-center gap-2 text-xs ${L.muted}`} style={{ visibility: replyVisible ? 'hidden' : 'visible' }}>
+                      <span className={`size-1.5 rounded-full ${L.primaryBg}`} aria-hidden='true' />
+                      {copy.thinking}
+                    </div>
+                    <div className={`rounded-lg border ${L.border} ${L.secondary} p-3`} style={{ visibility: toolVisible ? 'visible' : 'hidden' }}>
+                      <p className={`flex items-start gap-2 text-xs font-medium ${L.fg}`}>
+                        <Wrench className={`size-3.5 shrink-0 ${L.primaryText}`} aria-hidden='true' />
+                        <span className='min-w-0 break-words'>{copy.tool}: {answer.tool}</span>
+                      </p>
+                      <p className={`mt-2 break-words text-[11px] leading-relaxed ${L.mono} ${L.muted}`}>{answer.args}</p>
+                    </div>
+                    <div className={`grid text-sm leading-relaxed ${L.fg}`} style={{ visibility: replyVisible ? 'visible' : 'hidden' }}>
+                      <p className='invisible col-start-1 row-start-1 break-words' aria-hidden='true'>{answer.reply}</p>
+                      <p className='col-start-1 row-start-1 break-words'>{reply}</p>
+                    </div>
+                    <div style={{ visibility: replyVisible ? 'visible' : 'hidden' }}>
+                      <ResultCard answer={answer} copy={copy} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </form>
-      </div>
+        </div>
+      </AppSurface>
     </InteractivePanel>
   )
 }

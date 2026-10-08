@@ -1,153 +1,133 @@
 'use client'
 
-import { CheckCircle2, ChevronRight, CreditCard, Mail } from 'lucide-react'
-import { useState } from 'react'
-import type { ViolletInboxCopy, ViolletInboxMessage } from '@/types/case-study-types'
-import { focusRing, v } from './tokens'
-import { InteractivePanel } from './ui'
+import { ArrowRight, CheckCircle2, Mail } from 'lucide-react'
+import type { ViolletInboxCopy } from '@/types/case-study-types'
+import { easeOut, span, useSceneTimeline } from '../kit/scene'
+import { L, LC, badgeBase } from './light'
+import { AppSurface, InteractivePanel } from './ui'
 
-const badge =
-  'inline-flex h-5 shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-md border px-1.5 text-xs font-medium leading-none'
+const STAGE = 2600
+const ROW_HEIGHT = 88
+const BANKS: Record<string, { logo: string, color: string }> = {
+  Banreservas: { logo: 'banreservas.svg', color: '#264E72' },
+  Qik: { logo: 'qik.svg', color: '#0082CD' },
+  'Banco BHD': { logo: 'bhd.svg', color: '#50BA3F' }
+}
 
-export default function InboxExplorer ({ copy }: { copy: ViolletInboxCopy }) {
-  const [selected, setSelected] = useState<string | null>(null)
-  const message = copy.messages.find(item => item.id === selected) ?? null
-
+function SenderMark ({ name }: { name: string }) {
+  const bank = BANKS[name]
   return (
-    <InteractivePanel label={copy.title} title={copy.title} description={copy.description}>
-      <div className='grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]'>
-        <ul
-          className='box-border grid w-full min-w-0 grid-cols-1 gap-3'
-          aria-label={copy.listLabel}
-        >
-          {copy.messages.map(item => {
-            const active = item.id === selected
-            const alert = item.kind === 'alert'
-            return (
-              <li key={item.id} className='min-w-0'>
-                <button
-                  type='button'
-                  aria-pressed={active}
-                  onClick={() => setSelected(item.id)}
-                  className={`relative box-border flex h-full w-full max-w-full min-w-0 cursor-pointer flex-col gap-6 overflow-hidden rounded-xl border py-6 text-left shadow-sm transition-colors duration-200 motion-reduce:transition-none ${focusRing} ${
-                    active
-                      ? 'border-teal-300/60 bg-teal-400/10'
-                      : alert
-                        ? 'border-teal-400/30 bg-teal-400/5 hover:bg-slate-800/60'
-                        : 'border-slate-700/60 bg-slate-800/40 hover:bg-slate-800/60'
-                  }`}
-                >
-                  <span className='relative z-10 box-border w-full max-w-full min-w-0 overflow-hidden p-3'>
-                    <span className='box-border flex w-full max-w-full min-w-0 flex-col gap-1 overflow-hidden'>
-                      <span className='flex min-w-0 items-center gap-2'>
-                        <span
-                          aria-hidden='true'
-                          className={`flex size-8 shrink-0 items-center justify-center rounded-full ${
-                            alert ? 'bg-teal-400/10' : 'bg-slate-800/60'
-                          }`}
-                        >
-                          {alert
-                            ? <CreditCard className='size-4 text-teal-300' />
-                            : <Mail className='size-4 text-slate-400' />}
-                        </span>
-                        <span className='flex min-w-0 flex-1 items-center justify-between gap-2'>
-                          <span className={`min-w-0 truncate text-sm text-slate-200 ${alert ? 'font-semibold' : 'font-medium'}`}>
-                            {item.from}
-                          </span>
-                          <span className={`${badge} ${
-                            alert
-                              ? 'border-teal-400/40 bg-teal-400/10 text-teal-200'
-                              : 'border-slate-600 text-slate-400'
-                          }`}
-                          >
-                            {alert ? copy.alert : copy.noise}
-                          </span>
-                          <span className='flex-1' />
-                          <ChevronRight className='size-4 shrink-0 text-slate-500' aria-hidden='true' />
-                        </span>
-                      </span>
-                      <span className='flex min-w-0 items-start justify-between gap-2'>
-                        <span className={`min-w-0 flex-1 truncate text-sm ${alert || active ? 'text-slate-200' : 'text-slate-400'}`}>
-                          {item.subject}
-                        </span>
-                      </span>
-                      <span className='flex min-w-0 items-center gap-2'>
-                        <span className='min-w-0 flex-1 truncate text-xs text-slate-500'>{item.email}</span>
-                        <ChevronRight className='size-4 shrink-0 text-slate-500' aria-hidden='true' />
-                      </span>
-                    </span>
-                  </span>
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-
-        <div className='min-w-0' aria-live='polite'>
-          {message ? (
-            <MessageDetail message={message} alertLabel={copy.alert} noiseLabel={copy.noise} />
-          ) : (
-            <div className={`flex min-h-48 w-full items-center justify-center rounded-xl border bg-slate-800/40 p-8 text-center shadow-sm ${v.border}`}>
-              <p className={`text-sm ${v.subtle}`}>{copy.prompt}</p>
-            </div>
-          )}
-        </div>
-      </div>
-    </InteractivePanel>
+    <span
+      className={`flex h-10 w-14 shrink-0 items-center justify-center rounded-lg border ${L.border} bg-white p-1.5`}
+      style={{ boxShadow: bank ? `inset 0 -2px ${bank.color}` : undefined }}
+    >
+      {bank
+        ? <img src={`/case-studies/viollet/banks/${bank.logo}`} alt={name} width={44} height={28} className='h-full w-full object-contain' />
+        : <Mail className={`size-5 ${L.subtle}`} aria-hidden='true' />}
+    </span>
   )
 }
 
-function MessageDetail ({
-  message,
-  alertLabel,
-  noiseLabel
-}: {
-  message: ViolletInboxMessage
-  alertLabel: string
-  noiseLabel: string
-}) {
-  const alert = message.kind === 'alert'
+export default function InboxExplorer ({ copy }: { copy: ViolletInboxCopy }) {
+  const duration = copy.messages.length * STAGE
+  const timeline = useSceneTimeline(duration, { loop: true, hold: 2400 })
+  const finished = timeline.elapsed >= duration
+  const step = Math.min(copy.messages.length - 1, Math.floor(timeline.elapsed / STAGE))
+  const local = finished ? STAGE : timeline.elapsed - step * STAGE
+  // Keep the previous email open while the next row arrives, then move the reader.
+  const active = local < 400 && step > 0 ? step - 1 : step
+  const move = span(local, 400, 850, easeOut)
+  const highlight = finished ? step : Math.max(0, step - 1) + (step > 0 ? move : 0)
 
   return (
-    <div className='space-y-4'>
-      <div className='space-y-4'>
-        <div className='space-y-1'>
-          <h4 className={`break-words text-xl font-semibold ${v.fg}`}>{message.subject}</h4>
-          <div className={`flex flex-wrap items-center gap-2 text-sm ${v.muted}`}>
-            <span className={`font-medium ${v.fg}`}>{message.from}</span>
-            <span className='hidden sm:inline' aria-hidden='true'>-</span>
-            <span className='text-xs break-all sm:text-sm'>{message.email}</span>
+    <InteractivePanel label={copy.title} title={copy.title} description={copy.description} timeline={timeline}>
+      <AppSurface route='viollet.app'>
+        <div className={`flex items-center gap-2 border-b ${L.border} pb-3`}>
+          <Mail className={`size-4 ${L.primaryText}`} aria-hidden='true' />
+          <span className={`text-sm font-semibold ${L.fg}`}>{copy.listLabel}</span>
+          <span className={`ml-auto ${badgeBase} ${L.neutralBadge}`}>{copy.messages.length}</span>
+        </div>
+        <div className='grid min-w-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]'>
+          <div className={`relative min-w-0 overflow-hidden border-b lg:border-b-0 lg:border-r ${L.border}`}>
+            <div
+              aria-hidden='true'
+              className='pointer-events-none absolute inset-x-0 top-0 border-l-[3px]'
+              style={{
+                height: ROW_HEIGHT,
+                transform: `translateY(${highlight * ROW_HEIGHT}px)`,
+                background: 'oklch(0.539 0.254 282 / 0.08)',
+                borderColor: LC.primary
+              }}
+            />
+            <ul aria-label={copy.listLabel} className='relative m-0 list-none p-0'>
+              {copy.messages.map((item, index) => {
+                const arrival = finished ? 1 : span(timeline.elapsed, index * STAGE, index * STAGE + 400, easeOut)
+                return (
+                  <li key={item.id} className={`flex items-center gap-3 border-b last:border-b-0 ${L.border} px-3`} style={{ height: ROW_HEIGHT }}>
+                    <div
+                      className='flex w-full min-w-0 items-center gap-3'
+                      style={{ opacity: index === 0 ? 0.25 + arrival * 0.75 : arrival, transform: `translateX(${(1 - arrival) * 18}px)` }}
+                    >
+                      <SenderMark name={item.from} />
+                      <div className='min-w-0 flex-1'>
+                        <p className={`truncate text-sm font-semibold ${active === index ? L.primaryText : L.fg}`}>{item.from}</p>
+                        <p className={`mt-1 truncate text-xs ${L.fg2}`}>{item.subject}</p>
+                        <p className={`mt-1 truncate text-[11px] ${L.subtle}`}>{item.email}</p>
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+
+          {/* Overlaid grid cells reserve the tallest email's space at every frame. */}
+          <div className='grid min-w-0'>
+            {copy.messages.map((message, index) => {
+              const visible = active === index
+              const alert = message.kind === 'alert'
+              const opening = finished || index < step ? 1 : span(local, 400, 850, easeOut)
+              const verdict = finished || index < step ? 1 : span(local, 1300, 2000, easeOut)
+              return (
+                <article
+                  key={message.id}
+                  aria-hidden={!visible}
+                  className='col-start-1 row-start-1 flex min-w-0 flex-col gap-5 p-4 sm:p-5'
+                  style={{ visibility: visible ? 'visible' : 'hidden' }}
+                >
+                  <div className='flex min-w-0 items-center gap-3'>
+                    <SenderMark name={message.from} />
+                    <div className='min-w-0'>
+                      <p className={`text-sm font-semibold ${L.fg}`}>{message.from}</p>
+                      <p className={`break-all text-xs ${L.muted}`}>{message.email}</p>
+                    </div>
+                  </div>
+                  <div style={{ opacity: 0.65 + opening * 0.35, transform: `translateY(${(1 - opening) * 10}px)` }}>
+                    <h4 className={`break-words text-lg font-semibold ${L.fg}`}>{message.subject}</h4>
+                    <div className={`mt-4 ${L.card} p-4`}>
+                      <p className={`break-words text-sm leading-relaxed ${L.fg2}`}>{message.snippet}</p>
+                    </div>
+                  </div>
+                  <div
+                    className={`relative mt-auto overflow-hidden rounded-xl border p-4 ${alert ? L.primaryBorder : L.border} ${alert ? L.primaryTint : L.secondary}`}
+                    style={{ opacity: verdict, transform: `translateY(${(1 - verdict) * 16}px) scale(${0.96 + verdict * 0.04})` }}
+                    aria-hidden={!visible || verdict === 0}
+                  >
+                    <div className={`flex flex-wrap items-center gap-2 ${alert ? L.primaryText : L.muted}`}>
+                      {alert ? <CheckCircle2 className='size-5 shrink-0' aria-hidden='true' /> : <Mail className='size-5 shrink-0' aria-hidden='true' />}
+                      <span className='text-sm font-semibold'>{message.verdict}</span>
+                      <span className={`${badgeBase} ${alert ? L.success : L.neutralBadge}`}>{alert ? copy.alert : copy.noise}</span>
+                      {alert && <ArrowRight className='ml-auto size-4' aria-hidden='true' />}
+                    </div>
+                    <p className={`mt-3 break-words text-xs leading-relaxed ${L.muted}`}>{message.detail}</p>
+                    <div aria-hidden='true' className='absolute inset-x-0 bottom-0 h-0.5 origin-left' style={{ background: alert ? LC.primary : LC.wire, transform: `scaleX(${verdict})` }} />
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </div>
-        <div className='flex flex-wrap items-center gap-2'>
-          <span className={`${badge} ${
-            alert
-              ? 'border-transparent bg-slate-800/60 text-emerald-300'
-              : 'border-slate-600 text-slate-400'
-          }`}
-          >
-            {alert
-              ? <CheckCircle2 className='size-3' aria-hidden='true' />
-              : <Mail className='size-3' aria-hidden='true' />}
-            {message.verdict}
-          </span>
-          <span className={`${badge} ${
-            alert
-              ? 'border-teal-400/40 bg-teal-400/10 text-teal-200'
-              : 'border-slate-600 text-slate-400'
-          }`}
-          >
-            {alert ? alertLabel : noiseLabel}
-          </span>
-        </div>
-      </div>
-      <div aria-hidden='true' className='h-px w-full bg-slate-700/60' />
-      <div className={`flex flex-col gap-6 overflow-hidden rounded-xl border py-6 shadow-sm ${v.border} bg-slate-800/40`}>
-        <div className='px-4 sm:px-6'>
-          <p className={`text-sm leading-relaxed break-words ${v.fg}`}>{message.snippet}</p>
-          <p className={`mt-3 text-sm leading-relaxed break-words ${v.muted}`}>{message.detail}</p>
-        </div>
-      </div>
-    </div>
+      </AppSurface>
+    </InteractivePanel>
   )
 }

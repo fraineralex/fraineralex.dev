@@ -209,7 +209,7 @@ export function SceneFrame({
 	const { ref, playing, reduced, toggle, replay } = timeline
 	const control = `inline-flex size-11 items-center justify-center rounded-full border border-slate-700/60 bg-slate-900/70 text-slate-300 leading-none transition-colors hover:border-teal-300/50 hover:text-teal-100 motion-reduce:transition-none ${sceneFocus}`
 	return (
-		<div ref={ref} className={`min-w-0 overflow-hidden rounded-xl border border-slate-700/60 bg-slate-950/60 ${className}`}>
+		<div ref={ref} data-scene='' className={`min-w-0 overflow-hidden rounded-xl border border-slate-700/60 bg-slate-950/60 ${className}`}>
 			{(title || kicker || !reduced) && (
 				<div className='flex items-center justify-between gap-3 border-b border-slate-700/60 px-4 py-2 sm:px-5'>
 					<div className='min-w-0'>

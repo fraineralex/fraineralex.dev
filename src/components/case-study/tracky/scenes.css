@@ -1,0 +1,16 @@
+@keyframes tracky-march {
+	to {
+		stroke-dashoffset: -18;
+	}
+}
+
+.tracky-live .tracky-dash {
+	stroke-dasharray: 4 6;
+	animation: tracky-march 0.9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tracky-live .tracky-dash {
+		animation: none;
+	}
+}

@@ -379,6 +379,16 @@
         "caseStudyUrl": "/es/projects/chatify"
       },
       {
+        "title": "Ajedrez AI",
+        "shortDescription": "Proyecto de Ajedrez AI utilizando el algoritmo minimax.",
+        "description": "Juego de ajedrez contra una IA impulsada por el algoritmo minimax con poda alfa-beta y heurísticas. Está diseñado para determinar el movimiento óptimo dentro de una profundidad especificada.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "caseStudyUrl": "/es/projects/chess-ai",
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "year": 2022
+      },
+      {
         "title": "Blog",
         "shortDescription": "App web con RSS feed, búsqueda avanzada y filtrado por etiquetas.",
         "description": "Un blog receptivo con animaciones CSS, RSS feed, búsqueda avanzada, filtrado por etiquetas y suscripción al boletín. Registra y muestra recuentos de visitas a artículos para análisis de interacción del usuario.",
@@ -451,15 +461,6 @@
         "technologies": ["Python", "Odoo", "PostgreSQL", "XML", "HTML"],
         "githubRepositoryUrl": "https://github.com/fraineralex/dgt2_overtime_report",
         "year": 2023
-      },
-      {
-        "title": "Ajedrez AI",
-        "shortDescription": "Proyecto de Ajedrez AI utilizando el algoritmo minimax.",
-        "description": "Juego de ajedrez contra una IA impulsada por el algoritmo minimax con poda alfa-beta y heurísticas. Está diseñado para determinar el movimiento óptimo dentro de una profundidad especificada.",
-        "technologies": ["Python", "Numpy", "Pygame"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-        "year": 2022
       },
       {
         "title": "App de Bienes Raíces",

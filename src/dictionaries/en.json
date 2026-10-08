@@ -375,6 +375,16 @@
         "caseStudyUrl": "/projects/chatify"
       },
       {
+        "title": "Chess AI",
+        "shortDescription": "Chess AI project utilizing minimax algorithm.",
+        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It’s designed to determine the optimal move within a specified depth.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "year": 2022,
+        "caseStudyUrl": "/projects/chess-ai"
+      },
+      {
         "title": "Blog",
         "shortDescription": "Web app featuring RSS feed, advanced search, and tag filtering.",
         "description": "A responsive blog featuring CSS animations, RSS feed, advanced search, tag filtering, and newsletter subscription. Records and displays article visit counts for user interaction analysis.",
@@ -456,16 +466,6 @@
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/08-todo-app-typescript",
         "deployUrl": "https://frainer-todo-app.surge.sh",
         "year": 2023
-      },
-      {
-        "title": "Chess AI",
-        "shortDescription": "Chess AI project utilizing minimax algorithm.",
-        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It’s designed to determine the optimal move within a specified depth.",
-        "technologies": ["Python", "Numpy", "Pygame"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-        "year": 2022,
-        "caseStudyUrl": "/projects/chess-ai"
       },
       {
         "title": "Real Estate App",

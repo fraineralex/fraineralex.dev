@@ -1,9 +1,9 @@
 import dynamic from 'next/dynamic'
-import { CheckCheck, FileImage, MessageSquareReply, Pin, Search, SmilePlus } from 'lucide-react'
 import { BackLink, Chapter, Decisions, Hero, Outro, P, Shell, Stage, Statement } from '../kit/layout'
-import { Layers, StageCaption, Tiles } from '../kit/blocks'
-import Flow from '../kit/flow'
-import { backLink, flowLabels, type Lang } from './shared'
+import { Layers, StageCaption } from '../kit/blocks'
+import { MessageJourneyScene } from '../chatify/message-journey-scene'
+import { FeaturesScene } from '../chatify/features-scene'
+import { backLink, type Lang } from './shared'
 
 const ChatifyLiveSim = dynamic(() => import('../chatify/chatify-live-sim'), {
 	loading: () => <div className='h-[640px] animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none' aria-hidden />,
@@ -128,8 +128,6 @@ const COPY = {
 	},
 } as const
 
-const ICONS = [FileImage, MessageSquareReply, SmilePlus, CheckCheck, Pin, Search]
-
 export default function ChatifyCaseStudy({ lang }: { lang: Lang }) {
 	const t = COPY[lang]
 	const back = backLink(lang)
@@ -141,11 +139,14 @@ export default function ChatifyCaseStudy({ lang }: { lang: Lang }) {
 				<StageCaption>{t.caption}</StageCaption>
 			</Hero>
 
-			<Chapter n='01' title={t.c1.title} aside={<Flow steps={[...t.steps]} labels={flowLabels[lang]} note={t.flowNote} />}>
+			<Chapter n='01' title={t.c1.title}>
 				{t.c1.body.map((p) => (
 					<P key={p}>{p}</P>
 				))}
 			</Chapter>
+			<Stage>
+				<MessageJourneyScene lang={lang} />
+			</Stage>
 
 			<Chapter n='02' title={t.c2.title}>
 				{t.c2.body.map((p) => (
@@ -153,12 +154,7 @@ export default function ChatifyCaseStudy({ lang }: { lang: Lang }) {
 				))}
 			</Chapter>
 			<Stage>
-				<Tiles
-					items={t.tiles.map((tile, i) => {
-						const Icon = ICONS[i]
-						return { ...tile, icon: <Icon className='size-4' aria-hidden /> }
-					})}
-				/>
+				<FeaturesScene lang={lang} items={t.tiles.map((tile) => ({ title: tile.title, body: tile.body }))} />
 			</Stage>
 
 			<Statement>{t.statement}</Statement>

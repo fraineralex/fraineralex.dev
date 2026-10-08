@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import TradeoffsScene from './viollet/tradeoffs-scene'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { FiArrowLeft, FiExternalLink } from 'react-icons/fi'
@@ -194,22 +195,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
           <h2 className='mb-4 text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl'>
             {sections.tradeOffs.title}
           </h2>
-          <ul className='space-y-5'>
-            {sections.tradeOffs.items.map((item) => (
-              <li
-                key={item.decision}
-                className='rounded-lg border border-slate-700/50 bg-slate-800/30 p-5'
-              >
-                <h3 className='font-medium text-teal-200'>{item.decision}</h3>
-                <p
-                  className='mt-2 text-sm leading-relaxed text-slate-300/90 min-[400px]:text-base'
-                  style={{ textWrap: 'pretty' }}
-                >
-                  {item.rationale}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <TradeoffsScene items={sections.tradeOffs.items} />
           <ParsePipeline copy={interactives.parse} controls={interactives.controls} lang={lang} />
         </section>
 

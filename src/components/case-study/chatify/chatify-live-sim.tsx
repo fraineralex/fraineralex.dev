@@ -236,11 +236,13 @@ function Timeline () {
           <motion.span
             key={journey?.messageId}
             aria-hidden='true'
-            className='pointer-events-none absolute top-0 z-10 size-2.5 -ml-[5px] rounded-full bg-teal-300 shadow-[0_0_0_4px_rgb(94_234_212/0.25)]'
+            className='pointer-events-none absolute inset-x-0 top-0 z-10 block h-2.5'
             initial={false}
-            animate={{ left: `${((active + 0.5) / steps.length) * 100}%` }}
+            animate={{ x: `${((active + 0.5) / steps.length) * 100}%` }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-          />
+          >
+            <span className='absolute left-0 top-0 size-2.5 -ml-[5px] rounded-full bg-teal-300 shadow-[0_0_0_4px_rgb(94_234_212/0.25)]' />
+          </motion.span>
         )}
         <ol
           className='relative grid'
@@ -265,10 +267,8 @@ function Timeline () {
           })}
         </ol>
       </div>
-      {(held || journey?.holdRead) && (
-        <p className='mt-2 text-[11px] text-teal-300'>{copy.waiting}</p>
-      )}
-      <ol aria-live='polite' aria-relevant='additions' className='mt-2 max-h-24 space-y-1 overflow-y-auto [scrollbar-color:#475569_transparent] [scrollbar-width:thin]'>
+      <p className={`mt-2 min-h-8 text-[11px] leading-4 text-teal-300 sm:min-h-4 ${held || journey?.holdRead ? '' : 'invisible'}`}>{copy.waiting}</p>
+      <ol aria-live='polite' aria-relevant='additions' className='mt-2 h-24 space-y-1 overflow-y-auto [scrollbar-color:#475569_transparent] [scrollbar-width:thin]'>
         {traces.length === 0 && <li className='text-[11px] text-slate-400'>{copy.idle}</li>}
         {traces.slice(-4).map(trace => (
           <li key={trace.id} className='flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[11px]'>

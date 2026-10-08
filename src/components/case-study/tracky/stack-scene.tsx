@@ -172,8 +172,8 @@ export function StackScene({ lang, layers, caption }: { lang: 'en' | 'es'; layer
 					<svg className={`pointer-events-none absolute bottom-0 left-0 top-0 h-full w-7 ${live ? 'tracky-live' : ''}`} viewBox='0 0 28 100' preserveAspectRatio='none' aria-hidden>
 						<line x1='14' y1='6' x2='14' y2='94' stroke='rgb(71 85 105)' strokeWidth='2' vectorEffect='non-scaling-stroke' strokeDasharray='4 6' className='tracky-dash' />
 					</svg>
-					<span className='absolute left-[14px] size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300/50' style={{ top: `${trailY}%` }} aria-hidden />
-					<span className='absolute left-[14px] size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_12px_rgb(45_212_191/0.9)]' style={{ top: `${mobileY}%` }} aria-hidden />
+					<span className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${trailY}%)` }} aria-hidden><span className='absolute left-[14px] top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300/50' /></span>
+					<span className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${mobileY}%)` }} aria-hidden><span className='absolute left-[14px] top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_12px_rgb(45_212_191/0.9)]' /></span>
 					<div className='ml-7 min-w-0 divide-y divide-slate-700/50 border-y border-slate-700/50'>
 						{layers.map((layer, lane) => (
 							<div key={layer.title} className='flex h-[10.25rem] min-w-0 flex-col py-2'>
@@ -211,8 +211,8 @@ export function StackScene({ lang, layers, caption }: { lang: 'en' | 'es'; layer
 							</Fragment>
 						))}
 					</div>
-					<span className='absolute size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300/45' style={trailStyle(points, travel)} aria-hidden />
-					<span className='absolute size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_12px_rgb(45_212_191/0.9)]' style={{ left: `${x}%`, top: `${y}%` }} aria-hidden />
+					<span className='pointer-events-none absolute inset-0' style={trailStyle(points, travel)} aria-hidden><span className='absolute left-0 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300/45' /></span>
+					<span className='pointer-events-none absolute inset-0' style={{ transform: `translate(${x}%, ${y}%)` }} aria-hidden><span className='absolute left-0 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_12px_rgb(45_212_191/0.9)]' /></span>
 				</div>
 
 				<p className='mt-3 h-16 overflow-hidden text-xs leading-5 text-slate-400' aria-hidden>
@@ -244,7 +244,7 @@ function routePoints(route: NodeRef[]) {
 
 function trailStyle(points: [number, number][], travel: number) {
 	const [left, top] = pointOnPolyline(points, Math.max(0, travel - 0.16))
-	return { left: `${left}%`, top: `${top}%` }
+	return { transform: `translate(${left}%, ${top}%)` }
 }
 
 function laneOn(route: NodeRef[], lane: number, seg: (typeof SEGS)[number], travel: number) {

@@ -148,18 +148,17 @@ function Dots({ points, t }: { points: readonly (readonly [number, number])[]; t
 				const [x, y] = pointOnPolyline(points as [number, number][], Math.max(0, t - back))
 				const size = index === 0 ? 11 : 6
 				return (
+					<span key={back} className='pointer-events-none absolute inset-0' style={{ transform: `translate(${x}%, ${y}%)` }}>
 					<span
-						key={back}
-						className='absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300'
+						className='absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300'
 						style={{
-							left: `${x}%`,
-							top: `${y}%`,
 							width: size,
 							height: size,
 							opacity: index === 0 ? 1 : 0.45,
 							boxShadow: index === 0 ? '0 0 12px rgb(45 212 191 / 0.9)' : undefined,
 						}}
 					/>
+					</span>
 				)
 			})}
 		</>

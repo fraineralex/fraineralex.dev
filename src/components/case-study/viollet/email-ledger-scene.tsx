@@ -312,11 +312,9 @@ export default function EmailLedgerScene ({ lang }: { lang: Lang }) {
               </div>
               <div className='relative mb-1.5 h-[4.5rem] overflow-hidden rounded-md border border-slate-700/60 bg-slate-950/80 px-2 py-1'>
                 <p className='whitespace-pre text-[11px] leading-4 text-slate-200' style={{ opacity: frame.body }}>{BODY}</p>
-                <div
-                  aria-hidden='true'
-                  className='pointer-events-none absolute inset-x-0 h-3 bg-gradient-to-b from-transparent via-teal-300/50 to-transparent'
-                  style={{ top: `${frame.beam * 100}%`, opacity: Math.sin(frame.beam * Math.PI), transform: 'translateY(-50%)' }}
-                />
+                <div aria-hidden='true' className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${frame.beam * 100}%)`, opacity: Math.sin(frame.beam * Math.PI) }}>
+                  <div className='absolute inset-x-0 top-0 h-3 -translate-y-1/2 bg-gradient-to-b from-transparent via-teal-300/50 to-transparent' />
+                </div>
               </div>
               <div>
                 {copy.fields.map((label, index) => (

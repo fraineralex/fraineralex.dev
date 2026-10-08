@@ -13,7 +13,7 @@ function localizedAlternates (path: string) {
 }
 
 export default function sitemap (): MetadataRoute.Sitemap {
-  const staticRoutes = ['', '/projects', '/projects/viollet', '/blog', '/blog/tags']
+  const staticRoutes = ['', '/projects', '/projects/viollet', '/projects/tracky', '/projects/sargotech', '/projects/chatify', '/projects/chess-ai', '/blog', '/blog/tags']
   const staticEntries = i18n.locales.flatMap(lang =>
     staticRoutes.map(path => ({
       url: localizedUrl(lang, path),

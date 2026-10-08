@@ -1,0 +1,98 @@
+/* Coastal map styles adapted from the SargoTech landing, scoped under .sargo-obs. */
+.sargo-obs{background:#081728;color:#fff;font-family:var(--font-inter),Arial,sans-serif}
+.sargo-obs .observatory-bottom{max-width:1440px;display:flex;align-items:center;justify-content:space-between;gap:40px;margin:25px auto 0}
+.sargo-obs .observatory-bottom p{max-width:610px;font-size:11px;line-height:1.8;color:#809fb9}
+.sargo-obs .simulation-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:#fb923c;margin-right:7px}
+.sargo-obs .observatory-bottom a{display:flex;align-items:center;gap:35px;font-size:13px;color:#e2edf6;border-bottom:1px solid #718da7;padding:10px 0;white-space:nowrap}
+.sargo-obs .observatory-bottom a:hover{color:#0ea5e9}
+.sargo-obs .public-command-map{position:relative;max-width:1440px;height:min(76vh,760px);min-height:610px;margin:auto;overflow:hidden;border:1px solid #1b5676;background:#071624;border-radius:3px;box-shadow:0 35px 80px #0008;isolation:isolate}
+.sargo-obs .public-command-map>.public-maplibre-stage{position:absolute;inset:0}
+.sargo-obs .public-maplibre-stage .maplibregl-canvas{outline:none}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-left{left:13px;bottom:13px}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-right{right:13px;bottom:13px}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-group{overflow:hidden;border:1px solid #54b7e033!important;border-radius:4px!important;background:#07192ddf!important;box-shadow:0 12px 30px #0006!important}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl button{width:34px;height:34px;background-color:transparent!important;filter:invert(1) brightness(1.7);opacity:.82}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl button:hover{background-color:#d9f2ff20!important;opacity:1}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-attrib{color:#8aa7ba;background:#07192dcc!important}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-attrib a{color:#c3d8e5}
+.sargo-obs .public-map-atmosphere{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,#03101b66 0%,transparent 24%,transparent 70%,#03101bbd 100%),radial-gradient(circle at 52% 45%,transparent 35%,#03111f70 100%);box-shadow:inset 0 0 90px #020b13b0}
+.sargo-obs .public-map-toolbar{position:absolute;z-index:3;left:0;right:0;top:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid #5ecdf029;background:#06182bd9;backdrop-filter:blur(15px);pointer-events:none}
+.sargo-obs .public-map-toolbar>span:first-child{display:flex;align-items:center;gap:10px;color:#b9d6e8;font-size:11px;letter-spacing:1.65px}
+.sargo-obs .public-map-toolbar svg{color:#12bff6}
+.sargo-obs .public-map-live{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid #6e91a947;color:#c8d8e4;font-size:9px;letter-spacing:1px}
+.sargo-obs .public-map-live i{width:6px;height:6px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 5px #f59e0b15}
+.sargo-obs .public-map-live.live{border-color:#22c55e40;color:#d9fbe5}
+.sargo-obs .public-map-live.live i{background:#22c55e;animation:public-map-pulse 1.8s ease-in-out infinite}
+.sargo-obs .public-map-live.loading i{background:#38bdf8}
+.sargo-obs .public-map-status{position:absolute;z-index:3;top:82px;left:22px;display:flex;flex-direction:column;gap:4px;max-width:285px;padding:15px 17px;border:1px solid #55b8dc2b;background:#06182bd4;box-shadow:0 14px 36px #0005;backdrop-filter:blur(13px);pointer-events:none}
+.sargo-obs .public-map-status strong{font-size:17px;font-weight:500;color:#fff}
+.sargo-obs .public-map-status span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#66d8ff}
+.sargo-obs .public-map-status small{margin-top:4px;font-size:10px;line-height:1.45;color:#8facbf}
+.sargo-obs .public-semaphore-legend{position:absolute;z-index:3;left:22px;bottom:22px;width:235px;padding:17px 18px 15px;border:1px solid #55b8dc2b;background:#06182be8;box-shadow:0 14px 36px #0005;backdrop-filter:blur(13px);pointer-events:none}
+.sargo-obs .public-semaphore-legend h3{margin:0 0 12px;color:#d9e9f2;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.sargo-obs .public-semaphore-legend>span{position:relative;display:grid;grid-template-columns:13px 24px 1fr;align-items:center;gap:6px;margin-top:8px;color:#dce8ef;font-size:11px}
+.sargo-obs .public-semaphore-legend i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 4px #ffffff0b}
+.sargo-obs .public-semaphore-legend b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+.sargo-obs .public-semaphore-legend small{grid-column:3;color:#7898ad;font-size:9px}
+.sargo-obs .public-semaphore-legend .red i{background:#ef4444}
+.sargo-obs .public-semaphore-legend .red b{color:#fca5a5}
+.sargo-obs .public-semaphore-legend .yellow i{background:#f59e0b}
+.sargo-obs .public-semaphore-legend .yellow b{color:#fde68a}
+.sargo-obs .public-semaphore-legend .green i{background:#22c55e}
+.sargo-obs .public-semaphore-legend .green b{color:#86efac}
+.sargo-obs .public-beach-detail{position:absolute;z-index:4;top:82px;right:22px;width:min(300px,calc(100% - 44px));padding:20px;border:1px solid #59bce33b;background:#071a2de9;box-shadow:0 18px 50px #0008;backdrop-filter:blur(18px)}
+.sargo-obs .public-beach-detail>button{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:29px;height:29px;border:1px solid #ffffff1d;background:#ffffff08;color:#bcd2df;cursor:pointer}
+.sargo-obs .public-beach-detail>button:hover,.sargo-obs .public-beach-detail>button:focus-visible{border-color:#38bdf8;color:#fff;outline:none}
+.sargo-obs .detail-level{display:flex;align-items:center;gap:7px;width:fit-content;padding:5px 8px;border:1px solid currentColor;font-size:9px;letter-spacing:.13em}
+.sargo-obs .detail-level i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.sargo-obs .detail-level.roja{color:#f87171}
+.sargo-obs .detail-level.amarilla{color:#fbbf24}
+.sargo-obs .detail-level.verde{color:#4ade80}
+.sargo-obs .detail-level.neutral{color:#cbd5e1}
+.sargo-obs .public-semaphore-legend .neutral i{background:#94a3b8}
+.sargo-obs .public-beach-detail h3{max-width:235px;margin:16px 0 4px;color:#fff;font-size:25px;font-weight:400;line-height:1.1}
+.sargo-obs .public-beach-detail>p{margin:0;color:#8eacbf;font-size:10px;line-height:1.5}
+.sargo-obs .public-beach-detail dl{margin:18px 0 0;border-top:1px solid #ffffff18}
+.sargo-obs .public-beach-detail dl div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #ffffff14}
+.sargo-obs .public-beach-detail dt{color:#92afc1;font-size:10px}
+.sargo-obs .public-beach-detail dd{margin:0;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px}
+.sargo-obs .public-map-instructions{position:absolute;z-index:3;right:62px;bottom:22px;display:flex;align-items:center;gap:7px;padding:9px 11px;background:#06182bd4;border:1px solid #55b8dc24;color:#9bb5c5;font-size:9px;letter-spacing:.03em;pointer-events:none}
+.sargo-obs .public-map-instructions svg{color:#47cfff}
+.sargo-obs .public-map-instructions svg:nth-of-type(2){margin-left:7px}
+@keyframes public-map-pulse{50%{box-shadow:0 0 0 9px #22c55e00}}
+@media(max-width:900px){.sargo-obs .public-command-map{height:660px}
+.sargo-obs .public-map-status{top:76px}
+.sargo-obs .public-map-instructions{display:none}
+.sargo-obs .public-semaphore-legend{width:205px}
+.sargo-obs .public-beach-detail{top:auto;right:15px;bottom:16px}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-right{bottom:13px}
+}
+@media(max-width:700px){.sargo-obs .public-command-map{height:620px;min-height:0}
+.sargo-obs .public-map-toolbar{height:49px;padding:0 12px}
+.sargo-obs .public-map-toolbar>span:first-child{font-size:8px;letter-spacing:.75px}
+.sargo-obs .public-map-live{font-size:7px;padding:5px 6px;letter-spacing:.4px}
+.sargo-obs .public-map-status{top:62px;left:12px;max-width:210px;padding:11px 12px}
+.sargo-obs .public-map-status strong{font-size:14px}
+.sargo-obs .public-map-status span{font-size:9px}
+.sargo-obs .public-map-status small{font-size:8px}
+.sargo-obs .public-semaphore-legend{left:12px;bottom:12px;width:174px;padding:12px}
+.sargo-obs .public-semaphore-legend h3{margin-bottom:8px;font-size:8px}
+.sargo-obs .public-semaphore-legend>span{grid-template-columns:11px 20px 1fr;gap:4px;margin-top:6px;font-size:9px}
+.sargo-obs .public-semaphore-legend small{font-size:7px}
+.sargo-obs .public-beach-detail{left:12px;right:12px;bottom:12px;width:auto;padding:16px}
+.sargo-obs .public-beach-detail h3{font-size:21px}
+.sargo-obs .public-beach-detail dl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sargo-obs .public-beach-detail dl div{display:block;padding:9px 0}
+.sargo-obs .public-beach-detail dt{min-height:24px;font-size:8px}
+.sargo-obs .public-beach-detail dd{margin-top:6px;font-size:9px}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-right{right:7px;bottom:7px}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-group button{width:31px;height:31px}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-left{display:none}
+}
+@media(prefers-reduced-motion:reduce){.sargo-obs .public-map-live.live i{animation:none}
+}
+.sargo-obs .public-command-map:focus-within{border-color:#38bdf8}
+/* Reference legend: label and description, no counts */
+.sargo-obs .public-semaphore-legend>span,.sargo-obs .public-semaphore-legend>span{grid-template-columns:13px 1fr;row-gap:1px}
+.sargo-obs .public-semaphore-legend b{font-family:inherit;font-weight:600;color:#dce8ef}
+.sargo-obs .public-semaphore-legend small{grid-column:2}

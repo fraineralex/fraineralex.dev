@@ -3,6 +3,7 @@
 import { Check } from 'lucide-react'
 import { useId } from 'react'
 import { SCENE_LABELS, SceneFrame, easeOut, span, useSceneTimeline } from '../kit/scene'
+import { L, LC } from './light'
 import './alert-lanes-scene.css'
 
 /* Blog lane minutes (fast 4 and 16, slow 36 and 62), fixed paces, ~10.5s plus hold. */
@@ -14,10 +15,10 @@ const DURATION = SWIPE_MS + TRAVEL_MS
 const ROW = '3rem'
 
 const BANKS = [
-  { id: 'scotiabank', mark: 'SB', delay: 62 },
-  { id: 'bhd', mark: 'BHD', delay: 36 },
-  { id: 'banreservas', mark: 'BR', delay: 16 },
-  { id: 'popular', mark: 'BP', delay: 4 }
+  { id: 'scotiabank', logo: '/case-studies/viollet/banks/scotiabank_do.avif', delay: 62 },
+  { id: 'bhd', logo: '/case-studies/viollet/banks/bhd.svg', delay: 36 },
+  { id: 'banreservas', logo: '/case-studies/viollet/banks/banreservas.svg', delay: 16 },
+  { id: 'popular', logo: '/case-studies/viollet/banks/popular.svg', delay: 4 }
 ] as const
 
 type Id = (typeof BANKS)[number]['id']
@@ -170,15 +171,18 @@ function ClockMinutes ({ template, minutes }: { template: string; minutes: numbe
   )
 }
 
-function BankBadge ({ mark, arrived }: { mark: string; arrived: boolean }) {
+function BankBadge ({ logo, arrived }: { logo: string; arrived: boolean }) {
   return (
     <span
       aria-hidden='true'
       className={`flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full border text-[11px] font-bold leading-none tracking-tight ${
-        arrived ? 'border-emerald-400/40 bg-emerald-400/15 text-emerald-200' : 'border-slate-700/60 bg-slate-800 text-teal-200'
+        arrived ? 'border-emerald-200 bg-emerald-100 text-emerald-700' : 'border-[oklch(0.915_0.01_282)] bg-[oklch(0.965_0.01_282)] text-[oklch(0.539_0.254_282)]'
       }`}
     >
-      {mark}
+      <svg viewBox='0 0 28 28' className='size-full'>
+        <circle cx={14} cy={14} r={14} fill={LC.card} />
+        <image href={logo} x={4} y={4} width={20} height={20} preserveAspectRatio='xMidYMid meet' />
+      </svg>
     </span>
   )
 }
@@ -224,7 +228,7 @@ function LaneDiagram ({
           <rect x={card.x} y={card.y} width={card.w} height={card.h} rx={10} />
         </clipPath>
         <filter id={`alert-glow-${uid}`} x='-60%' y='-60%' width='220%' height='220%'>
-          <feDropShadow dx='0' dy='0' stdDeviation='2.2' floodColor='#5eead4' floodOpacity='0.9' />
+          <feDropShadow dx='0' dy='0' stdDeviation='2.2' floodColor={LC.primary} floodOpacity='0.9' />
         </filter>
       </defs>
       {BANKS.map((bank, index) => {
@@ -236,8 +240,8 @@ function LaneDiagram ({
         const to = down ? { x: spec.end.x, y: inbox.y } : { x: inbox.x, y: spec.end.y }
         return (
           <g key={bank.id}>
-            <path d={paths[index]} fill='none' className='stroke-slate-800' strokeWidth={8} strokeLinecap='round' />
-            <path d={paths[index]} fill='none' className='stroke-slate-600' strokeWidth={1.6} strokeLinecap='round' />
+            <path d={paths[index]} fill='none' className='stroke-[oklch(0.965_0.01_282)]' strokeWidth={8} strokeLinecap='round' />
+            <path d={paths[index]} fill='none' className='stroke-[oklch(0.86_0.02_282)]' strokeWidth={1.6} strokeLinecap='round' />
             <path
               d={paths[index]}
               fill='none'
@@ -245,29 +249,29 @@ function LaneDiagram ({
               strokeWidth={dash ? 2.4 : 1.8}
               strokeDasharray={dash ? '5 7' : undefined}
               strokeOpacity={state.arrived ? 0.8 : moving ? 1 : swipe * 0.45}
-              className={`stroke-teal-300 ${dash ? 'alert-lanes-dash' : ''}`}
+              className={`stroke-[oklch(0.539_0.254_282)] ${dash ? 'alert-lanes-dash' : ''}`}
             />
-            <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} strokeWidth={1.6} strokeLinecap='round' className={state.arrived ? 'stroke-emerald-400' : 'stroke-slate-600'} />
+            <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} strokeWidth={1.6} strokeLinecap='round' className={state.arrived ? 'stroke-emerald-600' : 'stroke-[oklch(0.86_0.02_282)]'} />
           </g>
         )
       })}
-      <rect x={card.x} y={card.y} width={card.w} height={card.h} rx={10} strokeWidth={1.6} className={swipe > 0.85 ? 'fill-slate-900 stroke-teal-300' : 'fill-slate-900 stroke-slate-600'} />
-      <rect x={card.x + 12} y={card.y + 16} width={24} height={16} rx={2} className='fill-teal-300' />
+      <rect x={card.x} y={card.y} width={card.w} height={card.h} rx={10} strokeWidth={1.6} className={swipe > 0.85 ? 'fill-white stroke-[oklch(0.539_0.254_282)]' : 'fill-white stroke-[oklch(0.86_0.02_282)]'} />
+      <rect x={card.x + 12} y={card.y + 16} width={24} height={16} rx={2} className='fill-[oklch(0.539_0.254_282)]' />
       {[7, 11, 15].map(radius => (
-        <path key={radius} d={`M ${card.x + card.w - 22} ${card.y + 24 - radius} A ${radius} ${radius} 0 0 1 ${card.x + card.w - 22} ${card.y + 24 + radius}`} fill='none' className='stroke-teal-300/80' strokeWidth={1.4} />
+        <path key={radius} d={`M ${card.x + card.w - 22} ${card.y + 24 - radius} A ${radius} ${radius} 0 0 1 ${card.x + card.w - 22} ${card.y + 24 + radius}`} fill='none' className='stroke-[oklch(0.539_0.254_282/0.8)]' strokeWidth={1.4} />
       ))}
-      <text x={card.x + card.w / 2} y={card.y + card.h - 16} textAnchor='middle' fontSize={geom.labelSize} fontWeight={600} className='fill-slate-200'>t = 0</text>
+      <text x={card.x + card.w / 2} y={card.y + card.h - 16} textAnchor='middle' fontSize={geom.labelSize} fontWeight={600} className='fill-[oklch(0.205_0_0)]'>t = 0</text>
       <g clipPath={`url(#alert-card-${uid})`}>
-        <rect x={sheenX} y={card.y - 8} width={12} height={card.h + 16} className='fill-teal-200/45' />
+        <rect x={sheenX} y={card.y - 8} width={12} height={card.h + 16} className='fill-[oklch(0.539_0.254_282/0.15)]' />
       </g>
-      <rect x={inbox.x} y={inbox.y} width={inbox.w} height={inbox.h} rx={10} strokeWidth={1.6} className={count === BANKS.length ? 'fill-slate-900 stroke-emerald-400' : count > 0 ? 'fill-slate-900 stroke-teal-300' : 'fill-slate-900 stroke-slate-600'} />
+      <rect x={inbox.x} y={inbox.y} width={inbox.w} height={inbox.h} rx={10} strokeWidth={1.6} className={count === BANKS.length ? 'fill-white stroke-emerald-600' : count > 0 ? 'fill-white stroke-[oklch(0.539_0.254_282)]' : 'fill-white stroke-[oklch(0.86_0.02_282)]'} />
       <g transform={`translate(${env.x} ${env.y})`}>
-        <rect x={-11} y={-8} width={22} height={16} rx={2} className='fill-slate-950 stroke-teal-300' strokeWidth={1.4} />
-        <path d='M -11 -8 L 0 3 L 11 -8' fill='none' className='stroke-teal-300' strokeWidth={1.4} />
+        <rect x={-11} y={-8} width={22} height={16} rx={2} className='fill-white stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.4} />
+        <path d='M -11 -8 L 0 3 L 11 -8' fill='none' className='stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.4} />
       </g>
-      <text x={countAt.x} y={countAt.y} textAnchor='middle' dominantBaseline='central' fontSize={geom.countSize} fontWeight={700} className='fill-slate-100 tabular-nums'>{String(count).padStart(2, '0')}</text>
-      <text x={labelAt.x} y={labelAt.y} textAnchor='middle' dominantBaseline='central' fontSize={geom.labelSize} className='fill-slate-400'>{copy.inbox}</text>
-      <circle cx={origin.x} cy={origin.y} r={4} className='fill-teal-300' />
+      <text x={countAt.x} y={countAt.y} textAnchor='middle' dominantBaseline='central' fontSize={geom.countSize} fontWeight={700} className='fill-[oklch(0.145_0_0)] tabular-nums'>{String(count).padStart(2, '0')}</text>
+      <text x={labelAt.x} y={labelAt.y} textAnchor='middle' dominantBaseline='central' fontSize={geom.labelSize} className='fill-[oklch(0.45_0_0)]'>{copy.inbox}</text>
+      <circle cx={origin.x} cy={origin.y} r={4} className='fill-[oklch(0.539_0.254_282)]' />
       {BANKS.map((bank, index) => {
         const state = frame.lanes[index]
         const spec = geom.lanes[bank.id]
@@ -277,28 +281,26 @@ function LaneDiagram ({
         return (
           <g key={bank.id}>
             {moving && !reduced && (
-              <circle cx={spec.end.x} cy={spec.end.y} r={geom.badgeR + 5} fill='none' className='alert-lanes-pulse stroke-teal-300' strokeWidth={1.5} />
+              <circle cx={spec.end.x} cy={spec.end.y} r={geom.badgeR + 5} fill='none' className='alert-lanes-pulse stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.5} />
             )}
             <circle
               cx={spec.end.x}
               cy={spec.end.y}
               r={geom.badgeR}
               strokeWidth={state.arrived && frame.minute - state.delay < 1.4 ? 2.4 : 1.5}
-              className={state.arrived ? 'fill-emerald-400/15 stroke-emerald-400' : moving ? 'fill-teal-400/10 stroke-teal-300' : 'fill-slate-800 stroke-slate-600'}
+              className={state.arrived ? 'fill-white stroke-emerald-600' : moving ? 'fill-white stroke-[oklch(0.539_0.254_282)]' : 'fill-white stroke-[oklch(0.86_0.02_282)]'}
             />
-            <text x={spec.end.x} y={spec.end.y} textAnchor='middle' dominantBaseline='central' fontSize={bank.mark.length > 2 ? geom.markSize - 3 : geom.markSize} fontWeight={700} className={state.arrived ? 'fill-emerald-200' : 'fill-teal-200'}>
-              {bank.mark}
-            </text>
+            <image href={bank.logo} x={spec.end.x - geom.badgeR * 0.72} y={spec.end.y - geom.badgeR * 0.72} width={geom.badgeR * 1.44} height={geom.badgeR * 1.44} preserveAspectRatio='xMidYMid meet' />
             {fade > 0 && [4, 3, 2, 1].map(step => {
               const behind = state.progress - step * 0.055
               if (behind <= 0.02) return null
               const trail = lanePoint(origin, spec.control, spec.end, behind)
-              return <circle key={step} cx={trail.x} cy={trail.y} r={3.4 - step * 0.45} className='fill-teal-300' opacity={fade * (0.14 + (4 - step) * 0.08)} />
+              return <circle key={step} cx={trail.x} cy={trail.y} r={3.4 - step * 0.45} className='fill-[oklch(0.539_0.254_282)]' opacity={fade * (0.14 + (4 - step) * 0.08)} />
             })}
             {fade > 0 && (
               <g transform={`translate(${point.x} ${point.y})`} opacity={fade} filter={`url(#alert-glow-${uid})`}>
-                <rect x={-10} y={-7} width={20} height={14} rx={2} className='fill-slate-950 stroke-teal-300' strokeWidth={1.4} />
-                <path d='M -10 -7 L 0 2.5 L 10 -7' fill='none' className='stroke-teal-300' strokeWidth={1.4} />
+                <rect x={-10} y={-7} width={20} height={14} rx={2} className='fill-white stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.4} />
+                <path d='M -10 -7 L 0 2.5 L 10 -7' fill='none' className='stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.4} />
               </g>
             )}
           </g>
@@ -310,10 +312,10 @@ function LaneDiagram ({
 
 function Feed ({ copy, frame }: { copy: Copy; frame: Frame }) {
   return (
-    <div className='min-w-0 rounded-lg border border-slate-700/60 bg-slate-900 p-3'>
+    <div className='min-w-0 rounded-lg border border-[oklch(0.915_0.01_282)] bg-white p-3'>
       <div className='flex h-6 items-center justify-between gap-2'>
-        <p className='text-[11px] font-medium uppercase tracking-wide text-teal-200/80'>{copy.feedTitle}</p>
-        <p className='text-[11px] text-slate-500'>{copy.illustrative}</p>
+        <p className='text-[11px] font-medium uppercase tracking-wide text-[oklch(0.539_0.254_282)]'>{copy.feedTitle}</p>
+        <p className='text-[11px] text-[oklch(0.556_0_0)]'>{copy.illustrative}</p>
       </div>
       <ol className='sr-only' aria-label={`${copy.feedTitle}. ${copy.illustrative}`}>
         {frame.feed.map(entry => (
@@ -331,18 +333,18 @@ function Feed ({ copy, frame }: { copy: Copy; frame: Frame }) {
           return (
             <li
               key={bank.id}
-              className={`absolute inset-x-0 top-0 flex h-12 items-center gap-2 border-b border-slate-700/60 bg-slate-900 px-1 text-sm transition-transform duration-500 ease-out motion-reduce:transition-none ${entry?.arrived ? 'text-slate-100 shadow-[inset_2px_0_0_rgba(52,211,153,0.75)]' : 'text-slate-400'}`}
+              className={`absolute inset-x-0 top-0 flex h-12 items-center gap-2 border-b border-[oklch(0.915_0.01_282)] bg-white px-1 text-sm transition-transform duration-500 ease-out motion-reduce:transition-none ${entry?.arrived ? 'text-[oklch(0.145_0_0)] shadow-[inset_2px_0_0_rgba(52,211,153,0.75)]' : 'text-[oklch(0.45_0_0)]'}`}
               style={{ transform: `translateY(calc(${ROW} * ${slot}))`, zIndex: entry?.arrived ? 2 : 1 }}
             >
               <span className='inline-block w-4 shrink-0 text-center font-mono text-xs tabular-nums'>{entry?.order ? entry.order : '·'}</span>
-              <BankBadge mark={bank.mark} arrived={Boolean(entry?.arrived)} />
+              <BankBadge logo={bank.logo} arrived={Boolean(entry?.arrived)} />
               <span className='min-w-0 flex-1 truncate'>{copy.banks[bank.id]}</span>
-              <span className='grid w-14 shrink-0 text-right font-mono text-[11px] leading-none tabular-nums text-slate-400'>
+              <span className='grid w-14 shrink-0 text-right font-mono text-[11px] leading-none tabular-nums text-[oklch(0.45_0_0)]'>
                 <span className={entry?.arrived ? '' : 'invisible'}>{minute} min</span>
                 <span className={`col-start-1 row-start-1 ${entry?.arrived ? 'invisible' : ''}`}>·· min</span>
               </span>
               <span className='flex size-4 shrink-0 items-center justify-center'>
-                <Check className={`size-3.5 text-emerald-300 ${entry?.arrived ? 'opacity-100' : 'opacity-0'}`} aria-hidden='true' />
+                <Check className={`size-3.5 text-emerald-700 ${entry?.arrived ? 'opacity-100' : 'opacity-0'}`} aria-hidden='true' />
               </span>
             </li>
           )
@@ -367,8 +369,8 @@ export default function AlertLanesScene ({ lang }: { lang: Lang }) {
       title={copy.title}
       caption={<span className='block min-h-[8rem] sm:min-h-[5.5rem]'>{captionFor(copy, frame)}</span>}
     >
-      <div className='min-w-0 p-3 lg:p-4'>
-        <p className='mb-2 h-7 whitespace-pre font-mono text-sm leading-7 text-slate-200' aria-hidden='true'>
+      <div className={`min-w-0 p-3 lg:p-4 ${L.surface}`}>
+        <p className='mb-2 h-7 whitespace-pre font-mono text-sm leading-7 text-[oklch(0.205_0_0)]' aria-hidden='true'>
           <ClockMinutes template={copy.clock} minutes={displayedMinute(frame.minute)} />
         </p>
         <div className='grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-center'>

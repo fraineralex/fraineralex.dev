@@ -38,6 +38,8 @@ export function useSceneTimeline(duration: number, { loop = false, hold = 2400 }
 	const [playing, setPlaying] = useState(false)
 	const [reduced, setReduced] = useState(false)
 	const [started, setStarted] = useState(false)
+	const elapsedRef = useRef(elapsed)
+	elapsedRef.current = elapsed
 
 	useEffect(() => {
 		const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -60,6 +62,7 @@ export function useSceneTimeline(duration: number, { loop = false, hold = 2400 }
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (!entry?.isIntersecting) return
+				elapsedRef.current = 0
 				setElapsed(0)
 				setStarted(true)
 				setPlaying(true)
@@ -70,9 +73,6 @@ export function useSceneTimeline(duration: number, { loop = false, hold = 2400 }
 		observer.observe(node)
 		return () => observer.disconnect()
 	}, [reduced])
-
-	const elapsedRef = useRef(elapsed)
-	elapsedRef.current = elapsed
 
 	useEffect(() => {
 		if (!playing || reduced) return
@@ -109,12 +109,16 @@ export function useSceneTimeline(duration: number, { loop = false, hold = 2400 }
 		started,
 		toggle: () => {
 			if (reduced) return
-			if (!playing && elapsed >= duration && !loop) setElapsed(0)
+			if (!playing && elapsed >= duration && !loop) {
+				elapsedRef.current = 0
+				setElapsed(0)
+			}
 			setStarted(true)
 			setPlaying((value) => !value)
 		},
 		replay: () => {
 			if (reduced) return
+			elapsedRef.current = 0
 			setElapsed(0)
 			setStarted(true)
 			setPlaying(true)

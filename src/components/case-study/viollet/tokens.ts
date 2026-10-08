@@ -40,7 +40,7 @@ export function itemClass (active: boolean) {
 
 /** Rounded pill filter or chip. */
 export function pillClass (active: boolean) {
-  return `inline-flex h-11 items-center justify-center rounded-full px-3 sm:h-8 text-xs font-medium leading-none transition-colors motion-reduce:transition-none ${focusRing} ${
+  return `inline-flex h-11 min-w-11 items-center justify-center rounded-full px-3 sm:h-8 sm:min-w-0 text-xs font-medium leading-none transition-colors motion-reduce:transition-none ${focusRing} ${
     active
       ? 'bg-teal-400/20 text-teal-100'
       : 'border border-slate-700/60 bg-slate-900/50 text-slate-300 hover:text-slate-100'

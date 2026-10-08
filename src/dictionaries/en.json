@@ -231,7 +231,19 @@
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "imageSrc": "tracky.webp",
-        "starsOnGithub": 25
+        "starsOnGithub": 25,
+        "caseStudyUrl": "/projects/tracky"
+      },
+      {
+        "projectName": "SargoTech",
+        "description": "Coastal technology from the Dominican Republic that anticipates sargassum with satellite data, anti sargassum barriers and local operations. A team project where I am the CTO and lead developer.",
+        "technologies": ["React", "TypeScript", "MapLibre"],
+        "deployUrl": "https://sargotech.com",
+        "caseStudyUrl": "/projects/sargotech",
+        "githubRepositoryUrl": "",
+        "imageSrc": "sargotech-og.webp",
+        "imageAlt": "SargoTech logo, Costas Inteligentes",
+        "starsOnGithub": 0
       },
       {
         "projectName": "Chatify",
@@ -251,16 +263,8 @@
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
         "imageSrc": "chatify.webp",
-        "starsOnGithub": 14
-      },
-      {
-        "projectName": "VB Solutions",
-        "description": "Modern landing page for a business automation consultancy specializing in Odoo and AI solutions. Features smooth animations, responsive design, and an intuitive interface to showcase digital transformation services.",
-        "technologies": ["TypeScript", "Next.js", "React", "Tailwind", "Shadcn/ui"],
-        "deployUrl": "https://vbsolutions.info",
-        "githubRepositoryUrl": "https://github.com/fraineralex/vbs-landing",
-        "imageSrc": "vbs.avif",
-        "starsOnGithub": 0
+        "starsOnGithub": 14,
+        "caseStudyUrl": "/projects/chatify"
       }
     ],
     "link": {
@@ -307,6 +311,16 @@
         "year": 2026
       },
       {
+        "title": "SargoTech",
+        "shortDescription": "Coastal intelligence against sargassum. Team project, I am CTO.",
+        "description": "Coastal technology from the Dominican Republic that anticipates sargassum with satellite data, anti sargassum barriers and local operations. A team project where I am the CTO and lead developer.",
+        "technologies": ["React", "TypeScript", "MapLibre"],
+        "deployUrl": "https://sargotech.com",
+        "caseStudyUrl": "/projects/sargotech",
+        "githubRepositoryUrl": "",
+        "year": 2026
+      },
+      {
         "title": "VB Solutions",
         "shortDescription": "Landing page for a business automation consultancy with Odoo and AI.",
         "description": "Modern landing page for a business automation consultancy specializing in Odoo and AI solutions. Features smooth animations, responsive design, and an intuitive interface to showcase digital transformation services.",
@@ -337,7 +351,8 @@
         ],
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
-        "year": 2024
+        "year": 2024,
+        "caseStudyUrl": "/projects/tracky"
       },
       {
         "title": "Chatify",
@@ -356,7 +371,8 @@
         ],
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
-        "year": 2024
+        "year": 2024,
+        "caseStudyUrl": "/projects/chatify"
       },
       {
         "title": "Blog",
@@ -448,7 +464,8 @@
         "technologies": ["Python", "Numpy", "Pygame"],
         "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
         "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-        "year": 2022
+        "year": 2022,
+        "caseStudyUrl": "/projects/chess-ai"
       },
       {
         "title": "Real Estate App",
@@ -607,7 +624,6 @@
         "url": "/projects"
       },
       "hero": {
-        "eyebrow": "Case study",
         "summary": "Viollet is a side project I designed and built end to end. It connects Gmail, ingests bank transaction notifications, categorizes spending with AI, and surfaces budgets and insights without asking for online banking credentials.",
         "technologies": [
           "TypeScript",
@@ -1093,11 +1109,7 @@
             {
               "id": "overview",
               "prompt": "What is my net this month?",
-              "keywords": [
-                "my net",
-                "net this",
-                "net balance"
-              ],
+              "keywords": ["my net", "net this", "net balance"],
               "tool": "get_financial_overview",
               "args": "period: this-month",
               "result": "Income RD$50,000 · expenses RD$32,955 · net RD$17,045",
@@ -1106,11 +1118,7 @@
             {
               "id": "budget",
               "prompt": "Create a monthly transportation budget of RD$4,500",
-              "keywords": [
-                "create a",
-                "budget of",
-                "rd$4,500"
-              ],
+              "keywords": ["create a", "budget of", "rd$4,500"],
               "tool": "create_budget",
               "args": "category: transportation · amountCents: 450000 · period: monthly",
               "result": "The tool would write the budget. This page only shows the call.",

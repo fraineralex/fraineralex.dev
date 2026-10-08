@@ -234,7 +234,19 @@
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "imageSrc": "tracky.webp",
-        "starsOnGithub": 25
+        "starsOnGithub": 25,
+        "caseStudyUrl": "/es/projects/tracky"
+      },
+      {
+        "projectName": "SargoTech",
+        "description": "Tecnología costera desde República Dominicana que anticipa el sargazo con datos satelitales, barreras antisargazo y operación local. Un proyecto en equipo donde soy el CTO y desarrollador principal.",
+        "technologies": ["React", "TypeScript", "MapLibre"],
+        "deployUrl": "https://sargotech.com",
+        "caseStudyUrl": "/es/projects/sargotech",
+        "githubRepositoryUrl": "",
+        "imageSrc": "sargotech-og.webp",
+        "imageAlt": "SargoTech logo, Costas Inteligentes",
+        "starsOnGithub": 0
       },
       {
         "projectName": "Chatify",
@@ -253,16 +265,8 @@
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
         "imageSrc": "chatify.webp",
-        "starsOnGithub": 14
-      },
-      {
-        "projectName": "VB Solutions",
-        "description": "Landing page moderna para una consultoría de automatización empresarial especializada en soluciones Odoo e IA. Cuenta con animaciones fluidas, diseño responsivo e interfaz intuitiva para mostrar servicios de transformación digital.",
-        "technologies": ["TypeScript", "Next.js", "React", "Tailwind", "Shadcn/ui"],
-        "deployUrl": "https://vbsolutions.info",
-        "githubRepositoryUrl": "https://github.com/fraineralex/vbs-landing",
-        "imageSrc": "vbs.avif",
-        "starsOnGithub": 0
+        "starsOnGithub": 14,
+        "caseStudyUrl": "/es/projects/chatify"
       }
     ],
     "link": {
@@ -309,6 +313,16 @@
         "year": 2026
       },
       {
+        "title": "SargoTech",
+        "shortDescription": "Inteligencia costera contra el sargazo. Proyecto en equipo, soy CTO.",
+        "description": "Tecnología costera desde República Dominicana que anticipa el sargazo con datos satelitales, barreras antisargazo y operación local. Un proyecto en equipo donde soy el CTO y desarrollador principal.",
+        "technologies": ["React", "TypeScript", "MapLibre"],
+        "deployUrl": "https://sargotech.com",
+        "caseStudyUrl": "/es/projects/sargotech",
+        "githubRepositoryUrl": "",
+        "year": 2026
+      },
+      {
         "title": "VB Solutions",
         "shortDescription": "Landing page para consultoría de automatización empresarial con Odoo e IA.",
         "description": "Landing page moderna para una consultoría de automatización empresarial especializada en soluciones Odoo e IA. Cuenta con animaciones fluidas, diseño responsivo e interfaz intuitiva para mostrar servicios de transformación digital.",
@@ -340,7 +354,8 @@
         ],
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
-        "year": 2024
+        "year": 2024,
+        "caseStudyUrl": "/es/projects/tracky"
       },
       {
         "title": "Chatify",
@@ -360,7 +375,8 @@
         ],
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
-        "year": 2024
+        "year": 2024,
+        "caseStudyUrl": "/es/projects/chatify"
       },
       {
         "title": "Blog",
@@ -609,7 +625,6 @@
         "url": "/es/projects"
       },
       "hero": {
-        "eyebrow": "Caso de estudio",
         "summary": "Viollet es un proyecto personal que diseñé y construí de punta a punta. Conecta Gmail, ingiere notificaciones de transacciones bancarias, categoriza gastos con IA y muestra presupuestos e insights sin pedir credenciales de banca en línea.",
         "technologies": [
           "TypeScript",
@@ -1096,11 +1111,7 @@
             {
               "id": "overview",
               "prompt": "¿Cuál es mi neto este mes?",
-              "keywords": [
-                "mi neto",
-                "neto este",
-                "balance neto"
-              ],
+              "keywords": ["mi neto", "neto este", "balance neto"],
               "tool": "get_financial_overview",
               "args": "period: this-month",
               "result": "Ingresos RD$50,000 · gastos RD$32,955 · neto RD$17,045",
@@ -1109,11 +1120,7 @@
             {
               "id": "budget",
               "prompt": "Crea un presupuesto mensual de transporte por RD$4,500",
-              "keywords": [
-                "presupuesto",
-                "rd$4,500",
-                "crea un"
-              ],
+              "keywords": ["presupuesto", "rd$4,500", "crea un"],
               "tool": "create_budget",
               "args": "category: transportation · amountCents: 450000 · period: monthly",
               "result": "La tool escribiría el presupuesto. Aquí solo se muestra la llamada.",

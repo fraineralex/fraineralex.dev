@@ -2,12 +2,12 @@
 
 /*
  * Adapted from the public coastal map on the SargoTech landing: same layers,
- * clustering and colors. This copy runs in reference mode only, with no live
- * readings, so every beach shows as a neutral marker and the legend explains
- * what each color means on the live site. Neutral vector basemap from public
- * domain outlines with self hosted glyphs, so nothing is fetched from third
- * party services. Adds ES/EN copy, cooperative gestures, a keyboard beach
- * picker and reduced motion camera moves.
+ * clustering and colors. This copy has no live readings. Each beach gets an
+ * illustrative level derived only from its coordinates and name (sample data,
+ * labeled on screen), so the traffic light can be seen working. Neutral vector
+ * basemap from public domain outlines with self hosted glyphs, so nothing is
+ * fetched from third party services. Adds ES/EN copy, cooperative gestures, a
+ * keyboard beach picker and reduced motion camera moves.
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Compass, MousePointer2, Satellite, X } from 'lucide-react'
@@ -19,25 +19,25 @@ import coast from './coast.json'
 import neighbors from './neighbors.json'
 
 type Lang = 'en' | 'es'
-type BeachProperties = { id: string; name: string }
+type Level = 'red' | 'yellow' | 'green'
+type BeachProperties = { id: string; name: string; level: Level; score: number }
 
 const COPY = {
 	es: {
 		aria: 'Mapa interactivo del semáforo costero de República Dominicana',
 		toolbar: 'SEMÁFORO POR PLAYA',
-		mode: 'REFERENCIA COSTERA',
+		mode: 'DATOS DE EJEMPLO',
 		country: 'República Dominicana',
 		observed: (n: number) => `${n} playas en el mapa`,
-		note: 'Modo de referencia: aquí no hay lecturas en vivo, así que cada playa aparece en gris. En el sitio en vivo cada una toma su color.',
+		note: 'Datos de ejemplo: los colores muestran cómo funciona el semáforo, no son lecturas reales. En el sitio en vivo cada playa toma su color según la cantidad de sargazo.',
 		legend: 'Semáforo costero',
 		red: ['Rojo', 'impacto probable'],
 		yellow: ['Amarillo', 'sargazo próximo'],
 		green: ['Verde', 'sin alerta cercana'],
-		neutral: ['Gris', 'sin lectura en vivo'],
-		status: 'SIN LECTURA',
+		levels: { red: 'ROJO', yellow: 'AMARILLO', green: 'VERDE' },
 		close: 'Cerrar detalle',
 		statusLabel: 'Estado',
-		statusValue: 'Modo de referencia',
+		statusValue: 'Datos de ejemplo',
 		coords: 'Coordenadas',
 		drag: 'Arrastra para explorar',
 		rotate: 'Ctrl + arrastrar para girar',
@@ -48,19 +48,18 @@ const COPY = {
 	en: {
 		aria: 'Interactive coastal traffic light map of the Dominican Republic',
 		toolbar: 'TRAFFIC LIGHT PER BEACH',
-		mode: 'COASTAL REFERENCE',
+		mode: 'SAMPLE DATA',
 		country: 'Dominican Republic',
 		observed: (n: number) => `${n} beaches on the map`,
-		note: 'Reference mode: there are no live readings here, so every beach shows in gray. On the live site each one takes its color.',
+		note: 'Sample data: the colors show how the traffic light works, they are not real readings. On the live site each beach takes its color from the amount of sargassum.',
 		legend: 'Coastal traffic light',
 		red: ['Red', 'likely impact'],
 		yellow: ['Yellow', 'sargassum nearby'],
 		green: ['Green', 'no nearby alert'],
-		neutral: ['Gray', 'no live reading'],
-		status: 'NO READING',
+		levels: { red: 'RED', yellow: 'YELLOW', green: 'GREEN' },
 		close: 'Close detail',
 		statusLabel: 'Status',
-		statusValue: 'Reference mode',
+		statusValue: 'Sample data',
 		coords: 'Coordinates',
 		drag: 'Drag to explore',
 		rotate: 'Ctrl + drag to rotate',
@@ -70,8 +69,29 @@ const COPY = {
 	},
 } as const
 
-// Reference mode has no live readings, so markers use a neutral color.
-const NEUTRAL = '#94a3b8'
+const COLORS: Record<Level, string> = { red: '#ef4444', yellow: '#f59e0b', green: '#22c55e' }
+const SCORE: Record<Level, number> = { red: 3, yellow: 2, green: 1 }
+
+/**
+ * Illustrative level for the sample map, derived only from coordinates and
+ * name: the east and south east coasts lean red, the north coast is mixed and
+ * the west leans green, with a stable per beach variation. Not real data.
+ */
+function sampleLevel(name: string, lat: number, lon: number): Level {
+	let hash = 0
+	for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0
+	const jitter = ((hash % 1000) / 1000 - 0.5) * 0.5
+	let base = 0.15
+	if (lon > -68.95) base = 0.8
+	else if (lat < 18.6 && lon > -70.2) base = 0.55
+	else if (lat > 19.25 && lon > -70.4) base = 0.5
+	else if (lat < 18.6 && lon > -70.9) base = 0.3
+	const value = base + jitter
+	return value > 0.62 ? 'red' : value > 0.36 ? 'yellow' : 'green'
+}
+
+const levelColor = ['match', ['get', 'level'], 'red', COLORS.red, 'yellow', COLORS.yellow, COLORS.green] as unknown as string
+const clusterColor = ['match', ['get', 'maxScore'], 3, COLORS.red, 2, COLORS.yellow, COLORS.green] as unknown as string
 
 function prefersReducedMotion() {
 	return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -83,13 +103,15 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 	const mapRef = useRef<MapLibreMap | null>(null)
 	const [selectedId, setSelectedId] = useState<string | null>(null)
 
-	const beaches = useMemo(() => dominicanBeaches.map((beach, index) => ({ ...beach, id: `beach-${index}` })), [])
+	const beaches = useMemo(() => dominicanBeaches.map((beach, index) => ({ ...beach, id: `beach-${index}`, level: sampleLevel(beach.name, beach.lat, beach.lon) })), [])
+
+	const counts = useMemo(() => beaches.reduce((total, beach) => ({ ...total, [beach.level]: total[beach.level] + 1 }), { red: 0, yellow: 0, green: 0 } as Record<Level, number>), [beaches])
 
 	const semaphoreFeatures = useMemo(
 		() => ({
 			type: 'FeatureCollection' as const,
 			features: beaches.map((beach) => {
-				const properties: BeachProperties = { id: beach.id, name: beach.name }
+				const properties: BeachProperties = { id: beach.id, name: beach.name, level: beach.level, score: SCORE[beach.level] }
 				return { type: 'Feature' as const, properties, geometry: { type: 'Point' as const, coordinates: [beach.lon, beach.lat] as [number, number] } }
 			}),
 		}),
@@ -118,7 +140,7 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 				sources: {
 					'neighbor-land': { type: 'geojson', data: neighbors as GeoJSONSourceSpecification['data'] },
 					'dominican-emphasis': { type: 'geojson', data: coast as GeoJSONSourceSpecification['data'] },
-					'beach-semaphore': { type: 'geojson', data: semaphoreFeatures, cluster: true, clusterRadius: 28, clusterMaxZoom: 8 },
+					'beach-semaphore': { type: 'geojson', data: semaphoreFeatures, cluster: true, clusterRadius: 28, clusterMaxZoom: 8, clusterProperties: { maxScore: ['max', ['get', 'score']] } },
 				},
 				layers: [
 					{ id: 'neutral-sea', type: 'background', paint: { 'background-color': '#08243a' } },
@@ -131,11 +153,11 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 		})
 		map.addControl(new maplibregl.NavigationControl({ visualizePitch: true, showCompass: true, showZoom: true }), 'bottom-right')
 		map.on('load', () => {
-			map.addLayer({ id: 'landing-beach-clusters-halo', type: 'circle', source: 'beach-semaphore', filter: ['has', 'point_count'], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 21, 9, 29], 'circle-color': NEUTRAL, 'circle-opacity': 0.24, 'circle-blur': 0.45 } })
-			map.addLayer({ id: 'landing-beach-clusters', type: 'circle', source: 'beach-semaphore', filter: ['has', 'point_count'], paint: { 'circle-radius': ['interpolate', ['linear'], ['get', 'point_count'], 2, 13, 8, 19, 20, 26], 'circle-color': NEUTRAL, 'circle-stroke-color': 'rgba(255,255,255,.9)', 'circle-stroke-width': 2, 'circle-opacity': 0.96 } })
+			map.addLayer({ id: 'landing-beach-clusters-halo', type: 'circle', source: 'beach-semaphore', filter: ['has', 'point_count'], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 21, 9, 29], 'circle-color': clusterColor, 'circle-opacity': 0.24, 'circle-blur': 0.45 } })
+			map.addLayer({ id: 'landing-beach-clusters', type: 'circle', source: 'beach-semaphore', filter: ['has', 'point_count'], paint: { 'circle-radius': ['interpolate', ['linear'], ['get', 'point_count'], 2, 13, 8, 19, 20, 26], 'circle-color': clusterColor, 'circle-stroke-color': 'rgba(255,255,255,.9)', 'circle-stroke-width': 2, 'circle-opacity': 0.96 } })
 			map.addLayer({ id: 'landing-beach-count', type: 'symbol', source: 'beach-semaphore', filter: ['has', 'point_count'], layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['sans-semibold'], 'text-size': 12, 'text-allow-overlap': true }, paint: { 'text-color': '#fff', 'text-halo-color': 'rgba(2,6,23,.72)', 'text-halo-width': 1.2 } })
-			map.addLayer({ id: 'landing-beach-points-halo', type: 'circle', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 10, 11, 17], 'circle-color': NEUTRAL, 'circle-opacity': 0.28, 'circle-blur': 0.45 } })
-			map.addLayer({ id: 'landing-beach-points', type: 'circle', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 7, 11, 11], 'circle-color': NEUTRAL, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2, 'circle-opacity': 0.98 } })
+			map.addLayer({ id: 'landing-beach-points-halo', type: 'circle', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 10, 11, 17], 'circle-color': levelColor, 'circle-opacity': 0.28, 'circle-blur': 0.45 } })
+			map.addLayer({ id: 'landing-beach-points', type: 'circle', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 7, 11, 11], 'circle-color': levelColor, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2, 'circle-opacity': 0.98 } })
 			map.addLayer({ id: 'landing-beach-labels', type: 'symbol', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], minzoom: 8.2, layout: { 'text-field': ['get', 'name'], 'text-font': ['sans-semibold'], 'text-size': 10, 'text-offset': [0, 1.3], 'text-anchor': 'top', 'text-optional': true }, paint: { 'text-color': '#f8fafc', 'text-halo-color': 'rgba(2,6,23,.9)', 'text-halo-width': 1.3 } })
 			map.on('click', 'landing-beach-clusters', (event) => {
 				const feature = event.features?.[0]
@@ -205,23 +227,18 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 					<h3>{t.legend}</h3>
 					<span className='red'>
 						<i />
-						<b>{t.red[0]}</b>
+						<b>{counts.red}</b> {t.red[0]}
 						<small>{t.red[1]}</small>
 					</span>
 					<span className='yellow'>
 						<i />
-						<b>{t.yellow[0]}</b>
+						<b>{counts.yellow}</b> {t.yellow[0]}
 						<small>{t.yellow[1]}</small>
 					</span>
 					<span className='green'>
 						<i />
-						<b>{t.green[0]}</b>
+						<b>{counts.green}</b> {t.green[0]}
 						<small>{t.green[1]}</small>
-					</span>
-					<span className='neutral'>
-						<i />
-						<b>{t.neutral[0]}</b>
-						<small>{t.neutral[1]}</small>
 					</span>
 				</aside>
 				{selected && (
@@ -229,9 +246,9 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 						<button type='button' onClick={() => setSelectedId(null)} aria-label={t.close}>
 							<X size={16} aria-hidden />
 						</button>
-						<span className='detail-level neutral'>
+						<span className={`detail-level ${selected.level}`}>
 							<i />
-							{t.status}
+							{t.levels[selected.level]}
 						</span>
 						<h3>{selected.name}</h3>
 						<dl>

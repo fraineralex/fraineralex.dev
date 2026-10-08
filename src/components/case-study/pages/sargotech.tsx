@@ -27,7 +27,7 @@ const COPY = {
 			],
 		},
 		caption:
-			'The same map as the public site, shown here in reference mode over a simplified basemap. Without live readings every beach is gray; on sargotech.com each one takes its color.',
+			'The same map as the public site, over a simplified basemap. The colors here are sample data that show how the traffic light works; on sargotech.com each beach takes its color from the amount of sargassum.',
 		c2: {
 			title: 'How a beach turns red',
 			body: [
@@ -91,7 +91,7 @@ const COPY = {
 			],
 		},
 		caption:
-			'El mismo mapa del sitio público, aquí en modo de referencia sobre un mapa base simplificado. Sin lecturas en vivo cada playa aparece en gris; en sargotech.com cada una toma su color.',
+			'El mismo mapa del sitio público, sobre un mapa base simplificado. Los colores aquí son datos de ejemplo que muestran cómo funciona el semáforo; en sargotech.com cada playa toma su color según la cantidad de sargazo.',
 		c2: {
 			title: 'Cómo una playa se pone en rojo',
 			body: [

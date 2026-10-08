@@ -92,7 +92,6 @@
 @media(prefers-reduced-motion:reduce){.sargo-obs .public-map-live.live i{animation:none}
 }
 .sargo-obs .public-command-map:focus-within{border-color:#38bdf8}
-/* Reference legend: label and description, no counts */
-.sargo-obs .public-semaphore-legend>span,.sargo-obs .public-semaphore-legend>span{grid-template-columns:13px 1fr;row-gap:1px}
-.sargo-obs .public-semaphore-legend b{font-family:inherit;font-weight:600;color:#dce8ef}
-.sargo-obs .public-semaphore-legend small{grid-column:2}
+.sargo-obs .detail-level.red{color:#f87171}
+.sargo-obs .detail-level.yellow{color:#fbbf24}
+.sargo-obs .detail-level.green{color:#4ade80}

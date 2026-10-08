@@ -14,6 +14,16 @@ function InteractiveFallback () {
   )
 }
 
+function Placeholder ({ body }: { body: string }) {
+  return (
+    <div className='mt-6 overflow-hidden rounded-xl border border-slate-700/60 bg-slate-950/60' aria-hidden='true'>
+      <div className='h-[60px] border-b border-slate-700/60 bg-slate-900/40' />
+      <div className={`animate-pulse bg-slate-900/30 motion-reduce:animate-none ${body}`} />
+      <div className='h-[60px] border-t border-slate-700/60' />
+    </div>
+  )
+}
+
 function HeroFallback () {
   return (
     <div
@@ -49,6 +59,12 @@ const ChatSim = dynamic(() => import('./viollet/chat-sim'), {
 })
 const GmailSync = dynamic(() => import('./viollet/gmail-sync'), {
   loading: InteractiveFallback
+})
+const AlertLanesScene = dynamic(() => import('./viollet/alert-lanes-scene'), {
+  loading: () => <Placeholder body='h-[640px] sm:h-[480px]' />
+})
+const EmailLedgerScene = dynamic(() => import('./viollet/email-ledger-scene'), {
+  loading: () => <Placeholder body='h-[900px] sm:h-[332px]' />
 })
 
 interface Props {
@@ -167,6 +183,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
         </SectionBlock>
 
         <SectionBlock section={sections.architecture}>
+          <EmailLedgerScene lang={lang} />
           <ArchitectureDiagram copy={interactives.architecture} />
           <p className='mt-3 text-center text-sm text-slate-500'>
             {sections.architecture.diagramCaption}
@@ -197,6 +214,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
         </section>
 
         <SectionBlock section={sections.impact}>
+          <AlertLanesScene lang={lang} />
           <BankCoverage copy={interactives.banks} />
         </SectionBlock>
         <SectionBlock section={sections.assistant}>

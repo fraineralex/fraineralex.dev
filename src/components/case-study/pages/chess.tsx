@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic'
-import { BackLink, Card, Chapter, Decisions, Hero, Outro, P, Shell, Stage, Statement } from '../kit/layout'
+import { BackLink, Chapter, Decisions, Hero, Outro, P, Shell, Stage, Statement } from '../kit/layout'
 import { StageCaption } from '../kit/blocks'
-import Flow from '../kit/flow'
-import { backLink, flowLabels, type Lang } from './shared'
+import AlphaBetaScene from '../chess/alphabeta-scene'
+import EvalScene from '../chess/eval-scene'
+import { backLink, type Lang } from './shared'
 
 const ChessLab = dynamic(() => import('../chess/chess-lab'), {
 	loading: () => <div className='h-[720px] animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none lg:h-[560px]' aria-hidden />,
@@ -16,7 +17,6 @@ const PIECES = [
 	{ glyph: '♕', value: 90 },
 ]
 
-const GOOD: Record<string, number> = { e4: 1, e5: 1, d4: 1, d5: 1, c6: 0.5, d6: 0.5, e6: 0.5, f6: 0.5, c3: 0.5, d3: 0.5, e3: 0.5, f3: 0.5, c4: 0.5, c5: 0.5, f4: 0.5, f5: 0.5 }
 
 const COPY = {
 	en: {
@@ -121,8 +121,6 @@ const COPY = {
 	},
 } as const
 
-const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-
 export default function ChessCaseStudy({ lang }: { lang: Lang }) {
 	const t = COPY[lang]
 	const back = backLink(lang)
@@ -140,11 +138,14 @@ export default function ChessCaseStudy({ lang }: { lang: Lang }) {
 				))}
 			</Chapter>
 
-			<Chapter n='02' title={t.c2.title} aside={<Flow steps={[...t.steps]} labels={flowLabels[lang]} note={t.flowNote} />}>
+			<Chapter n='02' title={t.c2.title}>
 				{t.c2.body.map((p) => (
 					<P key={p}>{p}</P>
 				))}
 			</Chapter>
+			<Stage>
+				<AlphaBetaScene lang={lang} />
+			</Stage>
 
 			<Statement>{t.statement}</Statement>
 
@@ -153,50 +154,8 @@ export default function ChessCaseStudy({ lang }: { lang: Lang }) {
 					<P key={p}>{p}</P>
 				))}
 			</Chapter>
-			<Stage className='grid gap-4 lg:grid-cols-2'>
-				<Card>
-					<h3 className='font-mono text-[11px] uppercase tracking-wider text-teal-300'>{t.piecesTitle}</h3>
-					<ul className='mt-5 space-y-3'>
-						{PIECES.map((piece) => (
-							<li key={piece.glyph} className='grid grid-cols-[2rem_1fr_2.5rem] items-center gap-3'>
-								<span className='text-2xl leading-none text-slate-100' aria-hidden>
-									{piece.glyph}
-								</span>
-								<span className='h-2 overflow-hidden rounded-full bg-slate-700/60'>
-									<span className='block h-full rounded-full bg-teal-400' style={{ width: `${(piece.value / 90) * 100}%` }} />
-								</span>
-								<span className='text-right font-mono text-sm text-slate-200'>{piece.value}</span>
-							</li>
-						))}
-					</ul>
-					<p className='mt-5 flex items-center gap-3 text-sm text-slate-400'>
-						<span className='text-2xl leading-none text-slate-100' aria-hidden>
-							♔
-						</span>
-						{t.kingNote}
-					</p>
-				</Card>
-				<Card>
-					<h3 className='font-mono text-[11px] uppercase tracking-wider text-teal-300'>{t.squaresTitle}</h3>
-					<div className='mx-auto mt-5 grid max-w-[280px] grid-cols-8 overflow-hidden rounded-lg border border-slate-700/60' role='img' aria-label={t.squaresNote}>
-						{[8, 7, 6, 5, 4, 3, 2, 1].flatMap((rank) =>
-							FILES.map((file, fi) => {
-								const sq = `${file}${rank}`
-								const v = GOOD[sq] ?? 0
-								const dark = (fi + rank) % 2 === 0
-								return (
-									<span
-										key={sq}
-										className={`flex aspect-square items-center justify-center font-mono text-[9px] leading-none ${v === 1 ? 'bg-teal-400 text-slate-950' : v === 0.5 ? 'bg-teal-400/40 text-slate-100' : dark ? 'bg-slate-950/50' : 'bg-slate-700/40'}`}
-									>
-										{v ? v : ''}
-									</span>
-								)
-							}),
-						)}
-					</div>
-					<p className='mt-5 text-sm text-slate-400'>{t.squaresNote}</p>
-				</Card>
+			<Stage>
+				<EvalScene lang={lang} pieces={PIECES} piecesTitle={t.piecesTitle} kingNote={t.kingNote} squaresTitle={t.squaresTitle} squaresNote={t.squaresNote} />
 			</Stage>
 
 			<Decisions title={t.decisionsTitle} items={[...t.decisions]} />

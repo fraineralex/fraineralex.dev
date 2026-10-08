@@ -23,7 +23,7 @@ function HeroFallback () {
   )
 }
 
-const AppReplica = dynamic(() => import('./viollet/app-replica'), {
+const AppReplica = dynamic(() => import('./viollet/app-embed'), {
   loading: HeroFallback
 })
 const InboxExplorer = dynamic(() => import('./viollet/inbox-explorer'), {
@@ -101,9 +101,6 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
             <FiArrowLeft className='mr-1 h-4 w-4 transition-transform group-hover:-translate-x-2 motion-reduce:transition-none' />
             {backLink.label}
           </Link>
-          <p className='mb-3 text-sm font-medium uppercase tracking-widest text-teal-300/80'>
-            {hero.eyebrow}
-          </p>
           <h1 className='text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl'>
             {meta.title}
           </h1>

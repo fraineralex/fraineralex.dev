@@ -1,11 +1,34 @@
 'use client'
 
 import { useReducedMotion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import {
+  Activity,
+  Building2,
+  CheckCircle2,
+  Code,
+  CreditCard,
+  DollarSign,
+  FileText,
+  Mail,
+  Tag
+} from 'lucide-react'
+import { useEffect, useState, type ReactNode } from 'react'
+import type { LucideIcon } from 'lucide-react'
 import type { Locale } from '@/i18n-config'
 import type { ViolletControlsCopy, ViolletParseCopy } from '@/types/case-study-types'
 import { formatDop } from './format'
+import { kicker } from './tokens'
 import { InteractivePanel, StepControls } from './ui'
+
+const badge =
+  'inline-flex min-h-5 shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-md border px-1.5 py-0.5 text-xs font-medium leading-none'
+
+const cardFrame =
+  'min-w-0 rounded-xl border shadow-sm transition-[border-color,box-shadow] duration-300 motion-reduce:transition-none'
+
+const activeTone = 'border-teal-300/60 bg-slate-800/70 ring-2 ring-teal-300/25'
+const pendingTone = 'border-teal-400/35 bg-slate-800/50'
+const idleTone = 'border-slate-700/60 bg-slate-800/40'
 
 export default function ParsePipeline ({
   copy,
@@ -41,6 +64,87 @@ export default function ParsePipeline ({
   const showExtract = step >= 3
   const showCategory = step >= 4
   const showStored = step >= 5
+  const emailTone = step < 2 ? activeTone : idleTone
+  const ledgerTone = showStored ? activeTone : showExtract ? pendingTone : idleTone
+
+  const ledgerFields: LedgerField[] = [
+    {
+      key: 'merchant',
+      icon: Mail,
+      label: copy.merchant,
+      value: <span className='text-sm font-medium text-slate-200'>BRAVO LA ESPERILLA</span>
+    },
+    {
+      key: 'amount',
+      icon: DollarSign,
+      label: copy.amount,
+      value: (
+        <span className='block text-right'>
+          <span className='block text-xl font-bold leading-none tabular-nums text-rose-400 sm:text-2xl'>
+            {formatDop(-259100, lang)}
+          </span>
+          <span className='mt-1 block font-mono text-[11px] font-normal leading-none text-slate-500'>· -259100</span>
+        </span>
+      )
+    },
+    {
+      key: 'account',
+      icon: Building2,
+      label: copy.account,
+      value: <span className='block max-w-full truncate text-sm font-medium text-slate-200'>Visa Premia *7392</span>
+    },
+    {
+      key: 'type',
+      icon: CreditCard,
+      label: copy.typeLabel,
+      value: (
+        <span className={`${badge} border-transparent bg-orange-500/10 text-orange-300`}>
+          {copy.typeValue}
+        </span>
+      )
+    }
+  ]
+
+  if (showCategory) {
+    ledgerFields.push(
+      {
+        key: 'category',
+        icon: Tag,
+        label: copy.category,
+        value: (
+          <span className={`${badge} border-transparent bg-teal-400/15 text-teal-200`}>
+            {copy.categoryValue}
+          </span>
+        )
+      },
+      {
+        key: 'confidence',
+        icon: Activity,
+        label: copy.confidence,
+        value: <span className='text-sm font-medium text-slate-200'>{copy.confidenceValue}</span>
+      },
+      {
+        key: 'source',
+        icon: FileText,
+        label: copy.source,
+        value: <span className='font-mono text-xs font-medium text-slate-200'>{copy.sourceValue}</span>
+      }
+    )
+  }
+
+  if (showStored) {
+    ledgerFields.push({
+      key: 'stored',
+      icon: CheckCircle2,
+      iconClassName: 'text-emerald-300',
+      label: copy.stored,
+      value: (
+        <span className='block max-w-full font-mono text-xs font-normal break-all text-emerald-300'>
+          emails.gmailMessageId · onConflictDoNothing
+        </span>
+      )
+    })
+  }
 
   return (
     <InteractivePanel label={copy.title} title={copy.title} description={copy.description}>
@@ -67,56 +171,159 @@ export default function ParsePipeline ({
         }}
       />
 
-      <div className='mt-4 grid gap-3 lg:grid-cols-2' aria-live='polite'>
-        <article className={`rounded-lg border p-4 ${step < 2 ? 'border-teal-300/70 bg-teal-400/10' : 'border-slate-700 bg-slate-900/70'}`}>
-          <p className='text-[11px] uppercase tracking-wide text-teal-200/80'>{step >= 1 ? 'Banreservas' : copy.rawLabel}</p>
-          <p className='mt-2 text-xs text-slate-400'>{copy.fromLabel} notificaciones@banreservas.com</p>
-          <h4 className='mt-2 text-sm font-medium text-slate-100'>{copy.subjectLabel} BRAVO LA ESPERILLA</h4>
-          <p className={`mt-3 whitespace-pre-wrap text-sm leading-relaxed ${showClean ? 'text-slate-200' : 'text-slate-400'}`}>
-            {'Transacción en Visa Premia ••7392\nMonto: DOP 2,591.00'}
-            {!showClean && `\n\n${copy.disclaimer}`}
-          </p>
-          {showClean && (
-            <p className='mt-3 text-xs text-teal-100'>{copy.cleanedLabel}</p>
-          )}
+      <div className='mt-5 grid min-w-0 items-start gap-3 lg:grid-cols-2' aria-live='polite'>
+        <article className={`${cardFrame} p-4 sm:p-6 ${emailTone}`}>
+          <div className='space-y-4'>
+            <div className='space-y-1'>
+              <p className={kicker}>{copy.subjectLabel}</p>
+              <h4 className='text-xl font-semibold break-words text-slate-200'>BRAVO LA ESPERILLA</h4>
+              <div className='flex flex-wrap items-center gap-2 text-sm text-slate-400'>
+                <span className='font-medium text-slate-200'>{step >= 1 ? 'Banreservas' : copy.rawLabel}</span>
+                <span className='hidden sm:inline' aria-hidden='true'>-</span>
+                <span className='text-xs break-all sm:text-sm'>
+                  <span className='text-slate-500'>{copy.fromLabel}</span>
+                  {' '}
+                  notificaciones@banreservas.com
+                </span>
+              </div>
+            </div>
+            <div className='flex flex-wrap items-center gap-2'>
+              <span className={`${badge} border-slate-600 text-slate-300`}>
+                <CreditCard className='size-3 shrink-0' aria-hidden='true' />
+                Visa Premia ••7392
+              </span>
+              {step >= 1 && (
+                <span className={`${badge} border-transparent bg-slate-800/60 text-slate-200`}>
+                  <span
+                    aria-hidden='true'
+                    className='flex size-5 shrink-0 items-center justify-center overflow-hidden rounded text-[10px] font-bold leading-none text-white'
+                    style={{ backgroundColor: '#264E72' }}
+                  >
+                    B
+                  </span>
+                  Banreservas
+                </span>
+              )}
+              <span className={`${badge} ${
+                showClean
+                  ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-300'
+                  : 'border-slate-600 text-slate-400'
+              }`}
+              >
+                {showClean
+                  ? <FileText className='size-3 shrink-0' aria-hidden='true' />
+                  : <Code className='size-3 shrink-0' aria-hidden='true' />}
+                {showClean ? 'text/plain' : 'text/html'}
+              </span>
+            </div>
+          </div>
+
+          <div aria-hidden='true' className='my-4 h-px w-full bg-slate-700/60' />
+
+          <div className='flex flex-col gap-6 overflow-hidden rounded-xl border border-slate-700/60 bg-slate-900/50 py-6 shadow-sm'>
+            <pre className={`overflow-hidden px-4 font-sans text-sm leading-relaxed break-words whitespace-pre-wrap transition-colors motion-reduce:transition-none sm:px-6 ${showClean ? 'text-slate-200' : 'text-slate-500'}`}>
+              {'Transacción en Visa Premia ••7392\nMonto: DOP 2,591.00'}
+              {!showClean && `\n\n${copy.disclaimer}`}
+            </pre>
+            {showClean && (
+              <p className='flex items-start gap-2 px-4 text-xs font-medium leading-relaxed text-emerald-300 sm:px-6'>
+                <CheckCircle2 className='mt-0.5 size-3.5 shrink-0' aria-hidden='true' />
+                {copy.cleanedLabel}
+              </p>
+            )}
+          </div>
         </article>
 
-        <article className={`rounded-lg border p-4 ${showStored ? 'border-teal-300/70 bg-teal-400/10' : 'border-slate-700 bg-slate-900/70'}`}>
-          <p className='text-[11px] uppercase tracking-wide text-teal-200/80'>{copy.ledgerLabel}</p>
-          {step < 3 ? (
-            <p className='mt-3 text-sm text-slate-400'>{copy.waiting}</p>
-          ) : (
-            <dl className='mt-3 space-y-2 text-sm'>
-              <Row label={copy.merchant} value='BRAVO LA ESPERILLA' />
-              <Row label={copy.amount} value={`${formatDop(-259100, lang)} · -259100`} />
-              <Row label={copy.account} value='Visa Premia *7392' />
-              <Row label={copy.typeLabel} value={copy.typeValue} />
-              {showCategory && (
-                <>
-                  <Row label={copy.category} value={copy.categoryValue} />
-                  <Row label={copy.confidence} value={copy.confidenceValue} />
-                  <Row label={copy.source} value={copy.sourceValue} />
-                </>
-              )}
-              {showStored && <Row label={copy.stored} value='emails.gmailMessageId · onConflictDoNothing' />}
-            </dl>
-          )}
+        <article className={`${cardFrame} flex h-fit flex-col gap-6 overflow-hidden py-6 text-slate-200 ${ledgerTone}`}>
+          <div className='grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 pb-3'>
+            <div className='flex items-center gap-2 text-base leading-none font-semibold'>
+              <Activity className='size-4 text-teal-300' aria-hidden='true' />
+              {copy.ledgerLabel}
+            </div>
+          </div>
+          <div className='space-y-3 px-6'>
+            {showExtract ? (
+              <>
+                <div className='flex items-center justify-between gap-3 rounded-lg p-3 transition-colors motion-reduce:transition-none hover:bg-slate-800/60'>
+                  <div className='flex min-w-0 flex-1 items-center gap-3'>
+                    <div aria-hidden='true' className='h-3 w-3 flex-shrink-0 rounded-full bg-teal-400' />
+                    <div className='min-w-0 flex-1'>
+                      <div className='flex min-w-0 items-center gap-2'>
+                        <p className='truncate text-sm font-medium text-slate-200'>BRAVO LA ESPERILLA</p>
+                        <Mail className='size-3 shrink-0 text-slate-500' aria-hidden='true' />
+                      </div>
+                      <div className='flex min-w-0 items-center gap-2 text-xs text-slate-400'>
+                        {showCategory && (
+                          <>
+                            <span className='truncate'>{copy.categoryValue}</span>
+                            <span aria-hidden='true'>•</span>
+                          </>
+                        )}
+                        <span className='truncate'>Visa Premia *7392</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className='shrink-0 text-right text-sm font-semibold tabular-nums text-slate-200'>
+                    {formatDop(-259100, lang)}
+                  </p>
+                </div>
+                <div>
+                  {ledgerFields.map((field, index) => (
+                    <FieldRow
+                      key={field.key}
+                      icon={field.icon}
+                      iconClassName={field.iconClassName}
+                      label={field.label}
+                      bordered={index < ledgerFields.length - 1}
+                    >
+                      {field.value}
+                    </FieldRow>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p className='py-8 text-center text-sm text-slate-500'>{copy.waiting}</p>
+            )}
+          </div>
         </article>
       </div>
 
-      <div className='mt-4 rounded-lg border border-slate-800 bg-slate-950/80 px-4 py-3'>
-        <h4 className='text-sm font-medium text-slate-100'>{current?.title}</h4>
+      <div className='mt-4 rounded-xl border border-teal-400/30 bg-teal-400/10 px-4 py-3.5'>
+        <h4 className='text-sm font-semibold text-teal-100'>{current?.title}</h4>
         <p className='mt-1 text-sm leading-relaxed text-slate-300'>{current?.body}</p>
       </div>
     </InteractivePanel>
   )
 }
 
-function Row ({ label, value }: { label: string; value: string }) {
+interface LedgerField {
+  key: string
+  icon: LucideIcon
+  iconClassName?: string
+  label: string
+  value: ReactNode
+}
+
+function FieldRow ({
+  icon: Icon,
+  iconClassName,
+  label,
+  bordered,
+  children
+}: {
+  icon: LucideIcon
+  iconClassName?: string
+  label: string
+  bordered: boolean
+  children: ReactNode
+}) {
   return (
-    <div className='grid grid-cols-1 gap-0.5 sm:grid-cols-[9rem_1fr]'>
-      <dt className='text-slate-400'>{label}</dt>
-      <dd className='font-mono text-xs text-teal-50 sm:text-sm'>{value}</dd>
+    <div className={`flex flex-wrap items-center justify-between gap-x-3 gap-y-1 py-2 ${bordered ? 'border-b border-slate-700/60' : ''}`}>
+      <div className='flex items-center gap-2 text-slate-400'>
+        <Icon className={`size-4 shrink-0 ${iconClassName ?? ''}`} aria-hidden='true' />
+        <span className='text-sm'>{label}</span>
+      </div>
+      <div className='ml-auto min-w-0 max-w-full text-right'>{children}</div>
     </div>
   )
 }

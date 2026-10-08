@@ -311,7 +311,6 @@ export interface CaseStudyContent {
     url: string
   }
   hero: {
-    eyebrow: string
     summary: string
     technologies: string[]
   }

@@ -79,5 +79,5 @@ export function proxy (request: NextRequest) {
 
 export const config = {
   // Ignore framework endpoints and public asset directories.
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images/|fonts/|content/).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images/|fonts/|content/|embeds/).*)']
 }

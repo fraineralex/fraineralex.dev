@@ -4,8 +4,9 @@ import { Pause, Play, RotateCcw, SkipBack, SkipForward } from 'lucide-react'
 import type { ReactNode } from 'react'
 import type { ViolletControlsCopy } from '@/types/case-study-types'
 
-export const focusRing =
-  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
+import { button, v } from './tokens'
+
+export { button, focusRing, inputClass, itemClass, kicker, pillClass, v, well } from './tokens'
 
 export function InteractivePanel ({
   label,
@@ -51,33 +52,31 @@ export function StepControls ({
   onNext: () => void
   onReplay: () => void
 }) {
-  const buttonClass = `inline-flex items-center gap-1.5 rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-sm font-medium text-slate-100 transition hover:border-teal-300/60 hover:text-teal-100 disabled:cursor-not-allowed disabled:opacity-40 ${focusRing}`
-
   return (
     <div className='flex flex-col gap-3'>
       <div className='flex flex-wrap items-center gap-2'>
-        <button type='button' className={buttonClass} onClick={onToggle} aria-pressed={playing}>
-          {playing ? <Pause className='h-4 w-4' aria-hidden='true' /> : <Play className='h-4 w-4' aria-hidden='true' />}
+        <button type='button' className={`${button.base} ${button.primary}`} onClick={onToggle} aria-pressed={playing}>
+          {playing ? <Pause className='size-4' aria-hidden='true' /> : <Play className='size-4' aria-hidden='true' />}
           {playing ? copy.pause : copy.play}
         </button>
-        <button type='button' className={buttonClass} onClick={onPrev} disabled={step === 0}>
-          <SkipBack className='h-4 w-4' aria-hidden='true' />
+        <button type='button' className={`${button.base} ${button.outline}`} onClick={onPrev} disabled={step === 0}>
+          <SkipBack className='size-4' aria-hidden='true' />
           {copy.previous}
         </button>
-        <button type='button' className={buttonClass} onClick={onNext} disabled={step === total - 1}>
-          <SkipForward className='h-4 w-4' aria-hidden='true' />
+        <button type='button' className={`${button.base} ${button.outline}`} onClick={onNext} disabled={step === total - 1}>
+          <SkipForward className='size-4' aria-hidden='true' />
           {copy.next}
         </button>
-        <button type='button' className={buttonClass} onClick={onReplay}>
-          <RotateCcw className='h-4 w-4' aria-hidden='true' />
+        <button type='button' className={`${button.base} ${button.ghost}`} onClick={onReplay}>
+          <RotateCcw className='size-4' aria-hidden='true' />
           {copy.replay}
         </button>
-        <p className='text-sm text-slate-400' aria-live='polite'>
+        <p className={`ml-auto text-xs font-medium tabular-nums ${v.muted}`} aria-live='polite'>
           {copy.step} {step + 1} {copy.of} {total}
         </p>
       </div>
       <div
-        className='h-1 overflow-hidden rounded-full bg-slate-800'
+        className={`h-1.5 overflow-hidden rounded-full ${v.secondary}`}
         role='progressbar'
         aria-valuemin={1}
         aria-valuemax={total}
@@ -85,7 +84,7 @@ export function StepControls ({
         aria-valuetext={`${copy.step} ${step + 1} ${copy.of} ${total}`}
       >
         <div
-          className='h-full rounded-full bg-teal-300 motion-reduce:transition-none transition-[width] duration-300'
+          className='h-full rounded-full bg-teal-300 transition-[width] duration-300 motion-reduce:transition-none'
           style={{ width: `${((step + 1) / total) * 100}%` }}
         />
       </div>

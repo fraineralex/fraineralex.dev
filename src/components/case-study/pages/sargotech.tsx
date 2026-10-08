@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { Building2, Landmark, MapPin } from 'lucide-react'
-import { BackLink, Card, Chapter, Decisions, Hero, MacWindow, Outro, P, Shell, Stage, Statement } from '../kit/layout'
+import { BackLink, Chapter, Decisions, Hero, MacWindow, Outro, P, Shell, Stage, Statement } from '../kit/layout'
 import { StageCaption, Tiles } from '../kit/blocks'
-import Flow from '../kit/flow'
+import { BeachScanScene, ResponseScene } from '../sargotech/scenes'
 import ObservatoryLazy from '../sargotech/observatory-lazy'
-import { backLink, flowLabels, type Lang } from './shared'
+import { backLink, type Lang } from './shared'
 
 const COPY = {
 	en: {
@@ -177,33 +177,22 @@ export default function SargoTechCaseStudy({ lang }: { lang: Lang }) {
 			<Chapter
 				n='02'
 				title={t.c2.title}
-				aside={
-					<Card>
-						<p className='font-mono text-[11px] uppercase tracking-wider text-teal-300'>{t.rules.title}</p>
-						<ul className='mt-4 space-y-3'>
-							{t.rules.items.map((rule) => (
-								<li key={rule.label} className='flex gap-3 rounded-lg border border-slate-700/60 bg-slate-900/50 p-3'>
-									<span className={`mt-1 size-2.5 shrink-0 rounded-full ${TONE[rule.tone]}`} aria-hidden />
-									<span>
-										<span className='block text-sm font-medium text-slate-100'>{rule.label}</span>
-										<span className='mt-0.5 block text-sm leading-relaxed text-slate-400'>{rule.text}</span>
-									</span>
-								</li>
-							))}
-						</ul>
-					</Card>
-				}
+				aside={<BeachScanScene lang={lang} rules={t.rules} />}
 			>
 				{t.c2.body.map((p) => (
 					<P key={p}>{p}</P>
 				))}
 			</Chapter>
 
-			<Chapter n='03' title={t.c3.title} aside={<Flow steps={[...t.steps]} labels={flowLabels[lang]} note={t.flowNote} />} flip>
+			<Chapter n='03' title={t.c3.title}>
 				{t.c3.body.map((p) => (
 					<P key={p}>{p}</P>
 				))}
 			</Chapter>
+			<Stage>
+				<ResponseScene lang={lang} steps={t.steps} />
+				<StageCaption>{t.flowNote}</StageCaption>
+			</Stage>
 
 			<section className='mt-14 scroll-mt-24'>
 				<h2 className='text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl'>{t.audiencesTitle}</h2>

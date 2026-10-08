@@ -204,9 +204,9 @@ function Chat({ elapsed, t }: { elapsed: number; t: Copy }) {
 					</article>
 				</Row>
 				<Row show={f.sticker} className='h-12 justify-start'>
-					<article className='relative w-fit rounded-lg border border-transparent px-1'>
+					<article className='flex w-fit items-end gap-1 rounded-lg border border-transparent px-1'>
 						<p className='px-1 text-4xl leading-none'>🎉</p>
-						<span className='absolute bottom-0 right-0 rounded bg-slate-800 px-1 text-[11px] font-medium text-slate-300'>{t.gif}</span>
+						<span className='rounded bg-slate-800 px-1 text-[11px] font-medium text-slate-300'>{t.gif}</span>
 					</article>
 				</Row>
 				<Row show={f.file} className='h-[3.25rem] justify-end'>

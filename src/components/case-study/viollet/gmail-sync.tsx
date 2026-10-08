@@ -152,7 +152,7 @@ export default function GmailSync ({ copy }: { copy: ViolletSyncCopy }) {
                   key={action}
                   type='button'
                   disabled={busy || index !== unlocked}
-                  className={`inline-flex min-h-9 w-full max-w-full items-center justify-center gap-1.5 whitespace-normal rounded-md px-3.5 py-2 text-center text-sm font-medium leading-none transition-colors motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-45 sm:w-auto sm:whitespace-nowrap sm:py-0 ${focusRing} ${index === unlocked ? button.primary : button.outline}`}
+                  className={`inline-flex min-h-11 sm:min-h-9 w-full max-w-full items-center justify-center gap-1.5 whitespace-normal rounded-md px-3.5 py-2 text-center text-sm font-medium leading-none transition-colors motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-45 sm:w-auto sm:whitespace-nowrap sm:py-0 ${focusRing} ${index === unlocked ? button.primary : button.outline}`}
                   onClick={() => run(action)}
                 >
                   <Icon className={`size-4 shrink-0 ${index < unlocked ? 'text-emerald-300' : ''} ${spinning ? 'animate-spin motion-reduce:animate-none' : ''}`} aria-hidden='true' />

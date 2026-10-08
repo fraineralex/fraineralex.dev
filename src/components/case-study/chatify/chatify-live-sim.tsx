@@ -1197,7 +1197,7 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
           <p className='text-[11px] font-medium uppercase tracking-wide text-teal-200/80'>{copy.sampleBadge}</p>
           <button
             type='button'
-            className={`inline-flex h-8 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-teal-400/15 px-3 text-xs font-medium leading-none text-teal-200 transition-colors hover:bg-teal-400/25 motion-reduce:transition-none ${focusRing}`}
+            className={`inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-teal-400/15 sm:h-8 px-3 text-xs font-medium leading-none text-teal-200 transition-colors hover:bg-teal-400/25 motion-reduce:transition-none ${focusRing}`}
             aria-pressed={replaying}
             onClick={() => {
               interacted.current = true
@@ -1227,7 +1227,7 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
                   aria-selected={selected}
                   aria-controls={`${uid}-panel-${side}`}
                   tabIndex={selected ? 0 : -1}
-                  className={`inline-flex h-8 min-w-0 items-center justify-center gap-1 rounded-md px-3 text-sm font-medium leading-none transition motion-reduce:transition-none ${focusRing} ${selected ? 'bg-teal-400/15 text-teal-100 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
+                  className={`inline-flex h-11 min-w-0 items-center justify-center gap-1 rounded-md px-3 text-sm sm:h-8 font-medium leading-none transition motion-reduce:transition-none ${focusRing} ${selected ? 'bg-teal-400/15 text-teal-100 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
                   onClick={() => setMobileView(side)}
                 >
                   {NAMES[side].split(' ')[0]}

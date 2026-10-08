@@ -23,7 +23,7 @@ export const focusRing =
 
 /** Buttons with fixed height and flex centered labels (shadcn sizes from the Viollet app). */
 export const button = {
-  base: `inline-flex h-9 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3.5 text-sm font-medium leading-none transition-colors motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-45 ${focusRing}`,
+  base: `inline-flex h-11 shrink-0 sm:h-9 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3.5 text-sm font-medium leading-none transition-colors motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-45 ${focusRing}`,
   primary: 'bg-teal-400/15 text-teal-200 hover:bg-teal-400/25',
   outline: 'border border-slate-700/60 bg-slate-900/60 text-slate-200 hover:border-teal-300/40 hover:text-teal-100',
   ghost: 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
@@ -40,7 +40,7 @@ export function itemClass (active: boolean) {
 
 /** Rounded pill filter or chip. */
 export function pillClass (active: boolean) {
-  return `inline-flex h-8 items-center justify-center rounded-full px-3 text-xs font-medium leading-none transition-colors motion-reduce:transition-none ${focusRing} ${
+  return `inline-flex h-11 items-center justify-center rounded-full px-3 sm:h-8 text-xs font-medium leading-none transition-colors motion-reduce:transition-none ${focusRing} ${
     active
       ? 'bg-teal-400/20 text-teal-100'
       : 'border border-slate-700/60 bg-slate-900/50 text-slate-300 hover:text-slate-100'
@@ -49,4 +49,4 @@ export function pillClass (active: boolean) {
 
 export const well = 'rounded-lg border border-slate-700/60 bg-slate-900/50 p-4'
 export const kicker = 'text-[11px] font-medium uppercase tracking-wide text-teal-200/80'
-export const inputClass = `h-9 w-full rounded-md border border-slate-700 bg-slate-950 px-3 text-sm text-slate-100 placeholder:text-slate-500 ${focusRing}`
+export const inputClass = `h-11 sm:h-9 w-full rounded-md border border-slate-700 bg-slate-950 px-3 text-sm text-slate-100 placeholder:text-slate-500 ${focusRing}`

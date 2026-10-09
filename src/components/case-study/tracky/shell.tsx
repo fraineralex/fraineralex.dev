@@ -5,6 +5,7 @@ import { Dumbbell, Github, Ham, House, Languages, Moon, NotepadText, Settings } 
 import { copy, type Lang } from './copy'
 import { PROFILE } from './data'
 import { focusRing, tk, TkButton } from './ui'
+import './scenes.css'
 import { MacWindow } from '../kit/mac-window'
 
 export type PageId = 'dashboard' | 'food' | 'exercise' | 'diary' | 'settings'
@@ -51,9 +52,9 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
     <header className='flex items-center justify-between gap-2 px-3 pb-2 pt-4 sm:px-5 sm:pt-6'>
       <div className='flex min-w-0 items-center gap-2'>
         <p className='font-serif text-2xl font-bold tracking-tight text-[#22c55e] sm:text-3xl' style={{ fontFamily: 'Georgia, "Iowan Old Style", Palatino, serif' }}>
-          trac<span className='text-[#efede5]'>ky</span>
+          trac<span className='text-[hsl(var(--foreground))]'>ky</span>
         </p>
-        <span className='hidden rounded-full border border-[hsl(217.2_32.6%_17.5%)] px-2.5 py-0.5 text-xs font-semibold sm:inline-flex'>{text.beta}</span>
+        <span className='hidden rounded-full border border-[hsl(var(--border))] px-2.5 py-0.5 text-xs font-semibold sm:inline-flex'>{text.beta}</span>
       </div>
       <div className='flex items-center gap-1 sm:gap-2'>
         <a
@@ -70,14 +71,14 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
             <Languages className='h-5 w-5' />
           </TkButton>
           {langOpen && (
-            <div role='menu' aria-label={text.switchLanguage} className='absolute right-0 z-20 mt-1 w-36 rounded-md border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(222.2_84%_4.9%)] p-1 shadow-lg'>
+            <div role='menu' aria-label={text.switchLanguage} className='absolute right-0 z-20 mt-1 w-36 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-1 shadow-lg'>
               {(['en', 'es'] as const).map((code) => (
                 <button
                   key={code}
                   type='button'
                   role='menuitemradio'
                   aria-checked={lang === code}
-                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(217.2_32.6%_17.5%)] ${focusRing} ${lang === code ? 'text-[#22c55e]' : ''}`}
+                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing} ${lang === code ? 'text-[#22c55e]' : ''}`}
                   onClick={() => { onLang(code); setLangOpen(false) }}
                 >
                   {text.languages[code]}
@@ -91,16 +92,16 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
             <Moon className='h-5 w-5' />
           </TkButton>
           {themeOpen && (
-            <div role='menu' aria-label={text.toggleTheme} className='absolute right-0 z-20 mt-1 w-32 rounded-md border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(222.2_84%_4.9%)] p-1 shadow-lg'>
+            <div role='menu' aria-label={text.toggleTheme} className='absolute right-0 z-20 mt-1 w-32 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-1 shadow-lg'>
               {(['light', 'dark', 'system'] as const).map((theme) => (
                 <button
                   key={theme}
                   type='button'
                   role='menuitemradio'
-                  aria-checked={theme === 'dark'}
-                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(217.2_32.6%_17.5%)] ${focusRing} ${theme === 'dark' ? 'text-[#22c55e]' : ''}`}
+                  aria-checked={theme === 'light'}
+                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing} ${theme === 'light' ? 'text-[#22c55e]' : ''}`}
                   onClick={() => {
-                    setThemeNote(theme === 'dark' ? '' : text.themeNote)
+                    setThemeNote(theme === 'light' ? '' : text.themeNote)
                     setThemeOpen(false)
                   }}
                 >
@@ -110,7 +111,7 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
             </div>
           )}
         </div>
-        <img src='/images/projects/viollet-user.webp' alt={PROFILE.name} className='h-7 w-7 rounded-full object-cover ring-1 ring-[hsl(217.2_32.6%_17.5%)]' />
+        <img src='/images/projects/viollet-user.webp' alt={PROFILE.name} className='h-7 w-7 rounded-full object-cover ring-1 ring-[hsl(var(--border))]' />
       </div>
       <p className='sr-only' aria-live='polite'>{themeNote}</p>
     </header>
@@ -131,7 +132,7 @@ function SideNav ({ lang, page, onPage }: { lang: Lang, page: PageId, onPage: (p
               type='button'
               aria-current={active ? 'page' : undefined}
               onClick={() => onPage(item.id)}
-              className={`inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md px-2.5 text-sm transition-colors motion-reduce:transition-none md:justify-start ${focusRing} ${active ? tk.active : 'text-[hsl(215_20.2%_65.1%)] hover:bg-[hsl(217.2_32.6%_17.5%)] hover:text-[hsl(210_40%_98%)]'}`}
+              className={`inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md px-2.5 text-sm transition-colors motion-reduce:transition-none md:justify-start ${focusRing} ${active ? tk.active : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--foreground))]'}`}
             >
               <Icon className='h-5 w-5 md:h-4 md:w-4' aria-hidden='true' />
               <span className='sr-only sm:not-sr-only sm:text-xs md:text-sm'>{navLabel(item.id, lang)}</span>
@@ -162,7 +163,7 @@ export default function TrackyFrame ({
   return (
     <section aria-label={text.appLabel} className='w-full max-w-full'>
       <MacWindow url={`tracky.fit/${PATHS[page]}`}>
-      <div className={`${tk.bg} ${tk.fg}`}>
+      <div className={`tracky-light ${tk.bg} ${tk.fg}`}>
       <div className='relative flex h-[640px] max-h-[85vh] min-h-[520px] flex-col sm:h-[700px]'>
         <Header lang={lang} onLang={onLang} />
         <div className='flex min-h-0 flex-1 flex-col md:flex-row'>

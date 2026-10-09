@@ -46,8 +46,8 @@ export function LineChart ({ title, labels, series, describedBy, yMin = 0, yMax 
       <svg viewBox={`0 0 ${width} ${height}`} role='img' aria-label={title} className='h-auto w-full'>
         {ticks.map((tick) => (
           <g key={tick}>
-            <line x1={pad.l} x2={width - pad.r} y1={y(tick)} y2={y(tick)} stroke='hsl(217.2 32.6% 17.5%)' strokeWidth='1' />
-            <text x={pad.l - 6} y={y(tick) + 3} textAnchor='end' fill='hsl(215 20.2% 65.1%)' fontSize='9'>{tick}</text>
+            <line x1={pad.l} x2={width - pad.r} y1={y(tick)} y2={y(tick)} stroke='hsl(var(--border))' strokeWidth='1' />
+            <text x={pad.l - 6} y={y(tick) + 3} textAnchor='end' fill='hsl(var(--muted-foreground))' fontSize='9'>{tick}</text>
           </g>
         ))}
         {series.map((item) => {
@@ -62,7 +62,7 @@ export function LineChart ({ title, labels, series, describedBy, yMin = 0, yMax 
           )
         })}
         {labels.map((label, index) => (
-          <text key={label} x={x(index)} y={height - 6} textAnchor='middle' fill={index === safeActive ? 'hsl(210 40% 98%)' : 'hsl(215 20.2% 65.1%)'} fontSize='9'>{label}</text>
+          <text key={label} x={x(index)} y={height - 6} textAnchor='middle' fill={index === safeActive ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))'} fontSize='9'>{label}</text>
         ))}
       </svg>
       <div className='mt-2 flex flex-wrap gap-1' role='group' aria-label={title}>
@@ -71,7 +71,7 @@ export function LineChart ({ title, labels, series, describedBy, yMin = 0, yMax 
             key={`${label}-${index}`}
             type='button'
             aria-pressed={index === safeActive}
-            className={`rounded-full px-2 py-1 text-[11px] transition-colors motion-reduce:transition-none ${focusRing} ${index === safeActive ? 'bg-[hsl(210_40%_98%)] text-[hsl(222.2_47.4%_11.2%)]' : `${tk.muted} hover:bg-[hsl(217.2_32.6%_17.5%)]`}`}
+            className={`rounded-full px-2 py-1 text-[11px] transition-colors motion-reduce:transition-none ${focusRing} ${index === safeActive ? 'bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]' : `${tk.muted} hover:bg-[hsl(var(--accent))]`}`}
             onClick={() => setActive(index)}
           >
             {label}
@@ -80,10 +80,10 @@ export function LineChart ({ title, labels, series, describedBy, yMin = 0, yMax 
       </div>
       <ul className='mt-2 flex flex-wrap gap-x-3 gap-y-1' aria-live='polite' id={describedBy}>
         {series.map((item) => (
-          <li key={item.id} className='flex items-center gap-1.5 text-[11px] text-[hsl(215_20.2%_65.1%)]'>
+          <li key={item.id} className='flex items-center gap-1.5 text-[11px] text-[hsl(var(--muted-foreground))]'>
             <span className='h-2 w-2 rounded-full' style={{ backgroundColor: item.color }} />
             <span>{item.label}</span>
-            <span className='tabular-nums text-[hsl(210_40%_98%)]'>{Math.round(item.values[safeActive] ?? 0)}</span>
+            <span className='tabular-nums text-[hsl(var(--foreground))]'>{Math.round(item.values[safeActive] ?? 0)}</span>
           </li>
         ))}
       </ul>
@@ -109,9 +109,9 @@ export function BarList ({ title, rows, suffix = '' }: { title: string, rows: Ba
         const barW = Math.max(0, Math.min(188, (row.value / max) * 188))
         return (
           <g key={row.label}>
-            <text x='0' y={y + 14} fill='hsl(215 20.2% 65.1%)' fontSize='11'>{row.label}</text>
-            <text x={width} y={y + 14} textAnchor='end' fill='hsl(210 40% 98%)' fontSize='11'>{Math.round(row.value)}{suffix}</text>
-            <rect x='0' y={y + 20} width='188' height='8' rx='4' fill='hsl(210 40% 98% / 0.12)' />
+            <text x='0' y={y + 14} fill='hsl(var(--muted-foreground))' fontSize='11'>{row.label}</text>
+            <text x={width} y={y + 14} textAnchor='end' fill='hsl(var(--foreground))' fontSize='11'>{Math.round(row.value)}{suffix}</text>
+            <rect x='0' y={y + 20} width='188' height='8' rx='4' fill='hsl(var(--foreground) / 0.12)' />
             <rect x='0' y={y + 20} width={barW} height='8' rx='4' fill={row.color} />
           </g>
         )
@@ -135,7 +135,7 @@ export function ColumnChart ({ title, labels, values, color }: { title: string, 
   return (
     <div>
       <svg viewBox={`0 0 ${width} ${height}`} role='img' aria-label={title} className='h-auto w-full'>
-        <line x1={pad.l} x2={width - pad.r} y1={pad.t + innerH} y2={pad.t + innerH} stroke='hsl(217.2 32.6% 17.5%)' />
+        <line x1={pad.l} x2={width - pad.r} y1={pad.t + innerH} y2={pad.t + innerH} stroke='hsl(var(--border))' />
         {values.map((value, index) => {
           const h = (value / max) * innerH
           const x = pad.l + index * (barW + gap)
@@ -143,7 +143,7 @@ export function ColumnChart ({ title, labels, values, color }: { title: string, 
           return (
             <g key={labels[index]}>
               <rect x={x} y={y} width={barW} height={Math.max(h, value > 0 ? 2 : 0)} rx='3' fill={color} opacity={index === safeActive ? 1 : 0.55} />
-              <text x={x + barW / 2} y={height - 6} textAnchor='middle' fill='hsl(215 20.2% 65.1%)' fontSize='9'>{labels[index]}</text>
+              <text x={x + barW / 2} y={height - 6} textAnchor='middle' fill='hsl(var(--muted-foreground))' fontSize='9'>{labels[index]}</text>
             </g>
           )
         })}
@@ -155,14 +155,14 @@ export function ColumnChart ({ title, labels, values, color }: { title: string, 
             type='button'
             aria-pressed={index === safeActive}
             onClick={() => setActive(index)}
-            className={`rounded-full px-2 py-1 text-[11px] motion-reduce:transition-none ${focusRing} ${index === safeActive ? 'bg-[hsl(210_40%_98%)] text-[hsl(222.2_47.4%_11.2%)]' : 'text-[hsl(215_20.2%_65.1%)] hover:bg-[hsl(217.2_32.6%_17.5%)]'}`}
+            className={`rounded-full px-2 py-1 text-[11px] motion-reduce:transition-none ${focusRing} ${index === safeActive ? 'bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
           >
             {label}
           </button>
         ))}
       </div>
-      <p className='mt-2 text-xs text-[hsl(215_20.2%_65.1%)]' aria-live='polite'>
-        {labels[safeActive]} <span className='tabular-nums text-[hsl(210_40%_98%)]'>{Math.round(values[safeActive] ?? 0)}</span>
+      <p className='mt-2 text-xs text-[hsl(var(--muted-foreground))]' aria-live='polite'>
+        {labels[safeActive]} <span className='tabular-nums text-[hsl(var(--foreground))]'>{Math.round(values[safeActive] ?? 0)}</span>
       </p>
     </div>
   )

@@ -170,7 +170,7 @@ function NutritionGraphic ({ foods, anchor, lang }: { foods: FoodEntry[], anchor
                     aria-label={label}
                     onClick={() => setDetail(label)}
                     className={`h-6 rounded-md sm:h-8 ${focusRing}`}
-                    style={{ background: `linear-gradient(to top, hsl(210 40% 98% / ${index === todayIndex ? 0.9 : 0.5}) ${fill}%, hsl(210 40% 98% / 0.18) ${fill}%)` }}
+                    style={{ background: `linear-gradient(to top, hsl(var(--foreground) / ${index === todayIndex ? 0.9 : 0.5}) ${fill}%, hsl(var(--foreground) / 0.18) ${fill}%)` }}
                   />
                 )
               })}
@@ -186,7 +186,7 @@ function NutritionGraphic ({ foods, anchor, lang }: { foods: FoodEntry[], anchor
                   type='button'
                   aria-label={label}
                   onClick={() => setDetail(label)}
-                  className={`rounded-md py-1 text-center text-[11px] sm:text-xs ${focusRing} ${index === todayIndex ? 'border-2 border-[hsl(210_40%_98%)] font-semibold' : tk.muted}`}
+                  className={`rounded-md py-1 text-center text-[11px] sm:text-xs ${focusRing} ${index === todayIndex ? 'border-2 border-[hsl(var(--foreground))] font-semibold' : tk.muted}`}
                 >
                   {text.daysShort[index]}
                 </button>
@@ -238,7 +238,7 @@ function InsightCard ({ title, range, value, unit, children, onOpen, openLabel }
       <h3 className='font-semibold capitalize'>{title}</h3>
       <p className={`text-xs ${tk.muted}`}>{range}</p>
       <div className='flex-1'>{children}</div>
-      <footer className='mt-2 flex items-center justify-between border-t border-[hsl(217.2_32.6%_17.5%)] pt-1'>
+      <footer className='mt-2 flex items-center justify-between border-t border-[hsl(var(--border))] pt-1'>
         <p className='tabular-nums'>
           {value} {unit && <span className={`text-sm ${tk.muted}`}>{unit}</span>}
         </p>
@@ -272,14 +272,14 @@ function MacroCards ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
           <TkCard key={item.key} className='p-4 transition-shadow hover:shadow-lg motion-reduce:transition-none'>
             <div className='flex items-center justify-between pb-2'>
               <h3 className='text-sm font-medium'>{item.name}</h3>
-              <Icon className='h-4 w-4 text-[hsl(215_20.2%_65.1%)]' aria-hidden='true' />
+              <Icon className='h-4 w-4 text-[hsl(var(--muted-foreground))]' aria-hidden='true' />
             </div>
             <p className='text-xl font-bold tabular-nums sm:text-2xl'>
               {formatNum(consumed, lang)} / {formatNum(needed, lang)}
             </p>
             <p className={`mt-1 text-xs ${tk.muted}`}>{percent}% {text.food.ofDailyGoal}</p>
-            <div className='mt-3 h-2 overflow-hidden rounded-full bg-[hsl(210_40%_98%/0.2)]'>
-              <div className='h-full bg-[hsl(210_40%_98%)] transition-[width] duration-300 motion-reduce:transition-none' style={{ width: `${percent}%` }} />
+            <div className='mt-3 h-2 overflow-hidden rounded-full bg-[hsl(var(--foreground)/0.2)]'>
+              <div className='h-full bg-[hsl(var(--foreground))] transition-[width] duration-300 motion-reduce:transition-none' style={{ width: `${percent}%` }} />
             </div>
           </TkCard>
         )
@@ -305,15 +305,15 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
   const today = totals[todayIndex] ?? { kcal: 0, protein: 0, carbs: 0, fat: 0 }
   const week = addMacros(totals)
   const goalRows = (source: typeof today, factor: number) => [
-    { label: text.nutrition.calories, value: capPercent(source.kcal, GOALS.kcal * factor), color: '#4ade80' },
-    { label: text.nutrition.protein, value: capPercent(source.protein, GOALS.protein * factor), color: '#3b82f6' },
-    { label: text.nutrition.carbs, value: capPercent(source.carbs, GOALS.carbs * factor), color: '#4ade80' },
-    { label: text.nutrition.fat, value: capPercent(source.fat, GOALS.fat * factor), color: '#fbbf24' }
+    { label: text.nutrition.calories, value: capPercent(source.kcal, GOALS.kcal * factor), color: 'hsl(var(--chart-2))' },
+    { label: text.nutrition.protein, value: capPercent(source.protein, GOALS.protein * factor), color: 'hsl(var(--chart-3))' },
+    { label: text.nutrition.carbs, value: capPercent(source.carbs, GOALS.carbs * factor), color: 'hsl(var(--chart-2))' },
+    { label: text.nutrition.fat, value: capPercent(source.fat, GOALS.fat * factor), color: 'hsl(var(--chart-4))' }
   ]
   const macroRows = [
-    { label: text.nutrition.protein, value: today.kcal ? (today.protein * 4 / today.kcal) * 100 : 0, color: '#f43f5e' },
-    { label: text.nutrition.carbs, value: today.kcal ? (today.carbs * 4 / today.kcal) * 100 : 0, color: '#4ade80' },
-    { label: text.nutrition.fat, value: today.kcal ? (today.fat * 9 / today.kcal) * 100 : 0, color: '#fbbf24' }
+    { label: text.nutrition.protein, value: today.kcal ? (today.protein * 4 / today.kcal) * 100 : 0, color: 'hsl(var(--chart-1))' },
+    { label: text.nutrition.carbs, value: today.kcal ? (today.carbs * 4 / today.kcal) * 100 : 0, color: 'hsl(var(--chart-2))' },
+    { label: text.nutrition.fat, value: today.kcal ? (today.fat * 9 / today.kcal) * 100 : 0, color: 'hsl(var(--chart-4))' }
   ]
   const weightLabels = WEIGHT_TREND.map((_, index) => {
     const date = new Date(anchor)
@@ -345,7 +345,7 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
               aria-selected={selected}
               tabIndex={selected ? 0 : -1}
               onClick={() => setTab(item.id)}
-              className={`rounded-md px-3 py-1.5 text-xs sm:text-sm ${focusRing} ${selected ? 'bg-[hsl(217.2_32.6%_17.5%)] text-[hsl(210_40%_98%)]' : 'text-[hsl(215_20.2%_65.1%)] hover:bg-[hsl(217.2_32.6%_17.5%)]'}`}
+              className={`rounded-md px-3 py-1.5 text-xs sm:text-sm ${focusRing} ${selected ? 'bg-[hsl(var(--border))] text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
             >
               {item.label}
             </button>
@@ -356,14 +356,14 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
         {tab === 'weekly' && (
           <div role='tabpanel' aria-labelledby={`${base}-tab-weekly`} className='space-y-4'>
             <h3 className='text-lg font-medium'>{text.food.weeklyTitle}</h3>
-            <ColumnChart title={text.nutrition.calories} labels={text.chartDays} values={totals.map((day) => day.kcal)} color='#3b82f6' />
+            <ColumnChart title={text.nutrition.calories} labels={text.chartDays} values={totals.map((day) => day.kcal)} color='hsl(var(--chart-3))' />
             <LineChart
               title={text.food.weeklyTitle}
               labels={text.chartDays}
               series={[
-                { id: 'protein', label: text.nutrition.protein, color: '#f43f5e', values: totals.map((day) => day.protein) },
-                { id: 'fats', label: text.nutrition.fats, color: '#fbbf24', values: totals.map((day) => day.fat) },
-                { id: 'carbs', label: text.nutrition.carbs, color: '#4ade80', values: totals.map((day) => day.carbs) }
+                { id: 'protein', label: text.nutrition.protein, color: 'hsl(var(--chart-1))', values: totals.map((day) => day.protein) },
+                { id: 'fats', label: text.nutrition.fats, color: 'hsl(var(--chart-4))', values: totals.map((day) => day.fat) },
+                { id: 'carbs', label: text.nutrition.carbs, color: 'hsl(var(--chart-2))', values: totals.map((day) => day.carbs) }
               ]}
             />
           </div>
@@ -376,7 +376,7 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
               labels={weightLabels}
               yMin={77}
               yMax={82}
-              series={[{ id: 'weight', label: text.units.kg, color: '#10b981', values: WEIGHT_TREND }]}
+              series={[{ id: 'weight', label: text.units.kg, color: 'hsl(var(--chart-2))', values: WEIGHT_TREND }]}
             />
           </div>
         )}
@@ -406,7 +406,7 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
 function MealRow ({ food, lang }: { food: FoodEntry, lang: Lang }) {
   const text = copy[lang]
   return (
-    <article className='rounded-lg border border-[hsl(217.2_32.6%_17.5%)] bg-[rgb(30_41_59/0.35)] px-3 py-3'>
+    <article className='rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-3'>
       <div className='flex items-start justify-between gap-3'>
         <div className='min-w-0'>
           <h3 className='truncate font-medium capitalize'>{nameOf(food, lang)}</h3>
@@ -424,7 +424,7 @@ function MealRow ({ food, lang }: { food: FoodEntry, lang: Lang }) {
 function ExerciseRow ({ exercise, lang }: { exercise: ExerciseEntry, lang: Lang }) {
   const text = copy[lang]
   return (
-    <article className='flex items-center justify-between gap-3 rounded-lg border border-[hsl(217.2_32.6%_17.5%)] bg-[rgb(30_41_59/0.35)] px-3 py-3'>
+    <article className='flex items-center justify-between gap-3 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-3'>
       <div className='flex min-w-0 items-center gap-3'>
         <Dumbbell className='h-5 w-5 shrink-0 text-[#93c5fd]' aria-hidden='true' />
         <div className='min-w-0'>
@@ -447,10 +447,10 @@ export function DashboardPage ({ lang, foods, exercises, anchor, onOpenChat, onN
   const burned = PROFILE.historyBurned + exercises.reduce((sum, exercise) => sum + exercise.kcal, 0)
   const range = rangeLabel(anchor, lang)
   const goalRows = [
-    { label: text.nutrition.calories, value: capPercent(todayTotals.kcal, GOALS.kcal), color: '#4ade80' },
-    { label: text.nutrition.protein, value: capPercent(todayTotals.protein, GOALS.protein), color: '#3b82f6' },
-    { label: text.nutrition.carbs, value: capPercent(todayTotals.carbs, GOALS.carbs), color: '#86efac' },
-    { label: text.nutrition.fat, value: capPercent(todayTotals.fat, GOALS.fat), color: '#fbbf24' }
+    { label: text.nutrition.calories, value: capPercent(todayTotals.kcal, GOALS.kcal), color: 'hsl(var(--chart-2))' },
+    { label: text.nutrition.protein, value: capPercent(todayTotals.protein, GOALS.protein), color: 'hsl(var(--chart-3))' },
+    { label: text.nutrition.carbs, value: capPercent(todayTotals.carbs, GOALS.carbs), color: 'hsl(var(--chart-2))' },
+    { label: text.nutrition.fat, value: capPercent(todayTotals.fat, GOALS.fat), color: 'hsl(var(--chart-4))' }
   ]
 
   return (
@@ -473,8 +473,8 @@ export function DashboardPage ({ lang, foods, exercises, anchor, onOpenChat, onN
             </InsightCard>
           </div>
           <InsightCard title={text.sections.goalProgress} range={range} value='50' unit={text.units.percent} openLabel={text.openDiary} onOpen={() => onNavigate('diary')}>
-            <div className='my-4 h-4 overflow-hidden rounded-full bg-[hsl(210_40%_98%/0.2)]' aria-hidden='true'>
-              <div className='h-full w-1/2 bg-[hsl(210_40%_98%)]' />
+            <div className='my-4 h-4 overflow-hidden rounded-full bg-[hsl(var(--foreground)/0.2)]' aria-hidden='true'>
+              <div className='h-full w-1/2 bg-[hsl(var(--foreground))]' />
             </div>
           </InsightCard>
         </div>
@@ -601,7 +601,7 @@ export function ExercisePage ({ lang, exercises, anchor, onOpenChat }: PageProps
             <TkCard key={card.name} className='p-4 transition-shadow hover:shadow-lg motion-reduce:transition-none'>
               <div className='flex items-center justify-between gap-2 pb-2'>
                 <h2 className='text-sm font-medium'>{card.name}</h2>
-                <Icon className='h-4 w-4 shrink-0 text-[hsl(215_20.2%_65.1%)]' aria-hidden='true' />
+                <Icon className='h-4 w-4 shrink-0 text-[hsl(var(--muted-foreground))]' aria-hidden='true' />
               </div>
               <p className='text-xl font-bold tabular-nums sm:text-2xl'>{card.value}</p>
             </TkCard>
@@ -611,7 +611,7 @@ export function ExercisePage ({ lang, exercises, anchor, onOpenChat }: PageProps
       <TkCard className='p-4'>
         <h2 className='text-lg font-medium'>{text.exercise.energyTitle}</h2>
         <p className={`mb-2 text-sm ${tk.muted}`}>{text.exercise.energyDesc}</p>
-        <ColumnChart title={text.exercise.energyTitle} labels={text.chartDays} values={weekValues} color='hsl(359 2% 90%)' />
+        <ColumnChart title={text.exercise.energyTitle} labels={text.chartDays} values={weekValues} color='hsl(var(--chart-1))' />
         <p className='mt-3 text-sm' aria-live='polite'>{message}. {text.exercise.mostActive.replace('{time}', text.meals[top])}</p>
       </TkCard>
       <section>
@@ -627,9 +627,9 @@ export function ExercisePage ({ lang, exercises, anchor, onOpenChat }: PageProps
                 type='button'
                 aria-pressed={selected}
                 onClick={() => setCategory(selected ? null : index)}
-                className={`flex h-24 flex-col items-center justify-center gap-1 rounded-lg border px-1 text-center text-xs transition-colors motion-reduce:transition-none sm:h-28 ${focusRing} ${selected ? 'border-[hsl(210_40%_98%)] bg-[hsl(210_40%_98%/0.12)]' : 'border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(210_40%_98%/0.06)] hover:bg-[hsl(210_40%_98%/0.12)]'}`}
+                className={`flex h-24 flex-col items-center justify-center gap-1 rounded-lg border px-1 text-center text-xs transition-colors motion-reduce:transition-none sm:h-28 ${focusRing} ${selected ? 'border-[hsl(var(--foreground))] bg-[hsl(var(--foreground)/0.12)]' : 'border-[hsl(var(--border))] bg-[hsl(var(--foreground)/0.06)] hover:bg-[hsl(var(--foreground)/0.12)]'}`}
               >
-                <Icon className='h-7 w-7 text-[hsl(210_40%_98%/0.8)]' aria-hidden='true' />
+                <Icon className='h-7 w-7 text-[hsl(var(--foreground)/0.8)]' aria-hidden='true' />
                 <span className='line-clamp-2'>{name}</span>
                 <span className='text-sm font-semibold tabular-nums'>{count}</span>
               </button>
@@ -718,7 +718,7 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
   return (
     <div className='space-y-6 pb-4'>
       <h1 className='text-2xl font-bold uppercase'>{formatLong(anchor, lang)}</h1>
-      <header className='rounded-lg border border-[hsl(215_20.2%_65.1%/0.2)] p-4 shadow-lg sm:p-6'>
+      <header className='rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 shadow-lg sm:p-6'>
         <h2 className='mb-4 flex items-center text-xl font-semibold sm:text-2xl'>
           <Filter className='mr-2 h-5 w-5' aria-hidden='true' /> {text.diary.filters}
         </h2>
@@ -735,14 +735,14 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
           </div>
           <label className='space-y-2 text-sm font-medium'>
             <span className='block'>{text.diary.date}</span>
-            <select value={date} onChange={(event) => setDate(event.target.value)} className={`h-9 w-full rounded-md border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(223_13%_10%)] px-2 text-sm text-[hsl(210_40%_98%)] sm:w-[200px] [&>option]:bg-[hsl(222.2_84%_4.9%)] ${focusRing}`}>
+            <select value={date} onChange={(event) => setDate(event.target.value)} className={`h-9 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
               <option value='all'>{text.diary.allDates}</option>
               {dates.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
           </label>
           <label className='space-y-2 text-sm font-medium'>
             <span className='block'>{text.diary.diaryGroup}</span>
-            <select value={group} onChange={(event) => setGroup(event.target.value)} className={`h-9 w-full rounded-md border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(223_13%_10%)] px-2 text-sm text-[hsl(210_40%_98%)] sm:w-[200px] [&>option]:bg-[hsl(222.2_84%_4.9%)] ${focusRing}`}>
+            <select value={group} onChange={(event) => setGroup(event.target.value)} className={`h-9 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
               <option value='all'>{text.diary.allGroups}</option>
               {MEAL_ORDER.map((meal) => <option key={meal} value={meal}>{text.meals[meal]}</option>)}
             </select>
@@ -766,11 +766,11 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
         return (
           <section key={day} className='overflow-hidden rounded-lg shadow-md'>
             <div className='flex items-center px-2 py-4'>
-              <span className='h-px flex-1 bg-[hsl(210_40%_98%)]' />
+              <span className='h-px flex-1 bg-[hsl(var(--foreground))]' />
               <h3 className='px-3 text-sm'>{day}</h3>
-              <span className='h-px flex-1 bg-[hsl(210_40%_98%)]' />
+              <span className='h-px flex-1 bg-[hsl(var(--foreground))]' />
             </div>
-            <div className='divide-y divide-[hsl(217.2_32.6%_17.5%)]'>
+            <div className='divide-y divide-[hsl(var(--border))]'>
               {entries.map((entry) => (
                 <article key={entry.id} className='px-2 py-4 sm:px-4'>
                   <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
@@ -790,17 +790,17 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
                   </div>
                   {entry.kind === 'meal' && (
                     <div className='mt-2 flex flex-wrap gap-2'>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.kcal ?? 0)} {text.diary.kcal}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><Drumstick className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{Math.round(entry.protein ?? 0)}{text.units.g} {text.diary.protein}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><EggFried className='mr-1 h-4 w-4 text-yellow-500' aria-hidden='true' />{Math.round(entry.fat ?? 0)}{text.units.g} {text.diary.fat}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><Wheat className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{Math.round(entry.carbs ?? 0)}{text.units.g} {text.diary.carbs}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.kcal ?? 0)} {text.diary.kcal}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Drumstick className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{Math.round(entry.protein ?? 0)}{text.units.g} {text.diary.protein}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><EggFried className='mr-1 h-4 w-4 text-yellow-500' aria-hidden='true' />{Math.round(entry.fat ?? 0)}{text.units.g} {text.diary.fat}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Wheat className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{Math.round(entry.carbs ?? 0)}{text.units.g} {text.diary.carbs}</span>
                     </div>
                   )}
                   {entry.kind === 'exercise' && (
                     <div className='mt-2 flex flex-wrap gap-2'>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.burned ?? 0)} {text.diary.kcalBurned}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><Clock className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{entry.minutes} {text.units.min}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(210_40%_98%)] px-2 py-1 text-xs font-medium text-[hsl(222.2_47.4%_11.2%)]'><Weight className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{text.diary.effort} {entry.effort}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.burned ?? 0)} {text.diary.kcalBurned}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Clock className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{entry.minutes} {text.units.min}</span>
+                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Weight className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{text.diary.effort} {entry.effort}</span>
                     </div>
                   )}
                 </article>
@@ -809,13 +809,13 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
             {summary.length > 0 && (
               <div className='px-2 pb-5 pt-2'>
                 <div className='mb-3 flex items-center'>
-                  <span className='h-px flex-1 bg-[hsl(215_20.2%_65.1%/0.5)]' />
+                  <span className='h-px flex-1 bg-[hsl(var(--muted-foreground)/0.5)]' />
                   <h3 className='px-3 text-lg font-medium'>{text.diary.daySummary}</h3>
-                  <span className='h-px flex-1 bg-[hsl(215_20.2%_65.1%/0.5)]' />
+                  <span className='h-px flex-1 bg-[hsl(var(--muted-foreground)/0.5)]' />
                 </div>
                 <div className='flex flex-wrap justify-center gap-2'>
                   {summary.map((item) => (
-                    <span key={item.label} className='inline-flex items-center gap-1 rounded-full bg-[hsl(217.2_32.6%_17.5%)] px-2 py-1 text-xs'>
+                    <span key={item.label} className='inline-flex items-center gap-1 rounded-full bg-[hsl(var(--border))] px-2 py-1 text-xs'>
                       <item.icon className='h-4 w-4' aria-hidden='true' /> {item.label}: {item.value}
                     </span>
                   ))}
@@ -851,7 +851,7 @@ export function SettingsPage ({ lang }: { lang: Lang }) {
       </header>
       <section className='space-y-2'>
         <h2 className='text-sm font-semibold'>{text.settings.personal}</h2>
-        <TkCard className='divide-y divide-[hsl(217.2_32.6%_17.5%)]'>
+        <TkCard className='divide-y divide-[hsl(var(--border))]'>
           {rows.slice(0, 5).map((row) => (
             <div key={row.label} className='flex items-center justify-between gap-3 px-4 py-3 text-sm'>
               <span className={tk.muted}>{row.label}</span>
@@ -862,7 +862,7 @@ export function SettingsPage ({ lang }: { lang: Lang }) {
       </section>
       <section className='space-y-2'>
         <h2 className='text-sm font-semibold'>{text.settings.goals}</h2>
-        <TkCard className='divide-y divide-[hsl(217.2_32.6%_17.5%)]'>
+        <TkCard className='divide-y divide-[hsl(var(--border))]'>
           {rows.slice(5).map((row) => (
             <div key={row.label} className='flex items-center justify-between gap-3 px-4 py-3 text-sm'>
               <span className={tk.muted}>{row.label}</span>

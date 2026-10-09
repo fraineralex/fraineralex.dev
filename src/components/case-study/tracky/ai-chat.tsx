@@ -47,7 +47,7 @@ interface AssistantMessage {
 
 type ChatMessage = UserMessage | AssistantMessage
 
-const DOTS = ['#3b82f6', '#22c55e', '#eab308']
+const DOTS = ['hsl(var(--chart-3))', '#22c55e', '#eab308']
 
 function chatMeta (lang: Lang, context: ChatContext) {
   const text = copy[lang]
@@ -292,7 +292,7 @@ export default function AiChat ({
         aria-modal='true'
         aria-labelledby={titleId}
         onKeyDown={onDialogKeyDown}
-        className={`relative z-10 flex max-h-[92%] w-[94%] max-w-xl flex-col gap-3 overflow-hidden rounded-lg border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(223_13%_10%)] p-4 text-[hsl(210_40%_98%)] shadow-lg sm:p-6 ${tk.fg}`}
+        className={`relative z-10 flex max-h-[92%] w-[94%] max-w-xl flex-col gap-3 overflow-hidden rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-4 text-[hsl(var(--foreground))] shadow-lg sm:p-6 ${tk.fg}`}
       >
         <div className='flex items-start justify-between gap-3'>
           <h2 id={titleId} className='text-lg font-semibold leading-none tracking-tight'>{meta.title}</h2>
@@ -314,11 +314,11 @@ export default function AiChat ({
               <MoreVertical className='h-4 w-4' />
             </TkButton>
             {menuOpen && (
-              <div role='menu' className='absolute right-0 z-10 mt-1 w-48 rounded-md border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(222.2_84%_4.9%)] p-1 shadow-lg'>
+              <div role='menu' className='absolute right-0 z-10 mt-1 w-48 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-1 shadow-lg'>
                 <button
                   type='button'
                   role='menuitem'
-                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(217.2_32.6%_17.5%)] ${focusRing}`}
+                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing}`}
                   onClick={() => {
                     clearTimers()
                     setMessages([])
@@ -345,16 +345,16 @@ export default function AiChat ({
               <div key={message.id} className='mb-4'>
                 {showDay && (
                   <div className='my-3 flex items-center gap-2'>
-                    <span className='h-px flex-1 bg-[hsl(217.2_32.6%_17.5%)]' />
+                    <span className='h-px flex-1 bg-[hsl(var(--border))]' />
                     <span className={`whitespace-nowrap px-2 text-[10px] uppercase tracking-wider ${tk.muted}`}>
                       {new Date(message.at).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'UTC' })}
                     </span>
-                    <span className='h-px flex-1 bg-[hsl(217.2_32.6%_17.5%)]' />
+                    <span className='h-px flex-1 bg-[hsl(var(--border))]' />
                   </div>
                 )}
                 {message.role === 'user' ? (
                   <div className='flex items-end justify-end gap-2'>
-                    <div className='max-w-[80%] rounded-2xl border border-[hsl(210_40%_98%/0.4)] bg-[hsl(222.2_47.4%_11.2%/0.5)] px-3 py-2 text-sm shadow-sm'>
+                    <div className='max-w-[80%] rounded-2xl border border-[hsl(var(--foreground)/0.4)] bg-[hsl(var(--secondary))] px-3 py-2 text-sm shadow-sm'>
                       <p className='whitespace-pre-wrap break-words'>{message.text}</p>
                       <span className={`mt-2 block text-right text-[10px] uppercase tracking-wide ${tk.muted}`}>{formatTime(message.at, lang)}</span>
                     </div>
@@ -370,7 +370,7 @@ export default function AiChat ({
                     ) : (
                       <div className='flex items-end justify-start gap-2'>
                         <Bot className='mb-1 h-5 w-5 shrink-0 text-green-500' aria-hidden='true' />
-                        <div className='max-w-[80%] rounded-2xl border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(217.2_32.6%_17.5%/0.6)] px-3 py-2 text-sm shadow-sm'>
+                        <div className='max-w-[80%] rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--border)/0.6)] px-3 py-2 text-sm shadow-sm'>
                           <p className='whitespace-pre-wrap break-words'>{message.text}</p>
                           <span className={`mt-2 block text-right text-[10px] uppercase tracking-wide ${tk.muted}`}>{formatTime(message.at, lang)}</span>
                         </div>
@@ -391,7 +391,7 @@ export default function AiChat ({
               type='button'
               disabled={busy}
               onClick={() => send(preset.label)}
-              className={`max-w-full rounded-full border border-[hsl(217.2_32.6%_17.5%)] px-3 py-1.5 text-left text-xs text-[hsl(210_40%_98%)] hover:bg-[hsl(217.2_32.6%_17.5%)] disabled:opacity-50 ${focusRing}`}
+              className={`max-w-full rounded-full border border-[hsl(var(--border))] px-3 py-1.5 text-left text-xs text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50 ${focusRing}`}
             >
               {preset.label}
             </button>
@@ -413,7 +413,7 @@ export default function AiChat ({
               disabled={busy}
               placeholder={meta.placeholder}
               onChange={(event) => setDraft(event.target.value)}
-              className={`h-12 min-w-0 flex-1 rounded-md border border-[hsl(217.2_32.6%_17.5%)] bg-transparent px-3 text-sm outline-none ${focusRing}`}
+              className={`h-12 min-w-0 flex-1 rounded-md border border-[hsl(var(--border))] bg-transparent px-3 text-sm outline-none ${focusRing}`}
             />
             <TkButton type='submit' size='icon' disabled={busy || !draft.trim()} aria-label={text.send}>
               <Send className='h-4 w-4' />

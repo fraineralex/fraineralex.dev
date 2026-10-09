@@ -1,19 +1,19 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 export const focusRing =
-  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(212.7_26.8%_83.9%)]'
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(var(--ring))]'
 
 export const tk = {
-  bg: 'bg-[hsl(223_13%_10%)]',
-  fg: 'text-[hsl(210_40%_98%)]',
-  muted: 'text-[hsl(215_20.2%_65.1%)]',
-  border: 'border-[hsl(217.2_32.6%_17.5%)]',
-  card: 'border border-[hsl(217.2_32.6%_17.5%)] bg-[rgb(30_41_59/0.5)]',
-  solid: 'bg-[hsl(222.2_84%_4.9%)]',
-  primary: 'bg-[hsl(210_40%_98%)] text-[hsl(222.2_47.4%_11.2%)] shadow hover:bg-[hsl(210_40%_98%/0.9)]',
-  ghost: 'text-[hsl(210_40%_98%)] hover:bg-[hsl(217.2_32.6%_17.5%)]',
-  outline: 'border border-[hsl(217.2_32.6%_17.5%)] bg-[hsl(223_13%_10%)] text-[hsl(210_40%_98%)] shadow-sm hover:bg-[hsl(217.2_32.6%_17.5%)]',
-  active: 'bg-[hsl(217.2_32.6%_17.5%)] text-[hsl(210_40%_98%)]'
+  bg: 'bg-[hsl(var(--background))]',
+  fg: 'text-[hsl(var(--foreground))]',
+  muted: 'text-[hsl(var(--muted-foreground))]',
+  border: 'border-[hsl(var(--border))]',
+  card: 'border border-[hsl(var(--border))] bg-[hsl(var(--card))]',
+  solid: 'bg-[hsl(var(--card))]',
+  primary: 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow hover:bg-[hsl(var(--primary)/0.9)]',
+  ghost: 'text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))]',
+  outline: 'border border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] shadow-sm hover:bg-[hsl(var(--accent))]',
+  active: 'bg-[hsl(var(--accent))] text-[hsl(var(--foreground))]'
 }
 
 const sizes = {

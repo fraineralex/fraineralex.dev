@@ -129,14 +129,14 @@ function NodeCard({ item, light }: { item: StackItem; light: number }) {
 	const on = light > 0.4
 	return (
 		<div
-			className={`flex h-full min-w-0 flex-col justify-start overflow-hidden rounded-md border px-2 py-1.5 sm:px-2.5 sm:py-2 ${on ? 'bg-slate-800/80' : 'bg-slate-900/50'}`}
+			className='flex h-full min-w-0 flex-col justify-start overflow-hidden rounded-lg border bg-white px-2 py-1.5 sm:px-2.5 sm:py-2'
 			style={{
-				borderColor: on ? `rgb(94 234 212 / ${0.35 + light * 0.6})` : 'rgb(51 65 85 / 0.7)',
-				boxShadow: on ? `0 0 16px rgb(45 212 191 / ${light * 0.35})` : undefined,
+				borderColor: on ? `hsl(var(--chart-2) / ${0.35 + light * 0.6})` : 'hsl(var(--border))',
+				boxShadow: on ? `0 0 16px hsl(var(--chart-2) / ${light * 0.35})` : undefined,
 			}}
 		>
-			<p className={`break-words text-xs font-medium leading-snug sm:text-[13px] ${on ? 'text-teal-100' : 'text-slate-100'}`}>{item.name}</p>
-			<p className='mt-1 break-words text-[11px] leading-snug text-slate-400'>{item.detail}</p>
+			<p className={`break-words text-xs font-medium leading-snug sm:text-[13px] ${on ? 'text-[hsl(var(--chart-3))]' : 'text-[hsl(var(--foreground))]'}`}>{item.name}</p>
+			<p className='mt-1 break-words text-[11px] leading-snug text-[hsl(var(--muted-foreground))]'>{item.detail}</p>
 		</div>
 	)
 }
@@ -161,20 +161,20 @@ export function StackScene({ lang, layers, caption }: { lang: 'en' | 'es'; layer
 	const poly = routePoints(route)
 
 	return (
-		<SceneFrame timeline={tl} labels={SCENE_LABELS[lang]} kicker={copy.kicker} title={copy.title} caption={copy.hops[seg.hop]}>
-			<div className='p-3 sm:p-4'>
-				<p className='mb-3 flex h-6 items-center gap-2 font-mono text-[13px] text-teal-200 sm:text-sm' aria-hidden>
-					<span className='inline-block w-[2ch] text-right tabular-nums text-slate-500'>{String(seg.hop + 1).padStart(2, '0')}</span>
+		<SceneFrame className='tracky-light tracky-scene' timeline={tl} labels={SCENE_LABELS[lang]} kicker={copy.kicker} title={copy.title} caption={copy.hops[seg.hop]}>
+			<div className='bg-[hsl(var(--background))] p-3 sm:p-4'>
+				<p className='mb-3 flex h-6 items-center gap-2 font-mono text-[13px] text-[hsl(var(--chart-3))] sm:text-sm' aria-hidden>
+					<span className='inline-block w-[2ch] text-right tabular-nums text-[hsl(var(--muted-foreground))]'>{String(seg.hop + 1).padStart(2, '0')}</span>
 					<span className='truncate'>{label}</span>
 				</p>
 
 				<div className='relative sm:hidden'>
 					<svg className={`pointer-events-none absolute bottom-0 left-0 top-0 h-full w-7 ${live ? 'tracky-live' : ''}`} viewBox='0 0 28 100' preserveAspectRatio='none' aria-hidden>
-						<line x1='14' y1='6' x2='14' y2='94' stroke='rgb(71 85 105)' strokeWidth='2' vectorEffect='non-scaling-stroke' strokeDasharray='4 6' className='tracky-dash' />
+						<line x1='14' y1='6' x2='14' y2='94' stroke='hsl(var(--border))' strokeWidth='2' vectorEffect='non-scaling-stroke' strokeDasharray='4 6' className='tracky-dash' />
 					</svg>
-					<span className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${trailY}%)` }} aria-hidden><span className='absolute left-[14px] top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300/50' /></span>
-					<span className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${mobileY}%)` }} aria-hidden><span className='absolute left-[14px] top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_12px_rgb(45_212_191/0.9)]' /></span>
-					<div className='ml-7 min-w-0 divide-y divide-slate-700/50 border-y border-slate-700/50'>
+					<span className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${trailY}%)` }} aria-hidden><span className='absolute left-[14px] top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--chart-2)/0.5)]' /></span>
+					<span className='pointer-events-none absolute inset-0' style={{ transform: `translateY(${mobileY}%)` }} aria-hidden><span className='absolute left-[14px] top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--chart-2))] shadow-[0_0_12px_hsl(var(--chart-2)/0.9)]' /></span>
+					<div className='ml-7 min-w-0 divide-y divide-[hsl(var(--border))] border-y border-[hsl(var(--border))]'>
 						{layers.map((layer, lane) => (
 							<div key={layer.title} className='flex h-[10.25rem] min-w-0 flex-col py-2'>
 								<LaneTitle index={lane} title={layer.title} on={laneOn(route, lane, seg, travel)} />
@@ -192,7 +192,7 @@ export function StackScene({ lang, layers, caption }: { lang: 'en' | 'es'; layer
 
 				<div className='relative hidden h-[22rem] sm:block'>
 					<svg className={`pointer-events-none absolute inset-0 h-full w-full ${live ? 'tracky-live' : ''}`} viewBox='0 0 100 100' preserveAspectRatio='none' aria-hidden>
-						<polyline points={poly.map((point) => point.join(',')).join(' ')} fill='none' stroke='rgb(71 85 105)' strokeWidth='1.5' vectorEffect='non-scaling-stroke' strokeDasharray='4 6' className='tracky-dash' />
+						<polyline points={poly.map((point) => point.join(',')).join(' ')} fill='none' stroke='hsl(var(--border))' strokeWidth='1.5' vectorEffect='non-scaling-stroke' strokeDasharray='4 6' className='tracky-dash' />
 					</svg>
 					<div className='grid h-full grid-cols-4 grid-rows-3'>
 						{layers.map((layer, lane) => (
@@ -211,19 +211,19 @@ export function StackScene({ lang, layers, caption }: { lang: 'en' | 'es'; layer
 							</Fragment>
 						))}
 					</div>
-					<span className='pointer-events-none absolute inset-0' style={trailStyle(points, travel)} aria-hidden><span className='absolute left-0 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300/45' /></span>
-					<span className='pointer-events-none absolute inset-0' style={{ transform: `translate(${x}%, ${y}%)` }} aria-hidden><span className='absolute left-0 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_12px_rgb(45_212_191/0.9)]' /></span>
+					<span className='pointer-events-none absolute inset-0' style={trailStyle(points, travel)} aria-hidden><span className='absolute left-0 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--chart-2)/0.45)]' /></span>
+					<span className='pointer-events-none absolute inset-0' style={{ transform: `translate(${x}%, ${y}%)` }} aria-hidden><span className='absolute left-0 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--chart-2))] shadow-[0_0_12px_hsl(var(--chart-2)/0.9)]' /></span>
 				</div>
 
-				<p className='mt-3 h-16 overflow-hidden text-xs leading-5 text-slate-400' aria-hidden>
+				<p className='mt-3 h-16 overflow-hidden text-xs leading-5 text-[hsl(var(--muted-foreground))]' aria-hidden>
 					{focused ? (
 						<>
-							<span className='font-medium text-slate-200'>{focused.name}. </span>
+							<span className='font-medium text-[hsl(var(--foreground))]'>{focused.name}. </span>
 							{focused.detail}
 						</>
 					) : null}
 				</p>
-				<p className='mt-2 text-xs text-slate-500'>{caption}</p>
+				<p className='mt-2 text-xs text-[hsl(var(--muted-foreground))]'>{caption}</p>
 			</div>
 		</SceneFrame>
 	)
@@ -256,11 +256,11 @@ function LaneTitle({ index, title, on }: { index: number; title: string; on: boo
 	const pad = String(index + 1).padStart(2, '0')
 	return (
 		<div className='min-w-0'>
-			<p className={`truncate font-mono text-[11px] uppercase tracking-wider ${on ? 'text-teal-100' : 'text-teal-300'}`}>
+			<p className='truncate font-mono text-[11px] uppercase tracking-wider text-[hsl(var(--chart-3))]'>
 				{pad}
 				<span className='sm:hidden'> · {title}</span>
 			</p>
-			<p className={`hidden truncate text-sm font-medium sm:block ${on ? 'text-teal-100' : 'text-slate-200'}`}>{title}</p>
+			<p className={`hidden truncate text-sm font-medium sm:block ${on ? 'text-[hsl(var(--chart-3))]' : 'text-[hsl(var(--foreground))]'}`}>{title}</p>
 		</div>
 	)
 }

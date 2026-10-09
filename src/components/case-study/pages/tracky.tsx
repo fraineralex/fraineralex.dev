@@ -41,7 +41,7 @@ const COPY = {
 			title: 'From a sentence to a diary entry',
 			body: [
 				'The core idea is the AI chat on the Food and Exercise pages. You describe what you did in your own words, the model structures it, and the entry lands in your diary.',
-				'Try it in the window above: open the chat and pick a preset.',
+				'The animation below types a breakfast, turns it into diary entries and updates the daily totals automatically.',
 			],
 		},
 		steps: [
@@ -103,7 +103,7 @@ const COPY = {
 			title: 'De una frase a una entrada del diario',
 			body: [
 				'La idea central es el chat con IA en las páginas de Comida y Ejercicio. Describes lo que hiciste con tus palabras, el modelo lo estructura y la entrada aparece en tu diario.',
-				'Pruébalo en la ventana de arriba: abre el chat y elige un ejemplo.',
+				'La animación de abajo escribe un desayuno, lo convierte en entradas del diario y actualiza los totales del día automáticamente.',
 			],
 		},
 		steps: [

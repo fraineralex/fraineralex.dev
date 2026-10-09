@@ -73,7 +73,7 @@ export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, 
                 <span
                   key={item.id}
                   aria-current={filter === item.id ? 'true' : undefined}
-                  className={`inline-flex h-7 shrink-0 items-center rounded-md px-2 text-xs sm:px-2.5 font-medium ${filter === item.id ? `bg-white shadow-sm ${L.primaryText}` : L.muted}`}
+                  className={`inline-flex h-7 shrink-0 items-center rounded-md px-1.5 text-xs sm:px-2.5 font-medium ${filter === item.id ? `bg-white shadow-sm ${L.primaryText}` : L.muted}`}
                 >
                   {item.label}
                 </span>

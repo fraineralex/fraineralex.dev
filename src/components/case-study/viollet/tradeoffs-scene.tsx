@@ -42,7 +42,8 @@ function DecisionGlyph ({ index, alternative = false, progress = 0 }: { index: n
   )
 }
 
-export default function TradeoffsScene ({ items }: { items: Item[] }) {
+export default function TradeoffsScene ({ items, lang }: { items: Item[], lang: 'es' | 'en' }) {
+  void lang
   const timeline = useSceneTimeline(Math.max(1, items.length) * STEP, { loop: true, hold: 3200 })
   const active = Math.min(items.length - 1, Math.floor(timeline.elapsed / STEP))
   const local = timeline.elapsed - active * STEP

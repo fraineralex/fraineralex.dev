@@ -674,7 +674,7 @@
             "El runtime tiene tres caminos que cooperan: la app con sesión en Next.js sobre Vercel (Clerk para las sesiones), la ingesta asíncrona de correo (Gmail watch más un push de Pub/Sub hacia una ruta webhook) y Drizzle sobre Turso para el ledger.",
             "Una notificación soportada se limpia, se extrae con el AI SDK a un objeto tipado (en producción, a través de Vercel AI Gateway), se categoriza y se guarda. El dashboard y el asistente leen esas filas para presupuestos, tendencias y respuestas."
           ],
-          "diagramCaption": "Elige un nodo para ver cómo se reparten el trabajo Gmail, Pub/Sub, Next.js, Clerk, Vercel, el AI SDK y Turso."
+          "diagramCaption": "Cada nodo explica, por turnos, cómo se reparten el trabajo Gmail, Pub/Sub, Next.js, Clerk, Vercel, el AI SDK y Turso."
         },
         "tradeOffs": {
           "title": "5. Decisiones y trade-offs",
@@ -829,11 +829,11 @@
         },
         "inbox": {
           "title": "Lo que ya llega al correo",
-          "description": "Abre un mensaje. Viollet solo ingiere remitentes financieros autorizados. El resto se queda en Gmail.",
+          "description": "Los mensajes llegan solos. Viollet solo ingiere remitentes financieros autorizados. El resto se queda en Gmail.",
           "listLabel": "Bandeja de ejemplo",
           "alert": "Alerta",
           "noise": "Ignorado",
-          "prompt": "Elige un mensaje para ver si entraría al tracker.",
+          "prompt": "Los mensajes se abren solos y muestran si entrarían al tracker.",
           "messages": [
             {
               "id": "bravo",
@@ -889,7 +889,7 @@
         },
         "access": {
           "title": "Qué incluye el permiso",
-          "description": "Activa instituciones y revisa el permiso de Gmail. La contraseña del banco sigue deshabilitada.",
+          "description": "Las instituciones se marcan solas y el permiso de Gmail se revisa enseguida. La contraseña del banco sigue deshabilitada.",
           "authorized": "Remitentes autorizados",
           "confirmed": "Remitente confirmado",
           "listed": "Listado en el catálogo",
@@ -901,16 +901,16 @@
           "bankLogin": "Probar un login bancario",
           "bankRefusal": "Rechazado. Viollet no recoge usuarios ni contraseñas de banca en línea.",
           "grantReady": "Gmail de solo lectura. Remitentes autorizados ({count}):",
-          "noneSelected": "Elige al menos una institución. El correo de un remitente que no autorizaste se ignora.",
+          "noneSelected": "Sin una institución autorizada, el correo de un remitente desconocido se ignora.",
           "summaryLabel": "Resultado del permiso"
         },
         "ownership": {
           "title": "Qué asumí",
-          "description": "Elige un frente de trabajo. Cada uno dice qué construí y qué dejé fuera a propósito.",
+          "description": "Cada frente de trabajo dice qué construí y qué dejé fuera a propósito.",
           "listLabel": "Frentes de trabajo",
           "ownedLabel": "Lo tomé",
           "deferredLabel": "Lo dejé para después",
-          "prompt": "Elige un frente para ver el corte de alcance.",
+          "prompt": "El recorrido muestra el corte de alcance de cada frente.",
           "items": [
             {
               "id": "framing",
@@ -958,7 +958,7 @@
         },
         "architecture": {
           "title": "Recorre una pieza",
-          "description": "Pasa el cursor o enfoca un nodo. Haz clic para dejar fija la explicación.",
+          "description": "El diagrama recorre cada nodo y muestra su explicación.",
           "diagramLabel": "Diagrama de arquitectura de Viollet",
           "talksTo": "Se conecta con",
           "pinned": "Fijado",
@@ -1064,7 +1064,7 @@
         },
         "banks": {
           "title": "Catálogo dominicano",
-          "description": "Filtra esta muestra del catálogo. Confirmado significa que el remitente de la alerta está verificado en el código. El resto está listado y depende del formato que mande el banco. El producto público habla de más de 15 bancos y tarjetas, incluidas instituciones todavía en evaluación. Aquí no está la lista completa.",
+          "description": "La búsqueda y los filtros corren solos. Confirmado significa que el remitente de la alerta está verificado en el código. El resto está listado y depende del formato que mande el banco. El producto público habla de más de 15 bancos y tarjetas, incluidas instituciones todavía en evaluación. Aquí no está la lista completa.",
           "searchLabel": "Buscar institución o remitente",
           "searchPlaceholder": "Banreservas, qik.do...",
           "filtersLabel": "Filtros del catálogo",
@@ -1079,11 +1079,11 @@
           "yes": "Sí",
           "confirmedHelp": "Remitente confirmado en el catálogo.",
           "listedHelp": "Listada para evaluación. El soporte depende de que la alerta se pueda interpretar.",
-          "prompt": "Elige una institución para ver el remitente y qué sigue."
+          "prompt": "El recorrido muestra el remitente de cada institución y qué sigue."
         },
         "chat": {
           "title": "Asistente sobre el ledger de ejemplo",
-          "description": "Haz una de las preguntas. La respuesta está guionizada con las cifras de la demo y muestra la tool que el asistente de producción llamaría. No contacta un modelo en vivo.",
+          "description": "Las tres preguntas se escriben solas. La respuesta está guionizada con las cifras de la demo y muestra la tool que el asistente de producción llamaría. No contacta un modelo en vivo.",
           "suggestionsLabel": "Preguntas de ejemplo",
           "transcriptLabel": "Conversación",
           "placeholder": "Pregunta por el gasto de ejemplo",
@@ -1092,7 +1092,7 @@
           "assistant": "Viollet",
           "tool": "Tool",
           "result": "Resultado",
-          "unknown": "Esta simulación solo responde las tres preguntas de ejemplo. Elige una.",
+          "unknown": "La simulación recorre sola las tres preguntas de ejemplo.",
           "thinking": "Consultando el ledger de ejemplo",
           "answers": [
             {
@@ -1131,7 +1131,7 @@
         },
         "sync": {
           "title": "Watch, push y un duplicado",
-          "description": "Corre las acciones en orden. El registro sigue el watch de Gmail y el webhook reales, incluido el rechazo del duplicado.",
+          "description": "La escena recorre el watch de Gmail y el webhook reales, incluido el rechazo del duplicado.",
           "actionsLabel": "Acciones",
           "connect": "Conectar Gmail",
           "watch": "Registrar watch",

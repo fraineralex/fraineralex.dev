@@ -174,18 +174,18 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
         </section>
 
         <SectionBlock section={sections.context}>
-          <InboxExplorer copy={interactives.inbox} />
+          <InboxExplorer copy={interactives.inbox} lang={lang} />
         </SectionBlock>
         <SectionBlock section={sections.constraints}>
-          <AccessGate copy={interactives.access} />
+          <AccessGate copy={interactives.access} lang={lang} />
         </SectionBlock>
         <SectionBlock section={sections.responsibility}>
-          <OwnershipMap copy={interactives.ownership} />
+          <OwnershipMap copy={interactives.ownership} lang={lang} />
         </SectionBlock>
 
         <SectionBlock section={sections.architecture}>
           <EmailLedgerScene lang={lang} />
-          <ArchitectureDiagram copy={interactives.architecture} />
+          <ArchitectureDiagram copy={interactives.architecture} lang={lang} />
           <p className='mt-3 text-center text-sm text-slate-500'>
             {sections.architecture.diagramCaption}
           </p>
@@ -195,19 +195,19 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
           <h2 className='mb-4 text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl'>
             {sections.tradeOffs.title}
           </h2>
-          <TradeoffsScene items={sections.tradeOffs.items} />
+          <TradeoffsScene items={sections.tradeOffs.items} lang={lang} />
           <ParsePipeline copy={interactives.parse} controls={interactives.controls} lang={lang} />
         </section>
 
         <SectionBlock section={sections.impact}>
           <AlertLanesScene lang={lang} />
-          <BankCoverage copy={interactives.banks} />
+          <BankCoverage copy={interactives.banks} lang={lang} />
         </SectionBlock>
         <SectionBlock section={sections.assistant}>
-          <ChatSim copy={interactives.chat} />
+          <ChatSim copy={interactives.chat} lang={lang} />
         </SectionBlock>
         <SectionBlock section={sections.operationalQuality}>
-          <GmailSync copy={interactives.sync} />
+          <GmailSync copy={interactives.sync} lang={lang} />
         </SectionBlock>
 
         <section className='rounded-xl border border-teal-400/20 bg-teal-400/5 p-6 sm:p-8'>

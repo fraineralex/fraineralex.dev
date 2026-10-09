@@ -24,7 +24,8 @@ const BANK_BRANDS = {
   banesco: { file: 'banesco_do.svg', color: '#003B71' }
 } satisfies Record<Institution['id'], { file: string; color: string }>
 
-export default function BankCoverage ({ copy }: { copy: ViolletBanksCopy }) {
+export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, lang: 'es' | 'en' }) {
+  void lang
   const timeline = useSceneTimeline(11000, { loop: true, hold: 3200 })
   const { elapsed } = timeline
   const query = elapsed < 4000

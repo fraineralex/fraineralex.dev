@@ -672,7 +672,7 @@
             "The runtime has three cooperating paths: the signed-in Next.js app on Vercel (Clerk for sessions), asynchronous mail ingestion (Gmail watch plus a Pub/Sub push into a webhook route), and Drizzle on Turso for the ledger.",
             "A supported notification is cleaned, extracted with the AI SDK into a typed object (through the Vercel AI Gateway in production), categorized, and stored. The dashboard and the assistant read those rows for budgets, trends, and answers."
           ],
-          "diagramCaption": "Choose a node to see how Gmail, Pub/Sub, Next.js, Clerk, Vercel, the AI SDK, and Turso split the work."
+          "diagramCaption": "Each node, in turn, shows how Gmail, Pub/Sub, Next.js, Clerk, Vercel, the AI SDK, and Turso split the work."
         },
         "tradeOffs": {
           "title": "5. Decisions and trade-offs",
@@ -827,11 +827,11 @@
         },
         "inbox": {
           "title": "What already lands in the inbox",
-          "description": "Open a message. Viollet only ingests authorized financial senders. Everything else stays in Gmail.",
+          "description": "Messages arrive on their own. Viollet only ingests authorized financial senders. Everything else stays in Gmail.",
           "listLabel": "Sample inbox",
           "alert": "Alert",
           "noise": "Ignored",
-          "prompt": "Choose a message to see whether it would enter the tracker.",
+          "prompt": "Messages open on their own and show whether they would enter the tracker.",
           "messages": [
             {
               "id": "bravo",
@@ -887,7 +887,7 @@
         },
         "access": {
           "title": "What the grant includes",
-          "description": "Turn institutions on, then review the Gmail grant. The bank password field stays disabled.",
+          "description": "Institutions check themselves, then the Gmail grant is reviewed. The bank password field stays disabled.",
           "authorized": "Authorized senders",
           "confirmed": "Confirmed sender",
           "listed": "Listed in the catalog",
@@ -904,11 +904,11 @@
         },
         "ownership": {
           "title": "What I took on",
-          "description": "Choose a workstream. Each one shows what I built and what I left out on purpose.",
+          "description": "Each workstream shows what I built and what I left out on purpose.",
           "listLabel": "Workstreams",
           "ownedLabel": "I owned this",
           "deferredLabel": "I left this for later",
-          "prompt": "Choose a workstream to see the scope cut.",
+          "prompt": "The route shows the scope cut for each workstream.",
           "items": [
             {
               "id": "framing",
@@ -956,7 +956,7 @@
         },
         "architecture": {
           "title": "Inspect one piece",
-          "description": "Hover or focus a node. Click to pin the explanation.",
+          "description": "The diagram visits each node and shows its explanation.",
           "diagramLabel": "Viollet architecture diagram",
           "talksTo": "Connects to",
           "pinned": "Pinned",
@@ -1062,7 +1062,7 @@
         },
         "banks": {
           "title": "Dominican catalog",
-          "description": "Filter this slice of the catalog. Confirmed means the alert sender is verified in the source catalog. Other rows are listed, and support depends on the format the bank sends. The public product talks about 15+ banks and cards, including institutions still under evaluation. This is not the full list.",
+          "description": "Search and filters run on their own. Confirmed means the alert sender is verified in the source catalog. Other rows are listed, and support depends on the format the bank sends. The public product talks about 15+ banks and cards, including institutions still under evaluation. This is not the full list.",
           "searchLabel": "Search institution or sender",
           "searchPlaceholder": "Banreservas, qik.do...",
           "filtersLabel": "Catalog filters",
@@ -1077,11 +1077,11 @@
           "yes": "Yes",
           "confirmedHelp": "Sender confirmed in the catalog.",
           "listedHelp": "Listed for evaluation. Support depends on whether the alert can be parsed.",
-          "prompt": "Choose an institution to see its sender and what it tracks."
+          "prompt": "The route shows each institution's sender and what it tracks."
         },
         "chat": {
           "title": "Assistant on the sample ledger",
-          "description": "Ask one of the sample questions. The reply is scripted from the demo ledger and shows the tool the production assistant would call. It does not contact a live model.",
+          "description": "The three questions type themselves. The reply is scripted from the demo ledger and shows the tool the production assistant would call. It does not contact a live model.",
           "suggestionsLabel": "Sample questions",
           "transcriptLabel": "Conversation",
           "placeholder": "Ask about the sample spending",
@@ -1090,7 +1090,7 @@
           "assistant": "Viollet",
           "tool": "Tool",
           "result": "Result",
-          "unknown": "This simulation only answers the three sample questions. Pick one.",
+          "unknown": "The simulation plays the three sample questions on its own.",
           "thinking": "Checking the sample ledger",
           "answers": [
             {
@@ -1128,7 +1128,7 @@
         },
         "sync": {
           "title": "Watch, push, and a duplicate",
-          "description": "Run the actions in order. The log follows the real Gmail watch and webhook path, including the duplicate guard.",
+          "description": "The scene plays the real Gmail watch and webhook path, including the duplicate guard.",
           "actionsLabel": "Actions",
           "connect": "Connect Gmail",
           "watch": "Register watch",

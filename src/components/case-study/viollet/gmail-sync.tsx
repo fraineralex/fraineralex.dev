@@ -35,7 +35,8 @@ function Envelope ({ x, y, opacity = 1 }: { x: number, y: number, opacity?: numb
   )
 }
 
-export default function GmailSync ({ copy }: { copy: ViolletSyncCopy }) {
+export default function GmailSync ({ copy, lang }: { copy: ViolletSyncCopy, lang: 'es' | 'en' }) {
+  void lang
   const timeline = useSceneTimeline(DURATION, { loop: true, hold: 3400 })
   const elapsed = timeline.elapsed
   const watching = elapsed >= 1800

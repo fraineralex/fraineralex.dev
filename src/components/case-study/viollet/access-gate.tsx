@@ -38,7 +38,8 @@ function DrawCheck ({ progress }: { progress: number }) {
   )
 }
 
-export default function AccessGate ({ copy }: { copy: ViolletAccessCopy }) {
+export default function AccessGate ({ copy, lang }: { copy: ViolletAccessCopy, lang: 'es' | 'en' }) {
+  void lang
   const timeline = useSceneTimeline(DURATION, { loop: true, hold: 3400 })
   const elapsed = timeline.elapsed
   const bankTravel = span(elapsed, BANK_START, BANK_START + BANK_STEP * (CHOICES.length - 1), linear)

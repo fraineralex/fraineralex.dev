@@ -28,7 +28,8 @@ function SenderMark ({ name }: { name: string }) {
   )
 }
 
-export default function InboxExplorer ({ copy }: { copy: ViolletInboxCopy }) {
+export default function InboxExplorer ({ copy, lang }: { copy: ViolletInboxCopy, lang: 'es' | 'en' }) {
+  void lang
   const duration = copy.messages.length * STAGE
   const timeline = useSceneTimeline(duration, { loop: true, hold: 2400 })
   const finished = timeline.elapsed >= duration

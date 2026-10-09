@@ -26,7 +26,8 @@ function routePoint (index: number, progress: number) {
   }
 }
 
-export default function OwnershipMap ({ copy }: { copy: ViolletOwnershipCopy }) {
+export default function OwnershipMap ({ copy, lang }: { copy: ViolletOwnershipCopy, lang: 'es' | 'en' }) {
+  void lang
   const timeline = useSceneTimeline(Math.max(1, copy.items.length) * STOP_MS, { loop: true, hold: 3200 })
   const active = Math.min(copy.items.length - 1, Math.floor(timeline.elapsed / STOP_MS))
   const travel = Math.max(0, Math.min(1, (timeline.elapsed % STOP_MS - (STOP_MS - TRAVEL_MS)) / TRAVEL_MS))

@@ -50,7 +50,8 @@ function ResultCard ({ answer, copy }: { answer: ViolletChatAnswer; copy: Violle
   )
 }
 
-export default function ChatSim ({ copy }: { copy: ViolletChatCopy }) {
+export default function ChatSim ({ copy, lang }: { copy: ViolletChatCopy, lang: 'es' | 'en' }) {
+  void lang
   const duration = Math.max(1, copy.answers.length) * TURN_MS
   const timeline = useSceneTimeline(duration, { loop: true, hold: 3400 })
   const index = Math.min(copy.answers.length - 1, Math.floor(timeline.elapsed / TURN_MS))

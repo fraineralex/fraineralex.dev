@@ -49,7 +49,8 @@ function pointOnCurve (link: ReturnType<typeof curve>, t: number): Point {
   }
 }
 
-export default function ArchitectureDiagram ({ copy }: { copy: ViolletArchitectureCopy }) {
+export default function ArchitectureDiagram ({ copy, lang }: { copy: ViolletArchitectureCopy, lang: 'es' | 'en' }) {
+  void lang
   const duration = Math.max(1, copy.nodes.length) * STEP_MS
   const timeline = useSceneTimeline(duration, { loop: true, hold: 2600 })
   const index = Math.min(copy.nodes.length - 1, Math.floor(timeline.elapsed / STEP_MS))

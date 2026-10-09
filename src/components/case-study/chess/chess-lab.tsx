@@ -52,9 +52,9 @@ export default function ChessLab({ lang }: { lang: Lang }) {
      <p className='min-h-[4.5rem] text-sm leading-relaxed'>{t.opening}</p>
      <p className='mt-3 min-h-[3rem] font-mono text-sm font-semibold text-[#486333]'>{chosen ? `${t.chosen}: ${chosen}` : opened ? t.thinking : t.ready}</p>
      <dl className='mt-4 grid grid-cols-[1fr_auto] gap-x-3 gap-y-3 text-sm'>
-      <dt>{t.nodes}</dt><dd className='min-w-[8ch] text-right font-mono tabular-nums'>{reply?.stats.nodes.toLocaleString(lang) ?? '…'}</dd>
-      <dt>{t.pruned}</dt><dd className='text-right font-mono tabular-nums'>{reply?.stats.pruned.toLocaleString(lang) ?? '…'}</dd>
-      <dt>{t.evaluation}</dt><dd className='text-right font-mono tabular-nums'>{reply ? Number.isFinite(score) ? `${score > 0 ? '+' : ''}${score.toFixed(1)}` : score > 0 ? '+∞' : '−∞' : '…'}</dd>
+      <dt>{t.nodes}</dt><dd className='min-w-[8ch] text-right font-mono tabular-nums'>{finished && reply ? reply.stats.nodes.toLocaleString(lang) : '…'}</dd>
+      <dt>{t.pruned}</dt><dd className='text-right font-mono tabular-nums'>{finished && reply ? reply.stats.pruned.toLocaleString(lang) : '…'}</dd>
+      <dt>{t.evaluation}</dt><dd className='text-right font-mono tabular-nums'>{finished && reply ? Number.isFinite(score) ? `${score > 0 ? '+' : ''}${score.toFixed(1)}` : score > 0 ? '+∞' : '−∞' : '…'}</dd>
      </dl>
      <p className='mt-4 min-h-[3rem] text-xs leading-relaxed text-stone-600'>{reply?.timedOut ? t.timeout : t.note}</p>
     </aside>

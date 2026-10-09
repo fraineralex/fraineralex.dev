@@ -51,7 +51,7 @@ export default function ChessLab({ lang }: { lang: Lang }) {
  const [plies, setPlies] = useState<Ply[]>([])
  const [autoplay, setAutoplay] = useState(true)
  const autoRef = useRef(true)
- const [depth, setDepth] = useState(2)
+ const [depth, setDepth] = useState(3)
  const [textbook, setTextbook] = useState(false)
  const modeRef = useRef(false)
  const [outline, setOutline] = useState(false)
@@ -120,7 +120,7 @@ export default function ChessLab({ lang }: { lang: Lang }) {
     const move = legalMoves(position).find(candidate => candidate.from === planned.from && candidate.to === planned.to)
     if (!move) return
     position = makeMove(position, move)
-    const pair = await compare(position, 2)
+    const pair = await compare(position, 3)
     if (cancelled || !pair[0].move) return
     position = makeMove(position, pair[0].move)
    }

@@ -1,198 +1,140 @@
 'use client'
 
-import { CheckCircle, CheckCircle2, Clock, Loader, Mail, RefreshCw, XCircle } from 'lucide-react'
-import { useReducedMotion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { CheckCircle2, Clock } from 'lucide-react'
 import type { ViolletSyncCopy } from '@/types/case-study-types'
-import { InteractivePanel } from './ui'
-import { button, focusRing, v } from './tokens'
+import { linear, span, useSceneTimeline } from '../kit/scene'
+import { L, LC } from './light'
+import { AppSurface, InteractivePanel } from './ui'
 
-type Phase = 'idle' | 'connected' | 'watching' | 'ingested' | 'deduped'
-type Action = 'connect' | 'watch' | 'push' | 'replay'
+const DURATION = 12000
+const STAGES = [
+  { action: 'connect', state: 'connected', start: 0, end: 1800 },
+  { action: 'watch', state: 'watching', start: 1800, end: 3600 },
+  { action: 'push', state: 'ingested', start: 3600, end: 7600 },
+  { action: 'replay', state: 'deduped', start: 8200, end: DURATION }
+] as const
 
-const ORDER: Action[] = ['connect', 'watch', 'push', 'replay']
+function routePoint (progress: number) {
+  const second = progress > 0.5
+  const t = second ? (progress - 0.5) * 2 : progress * 2
+  const start = second ? 300 : 90
+  return {
+    x: start + 210 * t,
+    y: 140 + (second ? 1 : -1) * 120 * t * (1 - t)
+  }
+}
 
-const ACTION_ICON = {
-  connect: Mail,
-  watch: Clock,
-  push: RefreshCw,
-  replay: RefreshCw
-} as const
+function Envelope ({ x, y, opacity = 1 }: { x: number, y: number, opacity?: number }) {
+  return (
+    <g transform={`translate(${x} ${y})`} opacity={opacity}>
+      <rect x={-23} y={-16} width={46} height={32} rx={5} fill={LC.card} stroke={LC.primary} strokeWidth={1.8} />
+      <path d='M -22 -14 L 0 2 L 22 -14' fill='none' stroke={LC.primary} strokeWidth={1.5} />
+      <circle cx={15} cy={12} r={11} fill={LC.card} stroke={LC.border} />
+      <image href='/case-studies/viollet/banks/banreservas.svg' x={7} y={4} width={16} height={16} />
+    </g>
+  )
+}
 
 export default function GmailSync ({ copy }: { copy: ViolletSyncCopy }) {
-  const reduced = useReducedMotion()
-  const [phase, setPhase] = useState<Phase>('idle')
-  const [log, setLog] = useState<string[]>([])
-  const [busy, setBusy] = useState(false)
-  const runId = useRef(0)
-
-  function run (action: Action) {
-    if (busy) return
-    const lines = copy.lines[action]
-    const nextPhase: Phase = action === 'connect'
-      ? 'connected'
-      : action === 'watch'
-        ? 'watching'
-        : action === 'push'
-          ? 'ingested'
-          : 'deduped'
-    const id = runId.current + 1
-    runId.current = id
-
-    if (reduced) {
-      setLog(current => [...current, ...lines])
-      setPhase(nextPhase)
-      return
-    }
-
-    setBusy(true)
-    lines.forEach((line, index) => {
-      window.setTimeout(() => {
-        if (runId.current !== id) return
-        setLog(current => [...current, line])
-        if (index === lines.length - 1) {
-          setPhase(nextPhase)
-          setBusy(false)
-        }
-      }, 280 * (index + 1))
-    })
-  }
-
-  function reset () {
-    runId.current += 1
-    setPhase('idle')
-    setLog([])
-    setBusy(false)
-  }
-
-  const unlocked = phase === 'idle' ? 0 : phase === 'connected' ? 1 : phase === 'watching' ? 2 : phase === 'ingested' ? 3 : 4
-  const totalLines = ORDER.reduce((sum, action) => sum + copy.lines[action].length, 0)
-  const progress = totalLines === 0 ? 0 : (log.length / totalLines) * 100
-  const nextAction = unlocked < ORDER.length ? ORDER[unlocked] : null
-  const badgeTone = busy
-    ? 'border-transparent bg-teal-400/15 text-teal-200'
-    : phase === 'idle'
-      ? 'border-transparent bg-rose-400/15 text-rose-300'
-      : 'border-transparent bg-emerald-400/15 text-emerald-300'
+  const timeline = useSceneTimeline(DURATION, { loop: true, hold: 3400 })
+  const elapsed = timeline.elapsed
+  const watching = elapsed >= 1800
+  const ingested = elapsed >= 7600
+  const deduped = elapsed >= 10800
+  const state = deduped ? 'deduped' : ingested ? 'ingested' : watching ? 'watching' : 'connected'
+  const delivery = span(elapsed, 3600, 7600, linear)
+  const resend = span(elapsed, 8200, 10800, linear)
+  const bounce = span(elapsed, 10800, 11600, linear)
+  const point = routePoint(delivery)
+  const duplicate = routePoint(resend)
+  const lines = STAGES.flatMap(stage => copy.lines[stage.action].map((line, index, group) => ({
+    line,
+    at: stage.start + (stage.end - stage.start) * index / Math.max(1, group.length)
+  })))
 
   return (
-    <InteractivePanel label={copy.title} title={copy.title} description={copy.description}>
-      <div className={`flex min-w-0 flex-col gap-6 rounded-xl border py-6 shadow-sm ${v.border} ${v.card} ${v.fg}`}>
-        <div className='grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-4 sm:px-6'>
-          <div className='flex flex-wrap items-start justify-between gap-3'>
-            <div className='min-w-0 space-y-1'>
-              <h4 className='flex items-center gap-2 font-semibold leading-none'>
-                <Mail className='size-5 shrink-0 text-teal-300' aria-hidden='true' />
-                {copy.actionsLabel}
-              </h4>
-              <p className={`text-sm ${v.muted}`}>{copy.stateLabel}</p>
-            </div>
-            <span className={`inline-flex max-w-full items-center justify-center gap-1 rounded-md border px-2 py-0.5 text-xs font-medium leading-snug ${badgeTone}`}>
-              {busy ? (
-                <Loader className='size-3 shrink-0 animate-spin motion-reduce:animate-none' aria-hidden='true' />
-              ) : phase === 'idle' ? (
-                <XCircle className='size-3 shrink-0' aria-hidden='true' />
+    <InteractivePanel label='Gmail → Viollet' title='Gmail → Viollet' description={copy.stateLabel} timeline={timeline}>
+      <AppSurface route='viollet.app / Gmail'>
+        <div className={`flex items-center justify-between gap-3 border-b pb-3 ${L.border}`}>
+          <span className={`text-xs font-medium ${L.muted}`}>{copy.stateLabel}</span>
+          <div className='grid min-w-0 text-right text-xs font-medium text-emerald-700' aria-live='polite'>
+            {STAGES.map(stage => (
+              <span key={stage.state} className={`col-start-1 row-start-1 ${state === stage.state ? '' : 'invisible'}`}>
+                {copy.states[stage.state]}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <svg viewBox='0 0 600 280' className='block h-auto w-full' role='img' aria-label={`Gmail → Pub/Sub → Viollet webhook. ${copy.states[state]}`}>
+          {['M 90 140 Q 195 80 300 140', 'M 300 140 Q 405 200 510 140'].map((path, index) => (
+            <g key={path}>
+              <path d={path} fill='none' stroke={LC.primarySoft} strokeWidth={9} strokeLinecap='round' />
+              <path d={path} fill='none' stroke={LC.wire} strokeWidth={1.5} />
+              <path d={path} fill='none' stroke={LC.primary} strokeWidth={2} pathLength={1} strokeDasharray='1' strokeDashoffset={1 - Math.min(1, Math.max(0, delivery * 2 - index))} />
+            </g>
+          ))}
+          {[90, 300, 510].map((x, index) => (
+            <g key={x}>
+              <rect x={x - 39} y={101} width={78} height={78} rx={18} fill={LC.card} stroke={index === 0 || (index === 1 ? delivery >= 0.5 : ingested) ? LC.primary : LC.wire} strokeWidth={1.8} />
+              {index === 0 ? (
+                <image href='/case-studies/viollet/gmail.png' x={x - 23} y={117} width={46} height={46} preserveAspectRatio='xMidYMid meet' />
+              ) : index === 1 ? (
+                <g fill={LC.primary} stroke={LC.primary} strokeWidth={2}>
+                  <path d={`M ${x - 18} 128 L ${x} 140 L ${x + 18} 128 M ${x} 140 V 158`} fill='none' />
+                  <circle cx={x - 18} cy={128} r={5} /><circle cx={x + 18} cy={128} r={5} /><circle cx={x} cy={158} r={5} />
+                </g>
               ) : (
-                <CheckCircle className='size-3 shrink-0' aria-hidden='true' />
+                <text x={x} y={150} textAnchor='middle' fontSize={30} fontWeight={700} fill={LC.primary}>V</text>
               )}
-              {copy.states[phase]}
-            </span>
+              <text x={x} y={207} textAnchor='middle' fontSize={14} fontWeight={600} fill={LC.fg}>{['Gmail', 'Pub/Sub', 'Viollet'][index]}</text>
+              {index === 2 && <text x={x} y={225} textAnchor='middle' fontSize={11} fill={LC.muted}>/api/gmail/webhook</text>}
+            </g>
+          ))}
+          <g opacity={watching ? 1 : 0.25}>
+            <circle cx={90} cy={54} r={18} fill={LC.card} stroke={LC.primary} strokeWidth={1.5} />
+            <path d='M 90 41 V 54 L 98 58' fill='none' stroke={LC.primary} strokeWidth={2} strokeLinecap='round' transform={`rotate(${watching ? span(elapsed, 1800, DURATION, linear) * 360 : 0} 90 54)`} />
+            <path d='M 90 73 V 100' stroke={LC.wire} strokeDasharray='3 4' />
+            <text x={118} y={58} fontSize={12} fill={LC.muted}>users.watch ↻</text>
+          </g>
+          {elapsed < 7600 && <Envelope x={point.x} y={point.y} />}
+          {elapsed >= 8200 && elapsed < 11600 && (
+            <Envelope x={duplicate.x - bounce * 55} y={duplicate.y - Math.sin(bounce * Math.PI / 2) * 40} opacity={1 - bounce * 0.8} />
+          )}
+          <g opacity={deduped ? 1 : 0}>
+            <circle cx={548} cy={105} r={14} fill='#ecfdf5' stroke='#059669' />
+            <path d='M 542 105 L 546 109 L 554 101' fill='none' stroke='#047857' strokeWidth={2} strokeLinecap='round' />
+          </g>
+        </svg>
+
+        <div className={`grid gap-2 rounded-lg border p-3 ${L.border} ${L.secondary}`}>
+          <p className={`flex items-center gap-2 text-xs ${L.muted} ${watching ? '' : 'invisible'}`}><Clock className='size-3.5' aria-hidden='true' />{copy.states.watching}</p>
+          <div className='grid text-sm' aria-live='polite'>
+            <div className={`col-start-1 row-start-1 flex items-center gap-3 ${ingested ? '' : 'invisible'}`}>
+              <svg viewBox='0 0 32 32' className='size-8 shrink-0' aria-hidden='true'><image href='/case-studies/viollet/banks/banreservas.svg' width={32} height={32} /></svg>
+              <span className='min-w-0 flex-1'>Banreservas <span className={L.muted}>· gmailMessageId</span></span>
+              <span className={`shrink-0 font-mono ${L.primaryText}`}>01</span>
+            </div>
+          </div>
+          <div className='grid text-xs font-medium text-emerald-700' aria-live='polite'>
+            {[copy.states.ingested, copy.states.deduped].map((label, index) => (
+              <span key={label} className={`col-start-1 row-start-1 ${ingested && (index === 1 ? deduped : !deduped) ? '' : 'invisible'}`}>{label}</span>
+            ))}
           </div>
         </div>
 
-        <div className='space-y-6 px-4 sm:px-6'>
-          <div className='grid gap-4 sm:grid-cols-2'>
-            <div className={`rounded-lg border p-4 ${v.border}`}>
-              <div className={`mb-1 flex items-center gap-2 text-sm ${v.muted}`}>
-                <Clock className='size-4 shrink-0' aria-hidden='true' />
-                {copy.stateLabel}
-              </div>
-              <p className='flex items-start gap-2 font-medium' aria-live='polite'>
-                {busy ? (
-                  <Loader className='mt-0.5 size-4 shrink-0 animate-spin text-teal-300 motion-reduce:animate-none' aria-hidden='true' />
-                ) : phase === 'idle' ? (
-                  <XCircle className='mt-0.5 size-4 shrink-0 text-rose-300' aria-hidden='true' />
-                ) : (
-                  <CheckCircle className='mt-0.5 size-4 shrink-0 text-emerald-400' aria-hidden='true' />
-                )}
-                <span className='min-w-0'>{copy.states[phase]}</span>
-              </p>
-            </div>
-            <div className={`rounded-lg border p-4 ${v.border}`}>
-              <div className={`mb-1 flex items-center gap-2 text-sm ${v.muted}`}>
-                <Mail className='size-4 shrink-0' aria-hidden='true' />
-                {copy.actionsLabel}
-              </div>
-              <p className='font-medium'>
-                {nextAction ? copy[nextAction] : copy.states.deduped}
-              </p>
-            </div>
-          </div>
-
-          <div
-            className='relative h-2 w-full overflow-hidden rounded-full bg-teal-400/20'
-            role='progressbar'
-            aria-valuemin={0}
-            aria-valuemax={totalLines}
-            aria-valuenow={log.length}
-            aria-label={copy.logLabel}
-          >
-            <div
-              className='h-full w-full bg-teal-400 transition-transform motion-reduce:transition-none'
-              style={{ transform: `translateX(-${100 - progress}%)` }}
-            />
-          </div>
-
-          <div className='flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4'>
-            {ORDER.map((action, index) => {
-              const Icon = index < unlocked ? CheckCircle2 : ACTION_ICON[action]
-              const spinning = busy && index === unlocked && (action === 'push' || action === 'replay')
-              return (
-                <button
-                  key={action}
-                  type='button'
-                  disabled={busy || index !== unlocked}
-                  className={`inline-flex min-h-11 sm:min-h-9 w-full max-w-full items-center justify-center gap-1.5 whitespace-normal rounded-md px-3.5 py-2 text-center text-sm font-medium leading-none transition-colors motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-45 sm:w-auto sm:whitespace-nowrap sm:py-0 ${focusRing} ${index === unlocked ? button.primary : button.outline}`}
-                  onClick={() => run(action)}
-                >
-                  <Icon className={`size-4 shrink-0 ${index < unlocked ? 'text-emerald-300' : ''} ${spinning ? 'animate-spin motion-reduce:animate-none' : ''}`} aria-hidden='true' />
-                  {copy[action]}
-                </button>
-              )
-            })}
-            <button
-              type='button'
-              className={`${button.base} ${button.ghost} w-full sm:w-auto`}
-              onClick={reset}
-            >
-              {copy.reset}
-            </button>
-          </div>
-
-          <div className={`min-w-0 overflow-hidden rounded-lg border bg-slate-900/50 ${v.border}`} aria-live='polite' aria-label={copy.logLabel}>
-            <p className={`border-b px-4 py-2 text-xs font-medium ${v.border} ${v.muted}`}>{copy.logLabel}</p>
-            {log.length === 0 ? (
-              <p className={`p-4 text-center text-sm ${v.muted}`}>{copy.states.idle}</p>
-            ) : (
-              <ol className='space-y-0.5 p-2'>
-                {log.map((line, index) => {
-                  const active = busy && index === log.length - 1
-                  return (
-                    <li key={`${index}-${line.slice(0, 18)}`} className='flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left'>
-                      {active ? (
-                        <Loader className='mt-0.5 size-3.5 shrink-0 animate-spin text-teal-300 motion-reduce:animate-none' aria-hidden='true' />
-                      ) : (
-                        <CheckCircle2 className='mt-0.5 size-3.5 shrink-0 text-emerald-400' aria-hidden='true' />
-                      )}
-                      <span className='min-w-0 flex-1 break-words text-sm'>{line}</span>
-                    </li>
-                  )
-                })}
-              </ol>
-            )}
-          </div>
+        <div className={`mt-4 overflow-hidden rounded-lg border ${L.border} bg-white`}>
+          <p className={`border-b px-3 py-2 text-xs font-medium ${L.border} ${L.muted}`}>{copy.logLabel}</p>
+          <ol className='space-y-1 p-3' aria-label={copy.logLabel} aria-live='polite' aria-relevant='additions text'>
+            {lines.map(({ line, at }, index) => (
+              <li key={`${index}-${at}`} className={`flex items-start gap-2 text-xs leading-5 ${elapsed >= at ? '' : 'invisible'}`}>
+                <CheckCircle2 className='mt-1 size-3 shrink-0 text-emerald-600' aria-hidden='true' />
+                <span className={`min-w-0 break-words ${L.mono} ${L.fg2}`}>{line}</span>
+              </li>
+            ))}
+          </ol>
         </div>
-      </div>
+      </AppSurface>
     </InteractivePanel>
   )
 }

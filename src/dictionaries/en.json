@@ -210,7 +210,8 @@
         "deployUrl": "https://viollet.app",
         "caseStudyUrl": "/projects/viollet",
         "githubRepositoryUrl": "",
-        "imageSrc": "viollet.avif",
+        "imageSrc": "viollet-og.avif",
+        "imageAlt": "Viollet preview: monthly spending summary with categories and bank alerts turned into transactions",
         "starsOnGithub": 0
       },
       {
@@ -230,7 +231,19 @@
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "imageSrc": "tracky.webp",
-        "starsOnGithub": 25
+        "starsOnGithub": 25,
+        "caseStudyUrl": "/projects/tracky"
+      },
+      {
+        "projectName": "SargoTech",
+        "description": "Coastal technology from the Dominican Republic that anticipates sargassum with satellite data, anti sargassum barriers and local operations. A team project where I am the CTO and lead developer.",
+        "technologies": ["React", "TypeScript", "MapLibre"],
+        "deployUrl": "https://sargotech.com",
+        "caseStudyUrl": "/projects/sargotech",
+        "githubRepositoryUrl": "",
+        "imageSrc": "sargotech-og.webp",
+        "imageAlt": "SargoTech logo, Costas Inteligentes",
+        "starsOnGithub": 0
       },
       {
         "projectName": "Chatify",
@@ -250,16 +263,8 @@
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
         "imageSrc": "chatify.webp",
-        "starsOnGithub": 14
-      },
-      {
-        "projectName": "VB Solutions",
-        "description": "Modern landing page for a business automation consultancy specializing in Odoo and AI solutions. Features smooth animations, responsive design, and an intuitive interface to showcase digital transformation services.",
-        "technologies": ["TypeScript", "Next.js", "React", "Tailwind", "Shadcn/ui"],
-        "deployUrl": "https://vbsolutions.info",
-        "githubRepositoryUrl": "https://github.com/fraineralex/vbs-landing",
-        "imageSrc": "vbs.avif",
-        "starsOnGithub": 0
+        "starsOnGithub": 14,
+        "caseStudyUrl": "/projects/chatify"
       }
     ],
     "link": {
@@ -306,6 +311,16 @@
         "year": 2026
       },
       {
+        "title": "SargoTech",
+        "shortDescription": "Coastal intelligence against sargassum. Team project, I am CTO.",
+        "description": "Coastal technology from the Dominican Republic that anticipates sargassum with satellite data, anti sargassum barriers and local operations. A team project where I am the CTO and lead developer.",
+        "technologies": ["React", "TypeScript", "MapLibre"],
+        "deployUrl": "https://sargotech.com",
+        "caseStudyUrl": "/projects/sargotech",
+        "githubRepositoryUrl": "",
+        "year": 2026
+      },
+      {
         "title": "VB Solutions",
         "shortDescription": "Landing page for a business automation consultancy with Odoo and AI.",
         "description": "Modern landing page for a business automation consultancy specializing in Odoo and AI solutions. Features smooth animations, responsive design, and an intuitive interface to showcase digital transformation services.",
@@ -336,7 +351,8 @@
         ],
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
-        "year": 2024
+        "year": 2024,
+        "caseStudyUrl": "/projects/tracky"
       },
       {
         "title": "Chatify",
@@ -355,7 +371,18 @@
         ],
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
-        "year": 2024
+        "year": 2024,
+        "caseStudyUrl": "/projects/chatify"
+      },
+      {
+        "title": "Chess AI",
+        "shortDescription": "Chess AI project utilizing minimax algorithm.",
+        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It’s designed to determine the optimal move within a specified depth.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "year": 2022,
+        "caseStudyUrl": "/projects/chess-ai"
       },
       {
         "title": "Blog",
@@ -439,15 +466,6 @@
         "githubRepositoryUrl": "https://github.com/fraineralex/learning-react/tree/main/projects/08-todo-app-typescript",
         "deployUrl": "https://frainer-todo-app.surge.sh",
         "year": 2023
-      },
-      {
-        "title": "Chess AI",
-        "shortDescription": "Chess AI project utilizing minimax algorithm.",
-        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It’s designed to determine the optimal move within a specified depth.",
-        "technologies": ["Python", "Numpy", "Pygame"],
-        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
-        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
-        "year": 2022
       },
       {
         "title": "Real Estate App",
@@ -599,14 +617,13 @@
         "description": "How I built an AI-assisted personal finance product that turns bank email notifications into categorized spending without bank credentials or manual entry.",
         "role": "Solo builder, from architecture through production",
         "year": "2026",
-        "readTime": "8 min read"
+        "readTime": "12 min read"
       },
       "backLink": {
         "label": "Back to projects",
         "url": "/projects"
       },
       "hero": {
-        "eyebrow": "Case study",
         "summary": "Viollet is a side project I designed and built end to end. It connects Gmail, ingests bank transaction notifications, categorizes spending with AI, and surfaces budgets and insights without asking for online banking credentials.",
         "technologies": [
           "TypeScript",
@@ -617,7 +634,8 @@
           "AI SDK",
           "Gmail API",
           "Google Pub/Sub",
-          "Webhooks"
+          "Webhooks",
+          "Vercel"
         ]
       },
       "sections": {
@@ -651,10 +669,10 @@
         "architecture": {
           "title": "4. Architecture",
           "paragraphs": [
-            "The runtime splits into three cooperating paths: user-facing app (Clerk-authenticated Next.js), asynchronous email ingestion (Gmail watch + Pub/Sub push into a webhook route), and persistence/query through Drizzle on Turso.",
-            "When a supported notification arrives, the pipeline parses the message, extracts transaction fields, runs categorization through the AI SDK, and writes normalized records the dashboard can aggregate for budgets, trends, and alerts."
+            "The runtime has three cooperating paths: the signed-in Next.js app on Vercel (Clerk for sessions), asynchronous mail ingestion (Gmail watch plus a Pub/Sub push into a webhook route), and Drizzle on Turso for the ledger.",
+            "A supported notification is cleaned, extracted with the AI SDK into a typed object (through the Vercel AI Gateway in production), categorized, and stored. The dashboard and the assistant read those rows for budgets, trends, and answers."
           ],
-          "diagramCaption": "High-level flow from bank email notifications to categorized records in Turso."
+          "diagramCaption": "Each node, in turn, shows how Gmail, Pub/Sub, Next.js, Clerk, Vercel, the AI SDK, and Turso split the work."
         },
         "tradeOffs": {
           "title": "5. Decisions and trade-offs",
@@ -690,7 +708,7 @@
           ]
         },
         "operationalQuality": {
-          "title": "7. Operational quality",
+          "title": "8. Operational quality",
           "paragraphs": [
             "Because the product handles financial metadata, the implementation treats transport and storage carefully: encrypted data in transit and at rest, read-only Gmail scopes scoped to user-selected senders, and clear copy on the public site about Google's verification process for restricted permissions.",
             "Ingestion is built for reliability at the webhook boundary: validate push deliveries, make writes idempotent where possible, and keep the parsing/categorization path isolated so a bad template does not corrupt unrelated user data."
@@ -702,14 +720,452 @@
           ]
         },
         "proof": {
-          "demoLabel": "8. Proof",
-          "videoLabel": "Product walkthrough",
-          "videoDescription": "A recorded walkthrough of the live dashboard, expenses, and budgets.",
-          "videoSrc": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/viollet-demo-en.mp4",
-          "videoPoster": "https://3fuapogza10xxil9.public.blob.vercel-storage.com/portfolio/viollet-demo/poster-en-dashboard.png",
+          "demoLabel": "9. Proof",
           "demoUrl": "https://viollet.app",
           "screenshotAlt": "Viollet dashboard showing automated expense tracking from bank email notifications",
-          "note": "Explore the live public beta at viollet.app. The source repository stays private during beta; this case study and the deployed product are the public evidence."
+          "note": "Explore the live public beta at viollet.app. The source repository stays private during beta; this case study and the deployed product are the public evidence. I also wrote about expense tracking in the Dominican Republic on the Viollet blog.",
+          "relatedLinks": [
+            {
+              "label": "Expense tracking in the Dominican Republic",
+              "url": "https://viollet.app/blog/control-gastos-republica-dominicana"
+            }
+          ],
+          "appLabel": "Sample session",
+          "appDescription": "A simulated Viollet session with the public demo's signed-in user. Open the dashboard, expenses, budgets, and inbox."
+        },
+        "assistant": {
+          "title": "7. Assistant",
+          "paragraphs": [
+            "The in-app assistant does not guess someone's finances. Each reply is grounded in tools over that person's rows: spend breakdowns, a financial overview, transactions, budgets, savings goals, and a few settings writes.",
+            "The panel below replays three answers from the same sample ledger as the landing demo. It shows the tool the production assistant would call. It does not contact a live model."
+          ]
+        }
+      },
+      "interactives": {
+        "controls": {
+          "play": "Play",
+          "pause": "Pause",
+          "previous": "Previous",
+          "next": "Next",
+          "replay": "Replay",
+          "step": "Step",
+          "of": "of"
+        },
+        "app": {
+          "frameLabel": "Simulated Viollet app with a signed-in user",
+          "url": "viollet.app",
+          "simulationNote": "Sample ledger from the viollet.app landing demo. This is not a live account.",
+          "signedIn": "Signed in",
+          "userName": "Frainer Encarnación",
+          "userEmail": "frainer@viollet.app",
+          "userAlt": "Photo of Frainer Encarnación",
+          "navLabel": "Viollet sections",
+          "overview": "Overview",
+          "tracking": "Tracking",
+          "product": "Expense tracker",
+          "version": "beta",
+          "tabs": {
+            "dashboard": "Dashboard",
+            "expenses": "Expenses",
+            "budgets": "Budgets",
+            "inbox": "Inbox"
+          },
+          "period": "This month",
+          "income": "Income",
+          "expenses": "Expenses",
+          "net": "Net balance",
+          "vsLast": "vs last month",
+          "categories": "Spending by category",
+          "recent": "Recent activity",
+          "budgetsTitle": "Budgets this month",
+          "inboxTitle": "Sample inbox",
+          "over": "Over budget",
+          "remaining": "left",
+          "filterLabel": "Category",
+          "allCategories": "All categories",
+          "parsed": "Parsed",
+          "ignored": "Ignored sender",
+          "closeDetail": "Close",
+          "merchant": "Merchant",
+          "amount": "Amount",
+          "category": "Category",
+          "account": "Account",
+          "origin": "Origin",
+          "originEmail": "Email notification",
+          "emptyFilter": "No sample transactions in that category.",
+          "categoryNames": {
+            "housing": "Housing",
+            "supermarkets": "Supermarkets",
+            "bills": "Bills and utilities",
+            "transportation": "Transportation",
+            "food": "Food and dining",
+            "subscriptions": "Subscriptions",
+            "shopping": "Shopping",
+            "education": "Education",
+            "services": "Services"
+          },
+          "budgetNames": {
+            "transportation": "Transportation",
+            "bills": "Bills and utilities",
+            "subscriptions": "Subscriptions",
+            "shopping": "Shopping",
+            "education": "Education"
+          },
+          "mail": {
+            "bravoSubject": "BRAVO LA ESPERILLA",
+            "bravoSnippet": "Visa Premia ••7392 · DOP 2,591.00",
+            "uberSubject": "UBER*RIDES",
+            "uberSnippet": "Qik Credit *4821 · RD$232.79",
+            "claroSubject": "CLARO RD",
+            "claroSnippet": "Qik Credit *4821 · RD$2,499.00",
+            "noiseFrom": "Centro Deals",
+            "noiseEmail": "promo@ofertascentro.example",
+            "noiseSubject": "40% off electronics this weekend",
+            "noiseSnippet": "A store promotion. Not a bank alert.",
+            "noiseReason": "The sender is not an authorized institution, so sync leaves the message in Gmail."
+          }
+        },
+        "inbox": {
+          "title": "What already lands in the inbox",
+          "description": "Messages arrive on their own. Viollet only ingests authorized financial senders. Everything else stays in Gmail.",
+          "listLabel": "Sample inbox",
+          "alert": "Alert",
+          "noise": "Ignored",
+          "prompt": "Messages open on their own and show whether they would enter the tracker.",
+          "messages": [
+            {
+              "id": "bravo",
+              "from": "Banreservas",
+              "email": "notificaciones@banreservas.com",
+              "subject": "BRAVO LA ESPERILLA",
+              "snippet": "Transaction on Visa Premia ••7392. Amount: DOP 2,591.00.",
+              "kind": "alert",
+              "verdict": "Financial alert",
+              "detail": "This sender is confirmed for Banreservas. Once the person authorizes that institution, the message can enter the pipeline. Until then it is still free text in Gmail."
+            },
+            {
+              "id": "qik",
+              "from": "Qik",
+              "email": "notificaciones@qik.do",
+              "subject": "UBER*RIDES",
+              "snippet": "Charge on Qik Credit *4821.",
+              "kind": "alert",
+              "verdict": "Financial alert",
+              "detail": "notificaciones@qik.do is the confirmed sender for Qik Banco Digital. Viollet does not read the whole mailbox, only senders the person turned on."
+            },
+            {
+              "id": "bhd",
+              "from": "Banco BHD",
+              "email": "alertas@bhd.com.do",
+              "subject": "ATM withdrawal",
+              "snippet": "ATM withdrawal notice from Banco BHD.",
+              "kind": "alert",
+              "verdict": "Financial alert",
+              "detail": "alertas@bhd.com.do is confirmed too. Cards and accounts are tracked separately, because the notice names the product that moved."
+            },
+            {
+              "id": "friend",
+              "from": "María Gómez",
+              "email": "maria.gomez@gmail.com",
+              "subject": "Dinner on Friday?",
+              "snippet": "A personal note. No amount, no bank.",
+              "kind": "noise",
+              "verdict": "Stays in Gmail",
+              "detail": "It does not match the institution catalog. Sync skips it. Viollet does not store it as a transaction."
+            },
+            {
+              "id": "promo",
+              "from": "Centro Deals",
+              "email": "promo@ofertascentro.example",
+              "subject": "40% off electronics",
+              "snippet": "A store promotion.",
+              "kind": "noise",
+              "verdict": "Stays in Gmail",
+              "detail": "A sale email can mention prices and still not be a bank notification. Without an authorized sender, it stays out."
+            }
+          ]
+        },
+        "access": {
+          "title": "What the grant includes",
+          "description": "Institutions check themselves, then the Gmail grant is reviewed. The bank password field stays disabled.",
+          "authorized": "Authorized senders",
+          "confirmed": "Confirmed sender",
+          "listed": "Listed in the catalog",
+          "passwordLabel": "Online banking password",
+          "passwordNote": "This field stays disabled. Viollet never asks for a bank password.",
+          "scope": "gmail.readonly",
+          "scopeDetail": "The only mailbox scope is https://www.googleapis.com/auth/gmail.readonly. Viollet can read mail. It cannot send, delete, or modify it.",
+          "review": "Review grant",
+          "bankLogin": "Try a bank login",
+          "bankRefusal": "Refused. Viollet does not collect online banking usernames or passwords.",
+          "grantReady": "Read-only Gmail. Authorized senders ({count}):",
+          "noneSelected": "Select at least one institution. Mail from a sender you did not authorize is ignored.",
+          "summaryLabel": "Grant result"
+        },
+        "ownership": {
+          "title": "What I took on",
+          "description": "Each workstream shows what I built and what I left out on purpose.",
+          "listLabel": "Workstreams",
+          "ownedLabel": "I owned this",
+          "deferredLabel": "I left this for later",
+          "prompt": "The route shows the scope cut for each workstream.",
+          "items": [
+            {
+              "id": "framing",
+              "title": "Problem and public copy",
+              "summary": "What to automate first, and how to explain it.",
+              "owned": "I framed the scope around email alerts, the consent flow, and public copy about access and revocation.",
+              "deferred": "An open-banking platform that would collect a password for every bank."
+            },
+            {
+              "id": "schema",
+              "title": "Turso data model",
+              "summary": "Drizzle on libSQL.",
+              "owned": "The schema for institutions, accounts, emails, transactions, categories, and Gmail sync state.",
+              "deferred": "A monolithic worker that parsed the mailbox inside a UI request."
+            },
+            {
+              "id": "ingest",
+              "title": "OAuth, watch, and webhook",
+              "summary": "From Gmail to an idempotent job.",
+              "owned": "The gmail.readonly grant, users.watch, the Pub/Sub push into /api/gmail/webhook, and coalesced deliveries.",
+              "deferred": "Any scope that would let the app modify or send mail."
+            },
+            {
+              "id": "extract",
+              "title": "Extraction and category",
+              "summary": "A typed schema plus rules.",
+              "owned": "The extraction object, the confidence threshold of 85, deterministic overrides, and merchant maps.",
+              "deferred": "Relying only on a regular expression for every bank template."
+            },
+            {
+              "id": "ux",
+              "title": "Dashboard and assistant",
+              "summary": "What a person sees and asks.",
+              "owned": "Expenses, budgets, accounts, and an assistant whose tools read and write that person's rows.",
+              "deferred": "A generic chat with no ledger access."
+            },
+            {
+              "id": "release",
+              "title": "Production beta",
+              "summary": "Vercel, verification, and ops.",
+              "owned": "The deploy, Google verification for the restricted scope, and the public beta copy.",
+              "deferred": "Opening the repository while the beta source stays private."
+            }
+          ]
+        },
+        "architecture": {
+          "title": "Inspect one piece",
+          "description": "The diagram visits each node and shows its explanation.",
+          "diagramLabel": "Viollet architecture diagram",
+          "talksTo": "Connects to",
+          "pinned": "Pinned",
+          "nodes": [
+            {
+              "id": "gmail",
+              "kicker": "Mailbox",
+              "name": "Gmail",
+              "summary": "Read-only API. The grant is gmail.readonly. Viollet calls users.watch on INBOX and history.list with historyTypes messageAdded. It cannot send, delete, or edit mail."
+            },
+            {
+              "id": "pubsub",
+              "kicker": "Queue",
+              "name": "Google Pub/Sub",
+              "summary": "Gmail publishes mailbox changes to a Cloud Pub/Sub topic. The app does not poll for every new message. The webhook receives the historyId."
+            },
+            {
+              "id": "next",
+              "kicker": "App",
+              "name": "Next.js",
+              "summary": "App Router, server actions, and the /api/gmail/webhook route. Sender filtering, extraction, and ledger writes are orchestrated here."
+            },
+            {
+              "id": "vercel",
+              "kicker": "Host",
+              "name": "Vercel",
+              "summary": "The app runs on Vercel. In production, email extraction goes through the Vercel AI Gateway. A Gemini model is the non-production fallback."
+            },
+            {
+              "id": "clerk",
+              "kicker": "Session",
+              "name": "Clerk",
+              "summary": "Sessions for the signed-in app. The Gmail token is a separate secret, encrypted with AES-256-GCM before it is stored. Clerk does not replace the Google grant."
+            },
+            {
+              "id": "ai",
+              "kicker": "Model",
+              "name": "AI SDK",
+              "summary": "Extraction asks the AI SDK for an object validated with zod: type, amount in cents, merchant, account, category, and confidence. Deterministic rules can still correct withdrawals, card payments, and the person's own rules. A model category is accepted at confidence 85 or higher."
+            },
+            {
+              "id": "turso",
+              "kicker": "Data",
+              "name": "Turso",
+              "summary": "libSQL through Drizzle. Emails, transactions, accounts, categories, institutions, and gmailSyncState live here. emails.gmailMessageId is unique, so a replayed push does not insert a second row."
+            }
+          ]
+        },
+        "parse": {
+          "title": "From alert to ledger row",
+          "description": "Step through one Banreservas notice from the landing demo. This simulates the production pipeline. It does not call Gmail or a model. The score of 92 is illustrative. The threshold of 85 is the one in the code.",
+          "fromLabel": "From",
+          "subjectLabel": "Subject",
+          "cleanedLabel": "Clean text, with HTML and the legal footer removed.",
+          "rawLabel": "Raw email",
+          "disclaimer": "[bank HTML and legal footer]",
+          "ledgerLabel": "Ledger row",
+          "waiting": "The row appears once extraction has an object.",
+          "merchant": "Merchant",
+          "amount": "Amount",
+          "account": "Account",
+          "typeLabel": "Type",
+          "typeValue": "debit · transaction",
+          "category": "Category",
+          "categoryValue": "supermarkets",
+          "confidence": "Confidence",
+          "confidenceValue": "92 / 100, threshold 85",
+          "source": "Source",
+          "sourceValue": "llm",
+          "stored": "Write",
+          "steps": [
+            {
+              "id": "notice",
+              "title": "The alert arrives",
+              "body": "Banreservas sends an email. Merchant, card, and amount are still mixed into the prose. Nothing is in the ledger yet."
+            },
+            {
+              "id": "sender",
+              "title": "The sender matches",
+              "body": "notificaciones@banreservas.com is a confirmed Banreservas sender. If this person had not authorized that bank, the message would be skipped."
+            },
+            {
+              "id": "clean",
+              "title": "The text is cleaned",
+              "body": "HTML becomes text and legal footers are removed before the model sees the message. The model gets the financial notice, not the disclaimer."
+            },
+            {
+              "id": "extract",
+              "title": "Structured extraction",
+              "body": "The AI SDK asks for an object: transaction type, amount in cents, merchant, account, and last four. DOP 2,591.00 becomes -259100 cents on Visa Premia ending 7392."
+            },
+            {
+              "id": "category",
+              "title": "The category is resolved",
+              "body": "Deterministic rules run first: the person's prompt rules, withdrawals, and payments to a card. None of those hit this sample. The illustrative confidence is 92, above the real accept threshold of 85, so Supermarkets is kept with source llm. Below that threshold Viollet checks the person's merchant map, then the global map. With no map, the category stays pending for enrichment."
+            },
+            {
+              "id": "write",
+              "title": "It is written once",
+              "body": "Drizzle inserts the email and the transaction in Turso. emails.gmailMessageId is unique and the insert uses onConflictDoNothing. A second delivery of the same Gmail id does not create another transaction."
+            }
+          ]
+        },
+        "banks": {
+          "title": "Dominican catalog",
+          "description": "Search and filters run on their own. Confirmed means the alert sender is verified in the source catalog. Other rows are listed, and support depends on the format the bank sends. The public product talks about 15+ banks and cards, including institutions still under evaluation. This is not the full list.",
+          "searchLabel": "Search institution or sender",
+          "searchPlaceholder": "Banreservas, qik.do...",
+          "filtersLabel": "Catalog filters",
+          "all": "All",
+          "confirmed": "Confirmed",
+          "listed": "Listed",
+          "empty": "No institution matches that search.",
+          "sender": "Alert sender",
+          "tracksCards": "Tracks cards",
+          "tracksAccounts": "Tracks accounts",
+          "transfers": "Includes transfers",
+          "yes": "Yes",
+          "confirmedHelp": "Sender confirmed in the catalog.",
+          "listedHelp": "Listed for evaluation. Support depends on whether the alert can be parsed.",
+          "prompt": "The route shows each institution's sender and what it tracks."
+        },
+        "chat": {
+          "title": "Assistant on the sample ledger",
+          "description": "The three questions type themselves. The reply is scripted from the demo ledger and shows the tool the production assistant would call. It does not contact a live model.",
+          "suggestionsLabel": "Sample questions",
+          "transcriptLabel": "Conversation",
+          "placeholder": "Ask about the sample spending",
+          "send": "Send",
+          "you": "You",
+          "assistant": "Viollet",
+          "tool": "Tool",
+          "result": "Result",
+          "unknown": "The simulation plays the three sample questions on its own.",
+          "thinking": "Checking the sample ledger",
+          "answers": [
+            {
+              "id": "transport",
+              "prompt": "How much did I spend on transportation this month?",
+              "keywords": [
+                "spend on transportation",
+                "uber",
+                "transportation this"
+              ],
+              "tool": "get_spend_breakdown",
+              "args": "groupBy: category · period: this-month",
+              "result": "Transportation RD$1,980 of RD$32,955 in expenses",
+              "reply": "In the sample ledger, transportation is RD$1,980 this month, inside RD$32,955 of expenses. The tool reads that person's transactions. It does not invent the amount."
+            },
+            {
+              "id": "overview",
+              "prompt": "What is my net this month?",
+              "keywords": ["my net", "net this", "net balance"],
+              "tool": "get_financial_overview",
+              "args": "period: this-month",
+              "result": "Income RD$50,000 · expenses RD$32,955 · net RD$17,045",
+              "reply": "Income RD$50,000, expenses RD$32,955, net balance RD$17,045. That comes from get_financial_overview on the same rows as the dashboard."
+            },
+            {
+              "id": "budget",
+              "prompt": "Create a monthly transportation budget of RD$4,500",
+              "keywords": ["create a", "budget of", "rd$4,500"],
+              "tool": "create_budget",
+              "args": "category: transportation · amountCents: 450000 · period: monthly",
+              "result": "The tool would write the budget. This page only shows the call.",
+              "reply": "In production, create_budget would save a monthly transportation budget of RD$4,500. On this page the call is shown and nothing is written."
+            }
+          ]
+        },
+        "sync": {
+          "title": "Watch, push, and a duplicate",
+          "description": "The scene plays the real Gmail watch and webhook path, including the duplicate guard.",
+          "actionsLabel": "Actions",
+          "connect": "Connect Gmail",
+          "watch": "Register watch",
+          "push": "Deliver a new alert",
+          "replay": "Replay the same push",
+          "reset": "Reset",
+          "logLabel": "Sync log",
+          "stateLabel": "Mailbox state",
+          "states": {
+            "idle": "Not connected",
+            "connected": "Read-only grant stored",
+            "watching": "users.watch active",
+            "ingested": "One transaction written",
+            "deduped": "Duplicate push ignored"
+          },
+          "lines": {
+            "connect": [
+              "Grant stored: https://www.googleapis.com/auth/gmail.readonly.",
+              "Refresh token encrypted with AES-256-GCM. No bank password stored.",
+              "Authorized senders: notificaciones@banreservas.com, notificaciones@qik.do."
+            ],
+            "watch": [
+              "gmail.users.watch on INBOX, publishing to the Cloud Pub/Sub topic.",
+              "gmailSyncState saved historyId and the watch expiration."
+            ],
+            "push": [
+              "Push received at /api/gmail/webhook. Coalesced for 8 seconds, then processed.",
+              "history.list with historyTypes messageAdded returned one id.",
+              "notificaciones@banreservas.com matched Banreservas.",
+              "Extraction wrote one email and one transaction. gmailMessageId is unique."
+            ],
+            "replay": [
+              "The same history push arrived again.",
+              "Insert used onConflictDoNothing on emails.gmailMessageId.",
+              "No second transaction was created."
+            ]
+          }
         }
       }
     }

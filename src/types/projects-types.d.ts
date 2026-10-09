@@ -5,6 +5,7 @@ export interface Project {
   deployUrl: string
   githubRepositoryUrl: string
   imageSrc: string
+  imageAlt?: string
   starsOnGithub: number
   caseStudyUrl?: string
 }

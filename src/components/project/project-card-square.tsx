@@ -37,7 +37,7 @@ export default function ProjectCardSquare ({
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  <FiGithub className='-mt-1 w-5 h-5 mr-2' />
+                  <FiGithub className='w-5 h-5 mr-2' />
                 </Link>
               )}
               {deployUrl && (
@@ -48,7 +48,7 @@ export default function ProjectCardSquare ({
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  <FiExternalLink className='-mt-1 w-5 h-5' />
+                  <FiExternalLink className='w-5 h-5' />
                 </Link>
               )}
             </span>

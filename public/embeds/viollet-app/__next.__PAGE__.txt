@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:"$Sreact.suspense"
+3:I[67747,["674","static/chunks/674-5bcd295569074e49.js","974","static/chunks/app/page-23112b6893e2648a.js"],"ProductionViolletApp"]
+4:I[45349,[],"OutletBoundary"]
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"id":"hero-prototype","className":"hero-prototype-wrap relative","children":["$","div",null,{"className":"hero-prototype-frame relative h-full overflow-hidden","children":["$","$2",null,{"fallback":["$","div",null,{"className":"bg-background h-full w-full"}],"children":["$","$L3",null,{}]}]}]}],null,["$","$L4",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"duVFodBKri5DU-GGLHa43"}
+5:null

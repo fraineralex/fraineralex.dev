@@ -17,6 +17,7 @@ export default function AllProjectsGrid ({ projects }: Props) {
             technologies={project.technologies}
             githubRepositoryUrl={project.githubRepositoryUrl}
             deployUrl={project.deployUrl}
+            caseStudyUrl={project.caseStudyUrl}
             year={project.year}
           />
         ))}

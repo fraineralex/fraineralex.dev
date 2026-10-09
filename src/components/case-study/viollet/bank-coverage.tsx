@@ -57,32 +57,30 @@ export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, 
             <div
               role='img'
               aria-label={`${copy.searchLabel}: ${query || copy.searchPlaceholder}`}
-              className={`flex h-11 min-w-0 items-center gap-2 rounded-lg border ${L.border} bg-white px-3`}
+              className={`relative flex h-11 min-w-0 items-center gap-2 rounded-lg border ${L.border} bg-white px-3`}
             >
               <Search className={`size-4 shrink-0 ${L.subtle}`} aria-hidden='true' />
-              <span aria-hidden='true' className={`truncate text-sm ${query ? L.fg : L.subtle}`}>
+              <span aria-hidden='true' className={`min-w-0 flex-1 truncate text-sm ${query ? L.fg : L.subtle}`}>
                 {query || copy.searchPlaceholder}
+                <span aria-hidden='true' className='ml-0.5 inline-block h-4 w-px align-[-2px]' style={{ backgroundColor: query && elapsed < 2200 ? LC.primary : 'transparent' }} />
               </span>
-              {query && elapsed < 2200 && (
-                <span aria-hidden='true' className='h-4 w-px shrink-0' style={{ backgroundColor: LC.primary }} />
-              )}
             </div>
           </div>
 
-          <div className='flex flex-wrap items-center justify-between gap-2'>
-            <div role='group' aria-label={copy.filtersLabel} className={`flex flex-wrap gap-1 rounded-lg ${L.secondary} p-1`}>
+          <div className='flex h-11 items-center justify-between gap-2'>
+            <div role='group' aria-label={copy.filtersLabel} className={`flex h-9 min-w-0 shrink items-center gap-1 overflow-hidden rounded-lg ${L.secondary} p-1`}>
               {filters.map(item => (
                 <span
                   key={item.id}
                   aria-current={filter === item.id ? 'true' : undefined}
-                  className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors motion-reduce:transition-none ${filter === item.id ? `bg-white shadow-sm ${L.primaryText}` : L.muted}`}
+                  className={`inline-flex h-7 items-center rounded-md px-2.5 text-xs font-medium ${filter === item.id ? `bg-white shadow-sm ${L.primaryText}` : L.muted}`}
                 >
                   {item.label}
                 </span>
               ))}
             </div>
-            <span className={`text-xs tabular-nums ${L.muted}`}>
-              {filters.find(item => item.id === filter)?.label} · {resultCount}/{INSTITUTIONS.length}
+            <span className={`w-[7.5rem] shrink-0 text-right text-xs tabular-nums ${L.muted}`}>
+              {resultCount}/{INSTITUTIONS.length}
             </span>
           </div>
 
@@ -120,9 +118,10 @@ export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, 
           </ul>
 
           <div className={`space-y-3 rounded-lg border ${L.border} ${L.primaryTint} p-3`}>
-            <p className={`text-xs leading-relaxed ${L.muted}`}>
-              {filter === 'listed' ? copy.listedHelp : copy.confirmedHelp}
-            </p>
+            <div className='grid'>
+              <p className={`col-start-1 row-start-1 text-xs leading-relaxed ${L.muted}`} style={{ visibility: filter === 'listed' ? 'hidden' : 'visible' }}>{copy.confirmedHelp}</p>
+              <p className={`col-start-1 row-start-1 text-xs leading-relaxed ${L.muted}`} style={{ visibility: filter === 'listed' ? 'visible' : 'hidden' }}>{copy.listedHelp}</p>
+            </div>
             <div className='flex flex-wrap gap-x-4 gap-y-2'>
               {tracks.map(({ icon: Icon, label }) => (
                 <span key={label} className={`inline-flex items-center gap-1.5 text-[11px] ${L.fg2}`}>

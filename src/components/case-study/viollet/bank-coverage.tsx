@@ -68,18 +68,18 @@ export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, 
           </div>
 
           <div className='flex h-11 items-center justify-between gap-2'>
-            <div role='group' aria-label={copy.filtersLabel} className={`flex h-9 min-w-0 shrink items-center gap-1 overflow-hidden rounded-lg ${L.secondary} p-1`}>
+            <div role='group' aria-label={copy.filtersLabel} className={`flex h-9 min-w-0 shrink items-center gap-0.5 overflow-hidden sm:gap-1 rounded-lg ${L.secondary} p-1`}>
               {filters.map(item => (
                 <span
                   key={item.id}
                   aria-current={filter === item.id ? 'true' : undefined}
-                  className={`inline-flex h-7 items-center rounded-md px-2.5 text-xs font-medium ${filter === item.id ? `bg-white shadow-sm ${L.primaryText}` : L.muted}`}
+                  className={`inline-flex h-7 shrink-0 items-center rounded-md px-2 text-xs sm:px-2.5 font-medium ${filter === item.id ? `bg-white shadow-sm ${L.primaryText}` : L.muted}`}
                 >
                   {item.label}
                 </span>
               ))}
             </div>
-            <span className={`w-[7.5rem] shrink-0 text-right text-xs tabular-nums ${L.muted}`}>
+            <span className={`w-10 shrink-0 text-right text-xs tabular-nums ${L.muted}`}>
               {resultCount}/{INSTITUTIONS.length}
             </span>
           </div>

@@ -77,7 +77,7 @@ export default function ChatSim ({ copy, lang }: { copy: ViolletChatCopy, lang: 
           </div>
 
           {/* A fixed viewport and reserved text keep typing and turn changes from moving the page. */}
-          <div className='h-[620px] overflow-y-auto overscroll-contain p-4 sm:h-[560px] sm:p-5' role='region' aria-label={copy.transcriptLabel}>
+          <div className='h-[620px] overflow-y-auto p-4 sm:h-[560px] sm:p-5' role='region' aria-label={copy.transcriptLabel}>
             {answer && (
               <div className='flex min-w-0 flex-col gap-5'>
                 <div className='flex flex-row-reverse items-start gap-2'>

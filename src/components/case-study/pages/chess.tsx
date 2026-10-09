@@ -20,7 +20,7 @@ const PIECES = [
 
 const COPY = {
 	en: {
-		lede: 'A desktop chess game where you play against an engine I wrote in Python. It searches with minimax and alpha-beta pruning under a time limit, and scores positions with material, piece square tables and a few extra heuristics. Below is a browser port of that engine you can play right now.',
+		lede: 'A desktop chess game where you play against an engine I wrote in Python. It searches with minimax and alpha-beta pruning under a time limit, and scores positions with material, piece square tables and a few extra heuristics. Below, a browser port plays an opening and chooses its reply automatically.',
 		facts: [
 			{ label: 'Role', value: 'Solo developer' },
 			{ label: 'Year', value: '2022' },
@@ -41,7 +41,7 @@ const COPY = {
 			body: [
 				'The engine looks a fixed number of moves ahead and assumes the opponent always plays its best reply. Alpha-beta pruning skips branches that cannot change the final decision, so the same depth costs fewer evaluations.',
 				'The search also watches the clock. When the time limit runs out, it returns the best move found so far instead of freezing the game. The readout next to the board shows nodes visited and branches pruned for every move.',
-				'Porting it to TypeScript, I noticed the minimizing branch never updates beta, so the original code almost never prunes. The lab lets you switch between the search as written and the version with the beta update: the move it picks is the same, the number of nodes is not.',
+				'Porting it to TypeScript, I noticed the minimizing branch never updates beta, so the original code almost never prunes. The lab automatically shows the search as written; the tree below illustrates the beta update and its pruning rule.',
 			],
 		},
 		steps: [
@@ -67,10 +67,10 @@ const COPY = {
 			{ decision: 'Hand written heuristics', rationale: 'Simple tables and rules are easy to read and tune, at the cost of strength compared to modern engines.' },
 			{ decision: 'A library for the rules', rationale: 'python-chess takes care of legal moves, check and mate, so the project could focus on search and evaluation.' },
 		],
-		outro: { title: 'See it play', note: 'There is a demo video and the full source on GitHub. Press t to switch board themes and r to restart, same as the desktop game.' },
+		outro: { title: 'See it play', note: 'There is a demo video and the full source on GitHub. The board above plays automatically and keeps the chosen move visible.' },
 	},
 	es: {
-		lede: 'Un juego de ajedrez de escritorio donde juegas contra un motor que escribí en Python. Busca con minimax y poda alfa-beta con límite de tiempo, y evalúa las posiciones con material, tablas por casilla y algunas heurísticas extra. Abajo hay una versión de ese motor para el navegador que puedes jugar ahora mismo.',
+		lede: 'Un juego de ajedrez de escritorio donde juegas contra un motor que escribí en Python. Busca con minimax y poda alfa-beta con límite de tiempo, y evalúa las posiciones con material, tablas por casilla y algunas heurísticas extra. Abajo, una versión para el navegador juega una apertura y elige su respuesta automáticamente.',
 		facts: [
 			{ label: 'Rol', value: 'Desarrollador único' },
 			{ label: 'Año', value: '2022' },
@@ -91,7 +91,7 @@ const COPY = {
 			body: [
 				'El motor mira un número fijo de jugadas hacia adelante y supone que el rival siempre responde con su mejor jugada. La poda alfa-beta descarta ramas que no pueden cambiar la decisión final, así la misma profundidad cuesta menos evaluaciones.',
 				'La búsqueda también vigila el reloj. Cuando se acaba el tiempo, devuelve la mejor jugada encontrada hasta ese momento en vez de congelar el juego. El panel junto al tablero muestra los nodos visitados y las ramas podadas en cada jugada.',
-				'Al portarlo a TypeScript me di cuenta de que la rama minimizadora nunca actualiza beta, así que el código original casi nunca poda. En el tablero puedes cambiar entre la búsqueda tal como está escrita y la versión con beta actualizado: la jugada elegida es la misma, la cantidad de nodos no.',
+				'Al portarlo a TypeScript me di cuenta de que la rama minimizadora nunca actualiza beta, así que el código original casi nunca poda. El tablero muestra automáticamente la búsqueda original; el árbol de abajo ilustra la actualización de beta y su regla de poda.',
 			],
 		},
 		steps: [
@@ -117,7 +117,7 @@ const COPY = {
 			{ decision: 'Heurísticas escritas a mano', rationale: 'Las tablas y reglas simples son fáciles de leer y ajustar, a cambio de menos fuerza que los motores modernos.' },
 			{ decision: 'Una librería para las reglas', rationale: 'python-chess se encarga de las jugadas legales, el jaque y el mate, así el proyecto se pudo enfocar en la búsqueda y la evaluación.' },
 		],
-		outro: { title: 'Míralo jugar', note: 'Hay un video demo y el código completo en GitHub. Presiona t para cambiar el tema del tablero y r para reiniciar, igual que en el juego de escritorio.' },
+		outro: { title: 'Míralo jugar', note: 'Hay un video demo y el código completo en GitHub. El tablero de arriba juega automáticamente y mantiene visible la jugada elegida.' },
 	},
 } as const
 

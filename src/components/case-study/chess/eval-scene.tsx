@@ -1,6 +1,8 @@
 'use client'
 
-import { SCENE_LABELS, SceneFrame, easeInOut, easeOut, span, useSceneTimeline } from '../kit/scene'
+import { SCENE_LABELS, easeInOut, easeOut, span, useSceneTimeline } from '../kit/scene'
+
+import { SceneFrame } from './scene-frame'
 
 type Lang = 'en' | 'es'
 
@@ -83,42 +85,42 @@ export default function EvalScene({
 			caption={<span className='block min-h-[4.5rem] sm:min-h-[3rem]'>{c.captions[phase]}</span>}
 		>
 			<div className='grid min-w-0 gap-4 p-3 sm:p-4 lg:grid-cols-2'>
-				<div className='min-w-0 rounded-lg border border-slate-700/50 bg-slate-800/30 p-4'>
-					<h3 className='font-mono text-[11px] uppercase tracking-wider text-teal-300'>{piecesTitle}</h3>
+				<div className='min-w-0 rounded-lg border border-[#e7e5e4] bg-[#f7f6f2] p-4'>
+					<h3 className='font-mono text-[11px] uppercase tracking-wider text-[#486333]'>{piecesTitle}</h3>
 					<ul className='mt-5 space-y-3'>
 						{pieces.map((piece, i) => {
 							const grow = span(e, BAR_START + i * BAR_STEP, BAR_START + i * BAR_STEP + 700, easeOut)
 							return (
 								<li key={piece.glyph} className='grid grid-cols-[2rem_1fr_2.5rem] items-center gap-3'>
-									<span className='text-2xl leading-none text-slate-100' aria-hidden style={{ opacity: 0.35 + 0.65 * grow }}>
+									<span className='text-2xl leading-none text-[#1c1917]' aria-hidden style={{ opacity: 0.35 + 0.65 * grow }}>
 										{piece.glyph}
 									</span>
-									<span className='h-2 overflow-hidden rounded-full bg-slate-700/60'>
-										<span className='block h-full rounded-full bg-teal-400' style={{ width: `${(piece.value / 90) * 100 * grow}%` }} />
+									<span className='h-2 overflow-hidden rounded-full bg-[#f7f6f2]'>
+										<span className='block h-full rounded-full bg-[#779A58]' style={{ width: `${(piece.value / 90) * 100 * grow}%` }} />
 									</span>
-									<span className='text-right font-mono text-sm tabular-nums text-slate-200'>{Math.round(piece.value * grow)}</span>
+									<span className='text-right font-mono text-sm tabular-nums text-[#1c1917]'>{Math.round(piece.value * grow)}</span>
 								</li>
 							)
 						})}
 					</ul>
-					<p className='mt-5 flex items-center gap-3 text-sm text-slate-400'>
-						<span className='text-2xl leading-none text-slate-100' aria-hidden>
+					<p className='mt-5 flex items-center gap-3 text-sm text-[#57534e]'>
+						<span className='text-2xl leading-none text-[#1c1917]' aria-hidden>
 							♔
 						</span>
 						{kingNote}
 					</p>
 				</div>
 
-				<div className='min-w-0 rounded-lg border border-slate-700/50 bg-slate-800/30 p-4'>
+				<div className='min-w-0 rounded-lg border border-[#e7e5e4] bg-[#f7f6f2] p-4'>
 					<div className='flex items-start justify-between gap-3'>
-						<h3 className='font-mono text-[11px] uppercase tracking-wider text-teal-300'>{squaresTitle}</h3>
-						<p className='shrink-0 text-right font-mono text-xs text-slate-400'>
+						<h3 className='font-mono text-[11px] uppercase tracking-wider text-[#486333]'>{squaresTitle}</h3>
+						<p className='shrink-0 text-right font-mono text-xs text-[#57534e]'>
 							<span className='sr-only'>{c.mobility}: </span>
 							<span aria-hidden>{c.mobility} </span>
-							<span className='inline-block w-[3ch] text-left tabular-nums text-teal-200'>+{bonus}</span>
+							<span className='inline-block w-[3ch] text-left tabular-nums text-[#486333]'>+{bonus}</span>
 						</p>
 					</div>
-					<div className='relative mx-auto mt-5 aspect-square w-full max-w-[280px] overflow-hidden rounded-lg border border-slate-700/60' role='img' aria-label={`${squaresNote} ${c.knightNote}`}>
+					<div className='relative mx-auto mt-5 aspect-square w-full max-w-[280px] overflow-hidden rounded-lg border border-[#e7e5e4]' role='img' aria-label={`${squaresNote} ${c.knightNote}`}>
 						<div className='grid h-full grid-cols-8 grid-rows-8'>
 							{[8, 7, 6, 5, 4, 3, 2, 1].flatMap((rank) =>
 								FILES.map((file, fi) => {
@@ -130,10 +132,10 @@ export default function EvalScene({
 									const targetIndex = TARGETS.indexOf(sq)
 									const hit = targetIndex >= 0 && reached(targetIndex)
 									return (
-										<span key={sq} className={`relative flex items-center justify-center font-mono text-[9px] leading-none ${dark ? 'bg-slate-950/50' : 'bg-slate-700/40'}`}>
-											{v > 0 && <span className={`absolute inset-0 ${v === 1 ? 'bg-teal-400' : 'bg-teal-400/40'}`} style={{ opacity: lit }} />}
-											{hit && <span className={`absolute inset-[18%] rounded-full border-2 ${v ? 'border-teal-100' : 'border-slate-400/70'}`} />}
-											<span className={`relative ${v === 1 ? 'text-slate-950' : 'text-slate-100'}`} style={{ opacity: lit }}>
+										<span key={sq} className={`relative flex items-center justify-center font-mono text-[9px] leading-none ${dark ? 'bg-[#779A58]' : 'bg-[#EAEBC8]'}`}>
+											{v > 0 && <span className={`absolute inset-0 ${dark ? 'bg-[#ACC333]' : 'bg-[#F4F774]'}`} style={{ opacity: lit }} />}
+											{hit && <span className={`absolute inset-[18%] rounded-full border-2 ${v ? 'border-[#486333]' : 'border-[#e7e5e4]'}`} />}
+											<span className={`relative ${v === 1 ? 'text-[#57534e]' : 'text-[#1c1917]'}`} style={{ opacity: lit }}>
 												{v ? v : ''}
 											</span>
 										</span>
@@ -146,16 +148,16 @@ export default function EvalScene({
 								if (!reached(i) && i !== hop) return null
 								const p = coord(sq)
 								const t = reached(i) ? 1 : e >= KNIGHT_START ? hopT : 0
-								return <line key={sq} x1={from.x} y1={from.y} x2={from.x + (p.x - from.x) * t} y2={from.y + (p.y - from.y) * t} strokeWidth={0.06} strokeLinecap='round' className={GOOD[sq] ? 'stroke-teal-200' : 'stroke-slate-400/70'} />
+								return <line key={sq} x1={from.x} y1={from.y} x2={from.x + (p.x - from.x) * t} y2={from.y + (p.y - from.y) * t} strokeWidth={0.06} strokeLinecap='round' className={GOOD[sq] ? 'stroke-[#779A58]' : 'stroke-[#a8a29e]'} />
 							})}
-							{moving && <circle cx={from.x + (to.x - from.x) * hopT} cy={from.y + (to.y - from.y) * hopT} r={0.16} className='fill-teal-100' />}
-							<text x={from.x} y={from.y + 0.32} textAnchor='middle' fontSize={0.9} className='fill-slate-50' opacity={knight} style={{ paintOrder: 'stroke' }} stroke='rgb(2 6 23)' strokeWidth={0.06}>
+							{moving && <circle cx={from.x + (to.x - from.x) * hopT} cy={from.y + (to.y - from.y) * hopT} r={0.16} className='fill-[#779A58]' />}
+							<text x={from.x} y={from.y + 0.32} textAnchor='middle' fontSize={0.9} className='fill-white' opacity={knight} style={{ paintOrder: 'stroke' }} stroke='rgb(2 6 23)' strokeWidth={0.06}>
 								♘
 							</text>
 						</svg>
 					</div>
-					<p className='mt-5 text-sm text-slate-400'>{squaresNote}</p>
-					<p className='mt-2 text-xs text-slate-500'>{c.knightNote}</p>
+					<p className='mt-5 text-sm text-[#57534e]'>{squaresNote}</p>
+					<p className='mt-2 text-xs text-[#57534e]'>{c.knightNote}</p>
 				</div>
 			</div>
 		</SceneFrame>

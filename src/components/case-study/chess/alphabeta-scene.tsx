@@ -1,6 +1,6 @@
 'use client'
 
-import { SCENE_LABELS, SceneFrame, easeInOut, span, useSceneTimeline } from '../kit/scene'
+import { SCENE_LABELS, easeInOut, span, useSceneTimeline } from '../kit/scene'
 
 /*
  * Alpha-beta on a small illustrative tree (depth 2, branching 3), searched
@@ -8,6 +8,8 @@ import { SCENE_LABELS, SceneFrame, easeInOut, span, useSceneTimeline } from '../
  * number on screen (values, alpha, beta, visited, pruned) is derived from the
  * leaf scores below, so the counters always match the tree.
  */
+
+import { SceneFrame } from './scene-frame'
 
 type Lang = 'en' | 'es'
 
@@ -217,10 +219,10 @@ function Packet({ x1, y1, x2, y2, t }: { x1: number; y1: number; x2: number; y2:
 		<g>
 			{[0.18, 0.1].map((lag, i) => {
 				const p = at(Math.max(0, t - lag))
-				return <circle key={lag} cx={p.x} cy={p.y} r={2.4 + i} className='fill-teal-300' opacity={0.25 + i * 0.15} />
+				return <circle key={lag} cx={p.x} cy={p.y} r={2.4 + i} className='fill-[#779A58]' opacity={0.25 + i * 0.15} />
 			})}
-			<circle cx={head.x} cy={head.y} r={7} className='fill-teal-300' opacity={0.25} />
-			<circle cx={head.x} cy={head.y} r={3.6} className='fill-teal-100' />
+			<circle cx={head.x} cy={head.y} r={7} className='fill-[#779A58]' opacity={0.25} />
+			<circle cx={head.x} cy={head.y} r={3.6} className='fill-[#779A58]' />
 		</g>
 	)
 }
@@ -243,16 +245,16 @@ export default function AlphaBetaScene({ lang }: { lang: Lang }) {
 		>
 			<div className='grid min-w-0 gap-4 p-3 sm:p-4 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-center'>
 				<svg viewBox={`0 0 ${W} ${H}`} className='mx-auto block h-auto w-full max-w-[34rem]' role='img' aria-label={c.note}>
-					<text x={6} y={ROOT.y + 4} className='fill-slate-500 font-mono' fontSize={11}>{c.max}</text>
-					<text x={6} y={MIN_Y - 26} className='fill-slate-500 font-mono' fontSize={11}>{c.min}</text>
+					<text x={6} y={ROOT.y + 4} className='fill-[#1c1917] font-mono' fontSize={11}>{c.max}</text>
+					<text x={6} y={MIN_Y - 26} className='fill-[#1c1917] font-mono' fontSize={11}>{c.min}</text>
 					{/* edges root -> min */}
 					{MIN_X.map((x, b) => {
 						const lit = s.activeBranch === b || s.best === b || s.minValue[b] !== null
 						const best = s.best === b
 						return (
 							<g key={`e${b}`}>
-								<line x1={ROOT.x} y1={ROOT.y + 18} x2={x} y2={MIN_Y - 18} strokeWidth={best ? 3 : 1.6} className={best ? 'stroke-teal-300' : lit ? 'stroke-teal-300/60' : 'stroke-slate-600'} />
-								<text x={(ROOT.x + x) / 2 + (b === 1 ? 14 : b === 0 ? -14 : 14)} y={(ROOT.y + MIN_Y) / 2 + 2} textAnchor='middle' fontSize={12} className={`font-mono ${best ? 'fill-teal-200' : 'fill-slate-400'}`}>
+								<line x1={ROOT.x} y1={ROOT.y + 18} x2={x} y2={MIN_Y - 18} strokeWidth={best ? 3 : 1.6} className={best ? 'stroke-[#779A58]' : lit ? 'stroke-[#779A58]' : 'stroke-[#a8a29e]'} />
+								<text x={(ROOT.x + x) / 2 + (b === 1 ? 14 : b === 0 ? -14 : 14)} y={(ROOT.y + MIN_Y) / 2 + 2} textAnchor='middle' fontSize={12} className={`font-mono ${best ? 'fill-[#779A58]' : 'fill-[#1c1917]'}`}>
 									{MOVES[b]}
 								</text>
 							</g>
@@ -274,7 +276,7 @@ export default function AlphaBetaScene({ lang }: { lang: Lang }) {
 										y2={p.y - 15}
 										strokeWidth={1.4}
 										strokeDasharray={pruned > 0 ? '3 4' : undefined}
-										className={pruned > 0 ? 'stroke-rose-400/70' : shown ? 'stroke-teal-300/60' : 'stroke-slate-600'}
+										className={pruned > 0 ? 'stroke-[#C84646]' : shown ? 'stroke-[#779A58]' : 'stroke-[#a8a29e]'}
 									/>
 									<rect
 										x={p.x - 15}
@@ -283,16 +285,16 @@ export default function AlphaBetaScene({ lang }: { lang: Lang }) {
 										height={30}
 										rx={6}
 										strokeWidth={1.4}
-										className={pruned > 0 ? 'fill-slate-950 stroke-rose-400/60' : shown ? 'fill-teal-400/10 stroke-teal-300' : 'fill-slate-900 stroke-slate-600'}
-										style={fresh > 0.05 ? { filter: `drop-shadow(0 0 ${6 * fresh}px rgb(45 212 191 / 0.8))` } : undefined}
+										className={pruned > 0 ? 'fill-[#f7f6f2] stroke-[#C84646]' : shown ? 'fill-[#779A58] stroke-[#779A58]' : 'fill-[#f7f6f2] stroke-[#a8a29e]'}
+										style={fresh > 0.05 ? { filter: `drop-shadow(0 0 ${6 * fresh}px rgb(119 154 88 / 0.8))` } : undefined}
 									/>
-									<text x={p.x} y={p.y + 4.5} textAnchor='middle' fontSize={13} fontWeight={600} className={`tabular-nums ${shown ? 'fill-slate-100' : 'fill-slate-600'}`}>
+									<text x={p.x} y={p.y + 4.5} textAnchor='middle' fontSize={13} fontWeight={600} className={`tabular-nums ${shown ? 'fill-[#1c1917]' : 'fill-[#1c1917]'}`}>
 										{shown && value !== null ? value : pruned > 0 ? '' : '?'}
 									</text>
 									{pruned > 0 && (
 										<g opacity={pruned}>
-											<line x1={(MIN_X[b] + p.x) / 2 - 7} y1={(MIN_Y + 18 + p.y - 15) / 2 - 5} x2={(MIN_X[b] + p.x) / 2 + 7} y2={(MIN_Y + 18 + p.y - 15) / 2 + 5} strokeWidth={2.2} className='stroke-rose-300' />
-											<line x1={p.x - 9} y1={p.y - 9} x2={p.x + 9} y2={p.y + 9} strokeWidth={1.6} className='stroke-rose-300/80' />
+											<line x1={(MIN_X[b] + p.x) / 2 - 7} y1={(MIN_Y + 18 + p.y - 15) / 2 - 5} x2={(MIN_X[b] + p.x) / 2 + 7} y2={(MIN_Y + 18 + p.y - 15) / 2 + 5} strokeWidth={2.2} className='stroke-[#C84646]' />
+											<line x1={p.x - 9} y1={p.y - 9} x2={p.x + 9} y2={p.y + 9} strokeWidth={1.6} className='stroke-[#C84646]' />
 										</g>
 									)}
 								</g>
@@ -306,7 +308,7 @@ export default function AlphaBetaScene({ lang }: { lang: Lang }) {
 						const p = leafPos(b, first)
 						const last = leafPos(b, 2)
 						return (
-							<text key={`t${b}`} x={(p.x + last.x) / 2} y={LEAF_Y + 32} textAnchor='middle' fontSize={11} className='fill-rose-300' opacity={s.prunedAt[b][first]}>
+							<text key={`t${b}`} x={(p.x + last.x) / 2} y={LEAF_Y + 32} textAnchor='middle' fontSize={11} className='fill-[#C84646]' opacity={s.prunedAt[b][first]}>
 								{c.prunedTag}
 							</text>
 						)
@@ -318,22 +320,22 @@ export default function AlphaBetaScene({ lang }: { lang: Lang }) {
 						const best = s.best === b
 						return (
 							<g key={`m${b}`}>
-								<circle cx={x} cy={MIN_Y} r={18} strokeWidth={active || best ? 2 : 1.4} className={best ? 'fill-teal-400/15 stroke-teal-300' : active ? 'fill-slate-900 stroke-teal-300' : value !== null ? 'fill-slate-900 stroke-slate-500' : 'fill-slate-900 stroke-slate-600'} style={active ? { filter: 'drop-shadow(0 0 6px rgb(45 212 191 / 0.6))' } : undefined} />
-								<text x={x} y={MIN_Y + 4.5} textAnchor='middle' fontSize={13} fontWeight={600} className={`tabular-nums ${value !== null ? 'fill-slate-100' : 'fill-slate-500'}`}>
+								<circle cx={x} cy={MIN_Y} r={18} strokeWidth={active || best ? 2 : 1.4} className={best ? 'fill-[#779A58] stroke-[#779A58]' : active ? 'fill-[#f7f6f2] stroke-[#779A58]' : value !== null ? 'fill-[#f7f6f2] stroke-[#a8a29e]' : 'fill-[#f7f6f2] stroke-[#a8a29e]'} style={active ? { filter: 'drop-shadow(0 0 6px rgb(119 154 88 / 0.6))' } : undefined} />
+								<text x={x} y={MIN_Y + 4.5} textAnchor='middle' fontSize={13} fontWeight={600} className={`tabular-nums ${value !== null ? 'fill-[#1c1917]' : 'fill-[#1c1917]'}`}>
 									{value !== null ? value : '·'}
 								</text>
-								<text x={x + 24} y={MIN_Y - 14} fontSize={11} className='fill-teal-200/90 font-mono' opacity={active ? 1 : 0}>
+								<text x={x + 24} y={MIN_Y - 14} fontSize={11} className='fill-[#779A58] font-mono' opacity={active ? 1 : 0}>
 									β {fmt(s.beta)}
 								</text>
 							</g>
 						)
 					})}
 					{/* root */}
-					<circle cx={ROOT.x} cy={ROOT.y} r={20} strokeWidth={2} className={final ? 'fill-teal-400/20 stroke-teal-300' : 'fill-slate-900 stroke-teal-300/80'} style={{ filter: `drop-shadow(0 0 ${final ? 10 * s.bestT : 4}px rgb(45 212 191 / 0.6))` }} />
-					<text x={ROOT.x} y={ROOT.y + 4.5} textAnchor='middle' fontSize={13} fontWeight={700} className='fill-slate-100 tabular-nums'>
+					<circle cx={ROOT.x} cy={ROOT.y} r={20} strokeWidth={2} className={final ? 'fill-[#779A58] stroke-[#779A58]' : 'fill-[#f7f6f2] stroke-[#779A58]'} style={{ filter: `drop-shadow(0 0 ${final ? 10 * s.bestT : 4}px rgb(119 154 88 / 0.6))` }} />
+					<text x={ROOT.x} y={ROOT.y + 4.5} textAnchor='middle' fontSize={13} fontWeight={700} className='fill-[#1c1917] tabular-nums'>
 						{rootValue === -Infinity ? '·' : rootValue}
 					</text>
-					<text x={ROOT.x + 28} y={ROOT.y - 10} fontSize={11} className='fill-teal-200/90 font-mono'>
+					<text x={ROOT.x + 28} y={ROOT.y - 10} fontSize={11} className='fill-[#779A58] font-mono'>
 						α {fmt(s.alpha)}
 					</text>
 					{/* packets */}
@@ -342,29 +344,29 @@ export default function AlphaBetaScene({ lang }: { lang: Lang }) {
 					{s.upT && <Packet x1={MIN_X[s.upT.branch]} y1={MIN_Y - 18} x2={ROOT.x} y2={ROOT.y + 18} t={s.upT.t} />}
 				</svg>
 
-				<div className='min-w-0 rounded-lg border border-slate-700/60 bg-slate-900/50 p-3 font-mono text-xs'>
+				<div className='min-w-0 rounded-lg border border-[#e7e5e4] bg-[#f7f6f2] p-3 font-mono text-xs'>
 					<dl className='grid grid-cols-[1fr_auto] gap-x-3 gap-y-2'>
-						<dt className='text-slate-400'>{c.alpha}</dt>
-						<dd className='w-[4ch] text-right tabular-nums text-teal-200'>{fmt(s.alpha)}</dd>
-						<dt className='text-slate-400'>{c.beta}</dt>
-						<dd className='w-[4ch] text-right tabular-nums text-teal-200'>{s.activeBranch === null ? '·' : fmt(s.beta)}</dd>
-						<dt className='text-slate-400'>{c.visited}</dt>
-						<dd className='text-right tabular-nums text-slate-100'>
+						<dt className='text-[#57534e]'>{c.alpha}</dt>
+						<dd className='w-[4ch] text-right tabular-nums text-[#486333]'>{fmt(s.alpha)}</dd>
+						<dt className='text-[#57534e]'>{c.beta}</dt>
+						<dd className='w-[4ch] text-right tabular-nums text-[#486333]'>{s.activeBranch === null ? '·' : fmt(s.beta)}</dd>
+						<dt className='text-[#57534e]'>{c.visited}</dt>
+						<dd className='text-right tabular-nums text-[#1c1917]'>
 							{String(s.visited).padStart(2, '\u2007')}/{TOTAL_NODES}
 						</dd>
-						<dt className='text-slate-400'>{c.pruned}</dt>
-						<dd className='text-right tabular-nums text-rose-300'>
+						<dt className='text-[#57534e]'>{c.pruned}</dt>
+						<dd className='text-right tabular-nums text-[#C84646]'>
 							{s.prunedCount}/{LEAF_TOTAL}
 						</dd>
-						<dt className='text-slate-400'>{c.bestMove}</dt>
-						<dd className='text-right text-slate-100'>
-							<span className={final ? 'text-teal-200' : 'invisible'}>{MOVES[s.best ?? 0]}</span>
+						<dt className='text-[#57534e]'>{c.bestMove}</dt>
+						<dd className='text-right text-[#1c1917]'>
+							<span className={final ? 'text-[#486333]' : 'invisible'}>{MOVES[s.best ?? 0]}</span>
 						</dd>
 					</dl>
-					<div className='mt-3 h-1.5 overflow-hidden rounded-full bg-slate-800' aria-hidden>
-						<div className='h-full rounded-full bg-teal-400 transition-none' style={{ width: `${(s.visited / TOTAL_NODES) * 100}%` }} />
+					<div className='mt-3 h-1.5 overflow-hidden rounded-full bg-[#f7f6f2]' aria-hidden>
+						<div className='h-full rounded-full bg-[#779A58] transition-none' style={{ width: `${(s.visited / TOTAL_NODES) * 100}%` }} />
 					</div>
-					<p className='mt-3 font-sans text-[11px] leading-relaxed text-slate-500'>{c.note}</p>
+					<p className='mt-3 font-sans text-[11px] leading-relaxed text-[#57534e]'>{c.note}</p>
 				</div>
 			</div>
 		</SceneFrame>

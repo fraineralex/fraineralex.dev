@@ -143,11 +143,11 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 					'beach-semaphore': { type: 'geojson', data: semaphoreFeatures, cluster: true, clusterRadius: 28, clusterMaxZoom: 8, clusterProperties: { maxScore: ['max', ['get', 'score']] } },
 				},
 				layers: [
-					{ id: 'neutral-sea', type: 'background', paint: { 'background-color': '#08243a' } },
-					{ id: 'neutral-neighbor-land', type: 'fill', source: 'neighbor-land', paint: { 'fill-color': '#173246', 'fill-outline-color': '#2a4a60' } },
-					{ id: 'neutral-dominican-land', type: 'fill', source: 'dominican-emphasis', paint: { 'fill-color': '#21455c' } },
+					{ id: 'neutral-sea', type: 'background', paint: { 'background-color': '#eaf4fb' } },
+					{ id: 'neutral-neighbor-land', type: 'fill', source: 'neighbor-land', paint: { 'fill-color': '#f7f9fc', 'fill-outline-color': '#e1e7ef' } },
+					{ id: 'neutral-dominican-land', type: 'fill', source: 'dominican-emphasis', paint: { 'fill-color': '#ffffff' } },
 					{ id: 'dominican-white-shade', type: 'fill', source: 'dominican-emphasis', paint: { 'fill-color': '#ffffff', 'fill-opacity': ['interpolate', ['linear'], ['zoom'], 5, 0.15, 8, 0.09, 12, 0.035] } },
-					{ id: 'dominican-white-outline', type: 'line', source: 'dominican-emphasis', paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 1.4, 9, 2.1, 13, 2.8], 'line-opacity': 0.82, 'line-blur': 0.2 } },
+					{ id: 'dominican-white-outline', type: 'line', source: 'dominican-emphasis', paint: { 'line-color': '#e1e7ef', 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 1.4, 9, 2.1, 13, 2.8], 'line-opacity': 0.82, 'line-blur': 0.2 } },
 				],
 			},
 		})
@@ -158,7 +158,7 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 			map.addLayer({ id: 'landing-beach-count', type: 'symbol', source: 'beach-semaphore', filter: ['has', 'point_count'], layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['sans-semibold'], 'text-size': 12, 'text-allow-overlap': true }, paint: { 'text-color': '#fff', 'text-halo-color': 'rgba(2,6,23,.72)', 'text-halo-width': 1.2 } })
 			map.addLayer({ id: 'landing-beach-points-halo', type: 'circle', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 10, 11, 17], 'circle-color': levelColor, 'circle-opacity': 0.28, 'circle-blur': 0.45 } })
 			map.addLayer({ id: 'landing-beach-points', type: 'circle', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 7, 11, 11], 'circle-color': levelColor, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2, 'circle-opacity': 0.98 } })
-			map.addLayer({ id: 'landing-beach-labels', type: 'symbol', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], minzoom: 8.2, layout: { 'text-field': ['get', 'name'], 'text-font': ['sans-semibold'], 'text-size': 10, 'text-offset': [0, 1.3], 'text-anchor': 'top', 'text-optional': true }, paint: { 'text-color': '#f8fafc', 'text-halo-color': 'rgba(2,6,23,.9)', 'text-halo-width': 1.3 } })
+			map.addLayer({ id: 'landing-beach-labels', type: 'symbol', source: 'beach-semaphore', filter: ['!', ['has', 'point_count']], minzoom: 8.2, layout: { 'text-field': ['get', 'name'], 'text-font': ['sans-semibold'], 'text-size': 10, 'text-offset': [0, 1.3], 'text-anchor': 'top', 'text-optional': true }, paint: { 'text-color': '#1e3a5f', 'text-halo-color': 'rgba(255,255,255,.9)', 'text-halo-width': 1.3 } })
 			map.on('click', 'landing-beach-clusters', (event) => {
 				const feature = event.features?.[0]
 				const clusterId = feature?.properties?.cluster_id
@@ -272,12 +272,12 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 					<span>{t.rotate}</span>
 				</div>
 			</div>
-			<label className='flex flex-col gap-2 border-t border-white/[0.08] px-4 py-3 text-sm text-[oklch(0.65_0_0)] sm:flex-row sm:items-center sm:gap-3'>
+			<label className='flex flex-col gap-2 border-t border-[#e1e7ef] px-4 py-3 text-sm text-[#62788a] sm:flex-row sm:items-center sm:gap-3'>
 				<span>{t.pick}</span>
 				<select
 					value={selectedId ?? ''}
 					onChange={(event) => jumpTo(event.target.value)}
-					className='h-10 w-full rounded-lg border border-white/10 bg-[oklch(0.145_0.008_282)] px-3 text-sm text-white outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.78_0.18_282)] sm:w-80'
+					className='h-10 w-full rounded-lg border border-[#e1e7ef] bg-[#ffffff] px-3 text-sm text-[#1e3a5f] outline-none focus-visible:ring-2 focus-visible:ring-[#0ea5e9] sm:w-80'
 				>
 					<option value=''>{t.pickPlaceholder}</option>
 					{sortedBeaches.map((beach) => (

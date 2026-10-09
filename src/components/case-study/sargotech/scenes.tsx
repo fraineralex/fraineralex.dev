@@ -7,6 +7,8 @@
  */
 import { SCENE_LABELS, SceneFrame, easeInOut, easeOut, linear, phaseAt, pointOnPolyline, span, useSceneTimeline } from '../kit/scene'
 
+import './scenes.css'
+
 type Lang = 'en' | 'es'
 type Tone = 'red' | 'yellow' | 'green'
 type Pt = [number, number]
@@ -83,35 +85,35 @@ export function BeachScanScene({
 	const active = rules.items.findIndex((item) => item.tone === tone)
 
 	return (
-		<SceneFrame timeline={tl} labels={SCENE_LABELS[lang]} kicker={c.kicker} title={rules.title} caption={<span className='block min-h-[4.5rem] sm:min-h-[3rem]'>{c.captions[phase]}</span>}>
+		<SceneFrame className='sargo-scene' timeline={tl} labels={SCENE_LABELS[lang]} kicker={c.kicker} title={rules.title} caption={<span className='block min-h-[4.5rem] sm:min-h-[3rem]'>{c.captions[phase]}</span>}>
 			<div className='p-3 sm:p-4'>
-				<svg viewBox='0 0 320 190' className='block h-auto w-full rounded-lg border border-slate-700/60 bg-slate-950' role='img' aria-label={c.aria}>
+				<svg viewBox='0 0 320 190' className='block h-auto w-full rounded-lg border border-[#e1e7ef] bg-[#f7f9fc]' role='img' aria-label={c.aria}>
 					<defs>
 						<radialGradient id='bs-sea' cx='50%' cy='0%' r='90%'>
-							<stop offset='0%' stopColor='#0f2a3a' />
-							<stop offset='100%' stopColor='#020617' />
+							<stop offset='0%' stopColor='#eaf4fb' />
+							<stop offset='100%' stopColor='#f7f9fc' />
 						</radialGradient>
 					</defs>
 					<rect width='320' height='190' fill='url(#bs-sea)' />
 					{[0, 800, 1600].map((o) => {
 						const r = ring(o)
-						return <circle key={o} cx={beach[0]} cy={beach[1]} r={10 + r * 90} fill='none' stroke='#5eead4' strokeWidth={1} opacity={tl.playing ? (1 - r) * 0.45 : o === 0 ? 0.25 : 0} />
+						return <circle key={o} cx={beach[0]} cy={beach[1]} r={10 + r * 90} fill='none' stroke='#0ea5e9' strokeWidth={1} opacity={tl.playing ? (1 - r) * 0.45 : o === 0 ? 0.25 : 0} />
 					})}
 					<Clump at={at} radius={16 + 10 * drift} opacity={strength} scale={0.8 + 0.5 * drift} />
-					<path d='M0 162 C 60 150, 110 166, 160 158 S 260 148, 320 160 L320 190 L0 190 Z' fill='#1e293b' />
-					<path d='M0 162 C 60 150, 110 166, 160 158 S 260 148, 320 160' fill='none' stroke='#475569' strokeWidth={1} />
+					<path d='M0 162 C 60 150, 110 166, 160 158 S 260 148, 320 160 L320 190 L0 190 Z' fill='#ffffff' />
+					<path d='M0 162 C 60 150, 110 166, 160 158 S 260 148, 320 160' fill='none' stroke='#e1e7ef' strokeWidth={1} />
 					<circle cx={beach[0]} cy={beach[1]} r={13} fill={HEX[tone]} opacity={0.22} />
-					<circle cx={beach[0]} cy={beach[1]} r={7} fill={HEX[tone]} stroke='#0f172a' strokeWidth={2} />
+					<circle cx={beach[0]} cy={beach[1]} r={7} fill={HEX[tone]} stroke='#1e3a5f' strokeWidth={2} />
 				</svg>
 				<ul className='mt-3 space-y-2'>
 					{rules.items.map((rule, i) => {
 						const on = i === active
 						return (
-							<li key={rule.label} className={`flex gap-3 rounded-lg border p-3 transition-colors duration-300 motion-reduce:transition-none ${on ? 'border-slate-500 bg-slate-800/70' : 'border-slate-700/60 bg-slate-900/50'}`}>
+							<li key={rule.label} className={`flex gap-3 rounded-lg border p-3 transition-colors duration-300 motion-reduce:transition-none ${on ? 'border-[#0ea5e9] bg-[#ffffff]' : 'border-[#e1e7ef] bg-[#ffffff]'}`}>
 								<span className={`mt-1 size-2.5 shrink-0 rounded-full ${DOT[rule.tone]} ${on ? '' : 'opacity-50'}`} aria-hidden />
 								<span>
-									<span className={`block text-sm font-medium ${on ? 'text-slate-50' : 'text-slate-300'}`}>{rule.label}</span>
-									<span className='mt-0.5 block text-sm leading-relaxed text-slate-400'>{rule.text}</span>
+									<span className='block text-sm font-medium text-[#1e3a5f]'>{rule.label}</span>
+									<span className='mt-0.5 block text-sm leading-relaxed text-[#62788a]'>{rule.text}</span>
 								</span>
 							</li>
 						)
@@ -168,75 +170,75 @@ export function ResponseScene({ lang, steps }: { lang: Lang; steps: readonly { t
 	const progress = (i: number) => span(e, RESP_STARTS[i], RESP_STARTS[i + 1] ?? RESP_DURATION, linear)
 
 	return (
-		<SceneFrame timeline={tl} labels={SCENE_LABELS[lang]} kicker={c.kicker} title={c.title} caption={<span className='block min-h-[4.5rem] sm:min-h-[3rem]'>{steps[step]?.body}</span>}>
+		<SceneFrame className='sargo-scene' timeline={tl} labels={SCENE_LABELS[lang]} kicker={c.kicker} title={c.title} caption={<span className='block min-h-[4.5rem] sm:min-h-[3rem]'>{steps[step]?.body}</span>}>
 			<div className='p-3 sm:p-4'>
 				<ol className='mx-auto grid max-w-[46rem] grid-cols-2 gap-2 pb-2 sm:grid-cols-4' aria-hidden>
 					{steps.map((s, i) => {
 						const on = i === step
 						return (
-							<li key={s.title} className={`flex h-11 min-w-0 flex-col justify-center rounded-lg border px-3 ${on ? 'border-teal-300/60 bg-teal-400/10' : 'border-slate-700/60 bg-slate-900/50'}`}>
-								<span className={`flex items-center gap-2 text-xs font-medium ${on ? 'text-teal-100' : i < step ? 'text-slate-300' : 'text-slate-500'}`}>
+							<li key={s.title} className={`flex h-11 min-w-0 flex-col justify-center rounded-lg border px-3 ${on ? 'border-[#0ea5e9] bg-[#ffffff]' : 'border-[#e1e7ef] bg-[#ffffff]'}`}>
+								<span className={`flex items-center gap-2 text-xs font-medium ${on || i < step ? 'text-[#1e3a5f]' : 'text-[#62788a]'}`}>
 									<span className='font-mono tabular-nums text-[11px]'>{String(i + 1).padStart(2, '0')}</span>
 									<span className='truncate'>{s.title}</span>
 								</span>
-								<span className='mt-1.5 block h-0.5 overflow-hidden rounded-full bg-slate-800'>
-									<span className='block h-full rounded-full bg-teal-300' style={{ width: `${progress(i) * 100}%` }} />
+								<span className='mt-1.5 block h-0.5 overflow-hidden rounded-full bg-[#e1e7ef]'>
+									<span className='block h-full rounded-full bg-[#0ea5e9]' style={{ width: `${progress(i) * 100}%` }} />
 								</span>
 							</li>
 						)
 					})}
 				</ol>
-				<svg viewBox='0 0 480 300' className='mx-auto mt-2 block h-auto w-full max-w-[46rem] rounded-lg border border-slate-700/60 bg-slate-950' role='img' aria-label={c.aria}>
+				<svg viewBox='0 0 480 300' className='mx-auto mt-2 block h-auto w-full max-w-[46rem] rounded-lg border border-[#e1e7ef] bg-[#f7f9fc]' role='img' aria-label={c.aria}>
 					<defs>
 						<linearGradient id='rs-sea' x1='0' y1='0' x2='1' y2='1'>
-							<stop offset='0%' stopColor='#0b2233' />
-							<stop offset='100%' stopColor='#04101c' />
+							<stop offset='0%' stopColor='#eaf4fb' />
+							<stop offset='100%' stopColor='#f7f9fc' />
 						</linearGradient>
 					</defs>
 					<rect width='480' height='300' fill='url(#rs-sea)' />
 					{/* scan band of the satellite pass */}
-					{scanning && <rect x={satX - 28} y={34} width={56} height={266} fill='#5eead4' opacity={0.08} />}
-					{scanning && <line x1={satX} y1={34} x2={satX} y2={300} stroke='#5eead4' strokeWidth={1} opacity={0.35} />}
+					{scanning && <rect x={satX - 28} y={34} width={56} height={266} fill='#0ea5e9' opacity={0.08} />}
+					{scanning && <line x1={satX} y1={34} x2={satX} y2={300} stroke='#0ea5e9' strokeWidth={1} opacity={0.35} />}
 					{/* trajectory */}
-					<path d={TRAJECTORY} fill='none' stroke='#94a3b8' strokeWidth={1.4} strokeDasharray='4 6' opacity={0.75 * trajectory * (1 - collect)} />
+					<path d={TRAJECTORY} fill='none' stroke='#62788a' strokeWidth={1.4} strokeDasharray='4 6' opacity={0.75 * trajectory * (1 - collect)} />
 					<Clump at={patch} radius={24} opacity={seen} scale={1 - collect} />
 					{/* barrier */}
-					<path d={BARRIER} fill='none' stroke='#fbbf24' strokeWidth={2.4} strokeLinecap='round' pathLength={1} strokeDasharray={`${barrier} 1`} />
+					<path d={BARRIER} fill='none' stroke='#fb923c' strokeWidth={2.4} strokeLinecap='round' pathLength={1} strokeDasharray={`${barrier} 1`} />
 					{barrier > 0.98 && [0.1, 0.3, 0.5, 0.7, 0.9].map((k) => {
 						const p = pointOnPolyline([[228, 146], [214, 168], [212, 192], [222, 216], [238, 236]], k)
-						return <circle key={k} cx={p[0]} cy={p[1]} r={2.6} fill='#fde68a' />
+						return <circle key={k} cx={p[0]} cy={p[1]} r={2.6} fill='#fb923c' />
 					})}
 					{/* land */}
-					<path d={LAND} fill='#1e293b' />
-					<path d={LAND} fill='none' stroke='#475569' strokeWidth={1} />
+					<path d={LAND} fill='#ffffff' />
+					<path d={LAND} fill='none' stroke='#e1e7ef' strokeWidth={1} />
 					{/* road and disposal site */}
-					<polyline points={ROAD.map((p) => p.join(',')).join(' ')} fill='none' stroke='#334155' strokeWidth={6} strokeLinecap='round' strokeLinejoin='round' />
-					<polyline points={ROAD.map((p) => p.join(',')).join(' ')} fill='none' stroke='#64748b' strokeWidth={1} strokeDasharray='4 5' />
+					<polyline points={ROAD.map((p) => p.join(',')).join(' ')} fill='none' stroke='#e1e7ef' strokeWidth={6} strokeLinecap='round' strokeLinejoin='round' />
+					<polyline points={ROAD.map((p) => p.join(',')).join(' ')} fill='none' stroke='#62788a' strokeWidth={1} strokeDasharray='4 5' />
 					<g transform='translate(432 76)'>
-						<rect x={-16} y={-14} width={32} height={26} rx={4} fill='#0f172a' stroke={truck > 0.98 ? '#5eead4' : '#64748b'} strokeWidth={1.6} />
-						<path d='M-8 -4 h16 M-6 -4 v10 h12 v-10' fill='none' stroke={truck > 0.98 ? '#5eead4' : '#94a3b8'} strokeWidth={1.4} />
+						<rect x={-16} y={-14} width={32} height={26} rx={4} fill='#1e3a5f' stroke={truck > 0.98 ? '#0ea5e9' : '#62788a'} strokeWidth={1.6} />
+						<path d='M-8 -4 h16 M-6 -4 v10 h12 v-10' fill='none' stroke={truck > 0.98 ? '#0ea5e9' : '#62788a'} strokeWidth={1.4} />
 					</g>
 					{/* beach marker */}
 					<circle cx={BEACH[0]} cy={BEACH[1]} r={14} fill={HEX[tone]} opacity={0.22} />
-					<circle cx={BEACH[0]} cy={BEACH[1]} r={7} fill={HEX[tone]} stroke='#0f172a' strokeWidth={2} />
+					<circle cx={BEACH[0]} cy={BEACH[1]} r={7} fill={HEX[tone]} stroke='#1e3a5f' strokeWidth={2} />
 					{/* boat */}
 					<g transform={`translate(${boat[0]} ${boat[1]})`} opacity={e >= 6500 ? 1 : 0.0}>
-						<path d='M-11 0 L11 0 L7 6 L-7 6 Z' fill='#e2e8f0' />
-						<rect x={-3} y={-7} width={7} height={7} rx={1} fill='#94a3b8' />
+						<path d='M-11 0 L11 0 L7 6 L-7 6 Z' fill='#1e3a5f' />
+						<rect x={-3} y={-7} width={7} height={7} rx={1} fill='#62788a' />
 						{loaded && <circle cx={-6} cy={-2} r={2.6 * collect} fill={WEED} />}
 					</g>
 					{/* truck */}
 					<g transform={`translate(${truckAt[0]} ${truckAt[1] - 6})`} opacity={e >= 10200 ? 1 : 0}>
 						<rect x={-12} y={-7} width={16} height={11} rx={1.5} fill={WEED} />
-						<rect x={4} y={-4} width={8} height={8} rx={1.5} fill='#e2e8f0' />
-						<circle cx={-7} cy={5} r={2.4} fill='#0f172a' stroke='#94a3b8' />
-						<circle cx={7} cy={5} r={2.4} fill='#0f172a' stroke='#94a3b8' />
+						<rect x={4} y={-4} width={8} height={8} rx={1.5} fill='#1e3a5f' />
+						<circle cx={-7} cy={5} r={2.4} fill='#1e3a5f' stroke='#62788a' />
+						<circle cx={7} cy={5} r={2.4} fill='#1e3a5f' stroke='#62788a' />
 					</g>
 					{/* satellite */}
 					<g transform={`translate(${satX} 20)`} opacity={scanning ? 1 : 0}>
-						<rect x={-5} y={-5} width={10} height={10} rx={2} fill='#e2e8f0' />
-						<rect x={-19} y={-3} width={12} height={6} fill='#5eead4' opacity={0.8} />
-						<rect x={7} y={-3} width={12} height={6} fill='#5eead4' opacity={0.8} />
+						<rect x={-5} y={-5} width={10} height={10} rx={2} fill='#1e3a5f' />
+						<rect x={-19} y={-3} width={12} height={6} fill='#0ea5e9' opacity={0.8} />
+						<rect x={7} y={-3} width={12} height={6} fill='#0ea5e9' opacity={0.8} />
 					</g>
 				</svg>
 			</div>

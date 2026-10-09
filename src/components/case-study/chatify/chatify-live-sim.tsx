@@ -26,11 +26,11 @@ import {
   createContext
 } from 'react'
 import { COPY, NAMES, type Copy, type Lang, type Side } from './copy'
-import { focusRing } from '../viollet/tokens'
 
-/** Blue focus ring inside the Chatify windows. Portfolio teal stays outside them. */
+/** Blue focus ring inside the Chatify windows. Uses the same accent as the source app. */
 const CHAT_RING =
-  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500'
+const focusRing = CHAT_RING
 
 const chatIconBtn =
   `inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md leading-none text-gray-700 transition duration-100 ease-out hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`
@@ -214,24 +214,20 @@ function stepCaption (copy: Copy, event: string) {
 }
 
 function Timeline () {
-  const { copy, journey, traces, motionOk, messages, isDesktop, mobileView } = useSim()
+  const { copy, journey, traces, motionOk } = useSim()
   const events = journey?.mode === 'reaction' ? REACTION_EVENTS : MESSAGE_EVENTS
   const steps = events.map(event => ({ event, caption: stepCaption(copy, event) }))
   const active = journey ? journey.step : -1
-  const held = messages.some(message => {
-    if (!message.onReceiver || !message.isDelivered || message.isRead) return false
-    const receiver = other(message.sender)
-    return !(isDesktop || mobileView === receiver)
-  })
+
 
   return (
-    <div className='rounded-xl border border-slate-700/60 bg-slate-800/40 px-4 py-4'>
+    <div className='rounded-xl border border-gray-200 bg-white px-4 py-4'>
       <div className='flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1'>
-        <h3 className='text-xs font-semibold text-slate-200'>{copy.timeline}</h3>
-        <p className='text-[10px] text-slate-400'>{copy.gate}</p>
+        <h3 className='text-xs font-semibold text-gray-800'>{copy.timeline}</h3>
+        <p className='text-[10px] text-gray-500'>{copy.gate}</p>
       </div>
-      <div className='relative mt-3'>
-        <div className='pointer-events-none absolute inset-x-0 top-[5px] h-px bg-slate-700/60' aria-hidden='true' />
+      <div className='relative mt-3 h-24'>
+        <div className='pointer-events-none absolute inset-x-0 top-[5px] h-px bg-gray-200' aria-hidden='true' />
         {motionOk && active >= 0 && (
           <motion.span
             key={journey?.messageId}
@@ -241,7 +237,7 @@ function Timeline () {
             animate={{ x: `${((active + 0.5) / steps.length) * 100}%` }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
-            <span className='absolute left-0 top-0 size-2.5 -ml-[5px] rounded-full bg-teal-300 shadow-[0_0_0_4px_rgb(94_234_212/0.25)]' />
+            <span className='absolute left-0 top-0 size-2.5 -ml-[5px] rounded-full bg-blue-500 shadow-[0_0_0_4px_rgb(94_234_212/0.25)]' />
           </motion.span>
         )}
         <ol
@@ -256,24 +252,24 @@ function Timeline () {
               <li key={step.event} className='flex min-w-0 flex-col items-center gap-1 text-center' aria-current={current ? 'step' : undefined}>
                 <span
                   aria-hidden='true'
-                  className={`z-10 size-2.5 rounded-full border-2 ${reached ? 'border-teal-300 bg-teal-300' : 'border-slate-600 bg-slate-900'}`}
+                  className={`z-10 size-2.5 rounded-full border-2 ${reached ? 'border-blue-500 bg-blue-500' : 'border-gray-200 bg-white'}`}
                 />
-                <code className={`w-full break-all px-0.5 font-mono text-[10px] leading-tight ${reached || current ? 'font-semibold text-teal-300' : 'text-slate-500'}`} title={step.event}>
+                <code className={`w-full break-all px-0.5 font-mono text-[10px] leading-tight ${reached || current ? 'font-semibold text-blue-500' : 'text-gray-500'}`} title={step.event}>
                   {step.event}
                 </code>
-                <span className='text-[10px] leading-tight text-slate-400'>{step.caption}</span>
+                <span className='text-[10px] leading-tight text-gray-500'>{step.caption}</span>
               </li>
             )
           })}
         </ol>
       </div>
-      <p className={`mt-2 min-h-8 text-[11px] leading-4 text-teal-300 sm:min-h-4 ${held || journey?.holdRead ? '' : 'invisible'}`}>{copy.waiting}</p>
+
       <ol aria-live='polite' aria-relevant='additions' className='mt-2 h-24 space-y-1 overflow-y-auto [scrollbar-color:#475569_transparent] [scrollbar-width:thin]'>
-        {traces.length === 0 && <li className='text-[11px] text-slate-400'>{copy.idle}</li>}
+        {traces.length === 0 && <li className='text-[11px] text-gray-500'>{copy.idle}</li>}
         {traces.slice(-4).map(trace => (
           <li key={trace.id} className='flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[11px]'>
-            <code className='font-mono text-teal-300'>{trace.event}</code>
-            <span className='text-slate-400'>{trace.caption}</span>
+            <code className='font-mono text-blue-500'>{trace.event}</code>
+            <span className='text-gray-500'>{trace.caption}</span>
           </li>
         ))}
       </ol>
@@ -284,7 +280,7 @@ function Timeline () {
 function ChatWindow ({ side }: { side: Side }) {
   const sim = useSim()
   const {
-    copy, lang, motionOk, messages, drafts, replyTo, scriptTyping, mobileView, isDesktop, uid
+    copy, lang, motionOk, messages, drafts, replyTo, scriptTyping, uid
   } = sim
   const contact = other(side)
   const listRef = useRef<HTMLUListElement>(null)
@@ -390,15 +386,13 @@ function ChatWindow ({ side }: { side: Side }) {
     inputRef.current?.focus()
   }
 
-  const hiddenOnMobile = mobileView !== side
   const pill = side === 'frainer' ? copy.youPill : copy.samplePill
 
   return (
     <section
       id={`${uid}-panel-${side}`}
-      role={isDesktop ? 'region' : 'tabpanel'}
+      role='region'
       aria-label={copy.windowLabel(NAMES[side])}
-      aria-labelledby={isDesktop ? undefined : `${uid}-tab-${side}`}
       onKeyDown={event => {
         if (event.key !== 'Escape') return
         setPicker(null)
@@ -408,11 +402,11 @@ function ChatWindow ({ side }: { side: Side }) {
         setSearchQuery('')
         sim.setReply(side, null)
       }}
-      className={`${hiddenOnMobile ? 'hidden lg:flex' : 'flex'} @container h-[32rem] min-w-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-[#fffffe] font-sans text-gray-900`}
+      className={`flex @container h-[32rem] min-w-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-[#fffffe] font-sans text-gray-800`}
     >
       <header className='flex items-center justify-between gap-2 border-b border-gray-200 bg-gray-200 px-3 py-3 @md:hidden'>
         <Avatar side={side} size={40} className='h-10 w-10' />
-        <span className='inline-flex h-5 shrink-0 items-center justify-center rounded-full bg-blue-600 px-2 text-[10px] font-medium leading-none text-white'>
+        <span className='inline-flex h-5 shrink-0 items-center justify-center rounded-full bg-blue-500 px-2 text-[10px] font-medium leading-none text-white'>
           {pill}
         </span>
       </header>
@@ -420,7 +414,7 @@ function ChatWindow ({ side }: { side: Side }) {
         <aside className='hidden min-h-0 w-[32%] min-w-[8.5rem] max-w-[14rem] shrink-0 flex-col border-r border-gray-200 @md:flex'>
           <header className='flex items-center justify-between gap-1 rounded-sm border-b border-gray-200 bg-gray-200 px-2 py-3'>
             <Avatar side={side} size={40} className='h-10 w-10' />
-            <span className='inline-flex h-5 shrink-0 items-center justify-center rounded-full bg-blue-600 px-2 text-[10px] font-medium leading-none text-white'>
+            <span className='inline-flex h-5 shrink-0 items-center justify-center rounded-full bg-blue-500 px-2 text-[10px] font-medium leading-none text-white'>
               {pill}
             </span>
           </header>
@@ -473,7 +467,7 @@ function ChatWindow ({ side }: { side: Side }) {
                       <span className='flex shrink-0 space-x-2'>
                         {muted && <MegaphoneOff className='h-4 w-4' aria-label={copy.mute} />}
                         {unread > 0 && (
-                          <span className='inline-flex h-5 min-w-5 items-center justify-center whitespace-nowrap rounded-full border border-blue-500 bg-blue-600 px-1 text-xs font-medium leading-none text-white'>
+                          <span className='inline-flex h-5 min-w-5 items-center justify-center whitespace-nowrap rounded-full border border-blue-500 bg-blue-500 px-1 text-xs font-medium leading-none text-white'>
                             {unread}
                           </span>
                         )}
@@ -522,7 +516,7 @@ function ChatWindow ({ side }: { side: Side }) {
                 )}
                 <button
                   type='button'
-                  className={`${chatIconBtn} ${searchOpen ? 'bg-gray-200 text-gray-900' : ''}`}
+                  className={`${chatIconBtn} ${searchOpen ? 'bg-gray-200 text-gray-800' : ''}`}
                   aria-pressed={searchOpen}
                   aria-label={searchOpen ? copy.closeSearch : copy.searchBtn}
                   onClick={() => {
@@ -536,7 +530,7 @@ function ChatWindow ({ side }: { side: Side }) {
               <div className='relative' ref={menuRef}>
                 <button
                   type='button'
-                  className={`${chatIconBtn} hover:contrast-200 ${menuOpen ? 'text-gray-900' : ''}`}
+                  className={`${chatIconBtn} hover:contrast-200 ${menuOpen ? 'text-gray-800' : ''}`}
                   aria-label={copy.options}
                   aria-haspopup='menu'
                   aria-expanded={menuOpen}
@@ -735,7 +729,7 @@ function ChatWindow ({ side }: { side: Side }) {
                 <button
                   type='button'
                   aria-label={copy.cancelReply}
-                  className={`absolute right-0 top-0 m-2 inline-flex h-8 w-8 items-center justify-center rounded-md leading-none text-gray-500 duration-100 ease-in-out hover:scale-110 hover:text-gray-900 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`}
+                  className={`absolute right-0 top-0 m-2 inline-flex h-8 w-8 items-center justify-center rounded-md leading-none text-gray-500 duration-100 ease-in-out hover:scale-110 hover:text-gray-800 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`}
                   onClick={() => sim.setReply(side, null)}
                 >
                   <X className='h-5 w-5' aria-hidden='true' />
@@ -829,7 +823,7 @@ function ChatWindow ({ side }: { side: Side }) {
                 }}
                 placeholder={copy.placeholder}
                 autoComplete='off'
-                className={`mx-1 h-10 min-w-0 flex-1 rounded-full border-0 bg-transparent px-3 py-2 text-sm text-gray-900 placeholder:text-gray-500 sm:mx-3 ${CHAT_RING}`}
+                className={`mx-1 h-10 min-w-0 flex-1 rounded-full border-0 bg-transparent px-3 py-2 text-sm text-gray-800 placeholder:text-gray-500 sm:mx-3 ${CHAT_RING}`}
               />
               <button
                 type='submit'
@@ -893,8 +887,9 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
   messagesRef.current = messages
   focusRef.current.view = mobileView
 
-  function focused (side: Side) {
-    return focusRef.current.desktop || focusRef.current.view === side
+  function focused (_side: Side) {
+    // Both sessions remain visible, including on mobile.
+    return true
   }
 
   function addTrace (event: string, caption: string) {
@@ -1067,8 +1062,16 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
       }
       at(cursor, () => {
         setTyping(step.side)
-        if (step.kind === 'text') setDrafts(current => ({ ...current, [step.side]: step.body }))
+        if (step.kind === 'text') setDrafts(current => ({ ...current, [step.side]: '' }))
       })
+      if (step.kind === 'text') {
+        const chars = Array.from(step.body)
+        chars.forEach((_, charIndex) => {
+          at(cursor + (typeMs * (charIndex + 1)) / chars.length, () => {
+            setDrafts(current => ({ ...current, [step.side]: chars.slice(0, charIndex + 1).join('') }))
+          })
+        })
+      }
       cursor += typeMs
       at(cursor, () => {
         setTyping(null)
@@ -1125,16 +1128,15 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
   }, [isDesktop, mobileView, copy])
 
   useEffect(() => {
-    if (!motionOk) return
     const root = rootRef.current
     if (!root) return
     let cancel = false
     const observer = new IntersectionObserver(([entry]) => {
-      if (cancel || !entry?.isIntersecting || entry.intersectionRatio < 0.45) return
+      if (cancel || !entry?.isIntersecting || entry.intersectionRatio < 0.1) return
       if (autoplayed.current || interacted.current) return
       autoplayed.current = true
       api.current.startReplay()
-    }, { threshold: [0.45] })
+    }, { threshold: [0.1] })
     observer.observe(root)
     return () => {
       cancel = true
@@ -1148,20 +1150,6 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
     replayTimers.current.forEach(id => window.clearTimeout(id))
     pipelineTimers.current.forEach(id => window.clearTimeout(id))
   }, [])
-
-  function onTabKey (event: KeyboardEvent<HTMLDivElement>) {
-    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') return
-    event.preventDefault()
-    const order: Side[] = ['frainer', 'laura']
-    const index = order.indexOf(mobileView)
-    const next = event.key === 'Home'
-      ? order[0]
-      : event.key === 'End'
-        ? order[1]
-        : order[(index + (event.key === 'ArrowRight' ? 1 : -1) + order.length) % order.length]
-    setMobileView(next)
-    document.getElementById(`${uid}-tab-${next}`)?.focus()
-  }
 
   const apiValue: SimApi = {
     lang,
@@ -1191,13 +1179,13 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
     <SimContext.Provider value={apiValue}>
       <section
         ref={rootRef}
-        className='w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-950 text-slate-200 shadow-sm'
+        className='w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-gray-200 bg-[#fffffe] text-gray-800 shadow-sm'
       >
-        <div className='flex flex-wrap items-center justify-between gap-2 px-3 pt-3'>
-          <p className='text-[11px] font-medium uppercase tracking-wide text-teal-200/80'>{copy.sampleBadge}</p>
+        <div className='flex h-14 items-center justify-between gap-2 px-3 pt-3'>
+          <p className='text-[11px] font-medium uppercase tracking-wide text-blue-500'>{copy.sampleBadge}</p>
           <button
             type='button'
-            className={`inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-teal-400/15 sm:h-8 px-3 text-xs font-medium leading-none text-teal-200 transition-colors hover:bg-teal-400/25 motion-reduce:transition-none ${focusRing}`}
+            className={`inline-flex h-11 w-28 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-blue-500/10 sm:h-8 px-3 text-xs font-medium leading-none text-blue-500 transition-colors hover:bg-blue-500/15 motion-reduce:transition-none ${focusRing}`}
             aria-pressed={replaying}
             onClick={() => {
               interacted.current = true
@@ -1208,46 +1196,13 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
             {replaying ? copy.replaying : copy.replay}
           </button>
         </div>
-        <div className='px-3 pt-3 lg:hidden'>
-          <div
-            role='tablist'
-            aria-label={copy.switchLabel}
-            className='grid grid-cols-2 gap-1 rounded-lg bg-slate-800/60 p-1'
-            onKeyDown={onTabKey}
-          >
-            {(['frainer', 'laura'] as const).map(side => {
-              const count = unreadFor(messages, side)
-              const selected = mobileView === side
-              return (
-                <button
-                  key={side}
-                  id={`${uid}-tab-${side}`}
-                  type='button'
-                  role='tab'
-                  aria-selected={selected}
-                  aria-controls={`${uid}-panel-${side}`}
-                  tabIndex={selected ? 0 : -1}
-                  className={`inline-flex h-11 min-w-0 items-center justify-center gap-1 rounded-md px-3 text-sm sm:h-8 font-medium leading-none transition motion-reduce:transition-none ${focusRing} ${selected ? 'bg-teal-400/15 text-teal-100 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
-                  onClick={() => setMobileView(side)}
-                >
-                  {NAMES[side].split(' ')[0]}
-                  {count > 0 && (
-                    <span className='inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-teal-400/20 px-1 text-[10px] font-medium leading-none text-teal-100'>
-                      {count}
-                    </span>
-                  )}
-                </button>
-              )
-            })}
-          </div>
-        </div>
         <div className='grid grid-cols-1 gap-4 px-3 pt-3 sm:px-4 lg:grid-cols-2'>
           <ChatWindow side='frainer' />
           <ChatWindow side='laura' />
         </div>
         <div className='px-3 pb-3 pt-3'>
           <Timeline />
-          <p className='mt-2 px-0.5 text-[11px] leading-relaxed text-slate-400'>{copy.caption}</p>
+          <p className='mt-2 px-0.5 text-[11px] leading-relaxed text-gray-500'>{copy.caption}</p>
         </div>
       </section>
     </SimContext.Provider>

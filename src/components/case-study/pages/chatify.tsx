@@ -22,7 +22,7 @@ const COPY = {
 			{ label: 'Open Chatify', url: 'https://chatify.fraineralex.dev' },
 			{ label: 'Source on GitHub', url: 'https://github.com/fraineralex/chatify' },
 		],
-		caption: 'Two sessions side by side: mine and a sample contact. Type in either window and watch the socket events below. Everything runs locally with sample data.',
+		caption: 'Two sessions side by side: mine and a sample contact. The conversation plays automatically with socket events below. Everything runs locally with sample data.',
 		c1: {
 			title: 'What it takes to feel instant',
 			body: [
@@ -80,7 +80,7 @@ const COPY = {
 			{ label: 'Abrir Chatify', url: 'https://chatify.fraineralex.dev' },
 			{ label: 'Código en GitHub', url: 'https://github.com/fraineralex/chatify' },
 		],
-		caption: 'Dos sesiones lado a lado: la mía y un contacto de ejemplo. Escribe en cualquiera de las ventanas y mira los eventos del socket abajo. Todo corre localmente con datos de ejemplo.',
+		caption: 'Dos sesiones lado a lado: la mía y un contacto de ejemplo. La conversación se reproduce automáticamente con los eventos del socket abajo. Todo corre localmente con datos de ejemplo.',
 		c1: {
 			title: 'Lo que hace falta para sentirse instantáneo',
 			body: [

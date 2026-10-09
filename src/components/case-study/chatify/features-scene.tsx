@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import { Check, CheckCheck, FileText, Pin, Search, Smile, Sticker } from 'lucide-react'
 import {
 	SCENE_LABELS,
-	SceneFrame,
 	easeInOut,
 	easeOut,
 	linear,
@@ -13,9 +12,9 @@ import {
 	typed,
 	useSceneTimeline,
 } from '../kit/scene'
+import { ChatifySceneFrame as SceneFrame } from './scene-frame'
 
 const DURATION = 13200
-const HOLD = 3000
 
 const COPY = {
 	en: {
@@ -124,16 +123,16 @@ function Ticks({ level, labels }: { level: number; labels: { sent: string; deliv
 	const name = level === 3 ? labels.read : level === 2 ? labels.delivered : level === 1 ? labels.sent : ''
 	return (
 		<span className='relative inline-block size-4 shrink-0' aria-label={name || undefined}>
-			<Check className={`${box} text-slate-400`} style={{ opacity: level === 1 ? 1 : 0 }} aria-hidden />
-			<CheckCheck className={`${box} text-slate-400`} style={{ opacity: level === 2 ? 1 : 0 }} aria-hidden />
-			<CheckCheck className={`${box} text-teal-300`} style={{ opacity: level >= 3 ? 1 : 0 }} aria-hidden />
+			<Check className={`${box} text-gray-500`} style={{ opacity: level === 1 ? 1 : 0 }} aria-hidden />
+			<CheckCheck className={`${box} text-gray-500`} style={{ opacity: level === 2 ? 1 : 0 }} aria-hidden />
+			<CheckCheck className={`${box} text-blue-500`} style={{ opacity: level >= 3 ? 1 : 0 }} aria-hidden />
 		</span>
 	)
 }
 
 function Time({ level, labels, extra }: { level: number; labels: { sent: string; delivered: string; read: string }; extra?: string }) {
 	return (
-		<span className='float-end ms-2 mt-1 inline-flex items-end gap-0.5 whitespace-nowrap text-xs font-normal text-slate-400'>
+		<span className='float-end ms-2 mt-1 inline-flex items-end gap-0.5 whitespace-nowrap text-xs font-normal text-gray-500'>
 			{extra && <span className='text-[11px] tabular-nums'>{extra}</span>}
 			<time className='text-[10px] tabular-nums' dateTime='2024-06-12T15:24:00Z'>3:24</time>
 			<Ticks level={level} labels={labels} />
@@ -160,45 +159,48 @@ function Chat({ elapsed, t }: { elapsed: number; t: Copy }) {
 	const found = span(elapsed, 12600, 13000, easeOut)
 	const query = typed(t.query, f.query)
 	return (
-		<section className='flex h-[26.25rem] min-w-0 flex-col overflow-hidden rounded-lg border border-slate-700/60 bg-slate-900/70' aria-hidden>
-			<header className='flex h-10 shrink-0 items-center gap-2 border-b border-slate-700/60 px-2.5'>
+		<section className='flex h-[26.25rem] min-w-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-white' aria-hidden>
+			<header className='flex h-10 shrink-0 items-center gap-2 border-b border-gray-200 bg-gray-200 px-2.5'>
 				<span className='relative shrink-0'>
-					<span className='inline-flex size-8 items-center justify-center rounded-full bg-slate-700 text-xs font-semibold text-slate-100'>L</span>
-					<span className='absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-slate-900 bg-emerald-400' />
+					<span className='inline-flex size-8 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-gray-800'>L</span>
+					<span className='absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-white bg-emerald-400' />
 				</span>
 				<div className='min-w-0'>
-					<h2 className='flex items-center gap-1 truncate text-sm font-bold text-slate-100'>
+					<h2 className='flex items-center gap-1 truncate text-sm font-bold text-gray-800'>
 						{t.contact}
-						<Pin className='size-3.5 shrink-0 text-teal-300' style={{ opacity: f.pin }} aria-hidden />
+						<Pin className='size-3.5 shrink-0 text-blue-500' style={{ opacity: f.pin }} aria-hidden />
 					</h2>
-					<p className='text-[11px] leading-tight text-emerald-400'>{t.online}</p>
+					<p className='text-[11px] leading-tight text-emerald-600'>{t.online}</p>
 				</div>
-				<span className='ms-auto inline-flex h-5 items-center rounded-full bg-teal-400/15 px-2 text-[10px] font-medium text-teal-200'>{t.sample}</span>
-				<Search className='size-4 shrink-0 text-slate-400' style={{ opacity: 0.35 + f.search * 0.65 }} aria-hidden />
+				<span className='ms-auto inline-flex h-5 items-center rounded-full bg-blue-500/10 px-2 text-[10px] font-medium text-blue-500'>{t.sample}</span>
+				<Search className='size-4 shrink-0 text-gray-500' style={{ opacity: 0.35 + f.search * 0.65 }} aria-hidden />
 			</header>
-			<ul className='flex min-h-0 flex-1 flex-col gap-1 overflow-hidden px-2.5 py-1'>
+			<ul className='relative flex min-h-0 flex-1 flex-col gap-1 overflow-hidden px-2.5 py-1'>
+				<li className='absolute left-2.5 top-1'>
+					<p className='rounded-lg bg-gray-100 px-2 py-1 text-sm text-gray-800' style={{ opacity: 1 - f.textIn }}>👋</p>
+				</li>
 				<Row show={f.textIn} className='h-[4.25rem] justify-end'>
 					<div className='flex w-full flex-col items-end'>
-						<article className='w-fit max-w-[95%] rounded-lg border border-transparent bg-slate-700 px-1 pb-1 pt-1'>
-							<p className='inline w-full align-middle text-sm font-medium text-slate-100'>
-								<span className='text-teal-300 underline decoration-teal-300/50 underline-offset-2'>{t.message}</span>
+						<article className='w-fit max-w-[95%] rounded-lg border border-transparent bg-gray-300 px-1 pb-1 pt-1'>
+							<p className='inline w-full align-middle text-sm font-medium text-gray-800'>
+								<span className='text-blue-500 underline decoration-blue-500/50 underline-offset-2'>{t.message}</span>
 								<Time level={ticks(elapsed, 1300)} labels={labels} />
 							</p>
 						</article>
 						<span className='-mt-2 me-2 flex justify-end' style={{ opacity: f.react, transform: `scale(${f.reactScale})` }}>
-							<span className='rounded-full border border-slate-600 bg-slate-800 px-[5px] py-[1px] text-sm leading-none'>👍</span>
+							<span className='rounded-full border border-gray-200 bg-gray-100 px-[5px] py-[1px] text-sm leading-none'>👍</span>
 						</span>
 					</div>
 				</Row>
 				<Row show={imageShow} className='h-[4.25rem] justify-end'>
-					<article className='w-fit max-w-[95%] rounded-lg border border-transparent bg-slate-700 px-1 pb-1 pt-1'>
-						<div className='relative h-9 w-28 overflow-hidden rounded-md bg-slate-950'>
-							<div className='absolute inset-0 bg-gradient-to-br from-teal-800/90 via-slate-600 to-slate-900' style={{ opacity: f.imageIn }} />
-							<div className='absolute inset-x-1 bottom-1 h-1 overflow-hidden rounded-full bg-slate-950/80' style={{ opacity: uploading ? 1 : 0 }}>
-								<div className='h-full rounded-full bg-teal-300' style={{ width: `${Math.round(f.upload * 100)}%` }} />
+					<article className='w-fit max-w-[95%] rounded-lg border border-transparent bg-gray-300 px-1 pb-1 pt-1'>
+						<div className='relative h-9 w-28 overflow-hidden rounded-md bg-[#fffffe]'>
+							<div className='absolute inset-0 bg-gradient-to-br from-indigo-500 to-teal-300' style={{ opacity: f.imageIn }} />
+							<div className='absolute inset-x-1 bottom-1 h-1 overflow-hidden rounded-full bg-gray-200' style={{ opacity: uploading ? 1 : 0 }}>
+								<div className='h-full rounded-full bg-gradient-to-r from-indigo-500 to-teal-300' style={{ width: `${Math.round(f.upload * 100)}%` }} />
 							</div>
 						</div>
-						<p className='flow-root ps-1 text-sm font-medium text-slate-100'>
+						<p className='flow-root ps-1 text-sm font-medium text-gray-800'>
 							<Time level={ticks(elapsed, 3900)} labels={labels} extra={uploading ? `${pct}%` : undefined} />
 						</p>
 					</article>
@@ -206,15 +208,15 @@ function Chat({ elapsed, t }: { elapsed: number; t: Copy }) {
 				<Row show={f.sticker} className='h-12 justify-start'>
 					<article className='flex w-fit items-end gap-1 rounded-lg border border-transparent px-1'>
 						<p className='px-1 text-4xl leading-none'>🎉</p>
-						<span className='rounded bg-slate-800 px-1 text-[11px] font-medium text-slate-300'>{t.gif}</span>
+						<span className='rounded bg-gray-100 px-1 text-[11px] font-medium text-gray-800'>{t.gif}</span>
 					</article>
 				</Row>
 				<Row show={f.file} className='h-[3.25rem] justify-end'>
-					<figure className='w-fit max-w-[95%] rounded-md bg-slate-800' style={{ outline: found > 0.2 ? '1px solid rgb(94 234 212 / 0.85)' : '1px solid transparent', borderRadius: 6 }}>
+					<figure className='w-fit max-w-[95%] rounded-md bg-gray-100' style={{ outline: found > 0.2 ? '1px solid #3b82f6' : '1px solid transparent', borderRadius: 6 }}>
 						<div className='flex items-center gap-2 px-2 py-1'>
-							<FileText className='size-8 shrink-0 text-slate-300' aria-hidden />
-							<span className='min-w-0 text-slate-400'>
-								<span className='block w-36 truncate text-sm font-medium text-slate-100'>{t.file}</span>
+							<FileText className='size-8 shrink-0 text-gray-800' aria-hidden />
+							<span className='min-w-0 text-gray-500'>
+								<span className='block w-36 truncate text-sm font-medium text-gray-800'>{t.file}</span>
 								<span className='block text-[11px]'>{t.kind}</span>
 							</span>
 							<Ticks level={ticks(elapsed, 5900)} labels={labels} />
@@ -222,37 +224,37 @@ function Chat({ elapsed, t }: { elapsed: number; t: Copy }) {
 					</figure>
 				</Row>
 				<Row show={f.reply} className='h-[4.75rem] justify-start'>
-					<article className='w-fit max-w-[95%] rounded-lg border border-transparent bg-slate-800 px-1 pb-1 pt-1'>
-						<div className='mb-1 flex flex-col rounded-lg border-l-4 border-teal-400 bg-slate-900/70 px-2'>
-							<p className='my-0.5 text-xs font-medium text-teal-300'>{t.you}</p>
-							<p className='truncate pb-1 text-xs font-normal text-slate-400'>{t.message}</p>
+					<article className='w-fit max-w-[95%] rounded-lg border border-transparent bg-gray-100 px-1 pb-1 pt-1'>
+						<div className='mb-1 flex flex-col rounded-lg border-l-4 border-blue-500 bg-white px-2'>
+							<p className='my-0.5 text-xs font-medium text-blue-500'>{t.you}</p>
+							<p className='truncate pb-1 text-xs font-normal text-gray-500'>{t.message}</p>
 						</div>
-						<p className='ps-1 text-sm font-medium text-slate-100'>
+						<p className='ps-1 text-sm font-medium text-gray-800'>
 							{t.reply}
-							<span className='float-end ms-2 mt-1 inline-flex text-[10px] font-normal text-slate-400'>
+							<span className='float-end ms-2 mt-1 inline-flex text-[10px] font-normal text-gray-500'>
 								<time className='tabular-nums' dateTime='2024-06-12T15:28:00Z'>3:28</time>
 							</span>
 						</p>
 					</article>
 				</Row>
 			</ul>
-			<div className='relative h-10 shrink-0 border-t border-slate-700/60'>
-				<div className='absolute inset-0 flex items-center gap-1.5 px-2 text-slate-400' style={{ opacity: 1 - f.search }}>
+			<div className='relative h-10 shrink-0 border-t border-gray-200'>
+				<div className='absolute inset-0 flex items-center gap-1.5 px-2 text-gray-500' style={{ opacity: 1 - f.search }}>
 					<Smile className='size-5 shrink-0' aria-hidden />
 					<Sticker className='size-5 shrink-0' aria-hidden />
 					<div className='relative h-7 min-w-0 flex-1 overflow-hidden rounded-full'>
-						<span className='absolute inset-0 truncate px-2 text-sm leading-7 text-slate-500' style={{ opacity: draft ? 0 : 1 }}>{t.placeholder}</span>
-						<span className='absolute inset-0 truncate px-2 text-sm leading-7 text-slate-100'>
+						<span className='absolute inset-0 truncate px-2 text-sm leading-7 text-gray-500' style={{ opacity: draft ? 0 : 1 }}>{t.placeholder}</span>
+						<span className='absolute inset-0 truncate px-2 text-sm leading-7 text-gray-800'>
 							{draft}
-							<span className='ms-px inline-block h-3.5 w-px translate-y-0.5 bg-teal-300 align-middle' style={{ opacity: caret ? 1 : 0 }} />
+							<span className='ms-px inline-block h-3.5 w-px translate-y-0.5 bg-blue-500 align-middle' style={{ opacity: caret ? 1 : 0 }} />
 						</span>
 					</div>
 				</div>
 				<div className='absolute inset-0 flex items-center px-2' style={{ opacity: f.search }}>
-					<Search className='me-2 size-4 shrink-0 text-teal-300' aria-hidden />
-					<div className='h-7 min-w-0 flex-1 truncate rounded-full bg-slate-800/80 px-3 text-sm leading-7 text-slate-100' aria-label={t.search}>
+					<Search className='me-2 size-4 shrink-0 text-blue-500' aria-hidden />
+					<div className='h-7 min-w-0 flex-1 truncate rounded-full bg-gray-100 px-3 text-sm leading-7 text-gray-800' aria-label={t.search}>
 						{query}
-						<span className='ms-px inline-block h-3.5 w-px translate-y-0.5 bg-teal-300 align-middle' style={{ opacity: f.search > 0.4 && f.query < 1 && Math.sin(elapsed / 160) > 0 ? 1 : 0 }} />
+						<span className='ms-px inline-block h-3.5 w-px translate-y-0.5 bg-blue-500 align-middle' style={{ opacity: f.search > 0.4 && f.query < 1 && Math.sin(elapsed / 160) > 0 ? 1 : 0 }} />
 					</div>
 				</div>
 			</div>
@@ -262,19 +264,19 @@ function Chat({ elapsed, t }: { elapsed: number; t: Copy }) {
 
 export function FeaturesScene({ lang, items }: { lang: 'en' | 'es'; items: readonly { title: string; body: string }[] }) {
 	const t = COPY[lang]
-	const tl = useSceneTimeline(DURATION, { loop: true, hold: HOLD })
+	const tl = useSceneTimeline(DURATION)
 	const f = frameAt(tl.elapsed)
 	const active = Math.min(f.item, Math.max(0, items.length - 1))
 	return (
 		<SceneFrame timeline={tl} labels={SCENE_LABELS[lang]} kicker={t.kicker} title={t.title} caption={<span className='block h-[3.25rem] overflow-hidden'>{t.captions[f.cue]}</span>}>
 			<div className='grid items-start gap-3 p-3 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] sm:p-4'>
 				<Chat elapsed={tl.elapsed} t={t} />
-				<div className='min-w-0 rounded-lg border border-slate-700/60 bg-slate-900/50 p-3'>
-					<p className='text-[11px] font-medium uppercase tracking-wide text-slate-500'>{t.list}</p>
+				<div className='min-w-0 rounded-lg border border-gray-200 bg-white p-3'>
+					<p className='text-[11px] font-medium uppercase tracking-wide text-gray-500'>{t.list}</p>
 					<div className='relative mt-2 h-28 overflow-hidden'>
 						{items.map((item, i) => (
-							<p key={item.title} className='absolute inset-0 text-sm leading-snug text-slate-300' style={{ opacity: i === active ? 1 : 0 }}>
-								<span className='mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-teal-200/80'>{t.now}</span>
+							<p key={item.title} className='absolute inset-0 text-sm leading-snug text-gray-800' style={{ opacity: i === active ? 1 : 0 }}>
+								<span className='mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-blue-500'>{t.now}</span>
 								{item.body}
 							</p>
 						))}
@@ -285,10 +287,10 @@ export function FeaturesScene({ lang, items }: { lang: 'en' | 'es'; items: reado
 							const on = i === active
 							return (
 								<li key={item.title} className='flex h-8 items-center gap-2' aria-current={on ? 'step' : undefined}>
-									<span className={`inline-flex size-5 shrink-0 items-center justify-center rounded-full border ${tick > 0.55 ? 'border-teal-300 bg-teal-400/15 text-teal-200' : 'border-slate-600 text-slate-600'}`}>
+									<span className={`inline-flex size-5 shrink-0 items-center justify-center rounded-full border ${tick > 0.55 ? 'border-blue-500 bg-blue-500/10 text-blue-500' : 'border-gray-200 text-gray-500'}`}>
 										<Check className='size-3' style={{ opacity: tick }} aria-hidden />
 									</span>
-									<span className={`min-w-0 truncate text-sm ${on ? 'font-medium text-slate-100' : tick > 0.55 ? 'text-slate-300' : 'text-slate-500'}`}>{item.title}</span>
+									<span className={`min-w-0 truncate text-sm ${on ? 'font-medium text-gray-800' : tick > 0.55 ? 'text-gray-800' : 'text-gray-500'}`}>{item.title}</span>
 								</li>
 							)
 						})}

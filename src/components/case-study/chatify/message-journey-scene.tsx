@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import { Check, CheckCheck } from 'lucide-react'
 import {
 	SCENE_LABELS,
-	SceneFrame,
 	easeInOut,
 	easeOut,
 	linear,
@@ -14,9 +13,9 @@ import {
 	typed,
 	useSceneTimeline,
 } from '../kit/scene'
+import { ChatifySceneFrame as SceneFrame } from './scene-frame'
 
 const DURATION = 12000
-const HOLD = 3200
 
 const COPY = {
 	en: {
@@ -137,9 +136,9 @@ function Ticks({ level, sent, delivered, read }: { level: number; sent: string; 
 	const label = level === 3 ? read : level === 2 ? delivered : level === 1 ? sent : ''
 	return (
 		<span className='relative inline-block size-4 shrink-0' aria-label={label || undefined}>
-			<Check className={`${box} text-slate-400`} style={{ opacity: level === 1 ? 1 : 0 }} aria-hidden />
-			<CheckCheck className={`${box} text-slate-400`} style={{ opacity: level === 2 ? 1 : 0 }} aria-hidden />
-			<CheckCheck className={`${box} text-teal-300`} style={{ opacity: level === 3 ? 1 : 0 }} aria-hidden />
+			<Check className={`${box} text-gray-500`} style={{ opacity: level === 1 ? 1 : 0 }} aria-hidden />
+			<CheckCheck className={`${box} text-gray-500`} style={{ opacity: level === 2 ? 1 : 0 }} aria-hidden />
+			<CheckCheck className={`${box} text-blue-500`} style={{ opacity: level === 3 ? 1 : 0 }} aria-hidden />
 		</span>
 	)
 }
@@ -147,10 +146,10 @@ function Ticks({ level, sent, delivered, read }: { level: number; sent: string; 
 function Bubble({ mine, show, text, level, labels }: { mine: boolean; show: number; text: string; level: number; labels: { sent: string; delivered: string; read: string } }) {
 	return (
 		<div className={`flex w-full ${mine ? 'justify-end' : 'justify-start'}`} style={{ opacity: show, transform: `translateY(${(1 - show) * 8}px)` }}>
-			<article className={`w-fit max-w-[92%] rounded-lg border border-transparent px-1 pb-1 pt-1 ${mine ? 'bg-slate-700' : 'bg-slate-800'}`}>
-				<p className='inline w-full align-middle text-sm font-medium text-slate-100'>
+			<article className={`w-fit max-w-[92%] rounded-lg border border-transparent px-1 pb-1 pt-1 ${mine ? 'bg-gray-300' : 'bg-gray-100'}`}>
+				<p className='inline w-full align-middle text-sm font-medium text-gray-800'>
 					{text}{' '}
-					<span className='float-end ms-2 mt-1 inline-flex items-end gap-0.5 whitespace-nowrap text-xs font-normal text-slate-400'>
+					<span className='float-end ms-2 mt-1 inline-flex items-end gap-0.5 whitespace-nowrap text-xs font-normal text-gray-500'>
 						<time className='text-[10px] tabular-nums' dateTime='2024-06-12T15:24:00Z'>3:24</time>
 						{mine && <Ticks level={level} sent={labels.sent} delivered={labels.delivered} read={labels.read} />}
 					</span>
@@ -180,19 +179,24 @@ function Panel({
 	children: ReactNode
 }) {
 	return (
-		<section className='flex h-32 min-w-0 flex-col overflow-hidden rounded-lg border border-slate-700/60 bg-slate-900/70 sm:h-full' aria-hidden>
-			<header className='flex h-8 shrink-0 items-center gap-2 border-b border-slate-700/60 bg-slate-800/50 px-2'>
-				<span className={`inline-flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${mine ? 'bg-teal-400/15 text-teal-200' : 'bg-slate-700 text-slate-100'}`}>{initial}</span>
-				<h2 className='min-w-0 truncate text-xs font-bold text-slate-100'>{name}</h2>
-				<p className='ms-auto shrink-0 text-[11px] text-emerald-400'>{status}</p>
+		<section className='flex h-32 min-w-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-white sm:h-full' aria-hidden>
+			<header className='flex h-8 shrink-0 items-center gap-2 border-b border-gray-200 bg-gray-200 px-2'>
+				<span className={`inline-flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${mine ? 'bg-blue-500/10 text-blue-500' : 'bg-gray-300 text-gray-800'}`}>{initial}</span>
+				<h2 className='min-w-0 truncate text-xs font-bold text-gray-800'>{name}</h2>
+				<p className='ms-auto shrink-0 text-[11px] text-emerald-600'>{status}</p>
 			</header>
-			<div className='flex min-h-0 flex-1 items-end px-2 py-1.5'>{children}</div>
-			<div className='flex h-8 shrink-0 items-center border-t border-slate-700/60 px-2'>
-				<div className='relative h-6 min-w-0 flex-1 overflow-hidden rounded-full bg-slate-800/80'>
-					<span className='absolute inset-0 truncate px-2.5 text-xs leading-6 text-slate-500' style={{ opacity: draft ? 0 : 1 }}>{placeholder}</span>
-					<span className='absolute inset-0 truncate px-2.5 text-xs leading-6 text-slate-100'>
+			<div className='flex min-h-0 flex-1 flex-col justify-end gap-1 overflow-hidden px-2 py-1.5'>
+				<div className={`flex ${mine ? 'justify-start' : 'justify-end'}`}>
+					<p className={`rounded-lg px-1 py-1 text-xs text-gray-800 ${mine ? 'bg-gray-100' : 'bg-gray-300'}`}>👋</p>
+				</div>
+				{children}
+			</div>
+			<div className='flex h-8 shrink-0 items-center border-t border-gray-200 px-2'>
+				<div className='relative h-6 min-w-0 flex-1 overflow-hidden rounded-full bg-gray-100'>
+					<span className='absolute inset-0 truncate px-2.5 text-xs leading-6 text-gray-500' style={{ opacity: draft ? 0 : 1 }}>{placeholder}</span>
+					<span className='absolute inset-0 truncate px-2.5 text-xs leading-6 text-gray-800'>
 						{draft}
-						<span className='ms-px inline-block h-3 w-px translate-y-px bg-teal-300 align-middle' style={{ opacity: caret ? 1 : 0 }} />
+						<span className='ms-px inline-block h-3 w-px translate-y-px bg-blue-500 align-middle' style={{ opacity: caret ? 1 : 0 }} />
 					</span>
 				</div>
 			</div>
@@ -207,10 +211,10 @@ function Dot({ pts, t }: { pts: Pt[]; t: number }) {
 		<g opacity={visible ? 1 : 0}>
 			{[0.14, 0.08, 0.03].map((lag, i) => {
 				const [x, y] = pointOnPolyline(pts, Math.max(0, t - lag))
-				return <circle key={lag} cx={x} cy={y} r={4.4 - i} fill='#5eead4' opacity={0.28 - i * 0.07} />
+				return <circle key={lag} cx={x} cy={y} r={4.4 - i} fill='#3b82f6' opacity={0.28 - i * 0.07} />
 			})}
-			<circle cx={head[0]} cy={head[1]} r='6' fill='#5eead4' opacity='0.28' />
-			<circle cx={head[0]} cy={head[1]} r='3.1' fill='#ccfbf1' />
+			<circle cx={head[0]} cy={head[1]} r='6' fill='#3b82f6' opacity='0.28' />
+			<circle cx={head[0]} cy={head[1]} r='3.1' fill='#3b82f6' />
 		</g>
 	)
 }
@@ -224,8 +228,8 @@ function Hub({ layout, elapsed, f, server, db }: { layout: 'row' | 'stack'; elap
 		{ pts: g.right, on: span(elapsed, 8100, 9700) },
 		{ pts: g.back, on: span(elapsed, 9800, 11600) },
 	]
-	const shieldFill = f.shield > 0.55 ? '#064e3b' : '#0f172a'
-	const shieldStroke = f.shield > 0.55 ? '#34d399' : '#64748b'
+	const shieldFill = f.shield > 0.55 ? '#d1fae5' : '#ffffff'
+	const shieldStroke = f.shield > 0.55 ? '#059669' : '#6b7280'
 	return (
 		<svg viewBox='0 0 220 220' width='220' height='220' className='mx-auto block max-w-full' aria-hidden>
 			{wires.map((wire) => (
@@ -233,7 +237,7 @@ function Hub({ layout, elapsed, f, server, db }: { layout: 'row' | 'stack'; elap
 					key={wire.pts.map((p) => p.join(',')).join(' ')}
 					d={pathOf(wire.pts)}
 					fill='none'
-					stroke={wire.on > 0.45 ? '#5eead4' : '#475569'}
+					stroke={wire.on > 0.45 ? '#3b82f6' : '#e5e7eb'}
 					strokeWidth={wire.on > 0.45 ? 2 : 1.5}
 					strokeDasharray={wire.on > 0.45 ? '4 7' : '0'}
 					strokeDashoffset={-(elapsed / 42) % 48}
@@ -241,17 +245,17 @@ function Hub({ layout, elapsed, f, server, db }: { layout: 'row' | 'stack'; elap
 					opacity={0.45 + wire.on * 0.55}
 				/>
 			))}
-			<g transform={`translate(${g.db[0]} ${g.db[1]})`} style={{ filter: f.db > 0.4 ? `drop-shadow(0 0 6px rgb(45 212 191 / ${0.35 + f.db * 0.4}))` : undefined }}>
-				<rect x='-36' y='-16' width='72' height='34' rx='8' fill='#0f172a' stroke={f.db > 0.5 ? '#5eead4' : '#475569'} strokeWidth='1.5' />
-				<text y='5' textAnchor='middle' fontSize='12' fill='#e2e8f0'>{db}</text>
+			<g transform={`translate(${g.db[0]} ${g.db[1]})`} style={{ filter: f.db > 0.4 ? `drop-shadow(0 0 6px rgb(59 130 246 / ${0.35 + f.db * 0.4}))` : undefined }}>
+				<rect x='-36' y='-16' width='72' height='34' rx='8' fill='#ffffff' stroke={f.db > 0.5 ? '#3b82f6' : '#e5e7eb'} strokeWidth='1.5' />
+				<text y='5' textAnchor='middle' fontSize='12' fill='#1f2937'>{db}</text>
 			</g>
-			<g transform={`translate(${g.server[0]} ${g.server[1]})`} style={{ filter: `drop-shadow(0 0 ${4 + f.hot * 6}px rgb(45 212 191 / ${0.2 + f.server * (f.hot > 0.15 ? beat : 0.55)}))` }}>
-				<rect x='-46' y='-18' width='92' height='36' rx='18' fill='#0f172a' stroke={f.server > 0.4 ? '#5eead4' : '#475569'} strokeWidth='1.5' />
-				<text y='4' textAnchor='middle' fontSize='12' fill='#e2e8f0'>{server}</text>
+			<g transform={`translate(${g.server[0]} ${g.server[1]})`} style={{ filter: `drop-shadow(0 0 ${4 + f.hot * 6}px rgb(59 130 246 / ${0.2 + f.server * (f.hot > 0.15 ? beat : 0.55)}))` }}>
+				<rect x='-46' y='-18' width='92' height='36' rx='18' fill='#ffffff' stroke={f.server > 0.4 ? '#3b82f6' : '#e5e7eb'} strokeWidth='1.5' />
+				<text y='4' textAnchor='middle' fontSize='12' fill='#1f2937'>{server}</text>
 			</g>
 			<g transform={`translate(${g.shield[0] - 11} ${g.shield[1] - 12})`}>
 				<path d='M11 21s7-3.4 7-8.6V5.2L11 2.6 4 5.2v7.2C4 17.6 11 21 11 21z' fill={shieldFill} stroke={shieldStroke} strokeWidth='1.4' />
-				<text x='11' y='-2' textAnchor='middle' fontSize='11' fill={f.shield > 0.55 ? '#6ee7b7' : '#94a3b8'}>Auth0</text>
+				<text x='11' y='-2' textAnchor='middle' fontSize='11' fill={f.shield > 0.55 ? '#059669' : '#6b7280'}>Auth0</text>
 			</g>
 			<g>
 				{(() => {
@@ -259,8 +263,8 @@ function Hub({ layout, elapsed, f, server, db }: { layout: 'row' | 'stack'; elap
 					const show = f.jwtT > 0.03 && f.jwtT < 0.97
 					return (
 						<g transform={`translate(${x} ${y})`} opacity={show ? 1 : 0}>
-							<rect x='-16' y='-8' width='32' height='16' rx='8' fill='#0f172a' stroke='#5eead4' />
-							<text y='4' textAnchor='middle' fontSize='11' fill='#99f6e4' fontFamily='ui-monospace, monospace'>JWT</text>
+							<rect x='-16' y='-8' width='32' height='16' rx='8' fill='#ffffff' stroke='#3b82f6' />
+							<text y='4' textAnchor='middle' fontSize='11' fill='#3b82f6' fontFamily='ui-monospace, monospace'>JWT</text>
 						</g>
 					)
 				})()}
@@ -275,27 +279,27 @@ function Hub({ layout, elapsed, f, server, db }: { layout: 'row' | 'stack'; elap
 
 function Log({ elapsed, title, note }: { elapsed: number; title: string; note: string }) {
 	return (
-		<div className='mt-3 border-t border-slate-700/60 pt-2' aria-hidden>
-			<p className='text-[11px] font-medium uppercase tracking-wide text-slate-500'>{title}</p>
+		<div className='mt-3 border-t border-gray-200 pt-2' aria-hidden>
+			<p className='text-[11px] font-medium uppercase tracking-wide text-gray-500'>{title}</p>
 			<ol className='relative mt-1 h-[110px] overflow-hidden'>
 				{LOG.map((row, i) => {
 					const enter = span(elapsed, row.at, row.at + 340, easeOut)
 					return (
-						<li key={row.name} className='absolute inset-x-0 flex h-[22px] items-center gap-2 border-b border-slate-800/80 font-mono text-[11px]' style={{ transform: `translateY(${i * 22}px)` }}>
-							<span className='w-5 shrink-0 tabular-nums text-slate-500' style={{ opacity: enter }}>{String(i + 1).padStart(2, '0')}</span>
-							<span className='truncate text-teal-300' style={{ opacity: enter, transform: `translateX(${(1 - enter) * -10}px)` }}>{row.name}</span>
+						<li key={row.name} className='absolute inset-x-0 flex h-[22px] items-center gap-2 border-b border-gray-200 font-mono text-[11px]' style={{ transform: `translateY(${i * 22}px)` }}>
+							<span className='w-5 shrink-0 tabular-nums text-gray-500' style={{ opacity: enter }}>{String(i + 1).padStart(2, '0')}</span>
+							<span className='truncate text-blue-500' style={{ opacity: enter, transform: `translateX(${(1 - enter) * -10}px)` }}>{row.name}</span>
 						</li>
 					)
 				})}
 			</ol>
-			<p className='truncate text-[11px] text-slate-500'>{note}</p>
+			<p className='truncate text-[11px] text-gray-500'>{note}</p>
 		</div>
 	)
 }
 
 export function MessageJourneyScene({ lang }: { lang: 'en' | 'es' }) {
 	const t = COPY[lang]
-	const tl = useSceneTimeline(DURATION, { loop: true, hold: HOLD })
+	const tl = useSceneTimeline(DURATION)
 	const f = journeyAt(tl.elapsed)
 	const draft = f.bubbleOut > 0 ? '' : typed(t.message, f.typeP)
 	const caret = f.typeP > 0 && f.typeP < 1 && f.bubbleOut === 0 && Math.sin(tl.elapsed / 160) > 0

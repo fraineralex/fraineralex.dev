@@ -62,10 +62,10 @@ const COPY = {
 		captions: [
 			'El JWT de Auth0 va en el handshake y el escudo pasa a verde.',
 			'Frainer escribe. La ventana de Laura muestra que escribe.',
-			'Su cliente emite new_message. El globo sale con un check.',
+			'Su cliente emite new_message. El globo sale con una marca de lectura.',
 			'El servidor guarda el mensaje en Turso (libSQL).',
-			'chat_message llega a Laura y delivered_message vuelve doble el check.',
-			'read_message vuelve y los checks toman el color de leído.',
+			'chat_message llega a Laura y delivered_message convierte las marcas de lectura en un par.',
+			'read_message vuelve y las marcas de lectura toman el color de leído.',
 		],
 	},
 } as const

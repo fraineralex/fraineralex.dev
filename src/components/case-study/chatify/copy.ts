@@ -226,9 +226,9 @@ const es: Copy = {
     { side: 'laura', body: 'Bien. Tengo este chat abierto de mi lado.' }
   ],
   script: [
-    { side: 'frainer', kind: 'text', body: 'Mira los ticks. Este sale como new_message.' },
+    { side: 'frainer', kind: 'text', body: 'Mira los vistos. Este sale como new_message.' },
     { side: 'laura', kind: 'text', body: 'Ya llegó. Te respondo para que se vea la cita.' },
-    { side: 'frainer', kind: 'text', body: 'Los checks azules son read_message.', replyTo: 1 },
+    { side: 'frainer', kind: 'text', body: 'Los vistos azules son read_message.', replyTo: 1 },
     { side: 'laura', kind: 'react', body: '🔥', target: 0 },
     { side: 'laura', kind: 'sticker', body: '🎉' }
   ],

@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic'
 import { BackLink, Chapter, Decisions, Hero, Outro, P, Shell, Stage, Statement } from '../kit/layout'
-import { Layers, StageCaption } from '../kit/blocks'
+import { StageCaption } from '../kit/blocks'
+import { ArchitectureColumns } from '../chatify/architecture-columns'
 import { MessageJourneyScene } from '../chatify/message-journey-scene'
 import { FeaturesScene } from '../chatify/features-scene'
 import { backLink, type Lang } from './shared'
 
 const ChatifyLiveSim = dynamic(() => import('../chatify/chatify-live-sim'), {
-	loading: () => <div className='h-[640px] animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none' aria-hidden />,
+	// Same box as the mounted sim (two stacked 32rem windows below lg, one row from lg).
+	loading: () => <div className='h-[calc(92.125rem+4px)] animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none lg:h-[calc(59.125rem+4px)]' aria-hidden />,
 })
 
 const COPY = {
@@ -69,9 +71,9 @@ const COPY = {
 		outro: { title: 'Try it', note: 'Chatify is live and the source is on GitHub under the MIT license.' },
 	},
 	es: {
-		lede: 'Una app de mensajería en tiempo real que construí como proyecto full stack en TypeScript. Chats uno a uno con texto, archivos, imágenes, videos, stickers, GIFs, emojis, reacciones y confirmación de lectura, con más de 200 registros.',
+		lede: 'Una app de mensajería en tiempo real que construí en solitario en TypeScript, de la interfaz al servidor. Chats uno a uno con texto, archivos, imágenes, videos, stickers, GIFs, emojis, reacciones y confirmación de lectura, con más de 200 registros.',
 		facts: [
-			{ label: 'Rol', value: 'Desarrollador full stack único' },
+			{ label: 'Rol', value: 'Desarrollador full stack, en solitario' },
 			{ label: 'Año', value: '2024' },
 			{ label: 'Tiempo real', value: 'Socket.io' },
 			{ label: 'Datos', value: 'Turso, S3' },
@@ -93,7 +95,7 @@ const COPY = {
 			{ title: 'Emitir', body: 'El cliente de quien envía emite un evento new_message por Socket.io.', tag: 'new_message' },
 			{ title: 'Guardar', body: 'El servidor guarda el mensaje en Turso (libSQL).' },
 			{ title: 'Difundir', body: 'El servidor envía un evento chat_message a los clientes conectados en esa conversación.', tag: 'chat_message' },
-			{ title: 'Entregado y leído', body: 'Quien recibe ve el mensaje y el estado de lectura vuelve, así quien envía ve cambiar los checks.', tag: 'read_message' },
+			{ title: 'Entregado y leído', body: 'Quien recibe ve el mensaje y el estado de lectura vuelve, así quien envía ve cambiar las marcas de lectura.', tag: 'read_message' },
 		],
 		flowNote: 'Los nombres de los eventos vienen del código del proyecto.',
 		c2: { title: 'Los detalles que completan un chat', body: ['Más allá de enviar texto, la mayor parte del trabajo estuvo en los detalles.'] },
@@ -101,7 +103,7 @@ const COPY = {
 			{ title: 'Mensajes ricos', body: 'Enlaces clicables, imágenes, videos y cualquier archivo con vista previa, más un selector de stickers y GIFs con Tenor.' },
 			{ title: 'Respuestas', body: 'Responde a un mensaje concreto y vuelve a él desde la cita.' },
 			{ title: 'Reacciones', body: 'Reacciona a cualquier mensaje con un emoji.' },
-			{ title: 'Estado de lectura', body: 'Checks de enviado, entregado y leído, y avisos de mensajes sin ver.' },
+			{ title: 'Estado de lectura', body: 'Marcas de lectura de enviado, entregado y leído, y avisos de mensajes sin ver.' },
 			{ title: 'Acciones del chat', body: 'Fijar, ocultar, silenciar, marcar como no leído, bloquear, vaciar o eliminar un chat.' },
 			{ title: 'Búsqueda', body: 'Encuentra chats y mensajes, y filtra lo compartido por archivos y multimedia.' },
 		],
@@ -165,7 +167,7 @@ export default function ChatifyCaseStudy({ lang }: { lang: Lang }) {
 				))}
 			</Chapter>
 			<Stage>
-				<Layers layers={t.layers.map((l) => ({ title: l.title, items: [...l.items] }))} caption={t.layersCaption} />
+				<ArchitectureColumns layers={t.layers.map((l) => ({ title: l.title, items: [...l.items] }))} caption={t.layersCaption} />
 			</Stage>
 
 			<Decisions title={t.decisionsTitle} items={[...t.decisions]} />

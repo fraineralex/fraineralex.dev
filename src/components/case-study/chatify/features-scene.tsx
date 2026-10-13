@@ -78,7 +78,7 @@ const COPY = {
 			'Aparece la fila de un archivo adjunto.',
 			'Laura responde y cita el primer mensaje.',
 			'La reacción se queda en el mensaje.',
-			'Los checks pasan de enviado a entregado y a leído.',
+			'Las marcas de lectura pasan de enviado a entregado y a leído.',
 			'La conversación se fija desde el encabezado.',
 			'La búsqueda encuentra el archivo por su nombre.',
 		],

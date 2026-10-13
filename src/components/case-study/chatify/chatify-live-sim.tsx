@@ -33,10 +33,14 @@ const CHAT_RING =
 const focusRing = CHAT_RING
 
 const chatIconBtn =
-  `inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md leading-none text-gray-700 transition duration-100 ease-out hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`
+  `relative inline-flex h-11 w-11 min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md leading-none text-gray-700 transition duration-100 ease-out hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`
 
 const composerBtn =
-  `inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md leading-none transition duration-100 ease-out hover:scale-125 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`
+  `relative inline-flex h-11 w-11 min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md leading-none transition duration-100 ease-out hover:scale-125 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`
+
+/** 44px hit area for controls that stay visually small, like the Chatify message toolbar. The button itself must be positioned (relative or absolute). */
+const hit44 =
+  "before:absolute before:left-1/2 before:top-1/2 before:h-11 before:w-11 before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']"
 
 const REACTIONS = ['👍', '🔥', '😂', '😮', '😢', '🙏', '😡']
 const EMOJIS = ['😀', '😁', '😂', '😊', '😍', '😎', '🤔', '😅', '😢', '😮', '😡', '👍', '👏', '🙏', '🔥', '❤️', '🎉', '✅', '✨', '🚀', '👋', '💯', '🤝', '⭐']
@@ -163,8 +167,7 @@ function Avatar ({ side, size, className = '' }: { side: Side; size: number; cla
     return (
       <img
         src='/images/projects/viollet-user.webp'
-        alt=''
-        aria-hidden='true'
+        alt='Frainer Encarnación'
         width={size}
         height={size}
         className={`inline-block shrink-0 rounded-full object-cover ${className}`}
@@ -222,9 +225,9 @@ function Timeline () {
 
   return (
     <div className='rounded-xl border border-gray-200 bg-white px-4 py-4'>
-      <div className='flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1'>
-        <h3 className='text-xs font-semibold text-gray-800'>{copy.timeline}</h3>
-        <p className='text-[10px] text-gray-500'>{copy.gate}</p>
+      <div className='flex h-9 items-center justify-between gap-3 overflow-hidden'>
+        <h3 className='shrink-0 text-xs font-semibold text-gray-800'>{copy.timeline}</h3>
+        <p className='truncate text-[10px] text-gray-500'>{copy.gate}</p>
       </div>
       <div className='relative mt-3 h-24'>
         <div className='pointer-events-none absolute inset-x-0 top-[5px] h-px bg-gray-200' aria-hidden='true' />
@@ -425,7 +428,7 @@ function ChatWindow ({ side }: { side: Side }) {
               value={sidebarQuery}
               onChange={event => setSidebarQuery(event.target.value)}
               placeholder={copy.searchBtn}
-              className={`w-full rounded-lg bg-gray-200 px-2 py-2 text-sm text-gray-800 outline-none placeholder-gray-700 focus:border-gray-300 ${CHAT_RING}`}
+              className={`h-11 min-h-11 w-full rounded-lg bg-gray-200 px-2 text-sm text-gray-800 outline-none placeholder-gray-700 focus:border-gray-300 ${CHAT_RING}`}
             />
           </div>
           <nav className='min-h-0 flex-1 px-1 pb-2'>
@@ -510,7 +513,7 @@ function ChatWindow ({ side }: { side: Side }) {
                       value={searchQuery}
                       onChange={event => setSearchQuery(event.target.value)}
                       placeholder={copy.search}
-                      className={`w-full rounded-full border-0 bg-white px-3 py-1 text-xs text-gray-800 outline-none ring-2 ring-blue-500 placeholder:text-gray-500 ${CHAT_RING}`}
+                      className={`h-11 min-h-11 w-full rounded-full border-0 bg-white px-3 text-sm text-gray-800 outline-none ring-2 ring-blue-500 placeholder:text-gray-500 ${CHAT_RING}`}
                     />
                   </div>
                 )}
@@ -547,7 +550,7 @@ function ChatWindow ({ side }: { side: Side }) {
                       <button
                         type='button'
                         role='menuitem'
-                        className={`flex h-9 w-full items-center px-4 text-left align-middle text-sm leading-none hover:bg-gray-100 ${CHAT_RING}`}
+                        className={`flex min-h-11 w-full items-center px-4 text-left align-middle text-sm leading-none hover:bg-gray-100 ${CHAT_RING}`}
                         onClick={() => {
                           setMuted(value => !value)
                           setMenuOpen(false)
@@ -561,7 +564,7 @@ function ChatWindow ({ side }: { side: Side }) {
                       <button
                         type='button'
                         role='menuitem'
-                        className={`flex h-9 w-full items-center px-4 text-left align-middle text-sm leading-none hover:bg-gray-100 disabled:opacity-40 ${CHAT_RING}`}
+                        className={`flex min-h-11 w-full items-center px-4 text-left align-middle text-sm leading-none hover:bg-gray-100 disabled:opacity-40 ${CHAT_RING}`}
                         disabled={unread === 0}
                         onClick={() => {
                           sim.noteUser()
@@ -617,7 +620,7 @@ function ChatWindow ({ side }: { side: Side }) {
                             type='button'
                             aria-label={copy.reactWith(emoji)}
                             aria-pressed={message.reactions[side] === emoji}
-                            className={`inline-flex h-7 min-w-7 shrink-0 items-center justify-center rounded px-1 text-sm leading-none text-gray-800 transition duration-100 ease-linear hover:scale-110 hover:text-blue-500 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING} ${message.reactions[side] === emoji ? 'bg-blue-100' : ''}`}
+                            className={`${hit44} relative z-10 inline-flex h-7 min-w-7 shrink-0 items-center justify-center rounded px-1 text-sm leading-none text-gray-800 transition duration-100 ease-linear hover:scale-110 hover:text-blue-500 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING} ${message.reactions[side] === emoji ? 'bg-blue-100' : ''}`}
                             onClick={() => onReact(message.id, emoji)}
                           >
                             {emoji}
@@ -626,7 +629,7 @@ function ChatWindow ({ side }: { side: Side }) {
                         <button
                           type='button'
                           aria-label={copy.reply}
-                          className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded leading-none text-gray-800 transition duration-100 ease-linear hover:scale-110 hover:text-blue-500 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`}
+                          className={`${hit44} relative z-10 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded leading-none text-gray-800 transition duration-100 ease-linear hover:scale-110 hover:text-blue-500 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`}
                           onClick={() => beginReply(message.id)}
                         >
                           <Reply className='h-5 w-5' aria-hidden='true' />
@@ -638,7 +641,7 @@ function ChatWindow ({ side }: { side: Side }) {
                             if ((event.target as HTMLElement).closest('button')) return
                             setPinned(current => current === message.id ? null : message.id)
                           }}
-                          className={`w-fit max-w-[min(20rem,100%)] cursor-pointer items-center whitespace-normal break-words rounded-lg border border-transparent md:max-w-[min(36rem,100%)] ${isMe ? 'bg-gray-300' : 'bg-gray-100'} ${message.kind !== 'sticker' ? 'px-1 pb-1 ps-1 pt-1' : ''} ${flash === message.id ? 'ring-2 ring-blue-500' : ''}`}
+                          className={`w-fit min-h-11 max-w-[min(20rem,100%)] cursor-pointer items-center whitespace-normal break-words rounded-lg border border-transparent md:max-w-[min(36rem,100%)] ${isMe ? 'bg-gray-300' : 'bg-gray-100'} ${message.kind !== 'sticker' ? 'px-1 pb-1 ps-1 pt-1' : ''} ${flash === message.id ? 'ring-2 ring-blue-500' : ''}`}
                         >
                           {quoted && (
                             <button
@@ -647,7 +650,7 @@ function ChatWindow ({ side }: { side: Side }) {
                                 event.stopPropagation()
                                 jumpTo(quoted.id)
                               }}
-                              className={`mb-1 flex w-full cursor-pointer flex-col whitespace-normal break-words rounded-lg border-l-4 bg-gray-100 px-2 text-left ${accent} ${CHAT_RING}`}
+                              className={`mb-1 flex min-h-11 w-full cursor-pointer flex-col whitespace-normal break-words rounded-lg border-l-4 bg-gray-100 px-2 text-left ${accent} ${CHAT_RING}`}
                             >
                               <p className='my-1 text-xs font-medium'>{quotedMine ? copy.you : NAMES[quoted.sender]}</p>
                               <p className='line-clamp-2 max-w-md truncate pb-2 pr-6 text-xs font-normal text-gray-600'>{quoted.body}</p>
@@ -723,13 +726,13 @@ function ChatWindow ({ side }: { side: Side }) {
               </li>
             )}
           </ul>
-          <form ref={formRef} className='relative w-full max-w-full shrink-0 border-t border-gray-200 p-2' onSubmit={submit}>
+          <form ref={formRef} className='relative w-full min-w-0 max-w-full shrink-0 border-t border-gray-200 p-2' onSubmit={submit}>
             {staged && (
               <span className={`relative mx-5 mb-3 flex flex-col whitespace-normal break-words rounded-lg border-l-[5px] bg-gray-100 px-4 py-5 ${staged.sender === side ? 'border-blue-500 text-blue-500' : 'border-green-500 text-green-500'}`}>
                 <button
                   type='button'
                   aria-label={copy.cancelReply}
-                  className={`absolute right-0 top-0 m-2 inline-flex h-8 w-8 items-center justify-center rounded-md leading-none text-gray-500 duration-100 ease-in-out hover:scale-110 hover:text-gray-800 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`}
+                  className={`${hit44} absolute right-0 top-0 z-10 m-2 inline-flex h-8 w-8 items-center justify-center rounded-md leading-none text-gray-500 duration-100 ease-in-out hover:scale-110 hover:text-gray-800 motion-reduce:transition-none motion-reduce:hover:scale-100 ${CHAT_RING}`}
                   onClick={() => sim.setReply(side, null)}
                 >
                   <X className='h-5 w-5' aria-hidden='true' />
@@ -740,12 +743,12 @@ function ChatWindow ({ side }: { side: Side }) {
                 <p className='mt-1 line-clamp-2 max-w-full pe-8 text-xs text-gray-600'>{staged.body}</p>
               </span>
             )}
-            <div className='mb-2 flex max-w-full gap-2 overflow-x-auto px-1' aria-label={copy.quick}>
+            <div className='mb-2 flex h-11 min-w-0 max-w-full gap-2 overflow-x-auto overflow-y-hidden px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden' aria-label={copy.quick}>
               {copy.quickReplies[side].map(text => (
                 <button
                   key={text}
                   type='button'
-                  className={`inline-flex h-8 shrink-0 items-center justify-center rounded-full bg-gray-200 px-3 text-xs font-medium leading-none text-gray-800 transition hover:bg-gray-300 motion-reduce:transition-none ${CHAT_RING}`}
+                  className={`inline-flex h-11 min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full bg-gray-200 px-3 text-xs font-medium leading-none text-gray-800 transition hover:bg-gray-300 motion-reduce:transition-none ${CHAT_RING}`}
                   onClick={() => sendQuick(text)}
                 >
                   {text}
@@ -760,13 +763,13 @@ function ChatWindow ({ side }: { side: Side }) {
                 <p className='mb-1 px-0.5 text-[10px] font-medium text-gray-500'>
                   {picker === 'emoji' ? copy.emojis : copy.stickerNote}
                 </p>
-                <div className={picker === 'emoji' ? 'grid grid-cols-8 gap-0.5' : 'grid grid-cols-4 gap-1 sm:grid-cols-6'}>
+                <div className='grid gap-1' style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(2.75rem, 1fr))' }}>
                   {(picker === 'emoji' ? EMOJIS : STICKERS).map(emoji => (
                     <button
                       key={emoji}
                       type='button'
                       aria-label={emoji}
-                      className={`inline-flex items-center justify-center rounded-md leading-none hover:bg-gray-100 ${CHAT_RING} ${picker === 'emoji' ? 'h-9 text-lg' : 'h-12 text-2xl'}`}
+                      className={`inline-flex w-full min-w-11 items-center justify-center rounded-md leading-none hover:bg-gray-100 ${CHAT_RING} ${picker === 'emoji' ? 'h-11 min-h-11 text-lg' : 'h-12 min-h-11 text-2xl'}`}
                       onMouseDown={event => event.preventDefault()}
                       onClick={() => {
                         if (picker === 'emoji') {
@@ -783,7 +786,7 @@ function ChatWindow ({ side }: { side: Side }) {
                 </div>
               </div>
             )}
-            <aside className='flex items-center space-x-2 text-gray-600 sm:space-x-3'>
+            <aside className='flex min-w-0 items-center gap-1 text-gray-600 sm:gap-2'>
               <button
                 type='button'
                 name='emoji'
@@ -823,7 +826,7 @@ function ChatWindow ({ side }: { side: Side }) {
                 }}
                 placeholder={copy.placeholder}
                 autoComplete='off'
-                className={`mx-1 h-10 min-w-0 flex-1 rounded-full border-0 bg-transparent px-3 py-2 text-sm text-gray-800 placeholder:text-gray-500 sm:mx-3 ${CHAT_RING}`}
+                className={`h-11 min-h-11 min-w-0 flex-1 rounded-full border-0 bg-transparent px-3 py-2 text-sm text-gray-800 placeholder:text-gray-500 ${CHAT_RING}`}
               />
               <button
                 type='submit'
@@ -1179,13 +1182,13 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
     <SimContext.Provider value={apiValue}>
       <section
         ref={rootRef}
-        className='w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-gray-200 bg-[#fffffe] text-gray-800 shadow-sm'
+        className='h-[calc(92.125rem+4px)] w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-gray-200 bg-[#fffffe] text-gray-800 shadow-sm lg:h-[calc(59.125rem+4px)]'
       >
         <div className='flex h-14 items-center justify-between gap-2 px-3 pt-3'>
           <p className='text-[11px] font-medium uppercase tracking-wide text-blue-500'>{copy.sampleBadge}</p>
           <button
             type='button'
-            className={`inline-flex h-11 w-28 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-blue-500/10 sm:h-8 px-3 text-xs font-medium leading-none text-blue-500 transition-colors hover:bg-blue-500/15 motion-reduce:transition-none ${focusRing}`}
+            className={`inline-flex h-11 min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg bg-blue-500/10 px-3 text-xs font-medium leading-none text-blue-500 transition-colors hover:bg-blue-500/15 motion-reduce:transition-none ${focusRing}`}
             aria-pressed={replaying}
             onClick={() => {
               interacted.current = true
@@ -1202,7 +1205,7 @@ export default function ChatifyLiveSim ({ lang }: { lang: Lang }) {
         </div>
         <div className='px-3 pb-3 pt-3'>
           <Timeline />
-          <p className='mt-2 px-0.5 text-[11px] leading-relaxed text-gray-500'>{copy.caption}</p>
+          <p className='mt-2 h-[3.375rem] overflow-hidden px-0.5 text-[11px] leading-relaxed text-gray-500'>{copy.caption}</p>
         </div>
       </section>
     </SimContext.Provider>

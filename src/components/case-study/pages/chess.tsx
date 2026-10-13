@@ -4,6 +4,7 @@ import { StageCaption } from '../kit/blocks'
 import AlphaBetaScene from '../chess/alphabeta-scene'
 import EvalScene from '../chess/eval-scene'
 import { backLink, type Lang } from './shared'
+import MoreCaseStudies from '../more-case-studies'
 
 const ChessLab = dynamic(() => import('../chess/chess-lab'), {
 	loading: () => <div className='h-[720px] animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none lg:h-[560px]' aria-hidden />,
@@ -162,6 +163,7 @@ export default function ChessCaseStudy({ lang }: { lang: Lang }) {
 
 			<Decisions title={t.decisionsTitle} items={[...t.decisions]} />
 			<Outro title={t.outro.title} note={t.outro.note} links={[...t.links]} />
+			<MoreCaseStudies lang={lang} current='chess-ai' />
 		</Shell>
 	)
 }

@@ -5,6 +5,7 @@ import { PageTiles } from '../tracky/page-tiles'
 import { SentenceScene } from '../tracky/sentence-scene'
 import { StackScene } from '../tracky/stack-scene'
 import { backLink, type Lang } from './shared'
+import MoreCaseStudies from '../more-case-studies'
 import '../tracky/scenes.css'
 
 const TrackyAppSim = dynamic(() => import('../tracky/tracky-app-sim'), {
@@ -180,6 +181,7 @@ export default function TrackyCaseStudy({ lang }: { lang: Lang }) {
 
 			<Decisions title={t.decisionsTitle} items={[...t.decisions]} />
 			<Outro title={t.outro.title} note={t.outro.note} links={[...t.links]} />
+			<MoreCaseStudies lang={lang} current='tracky' />
 		</Shell>
 	)
 }

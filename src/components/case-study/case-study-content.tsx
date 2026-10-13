@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import { FiArrowLeft, FiExternalLink } from 'react-icons/fi'
 import type { Locale } from '@/i18n-config'
 import type { CaseStudyContent } from '@/types/case-study-types'
+import MoreCaseStudies from './more-case-studies'
 
 function InteractiveFallback () {
   return (
@@ -247,6 +248,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
             </ul>
           ) : null}
         </section>
+        <MoreCaseStudies lang={lang} current='viollet' />
       </article>
     </main>
   )

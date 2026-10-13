@@ -5,6 +5,7 @@ import { ArchitectureColumns } from '../chatify/architecture-columns'
 import { MessageJourneyScene } from '../chatify/message-journey-scene'
 import { FeaturesScene } from '../chatify/features-scene'
 import { backLink, type Lang } from './shared'
+import MoreCaseStudies from '../more-case-studies'
 
 const ChatifyLiveSim = dynamic(() => import('../chatify/chatify-live-sim'), {
 	// Same box as the mounted sim (two stacked 32rem windows below lg, one row from lg).
@@ -172,6 +173,7 @@ export default function ChatifyCaseStudy({ lang }: { lang: Lang }) {
 
 			<Decisions title={t.decisionsTitle} items={[...t.decisions]} />
 			<Outro title={t.outro.title} note={t.outro.note} links={[...t.links]} />
+			<MoreCaseStudies lang={lang} current='chatify' />
 		</Shell>
 	)
 }

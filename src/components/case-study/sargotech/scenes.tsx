@@ -141,8 +141,8 @@ const ROAD: Pt[] = [[268, 258], [330, 232], [392, 196], [410, 140], [432, 92]]
 const LAND = 'M300 0 L480 0 L480 300 L228 300 C 248 262, 290 244, 300 210 C 310 178, 288 150, 310 118 C 330 86, 300 40, 300 0 Z'
 
 const RESP_COPY = {
-	en: { kicker: 'Response', title: 'Four steps, one map', aria: 'Stylized coast: observation data finds a sargassum patch offshore, a barrier is placed in front of the beach, a boat collects the patch at sea and a truck takes the load inland to a disposal site.' },
-	es: { kicker: 'Respuesta', title: 'Cuatro pasos, un mapa', aria: 'Costa estilizada: los datos de observación encuentran una mancha de sargazo mar adentro, se coloca una barrera frente a la playa, un bote recoge la mancha en el mar y un camión lleva la carga tierra adentro a un sitio de disposición.' },
+	en: { kicker: 'Response', title: 'Four steps, one map', aria: 'Stylized coast: a sargassum patch sits offshore, a barrier is placed in front of the beach, a boat collects the patch at sea and a truck takes the load inland to a disposal site.' },
+	es: { kicker: 'Respuesta', title: 'Cuatro pasos, un mapa', aria: 'Costa estilizada: una mancha de sargazo está mar adentro, se coloca una barrera frente a la playa, un bote recoge la mancha en el mar y un camión lleva la carga tierra adentro a un sitio de disposición.' },
 } as const
 
 export function ResponseScene({ lang, steps }: { lang: Lang; steps: readonly { title: string; body: string }[] }) {

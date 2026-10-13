@@ -296,7 +296,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
     slug: 'sargotech',
     meta: {
       title: 'SargoTech',
-      description: 'A project by a team of 4 to anticipate sargassum on Caribbean beaches with observation data and local operations. I am the CTO and lead developer.',
+      description: 'A project by a team of 4 to anticipate sargassum on Caribbean beaches with a coastal traffic light and local operations. I am the CTO and lead developer.',
       role: 'CTO and Lead Developer, team of 4 co-founders',
       year: '2026',
       readTime: '4 min read'
@@ -311,7 +311,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
         title: '1. Context',
         paragraphs: [
           'When you see sargassum on the sand, the impact has already arrived. The response has to start earlier, out at sea, with enough notice to contain it, collect it and dispose of it properly.',
-          'The vision is to turn observation data, local logistics and environmental traceability into cleaner beaches and more resilient tourism.'
+          'The vision is to turn local logistics and environmental traceability into cleaner beaches and more resilient tourism.'
         ]
       },
       {
@@ -328,7 +328,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
             { id: 'amber', label: 'Yellow', tone: 'amber', title: 'Sargassum nearby', body: 'Sargassum is approaching. A good moment to plan and verify in the field.' },
             { id: 'green', label: 'Green', tone: 'green', title: 'No nearby alert', body: 'No sargassum alert close to this beach right now.' }
           ],
-          sampleNote: 'Labels from the public map on sargotech.com. Live counts change with the data, so I do not quote them here.'
+          sampleNote: 'Labels from the public map on sargotech.com. Live counts change, so I do not quote them here.'
         }
       },
       {
@@ -340,7 +340,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
           description: 'Step through the flow described on the site.',
           ...nav,
           steps: [
-            { title: 'Predict', body: 'Estimate the trajectory and the arrival window from observation data and sea conditions.' },
+            { title: 'Predict', body: 'Estimate the trajectory, the zone and the arrival window.' },
             { title: 'Contain', body: 'Anti sargassum barriers, with inspections to check the containment.' },
             { title: 'Collect', body: 'Coordinate collection on the beach, with validation in the field.' },
             { title: 'Manage disposal', body: 'Coordinated transport to the final destination, with traceability.' }

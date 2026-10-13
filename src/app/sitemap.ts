@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { i18n } from '@/i18n-config'
 import { allPosts } from '@/lib/posts'
+import { CASE_STUDY_LAST_MODIFIED, CASE_STUDY_SITEMAP_PATHS } from '@/lib/case-study-seo'
 import { localizedUrl } from '@/lib/site-metadata'
 import { allTags } from '@/utils/data'
 
@@ -14,9 +15,11 @@ function localizedAlternates (path: string) {
 
 export default function sitemap (): MetadataRoute.Sitemap {
   const staticRoutes = ['', '/projects', '/projects/viollet', '/projects/tracky', '/projects/sargotech', '/projects/chatify', '/projects/chess-ai', '/blog', '/blog/tags']
+  const datedPaths = new Set<string>(CASE_STUDY_SITEMAP_PATHS)
   const staticEntries = i18n.locales.flatMap(lang =>
     staticRoutes.map(path => ({
       url: localizedUrl(lang, path),
+      ...(datedPaths.has(path) ? { lastModified: CASE_STUDY_LAST_MODIFIED } : {}),
       alternates: {
         languages: localizedAlternates(path)
       }

@@ -222,7 +222,7 @@ export default function ChessLab({ lang }: { lang: Lang }) {
   <dt>{t.nodes}</dt><dd className='font-mono tabular-nums'>{entry?.stats.nodes.toLocaleString(lang) ?? '…'}</dd>
   <dt>{t.pruned}</dt><dd className='font-mono tabular-nums'>{entry?.stats.pruned.toLocaleString(lang) ?? '…'}</dd>
  </dl>
- return <SceneFrame timeline={timeline} kicker='minimax.py' title={t.title} caption={t.note} flush>
+ return <SceneFrame timeline={timeline} kicker='minimax.py' title={t.title} caption={t.note} flush titleLevel={2}>
   <div className='grid min-w-0 gap-4 px-0 py-3 sm:py-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:px-4 lg:py-4'>
    <div className='min-w-0'>
     <div role='grid' aria-label={t.board} onKeyDown={onKey} className='mx-auto grid aspect-square w-full max-w-[480px] grid-cols-8 grid-rows-8 overflow-hidden rounded-none md:rounded-lg'>

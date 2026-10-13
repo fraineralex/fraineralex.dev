@@ -3,6 +3,7 @@
 import { Check } from 'lucide-react'
 import { useId } from 'react'
 import { SCENE_LABELS, SceneFrame, easeOut, span, useSceneTimeline } from '../kit/scene'
+import { bankIcon } from './banks'
 import { L, LC } from './light'
 import './alert-lanes-scene.css'
 
@@ -15,10 +16,10 @@ const DURATION = SWIPE_MS + TRAVEL_MS
 const ROW = '3rem'
 
 const BANKS = [
-  { id: 'scotiabank', logo: '/case-studies/viollet/banks/scotiabank_do.avif', delay: 62 },
-  { id: 'bhd', logo: '/case-studies/viollet/banks/bhd.svg', delay: 36 },
-  { id: 'banreservas', logo: '/case-studies/viollet/banks/banreservas.svg', delay: 16 },
-  { id: 'popular', logo: '/case-studies/viollet/banks/popular.svg', delay: 4 }
+  { id: 'scotiabank', delay: 62 },
+  { id: 'bhd', delay: 36 },
+  { id: 'banreservas', delay: 16 },
+  { id: 'popular', delay: 4 }
 ] as const
 
 type Id = (typeof BANKS)[number]['id']
@@ -307,7 +308,7 @@ function LaneDiagram ({
             <clipPath id={`alert-logo-${uid}-${bank.id}`}>
               <circle cx={spec.end.x} cy={spec.end.y} r={geom.badgeR - 2} />
             </clipPath>
-            <image href={bank.logo} x={spec.end.x - geom.badgeR * 0.58} y={spec.end.y - geom.badgeR * 0.58} width={geom.badgeR * 1.16} height={geom.badgeR * 1.16} preserveAspectRatio='xMidYMid meet' clipPath={`url(#alert-logo-${uid}-${bank.id})`} />
+            <image href={bankIcon(bank.id)} x={spec.end.x - geom.badgeR * 0.58} y={spec.end.y - geom.badgeR * 0.58} width={geom.badgeR * 1.16} height={geom.badgeR * 1.16} preserveAspectRatio='xMidYMid meet' clipPath={`url(#alert-logo-${uid}-${bank.id})`} />
           </g>
         )
       })}
@@ -361,7 +362,7 @@ function Feed ({ copy, frame }: { copy: Copy; frame: Frame }) {
               style={{ transform: `translateY(calc(${ROW} * ${slot}))`, zIndex: entry?.arrived ? 2 : 1 }}
             >
               <span className='inline-block w-4 shrink-0 text-center font-mono text-xs tabular-nums'>{entry?.order ? entry.order : '·'}</span>
-              <BankBadge logo={bank.logo} arrived={Boolean(entry?.arrived)} />
+              <BankBadge logo={bankIcon(bank.id)} arrived={Boolean(entry?.arrived)} />
               <span className='min-w-0 flex-1 break-words text-xs leading-4 sm:text-sm sm:leading-5'>{copy.banks[bank.id]}</span>
               <span className='grid w-14 shrink-0 whitespace-nowrap text-right font-mono text-[10px] leading-none tabular-nums text-[oklch(0.45_0_0)] sm:w-[3.75rem] sm:text-[11px]'>
                 <span className={entry?.arrived ? '' : 'invisible'}>{minute} min</span>

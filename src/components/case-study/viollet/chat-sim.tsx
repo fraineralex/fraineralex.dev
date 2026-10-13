@@ -3,6 +3,7 @@
 import { Bot, User, Wrench } from 'lucide-react'
 import type { ViolletChatAnswer, ViolletChatCopy } from '@/types/case-study-types'
 import { linear, span, typed, useSceneTimeline } from '../kit/scene'
+import { bankColor, bankIcon } from './banks'
 import { L, LC } from './light'
 import { AppSurface, InteractivePanel } from './ui'
 
@@ -25,8 +26,12 @@ function ResultCard ({ answer, copy }: { answer: ViolletChatAnswer; copy: Violle
       {bankContext && (
         <div className={`mb-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b ${L.border} pb-3`}>
           {/* Brands illustrate the ledger context, without inventing a bank breakdown. */}
-          <img src='/case-studies/viollet/banks/qik.svg' alt='Qik' className='h-6 w-auto max-w-[5.5rem] object-contain' />
-          <img src='/case-studies/viollet/banks/banreservas.svg' alt='Banreservas' className='h-6 w-auto max-w-[7.5rem] object-contain' />
+          <span className='inline-flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-white p-0.5' style={{ borderColor: bankColor('qik') }}>
+            <img src={bankIcon('qik')} alt='Qik' width={24} height={24} className='size-full object-contain' />
+          </span>
+          <span className='inline-flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-white p-0.5' style={{ borderColor: bankColor('banreservas') }}>
+            <img src={bankIcon('banreservas')} alt='Banreservas' width={24} height={24} className='size-full object-contain' />
+          </span>
         </div>
       )}
       <div className='space-y-3'>

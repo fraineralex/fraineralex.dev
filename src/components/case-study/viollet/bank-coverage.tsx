@@ -3,26 +3,13 @@
 import { ArrowLeftRight, Check, CreditCard, Landmark, Mail, Search } from 'lucide-react'
 import type { ViolletBanksCopy } from '@/types/case-study-types'
 import { span, typed, useSceneTimeline } from '../kit/scene'
+import { bankColor, bankIcon } from './banks'
 import { L, LC } from './light'
 import { INSTITUTIONS } from './sample-ledger'
 import { AppSurface, InteractivePanel } from './ui'
 
 type Filter = 'all' | 'confirmed' | 'listed'
 type Institution = (typeof INSTITUTIONS)[number]
-
-const BANK_BRANDS = {
-  banreservas: { file: 'banreservas.svg', color: '#264E72' },
-  popular: { file: 'popular.svg', color: '#001638' },
-  bhd: { file: 'bhd.svg', color: '#50BA3F' },
-  lafise: { file: 'lafise.svg', color: '#00583C' },
-  qik: { file: 'qik.svg', color: '#0082CD' },
-  santa_cruz: { file: 'santa_cruz.avif', color: '#0961AD' },
-  apap: { file: 'apap.svg', color: '#205BA8' },
-  scotiabank: { file: 'scotiabank_do.avif', color: '#EC0712' },
-  promerica: { file: 'promerica.svg', color: '#0961AD' },
-  caribe: { file: 'caribe.svg', color: '#1B765A' },
-  banesco: { file: 'banesco_do.svg', color: '#003B71' }
-} satisfies Record<Institution['id'], { file: string; color: string }>
 
 export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, lang: 'es' | 'en' }) {
   void lang
@@ -85,36 +72,33 @@ export default function BankCoverage ({ copy, lang }: { copy: ViolletBanksCopy, 
           </div>
 
           <ul className='grid min-w-0 grid-cols-1 gap-2 lg:grid-cols-2'>
-            {INSTITUTIONS.map(item => {
-              const brand = BANK_BRANDS[item.id]
-              return (
-                <li
-                  key={item.id}
-                  className={`flex min-w-0 items-center gap-3 p-3 ${L.card} transition-opacity duration-500 motion-reduce:transition-none`}
-                  style={{ opacity: matches(item) ? 1 : 0.2 }}
+            {INSTITUTIONS.map(item => (
+              <li
+                key={item.id}
+                className={`flex min-w-0 items-center gap-3 p-3 ${L.card} transition-opacity duration-500 motion-reduce:transition-none`}
+                style={{ opacity: matches(item) ? 1 : 0.2 }}
+              >
+                <div
+                  className={`flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border ${L.border} bg-white p-2`}
+                  style={{ borderBottom: `3px solid ${bankColor(item.id)}` }}
                 >
-                  <div
-                    className={`flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border ${L.border} bg-white p-2`}
-                    style={{ borderBottom: `3px solid ${brand.color}` }}
-                  >
-                    {/* Official bank artwork retains its own proportions. */}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={`/case-studies/viollet/banks/${brand.file}`} alt={item.name} className='h-full w-full object-contain' />
-                  </div>
-                  <div className='min-w-0 flex-1 space-y-1.5'>
-                    <p className={`truncate text-sm font-semibold ${L.fg}`}>{item.name}</p>
-                    <p className={`flex min-w-0 items-center gap-1 text-[10px] ${L.muted}`}>
-                      <Mail className='size-3 shrink-0' aria-hidden='true' />
-                      <span className='truncate'>{item.sender}</span>
-                    </p>
-                    <span className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${item.confirmed ? L.success : L.neutralBadge}`}>
-                      {item.confirmed && <Check className='size-3' aria-hidden='true' />}
-                      {item.confirmed ? copy.confirmed : copy.listed}
-                    </span>
-                  </div>
-                </li>
-              )
-            })}
+                  {/* Official bank artwork retains its own proportions. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={bankIcon(item.id)} alt={item.name} className='h-full w-full object-contain' />
+                </div>
+                <div className='min-w-0 flex-1 space-y-1.5'>
+                  <p className={`truncate text-sm font-semibold ${L.fg}`}>{item.name}</p>
+                  <p className={`flex min-w-0 items-center gap-1 text-[10px] ${L.muted}`}>
+                    <Mail className='size-3 shrink-0' aria-hidden='true' />
+                    <span className='truncate'>{item.sender}</span>
+                  </p>
+                  <span className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${item.confirmed ? L.success : L.neutralBadge}`}>
+                    {item.confirmed && <Check className='size-3' aria-hidden='true' />}
+                    {item.confirmed ? copy.confirmed : copy.listed}
+                  </span>
+                </div>
+              </li>
+            ))}
           </ul>
 
           <div className={`space-y-3 rounded-lg border ${L.border} ${L.primaryTint} p-3`}>

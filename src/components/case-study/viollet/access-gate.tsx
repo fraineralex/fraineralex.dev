@@ -3,24 +3,12 @@
 import { LockKeyhole, Shield, X } from 'lucide-react'
 import type { ViolletAccessCopy } from '@/types/case-study-types'
 import { linear, span, useSceneTimeline } from '../kit/scene'
+import { bankColor, bankIcon } from './banks'
 import { L, LC, badgeBase } from './light'
 import { INSTITUTIONS } from './sample-ledger'
 import { AppSurface, InteractivePanel } from './ui'
 
 const CHOICES = INSTITUTIONS.slice(0, 6)
-const BANK_MARKS = {
-  banreservas: { file: 'banreservas.svg', color: '#264E72' },
-  popular: { file: 'popular.svg', color: '#001638' },
-  bhd: { file: 'bhd.svg', color: '#50BA3F' },
-  lafise: { file: 'lafise.svg', color: '#00583C' },
-  qik: { file: 'qik.svg', color: '#0082CD' },
-  santa_cruz: { file: 'santa_cruz.avif', color: '#0961AD' },
-  apap: { file: 'apap.svg', color: '#205BA8' },
-  scotiabank: { file: 'scotiabank_do.avif', color: '#EC0712' },
-  promerica: { file: 'promerica.svg', color: '#0961AD' },
-  caribe: { file: 'caribe.svg', color: '#1B765A' },
-  banesco: { file: 'banesco_do.svg', color: '#003B71' }
-} as const
 
 const BANK_START = 500
 const BANK_STEP = 650
@@ -66,12 +54,11 @@ export default function AccessGate ({ copy, lang }: { copy: ViolletAccessCopy, l
               <ul className='space-y-2'>
                 {CHOICES.map((item, index) => {
                   const progress = span(elapsed, BANK_START + index * BANK_STEP, BANK_START + index * BANK_STEP + 400, linear)
-                  const mark = BANK_MARKS[item.id]
                   return (
                     <li key={item.id} className={`relative flex h-[72px] min-w-0 items-center gap-2 rounded-xl border bg-white px-2 sm:gap-3 sm:px-3 ${progress === 1 ? L.primaryBorder : L.border}`}>
                       <span aria-hidden='true' className='absolute -left-[21px] size-1.5 rounded-full' style={{ background: progress > 0 ? LC.primary : LC.wire }} />
-                      <span className='flex h-10 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md border border-slate-100 border-b-2 bg-white p-1.5' style={{ borderBottomColor: mark.color }}>
-                        <img src={`/case-studies/viollet/banks/${mark.file}`} alt={item.name} width={48} height={40} className='h-full w-full object-contain' />
+                      <span className='flex h-10 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md border border-slate-100 border-b-2 bg-white p-1.5' style={{ borderBottomColor: bankColor(item.id) }}>
+                        <img src={bankIcon(item.id)} alt={item.name} width={48} height={40} className='h-full w-full object-contain' />
                       </span>
                       <div className='min-w-0 flex-1'>
                         <p className={`truncate text-xs font-semibold sm:text-sm ${L.fg}`}>{item.name}</p>

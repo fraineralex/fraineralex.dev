@@ -3,6 +3,7 @@
 import { CheckCircle2, Clock } from 'lucide-react'
 import type { ViolletSyncCopy } from '@/types/case-study-types'
 import { linear, span, useSceneTimeline } from '../kit/scene'
+import { bankColor, bankIcon } from './banks'
 import { L, LC } from './light'
 import { AppSurface, InteractivePanel } from './ui'
 
@@ -30,7 +31,7 @@ function Envelope ({ x, y, opacity = 1 }: { x: number, y: number, opacity?: numb
       <rect x={-23} y={-16} width={46} height={32} rx={5} fill={LC.card} stroke={LC.primary} strokeWidth={1.8} />
       <path d='M -22 -14 L 0 2 L 22 -14' fill='none' stroke={LC.primary} strokeWidth={1.5} />
       <circle cx={15} cy={12} r={11} fill={LC.card} stroke={LC.border} />
-      <image href='/case-studies/viollet/banks/banreservas.svg' x={7} y={4} width={16} height={16} />
+      <image href={bankIcon('banreservas')} x={7} y={4} width={16} height={16} preserveAspectRatio='xMidYMid meet' />
     </g>
   )
 }
@@ -111,7 +112,10 @@ export default function GmailSync ({ copy, lang }: { copy: ViolletSyncCopy, lang
           <p className={`flex items-center gap-2 text-xs ${L.muted} ${watching ? '' : 'invisible'}`}><Clock className='size-3.5' aria-hidden='true' />{copy.states.watching}</p>
           <div className='grid text-sm' aria-live='polite'>
             <div className={`col-start-1 row-start-1 flex items-center gap-3 ${ingested ? '' : 'invisible'}`}>
-              <svg viewBox='0 0 32 32' className='size-8 shrink-0' aria-hidden='true'><image href='/case-studies/viollet/banks/banreservas.svg' width={32} height={32} /></svg>
+              <svg viewBox='0 0 32 32' className='size-8 shrink-0' aria-hidden='true'>
+                <circle cx={16} cy={16} r={15} fill='#ffffff' stroke={bankColor('banreservas')} strokeWidth={1.25} />
+                <image href={bankIcon('banreservas')} x={5} y={5} width={22} height={22} preserveAspectRatio='xMidYMid meet' />
+              </svg>
               <span className='min-w-0 flex-1'>Banreservas <span className={L.muted}>· gmailMessageId</span></span>
               <span className={`shrink-0 font-mono ${L.primaryText}`}>01</span>
             </div>

@@ -14,6 +14,7 @@ import {
   typed,
   useSceneTimeline
 } from '../kit/scene'
+import { bankIcon } from './banks'
 import { formatDop } from './format'
 import { L, LC } from './light'
 import { CATEGORIES, METRICS, TRANSACTIONS } from './sample-ledger'
@@ -85,16 +86,6 @@ const COPY = {
     ]
   }
 } as const
-
-const BANK_LOGOS: Record<string, string> = {
-  Banreservas: 'banreservas.svg',
-  'Banco BHD': 'bhd.svg',
-  'Banco Popular': 'popular.svg',
-  Qik: 'qik.svg',
-  Scotiabank: 'scotiabank_do.avif',
-  'Santa Cruz': 'santa_cruz.avif',
-  'Banco Santa Cruz': 'santa_cruz.avif'
-}
 
 type Lang = 'en' | 'es'
 
@@ -252,6 +243,7 @@ export default function EmailLedgerScene ({ lang }: { lang: Lang }) {
               <ul className='relative overflow-hidden' style={{ height: ROW * SLOTS }} aria-label={copy.inbox}>
                 {copy.mail.map((item, index) => {
                   const fresh = index === 0
+                  const icon = bankIcon(item.from)
                   const y = (index - 1 + frame.arrive) * ROW
                   return (
                     <li
@@ -267,8 +259,8 @@ export default function EmailLedgerScene ({ lang }: { lang: Lang }) {
                         <span
                           className={`flex size-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold leading-none ${fresh ? 'bg-[oklch(0.539_0.254_282/0.08)] text-[oklch(0.539_0.254_282)]' : 'bg-[oklch(0.965_0.01_282)] text-[oklch(0.45_0_0)]'}`}
                         >
-                          {BANK_LOGOS[item.from] ? (
-                            <img src={`/case-studies/viollet/banks/${BANK_LOGOS[item.from]}`} alt={item.from} className='size-full rounded-full bg-white p-0.5 object-contain' />
+                          {icon ? (
+                            <img src={icon} alt={item.from} className='size-full rounded-full bg-white p-0.5 object-contain' />
                           ) : (
                             <User className='size-3.5' aria-hidden='true' />
                           )}

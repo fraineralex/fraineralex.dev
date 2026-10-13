@@ -15,6 +15,7 @@ import type { ReactNode } from 'react'
 import type { Locale } from '@/i18n-config'
 import type { ViolletControlsCopy, ViolletParseCopy } from '@/types/case-study-types'
 import { useSceneTimeline } from '../kit/scene'
+import { bankIcon } from './banks'
 import { formatDop } from './format'
 import { L, LC, badgeBase } from './light'
 import { AppSurface, InteractivePanel } from './ui'
@@ -79,7 +80,7 @@ export default function ParsePipeline ({
               <div className={`flex min-w-0 items-center gap-3 border-b ${L.border} p-4 sm:p-5`}>
                 <span className={`flex h-11 w-16 shrink-0 items-center justify-center rounded-lg border ${L.border} bg-white p-2`}>
                   <img
-                    src='/case-studies/viollet/banks/banreservas.svg'
+                    src={bankIcon('banreservas')}
                     alt='Banreservas'
                     width={48}
                     height={28}

@@ -106,26 +106,27 @@ export const LinkedinCard = ({ dictionary, navigation }: LinkedinCardProps) => {
       <div className='flex flex-wrap items-center gap-2 sm:mt-3 sm:gap-2'>
         <Link
           type='button'
-          className='rounded-3xl border-1 border-teal-300 bg-teal-300 px-2.5 py-1 text-[11px] font-medium text-black hover:bg-teal-600 focus-visible:bg-teal-600 sm:px-3.5 sm:text-xs'
+          className='inline-flex h-7 items-center justify-center gap-1.5 whitespace-nowrap rounded-3xl border-2 px-2.5 text-[11px] font-medium leading-none sm:h-8 sm:text-xs border-teal-300 bg-teal-300 text-black hover:border-teal-600 hover:bg-teal-600 focus-visible:bg-teal-600 sm:px-3.5'
           href={connectButton.url}
           target='_blank'
         >
-          <ConnectIcon className='inline' /> {connectButton.label}
+          <ConnectIcon className='shrink-0' />
+          {connectButton.label}
         </Link>
         <Link
-          className='rounded-3xl border-2 border-teal-300 px-2.5 py-1 text-[11px] font-medium text-teal-300 hover:bg-teal-50/10 focus-visible:bg-teal-50/10 sm:px-3.5 sm:text-xs'
-          aria-label='View Full Résumé'
+          className='inline-flex h-7 items-center justify-center gap-1.5 whitespace-nowrap rounded-3xl border-2 px-2.5 text-[11px] font-medium leading-none sm:h-8 sm:text-xs border-teal-300 text-teal-300 hover:bg-teal-50/10 focus-visible:bg-teal-50/10 sm:px-3.5'
           href={messageButton.url}
         >
-          <EmailIcon className='inline w-3.5 sm:w-4' /> {messageButton.label}
+          <EmailIcon className='w-3.5 shrink-0 sm:w-4' />
+          {messageButton.label}
         </Link>
         <Link
-          className='rounded-3xl border-2 border-shark-200 px-2.5 py-1 text-[11px] font-medium text-shark-200 hover:border-shark-100 hover:bg-shark-50/10 hover:text-shark-100 focus-visible:bg-shark-50/10 sm:px-4 sm:text-xs'
+          className='inline-flex h-7 items-center justify-center gap-1.5 whitespace-nowrap rounded-3xl border-2 px-2.5 text-[11px] font-medium leading-none sm:h-8 sm:text-xs border-shark-200 text-shark-200 hover:border-shark-100 hover:bg-shark-50/10 hover:text-shark-100 focus-visible:bg-shark-50/10 sm:px-4'
           aria-label='View Full Résumé'
           href={resumeButton.url}
           target='_blank'
         >
-          <BsDownload className='me-1 inline' />
+          <BsDownload className='shrink-0' aria-hidden />
           {resumeButton.label}
         </Link>
       </div>

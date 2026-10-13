@@ -1,0 +1,31 @@
+@keyframes alert-lanes-march {
+  to {
+    stroke-dashoffset: -24px;
+  }
+}
+
+.alert-lanes-dash {
+  animation: alert-lanes-march 0.9s linear infinite;
+}
+
+@keyframes alert-lanes-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.alert-lanes-pulse {
+  animation: alert-lanes-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert-lanes-dash,
+  .alert-lanes-pulse {
+    animation: none;
+  }
+}

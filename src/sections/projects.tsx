@@ -30,6 +30,7 @@ export default function Projects ({ dictionary, refProjects }: ProjectsProps) {
                 githubRepositoryUrl={card.githubRepositoryUrl}
                 starsOnGithub={card.starsOnGithub}
                 imageSrc={card.imageSrc}
+                imageAlt={card.imageAlt}
                 caseStudyUrl={card.caseStudyUrl}
                 caseStudyLabel={caseStudyLabel}
                 liveDemoLabel={liveDemoLabel}

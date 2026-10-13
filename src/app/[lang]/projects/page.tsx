@@ -135,6 +135,16 @@ export async function generateMetadata ({ params }: Props) {
   return lang === 'es' ? spanishMetadata : englishMetadata
 }
 
+const caseStudyOrder = ['viollet', 'tracky', 'sargotech', 'chatify', 'chess-ai']
+
+function orderProjects<T extends { caseStudyUrl?: string | null }> (projects: T[]): T[] {
+  const rank = (p: T) => {
+    const i = caseStudyOrder.findIndex(slug => p.caseStudyUrl?.endsWith(`/projects/${slug}`))
+    return i === -1 ? caseStudyOrder.length : i
+  }
+  return projects.map((p, i) => ({ p, i })).sort((a, b) => rank(a.p) - rank(b.p) || a.i - b.i).map(x => x.p)
+}
+
 interface Props {
   params: Promise<{ lang?: Locale }>
 }
@@ -161,7 +171,7 @@ export default async function Projects ({ params }: Props) {
           </h1>
         </header>
         <AllProjectsContent
-          projects={allProjects.projects}
+          projects={orderProjects(allProjects.projects)}
           tableHeaders={allProjects.tableHeaders}
         />
       </section>

@@ -12,3 +12,8 @@ body {
   color: rgb(var(--foreground-rgb));
   background-color: #0f172a;
 }
+
+/* Case study kit: dashed flow rails (Viollet blog essay-flow style). */
+@keyframes vk-flow-dash { to { stroke-dashoffset: -18; } }
+.vk-flow-dash { animation: vk-flow-dash 1.6s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .vk-flow-dash { animation: none; } }

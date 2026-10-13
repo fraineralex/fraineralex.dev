@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { MouseShadow } from '@/components/layout/mouse-shadow'
-import { Locale, i18n } from '@/i18n-config'
+import { i18n } from '@/i18n-config'
 import Navigation from '@/components/blog/nav/nav'
 import LocalFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
@@ -31,12 +31,12 @@ const inter = Inter({
 })
 
 const calSans = LocalFont({
-  src: '../../public/fonts/CalSans-SemiBold.ttf',
+  src: '../../../public/fonts/CalSans-SemiBold.ttf',
   variable: '--font-calsans'
 })
 
 const londrinaSolid = LocalFont({
-  src: '../../public/fonts/LondrinaSolid-Regular.ttf',
+  src: '../../../public/fonts/LondrinaSolid-Regular.ttf',
   variable: '--font-londrina'
 })
 
@@ -102,12 +102,12 @@ export const metadata: Metadata = {
 
 interface Props {
   children: React.ReactNode
-  params: Promise<{ lang?: Locale }>
+  params: Promise<{ lang: string }>
 }
 
 export default async function RootLayout ({ children, params }: Props) {
   const { lang: paramLang } = await params
-  const lang = paramLang || i18n.defaultLocale
+  const lang = paramLang === 'es' ? 'es' : i18n.defaultLocale
   return (
     <html
       className={`${[

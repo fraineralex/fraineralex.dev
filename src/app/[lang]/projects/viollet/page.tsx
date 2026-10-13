@@ -34,9 +34,9 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
       siteName: 'fraineralex.dev',
       images: [
         {
-          url: `${SITE_URL}/images/projects/viollet.avif`,
-          width: 1200,
-          height: 675
+          url: `${SITE_URL}/images/projects/viollet-og.webp`,
+          width: 1600,
+          height: 900
         }
       ],
       locale: lang === 'es' ? 'es-DO' : 'en-US',
@@ -50,9 +50,9 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
       description: content.meta.description,
       images: [
         {
-          url: `${SITE_URL}/images/projects/viollet.avif`,
-          width: 1200,
-          height: 675
+          url: `${SITE_URL}/images/projects/viollet-og.webp`,
+          width: 1600,
+          height: 900
         }
       ]
     },
@@ -60,7 +60,8 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
       canonical: path,
       languages: {
         'en-US': '/projects/viollet',
-        'es-DO': '/es/projects/viollet'
+        'es-DO': '/es/projects/viollet',
+        'x-default': '/projects/viollet'
       }
     }
   }
@@ -72,5 +73,5 @@ export default async function ViolletCaseStudyPage ({ params }: Props) {
   const lang = paramLang || i18n.defaultLocale
   const { caseStudies } = await getDictionary(lang)
 
-  return <CaseStudyPageContent content={caseStudies.viollet} />
+  return <CaseStudyPageContent content={caseStudies.viollet} lang={lang} />
 }

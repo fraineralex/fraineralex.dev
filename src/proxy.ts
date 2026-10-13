@@ -33,6 +33,18 @@ export function proxy (request: NextRequest) {
     (pathname.includes('.') && !isBlogFeed)
   ) return
 
+  // /projects matches app/[lang] (lang "projects") and 404s before the
+  // next.config rewrite, so RSC prefetch of that href fails. /en/projects is
+  // the route the App Router serves. Do not strip that prefix for English.
+  if (pathname === '/projects' || pathname === `/${i18n.defaultLocale}/projects`) {
+    if (getLocale(request) === i18n.defaultLocale) {
+      if (pathname === `/${i18n.defaultLocale}/projects`) return
+      const url = request.nextUrl.clone()
+      url.pathname = `/${i18n.defaultLocale}/projects`
+      return NextResponse.rewrite(url)
+    }
+  }
+
   // Remove the default locale from the pathname if present
   if (
     pathname.startsWith(`/${i18n.defaultLocale}/`) &&
@@ -79,5 +91,5 @@ export function proxy (request: NextRequest) {
 
 export const config = {
   // Ignore framework endpoints and public asset directories.
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images/|fonts/|content/).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images/|fonts/|content/|embeds/).*)']
 }

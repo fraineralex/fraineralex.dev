@@ -1,0 +1,3 @@
+html, body { height: 100%; margin: 0; background: transparent; overflow: hidden; }
+#hero-prototype.hero-prototype-wrap { height: 100vh !important; min-height: 100vh !important; max-height: 100vh !important; margin: 0 !important; padding: 0 !important; }
+#hero-prototype .hero-prototype-frame { height: 100% !important; max-height: 100% !important; border-radius: 0 !important; box-shadow: none !important; }

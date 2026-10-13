@@ -1,0 +1,9 @@
+/* Light workspace chrome, scoped to the SargoTech simulations. */
+.sargo-scene[data-scene] { background: #f7f9fc; border-color: #e1e7ef; color: #1e3a5f; }
+.sargo-scene[data-scene] > div:first-child { background: #ffffff; border-color: #e1e7ef; }
+.sargo-scene[data-scene] > div:first-child p { color: #0ea5e9; }
+.sargo-scene[data-scene] h3 { color: #1e3a5f; }
+.sargo-scene[data-scene] button { background: #ffffff; border-color: #e1e7ef; color: #1e3a5f; }
+.sargo-scene[data-scene] button:hover { border-color: #0ea5e9; color: #0ea5e9; }
+.sargo-scene[data-scene] button:focus-visible { outline-color: #0ea5e9; }
+.sargo-scene[data-scene] > p { background: #ffffff; border-color: #e1e7ef; color: #62788a; }

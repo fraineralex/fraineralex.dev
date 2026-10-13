@@ -35,7 +35,16 @@ export default function AllProjectsList ({ projects, tableHeaders }: Props) {
       <tbody>
         {projects.length > 0 &&
           projects
-            .sort((a, b) => b.year - a.year)
+            .map((p, i) => ({ p, i }))
+            // case studies keep the order they arrive in (pinned first), the rest go newest first
+            .sort((a, b) => {
+              const ca = a.p.caseStudyUrl ? 0 : 1
+              const cb = b.p.caseStudyUrl ? 0 : 1
+              if (ca !== cb) return ca - cb
+              if (ca === 0) return a.i - b.i
+              return b.p.year - a.p.year || a.i - b.i
+            })
+            .map(x => x.p)
             .map(
               (
                 {

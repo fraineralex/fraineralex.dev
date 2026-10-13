@@ -1,0 +1,6 @@
+:HL["/embeds/viollet-app/_next/static/media/0b78ff376f6b9734-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/embeds/viollet-app/_next/static/media/723e11e5093b8e80.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/embeds/viollet-app/_next/static/css/1b735910997ca638.css","style"]
+:HL["/embeds/viollet-app/_next/static/css/4e91eec563009c91.css","style"]
+:HL["/embeds/viollet-app/_next/static/css/6f4f1c428f72cdfb.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"duVFodBKri5DU-GGLHa43"}

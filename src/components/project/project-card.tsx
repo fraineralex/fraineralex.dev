@@ -11,6 +11,7 @@ export default function ProjectCard({
   starsOnGithub,
   technologies,
   imageSrc,
+  imageAlt,
   caseStudyUrl,
   caseStudyLabel,
   liveDemoLabel,
@@ -113,7 +114,7 @@ export default function ProjectCard({
           </ul>
         </aside>
         <Image
-          alt={`Cover image of the project`}
+          alt={imageAlt ?? `Cover image of the project`}
           width={200}
           height={48}
           className="rounded transition sm:order-1 sm:col-span-2 sm:transhark-y-1 group-hover:scale-110"

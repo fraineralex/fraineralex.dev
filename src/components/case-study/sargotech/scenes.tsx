@@ -21,7 +21,7 @@ const WEED = '#d6a84f'
 const CLUMP: Pt[] = Array.from({ length: 26 }, (_, i) => {
 	const r = Math.sqrt((i + 0.5) / 26)
 	const a = i * 2.399963
-	return [Math.cos(a) * r, Math.sin(a) * r * 0.62]
+	return [Math.cos(a) * r, Math.sin(a) * r * 0.6]
 })
 
 function Clump({ at, radius, opacity, scale = 1 }: { at: Pt; radius: number; opacity: number; scale?: number }) {
@@ -141,8 +141,8 @@ const ROAD: Pt[] = [[268, 258], [330, 232], [392, 196], [410, 140], [432, 92]]
 const LAND = 'M300 0 L480 0 L480 300 L228 300 C 248 262, 290 244, 300 210 C 310 178, 288 150, 310 118 C 330 86, 300 40, 300 0 Z'
 
 const RESP_COPY = {
-	en: { kicker: 'Response', title: 'Four steps, one map', aria: 'Stylized coast: a satellite pass spots a sargassum patch offshore, a barrier is placed in front of the beach, a boat collects the patch at sea and a truck takes the load inland to a disposal site.' },
-	es: { kicker: 'Respuesta', title: 'Cuatro pasos, un mapa', aria: 'Costa estilizada: una pasada satelital detecta una mancha de sargazo mar adentro, se coloca una barrera frente a la playa, un bote recoge la mancha en el mar y un camión lleva la carga tierra adentro a un sitio de disposición.' },
+	en: { kicker: 'Response', title: 'Four steps, one map', aria: 'Stylized coast: observation data finds a sargassum patch offshore, a barrier is placed in front of the beach, a boat collects the patch at sea and a truck takes the load inland to a disposal site.' },
+	es: { kicker: 'Respuesta', title: 'Cuatro pasos, un mapa', aria: 'Costa estilizada: los datos de observación encuentran una mancha de sargazo mar adentro, se coloca una barrera frente a la playa, un bote recoge la mancha en el mar y un camión lleva la carga tierra adentro a un sitio de disposición.' },
 } as const
 
 export function ResponseScene({ lang, steps }: { lang: Lang; steps: readonly { title: string; body: string }[] }) {
@@ -151,7 +151,7 @@ export function ResponseScene({ lang, steps }: { lang: Lang; steps: readonly { t
 	const e = tl.elapsed
 	const step = phaseAt(e, RESP_STARTS)
 
-	const satX = 20 + 440 * span(e, 0, 2800, linear)
+	const sweepX = 20 + 440 * span(e, 0, 2800, linear)
 	const scanning = e < 2900
 	const seen = span(e, 500, 1000, easeOut)
 	const trajectory = span(e, 1100, 2600, easeInOut)
@@ -196,9 +196,9 @@ export function ResponseScene({ lang, steps }: { lang: Lang; steps: readonly { t
 						</linearGradient>
 					</defs>
 					<rect width='480' height='300' fill='url(#rs-sea)' />
-					{/* scan band of the satellite pass */}
-					{scanning && <rect x={satX - 28} y={34} width={56} height={266} fill='#0ea5e9' opacity={0.08} />}
-					{scanning && <line x1={satX} y1={34} x2={satX} y2={300} stroke='#0ea5e9' strokeWidth={1} opacity={0.35} />}
+					{/* observation sweep */}
+					{scanning && <rect x={sweepX - 28} y={34} width={56} height={266} fill='#0ea5e9' opacity={0.08} />}
+					{scanning && <line x1={sweepX} y1={34} x2={sweepX} y2={300} stroke='#0ea5e9' strokeWidth={1} opacity={0.35} />}
 					{/* trajectory */}
 					<path d={TRAJECTORY} fill='none' stroke='#62788a' strokeWidth={1.4} strokeDasharray='4 6' opacity={0.75 * trajectory * (1 - collect)} />
 					<Clump at={patch} radius={24} opacity={seen} scale={1 - collect} />
@@ -233,12 +233,6 @@ export function ResponseScene({ lang, steps }: { lang: Lang; steps: readonly { t
 						<rect x={4} y={-4} width={8} height={8} rx={1.5} fill='#1e3a5f' />
 						<circle cx={-7} cy={5} r={2.4} fill='#1e3a5f' stroke='#62788a' />
 						<circle cx={7} cy={5} r={2.4} fill='#1e3a5f' stroke='#62788a' />
-					</g>
-					{/* satellite */}
-					<g transform={`translate(${satX} 20)`} opacity={scanning ? 1 : 0}>
-						<rect x={-5} y={-5} width={10} height={10} rx={2} fill='#1e3a5f' />
-						<rect x={-19} y={-3} width={12} height={6} fill='#0ea5e9' opacity={0.8} />
-						<rect x={7} y={-3} width={12} height={6} fill='#0ea5e9' opacity={0.8} />
 					</g>
 				</svg>
 			</div>

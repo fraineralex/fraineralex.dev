@@ -11,7 +11,8 @@
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-left{left:13px;bottom:13px}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-right{right:13px;bottom:13px}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-group{overflow:hidden;border:1px solid #e1e7ef!important;border-radius:4px!important;background:#ffffff!important;box-shadow:0 12px 30px #1e3a5f14!important}
-.sargo-obs .public-maplibre-stage .maplibregl-ctrl button{width:34px;height:34px;background-color:transparent!important;filter:none;opacity:.82}
+.sargo-obs .public-maplibre-stage .maplibregl-ctrl button{width:44px;height:44px;min-width:44px;min-height:44px;background-color:transparent!important;filter:none;opacity:.82}
+.sargo-obs .maplibregl-cooperative-gesture-screen,.sargo-obs .maplibregl-cooperative-gesture-screen.maplibregl-show{display:none}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl button:hover{background-color:#eaf4fb!important;opacity:1}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-attrib{color:#62788a;background:#ffffff!important}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-attrib a{color:#1e3a5f}
@@ -40,8 +41,8 @@
 .sargo-obs .public-semaphore-legend .yellow b{color:#1e3a5f}
 .sargo-obs .public-semaphore-legend .green i{background:#22c55e}
 .sargo-obs .public-semaphore-legend .green b{color:#1e3a5f}
-.sargo-obs .public-beach-detail{position:absolute;z-index:4;top:82px;right:22px;width:min(300px,calc(100% - 44px));padding:20px;border:1px solid #e1e7ef;background:#ffffff;box-shadow:0 18px 50px #1e3a5f14;backdrop-filter:blur(18px)}
-.sargo-obs .public-beach-detail>button{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:29px;height:29px;border:1px solid #e1e7ef;background:#ffffff;color:#1e3a5f;cursor:pointer}
+.sargo-obs .public-beach-detail{position:absolute;z-index:4;top:82px;right:22px;width:min(300px,calc(100% - 44px));padding:20px 64px 20px 20px;border:1px solid #e1e7ef;background:#ffffff;box-shadow:0 18px 50px #1e3a5f14;backdrop-filter:blur(18px)}
+.sargo-obs .public-beach-detail>button{position:absolute;top:8px;right:8px;display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;border:1px solid #e1e7ef;background:#ffffff;color:#1e3a5f;cursor:pointer}
 .sargo-obs .public-beach-detail>button:hover,.sargo-obs .public-beach-detail>button:focus-visible{border-color:#0ea5e9;color:#1e3a5f;outline:none}
 .sargo-obs .detail-level{display:flex;align-items:center;gap:7px;width:fit-content;padding:5px 8px;border:1px solid currentColor;font-size:9px;letter-spacing:.13em}
 .sargo-obs .detail-level i{width:6px;height:6px;border-radius:50%;background:currentColor}
@@ -56,13 +57,9 @@
 .sargo-obs .public-beach-detail dl div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #e1e7ef}
 .sargo-obs .public-beach-detail dt{color:#62788a;font-size:10px}
 .sargo-obs .public-beach-detail dd{margin:0;color:#1e3a5f;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px}
-.sargo-obs .public-map-instructions{position:absolute;z-index:3;right:62px;bottom:22px;display:flex;align-items:center;gap:7px;padding:9px 11px;background:#ffffff;border:1px solid #e1e7ef;color:#62788a;font-size:9px;letter-spacing:.03em;pointer-events:none}
-.sargo-obs .public-map-instructions svg{color:#0ea5e9}
-.sargo-obs .public-map-instructions svg:nth-of-type(2){margin-left:7px}
 @keyframes public-map-pulse{50%{box-shadow:0 0 0 9px #22c55e00}}
 @media(max-width:900px){.sargo-obs .public-command-map{height:660px}
 .sargo-obs .public-map-status{top:76px}
-.sargo-obs .public-map-instructions{display:none}
 .sargo-obs .public-semaphore-legend{width:205px}
 .sargo-obs .public-beach-detail{top:auto;right:15px;bottom:16px}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-right{bottom:13px}
@@ -79,14 +76,11 @@
 .sargo-obs .public-semaphore-legend h3{margin-bottom:8px;font-size:8px}
 .sargo-obs .public-semaphore-legend>span{grid-template-columns:11px 20px 1fr;gap:4px;margin-top:6px;font-size:9px}
 .sargo-obs .public-semaphore-legend small{font-size:7px}
-.sargo-obs .public-beach-detail{left:12px;right:12px;bottom:12px;width:auto;padding:16px}
+.sargo-obs .public-beach-detail{left:12px;right:12px;bottom:12px;width:auto;padding:16px 60px 16px 16px}
 .sargo-obs .public-beach-detail h3{font-size:21px}
-.sargo-obs .public-beach-detail dl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.sargo-obs .public-beach-detail dl div{display:block;padding:9px 0}
-.sargo-obs .public-beach-detail dt{min-height:24px;font-size:8px}
-.sargo-obs .public-beach-detail dd{margin-top:6px;font-size:9px}
+.sargo-obs .public-beach-detail dt{font-size:8px}
+.sargo-obs .public-beach-detail dd{font-size:9px}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-right{right:7px;bottom:7px}
-.sargo-obs .public-maplibre-stage .maplibregl-ctrl-group button{width:31px;height:31px}
 .sargo-obs .public-maplibre-stage .maplibregl-ctrl-bottom-left{display:none}
 }
 @media(prefers-reduced-motion:reduce){.sargo-obs .public-map-live.live i{animation:none}

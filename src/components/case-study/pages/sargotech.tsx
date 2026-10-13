@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import { Building2, Landmark, MapPin } from 'lucide-react'
 import { BackLink, Chapter, Decisions, Hero, MacWindow, Outro, P, Shell, Stage, Statement } from '../kit/layout'
-import { StageCaption, Tiles } from '../kit/blocks'
+import { StageCaption } from '../kit/blocks'
+import Reveal from '../kit/reveal'
 import { BeachScanScene, ResponseScene } from '../sargotech/scenes'
 import ObservatoryLazy from '../sargotech/observatory-lazy'
 import { backLink, type Lang } from './shared'
@@ -10,7 +11,7 @@ const COPY = {
 	en: {
 		lede: 'Coastal technology from the Dominican Republic to get ahead of sargassum in the Caribbean. It connects ocean observation with the people who can act: hotels, municipalities and field teams. We are four co-founders, and I am the CTO and lead developer.',
 		facts: [
-			{ label: 'Role', value: 'CTO & Lead Developer' },
+			{ label: 'Role', value: 'CTO and Lead Developer' },
 			{ label: 'Team', value: '4 co-founders' },
 			{ label: 'Year', value: '2026' },
 			{ label: 'Map', value: 'MapLibre GL' },
@@ -31,7 +32,7 @@ const COPY = {
 		c2: {
 			title: 'How a beach turns red',
 			body: [
-				'With a satellite reading, each beach scans the pixels around it and looks at how strong and how close the floating sargassum signal is. The rules are short on purpose, so anyone on the team can explain why a beach changed color.',
+				'With observation data, each beach looks at how strong the floating sargassum signal is and how close it is. The rules are short on purpose, so anyone on the team can explain why a beach changed color.',
 			],
 		},
 		rules: {
@@ -54,7 +55,7 @@ const COPY = {
 		audiences: [
 			{ title: 'Hotels and resorts', body: 'Know ahead of time what is coming to the beachfront and plan the response.' },
 			{ title: 'Municipalities', body: 'Decide which beaches need attention first and coordinate resources.' },
-			{ title: 'Scouts and providers', body: 'Validate conditions in the field and carry out the service.' },
+			{ title: 'Field teams', body: 'Validate conditions in the field and carry out the service.' },
 		],
 		c4: {
 			title: 'A team of four',
@@ -72,9 +73,9 @@ const COPY = {
 		outro: { title: 'Visit SargoTech', note: 'The site is in Spanish and includes the live coastal map.' },
 	},
 	es: {
-		lede: 'Tecnología costera desde República Dominicana para adelantarnos al sargazo en el Caribe. Conecta la observación del océano con quienes pueden actuar: hoteles, municipios y equipos de campo. Somos cuatro cofundadores y yo soy el CTO y desarrollador líder.',
+		lede: 'Tecnología costera desde República Dominicana para adelantarnos al sargazo en el Caribe. Conecta la observación del océano con quienes pueden actuar: hoteles, municipios y equipos de campo. Somos cuatro cofundadores y yo soy el CTO y desarrollador principal.',
 		facts: [
-			{ label: 'Rol', value: 'CTO & Lead Developer' },
+			{ label: 'Rol', value: 'CTO y desarrollador principal' },
 			{ label: 'Equipo', value: '4 cofundadores' },
 			{ label: 'Año', value: '2026' },
 			{ label: 'Mapa', value: 'MapLibre GL' },
@@ -95,7 +96,7 @@ const COPY = {
 		c2: {
 			title: 'Cómo una playa se pone en rojo',
 			body: [
-				'Con una lectura satelital, cada playa revisa los píxeles a su alrededor y mira qué tan fuerte y qué tan cerca está la señal de sargazo flotante. Las reglas son cortas a propósito, para que cualquiera del equipo pueda explicar por qué una playa cambió de color.',
+				'Con datos de observación, cada playa mira qué tan fuerte es la señal de sargazo flotante y qué tan cerca está. Las reglas son cortas a propósito, para que cualquiera del equipo pueda explicar por qué una playa cambió de color.',
 			],
 		},
 		rules: {
@@ -118,12 +119,12 @@ const COPY = {
 		audiences: [
 			{ title: 'Hoteles y resorts', body: 'Saber con tiempo lo que viene a su frente de playa y planificar la respuesta.' },
 			{ title: 'Municipios', body: 'Decidir qué playas necesitan atención primero y coordinar recursos.' },
-			{ title: 'Scouts y proveedores', body: 'Validar las condiciones en campo y ejecutar el servicio.' },
+			{ title: 'Equipos de campo', body: 'Validar las condiciones en campo y ejecutar el servicio.' },
 		],
 		c4: {
 			title: 'Un equipo de cuatro',
 			body: [
-				'Enmanuel Santos es CEO y líder de producto, Christopher Marrero es ingeniero de software, Martha Espinal lidera operaciones y alianzas, y yo soy el CTO y desarrollador líder.',
+				'Enmanuel Santos es CEO y líder de producto, Christopher Marrero es ingeniero de software, Martha Espinal lidera operaciones y alianzas, y yo soy el CTO y desarrollador principal.',
 				'En la sección de equipo, mi parte dice: aterrizar procesos, validación de datos y coordinación para convertir alertas en acciones medibles. El producto sigue evolucionando, así que en esta página me quedo con lo que es público.',
 			],
 		},
@@ -168,7 +169,7 @@ export default function SargoTechCaseStudy({ lang }: { lang: Lang }) {
 				))}
 			</Chapter>
 			<Stage>
-				<MacWindow url='sargotech.com/#mapa-interactivo'>
+				<MacWindow url='sargotech.com/#mapa-interactivo' light>
 					<ObservatoryLazy lang={lang} />
 				</MacWindow>
 				<StageCaption>{t.caption}</StageCaption>
@@ -196,14 +197,22 @@ export default function SargoTechCaseStudy({ lang }: { lang: Lang }) {
 
 			<section className='mt-14 scroll-mt-24'>
 				<h2 className='text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl'>{t.audiencesTitle}</h2>
-				<div className='mt-5'>
-					<Tiles
-						items={t.audiences.map((a, i) => {
-							const Icon = AUDIENCE_ICONS[i]
-							return { ...a, icon: <Icon className='size-4' aria-hidden /> }
-						})}
-					/>
-				</div>
+				<ul className='mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+					{t.audiences.map((a, i) => {
+						const Icon = AUDIENCE_ICONS[i]
+						return (
+							<Reveal key={a.title} as='li' delay={i * 120} className='min-w-0 rounded-lg border border-slate-700/50 bg-slate-800/30 p-5'>
+								<span className='inline-flex size-9 items-center justify-center rounded-lg bg-teal-400/10 text-teal-300'>
+									<Icon className='size-4' aria-hidden />
+								</span>
+								<h3 className='mt-4 font-medium text-slate-100'>{a.title}</h3>
+								<p className='mt-1.5 text-sm leading-relaxed text-slate-400' style={{ textWrap: 'pretty' }}>
+									{a.body}
+								</p>
+							</Reveal>
+						)
+					})}
+				</ul>
 			</section>
 
 			<Statement>{t.statement}</Statement>

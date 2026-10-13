@@ -2,15 +2,13 @@
 
 /*
  * Adapted from the public coastal map on the SargoTech landing: same layers,
- * clustering and colors. This copy has no live readings. Each beach gets an
- * illustrative level derived only from its coordinates and name (sample data,
- * labeled on screen), so the traffic light can be seen working. Neutral vector
- * basemap from public domain outlines with self hosted glyphs, so nothing is
- * fetched from third party services. Adds ES/EN copy, cooperative gestures, a
- * keyboard beach picker and reduced motion camera moves.
+ * clustering and colors. This copy has no live readings. Each beach carries a
+ * fixed sample level from the data file, labeled on screen as example data.
+ * Neutral vector basemap from public domain outlines with self hosted glyphs.
+ * Adds ES/EN copy, a beach picker and reduced motion camera moves.
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Compass, MousePointer2, Satellite, X } from 'lucide-react'
+import { Waves, X } from 'lucide-react'
 import maplibregl, { type GeoJSONSource, type GeoJSONSourceSpecification, type Map as MapLibreMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import './observatory.css'
@@ -38,12 +36,8 @@ const COPY = {
 		close: 'Cerrar detalle',
 		statusLabel: 'Estado',
 		statusValue: 'Datos de ejemplo',
-		coords: 'Coordenadas',
-		drag: 'Arrastra para explorar',
-		rotate: 'Ctrl + arrastrar para girar',
 		pick: 'Ir a una playa',
 		pickPlaceholder: 'Elige una playa',
-		gestures: { windowsHelpText: 'Usa Ctrl + rueda para acercar el mapa', macHelpText: 'Usa ⌘ + rueda para acercar el mapa', mobileHelpText: 'Usa dos dedos para mover el mapa' },
 	},
 	en: {
 		aria: 'Interactive coastal traffic light map of the Dominican Republic',
@@ -60,35 +54,33 @@ const COPY = {
 		close: 'Close detail',
 		statusLabel: 'Status',
 		statusValue: 'Sample data',
-		coords: 'Coordinates',
-		drag: 'Drag to explore',
-		rotate: 'Ctrl + drag to rotate',
 		pick: 'Jump to a beach',
 		pickPlaceholder: 'Pick a beach',
-		gestures: { windowsHelpText: 'Use Ctrl + scroll to zoom the map', macHelpText: 'Use ⌘ + scroll to zoom the map', mobileHelpText: 'Use two fingers to move the map' },
 	},
 } as const
 
+/** Control names only. Gesture hints stay blank so the default instruction copy never shows. */
+const MAP_LOCALE: Record<Lang, Record<string, string>> = {
+	es: {
+		'NavigationControl.ZoomIn': 'Acercar',
+		'NavigationControl.ZoomOut': 'Alejar',
+		'NavigationControl.ResetBearing': 'Volver al norte',
+		'CooperativeGesturesHandler.WindowsHelpText': '',
+		'CooperativeGesturesHandler.MacHelpText': '',
+		'CooperativeGesturesHandler.MobileHelpText': '',
+	},
+	en: {
+		'NavigationControl.ZoomIn': 'Zoom in',
+		'NavigationControl.ZoomOut': 'Zoom out',
+		'NavigationControl.ResetBearing': 'Reset north',
+		'CooperativeGesturesHandler.WindowsHelpText': '',
+		'CooperativeGesturesHandler.MacHelpText': '',
+		'CooperativeGesturesHandler.MobileHelpText': '',
+	},
+}
+
 const COLORS: Record<Level, string> = { red: '#ef4444', yellow: '#f59e0b', green: '#22c55e' }
 const SCORE: Record<Level, number> = { red: 3, yellow: 2, green: 1 }
-
-/**
- * Illustrative level for the sample map, derived only from coordinates and
- * name: the east and south east coasts lean red, the north coast is mixed and
- * the west leans green, with a stable per beach variation. Not real data.
- */
-function sampleLevel(name: string, lat: number, lon: number): Level {
-	let hash = 0
-	for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0
-	const jitter = ((hash % 1000) / 1000 - 0.5) * 0.5
-	let base = 0.15
-	if (lon > -68.95) base = 0.8
-	else if (lat < 18.6 && lon > -70.2) base = 0.55
-	else if (lat > 19.25 && lon > -70.4) base = 0.5
-	else if (lat < 18.6 && lon > -70.9) base = 0.3
-	const value = base + jitter
-	return value > 0.62 ? 'red' : value > 0.36 ? 'yellow' : 'green'
-}
 
 const levelColor = ['match', ['get', 'level'], 'red', COLORS.red, 'yellow', COLORS.yellow, COLORS.green] as unknown as string
 const clusterColor = ['match', ['get', 'maxScore'], 3, COLORS.red, 2, COLORS.yellow, COLORS.green] as unknown as string
@@ -103,7 +95,7 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 	const mapRef = useRef<MapLibreMap | null>(null)
 	const [selectedId, setSelectedId] = useState<string | null>(null)
 
-	const beaches = useMemo(() => dominicanBeaches.map((beach, index) => ({ ...beach, id: `beach-${index}`, level: sampleLevel(beach.name, beach.lat, beach.lon) })), [])
+	const beaches = useMemo(() => dominicanBeaches.map((beach, index) => ({ ...beach, id: `beach-${index}` })), [])
 
 	const counts = useMemo(() => beaches.reduce((total, beach) => ({ ...total, [beach.level]: total[beach.level] + 1 }), { red: 0, yellow: 0, green: 0 } as Record<Level, number>), [beaches])
 
@@ -133,7 +125,7 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 			attributionControl: false,
 			interactive: true,
 			cooperativeGestures: true,
-			locale: { 'CooperativeGesturesHandler.WindowsHelpText': t.gestures.windowsHelpText, 'CooperativeGesturesHandler.MacHelpText': t.gestures.macHelpText, 'CooperativeGesturesHandler.MobileHelpText': t.gestures.mobileHelpText },
+			locale: MAP_LOCALE[lang],
 			style: {
 				version: 8,
 				glyphs: `${window.location.origin}/map-glyphs/{fontstack}/{range}.pbf`,
@@ -195,7 +187,7 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 			map.remove()
 			mapRef.current = null
 		}
-	}, [semaphoreFeatures, t])
+	}, [semaphoreFeatures, t, lang])
 
 	const jumpTo = (id: string) => {
 		setSelectedId(id || null)
@@ -211,7 +203,7 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 				<div className='public-map-atmosphere' />
 				<header className='public-map-toolbar'>
 					<span>
-						<Satellite size={15} aria-hidden /> {t.toolbar}
+						<Waves size={15} aria-hidden /> {t.toolbar}
 					</span>
 					<span className='public-map-live reference'>
 						<i />
@@ -256,28 +248,16 @@ export default function CoastalObservatory({ lang = 'en' }: { lang?: Lang }) {
 								<dt>{t.statusLabel}</dt>
 								<dd>{t.statusValue}</dd>
 							</div>
-							<div>
-								<dt>{t.coords}</dt>
-								<dd>
-									{selected.lat.toFixed(3)}, {selected.lon.toFixed(3)}
-								</dd>
-							</div>
 						</dl>
 					</aside>
 				)}
-				<div className='public-map-instructions'>
-					<MousePointer2 size={14} aria-hidden />
-					<span>{t.drag}</span>
-					<Compass size={14} aria-hidden />
-					<span>{t.rotate}</span>
-				</div>
 			</div>
 			<label className='flex flex-col gap-2 border-t border-[#e1e7ef] px-4 py-3 text-sm text-[#62788a] sm:flex-row sm:items-center sm:gap-3'>
 				<span>{t.pick}</span>
 				<select
 					value={selectedId ?? ''}
 					onChange={(event) => jumpTo(event.target.value)}
-					className='h-10 w-full rounded-lg border border-[#e1e7ef] bg-[#ffffff] px-3 text-sm text-[#1e3a5f] outline-none focus-visible:ring-2 focus-visible:ring-[#0ea5e9] sm:w-80'
+					className='h-11 min-h-11 w-full rounded-lg border border-[#e1e7ef] bg-[#ffffff] px-3 text-sm text-[#1e3a5f] outline-none focus-visible:ring-2 focus-visible:ring-[#0ea5e9] sm:w-80'
 				>
 					<option value=''>{t.pickPlaceholder}</option>
 					{sortedBeaches.map((beach) => (

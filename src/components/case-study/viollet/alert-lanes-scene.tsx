@@ -60,20 +60,20 @@ const DESKTOP: Geom = {
 }
 
 const MOBILE: Geom = {
-  viewBox: '0 0 320 460',
+  viewBox: '0 0 320 508',
   origin: { x: 160, y: 82 },
   card: { x: 114, y: 10, w: 92, h: 72 },
   inbox: { x: 18, y: 400, w: 284, h: 48 },
   plug: 'down',
   badgeR: 18,
   markSize: 15,
-  labelSize: 15,
+  labelSize: 12,
   countSize: 16,
   lanes: {
-    scotiabank: { control: { x: 40, y: 188 }, end: { x: 48, y: 340 } },
-    bhd: { control: { x: 104, y: 220 }, end: { x: 120, y: 354 } },
-    banreservas: { control: { x: 216, y: 220 }, end: { x: 200, y: 354 } },
-    popular: { control: { x: 280, y: 188 }, end: { x: 272, y: 340 } }
+    scotiabank: { control: { x: 28, y: 188 }, end: { x: 36, y: 328 } },
+    bhd: { control: { x: 96, y: 210 }, end: { x: 108, y: 346 } },
+    banreservas: { control: { x: 224, y: 210 }, end: { x: 212, y: 346 } },
+    popular: { control: { x: 292, y: 188 }, end: { x: 284, y: 328 } }
   }
 }
 
@@ -147,14 +147,14 @@ const COPY = {
     title: 'Un pase, cuatro relojes',
     clock: 't = {minutes} min',
     inbox: 'Buzón',
-    feedTitle: 'Feed de Viollet',
+    feedTitle: 'Lista de Viollet',
     illustrative: 'Ilustrativo',
     arrived: 'Llegó',
     pending: 'En camino',
     banks: { scotiabank: 'Scotiabank', bhd: 'Banco BHD', banreservas: 'Banreservas', popular: 'Banco Popular' },
     launch: 'Un pase de tarjeta en el punto de venta abre cuatro carriles a la vez. Los sobres van al buzón con relojes distintos. Los minutos son ilustrativos, no una medición.',
-    partial: '{bank} llegó al buzón a los {minutes} min y el feed subió su fila. Los otros carriles siguen en camino. Los minutos son ilustrativos, no una medición.',
-    done: 'Las cuatro alertas ya están en el feed de Viollet, en orden de llegada. Banco Popular entró primero, a los 4 min, y Scotiabank de último, a los 62 min. Los minutos son ilustrativos, no una medición.'
+    partial: '{bank} llegó al buzón a los {minutes} min y la lista subió su fila. Los otros carriles siguen en camino. Los minutos son ilustrativos, no una medición.',
+    done: 'Las cuatro alertas ya están en la lista de Viollet, en orden de llegada. Banco Popular entró primero, a los 4 min, y Scotiabank de último, a los 62 min. Los minutos son ilustrativos, no una medición.'
   }
 } as const
 
@@ -216,9 +216,9 @@ function LaneDiagram ({
   const count = frame.lanes.filter(lane => lane.arrived).length
   const cx = inbox.x + inbox.w / 2
   const cy = inbox.y + inbox.h / 2
-  const env = down ? { x: cx - 56, y: cy } : { x: cx, y: cy - 30 }
-  const countAt = down ? { x: cx - 4, y: cy } : { x: cx, y: cy + 4 }
-  const labelAt = down ? { x: cx + 50, y: cy } : { x: cx, y: cy + 28 }
+  const env = down ? { x: cx - 72, y: cy } : { x: cx, y: cy - 30 }
+  const countAt = down ? { x: cx - 22, y: cy } : { x: cx, y: cy + 4 }
+  const labelAt = down ? { x: cx + 46, y: cy } : { x: cx, y: cy + 28 }
   const sheenX = card.x - 20 + swipe * (card.w + 36)
 
   return (
@@ -276,23 +276,14 @@ function LaneDiagram ({
         const state = frame.lanes[index]
         const spec = geom.lanes[bank.id]
         const moving = state.progress > 0 && !state.arrived
-        const point = lanePoint(origin, spec.control, spec.end, state.progress)
-        const fade = !moving ? 0 : state.progress < 0.06 ? state.progress / 0.06 : state.progress > 0.88 ? (1 - state.progress) / 0.12 : 1
+        // Stop short of the badge so the envelope never covers the bank mark.
+        const travel = Math.min(state.progress, 0.78)
+        const point = lanePoint(origin, spec.control, spec.end, travel)
+        const fade = !moving ? 0 : state.progress < 0.06 ? state.progress / 0.06 : state.progress > 0.68 ? Math.max(0, (0.9 - state.progress) / 0.22) : 1
         return (
           <g key={bank.id}>
-            {moving && !reduced && (
-              <circle cx={spec.end.x} cy={spec.end.y} r={geom.badgeR + 5} fill='none' className='alert-lanes-pulse stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.5} />
-            )}
-            <circle
-              cx={spec.end.x}
-              cy={spec.end.y}
-              r={geom.badgeR}
-              strokeWidth={state.arrived && frame.minute - state.delay < 1.4 ? 2.4 : 1.5}
-              className={state.arrived ? 'fill-white stroke-emerald-600' : moving ? 'fill-white stroke-[oklch(0.539_0.254_282)]' : 'fill-white stroke-[oklch(0.86_0.02_282)]'}
-            />
-            <image href={bank.logo} x={spec.end.x - geom.badgeR * 0.72} y={spec.end.y - geom.badgeR * 0.72} width={geom.badgeR * 1.44} height={geom.badgeR * 1.44} preserveAspectRatio='xMidYMid meet' />
             {fade > 0 && [4, 3, 2, 1].map(step => {
-              const behind = state.progress - step * 0.055
+              const behind = travel - step * 0.055
               if (behind <= 0.02) return null
               const trail = lanePoint(origin, spec.control, spec.end, behind)
               return <circle key={step} cx={trail.x} cy={trail.y} r={3.4 - step * 0.45} className='fill-[oklch(0.539_0.254_282)]' opacity={fade * (0.14 + (4 - step) * 0.08)} />
@@ -303,9 +294,42 @@ function LaneDiagram ({
                 <path d='M -10 -7 L 0 2.5 L 10 -7' fill='none' className='stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.4} />
               </g>
             )}
+            {moving && !reduced && (
+              <circle cx={spec.end.x} cy={spec.end.y} r={geom.badgeR + 5} fill='none' className='alert-lanes-pulse stroke-[oklch(0.539_0.254_282)]' strokeWidth={1.5} />
+            )}
+            <circle
+              cx={spec.end.x}
+              cy={spec.end.y}
+              r={geom.badgeR}
+              strokeWidth={state.arrived && frame.minute - state.delay < 1.4 ? 2.4 : 1.5}
+              className={state.arrived ? 'fill-white stroke-emerald-600' : moving ? 'fill-white stroke-[oklch(0.539_0.254_282)]' : 'fill-white stroke-[oklch(0.86_0.02_282)]'}
+            />
+            <clipPath id={`alert-logo-${uid}-${bank.id}`}>
+              <circle cx={spec.end.x} cy={spec.end.y} r={geom.badgeR - 2} />
+            </clipPath>
+            <image href={bank.logo} x={spec.end.x - geom.badgeR * 0.58} y={spec.end.y - geom.badgeR * 0.58} width={geom.badgeR * 1.16} height={geom.badgeR * 1.16} preserveAspectRatio='xMidYMid meet' clipPath={`url(#alert-logo-${uid}-${bank.id})`} />
           </g>
         )
       })}
+      {down && (
+        <g>
+          {BANKS.map(bank => {
+            const name = copy.banks[bank.id]
+            const words = name.split(' ')
+            const lines = words.length > 1 ? [words[0], words.slice(1).join(' ')] : [name]
+            const size = 8
+            const x = geom.lanes[bank.id].end.x
+            const y = inbox.y + inbox.h + 18
+            return (
+              <text key={bank.id} x={x} y={y} textAnchor='middle' fontSize={size} fontWeight={600} className='fill-[oklch(0.205_0_0)]'>
+                {lines.map((line, lineIndex) => (
+                  <tspan key={line} x={x} dy={lineIndex === 0 ? 0 : size + 1}>{line}</tspan>
+                ))}
+              </text>
+            )
+          })}
+        </g>
+      )}
     </svg>
   )
 }
@@ -313,9 +337,9 @@ function LaneDiagram ({
 function Feed ({ copy, frame }: { copy: Copy; frame: Frame }) {
   return (
     <div className='min-w-0 rounded-lg border border-[oklch(0.915_0.01_282)] bg-white p-3'>
-      <div className='flex h-6 items-center justify-between gap-2'>
-        <p className='text-[11px] font-medium uppercase tracking-wide text-[oklch(0.539_0.254_282)]'>{copy.feedTitle}</p>
-        <p className='text-[11px] text-[oklch(0.556_0_0)]'>{copy.illustrative}</p>
+      <div className='flex min-h-6 items-start justify-between gap-2'>
+        <p className='min-w-0 flex-1 text-[11px] font-medium uppercase leading-tight tracking-normal text-[oklch(0.539_0.254_282)] sm:tracking-wide'>{copy.feedTitle}</p>
+        <p className='shrink-0 text-[11px] leading-tight text-[oklch(0.556_0_0)]'>{copy.illustrative}</p>
       </div>
       <ol className='sr-only' aria-label={`${copy.feedTitle}. ${copy.illustrative}`}>
         {frame.feed.map(entry => (
@@ -333,13 +357,13 @@ function Feed ({ copy, frame }: { copy: Copy; frame: Frame }) {
           return (
             <li
               key={bank.id}
-              className={`absolute inset-x-0 top-0 flex h-12 items-center gap-2 border-b border-[oklch(0.915_0.01_282)] bg-white px-1 text-sm transition-transform duration-500 ease-out motion-reduce:transition-none ${entry?.arrived ? 'text-[oklch(0.145_0_0)] shadow-[inset_2px_0_0_rgba(52,211,153,0.75)]' : 'text-[oklch(0.45_0_0)]'}`}
+              className={`absolute inset-x-0 top-0 flex h-12 items-center gap-2 overflow-hidden border-b border-[oklch(0.915_0.01_282)] bg-white px-1 text-sm transition-transform duration-500 ease-out motion-reduce:transition-none ${entry?.arrived ? 'text-[oklch(0.145_0_0)] shadow-[inset_2px_0_0_rgba(52,211,153,0.75)]' : 'text-[oklch(0.45_0_0)]'}`}
               style={{ transform: `translateY(calc(${ROW} * ${slot}))`, zIndex: entry?.arrived ? 2 : 1 }}
             >
               <span className='inline-block w-4 shrink-0 text-center font-mono text-xs tabular-nums'>{entry?.order ? entry.order : '·'}</span>
               <BankBadge logo={bank.logo} arrived={Boolean(entry?.arrived)} />
-              <span className='min-w-0 flex-1 truncate'>{copy.banks[bank.id]}</span>
-              <span className='grid w-14 shrink-0 text-right font-mono text-[11px] leading-none tabular-nums text-[oklch(0.45_0_0)]'>
+              <span className='min-w-0 flex-1 break-words text-xs leading-4 sm:text-sm sm:leading-5'>{copy.banks[bank.id]}</span>
+              <span className='grid w-14 shrink-0 whitespace-nowrap text-right font-mono text-[10px] leading-none tabular-nums text-[oklch(0.45_0_0)] sm:w-[3.75rem] sm:text-[11px]'>
                 <span className={entry?.arrived ? '' : 'invisible'}>{minute} min</span>
                 <span className={`col-start-1 row-start-1 ${entry?.arrived ? 'invisible' : ''}`}>·· min</span>
               </span>

@@ -9,16 +9,16 @@ const TEXT = {
   en: {
     load: 'Start the interactive preview',
     reduced: 'Motion is reduced on your device, so the preview waits for you. It plays a short guided demo once it starts.',
-    hint: 'This is the same app simulation that runs on the viollet.app landing page. Click around: the sidebar, filters, charts and inbox all respond.'
+    hint: 'This is the same app simulation that runs on the viollet.app landing page. It shows the sidebar, filters, charts, and inbox.'
   },
   es: {
     load: 'Iniciar la vista interactiva',
     reduced: 'Tu dispositivo tiene el movimiento reducido, así que la vista espera por ti. Al iniciar, reproduce una demo guiada corta.',
-    hint: 'Es la misma simulación de la app que corre en la landing de viollet.app. Explora: el menú, los filtros, las gráficas y el inbox responden.'
+    hint: 'Es la misma simulación de la app que corre en la página de inicio de viollet.app. Muestra el menú, los filtros, las gráficas y la bandeja.'
   }
 }
 
-export default function AppEmbed ({ copy, lang }: { copy: ViolletAppCopy; lang: Locale }) {
+export default function AppEmbed ({ copy, lang, posterAlt }: { copy: ViolletAppCopy; lang: Locale; posterAlt: string }) {
   const t = TEXT[lang] ?? TEXT.en
   const wrapRef = useRef<HTMLDivElement>(null)
   const [reduced, setReduced] = useState(false)
@@ -57,7 +57,7 @@ export default function AppEmbed ({ copy, lang }: { copy: ViolletAppCopy; lang: 
         ) : (
           <div className='relative h-full w-full'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src='/images/projects/viollet-app-poster.webp' alt='' className='h-full w-full object-cover object-left-top opacity-60' />
+            <img src='/images/projects/viollet-app-poster.webp' alt={posterAlt} className='h-full w-full object-cover object-left-top opacity-60' />
             <div className='absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-t from-[#0b0712] via-[#0b0712]/60 to-transparent p-6 text-center'>
               <button
                 type='button'

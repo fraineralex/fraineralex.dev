@@ -23,16 +23,16 @@ function ResultCard ({ answer, copy }: { answer: ViolletChatAnswer; copy: Violle
     <figure className={`${L.card} overflow-hidden p-3`}>
       <figcaption className={`mb-2 text-xs font-medium ${L.muted}`}>{copy.result}</figcaption>
       {bankContext && (
-        <div className={`mb-3 flex items-center gap-4 border-b ${L.border} pb-3`} aria-hidden='true'>
+        <div className={`mb-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b ${L.border} pb-3`}>
           {/* Brands illustrate the ledger context, without inventing a bank breakdown. */}
-          <img src='/case-studies/viollet/banks/qik.svg' alt='' className='h-6 w-12 object-contain' />
-          <img src='/case-studies/viollet/banks/banreservas.svg' alt='' className='h-6 w-24 object-contain' />
+          <img src='/case-studies/viollet/banks/qik.svg' alt='Qik' className='h-6 w-auto max-w-[5.5rem] object-contain' />
+          <img src='/case-studies/viollet/banks/banreservas.svg' alt='Banreservas' className='h-6 w-auto max-w-[7.5rem] object-contain' />
         </div>
       )}
       <div className='space-y-3'>
         {rows.map((row, index) => (
           <div key={row}>
-            <p className={`text-xs leading-relaxed ${L.fg}`}>{row}</p>
+            <p className={`break-words text-xs leading-relaxed ${L.fg}`}>{row}</p>
             <div className={`mt-2 h-2 overflow-hidden rounded-full ${L.secondary}`} aria-hidden='true'>
               <div
                 className='h-full rounded-full'
@@ -68,7 +68,7 @@ export default function ChatSim ({ copy, lang }: { copy: ViolletChatCopy, lang: 
         <div className={`overflow-hidden rounded-xl border ${L.border} bg-white`}>
           <div className={`flex items-center gap-2 border-b ${L.border} px-4 py-3`}>
             <Bot className={`size-4 ${L.primaryText}`} aria-hidden='true' />
-            <span className={`text-sm font-medium ${L.fg}`}>{copy.assistant}</span>
+            <span className={`min-w-0 truncate text-sm font-medium ${L.fg}`}>{copy.assistant}</span>
             <div className='ml-auto flex gap-1.5' aria-hidden='true'>
               {copy.answers.map((item, position) => (
                 <span key={item.id} className='size-1.5 rounded-full' style={{ background: position === index ? LC.primary : LC.border }} />
@@ -84,9 +84,9 @@ export default function ChatSim ({ copy, lang }: { copy: ViolletChatCopy, lang: 
                   <div className={`flex size-8 shrink-0 items-center justify-center rounded-full ${L.secondary}`}>
                     <User className={`size-4 ${L.muted}`} aria-hidden='true' />
                   </div>
-                  <div className='max-w-[85%] min-w-0'>
-                    <p className={`mb-1 text-right text-xs ${L.muted}`}>{copy.you}</p>
-                    <div className={`grid rounded-xl ${L.primaryTint} px-3 py-2 text-sm leading-relaxed ${L.fg}`}>
+                  <div className='min-w-0 max-w-[calc(100%-2.75rem)]'>
+                    <p className={`mb-1 text-right text-xs leading-4 ${L.muted}`}>{copy.you}</p>
+                    <div className={`grid rounded-xl ${L.primaryTint} px-3 py-2 text-[13px] leading-5 sm:text-sm sm:leading-relaxed ${L.fg}`}>
                       <span className='invisible col-start-1 row-start-1 break-words' aria-hidden='true'>{answer.prompt}</span>
                       <span className='col-start-1 row-start-1 break-words'>
                         {question}
@@ -101,17 +101,17 @@ export default function ChatSim ({ copy, lang }: { copy: ViolletChatCopy, lang: 
                     <Bot className={`size-4 ${L.primaryText}`} aria-hidden='true' />
                   </div>
                   <div className='min-w-0 flex-1 space-y-3'>
-                    <p className={`text-xs font-medium ${L.muted}`}>{copy.assistant}</p>
-                    <div className={`flex items-center gap-2 text-xs ${L.muted}`} style={{ visibility: replyVisible ? 'hidden' : 'visible' }}>
-                      <span className={`size-1.5 rounded-full ${L.primaryBg}`} aria-hidden='true' />
-                      {copy.thinking}
+                    <p className={`max-w-full text-xs font-medium leading-4 ${L.muted}`}>{copy.assistant}</p>
+                    <div className={`flex items-start gap-2 text-xs leading-4 ${L.muted}`} style={{ visibility: replyVisible ? 'hidden' : 'visible' }}>
+                      <span className={`mt-1.5 size-1.5 shrink-0 rounded-full ${L.primaryBg}`} aria-hidden='true' />
+                      <span className='min-w-0 break-words'>{copy.thinking}</span>
                     </div>
                     <div className={`rounded-lg border ${L.border} ${L.secondary} p-3`} style={{ visibility: toolVisible ? 'visible' : 'hidden' }}>
-                      <p className={`flex items-start gap-2 text-xs font-medium ${L.fg}`}>
-                        <Wrench className={`size-3.5 shrink-0 ${L.primaryText}`} aria-hidden='true' />
-                        <span className='min-w-0 break-words'>{copy.tool}: {answer.tool}</span>
+                      <p className={`grid grid-cols-[auto_minmax(0,1fr)] items-start gap-2 text-xs font-medium ${L.fg}`}>
+                        <Wrench className={`mt-0.5 size-3.5 ${L.primaryText}`} aria-hidden='true' />
+                        <span className='min-h-8 min-w-0 break-all text-[11px] leading-4 sm:min-h-0 sm:text-xs sm:leading-snug'>{copy.tool}: {answer.tool}</span>
                       </p>
-                      <p className={`mt-2 break-words text-[11px] leading-relaxed ${L.mono} ${L.muted}`}>{answer.args}</p>
+                      <p className={`mt-2 min-h-8 break-all text-[11px] leading-4 ${L.mono} ${L.muted}`}>{answer.args}</p>
                     </div>
                     <div className={`grid text-sm leading-relaxed ${L.fg}`} style={{ visibility: replyVisible ? 'visible' : 'hidden' }}>
                       <p className='invisible col-start-1 row-start-1 break-words' aria-hidden='true'>{answer.reply}</p>

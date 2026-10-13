@@ -36,7 +36,6 @@ function Envelope ({ x, y, opacity = 1 }: { x: number, y: number, opacity?: numb
 }
 
 export default function GmailSync ({ copy, lang }: { copy: ViolletSyncCopy, lang: 'es' | 'en' }) {
-  void lang
   const timeline = useSceneTimeline(DURATION, { loop: true, hold: 3400 })
   const elapsed = timeline.elapsed
   const watching = elapsed >= 1800
@@ -67,7 +66,7 @@ export default function GmailSync ({ copy, lang }: { copy: ViolletSyncCopy, lang
           </div>
         </div>
 
-        <svg viewBox='0 0 600 280' className='block h-auto w-full' role='img' aria-label={`Gmail → Pub/Sub → Viollet webhook. ${copy.states[state]}`}>
+        <svg viewBox='0 0 600 280' className='block h-auto w-full' role='img' aria-label={lang === 'es' ? `Gmail, Pub/Sub y el aviso automático de Viollet. ${copy.states[state]}` : `Gmail, Pub/Sub, and the Viollet webhook. ${copy.states[state]}`}>
           {['M 90 140 Q 195 80 300 140', 'M 300 140 Q 405 200 510 140'].map((path, index) => (
             <g key={path}>
               <path d={path} fill='none' stroke={LC.primarySoft} strokeWidth={9} strokeLinecap='round' />

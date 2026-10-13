@@ -296,7 +296,7 @@ export const es: Record<string, GenericCaseStudyContent> = {
     slug: 'sargotech',
     meta: {
       title: 'SargoTech',
-      description: 'Proyecto de un equipo de 4 para anticipar el sargazo en las playas del Caribe con datos de observación y operación local. Soy el CTO y desarrollador principal.',
+      description: 'Proyecto de un equipo de 4 para anticipar el sargazo en las playas del Caribe con un semáforo costero y operación local. Soy el CTO y desarrollador principal.',
       role: 'CTO y desarrollador principal, equipo de 4 cofundadores',
       year: '2026',
       readTime: '4 min de lectura'
@@ -311,7 +311,7 @@ export const es: Record<string, GenericCaseStudyContent> = {
         title: '1. Contexto',
         paragraphs: [
           'Cuando ves el sargazo en la arena, el impacto ya llegó. La respuesta tiene que empezar antes, mar adentro, con tiempo suficiente para contenerlo, recolectarlo y disponer de él como se debe.',
-          'La visión es convertir datos de observación, logística local y trazabilidad ambiental en playas más limpias y un turismo más resiliente.'
+          'La visión es convertir la logística local y la trazabilidad ambiental en playas más limpias y un turismo más resiliente.'
         ]
       },
       {
@@ -328,7 +328,7 @@ export const es: Record<string, GenericCaseStudyContent> = {
             { id: 'amber', label: 'Amarillo', tone: 'amber', title: 'Sargazo próximo', body: 'El sargazo se acerca. Buen momento para planificar y verificar en campo.' },
             { id: 'green', label: 'Verde', tone: 'green', title: 'Sin alerta cercana', body: 'Ahora mismo no hay alerta de sargazo cerca de esta playa.' }
           ],
-          sampleNote: 'Etiquetas tomadas del mapa público de sargotech.com. Los conteos en vivo cambian con los datos, por eso no los cito aquí.'
+          sampleNote: 'Etiquetas tomadas del mapa público de sargotech.com. Los conteos en vivo cambian, por eso no los cito aquí.'
         }
       },
       {
@@ -340,7 +340,7 @@ export const es: Record<string, GenericCaseStudyContent> = {
           description: 'Recorre el flujo que describe el sitio.',
           ...nav,
           steps: [
-            { title: 'Predecir', body: 'Estimar la trayectoria y la ventana de llegada a partir de los datos de observación y las condiciones del mar.' },
+            { title: 'Predecir', body: 'Estimar la trayectoria, la zona y la ventana de llegada.' },
             { title: 'Contener', body: 'Barreras antisargazo, con inspecciones para revisar la contención.' },
             { title: 'Recolectar', body: 'Coordinar la recolección en la playa, con validación en campo.' },
             { title: 'Gestionar la disposición', body: 'Traslado coordinado hasta el destino final, con trazabilidad.' }

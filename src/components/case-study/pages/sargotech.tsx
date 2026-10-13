@@ -6,6 +6,7 @@ import Reveal from '../kit/reveal'
 import { BeachScanScene, ResponseScene } from '../sargotech/scenes'
 import ObservatoryLazy from '../sargotech/observatory-lazy'
 import { backLink, type Lang } from './shared'
+import MoreCaseStudies from '../more-case-studies'
 
 const COPY = {
 	en: {
@@ -32,7 +33,7 @@ const COPY = {
 		c2: {
 			title: 'How a beach turns red',
 			body: [
-				'With observation data, each beach looks at how strong the floating sargassum signal is and how close it is. The rules are short on purpose, so anyone on the team can explain why a beach changed color.',
+				'Each beach looks at how strong the floating sargassum signal is and how close it is. The rules are short on purpose, so anyone on the team can explain why a beach changed color.',
 			],
 		},
 		rules: {
@@ -96,7 +97,7 @@ const COPY = {
 		c2: {
 			title: 'Cómo una playa se pone en rojo',
 			body: [
-				'Con datos de observación, cada playa mira qué tan fuerte es la señal de sargazo flotante y qué tan cerca está. Las reglas son cortas a propósito, para que cualquiera del equipo pueda explicar por qué una playa cambió de color.',
+				'Cada playa mira qué tan fuerte es la señal de sargazo flotante y qué tan cerca está. Las reglas son cortas a propósito, para que cualquiera del equipo pueda explicar por qué una playa cambió de color.',
 			],
 		},
 		rules: {
@@ -225,6 +226,7 @@ export default function SargoTechCaseStudy({ lang }: { lang: Lang }) {
 
 			<Decisions title={t.decisionsTitle} items={[...t.decisions]} />
 			<Outro title={t.outro.title} note={t.outro.note} links={[...t.links]} />
+			<MoreCaseStudies lang={lang} current='sargotech' />
 		</Shell>
 	)
 }

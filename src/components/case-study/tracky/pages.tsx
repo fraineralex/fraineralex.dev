@@ -299,7 +299,7 @@ function MacroCards ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
         return (
           <TkCard key={item.key} className='p-4 transition-shadow hover:shadow-lg motion-reduce:transition-none'>
             <div className='flex items-center justify-between pb-2'>
-              <h3 className='text-sm font-medium'>{item.name}</h3>
+              <h2 className='text-sm font-medium'>{item.name}</h2>
               <Icon className='h-4 w-4 text-[hsl(var(--muted-foreground))]' aria-hidden='true' />
             </div>
             <p className='text-xl font-bold tabular-nums sm:text-2xl'>
@@ -440,7 +440,7 @@ export function DashboardPage ({ lang, foods, exercises, anchor, onOpenChat, onN
   return (
     <div className='space-y-4 pb-2'>
       <div className='flex flex-col-reverse gap-3 md:flex-row md:items-center md:justify-between'>
-        <h1 className='text-center text-2xl font-bold uppercase md:text-left'>{formatLong(anchor, lang)}</h1>
+        <p className='text-center text-2xl font-bold uppercase md:text-left'>{formatLong(anchor, lang)}</p>
         <div className='flex flex-wrap justify-center gap-2 md:justify-end'>
           <TkButton size='sm' className='flex-grow sm:flex-grow-0' onClick={(event) => onOpenChat('dashboard', event.currentTarget)}>
             <MessageSquare className='h-4 w-4' aria-hidden='true' /> {text.food.aiChat}
@@ -502,7 +502,7 @@ export function FoodPage ({ lang, foods, anchor, onOpenChat }: PageProps) {
   return (
     <div className='pb-4'>
       <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-        <h1 className='hidden text-2xl font-bold uppercase sm:block'>{formatLong(anchor, lang)}</h1>
+        <p className='hidden text-2xl font-bold uppercase sm:block'>{formatLong(anchor, lang)}</p>
         <div className='flex w-full flex-wrap justify-center gap-2 sm:w-auto sm:justify-end'>
           <TkButton size='sm' onClick={(event) => onOpenChat('food', event.currentTarget)}>
             <PlusCircle className='h-4 w-4' aria-hidden='true' /> {text.food.registerFood}
@@ -634,7 +634,7 @@ export function ExercisePage ({ lang, exercises, anchor, onOpenChat }: PageProps
   return (
     <div className='space-y-5 pb-4'>
       <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-        <h1 className='hidden text-xl font-bold uppercase sm:block lg:text-2xl'>{formatLong(anchor, lang)}</h1>
+        <p className='hidden text-xl font-bold uppercase sm:block lg:text-2xl'>{formatLong(anchor, lang)}</p>
         <div className='flex w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end'>
           <ChatButtons lang={lang} context='exercise' onOpenChat={onOpenChat} extra='exercise' />
         </div>
@@ -808,7 +808,7 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
 
   return (
     <div className='space-y-6 pb-4'>
-      <h1 className='text-2xl font-bold uppercase'>{formatLong(anchor, lang)}</h1>
+      <p className='text-2xl font-bold uppercase'>{formatLong(anchor, lang)}</p>
       <header className='rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 shadow-lg sm:p-6'>
         <h2 className='mb-4 flex items-center text-xl font-semibold sm:text-2xl'>
           <Filter className='mr-2 h-5 w-5' aria-hidden='true' /> {text.diary.filters}
@@ -940,7 +940,7 @@ export function SettingsPage ({ lang }: { lang: Lang }) {
   return (
     <div className='space-y-5 pb-6'>
       <header>
-        <h1 className='text-2xl font-bold'>{text.settings.title}</h1>
+        <p className='text-2xl font-bold'>{text.settings.title}</p>
         <p className={`mt-1 text-sm ${tk.muted}`}>{text.settings.subtitle}</p>
       </header>
       <section className='space-y-2'>

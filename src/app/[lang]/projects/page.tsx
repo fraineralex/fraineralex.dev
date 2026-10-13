@@ -3,136 +3,16 @@ import { FiArrowLeft } from 'react-icons/fi'
 import { Locale, i18n } from '@/i18n-config'
 import { getDictionary } from '@/get-dictionary'
 import AllProjectsContent from '@/components/project/all-projects-content'
+import { JsonLdScript } from '@/components/layout/json-ld'
 import Link from 'next/link'
-import { Metadata } from 'next'
-import { localizedUrl, SITE_URL } from '@/lib/site-metadata'
-
-const englishMetadata: Metadata = {
-  title: 'Projects | Frainer Encarnación',
-  description:
-    'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
-  keywords: ['Side Projects', 'Open Source Projects', 'Client Work', 'Web Development Projects', 'Software Engineering Projects'],
-  openGraph: {
-    title: 'Projects | Frainer Encarnación',
-    description:
-      'A list of projects that I have worked on, including personal projects, open source projects, and client work.',
-    url: `${SITE_URL}/projects`,
-    siteName: new URL(SITE_URL).host,
-    images: [
-      {
-        url: `${SITE_URL}/images/projects/og-projects.webp`,
-        width: 1920,
-        height: 1080
-      }
-    ],
-    locale: 'en-US',
-    type: 'website'
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1
-    }
-  },
-  twitter: {
-    title: 'Projects | Frainer Encarnación',
-    card: 'summary_large_image',
-    creator: '@fraineralex',
-    site: '@fraineralex',
-    images: [
-      {
-        url: `${SITE_URL}/images/projects/og-projects.webp`,
-        width: 1920,
-        height: 1080
-      }
-    ],
-    description:
-      'A list of projects that I have worked on, including personal projects, open source projects, and client work.'
-  },
-  icons: {
-    shortcut: '/favicon.ico'
-  },
-  alternates: {
-    canonical: localizedUrl('en', '/projects'),
-    languages: {
-      'es-DO': localizedUrl('es', '/projects'),
-      'en-US': localizedUrl('en', '/projects'),
-      'x-default': localizedUrl('en', '/projects')
-    },
-  }
-}
-
-const spanishMetadata: Metadata = {
-  title: 'Proyectos | Frainer Encarnación',
-  description:
-    'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
-  keywords: ['Proyectos Personales', 'Proyectos de Código Abierto', 'Trabajo para Clientes', 'Proyectos de Desarrollo Web', 'Proyectos de Ingeniería de Software'],
-  openGraph: {
-    title: 'Proyectos | Frainer Encarnación',
-    description:
-      'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.',
-    url: `${SITE_URL}/es/projects`,
-    siteName: new URL(SITE_URL).host,
-    images: [
-      {
-        url: `${SITE_URL}/images/projects/es-og-projects.webp`,
-        width: 1920,
-        height: 1080
-      }
-    ],
-    locale: 'es-DO',
-    type: 'website'
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1
-    }
-  },
-  twitter: {
-    title: 'Proyectos | Frainer Encarnación',
-    card: 'summary_large_image',
-    creator: '@fraineralex',
-    site: '@fraineralex',
-    images: [
-      {
-        url: `${SITE_URL}/images/projects/es-og-projects.webp`,
-        width: 1920,
-        height: 1080
-      }
-    ],
-    description:
-      'Una lista de proyectos en los que he trabajado, incluyendo proyectos personales, proyectos de código abierto y trabajo para clientes.'
-  },
-  icons: {
-    shortcut: '/favicon.ico'
-  },
-  alternates: {
-    canonical: localizedUrl('es', '/projects'),
-    languages: {
-      'es-DO': localizedUrl('es', '/projects'),
-      'en-US': localizedUrl('en', '/projects'),
-      'x-default': localizedUrl('en', '/projects')
-    },
-  }
-}
+import { projectsJsonLd, projectsMetadata } from '@/lib/case-study-seo'
 
 export const dynamicParams = false
 
 export async function generateMetadata ({ params }: Props) {
   const { lang } = await params
   if (!i18n.locales.some(locale => locale === lang)) notFound()
-  return lang === 'es' ? spanishMetadata : englishMetadata
+  return projectsMetadata(lang === 'es' ? 'es' : 'en')
 }
 
 const caseStudyOrder = ['viollet', 'tracky', 'sargotech', 'chatify', 'chess-ai']
@@ -157,6 +37,7 @@ export default async function Projects ({ params }: Props) {
 
   return (
     <main className='mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0'>
+      <JsonLdScript data={projectsJsonLd(lang)} />
       <section className='lg:py-24'>
         <header className='lg:pb-3'>
           <Link

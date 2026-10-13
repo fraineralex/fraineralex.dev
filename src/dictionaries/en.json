@@ -231,12 +231,13 @@
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "imageSrc": "tracky.webp",
+        "imageAlt": "Tracky landing page with the headline Smart, simple Fitness Tracking, a meal, and a nutrition summary",
         "starsOnGithub": 25,
         "caseStudyUrl": "/projects/tracky"
       },
       {
         "projectName": "SargoTech",
-        "description": "Coastal technology from the Dominican Republic that anticipates sargassum with satellite data, anti sargassum barriers and local operations. A team project where I am the CTO and lead developer.",
+        "description": "Coastal technology from the Dominican Republic that anticipates sargassum for hotels, municipalities, and field teams. A team of 4 where I am the CTO and lead developer.",
         "technologies": ["React", "TypeScript", "MapLibre"],
         "deployUrl": "https://sargotech.com",
         "caseStudyUrl": "/projects/sargotech",
@@ -263,8 +264,20 @@
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
         "imageSrc": "chatify.webp",
+        "imageAlt": "Chatify landing page showing a chat with a contact list, a PDF file, and a shared image",
         "starsOnGithub": 14,
         "caseStudyUrl": "/projects/chatify"
+      },
+      {
+        "projectName": "Chess AI",
+        "description": "Chess game against an AI powered by the minimax algorithm with alpha-beta pruning and heuristics. It is designed to determine the optimal move within a specified depth.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "imageSrc": "chess.webp",
+        "imageAlt": "Chess AI board on a green and cream theme, with a knight on a highlighted square",
+        "starsOnGithub": 0,
+        "caseStudyUrl": "/projects/chess-ai"
       }
     ],
     "link": {
@@ -313,7 +326,7 @@
       {
         "title": "SargoTech",
         "shortDescription": "Coastal intelligence against sargassum. Team project, I am CTO.",
-        "description": "Coastal technology from the Dominican Republic that anticipates sargassum with satellite data, anti sargassum barriers and local operations. A team project where I am the CTO and lead developer.",
+        "description": "Coastal technology from the Dominican Republic that anticipates sargassum for hotels, municipalities, and field teams. A team of 4 where I am the CTO and lead developer.",
         "technologies": ["React", "TypeScript", "MapLibre"],
         "deployUrl": "https://sargotech.com",
         "caseStudyUrl": "/projects/sargotech",

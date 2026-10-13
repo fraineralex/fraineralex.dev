@@ -234,12 +234,13 @@
         "deployUrl": "https://tracky.fit",
         "githubRepositoryUrl": "https://github.com/fraineralex/tracky",
         "imageSrc": "tracky.webp",
+        "imageAlt": "Página de Tracky con el titular de seguimiento fitness, una comida y un resumen de nutrición",
         "starsOnGithub": 25,
         "caseStudyUrl": "/es/projects/tracky"
       },
       {
         "projectName": "SargoTech",
-        "description": "Tecnología costera desde República Dominicana que anticipa el sargazo con datos satelitales, barreras antisargazo y operación local. Un proyecto en equipo donde soy el CTO y desarrollador principal.",
+        "description": "Tecnología costera desde República Dominicana que anticipa el sargazo para hoteles, municipios y equipos de campo. Un equipo de 4 donde soy el CTO y desarrollador principal.",
         "technologies": ["React", "TypeScript", "MapLibre"],
         "deployUrl": "https://sargotech.com",
         "caseStudyUrl": "/es/projects/sargotech",
@@ -265,8 +266,20 @@
         "deployUrl": "https://chatify.fraineralex.dev",
         "githubRepositoryUrl": "https://github.com/fraineralex/chatify",
         "imageSrc": "chatify.webp",
+        "imageAlt": "Página de Chatify con un chat, la lista de contactos, un archivo PDF y una imagen compartida",
         "starsOnGithub": 14,
         "caseStudyUrl": "/es/projects/chatify"
+      },
+      {
+        "projectName": "Ajedrez AI",
+        "description": "Juego de ajedrez contra una IA impulsada por el algoritmo minimax con poda alfa-beta y heurísticas. Está diseñado para determinar el movimiento óptimo dentro de una profundidad especificada.",
+        "technologies": ["Python", "Numpy", "Pygame"],
+        "deployUrl": "https://user-images.githubusercontent.com/89224196/216224624-7c3c1718-6f93-4592-8720-afc9e4b2dc11.mp4",
+        "githubRepositoryUrl": "https://github.com/fraineralex/ChessAI",
+        "imageSrc": "chess.webp",
+        "imageAlt": "Tablero de Chess AI en verde y crema, con un caballo sobre una casilla resaltada",
+        "starsOnGithub": 0,
+        "caseStudyUrl": "/es/projects/chess-ai"
       }
     ],
     "link": {
@@ -315,7 +328,7 @@
       {
         "title": "SargoTech",
         "shortDescription": "Inteligencia costera contra el sargazo. Proyecto en equipo, soy CTO.",
-        "description": "Tecnología costera desde República Dominicana que anticipa el sargazo con datos satelitales, barreras antisargazo y operación local. Un proyecto en equipo donde soy el CTO y desarrollador principal.",
+        "description": "Tecnología costera desde República Dominicana que anticipa el sargazo para hoteles, municipios y equipos de campo. Un equipo de 4 donde soy el CTO y desarrollador principal.",
         "technologies": ["React", "TypeScript", "MapLibre"],
         "deployUrl": "https://sargotech.com",
         "caseStudyUrl": "/es/projects/sargotech",

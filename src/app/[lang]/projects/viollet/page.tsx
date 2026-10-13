@@ -60,7 +60,8 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
       canonical: path,
       languages: {
         'en-US': '/projects/viollet',
-        'es-DO': '/es/projects/viollet'
+        'es-DO': '/es/projects/viollet',
+        'x-default': '/projects/viollet'
       }
     }
   }

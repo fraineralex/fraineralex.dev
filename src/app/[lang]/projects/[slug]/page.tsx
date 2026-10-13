@@ -58,7 +58,11 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: path(locale, slug),
-      languages: { 'en-US': `/projects/${slug}`, 'es-DO': `/es/projects/${slug}` }
+      languages: {
+        'en-US': `/projects/${slug}`,
+        'es-DO': `/es/projects/${slug}`,
+        'x-default': `/projects/${slug}`
+      }
     }
   }
 }

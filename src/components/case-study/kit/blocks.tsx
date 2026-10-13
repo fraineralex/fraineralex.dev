@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import Reveal from './reveal'
 
 /** Layered architecture diagram: columns of cards with a dashed connector between layers. */
 export function Layers({ layers, caption }: { layers: { title: string; items: { name: string; detail: string }[] }[]; caption?: string }) {
@@ -31,19 +32,19 @@ export function Layers({ layers, caption }: { layers: { title: string; items: { 
 	)
 }
 
-/** Feature grid. Each tile is a portfolio card with an icon slot. */
+/** Feature grid. Tiles fade up in a stagger when the row scrolls into view. */
 export function Tiles({ items, cols = 3 }: { items: { icon?: ReactNode; title: string; body: string }[]; cols?: 2 | 3 | 4 }) {
 	const grid = cols === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : cols === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'
 	return (
 		<ul className={`grid gap-3 ${grid}`}>
-			{items.map((item) => (
-				<li key={item.title} className='min-w-0 rounded-lg border border-slate-700/50 bg-slate-800/30 p-5'>
+			{items.map((item, index) => (
+				<Reveal key={item.title} as='li' delay={index * 90} className='min-w-0 rounded-lg border border-slate-700/50 bg-slate-800/30 p-5'>
 					{item.icon && <span className='inline-flex size-9 items-center justify-center rounded-lg bg-teal-400/10 text-teal-300'>{item.icon}</span>}
 					<h3 className={`${item.icon ? 'mt-4' : ''} font-medium text-slate-100`}>{item.title}</h3>
 					<p className='mt-1.5 text-sm leading-relaxed text-slate-400' style={{ textWrap: 'pretty' }}>
 						{item.body}
 					</p>
-				</li>
+				</Reveal>
 			))}
 		</ul>
 	)

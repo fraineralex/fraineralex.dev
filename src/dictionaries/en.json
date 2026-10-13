@@ -621,7 +621,13 @@
       },
       "backLink": {
         "label": "Back to projects",
-        "url": "/projects"
+        "url": "/en/projects"
+      },
+      "labels": {
+        "role": "Role",
+        "year": "Year",
+        "readTime": "Read time",
+        "technologies": "Technologies used"
       },
       "hero": {
         "summary": "Viollet is a side project I designed and built end to end. It connects Gmail, ingests bank transaction notifications, categorizes spending with AI, and surfaces budgets and insights without asking for online banking credentials.",
@@ -731,7 +737,7 @@
             }
           ],
           "appLabel": "Sample session",
-          "appDescription": "A simulated Viollet session with the public demo's signed-in user. Open the dashboard, expenses, budgets, and inbox."
+          "appDescription": "A simulated Viollet session with the public demo's signed-in user. It shows the dashboard, expenses, budgets, and inbox."
         },
         "assistant": {
           "title": "7. Assistant",

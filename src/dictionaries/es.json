@@ -199,7 +199,7 @@
     "cards": [
       {
         "projectName": "Viollet",
-        "description": "Plataforma de finanzas personales con IA que rastrea y categoriza automáticamente gastos a partir de correos de transacciones bancarias, convirtiendo notificaciones del inbox en insights accionables sin entrada manual.",
+        "description": "Plataforma de finanzas personales con IA que rastrea y categoriza automáticamente gastos a partir de correos de transacciones bancarias, convirtiendo notificaciones de la bandeja en hallazgos accionables sin entrada manual.",
         "technologies": [
           "TypeScript",
           "Next.js",
@@ -209,7 +209,7 @@
           "AI SDK",
           "Gmail API",
           "Google Pub/Sub",
-          "Webhooks"
+          "Avisos web"
         ],
         "deployUrl": "https://viollet.app",
         "caseStudyUrl": "/es/projects/viollet",
@@ -295,7 +295,7 @@
       {
         "title": "Viollet",
         "shortDescription": "Plataforma de finanzas personales con IA que rastrea gastos desde correos bancarios.",
-        "description": "Plataforma de finanzas personales con IA que rastrea y categoriza automáticamente gastos a partir de correos de transacciones bancarias, convirtiendo notificaciones del inbox en insights accionables sin entrada manual.",
+        "description": "Plataforma de finanzas personales con IA que rastrea y categoriza automáticamente gastos a partir de correos de transacciones bancarias, convirtiendo notificaciones de la bandeja en hallazgos accionables sin entrada manual.",
         "technologies": [
           "TypeScript",
           "Next.js",
@@ -305,7 +305,7 @@
           "AI SDK",
           "Gmail API",
           "Google Pub/Sub",
-          "Webhooks"
+          "Avisos web"
         ],
         "deployUrl": "https://viollet.app",
         "caseStudyUrl": "/es/projects/viollet",
@@ -625,8 +625,14 @@
         "label": "Volver a proyectos",
         "url": "/es/projects"
       },
+      "labels": {
+        "role": "Rol",
+        "year": "Año",
+        "readTime": "Tiempo de lectura",
+        "technologies": "Tecnologías utilizadas"
+      },
       "hero": {
-        "summary": "Viollet es un proyecto personal que diseñé y construí de punta a punta. Conecta Gmail, ingiere notificaciones de transacciones bancarias, categoriza gastos con IA y muestra presupuestos e insights sin pedir credenciales de banca en línea.",
+        "summary": "Viollet es un proyecto personal que diseñé y construí de punta a punta. Conecta Gmail, ingiere notificaciones de transacciones bancarias, categoriza gastos con IA y muestra presupuestos y hallazgos sin pedir credenciales de banca en línea.",
         "technologies": [
           "TypeScript",
           "Next.js",
@@ -636,7 +642,7 @@
           "AI SDK",
           "Gmail API",
           "Google Pub/Sub",
-          "Webhooks",
+          "Avisos web",
           "Vercel"
         ]
       },
@@ -651,7 +657,7 @@
         "constraints": {
           "title": "2. Restricciones",
           "paragraphs": [
-            "Viollet es un proyecto personal en solitario, así que el alcance debía centrarse en una ruta de ingesta confiable en lugar de construir una plataforma open-banking completa desde el día uno.",
+            "Viollet es un proyecto personal en solitario, así que el alcance debía centrarse en una ruta de ingesta confiable en lugar de construir una plataforma de banca abierta completa desde el día uno.",
             "Los datos financieros exigen más rigor en seguridad y confianza: sin contraseñas bancarias, acceso de solo lectura a Gmail con consentimiento explícito, y un repositorio privado mientras el producto sigue en beta pública."
           ],
           "bullets": [
@@ -664,36 +670,36 @@
         "responsibility": {
           "title": "3. Mi responsabilidad",
           "paragraphs": [
-            "Asumí el producto desde la definición del problema hasta producción: límites del sistema, modelo de datos, flujo Gmail/OAuth, ingesta por webhooks, categorización asistida por IA, UX del dashboard y despliegue.",
-            "Eso incluyó decidir qué automatizar primero (captura y categorización por correo), qué posponer (APIs bancarias directas) y cómo explicar los trade-offs en el sitio público para que los usuarios entiendan acceso y revocación."
+            "Asumí el producto desde la definición del problema hasta producción: límites del sistema, modelo de datos, flujo Gmail/OAuth, ingesta por avisos automáticos, categorización asistida por IA, experiencia del panel y despliegue.",
+            "Eso incluyó decidir qué automatizar primero (captura y categorización por correo), qué posponer (APIs bancarias directas) y cómo explicar las contrapartidas en el sitio público para que las personas entiendan acceso y revocación."
           ]
         },
         "architecture": {
           "title": "4. Arquitectura",
           "paragraphs": [
-            "El runtime tiene tres caminos que cooperan: la app con sesión en Next.js sobre Vercel (Clerk para las sesiones), la ingesta asíncrona de correo (Gmail watch más un push de Pub/Sub hacia una ruta webhook) y Drizzle sobre Turso para el ledger.",
-            "Una notificación soportada se limpia, se extrae con el AI SDK a un objeto tipado (en producción, a través de Vercel AI Gateway), se categoriza y se guarda. El dashboard y el asistente leen esas filas para presupuestos, tendencias y respuestas."
+            "El sistema tiene tres caminos que cooperan: la app con sesión en Next.js sobre Vercel (Clerk para las sesiones), la ingesta asíncrona de correo (users.watch de Gmail más un aviso de Pub/Sub hacia una ruta de avisos) y Drizzle sobre Turso para el libro.",
+            "Una notificación soportada se limpia, se extrae con el AI SDK a un objeto tipado (en producción, a través de Vercel AI Gateway), se categoriza y se guarda. El panel y el asistente leen esas filas para presupuestos, tendencias y respuestas."
           ],
           "diagramCaption": "Cada nodo explica, por turnos, cómo se reparten el trabajo Gmail, Pub/Sub, Next.js, Clerk, Vercel, el AI SDK y Turso."
         },
         "tradeOffs": {
-          "title": "5. Decisiones y trade-offs",
+          "title": "5. Decisiones y contrapartidas",
           "items": [
             {
               "decision": "Notificaciones por correo en lugar de APIs bancarias",
-              "rationale": "Las APIs bancarias y agregadores ampliarían cobertura en teoría, pero añaden overhead de partnerships y soporte regional desigual. Las alertas por correo ya llegan a los usuarios y permiten lanzar una beta funcional sin almacenar credenciales bancarias."
+              "rationale": "Las APIs bancarias y agregadores ampliarían cobertura en teoría, pero añaden la carga de llegar a acuerdos y un soporte regional desigual. Las alertas por correo ya llegan a las personas y permiten lanzar una beta funcional sin almacenar credenciales bancarias."
             },
             {
               "decision": "Turso + Drizzle para la capa de datos",
-              "rationale": "Una base libSQL administrada en el edge reduce la carga operativa para un constructor en solitario, mientras Drizzle aporta migraciones y consultas tipadas. El trade-off es diseñar ingesta idempotente y segura para webhooks en lugar de un worker monolítico."
+              "rationale": "Una base libSQL administrada en el perímetro reduce la carga operativa para un constructor en solitario, mientras Drizzle aporta migraciones y consultas tipadas. La contrapartida es diseñar una ingesta idempotente y segura ante avisos automáticos en lugar de un solo proceso que lo hiciera todo."
             },
             {
-              "decision": "Categorización asistida por IA junto a reglas de parsing",
-              "rationale": "Las reglas puras fallan cuando los bancos cambian plantillas o redacción. El AI SDK ayuda a clasificar comercios y categorías ambiguos, con restricciones de parsing para mantener salidas estructuradas. El trade-off es vigilar calidad y acotar prompts a metadatos financieros, no al correo personal general."
+              "decision": "Categorización asistida por IA junto a reglas de lectura",
+              "rationale": "Las reglas puras fallan cuando los bancos cambian plantillas o redacción. El AI SDK ayuda a clasificar comercios y categorías ambiguos, con restricciones de lectura para mantener salidas estructuradas. La contrapartida es vigilar la calidad y acotar las instrucciones a metadatos financieros, no al correo personal general."
             },
             {
               "decision": "Clerk para autenticación",
-              "rationale": "Clerk redujo el tiempo hasta producción para gestión de sesiones y me permitió enfocar ingeniería en sincronización Gmail e ingesta confiable. El trade-off es acoplarse a un proveedor hospedado, aceptable en una beta donde importan velocidad y defaults de seguridad."
+              "rationale": "Clerk redujo el tiempo hasta producción para gestión de sesiones y me permitió enfocar ingeniería en sincronización Gmail e ingesta confiable. La contrapartida es acoplarse a un proveedor hospedado, aceptable en una beta donde importan la velocidad y los valores seguros por defecto."
             }
           ]
         },
@@ -701,30 +707,30 @@
           "title": "6. Impacto",
           "paragraphs": [
             "Viollet está en vivo en viollet.app como beta pública gratuita. Los usuarios conectan Gmail, seleccionan remitentes financieros autorizados y obtienen seguimiento automatizado de gastos desde notificaciones. Esto reemplaza el registro manual en el flujo soportado.",
-            "El alcance público actual incluye soporte para más de 15 bancos y tarjetas dominicanas (con evaluación de instituciones adicionales que envían alertas por correo), además de presupuestos, tendencias de gasto e insights proactivos derivados de transacciones categorizadas."
+            "El alcance público actual incluye soporte para más de 15 bancos y tarjetas dominicanas (con evaluación de instituciones adicionales que envían alertas por correo), además de presupuestos, tendencias de gasto y hallazgos proactivos derivados de transacciones categorizadas."
           ],
           "bullets": [
             "Automatización Gmail → gastos categorizados sin entrada manual para cuentas conectadas",
-            "Sin recolección de usuarios ni contraseñas de banca en línea",
+            "Sin recolección de nombres de usuario ni contraseñas de banca en línea",
             "Los usuarios pueden revocar acceso a Gmail desde Google o dentro del flujo del producto"
           ]
         },
         "operationalQuality": {
           "title": "8. Calidad operativa",
           "paragraphs": [
-            "Como el producto maneja metadatos financieros, la implementación cuida transporte y almacenamiento: datos cifrados en tránsito y en reposo, permisos Gmail de solo lectura acotados a remitentes elegidos por el usuario, y copy claro en el sitio público sobre el proceso de verificación de Google para permisos restringidos.",
-            "La ingesta está pensada para confiabilidad en el límite del webhook: validar entregas push, hacer escrituras idempotentes cuando sea posible y aislar parsing/categorización para que una plantilla defectuosa no corrompa datos ajenos."
+            "Como el producto maneja metadatos financieros, la implementación cuida transporte y almacenamiento: datos cifrados en tránsito y en reposo, permisos Gmail de solo lectura acotados a remitentes elegidos por la persona, y texto claro en el sitio público sobre el proceso de verificación de Google para permisos restringidos.",
+            "La ingesta está pensada para ser confiable en el límite del aviso automático: validar las entregas de los avisos, hacer escrituras idempotentes cuando sea posible y aislar la lectura y la categorización para que una plantilla defectuosa no corrompa datos ajenos."
           ],
           "bullets": [
             "Verificación de app de Google completada; permisos Gmail restringidos siguen el ciclo de evaluación de seguridad de Google",
-            "FAQ pública documenta acceso, revocación y uso de datos sin reventa publicitaria",
-            "Ruta Webhook + Pub/Sub desacopla la entrega de correo de la latencia UI request/response"
+            "Las preguntas frecuentes documentan acceso, revocación y uso de datos sin reventa publicitaria",
+            "La ruta de avisos y Pub/Sub separa la entrega de correo de la latencia de la interfaz entre solicitud y respuesta"
           ]
         },
         "proof": {
           "demoLabel": "9. Prueba",
           "demoUrl": "https://viollet.app",
-          "screenshotAlt": "Dashboard de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
+          "screenshotAlt": "Panel de Viollet mostrando seguimiento automatizado de gastos desde notificaciones bancarias por correo",
           "note": "Explora la beta pública en viollet.app. El repositorio fuente permanece privado durante la beta; este caso de estudio y el producto desplegado son la evidencia pública. También escribí sobre control de gastos en República Dominicana en el blog de Viollet.",
           "relatedLinks": [
             {
@@ -733,13 +739,13 @@
             }
           ],
           "appLabel": "Sesión de ejemplo",
-          "appDescription": "Una simulación de Viollet con el usuario de la demo pública. Recorre el dashboard, los gastos, los presupuestos y el inbox."
+          "appDescription": "Una simulación de Viollet con el usuario de la demo pública. Muestra el panel, los gastos, los presupuestos y la bandeja."
         },
         "assistant": {
           "title": "7. Asistente",
           "paragraphs": [
-            "El asistente dentro de la app no adivina las finanzas de alguien. Cada respuesta se apoya en tools sobre las filas de esa persona: desglose de gasto, resumen, transacciones, presupuestos, metas de ahorro y algunos ajustes.",
-            "El panel de abajo repite tres respuestas del mismo ledger de ejemplo que la landing. Muestra la tool que llamaría el asistente en producción. No contacta un modelo en vivo."
+            "El asistente dentro de la app no adivina las finanzas de alguien. Cada respuesta se apoya en herramientas sobre las filas de esa persona: desglose de gasto, resumen, transacciones, presupuestos, metas de ahorro y algunos ajustes.",
+            "El panel de abajo repite tres respuestas del mismo libro de ejemplo que la página de inicio. Muestra la herramienta que llamaría el asistente en producción. No contacta un modelo en vivo."
           ]
         }
       },
@@ -756,7 +762,7 @@
         "app": {
           "frameLabel": "Simulación de la app Viollet con un usuario en sesión",
           "url": "viollet.app",
-          "simulationNote": "Ledger de ejemplo de la demo en viollet.app. No es una cuenta real.",
+          "simulationNote": "Libro de ejemplo de la demo en viollet.app. No es una cuenta real.",
           "signedIn": "Sesión iniciada",
           "userName": "Frainer Encarnación",
           "userEmail": "frainer@viollet.app",
@@ -764,13 +770,13 @@
           "navLabel": "Secciones de Viollet",
           "overview": "Resumen",
           "tracking": "Seguimiento",
-          "product": "Tracker de gastos",
+          "product": "Registro de gastos",
           "version": "beta",
           "tabs": {
-            "dashboard": "Dashboard",
+            "dashboard": "Panel",
             "expenses": "Gastos",
             "budgets": "Presupuestos",
-            "inbox": "Inbox"
+            "inbox": "Bandeja"
           },
           "period": "Este mes",
           "income": "Ingresos",
@@ -833,7 +839,7 @@
           "listLabel": "Bandeja de ejemplo",
           "alert": "Alerta",
           "noise": "Ignorado",
-          "prompt": "Los mensajes se abren solos y muestran si entrarían al tracker.",
+          "prompt": "Los mensajes se abren solos y muestran si entrarían al registro.",
           "messages": [
             {
               "id": "bravo",
@@ -843,7 +849,7 @@
               "snippet": "Transacción en Visa Premia ••7392. Monto: DOP 2,591.00.",
               "kind": "alert",
               "verdict": "Alerta financiera",
-              "detail": "El remitente está confirmado para Banreservas. Si la persona autorizó ese banco, el mensaje entra al pipeline. Hasta entonces sigue siendo texto libre en Gmail."
+              "detail": "El remitente está confirmado para Banreservas. Si la persona autorizó ese banco, el mensaje entra al flujo. Hasta entonces sigue siendo texto libre en Gmail."
             },
             {
               "id": "qik",
@@ -898,8 +904,8 @@
           "scope": "gmail.readonly",
           "scopeDetail": "El único permiso del buzón es https://www.googleapis.com/auth/gmail.readonly. Viollet puede leer correo. No puede enviar, borrar ni modificar mensajes.",
           "review": "Revisar permiso",
-          "bankLogin": "Probar un login bancario",
-          "bankRefusal": "Rechazado. Viollet no recoge usuarios ni contraseñas de banca en línea.",
+          "bankLogin": "Probar un inicio de sesión bancario",
+          "bankRefusal": "Rechazado. Viollet no recoge nombres de usuario ni contraseñas de banca en línea.",
           "grantReady": "Gmail de solo lectura. Remitentes autorizados ({count}):",
           "noneSelected": "Sin una institución autorizada, el correo de un remitente desconocido se ignora.",
           "summaryLabel": "Resultado del permiso"
@@ -914,23 +920,23 @@
           "items": [
             {
               "id": "framing",
-              "title": "Problema y copy público",
+              "title": "Problema y texto público",
               "summary": "Qué automatizar primero y cómo explicarlo.",
               "owned": "Definí el alcance alrededor de alertas por correo, el flujo de consentimiento y el texto público sobre acceso y revocación.",
-              "deferred": "Una plataforma open-banking con credenciales de cada banco."
+              "deferred": "Una plataforma de banca abierta con credenciales de cada banco."
             },
             {
               "id": "schema",
               "title": "Modelo en Turso",
               "summary": "Drizzle sobre libSQL.",
               "owned": "El esquema de instituciones, cuentas, correos, transacciones, categorías y el estado de sincronización de Gmail.",
-              "deferred": "Un worker monolítico que procesara el buzón dentro del request de la UI."
+              "deferred": "Un solo proceso que procesara el buzón dentro de la solicitud de la interfaz."
             },
             {
               "id": "ingest",
-              "title": "OAuth, watch y webhook",
-              "summary": "De Gmail a un job idempotente.",
-              "owned": "El permiso gmail.readonly, users.watch, el push de Pub/Sub a /api/gmail/webhook y la coalescencia de entregas.",
+              "title": "OAuth, users.watch y aviso automático",
+              "summary": "De Gmail a un trabajo idempotente.",
+              "owned": "El permiso gmail.readonly, users.watch, el aviso de Pub/Sub a /api/gmail/webhook y la agrupación de entregas.",
               "deferred": "Pedir permiso para modificar o enviar correo."
             },
             {
@@ -942,16 +948,16 @@
             },
             {
               "id": "ux",
-              "title": "Dashboard y asistente",
+              "title": "Panel y asistente",
               "summary": "Lo que la persona ve y pregunta.",
-              "owned": "Gastos, presupuestos, cuentas y un asistente que llama tools sobre las filas de esa persona.",
-              "deferred": "Un chat genérico sin acceso al ledger."
+              "owned": "Gastos, presupuestos, cuentas y un asistente que llama herramientas sobre las filas de esa persona.",
+              "deferred": "Un chat genérico sin acceso al libro."
             },
             {
               "id": "release",
               "title": "Beta en producción",
               "summary": "Vercel, verificación y operación.",
-              "owned": "El deploy, la verificación de Google para el permiso restringido y el copy de la beta pública.",
+              "owned": "El despliegue, la verificación de Google para el permiso restringido y el texto de la beta pública.",
               "deferred": "Abrir el repositorio mientras la beta sigue privada en el código."
             }
           ]
@@ -973,19 +979,19 @@
               "id": "pubsub",
               "kicker": "Cola",
               "name": "Google Pub/Sub",
-              "summary": "Gmail publica los cambios del buzón en un topic de Cloud Pub/Sub. La app no hace polling por cada mensaje nuevo. El webhook recibe el historyId."
+              "summary": "Gmail publica los cambios del buzón en un tema de Cloud Pub/Sub. La app no consulta el buzón por cada mensaje nuevo. La ruta de avisos recibe el historyId."
             },
             {
               "id": "next",
               "kicker": "App",
               "name": "Next.js",
-              "summary": "App Router, server actions y la ruta /api/gmail/webhook. Aquí se filtran remitentes, se lanza la extracción y se escriben las filas."
+              "summary": "App Router, acciones de servidor y la ruta /api/gmail/webhook. Aquí se filtran remitentes, se lanza la extracción y se escriben las filas."
             },
             {
               "id": "vercel",
-              "kicker": "Host",
+              "kicker": "Alojamiento",
               "name": "Vercel",
-              "summary": "La app vive en Vercel. En producción, la extracción de correos pasa por Vercel AI Gateway. Un modelo Gemini queda como fallback fuera de producción."
+              "summary": "La app vive en Vercel. En producción, la extracción de correos pasa por Vercel AI Gateway. Un modelo Gemini queda como alternativa fuera de producción."
             },
             {
               "id": "clerk",
@@ -1003,37 +1009,37 @@
               "id": "turso",
               "kicker": "Datos",
               "name": "Turso",
-              "summary": "libSQL con Drizzle. Aquí viven correos, transacciones, cuentas, categorías, instituciones y gmailSyncState. emails.gmailMessageId es único, así que un push repetido no crea otra fila."
+              "summary": "libSQL con Drizzle. Aquí viven correos, transacciones, cuentas, categorías, instituciones y gmailSyncState. emails.gmailMessageId es único, así que un aviso repetido no crea otra fila."
             }
           ]
         },
         "parse": {
           "title": "De la alerta a la fila",
-          "description": "Avanza una notificación de Banreservas de la demo. Simula el pipeline de producción. No llama a Gmail ni a un modelo. El 92 de confianza es ilustrativo. El umbral de 85 sí es el del código.",
+          "description": "Avanza una notificación de Banreservas de la demo. Simula el flujo de producción. No llama a Gmail ni a un modelo. El 92 de confianza es ilustrativo. El umbral de 85 sí es el del código.",
           "fromLabel": "De",
           "subjectLabel": "Asunto",
           "cleanedLabel": "Texto limpio, sin HTML ni aviso legal.",
           "rawLabel": "Correo crudo",
           "disclaimer": "[HTML del banco y aviso legal]",
-          "ledgerLabel": "Fila del ledger",
+          "ledgerLabel": "Fila del libro",
           "waiting": "La fila aparece cuando la extracción tiene un objeto.",
           "merchant": "Comercio",
           "amount": "Monto",
           "account": "Cuenta",
           "typeLabel": "Tipo",
-          "typeValue": "debit · transaction",
+          "typeValue": "débito · transacción",
           "category": "Categoría",
-          "categoryValue": "supermarkets",
+          "categoryValue": "supermercados",
           "confidence": "Confianza",
           "confidenceValue": "92 / 100, umbral 85",
           "source": "Origen",
-          "sourceValue": "llm",
+          "sourceValue": "modelo",
           "stored": "Escritura",
           "steps": [
             {
               "id": "notice",
               "title": "Llega la alerta",
-              "body": "Banreservas manda un correo. El comercio, la tarjeta y el monto siguen mezclados en el texto. Todavía no hay una fila en el ledger."
+              "body": "Banreservas manda un correo. El comercio, la tarjeta y el monto siguen mezclados en el texto. Todavía no hay una fila en el libro."
             },
             {
               "id": "sender",
@@ -1053,7 +1059,7 @@
             {
               "id": "category",
               "title": "Se resuelve la categoría",
-              "body": "Primero corren reglas deterministas: reglas de la persona, retiros y pagos a tarjeta. En esta muestra ninguna aplica. La confianza ilustrativa es 92, por encima del umbral real de 85, así que se guarda Supermercados con origen llm. Si la confianza fuera menor, entrarían el mapa de comercios de la persona y luego el mapa global. Si tampoco hay mapa, la categoría queda pendiente de enriquecimiento."
+              "body": "Primero corren reglas deterministas: reglas de la persona, retiros y pagos a tarjeta. En esta muestra ninguna aplica. La confianza ilustrativa es 92, por encima del umbral real de 85, así que se guarda Supermercados con origen modelo. Si la confianza fuera menor, entrarían el mapa de comercios de la persona y luego el mapa global. Si tampoco hay mapa, la categoría queda pendiente de enriquecimiento."
             },
             {
               "id": "write",
@@ -1082,18 +1088,18 @@
           "prompt": "El recorrido muestra el remitente de cada institución y qué sigue."
         },
         "chat": {
-          "title": "Asistente sobre el ledger de ejemplo",
-          "description": "Las tres preguntas se escriben solas. La respuesta está guionizada con las cifras de la demo y muestra la tool que el asistente de producción llamaría. No contacta un modelo en vivo.",
+          "title": "Asistente sobre el libro de ejemplo",
+          "description": "Las tres preguntas se escriben solas. La respuesta está guionizada con las cifras de la demo y muestra la herramienta que el asistente de producción llamaría. No contacta un modelo en vivo.",
           "suggestionsLabel": "Preguntas de ejemplo",
           "transcriptLabel": "Conversación",
           "placeholder": "Pregunta por el gasto de ejemplo",
           "send": "Enviar",
           "you": "Tú",
           "assistant": "Viollet",
-          "tool": "Tool",
+          "tool": "Herramienta",
           "result": "Resultado",
           "unknown": "La simulación recorre sola las tres preguntas de ejemplo.",
-          "thinking": "Consultando el ledger de ejemplo",
+          "thinking": "Consultando el libro de ejemplo",
           "answers": [
             {
               "id": "transport",
@@ -1107,7 +1113,7 @@
               "tool": "get_spend_breakdown",
               "args": "groupBy: category · period: this-month",
               "result": "Transporte RD$1,980 de RD$32,955 en gastos",
-              "reply": "En el ledger de ejemplo, transporte va en RD$1,980 este mes, dentro de RD$32,955 de gastos. La tool lee las transacciones de esa persona. No inventa el monto."
+              "reply": "En el libro de ejemplo, transporte va en RD$1,980 este mes, dentro de RD$32,955 de gastos. La herramienta lee las transacciones de esa persona. No inventa el monto."
             },
             {
               "id": "overview",
@@ -1116,7 +1122,7 @@
               "tool": "get_financial_overview",
               "args": "period: this-month",
               "result": "Ingresos RD$50,000 · gastos RD$32,955 · neto RD$17,045",
-              "reply": "Ingresos RD$50,000, gastos RD$32,955, balance neto RD$17,045. Eso sale de get_financial_overview sobre las mismas filas del dashboard."
+              "reply": "Ingresos RD$50,000, gastos RD$32,955, balance neto RD$17,045. Eso sale de get_financial_overview sobre las mismas filas del panel."
             },
             {
               "id": "budget",
@@ -1124,19 +1130,19 @@
               "keywords": ["presupuesto", "rd$4,500", "crea un"],
               "tool": "create_budget",
               "args": "category: transportation · amountCents: 450000 · period: monthly",
-              "result": "La tool escribiría el presupuesto. Aquí solo se muestra la llamada.",
+              "result": "La herramienta escribiría el presupuesto. Aquí solo se muestra la llamada.",
               "reply": "En producción, create_budget guardaría un presupuesto mensual de transporte por RD$4,500. En esta página la llamada se muestra y no se escribe nada."
             }
           ]
         },
         "sync": {
-          "title": "Watch, push y un duplicado",
-          "description": "La escena recorre el watch de Gmail y el webhook reales, incluido el rechazo del duplicado.",
+          "title": "users.watch, aviso y un duplicado",
+          "description": "La escena recorre users.watch de Gmail y el aviso automático real, incluido el rechazo del duplicado.",
           "actionsLabel": "Acciones",
           "connect": "Conectar Gmail",
-          "watch": "Registrar watch",
+          "watch": "Registrar users.watch",
           "push": "Entregar una alerta nueva",
-          "replay": "Reenviar el mismo push",
+          "replay": "Reenviar el mismo aviso",
           "reset": "Reiniciar",
           "logLabel": "Registro de sincronización",
           "stateLabel": "Estado del buzón",
@@ -1145,27 +1151,27 @@
             "connected": "Permiso de solo lectura guardado",
             "watching": "users.watch activo",
             "ingested": "Una transacción escrita",
-            "deduped": "Push duplicado ignorado"
+            "deduped": "Aviso duplicado ignorado"
           },
           "lines": {
             "connect": [
               "Permiso guardado: https://www.googleapis.com/auth/gmail.readonly.",
-              "El refresh token se cifra con AES-256-GCM. No se guarda contraseña de banco.",
+              "El token de actualización se cifra con AES-256-GCM. No se guarda contraseña de banco.",
               "Remitentes autorizados: notificaciones@banreservas.com, notificaciones@qik.do."
             ],
             "watch": [
-              "gmail.users.watch sobre INBOX, publicando en el topic de Cloud Pub/Sub.",
-              "gmailSyncState guarda historyId y la expiración del watch."
+              "gmail.users.watch sobre INBOX, publicando en el tema de Cloud Pub/Sub.",
+              "gmailSyncState guarda historyId y la expiración de users.watch."
             ],
             "push": [
-              "Push recibido en /api/gmail/webhook. Se coalesce durante 8 segundos y después se procesa.",
+              "Aviso recibido en /api/gmail/webhook. Se agrupa durante 8 segundos y después se procesa.",
               "history.list con historyTypes messageAdded devolvió un id.",
               "notificaciones@banreservas.com coincidió con Banreservas.",
               "La extracción escribió un correo y una transacción. gmailMessageId queda único."
             ],
             "replay": [
-              "Llegó el mismo push de history otra vez.",
-              "El insert usó onConflictDoNothing sobre emails.gmailMessageId.",
+              "Llegó el mismo aviso de history otra vez.",
+              "La inserción usó onConflictDoNothing sobre emails.gmailMessageId.",
               "No se creó una segunda transacción."
             ]
           }

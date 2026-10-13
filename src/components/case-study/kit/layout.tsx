@@ -21,9 +21,9 @@ export const vk = {
 export const focusRing =
 	'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
 
-/** Buttons and button-like links. Fixed height plus flex centering keeps labels centered on both axes. */
+/** Buttons and button-like links. Fixed 44px height, centered on both axes. */
 export const btn = {
-	base: `inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 text-sm font-semibold leading-none transition-colors motion-reduce:transition-none ${focusRing}`,
+	base: `inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 text-sm font-semibold leading-none transition-colors motion-reduce:transition-none ${focusRing}`,
 	primary: 'bg-teal-400/10 text-teal-200 hover:bg-teal-400/20 hover:text-teal-100',
 	secondary: 'border border-slate-700/60 bg-slate-800/40 text-slate-200 hover:border-teal-300/40 hover:text-teal-100',
 	ghost: 'text-slate-300 hover:bg-slate-800/60 hover:text-slate-100',
@@ -45,8 +45,10 @@ export function Shell({ children }: { children: ReactNode }) {
 }
 
 export function BackLink({ href, label }: { href: string; label: string }) {
+	// /projects is a rewrite of the real /en/projects route, and prefetching it 404s.
+	const to = href === '/projects' ? '/en/projects' : href
 	return (
-		<Link href={href} className={`group mb-4 inline-flex items-center font-semibold leading-tight text-teal-200 ${focusRing}`}>
+		<Link href={to} className={`group mb-4 inline-flex min-h-11 items-center font-semibold leading-tight text-teal-200 ${focusRing}`}>
 			<ArrowLeft className='mr-1 size-4 transition-transform group-hover:-translate-x-2 motion-reduce:transition-none' aria-hidden />
 			{label}
 		</Link>

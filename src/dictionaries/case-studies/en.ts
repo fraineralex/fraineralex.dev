@@ -1,6 +1,6 @@
 import type { GenericCaseStudyContent } from '@/types/generic-case-study-types'
 
-const back = { label: 'Back to projects', url: '/projects' }
+const back = { label: 'Back to projects', url: '/en/projects' }
 const nav = { prevLabel: 'Previous', nextLabel: 'Next', stepLabel: 'Step' }
 
 export const en: Record<string, GenericCaseStudyContent> = {
@@ -22,7 +22,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
       {
         title: '1. The problem',
         paragraphs: [
-          'Most fitness apps bury simple meal and workout logging under feature bloat. Logging a breakfast should not take ten taps through menus.',
+          'Most fitness apps bury simple meal and workout logging under feature bloat. Logging a breakfast should stay short.',
           'I wanted a tracker that stays out of the way: log what you ate or trained, see your progress against your goal, and move on.'
         ]
       },
@@ -34,7 +34,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
         interactive: {
           kind: 'stepper',
           title: 'From a sentence to a diary entry',
-          description: 'Step through how a chat message becomes a logged meal.',
+          description: 'How a chat message becomes a logged meal.',
           ...nav,
           steps: [
             { title: 'You type', body: 'In the Food page chat you write something like "two eggs and a banana for breakfast".' },
@@ -52,7 +52,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
         interactive: {
           kind: 'options',
           title: 'Tracky pages',
-          description: 'Pick a page to see what it does. Use the arrow keys to move between tabs.',
+          description: 'What each page is for.',
           options: [
             { id: 'onboarding', label: 'Onboarding', title: 'Onboarding', body: 'A step by step setup for fitness goals, preferences and profile, so the dashboard has targets from day one.' },
             { id: 'dashboard', label: 'Dashboard', title: 'Dashboard', body: 'An overview of progress, personal stats and quick access to the main actions, with charts for trends.' },
@@ -70,7 +70,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
         interactive: {
           kind: 'architecture',
           title: 'How the pieces connect',
-          description: 'Select a node to read its role.',
+          description: 'What each piece does.',
           hint: 'Based on the stack listed in the repository README.',
           layers: ['Client', 'App server', 'Services and data'],
           nodes: [
@@ -296,8 +296,8 @@ export const en: Record<string, GenericCaseStudyContent> = {
     slug: 'sargotech',
     meta: {
       title: 'SargoTech',
-      description: 'A team project to anticipate sargassum on Caribbean beaches with satellite data and local operations. I am the CTO and lead developer.',
-      role: 'CTO & Lead Developer, team of 4 co-founders',
+      description: 'A project by a team of 4 to anticipate sargassum on Caribbean beaches with observation data and local operations. I am the CTO and lead developer.',
+      role: 'CTO and Lead Developer, team of 4 co-founders',
       year: '2026',
       readTime: '4 min read'
     },
@@ -311,7 +311,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
         title: '1. Context',
         paragraphs: [
           'When you see sargassum on the sand, the impact has already arrived. The response has to start earlier, out at sea, with enough notice to contain it, collect it and dispose of it properly.',
-          'The vision is to turn satellite data, local logistics and environmental traceability into cleaner beaches and more resilient tourism.'
+          'The vision is to turn observation data, local logistics and environmental traceability into cleaner beaches and more resilient tourism.'
         ]
       },
       {
@@ -340,7 +340,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
           description: 'Step through the flow described on the site.',
           ...nav,
           steps: [
-            { title: 'Predict', body: 'Estimate the trajectory and the arrival window from satellite readings and sea conditions.' },
+            { title: 'Predict', body: 'Estimate the trajectory and the arrival window from observation data and sea conditions.' },
             { title: 'Contain', body: 'Anti sargassum barriers, with inspections to check the containment.' },
             { title: 'Collect', body: 'Coordinate collection on the beach, with validation in the field.' },
             { title: 'Manage disposal', body: 'Coordinated transport to the final destination, with traceability.' }
@@ -358,7 +358,7 @@ export const en: Record<string, GenericCaseStudyContent> = {
           options: [
             { id: 'hotels', label: 'Hotels & resorts', title: 'Anticipate and plan', body: 'Know ahead of time what is coming to the beachfront and plan the response.' },
             { id: 'municipalities', label: 'Municipalities', title: 'Prioritize and coordinate', body: 'Decide which beaches need attention first and coordinate resources.' },
-            { id: 'scouts', label: 'Scouts & providers', title: 'Verify and respond', body: 'Validate conditions in the field and carry out the service.' }
+            { id: 'field', label: 'Field teams', title: 'Verify and respond', body: 'Validate conditions in the field and carry out the service.' }
           ]
         }
       },

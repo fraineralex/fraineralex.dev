@@ -310,6 +310,12 @@ export interface CaseStudyContent {
     label: string
     url: string
   }
+  labels: {
+    role: string
+    year: string
+    readTime: string
+    technologies: string
+  }
   hero: {
     summary: string
     technologies: string[]

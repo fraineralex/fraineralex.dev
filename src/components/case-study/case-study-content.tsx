@@ -105,14 +105,14 @@ function SectionBlock ({
 }
 
 export default function CaseStudyPageContent ({ content, lang }: Props) {
-  const { meta, backLink, hero, sections, interactives } = content
+  const { meta, backLink, hero, sections, interactives, labels } = content
 
   return (
     <main className='mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0'>
       <article className='lg:py-24'>
         <header className='mb-10 lg:mb-14'>
           <Link
-            className='group mb-4 inline-flex items-center font-semibold leading-tight text-teal-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
+            className='group mb-4 inline-flex min-h-11 items-center font-semibold leading-tight text-teal-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
             href={backLink.url}
           >
             <FiArrowLeft className='mr-1 h-4 w-4 transition-transform group-hover:-translate-x-2 motion-reduce:transition-none' />
@@ -129,21 +129,21 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
           </p>
           <dl className='mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400'>
             <div>
-              <dt className='sr-only'>Role</dt>
+              <dt className='sr-only'>{labels.role}</dt>
               <dd>{meta.role}</dd>
             </div>
             <div>
-              <dt className='sr-only'>Year</dt>
+              <dt className='sr-only'>{labels.year}</dt>
               <dd>{meta.year}</dd>
             </div>
             <div>
-              <dt className='sr-only'>Read time</dt>
+              <dt className='sr-only'>{labels.readTime}</dt>
               <dd>{meta.readTime}</dd>
             </div>
           </dl>
           <ul
             className='mt-6 flex flex-wrap gap-2'
-            aria-label='Technologies used'
+            aria-label={labels.technologies}
           >
             {hero.technologies.map((technology) => (
               <li key={technology}>
@@ -170,7 +170,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
               {sections.proof.appDescription}
             </p>
           </div>
-          <AppReplica copy={interactives.app} lang={lang} />
+          <AppReplica copy={interactives.app} lang={lang} posterAlt={sections.proof.screenshotAlt} />
         </section>
 
         <SectionBlock section={sections.context}>
@@ -224,7 +224,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
             href={sections.proof.demoUrl}
             target='_blank'
             rel='noreferrer noopener'
-            className='inline-flex items-center rounded-md bg-teal-400/10 px-4 py-2.5 text-sm font-semibold text-teal-200 transition hover:bg-teal-400/20 hover:text-teal-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
+            className='inline-flex min-h-11 min-w-11 items-center rounded-md bg-teal-400/10 px-4 py-3 text-sm font-semibold text-teal-200 transition hover:bg-teal-400/20 hover:text-teal-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
           >
             viollet.app
             <FiExternalLink className='ml-2 h-4 w-4' />
@@ -237,10 +237,10 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
                     href={item.url}
                     target='_blank'
                     rel='noreferrer noopener'
-                    className='inline-flex items-center font-medium text-teal-200/90 underline decoration-teal-400/40 underline-offset-4 transition hover:text-teal-100 hover:decoration-teal-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
+                    className='inline-flex min-h-11 min-w-11 max-w-full items-center gap-1.5 px-1 py-3 font-medium text-teal-200/90 underline decoration-teal-400/40 underline-offset-4 transition hover:text-teal-100 hover:decoration-teal-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300'
                   >
-                    {item.label}
-                    <FiExternalLink className='ml-1.5 h-3.5 w-3.5 shrink-0' />
+                    <span className='min-w-0 break-words'>{item.label}</span>
+                    <FiExternalLink className='h-3.5 w-3.5 shrink-0' />
                   </Link>
                 </li>
               ))}

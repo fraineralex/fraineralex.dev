@@ -16,11 +16,7 @@ const en = {
   squareHint: 'Each square is one day this week.',
   openDiary: 'Open diary',
   chatSuggestions: 'Sample prompts',
-  todayFood: 'Food',
-  todayExercise: 'Exercise',
-  noFoodToday: 'No meals logged for today yet.',
-  noExerciseToday: 'No exercises logged for today yet.',
-  noCategory: 'No sessions in this sample category.',
+  timeIn: '6 days in',
   quantity: 'Quantity',
   presets: [
     { id: 'breakfast' as const, label: '2 eggs, toast and a coffee for breakfast' },
@@ -126,7 +122,42 @@ const en = {
     duration: 'Duration',
     effort: 'Effort Level',
     energy: 'Energy Burned',
-    efforts: { easy: 'Easy', moderate: 'Moderate', hard: 'Hard', 'very-hard': 'Very Hard' }
+    efforts: { easy: 'Easy', moderate: 'Moderate', hard: 'Hard', 'very-hard': 'Very Hard' },
+    graphics: {
+      tabs: {
+        energy: 'Energy Burned',
+        frequency: 'Exercise Frequency',
+        time: 'Time Categories',
+        progress: 'Monthly Progress'
+      },
+      caloriesBurned: 'Calories Burned',
+      frequencyTitle: 'Exercise Frequency',
+      frequencyDesc: 'Daily exercise completion over the past week',
+      timeTitle: 'Exercise Time Categories',
+      timeDesc: 'Distribution of exercise sessions throughout the day',
+      sessions: 'sessions',
+      progressTitle: 'Monthly Progress',
+      progressDesc: 'Energy burned and exercise time over the past month',
+      energyKcal: 'Energy Burned (kcal)',
+      timeMinutes: 'Time (minutes)',
+      excellent: 'Excellent workout consistency!',
+      goodProgress: 'Making good progress!',
+      room: 'Room for improvement in workout frequency',
+      noActive: 'You have no active time yet',
+      exceededMonth: 'Exceeded monthly target by {percent}%',
+      reachedMonth: 'Reached {percent}% of monthly target',
+      outstanding: 'Outstanding work! Keep up this amazing energy!',
+      closer: 'Getting closer to your goal! Keep pushing!',
+      every: 'Every workout counts. Keep moving forward!',
+      dedication: 'Keep up this amazing dedication to your fitness!',
+      routine: 'You are building a solid fitness routine!',
+      increase: 'Try to increase your workout frequency gradually',
+      greatJob: 'Great job exercising during {time}!',
+      couch: 'Get up from that couch! Your fitness goals will not achieve themselves',
+      outstandingMonth: 'Outstanding monthly performance! Keep up the great work!',
+      greatMonth: 'Great progress this month! Keep pushing!',
+      keepGoing: 'Keep going, every bit of effort counts!'
+    }
   },
   diary: {
     title: 'Diary',
@@ -182,8 +213,7 @@ const en = {
     sexValue: 'male',
     activityValue: 'Mostly Active',
     goalValue: 'lose'
-  },
-  categories: ['Gym', 'Cardio', 'Individual Sport', 'Team Sport', 'Outdoor Activity', 'Stretching & Mobility']
+  }
 }
 
 const es: typeof en = {
@@ -200,11 +230,7 @@ const es: typeof en = {
   squareHint: 'Cada cuadro es un día de esta semana.',
   openDiary: 'Abrir diario',
   chatSuggestions: 'Frases de ejemplo',
-  todayFood: 'Comida',
-  todayExercise: 'Ejercicio',
-  noFoodToday: 'Todavía no hay comidas registradas hoy.',
-  noExerciseToday: 'Todavía no hay ejercicios registrados hoy.',
-  noCategory: 'No hay sesiones en esta categoría de ejemplo.',
+  timeIn: 'Hace 6 días',
   quantity: 'Cantidad',
   presets: [
     { id: 'breakfast', label: '2 huevos, tostada y un café para el desayuno' },
@@ -310,7 +336,42 @@ const es: typeof en = {
     duration: 'Duración',
     effort: 'Nivel de Esfuerzo',
     energy: 'Energía Quemada',
-    efforts: { easy: 'Fácil', moderate: 'Moderado', hard: 'Difícil', 'very-hard': 'Muy Difícil' }
+    efforts: { easy: 'Fácil', moderate: 'Moderado', hard: 'Difícil', 'very-hard': 'Muy Difícil' },
+    graphics: {
+      tabs: {
+        energy: 'Energía Quemada',
+        frequency: 'Frecuencia de Ejercicio',
+        time: 'Categorías de Tiempo',
+        progress: 'Progreso Mensual'
+      },
+      caloriesBurned: 'Calorías Quemadas',
+      frequencyTitle: 'Frecuencia de Ejercicio',
+      frequencyDesc: 'Completado de ejercicios diarios en la última semana',
+      timeTitle: 'Categorías de Tiempo de Ejercicio',
+      timeDesc: 'Distribución de sesiones de ejercicio durante el día',
+      sessions: 'sesiones',
+      progressTitle: 'Progreso Mensual',
+      progressDesc: 'Energía quemada y tiempo de ejercicio en el último mes',
+      energyKcal: 'Energía Quemada (kcal)',
+      timeMinutes: 'Tiempo (minutos)',
+      excellent: '¡Excelente consistencia de entrenamiento!',
+      goodProgress: '¡Buen progreso!',
+      room: 'Hay espacio para mejorar la frecuencia de entrenamiento',
+      noActive: 'Aún no tienes tiempo activo',
+      exceededMonth: 'Superaste el objetivo mensual por {percent}%',
+      reachedMonth: 'Alcanzaste {percent}% del objetivo mensual',
+      outstanding: '¡Excelente trabajo! ¡Sigue con esta energía increíble!',
+      closer: '¡Te acercas a tu objetivo! ¡Sigue adelante!',
+      every: 'Cada entrenamiento cuenta. Sigue avanzando.',
+      dedication: '¡Sigue con esta increíble dedicación a tu fitness!',
+      routine: '¡Estás construyendo una rutina sólida de fitness!',
+      increase: 'Intenta aumentar tu frecuencia de entrenamiento gradualmente',
+      greatJob: '¡Buen trabajo ejercitándote durante {time}!',
+      couch: '¡Levántate del sofá! Tus objetivos fitness no se lograrán solos',
+      outstandingMonth: '¡Rendimiento mensual excepcional! ¡Sigue así!',
+      greatMonth: '¡Gran progreso este mes! ¡Sigue adelante!',
+      keepGoing: '¡Sigue adelante, cada esfuerzo cuenta!'
+    }
   },
   diary: {
     title: 'Diario',
@@ -366,8 +427,7 @@ const es: typeof en = {
     sexValue: 'masculino',
     activityValue: 'Mayormente Activo',
     goalValue: 'perder'
-  },
-  categories: ['Gimnasio', 'Cardio', 'Deporte individual', 'Deporte de equipo', 'Actividad al aire libre', 'Estiramiento y movilidad']
+  }
 }
 
 export const copy: Record<Lang, typeof en> = { en, es }

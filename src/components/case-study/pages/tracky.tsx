@@ -5,9 +5,10 @@ import { PageTiles } from '../tracky/page-tiles'
 import { SentenceScene } from '../tracky/sentence-scene'
 import { StackScene } from '../tracky/stack-scene'
 import { backLink, type Lang } from './shared'
+import '../tracky/scenes.css'
 
 const TrackyAppSim = dynamic(() => import('../tracky/tracky-app-sim'), {
-	loading: () => <div className='h-[640px] animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none sm:h-[700px]' aria-hidden />,
+	loading: () => <div className='tracky-slot animate-pulse rounded-xl border border-slate-700/60 bg-slate-900/50 motion-reduce:animate-none' aria-hidden />,
 })
 
 const COPY = {

@@ -3,12 +3,13 @@
 import { useEffect, useId, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import {
   Activity,
-  Bike,
   BookOpen,
+  Calendar,
   ChevronRight,
   Circle,
   ClipboardList,
   Clock,
+  Coffee,
   Dumbbell,
   Drumstick,
   EggFried,
@@ -16,16 +17,18 @@ import {
   Flame,
   FlameKindling,
   HandPlatter,
-  HeartPulse,
   MessageSquare,
+  Moon,
   Nut,
+  PlusCircle,
   Square,
+  Sun,
   TrendingUp,
   Utensils,
   Weight,
   Wheat
 } from 'lucide-react'
-import { BarList, ColumnChart, LineChart } from './charts'
+import { ColumnChart, DualLineChart, LineChart, StackedAreaChart, type ChartSeries } from './charts'
 import type { ChatContext } from './ai-chat'
 import { copy, type Lang } from './copy'
 import {
@@ -37,7 +40,6 @@ import {
   dayMacros,
   exercisesOn,
   foodMacros,
-  foodsOn,
   formatDayKey,
   formatDuration,
   formatLong,
@@ -47,6 +49,7 @@ import {
   nameOf,
   rawPercent,
   sameUtcDay,
+  mondayOf,
   weekDays,
   weekIndex,
   type ExerciseEntry,
@@ -196,7 +199,7 @@ function NutritionGraphic ({ foods, anchor, lang }: { foods: FoodEntry[], anchor
                     label={label}
                     onSelect={() => setDetail(label)}
                     className='h-6 rounded-md sm:h-8'
-                    style={{ background: `linear-gradient(to top, hsl(var(--foreground) / ${index === todayIndex ? 0.9 : 0.5}) ${fill}%, hsl(var(--foreground) / 0.18) ${fill}%)` }}
+                    style={{ background: `linear-gradient(to top, hsl(var(--foreground) / ${index === todayIndex ? 0.9 : 0.5}) ${fill}%, hsl(var(--primary) / 0.2) ${fill}%)` }}
                   />
                 )
               })}
@@ -283,11 +286,11 @@ function MacroCards ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
   const items = [
     { key: 'kcal' as const, name: text.nutrition.calories, icon: Flame },
     { key: 'protein' as const, name: text.nutrition.protein, icon: Drumstick },
-    { key: 'carbs' as const, name: text.nutrition.carbs, icon: Wheat },
-    { key: 'fat' as const, name: text.nutrition.fats, icon: EggFried }
+    { key: 'fat' as const, name: text.nutrition.fats, icon: EggFried },
+    { key: 'carbs' as const, name: text.nutrition.carbs, icon: Wheat }
   ]
   return (
-    <div className='mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4'>
+    <div className='mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
       {items.map((item) => {
         const consumed = today[item.key]
         const needed = neededOf(item.key)
@@ -329,17 +332,16 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
   const totals = days.map((day, index) => index > todayIndex ? { kcal: 0, protein: 0, carbs: 0, fat: 0 } : dayMacros(foods, day))
   const today = totals[todayIndex] ?? { kcal: 0, protein: 0, carbs: 0, fat: 0 }
   const week = addMacros(totals)
-  const goalRows = (source: typeof today, factor: number) => [
-    { label: text.nutrition.calories, value: capPercent(source.kcal, GOALS.kcal * factor), color: 'hsl(var(--chart-2))' },
-    { label: text.nutrition.protein, value: capPercent(source.protein, GOALS.protein * factor), color: 'hsl(var(--chart-3))' },
-    { label: text.nutrition.carbs, value: capPercent(source.carbs, GOALS.carbs * factor), color: 'hsl(var(--chart-2))' },
-    { label: text.nutrition.fat, value: capPercent(source.fat, GOALS.fat * factor), color: 'hsl(var(--chart-4))' }
+  const goalValues = (source: typeof today, factor: number) => [
+    capPercent(source.kcal, GOALS.kcal * factor),
+    capPercent(source.protein, GOALS.protein * factor),
+    capPercent(source.carbs, GOALS.carbs * factor),
+    capPercent(source.fat, GOALS.fat * factor)
   ]
-  const macroRows = [
-    { label: text.nutrition.protein, value: today.kcal ? (today.protein * 4 / today.kcal) * 100 : 0, color: 'hsl(var(--chart-1))' },
-    { label: text.nutrition.carbs, value: today.kcal ? (today.carbs * 4 / today.kcal) * 100 : 0, color: 'hsl(var(--chart-2))' },
-    { label: text.nutrition.fat, value: today.kcal ? (today.fat * 9 / today.kcal) * 100 : 0, color: 'hsl(var(--chart-4))' }
-  ]
+  const goalLabels = [text.nutrition.calories, text.nutrition.protein, text.nutrition.carbs, text.nutrition.fat]
+  const macroShare = (grams: number) => today.kcal ? Math.round((grams / today.kcal) * 100) : 0
+  const macroLabels = [text.nutrition.protein, text.nutrition.carbs, text.nutrition.fat]
+  const macroValues = [macroShare(today.protein), macroShare(today.carbs), macroShare(today.fat)]
   const weightLabels = WEIGHT_TREND.map((_, index) => {
     const date = new Date(anchor)
     date.setUTCDate(date.getUTCDate() - (WEIGHT_TREND.length - 1 - index) * 7)
@@ -379,16 +381,16 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
       </div>
       <TkCard className='mt-4 p-4'>
         {tab === 'weekly' && (
-          <div role='tabpanel' aria-labelledby={`${base}-tab-weekly`} className='space-y-4'>
-            <h3 className='text-lg font-medium'>{text.food.weeklyTitle}</h3>
-            <ColumnChart title={text.nutrition.calories} labels={text.chartDays} values={totals.map((day) => day.kcal)} color='hsl(var(--chart-3))' />
+          <div role='tabpanel' aria-labelledby={`${base}-tab-weekly`}>
+            <h3 className='mb-2 text-lg font-medium'>{text.food.weeklyTitle}</h3>
             <LineChart
               title={text.food.weeklyTitle}
               labels={text.chartDays}
               series={[
-                { id: 'protein', label: text.nutrition.protein, color: 'hsl(var(--chart-1))', values: totals.map((day) => day.protein) },
-                { id: 'fats', label: text.nutrition.fats, color: 'hsl(var(--chart-4))', values: totals.map((day) => day.fat) },
-                { id: 'carbs', label: text.nutrition.carbs, color: 'hsl(var(--chart-2))', values: totals.map((day) => day.carbs) }
+                { id: 'calories', label: text.nutrition.calories, color: '#3b82f6', values: totals.map((day) => day.kcal) },
+                { id: 'protein', label: text.nutrition.protein, color: '#f43f5e', values: totals.map((day) => day.protein) },
+                { id: 'fats', label: text.nutrition.fats, color: '#fbbf24', values: totals.map((day) => day.fat) },
+                { id: 'carbs', label: text.nutrition.carbs, color: '#4ade80', values: totals.map((day) => day.carbs) }
               ]}
             />
           </div>
@@ -399,28 +401,28 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
             <LineChart
               title={text.food.weightTitle}
               labels={weightLabels}
-              yMin={77}
-              yMax={82}
-              series={[{ id: 'weight', label: text.units.kg, color: 'hsl(var(--chart-2))', values: WEIGHT_TREND }]}
+              ySuffix={` ${text.units.kg}`}
+              zeroBaseline={false}
+              series={[{ id: 'weight', label: text.units.kg, color: '#10b981', values: WEIGHT_TREND }]}
             />
           </div>
         )}
         {tab === 'macro' && (
           <div role='tabpanel' aria-labelledby={`${base}-tab-macro`}>
-            <h3 className='mb-3 text-lg font-medium'>{text.food.macroTitle}</h3>
-            <BarList title={text.food.macroTitle} rows={macroRows} suffix='%' />
+            <h3 className='mb-2 text-lg font-medium'>{text.food.macroTitle}</h3>
+            <ColumnChart title={text.food.macroTitle} labels={macroLabels} values={macroValues} color='#3b82f6' ySuffix='%' />
           </div>
         )}
         {tab === 'today' && (
           <div role='tabpanel' aria-labelledby={`${base}-tab-today`}>
-            <h3 className='mb-3 text-lg font-medium'>{text.food.todayTitle}</h3>
-            <BarList title={text.food.todayTitle} rows={goalRows(today, 1)} suffix='%' />
+            <h3 className='mb-2 text-lg font-medium'>{text.food.todayTitle}</h3>
+            <ColumnChart title={text.food.todayTitle} labels={goalLabels} values={goalValues(today, 1)} color='#4ade80' ySuffix='%' />
           </div>
         )}
         {tab === 'week' && (
           <div role='tabpanel' aria-labelledby={`${base}-tab-week`}>
-            <h3 className='mb-3 text-lg font-medium'>{text.food.weekTitle}</h3>
-            <BarList title={text.food.weekTitle} rows={goalRows(week, 7)} suffix='%' />
+            <h3 className='mb-2 text-lg font-medium'>{text.food.weekTitle}</h3>
+            <ColumnChart title={text.food.weekTitle} labels={goalLabels} values={goalValues(week, 7)} color='#8b5cf6' ySuffix='%' />
           </div>
         )}
       </TkCard>
@@ -428,62 +430,27 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
   )
 }
 
-function MealRow ({ food, lang }: { food: FoodEntry, lang: Lang }) {
-  const text = copy[lang]
-  return (
-    <article className='rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-3'>
-      <div className='flex items-start justify-between gap-3'>
-        <div className='min-w-0'>
-          <h3 className='truncate font-medium capitalize'>{nameOf(food, lang)}</h3>
-          <p className={`text-xs capitalize ${tk.muted}`}>{text.meals[food.meal]} · {food.grams} {food.unit}</p>
-        </div>
-        <p className='shrink-0 text-sm font-semibold tabular-nums'>{formatNum(food.kcal, lang)} {text.units.kcal}</p>
-      </div>
-      <p className={`mt-2 text-xs ${tk.muted}`}>
-        {text.nutrition.protein} {Math.round(food.protein)}{text.units.g} · {text.nutrition.carbs} {Math.round(food.carbs)}{text.units.g} · {text.nutrition.fat} {Math.round(food.fat)}{text.units.g}
-      </p>
-    </article>
-  )
-}
-
-function ExerciseRow ({ exercise, lang }: { exercise: ExerciseEntry, lang: Lang }) {
-  const text = copy[lang]
-  return (
-    <article className='flex items-center justify-between gap-3 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-3'>
-      <div className='flex min-w-0 items-center gap-3'>
-        <Dumbbell className='h-5 w-5 shrink-0 text-[#93c5fd]' aria-hidden='true' />
-        <div className='min-w-0'>
-          <h3 className='truncate font-medium'>{nameOf(exercise, lang)}</h3>
-          <p className={`text-xs capitalize ${tk.muted}`}>{text.exercise.efforts[exercise.effort]} · {exercise.minutes} {text.units.min}</p>
-        </div>
-      </div>
-      <p className='shrink-0 text-sm font-semibold tabular-nums'>{formatNum(exercise.kcal, lang)} {text.units.kcal}</p>
-    </article>
-  )
-}
-
 export function DashboardPage ({ lang, foods, exercises, anchor, onOpenChat, onNavigate }: PageProps) {
   const text = copy[lang]
-  const today = new Date(anchor)
-  const todayFoods = foodsOn(foods, today).sort((a, b) => b.at.localeCompare(a.at))
-  const todayExercises = exercisesOn(exercises, today).sort((a, b) => b.at.localeCompare(a.at))
-  const todayTotals = dayMacros(foods, today)
   const allFood = addMacros(foods.map(foodMacros))
   const burned = PROFILE.historyBurned + exercises.reduce((sum, exercise) => sum + exercise.kcal, 0)
   const range = rangeLabel(anchor, lang)
-  const goalRows = [
-    { label: text.nutrition.calories, value: capPercent(todayTotals.kcal, GOALS.kcal), color: 'hsl(var(--chart-2))' },
-    { label: text.nutrition.protein, value: capPercent(todayTotals.protein, GOALS.protein), color: 'hsl(var(--chart-3))' },
-    { label: text.nutrition.carbs, value: capPercent(todayTotals.carbs, GOALS.carbs), color: 'hsl(var(--chart-2))' },
-    { label: text.nutrition.fat, value: capPercent(todayTotals.fat, GOALS.fat), color: 'hsl(var(--chart-4))' }
-  ]
+  const goalProgress = Math.round(((PROFILE.startWeight - PROFILE.weight) / (PROFILE.startWeight - PROFILE.goalWeight)) * 100)
 
   return (
     <div className='space-y-4 pb-2'>
       <div className='flex flex-col-reverse gap-3 md:flex-row md:items-center md:justify-between'>
         <h1 className='text-center text-2xl font-bold uppercase md:text-left'>{formatLong(anchor, lang)}</h1>
         <div className='flex flex-wrap justify-center gap-2 md:justify-end'>
-          <ChatButtons lang={lang} context='dashboard' onOpenChat={onOpenChat} extra='both' />
+          <TkButton size='sm' className='flex-grow sm:flex-grow-0' onClick={(event) => onOpenChat('dashboard', event.currentTarget)}>
+            <MessageSquare className='h-4 w-4' aria-hidden='true' /> {text.food.aiChat}
+          </TkButton>
+          <TkButton size='sm' className='flex-grow sm:flex-grow-0' onClick={(event) => onOpenChat('dashboard', event.currentTarget)}>
+            <ClipboardList className='h-4 w-4' aria-hidden='true' /> {text.food.addMeal}
+          </TkButton>
+          <TkButton size='sm' className='flex-grow sm:flex-grow-0' onClick={(event) => onOpenChat('exercise', event.currentTarget)}>
+            <Dumbbell className='h-4 w-4' aria-hidden='true' /> {text.exercise.addExercise}
+          </TkButton>
         </div>
       </div>
       <div className='grid gap-3 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
@@ -497,9 +464,9 @@ export function DashboardPage ({ lang, foods, exercises, anchor, onOpenChat, onN
               <span className='my-4 flex justify-end'><Circle className='h-4 w-4 text-purple-400' strokeWidth={4} aria-hidden='true' /></span>
             </InsightCard>
           </div>
-          <InsightCard title={text.sections.goalProgress} range={range} value='50' unit={text.units.percent} openLabel={text.openDiary} onOpen={() => onNavigate('diary')}>
-            <div className='my-4 h-4 overflow-hidden rounded-full bg-[hsl(var(--foreground)/0.2)]' aria-hidden='true'>
-              <div className='h-full w-1/2 bg-[hsl(var(--foreground))]' />
+          <InsightCard title={text.sections.goalProgress} range={range} value={text.timeIn} openLabel={text.openDiary} onOpen={() => onNavigate('diary')}>
+            <div className='my-4 h-4 overflow-hidden rounded-full bg-[hsl(var(--primary)/0.2)]' aria-hidden='true'>
+              <div className='h-full bg-[hsl(var(--primary))]' style={{ width: `${goalProgress}%` }} />
             </div>
           </InsightCard>
         </div>
@@ -526,22 +493,6 @@ export function DashboardPage ({ lang, foods, exercises, anchor, onOpenChat, onN
           <span className='my-3 flex justify-end'><Circle className='h-4 w-4 text-green-400' strokeWidth={4} aria-hidden='true' /></span>
         </InsightCard>
       </div>
-      <TkCard className='p-4'>
-        <h2 className='mb-3 text-lg font-medium'>{text.food.todayTitle}</h2>
-        <BarList title={text.food.todayTitle} rows={goalRows} suffix='%' />
-      </TkCard>
-      <div className='grid gap-3 md:grid-cols-2'>
-        <section aria-label={text.todayFood} className='space-y-2'>
-          <h2 className='text-sm font-semibold'>{text.todayFood}</h2>
-          {todayFoods.length === 0 && <p className={`text-sm ${tk.muted}`}>{text.noFoodToday}</p>}
-          {todayFoods.map((food) => <MealRow key={food.id} food={food} lang={lang} />)}
-        </section>
-        <section aria-label={text.todayExercise} className='space-y-2'>
-          <h2 className='text-sm font-semibold'>{text.todayExercise}</h2>
-          {todayExercises.length === 0 && <p className={`text-sm ${tk.muted}`}>{text.noExerciseToday}</p>}
-          {todayExercises.map((exercise) => <ExerciseRow key={exercise.id} exercise={exercise} lang={lang} />)}
-        </section>
-      </div>
     </div>
   )
 }
@@ -550,14 +501,14 @@ export function FoodPage ({ lang, foods, anchor, onOpenChat }: PageProps) {
   const text = copy[lang]
   return (
     <div className='pb-4'>
-      <div className='mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
         <h1 className='hidden text-2xl font-bold uppercase sm:block'>{formatLong(anchor, lang)}</h1>
         <div className='flex w-full flex-wrap justify-center gap-2 sm:w-auto sm:justify-end'>
           <TkButton size='sm' onClick={(event) => onOpenChat('food', event.currentTarget)}>
-            <ClipboardList className='h-4 w-4' aria-hidden='true' /> {text.food.registerFood}
+            <PlusCircle className='h-4 w-4' aria-hidden='true' /> {text.food.registerFood}
           </TkButton>
           <TkButton size='sm' onClick={(event) => onOpenChat('food', event.currentTarget)}>
-            <Utensils className='h-4 w-4' aria-hidden='true' /> {text.food.addMeal}
+            <ClipboardList className='h-4 w-4' aria-hidden='true' /> {text.food.addMeal}
           </TkButton>
           <ChatButtons lang={lang} context='food' onOpenChat={onOpenChat} />
         </div>
@@ -568,58 +519,127 @@ export function FoodPage ({ lang, foods, anchor, onOpenChat }: PageProps) {
   )
 }
 
-const CATEGORY_ICONS = [Dumbbell, Activity, Flame, Circle, Bike, HeartPulse]
+const TIME_ICONS = { breakfast: Sun, lunch: Utensils, snack: Coffee, dinner: Moon } as const
 
-function exerciseBucket (exercise: ExerciseEntry) {
+function exerciseKind (exercise: ExerciseEntry) {
   const name = `${exercise.nameEn} ${exercise.nameEs}`.toLowerCase()
-  if (name.includes('run') || name.includes('carrer') || name.includes('cardio')) return 1
-  if (name.includes('gym') || name.includes('gimnasi') || name.includes('strength') || name.includes('fuerza')) return 0
-  return -1
+  if (name.includes('run') || name.includes('carrer') || name.includes('cardio')) return 'cardio'
+  return 'gym'
+}
+
+function ChartNote ({ lead, note, trend = true }: { lead: string, note: string, trend?: boolean }) {
+  return (
+    <footer className='mt-3 flex flex-col items-start gap-2 text-sm'>
+      <p className='flex items-center gap-2 font-medium leading-none'>
+        {lead}
+        {trend && <TrendingUp className='h-4 w-4' aria-hidden='true' />}
+      </p>
+      <p className={`leading-none ${tk.muted}`}>{note}</p>
+    </footer>
+  )
 }
 
 export function ExercisePage ({ lang, exercises, anchor, onOpenChat }: PageProps) {
   const text = copy[lang]
-  const [category, setCategory] = useState<number | null>(null)
+  const graphics = text.exercise.graphics
+  const base = useId()
+  const tabs = [
+    { id: 'energy', label: graphics.tabs.energy },
+    { id: 'frequency', label: graphics.tabs.frequency },
+    { id: 'time', label: graphics.tabs.time },
+    { id: 'progress', label: graphics.tabs.progress }
+  ] as const
+  const [tab, setTab] = useState<(typeof tabs)[number]['id']>('energy')
   const days = weekDays(anchor)
   const todayIndex = weekIndex(new Date(anchor))
   const burned = PROFILE.historyBurned + exercises.reduce((sum, exercise) => sum + exercise.kcal, 0)
   const minutes = PROFILE.historyMinutes + exercises.reduce((sum, exercise) => sum + exercise.minutes, 0)
   const sessions = PROFILE.historySessions + exercises.length
-  const weekValues = days.map((day, index) => index > todayIndex ? 0 : exercisesOn(exercises, day).reduce((sum, exercise) => sum + exercise.kcal, 0))
-  const weekBurn = weekValues.reduce((sum, value) => sum + value, 0)
+  const energyLabels = text.chartDays.slice(0, todayIndex + 1)
+  const energyValues = days.slice(0, todayIndex + 1).map((day) => exercisesOn(exercises, day).reduce((sum, exercise) => sum + exercise.kcal, 0))
+  const weekBurn = energyValues.reduce((sum, value) => sum + value, 0)
   const weekCount = exercises.filter((exercise) => days.some((day) => sameUtcDay(new Date(exercise.at), day))).length
+  const weekMinutes = exercises.filter((exercise) => days.some((day) => sameUtcDay(new Date(exercise.at), day))).reduce((sum, exercise) => sum + exercise.minutes, 0)
   const percent = Math.round((weekBurn / PROFILE.weekBurnTarget) * 100)
-  const message = percent >= 100
+  const energyLead = percent >= 100
     ? text.exercise.exceeded.replace('{percent}', String(percent - 100))
     : text.exercise.reached.replace('{percent}', String(percent))
-  const counts = new Map<MealGroup, number>()
-  exercises.forEach((exercise) => counts.set(exercise.meal, (counts.get(exercise.meal) ?? 0) + 1))
-  let top: MealGroup = 'breakfast'
-  let topCount = 0
-  counts.forEach((count, meal) => {
-    if (count > topCount) {
-      top = meal
-      topCount = count
+  const energyNote = percent >= 100 ? graphics.outstanding : percent >= 70 ? graphics.closer : graphics.every
+  const avgTime = weekMinutes / 7
+  const frequencyLead = avgTime > 30 ? graphics.excellent : avgTime > 15 ? graphics.goodProgress : graphics.room
+  const frequencyNote = avgTime > 30 ? graphics.dedication : avgTime > 15 ? graphics.routine : graphics.increase
+  const loggedDays = days.filter((day, index) => index <= todayIndex && exercisesOn(exercises, day).length > 0)
+  const frequencyLabels = loggedDays.map((day) => formatShort(day.toISOString(), lang))
+  const gymLabel = lang === 'es' ? 'Gimnasio' : 'Gym'
+  const frequencySeries: ChartSeries[] = [
+    {
+      id: 'gym',
+      label: gymLabel,
+      color: 'hsl(var(--chart-1))',
+      values: loggedDays.map((day) => exercisesOn(exercises, day).filter((exercise) => exerciseKind(exercise) === 'gym').reduce((sum, exercise) => sum + exercise.minutes, 0))
+    },
+    {
+      id: 'cardio',
+      label: 'Cardio',
+      color: 'hsl(var(--chart-2))',
+      values: loggedDays.map((day) => exercisesOn(exercises, day).filter((exercise) => exerciseKind(exercise) === 'cardio').reduce((sum, exercise) => sum + exercise.minutes, 0))
     }
+  ].filter((series) => series.values.some((value) => value > 0))
+  const timeMeals = ['breakfast', 'lunch', 'snack', 'dinner'] as const
+  const timeCounts = timeMeals.map((meal) => ({
+    meal,
+    sessions: exercises.filter((exercise) => exercise.meal === meal).length
+  }))
+  const topTime = [...timeCounts].sort((a, b) => b.sessions - a.sessions)[0] ?? { meal: 'breakfast' as const, sessions: 0 }
+  const topName = text.meals[topTime.meal]
+  const monthMap = new Map<string, { label: string, kcal: number, minutes: number }>()
+  exercises.forEach((exercise) => {
+    const start = mondayOf(new Date(exercise.at))
+    const end = new Date(start)
+    end.setUTCDate(start.getUTCDate() + 6)
+    const key = start.toISOString()
+    const current = monthMap.get(key) ?? {
+      label: `${formatShort(start.toISOString(), lang)} - ${formatShort(end.toISOString(), lang)}`,
+      kcal: 0,
+      minutes: 0
+    }
+    current.kcal += exercise.kcal
+    current.minutes += exercise.minutes
+    monthMap.set(key, current)
   })
+  const monthPoints = [...monthMap.entries()].sort((a, b) => a[0].localeCompare(b[0])).map((entry) => entry[1])
+  const monthBurn = monthPoints.reduce((sum, point) => sum + point.kcal, 0)
+  const monthPercent = Math.round((monthBurn / PROFILE.weekBurnTarget) * 100)
+  const monthLead = monthPercent >= 100
+    ? graphics.exceededMonth.replace('{percent}', String(monthPercent - 100))
+    : graphics.reachedMonth.replace('{percent}', String(monthPercent))
+  const monthNote = monthPercent >= 100 ? graphics.outstandingMonth : monthPercent >= 70 ? graphics.greatMonth : graphics.keepGoing
   const cards = [
     { name: text.exercise.cards.burned, value: `${formatNum(burned, lang)} ${text.units.kcal}`, icon: Flame },
     { name: text.exercise.cards.time, value: formatDuration(minutes), icon: Clock },
     { name: text.exercise.cards.avg, value: formatDuration(Math.round(minutes / Math.max(sessions, 1))), icon: TrendingUp },
     { name: text.exercise.cards.week, value: `${formatNum(weekCount, lang)} ${text.exercise.cards.times}`, icon: Activity }
   ]
-  const sorted = [...exercises].sort((a, b) => b.at.localeCompare(a.at))
-  const visible = category === null ? sorted : sorted.filter((exercise) => exerciseBucket(exercise) === category)
+
+  function onTabsKey (event: KeyboardEvent<HTMLDivElement>) {
+    const index = tabs.findIndex((item) => item.id === tab)
+    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
+    event.preventDefault()
+    const nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length
+    const next = tabs[nextIndex]!
+    setTab(next.id)
+    document.getElementById(`${base}-tab-${next.id}`)?.focus()
+  }
 
   return (
     <div className='space-y-5 pb-4'>
-      <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-        <h1 className='hidden text-2xl font-bold uppercase sm:block'>{formatLong(anchor, lang)}</h1>
-        <div className='flex flex-wrap justify-center gap-2 sm:justify-end'>
+      <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+        <h1 className='hidden text-xl font-bold uppercase sm:block lg:text-2xl'>{formatLong(anchor, lang)}</h1>
+        <div className='flex w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end'>
           <ChatButtons lang={lang} context='exercise' onOpenChat={onOpenChat} extra='exercise' />
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-3 lg:grid-cols-4'>
+      <div className='mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
         {cards.map((card) => {
           const Icon = card.icon
           return (
@@ -628,47 +648,93 @@ export function ExercisePage ({ lang, exercises, anchor, onOpenChat }: PageProps
                 <h2 className='text-sm font-medium'>{card.name}</h2>
                 <Icon className='h-4 w-4 shrink-0 text-[hsl(var(--muted-foreground))]' aria-hidden='true' />
               </div>
-              <p className='text-xl font-bold tabular-nums sm:text-2xl'>{card.value}</p>
+              <p className='text-2xl font-bold tabular-nums'>{card.value}</p>
             </TkCard>
           )
         })}
       </div>
-      <TkCard className='p-4'>
-        <h2 className='text-lg font-medium'>{text.exercise.energyTitle}</h2>
-        <p className={`mb-2 text-sm ${tk.muted}`}>{text.exercise.energyDesc}</p>
-        <ColumnChart title={text.exercise.energyTitle} labels={text.chartDays} values={weekValues} color='hsl(var(--chart-1))' />
-        <p className='mt-3 text-sm' aria-live='polite'>{message}. {text.exercise.mostActive.replace('{time}', text.meals[top])}</p>
-      </TkCard>
-      <section>
-        <h2 className='mb-2 text-sm font-semibold'>{text.exercise.categories}</h2>
-        <div className='grid grid-cols-3 gap-2 sm:grid-cols-6'>
-          {text.categories.map((name, index) => {
-            const Icon = CATEGORY_ICONS[index] ?? Dumbbell
-            const selected = category === index
-            const count = sorted.filter((exercise) => exerciseBucket(exercise) === index).length
+      <div>
+        <div role='tablist' aria-label={text.exercise.title} className='flex w-fit flex-wrap gap-1' onKeyDown={onTabsKey}>
+          {tabs.map((item) => {
+            const selected = tab === item.id
             return (
               <button
-                key={name}
+                key={item.id}
+                id={`${base}-tab-${item.id}`}
                 type='button'
-                aria-pressed={selected}
-                onClick={() => setCategory(selected ? null : index)}
-                className={`flex h-24 flex-col items-center justify-center gap-1 rounded-lg border px-1 text-center text-xs transition-colors motion-reduce:transition-none sm:h-28 ${focusRing} ${selected ? 'border-[hsl(var(--foreground))] bg-[hsl(var(--foreground)/0.12)]' : 'border-[hsl(var(--border))] bg-[hsl(var(--foreground)/0.06)] hover:bg-[hsl(var(--foreground)/0.12)]'}`}
+                role='tab'
+                aria-selected={selected}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setTab(item.id)}
+                className={`inline-flex min-h-11 min-w-11 flex-grow items-center rounded-md px-3 text-xs sm:flex-grow-0 sm:text-sm ${focusRing} ${selected ? 'bg-[hsl(var(--border))] text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
               >
-                <Icon className='h-7 w-7 text-[hsl(var(--foreground)/0.8)]' aria-hidden='true' />
-                <span className='line-clamp-2'>{name}</span>
-                <span className='text-sm font-semibold tabular-nums'>{count}</span>
+                {item.label}
               </button>
             )
           })}
         </div>
-      </section>
-      <section className='space-y-2' aria-label={text.exercise.title}>
-        <p className='sr-only' aria-live='polite'>
-          {category === null ? '' : `${text.categories[category]}: ${visible.length}`}
-        </p>
-        {visible.length === 0 && <p className={`text-sm ${tk.muted}`}>{text.noCategory}</p>}
-        {visible.map((exercise) => <ExerciseRow key={exercise.id} exercise={exercise} lang={lang} />)}
-      </section>
+        <TkCard className='mt-4 p-4'>
+          {tab === 'energy' && (
+            <div role='tabpanel' aria-labelledby={`${base}-tab-energy`}>
+              <h2 className='text-lg font-medium'>{text.exercise.energyTitle}</h2>
+              <p className={`mb-2 text-sm ${tk.muted}`}>{text.exercise.energyDesc}</p>
+              <ColumnChart title={graphics.caloriesBurned} labels={energyLabels} values={energyValues} color='hsl(var(--chart-1))' />
+              <ChartNote lead={energyLead} note={energyNote} />
+            </div>
+          )}
+          {tab === 'frequency' && (
+            <div role='tabpanel' aria-labelledby={`${base}-tab-frequency`}>
+              <h2 className='text-lg font-medium'>{graphics.frequencyTitle}</h2>
+              <p className={`mb-2 text-sm ${tk.muted}`}>{graphics.frequencyDesc}</p>
+              {frequencyLabels.length > 0 && (
+                <StackedAreaChart title={graphics.frequencyTitle} labels={frequencyLabels} series={frequencySeries} />
+              )}
+              <ChartNote lead={frequencyLead} note={frequencyNote} trend={avgTime > 15} />
+            </div>
+          )}
+          {tab === 'time' && (
+            <div role='tabpanel' aria-labelledby={`${base}-tab-time`}>
+              <h2 className='text-lg font-medium'>{graphics.timeTitle}</h2>
+              <p className={`mb-3 text-sm ${tk.muted}`}>{graphics.timeDesc}</p>
+              <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+                {timeCounts.map((item) => {
+                  const Icon = TIME_ICONS[item.meal]
+                  return (
+                    <TkCard key={item.meal} className='bg-slate-200'>
+                      <div className='flex flex-col items-center justify-center p-6 text-center'>
+                        <Icon className='mb-2 h-8 w-8 text-[hsl(var(--primary))]' aria-hidden='true' />
+                        <h3 className='text-lg font-semibold'>{text.meals[item.meal]}</h3>
+                        <p className='text-2xl font-bold tabular-nums'>{item.sessions}</p>
+                        <p className={`text-sm ${tk.muted}`}>{graphics.sessions}</p>
+                      </div>
+                    </TkCard>
+                  )
+                })}
+              </div>
+              <ChartNote
+                lead={topTime.sessions > 0 ? text.exercise.mostActive.replace('{time}', topName) : graphics.noActive}
+                note={topTime.sessions > 0 ? graphics.greatJob.replace('{time}', topName) : graphics.couch}
+                trend={topTime.sessions > 0}
+              />
+            </div>
+          )}
+          {tab === 'progress' && (
+            <div role='tabpanel' aria-labelledby={`${base}-tab-progress`}>
+              <h2 className='text-lg font-medium'>{graphics.progressTitle}</h2>
+              <p className={`mb-2 text-sm ${tk.muted}`}>{graphics.progressDesc}</p>
+              {monthPoints.length > 0 && (
+                <DualLineChart
+                  title={graphics.progressTitle}
+                  labels={monthPoints.map((point) => point.label)}
+                  left={{ id: 'energy', label: graphics.energyKcal, color: 'hsl(var(--chart-1))', values: monthPoints.map((point) => point.kcal) }}
+                  right={{ id: 'time', label: graphics.timeMinutes, color: 'hsl(var(--chart-2))', values: monthPoints.map((point) => point.minutes) }}
+                />
+              )}
+              <ChartNote lead={monthLead} note={monthNote} />
+            </div>
+          )}
+        </TkCard>
+      </div>
     </div>
   )
 }
@@ -759,17 +825,20 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
             </div>
           </div>
           <label className='space-y-2 text-sm font-medium'>
-            <span className='block'>{text.diary.date}</span>
-            <select value={date} onChange={(event) => setDate(event.target.value)} className={`h-11 min-h-11 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
+            <span className='mb-2 block'>{text.diary.date}</span>
+            <span className='relative block'>
+            <Calendar className='pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-[hsl(var(--muted-foreground))]' aria-hidden='true' />
+            <select value={date} onChange={(event) => setDate(event.target.value)} className={`h-11 min-h-11 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] pl-8 pr-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
               <option value='all'>{text.diary.allDates}</option>
               {dates.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
+            </span>
           </label>
           <label className='space-y-2 text-sm font-medium'>
             <span className='block'>{text.diary.diaryGroup}</span>
             <select value={group} onChange={(event) => setGroup(event.target.value)} className={`h-11 min-h-11 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
               <option value='all'>{text.diary.allGroups}</option>
-              {MEAL_ORDER.map((meal) => <option key={meal} value={meal}>{text.meals[meal]}</option>)}
+              {MEAL_ORDER.filter((meal) => meal !== 'uncategorized').map((meal) => <option key={meal} value={meal}>{text.meals[meal]}</option>)}
             </select>
           </label>
         </div>
@@ -815,17 +884,17 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
                   </div>
                   {entry.kind === 'meal' && (
                     <div className='mt-2 flex flex-wrap gap-2'>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.kcal ?? 0)} {text.diary.kcal}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Drumstick className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{Math.round(entry.protein ?? 0)}{text.units.g} {text.diary.protein}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><EggFried className='mr-1 h-4 w-4 text-yellow-500' aria-hidden='true' />{Math.round(entry.fat ?? 0)}{text.units.g} {text.diary.fat}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Wheat className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{Math.round(entry.carbs ?? 0)}{text.units.g} {text.diary.carbs}</span>
+                      <span className='inline-flex items-center rounded-full bg-red-100 px-2 py-1 text-xs font-medium'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.kcal ?? 0)} {text.diary.kcal}</span>
+                      <span className='inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium'><Drumstick className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{Math.round(entry.protein ?? 0)}{text.units.g} {text.diary.protein}</span>
+                      <span className='inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium'><EggFried className='mr-1 h-4 w-4 text-yellow-500' aria-hidden='true' />{Math.round(entry.fat ?? 0)}{text.units.g} {text.diary.fat}</span>
+                      <span className='inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium'><Wheat className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{Math.round(entry.carbs ?? 0)}{text.units.g} {text.diary.carbs}</span>
                     </div>
                   )}
                   {entry.kind === 'exercise' && (
                     <div className='mt-2 flex flex-wrap gap-2'>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.burned ?? 0)} {text.diary.kcalBurned}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Clock className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{entry.minutes} {text.units.min}</span>
-                      <span className='inline-flex items-center rounded-full bg-[hsl(var(--secondary))] px-2 py-1 text-xs font-medium text-[hsl(var(--secondary-foreground))]'><Weight className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{text.diary.effort} {entry.effort}</span>
+                      <span className='inline-flex items-center rounded-full bg-red-100 px-2 py-1 text-xs font-medium'><Flame className='mr-1 h-4 w-4 text-red-500' aria-hidden='true' />{Math.round(entry.burned ?? 0)} {text.diary.kcalBurned}</span>
+                      <span className='inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium'><Clock className='mr-1 h-4 w-4 text-blue-500' aria-hidden='true' />{entry.minutes} {text.units.min}</span>
+                      <span className='inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium'><Weight className='mr-1 h-4 w-4 text-green-500' aria-hidden='true' />{text.diary.effort} {entry.effort}</span>
                     </div>
                   )}
                 </article>
@@ -840,7 +909,7 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
                 </div>
                 <div className='flex flex-wrap justify-center gap-2'>
                   {summary.map((item) => (
-                    <span key={item.label} className='inline-flex items-center gap-1 rounded-full bg-[hsl(var(--border))] px-2 py-1 text-xs'>
+                    <span key={item.label} className='inline-flex items-center gap-1 rounded-full bg-[hsl(var(--accent))] px-2 py-1 text-xs text-[hsl(var(--accent-foreground))]'>
                       <item.icon className='h-4 w-4' aria-hidden='true' /> {item.label}: {item.value}
                     </span>
                   ))}

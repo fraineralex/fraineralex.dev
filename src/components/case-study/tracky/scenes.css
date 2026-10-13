@@ -15,6 +15,44 @@
 	}
 }
 
+/* Fixed 16:10 desktop frame. Mobile keeps a reserved height so the page does not shift. */
+.tracky-slot {
+	width: 100%;
+	height: 360px;
+}
+
+@media (min-width: 390px) {
+	.tracky-slot {
+		height: 390px;
+	}
+}
+
+@media (min-width: 768px) {
+	.tracky-slot {
+		height: auto;
+		aspect-ratio: 16 / 10;
+	}
+}
+
+.tracky-mac {
+	height: 100%;
+}
+
+.tracky-mac > div.rounded-xl {
+	display: flex;
+	height: 100%;
+	min-height: 0;
+	flex-direction: column;
+}
+
+.tracky-mac > div.rounded-xl > div:last-child {
+	display: flex;
+	min-height: 0;
+	flex: 1 1 auto;
+	flex-direction: column;
+	overflow: hidden;
+}
+
 /* Scoped to the embedded Tracky UI, independent of the portfolio theme. */
 .tracky-light {
 	--background: 140 43% 96%;

@@ -49,7 +49,7 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
   }, [])
 
   return (
-    <header className='flex items-center justify-between gap-2 px-3 pb-2 pt-4 sm:px-5 sm:pt-6'>
+    <header className='flex shrink-0 items-center justify-between gap-2 px-3 pb-2 pt-4 sm:px-5 sm:pt-6'>
       <div className='flex min-w-0 items-center gap-2'>
         <p className='font-serif text-2xl font-bold tracking-tight text-[#22c55e] sm:text-3xl' style={{ fontFamily: 'Georgia, "Iowan Old Style", Palatino, serif' }}>
           trac<span className='text-[hsl(var(--foreground))]'>ky</span>
@@ -161,10 +161,10 @@ export default function TrackyFrame ({
 }) {
   const text = copy[lang]
   return (
-    <section aria-label={text.appLabel} className='w-full max-w-full'>
-      <MacWindow light url={`tracky.fit/${PATHS[page]}`}>
-      <div className={`tracky-light ${tk.bg} ${tk.fg}`}>
-      <div className='relative flex h-[640px] max-h-[85vh] min-h-[520px] flex-col sm:h-[700px]'>
+    <section aria-label={text.appLabel} className='tracky-slot max-w-full'>
+      <MacWindow className='tracky-mac h-full' light url={`tracky.fit/${PATHS[page]}`}>
+      <div className={`tracky-light flex h-full min-h-0 flex-col ${tk.bg} ${tk.fg}`}>
+      <div className='relative flex h-full min-h-0 flex-col'>
         <Header lang={lang} onLang={onLang} />
         <div className='flex min-h-0 flex-1 flex-col md:flex-row'>
           <SideNav lang={lang} page={page} onPage={onPage} />
@@ -172,7 +172,7 @@ export default function TrackyFrame ({
             {children}
           </div>
         </div>
-        <p className={`border-t px-3 py-1.5 text-[10px] leading-snug ${tk.border} ${tk.muted}`}>{text.sampleCaption}</p>
+        <p className={`shrink-0 border-t px-3 py-1.5 text-[10px] leading-snug ${tk.border} ${tk.muted}`}>{text.sampleCaption}</p>
         {overlay}
       </div>
       </div>

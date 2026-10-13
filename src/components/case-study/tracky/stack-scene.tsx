@@ -49,11 +49,11 @@ const COPY = {
 	},
 	es: {
 		kicker: 'App Router',
-		title: 'Baja por el stack y vuelve',
+		title: 'Baja por las capas y vuelve',
 		hops: [
-			'Registras la comida en la UI.',
-			'La Server Action la recibe.',
-			'El AI SDK llama al modelo.',
+			'Registras la comida en la interfaz.',
+			'La acción de servidor la recibe.',
+			'El SDK de IA llama al modelo.',
 			'Drizzle escribe en Postgres.',
 			'La respuesta sube de vuelta.',
 			'El diario se actualiza.',

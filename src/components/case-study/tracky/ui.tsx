@@ -17,9 +17,9 @@ export const tk = {
 }
 
 const sizes = {
-  default: 'h-9 px-4 py-2',
-  sm: 'h-8 rounded-md px-3 text-xs',
-  icon: 'h-9 w-9'
+  default: 'min-h-11 min-w-11 px-4 py-2',
+  sm: 'min-h-11 min-w-11 rounded-md px-3 text-xs',
+  icon: 'min-h-11 min-w-11'
 }
 
 const variants = {

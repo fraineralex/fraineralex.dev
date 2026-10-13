@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useId, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import {
   Activity,
   Bike,
@@ -71,6 +71,33 @@ interface PageProps extends SimHandlers {
 }
 
 const MEAL_ORDER: MealGroup[] = ['breakfast', 'lunch', 'snack', 'dinner', 'uncategorized']
+
+/** Painted cell stays the same size. The control is at least 44px and sits out of flow so the row does not grow. */
+function DayTarget ({
+  label,
+  onSelect,
+  className,
+  children,
+  style
+}: {
+  label: string
+  onSelect: () => void
+  className: string
+  children?: ReactNode
+  style?: CSSProperties
+}) {
+  return (
+    <div className={`relative ${className}`} style={style}>
+      {children}
+      <button
+        type='button'
+        aria-label={label}
+        onClick={onSelect}
+        className={`absolute left-1/2 top-1/2 z-10 h-11 w-full min-w-11 -translate-x-1/2 -translate-y-1/2 rounded-md bg-transparent focus-visible:z-20 ${focusRing}`}
+      />
+    </div>
+  )
+}
 
 function neededOf (key: 'kcal' | 'protein' | 'carbs' | 'fat') {
   if (key === 'kcal') return GOALS.kcal
@@ -164,12 +191,11 @@ function NutritionGraphic ({ foods, anchor, lang }: { foods: FoodEntry[], anchor
                 const label = `${text.days[index]}, ${names[key]}, ${Math.round(info.percent)}%. ${text.nutrition.consumed} ${formatNum(info.consumed, lang)} / ${formatNum(info.needed, lang)}`
                 const fill = Math.max(0, Math.min(100, info.percent))
                 return (
-                  <button
+                  <DayTarget
                     key={day.toISOString()}
-                    type='button'
-                    aria-label={label}
-                    onClick={() => setDetail(label)}
-                    className={`h-6 rounded-md sm:h-8 ${focusRing}`}
+                    label={label}
+                    onSelect={() => setDetail(label)}
+                    className='h-6 rounded-md sm:h-8'
                     style={{ background: `linear-gradient(to top, hsl(var(--foreground) / ${index === todayIndex ? 0.9 : 0.5}) ${fill}%, hsl(var(--foreground) / 0.18) ${fill}%)` }}
                   />
                 )
@@ -181,15 +207,14 @@ function NutritionGraphic ({ foods, anchor, lang }: { foods: FoodEntry[], anchor
               const value = score(index)
               const label = `${text.days[index]} ${Math.round(value)}%`
               return (
-                <button
+                <DayTarget
                   key={day.toISOString()}
-                  type='button'
-                  aria-label={label}
-                  onClick={() => setDetail(label)}
-                  className={`rounded-md py-1 text-center text-[11px] sm:text-xs ${focusRing} ${index === todayIndex ? 'border-2 border-[hsl(var(--foreground))] font-semibold' : tk.muted}`}
+                  label={label}
+                  onSelect={() => setDetail(label)}
+                  className={`rounded-md py-1 text-center text-[11px] sm:text-xs ${index === todayIndex ? 'border-2 border-[hsl(var(--foreground))] font-semibold' : tk.muted}`}
                 >
-                  {text.daysShort[index]}
-                </button>
+                  <span aria-hidden='true'>{text.daysShort[index]}</span>
+                </DayTarget>
               )
             })}
           </div>
@@ -345,7 +370,7 @@ function FoodCharts ({ foods, anchor, lang }: { foods: FoodEntry[], anchor: stri
               aria-selected={selected}
               tabIndex={selected ? 0 : -1}
               onClick={() => setTab(item.id)}
-              className={`rounded-md px-3 py-1.5 text-xs sm:text-sm ${focusRing} ${selected ? 'bg-[hsl(var(--border))] text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
+              className={`inline-flex min-h-11 min-w-11 items-center rounded-md px-3 text-xs sm:text-sm ${focusRing} ${selected ? 'bg-[hsl(var(--border))] text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
             >
               {item.label}
             </button>
@@ -735,14 +760,14 @@ export function DiaryPage ({ lang, foods, exercises, notes, anchor }: PageProps)
           </div>
           <label className='space-y-2 text-sm font-medium'>
             <span className='block'>{text.diary.date}</span>
-            <select value={date} onChange={(event) => setDate(event.target.value)} className={`h-9 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
+            <select value={date} onChange={(event) => setDate(event.target.value)} className={`h-11 min-h-11 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
               <option value='all'>{text.diary.allDates}</option>
               {dates.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
           </label>
           <label className='space-y-2 text-sm font-medium'>
             <span className='block'>{text.diary.diaryGroup}</span>
-            <select value={group} onChange={(event) => setGroup(event.target.value)} className={`h-9 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
+            <select value={group} onChange={(event) => setGroup(event.target.value)} className={`h-11 min-h-11 w-full rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-2 text-sm text-[hsl(var(--foreground))] sm:w-[200px] [&>option]:bg-[hsl(var(--card))] ${focusRing}`}>
               <option value='all'>{text.diary.allGroups}</option>
               {MEAL_ORDER.map((meal) => <option key={meal} value={meal}>{text.meals[meal]}</option>)}
             </select>

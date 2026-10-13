@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { focusRing, tk } from './ui'
 
+const dayChip = `inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 text-[11px] transition-colors motion-reduce:transition-none ${focusRing}`
+
 export interface LineSeries {
   id: string
   label: string
@@ -71,7 +73,7 @@ export function LineChart ({ title, labels, series, describedBy, yMin = 0, yMax 
             key={`${label}-${index}`}
             type='button'
             aria-pressed={index === safeActive}
-            className={`rounded-full px-2 py-1 text-[11px] transition-colors motion-reduce:transition-none ${focusRing} ${index === safeActive ? 'bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]' : `${tk.muted} hover:bg-[hsl(var(--accent))]`}`}
+            className={`${dayChip} ${index === safeActive ? 'bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]' : `${tk.muted} hover:bg-[hsl(var(--accent))]`}`}
             onClick={() => setActive(index)}
           >
             {label}
@@ -155,7 +157,7 @@ export function ColumnChart ({ title, labels, values, color }: { title: string, 
             type='button'
             aria-pressed={index === safeActive}
             onClick={() => setActive(index)}
-            className={`rounded-full px-2 py-1 text-[11px] motion-reduce:transition-none ${focusRing} ${index === safeActive ? 'bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
+            className={`${dayChip} ${index === safeActive ? 'bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))]'}`}
           >
             {label}
           </button>

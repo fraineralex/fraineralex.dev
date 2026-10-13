@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
-import { Bot, Gauge, NotebookPen, Salad } from 'lucide-react'
 import { BackLink, Chapter, Decisions, Hero, Outro, P, Shell, Stage, Statement } from '../kit/layout'
-import { StageCaption, Tiles } from '../kit/blocks'
+import { StageCaption } from '../kit/blocks'
+import { PageTiles } from '../tracky/page-tiles'
 import { SentenceScene } from '../tracky/sentence-scene'
 import { StackScene } from '../tracky/stack-scene'
 import { backLink, type Lang } from './shared'
@@ -25,7 +25,7 @@ const COPY = {
 		],
 		caption: 'Signed in as Frainer Encarnación. The interface is recreated from the Tracky repository and runs on sample data in your browser. Nothing is sent anywhere.',
 		c1: {
-			title: 'Logging a breakfast should not take ten taps',
+			title: 'Logging a breakfast should stay short',
 			body: [
 				'Most fitness apps bury simple logging under feature bloat. I wanted a tracker that stays out of the way: log what you ate or trained, see your progress against your goal, and move on.',
 				'So I kept the surface small on purpose. Each page has one job.',
@@ -33,7 +33,7 @@ const COPY = {
 		},
 		tiles: [
 			{ title: 'Dashboard', body: 'Progress, personal stats and quick access to the main actions, with charts for trends.' },
-			{ title: 'Food', body: 'Food intake and macros, with the AI chat one click away.' },
+			{ title: 'Food', body: 'Food intake and macros, with the AI chat on the same page.' },
 			{ title: 'Exercise', body: 'Workouts with type, duration and intensity, or let the chat add them for you.' },
 			{ title: 'Diary', body: 'A daily log of meals and workouts you can search and filter.' },
 		],
@@ -74,11 +74,11 @@ const COPY = {
 		outro: { title: 'See it live', note: 'Tracky is in beta at tracky.fit and the full source is on GitHub under the MIT license.' },
 	},
 	es: {
-		lede: 'Un tracker de fitness minimalista que diseñé y construí por mi cuenta. Se queda con lo esencial (comidas, entrenamientos, progreso y metas) y suma un chat con IA que convierte una frase normal en entradas del diario. Es open source y está en vivo en tracky.fit, con más de 100 usuarios activos.',
+		lede: 'Un tracker de fitness minimalista que diseñé y construí por mi cuenta. Se queda con lo esencial (comidas, entrenamientos, progreso y metas) y suma un chat con IA que convierte una frase normal en entradas del diario. Es código abierto y está en vivo en tracky.fit, con más de 100 usuarios activos.',
 		facts: [
 			{ label: 'Rol', value: 'Desarrollador único' },
 			{ label: 'Año', value: '2024' },
-			{ label: 'Stack', value: 'Next.js 15, Drizzle, OpenAI' },
+			{ label: 'Tecnologías', value: 'Next.js 15, Drizzle, OpenAI' },
 			{ label: 'Estado', value: 'Beta en tracky.fit' },
 		],
 		links: [
@@ -87,15 +87,15 @@ const COPY = {
 		],
 		caption: 'Sesión iniciada como Frainer Encarnación. La interfaz está recreada a partir del repositorio de Tracky y funciona con datos de ejemplo en tu navegador. No se envía nada.',
 		c1: {
-			title: 'Registrar un desayuno no debería tomar diez toques',
+			title: 'Registrar un desayuno debería ser breve',
 			body: [
 				'La mayoría de las apps de fitness esconden lo básico bajo un montón de funciones. Yo quería un tracker que no estorbe: registras lo que comiste o entrenaste, ves tu progreso contra tu meta y sigues con tu día.',
 				'Por eso mantuve la app pequeña a propósito. Cada página tiene un solo trabajo.',
 			],
 		},
 		tiles: [
-			{ title: 'Dashboard', body: 'Progreso, estadísticas personales y acceso rápido a las acciones principales, con gráficos de tendencia.' },
-			{ title: 'Comida', body: 'Consumo y macros, con el chat de IA a un clic.' },
+			{ title: 'Panel', body: 'Progreso, estadísticas personales y acceso rápido a las acciones principales, con gráficos de tendencia.' },
+			{ title: 'Comida', body: 'Consumo y macros, con el chat de IA en la misma página.' },
 			{ title: 'Ejercicio', body: 'Entrenamientos con tipo, duración e intensidad, o deja que el chat los agregue.' },
 			{ title: 'Diario', body: 'Un registro diario de comidas y entrenamientos que puedes buscar y filtrar.' },
 		],
@@ -108,36 +108,34 @@ const COPY = {
 		},
 		steps: [
 			{ title: 'Escribes', body: 'En el chat de Comida escribes algo como "dos huevos y un guineo de desayuno".' },
-			{ title: 'Llamada al modelo', body: 'Una llamada del lado del servidor con el Vercel AI SDK envía el mensaje a la API de OpenAI y pide una salida estructurada.', tag: 'ai sdk' },
+			{ title: 'Llamada al modelo', body: 'Una llamada del lado del servidor con el Vercel AI SDK envía el mensaje a la API de OpenAI y pide una salida estructurada.', tag: 'sdk de ia' },
 			{ title: 'Entrada estructurada', body: 'La respuesta se convierte en las entradas de comida que Tracky entiende, con sus valores nutricionales.' },
-			{ title: 'Guardado', body: 'Una Server Action guarda las entradas en Postgres con Drizzle, asociadas al usuario de Clerk.', tag: 'server action' },
-			{ title: 'Diario y dashboard', body: 'El diario y el dashboard se actualizan, así el progreso hacia la meta del día cambia al instante.' },
+			{ title: 'Guardado', body: 'Una acción de servidor guarda las entradas en Postgres con Drizzle, asociadas al usuario de Clerk.', tag: 'acción de servidor' },
+			{ title: 'Diario y panel', body: 'El diario y el panel se actualizan, así el progreso hacia la meta del día cambia al instante.' },
 		],
 		flowNote: 'Flujo ilustrativo basado en el README del proyecto.',
 		c3: {
 			title: 'Un solo framework, sin API aparte',
 			body: [
-				'Empecé con create-t3-app y migré al App Router de Next.js 15 con React 19. Las mutaciones pasan por Server Actions y el Partial Prerendering muestra al instante las partes estáticas mientras llegan los datos del usuario.',
+				'Empecé con create-t3-app y migré al App Router de Next.js 15 con React 19. Las mutaciones pasan por acciones de servidor y el Partial Prerendering muestra al instante las partes estáticas mientras llegan los datos del usuario.',
 			],
 		},
 		layers: [
 			{ title: 'Cliente', items: [{ name: 'React 19 + shadcn/ui', detail: 'Tailwind y primitivas de Radix para una interfaz mínima y accesible.' }, { name: 'Framer Motion', detail: 'Transiciones pequeñas entre estados.' }] },
-			{ title: 'Servidor', items: [{ name: 'Next.js 15 App Router', detail: 'Rutas, Partial Prerendering y Server Actions.' }, { name: 'Vercel AI SDK', detail: 'Envuelve las llamadas a OpenAI detrás del chat.' }] },
-			{ title: 'Servicios', items: [{ name: 'Clerk', detail: 'Autenticación y gestión de usuarios.' }, { name: 'Drizzle + Neon Postgres', detail: 'Esquema y consultas tipadas sobre Postgres serverless.' }, { name: 'Cloudflare R2', detail: 'Almacenamiento de archivos y recursos.' }] },
+			{ title: 'Servidor', items: [{ name: 'Next.js 15 App Router', detail: 'Rutas, Partial Prerendering y acciones de servidor.' }, { name: 'Vercel AI SDK', detail: 'Envuelve las llamadas a OpenAI detrás del chat.' }] },
+			{ title: 'Servicios', items: [{ name: 'Clerk', detail: 'Autenticación y gestión de usuarios.' }, { name: 'Drizzle + Neon Postgres', detail: 'Esquema y consultas tipadas sobre Postgres sin servidor.' }, { name: 'Cloudflare R2', detail: 'Almacenamiento de archivos y recursos.' }] },
 		],
-		layersCaption: 'Basado en el stack que aparece en el README del repositorio.',
+		layersCaption: 'Basado en las tecnologías que aparecen en el README del repositorio.',
 		statement: 'Construí Tracky solo: alcance del producto, interfaz, modelo de datos, integración con IA, autenticación, CI y despliegue.',
 		decisionsTitle: 'Decisiones',
 		decisions: [
-			{ decision: 'Server Actions en vez de una API aparte', rationale: 'Tener las mutaciones junto a la interfaz me ahorró código repetido en un proyecto individual. El costo es que la lógica queda atada a Next.js.' },
+			{ decision: 'Acciones de servidor en vez de una API aparte', rationale: 'Tener las mutaciones junto a la interfaz me ahorró código repetido en un proyecto individual. El costo es que la lógica queda atada a Next.js.' },
 			{ decision: 'El chat como atajo, no como única entrada', rationale: 'El chat acelera el registro, pero los formularios siguen ahí cuando quieres valores exactos.' },
-			{ decision: 'Menos funciones a propósito', rationale: 'Dejé fuera feeds sociales y gamificación para que la app se enfoque en registrar y ver progreso.' },
+			{ decision: 'Menos funciones a propósito', rationale: 'Dejé fuera las redes sociales y la gamificación para que la app se enfoque en registrar y ver progreso.' },
 		],
 		outro: { title: 'Míralo en vivo', note: 'Tracky está en beta en tracky.fit y el código completo está en GitHub con licencia MIT.' },
 	},
 } as const
-
-const ICONS = [<Gauge key='g' className='size-4' aria-hidden />, <Salad key='s' className='size-4' aria-hidden />, <Bot key='b' className='size-4' aria-hidden />, <NotebookPen key='n' className='size-4' aria-hidden />]
 
 export default function TrackyCaseStudy({ lang }: { lang: Lang }) {
 	const t = COPY[lang]
@@ -156,7 +154,7 @@ export default function TrackyCaseStudy({ lang }: { lang: Lang }) {
 				))}
 			</Chapter>
 			<Stage>
-				<Tiles cols={4} items={t.tiles.map((tile, i) => ({ ...tile, icon: ICONS[i] }))} />
+				<PageTiles lang={lang} items={t.tiles.map((tile) => ({ title: tile.title, body: tile.body }))} />
 			</Stage>
 
 			<Chapter n='02' title={t.c2.title}>

@@ -13,6 +13,7 @@ import {
 	typed,
 	useSceneTimeline,
 } from '../kit/scene'
+import { PROFILE } from './data'
 import './scenes.css'
 
 const DURATION = 12000
@@ -258,7 +259,7 @@ function Chat({ copy, message, caret, send, tokens }: { copy: Copy; message: str
 					</p>
 					<span className='mt-1 block text-right text-[10px] uppercase tracking-wide text-[hsl(var(--muted-foreground))]'>08:12</span>
 				</div>
-				<img src='/images/projects/viollet-user.webp' alt='' className='h-7 w-7 shrink-0 rounded-full object-cover' />
+				<img src='/images/projects/viollet-user.webp' alt={PROFILE.name} className='h-7 w-7 shrink-0 rounded-full object-cover' />
 			</div>
 			<div className='mt-2 h-16 shrink-0 font-mono text-[11px] leading-4 text-[hsl(var(--chart-3))]'>
 				{TOKENS.map((token, index) => {

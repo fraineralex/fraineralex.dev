@@ -9,6 +9,7 @@ import {
   matchPreset,
   materialize,
   nameOf,
+  PROFILE,
   type ExerciseEntry,
   type FoodEntry
 } from './data'
@@ -318,7 +319,7 @@ export default function AiChat ({
                 <button
                   type='button'
                   role='menuitem'
-                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing}`}
+                  className={`flex min-h-11 w-full items-center rounded-sm px-2 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing}`}
                   onClick={() => {
                     clearTimers()
                     setMessages([])
@@ -358,7 +359,7 @@ export default function AiChat ({
                       <p className='whitespace-pre-wrap break-words'>{message.text}</p>
                       <span className={`mt-2 block text-right text-[10px] uppercase tracking-wide ${tk.muted}`}>{formatTime(message.at, lang)}</span>
                     </div>
-                    <img src='/images/projects/viollet-user.webp' alt='' className='h-7 w-7 rounded-full object-cover' />
+                    <img src='/images/projects/viollet-user.webp' alt={PROFILE.name} className='h-7 w-7 rounded-full object-cover' />
                   </div>
                 ) : (
                   <div className='space-y-2'>
@@ -391,7 +392,7 @@ export default function AiChat ({
               type='button'
               disabled={busy}
               onClick={() => send(preset.label)}
-              className={`max-w-full rounded-full border border-[hsl(var(--border))] px-3 py-1.5 text-left text-xs text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50 ${focusRing}`}
+              className={`inline-flex min-h-11 min-w-11 max-w-full items-center rounded-full border border-[hsl(var(--border))] px-3 text-left text-xs text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50 ${focusRing}`}
             >
               {preset.label}
             </button>

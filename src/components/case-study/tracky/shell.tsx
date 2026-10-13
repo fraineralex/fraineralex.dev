@@ -62,7 +62,7 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
           target='_blank'
           rel='noreferrer'
           aria-label={text.github}
-          className={`inline-flex h-9 w-9 items-center justify-center rounded-md ${tk.ghost} ${focusRing}`}
+          className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md ${tk.ghost} ${focusRing}`}
         >
           <Github className='h-5 w-5' />
         </a>
@@ -78,7 +78,7 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
                   type='button'
                   role='menuitemradio'
                   aria-checked={lang === code}
-                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing} ${lang === code ? 'text-[#22c55e]' : ''}`}
+                  className={`flex min-h-11 w-full items-center rounded-sm px-2 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing} ${lang === code ? 'text-[#22c55e]' : ''}`}
                   onClick={() => { onLang(code); setLangOpen(false) }}
                 >
                   {text.languages[code]}
@@ -99,7 +99,7 @@ function Header ({ lang, onLang }: { lang: Lang, onLang: (lang: Lang) => void })
                   type='button'
                   role='menuitemradio'
                   aria-checked={theme === 'light'}
-                  className={`w-full rounded-sm px-2 py-1.5 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing} ${theme === 'light' ? 'text-[#22c55e]' : ''}`}
+                  className={`flex min-h-11 w-full items-center rounded-sm px-2 text-left text-sm hover:bg-[hsl(var(--accent))] ${focusRing} ${theme === 'light' ? 'text-[#22c55e]' : ''}`}
                   onClick={() => {
                     setThemeNote(theme === 'light' ? '' : text.themeNote)
                     setThemeOpen(false)
@@ -132,7 +132,7 @@ function SideNav ({ lang, page, onPage }: { lang: Lang, page: PageId, onPage: (p
               type='button'
               aria-current={active ? 'page' : undefined}
               onClick={() => onPage(item.id)}
-              className={`inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md px-2.5 text-sm transition-colors motion-reduce:transition-none md:justify-start ${focusRing} ${active ? tk.active : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--foreground))]'}`}
+              className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-md px-2.5 text-sm transition-colors motion-reduce:transition-none md:justify-start ${focusRing} ${active ? tk.active : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--foreground))]'}`}
             >
               <Icon className='h-5 w-5 md:h-4 md:w-4' aria-hidden='true' />
               <span className='sr-only sm:not-sr-only sm:text-xs md:text-sm'>{navLabel(item.id, lang)}</span>
@@ -162,7 +162,7 @@ export default function TrackyFrame ({
   const text = copy[lang]
   return (
     <section aria-label={text.appLabel} className='w-full max-w-full'>
-      <MacWindow url={`tracky.fit/${PATHS[page]}`}>
+      <MacWindow light url={`tracky.fit/${PATHS[page]}`}>
       <div className={`tracky-light ${tk.bg} ${tk.fg}`}>
       <div className='relative flex h-[640px] max-h-[85vh] min-h-[520px] flex-col sm:h-[700px]'>
         <Header lang={lang} onLang={onLang} />

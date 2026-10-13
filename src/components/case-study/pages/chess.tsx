@@ -41,7 +41,7 @@ const COPY = {
 			body: [
 				'The engine looks a fixed number of moves ahead and assumes the opponent always plays its best reply. Alpha-beta pruning skips branches that cannot change the final decision, so the same depth costs fewer evaluations.',
 				'The search also watches the clock. When the time limit runs out, it returns the best move found so far instead of freezing the game. The readout next to the board shows nodes visited and branches pruned for every move.',
-				'Porting it to TypeScript, I noticed the minimizing branch never updates beta, so the original code almost never prunes. The lab alternates between the original and the beta update: a completed search picks the same move with fewer nodes. Touch the board to play White, or use the toggle to compare the work yourself.',
+				'Porting it to TypeScript, I noticed the minimizing branch never updates beta, so the original code almost never prunes. The lab alternates between the original and the beta update: a completed search picks the same move with fewer nodes. The engine plays on its own, and the controls let you take over as White or compare the two modes.',
 			],
 		},
 		steps: [
@@ -67,7 +67,7 @@ const COPY = {
 			{ decision: 'Hand written heuristics', rationale: 'Simple tables and rules are easy to read and tune, at the cost of strength compared to modern engines.' },
 			{ decision: 'A library for the rules', rationale: 'python-chess takes care of legal moves, check and mate, so the project could focus on search and evaluation.' },
 		],
-		outro: { title: 'See it play', note: 'There is a demo video and the full source on GitHub. The board above plays automatically. Take over to play White, compare the search modes, then resume autoplay.' },
+		outro: { title: 'See it play', note: 'There is a demo video and the full source on GitHub. The board above plays on its own. The controls let you take over as White, compare the search modes, and resume autoplay.' },
 	},
 	es: {
 		lede: 'Un juego de ajedrez de escritorio donde juegas contra un motor que escribí en Python. Busca con minimax y poda alfa-beta con límite de tiempo, y evalúa las posiciones con material, tablas por casilla y algunas heurísticas extra. Abajo, una versión para el navegador repite una apertura, compara ambos modos de búsqueda y te deja tomar el control con blancas.',
@@ -91,7 +91,7 @@ const COPY = {
 			body: [
 				'El motor mira un número fijo de jugadas hacia adelante y supone que el rival siempre responde con su mejor jugada. La poda alfa-beta descarta ramas que no pueden cambiar la decisión final, así la misma profundidad cuesta menos evaluaciones.',
 				'La búsqueda también vigila el reloj. Cuando se acaba el tiempo, devuelve la mejor jugada encontrada hasta ese momento en vez de congelar el juego. El panel junto al tablero muestra los nodos visitados y las ramas podadas en cada jugada.',
-				'Al portarlo a TypeScript me di cuenta de que la rama minimizadora nunca actualiza beta, así que el código original casi nunca poda. El tablero alterna entre el original y la actualización de beta: una búsqueda completa elige la misma jugada con menos nodos. Toca el tablero para jugar con blancas o usa el selector para comparar el trabajo.',
+				'Al portarlo a TypeScript me di cuenta de que la rama minimizadora nunca actualiza beta, así que el código original casi nunca poda. El tablero alterna entre el original y la actualización de beta: una búsqueda completa elige la misma jugada con menos nodos. El motor juega por su cuenta y los controles permiten tomar el control con blancas o comparar ambos modos.',
 			],
 		},
 		steps: [
@@ -117,7 +117,7 @@ const COPY = {
 			{ decision: 'Heurísticas escritas a mano', rationale: 'Las tablas y reglas simples son fáciles de leer y ajustar, a cambio de menos fuerza que los motores modernos.' },
 			{ decision: 'Una librería para las reglas', rationale: 'python-chess se encarga de las jugadas legales, el jaque y el mate, así el proyecto se pudo enfocar en la búsqueda y la evaluación.' },
 		],
-		outro: { title: 'Míralo jugar', note: 'Hay un video demo y el código completo en GitHub. El tablero de arriba juega automáticamente. Toma el control con blancas, compara los modos de búsqueda y vuelve al autoplay cuando quieras.' },
+		outro: { title: 'Míralo jugar', note: 'Hay un video demo y el código completo en GitHub. El tablero de arriba juega por su cuenta. Los controles permiten tomar el control con blancas, comparar los modos de búsqueda y reanudar la reproducción automática.' },
 	},
 } as const
 
@@ -128,7 +128,9 @@ export default function ChessCaseStudy({ lang }: { lang: Lang }) {
 		<Shell>
 			<BackLink href={back.href} label={back.label} />
 			<Hero title='Chess AI' lede={t.lede} facts={[...t.facts]} links={[...t.links]}>
-				<ChessLab lang={lang} />
+				<div className='min-w-0 max-lg:-mx-6 max-lg:w-[calc(100%+3rem)]'>
+					<ChessLab lang={lang} />
+				</div>
 				<StageCaption>{t.caption}</StageCaption>
 			</Hero>
 

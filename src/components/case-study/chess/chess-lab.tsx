@@ -13,7 +13,7 @@ const GLYPH: Record<string, string> = { K: '♚', Q: '♛', R: '♜', B: '♝', 
 const COPY = {
  en: {
   title: 'Watch, compare, or play White', board: 'Chess board. Arrow keys navigate. Enter or Space selects a piece and its legal destination.',
-  intro: 'An opening plays in a loop. Touch the board or a control to play White against the engine.',
+  intro: 'An opening plays in a loop. The engine plays on its own, and the controls let you take over as White against the engine.',
   note: 'The original minimizing branch never updates beta, so it almost never prunes. With the beta update, a completed search chooses the same move with fewer nodes. Positive evaluation favors Black.',
   original: 'As written', fixed: 'With beta update', pruning: 'Search mode', nodes: 'Nodes visited', pruned: 'Branches pruned',
   depth: 'Depth', theme: 'Piece theme', solid: 'Solid', outline: 'Outline', undo: 'Undo', restart: 'Restart', resume: 'Resume autoplay',
@@ -25,11 +25,11 @@ const COPY = {
  },
  es: {
   title: 'Mira, compara o juega con blancas', board: 'Tablero de ajedrez. Las flechas navegan. Enter o Espacio selecciona una pieza y su destino legal.',
-  intro: 'Una apertura se repite en bucle. Toca el tablero o un control para jugar con blancas contra el motor.',
+  intro: 'Una apertura se repite en bucle. El motor juega por su cuenta y los controles permiten tomar el control para jugar con blancas.',
   note: 'La rama minimizadora original nunca actualiza beta, así que casi nunca poda. Con beta actualizado, una búsqueda completa elige la misma jugada con menos nodos. La evaluación positiva favorece a las negras.',
   original: 'Original', fixed: 'Con beta actualizado', pruning: 'Modo de búsqueda', nodes: 'Nodos visitados', pruned: 'Ramas podadas',
-  depth: 'Profundidad', theme: 'Tema de las piezas', solid: 'Sólido', outline: 'Contorno', undo: 'Deshacer', restart: 'Reiniciar', resume: 'Volver al autoplay',
-  you: 'Tu turno', thinking: 'El motor está buscando…', auto: 'Autoplay', chosen: 'Jugada elegida', ready: 'Posición inicial',
+  depth: 'Profundidad', theme: 'Tema de las piezas', solid: 'Sólido', outline: 'Contorno', undo: 'Deshacer', restart: 'Reiniciar', resume: 'Reanudar la reproducción automática',
+  you: 'Tu turno', thinking: 'El motor está buscando…', auto: 'Reproducción automática', chosen: 'Jugada elegida', ready: 'Posición inicial',
   win: 'Jaque mate. Ganaste.', lose: 'Jaque mate. Gana el motor.', draw: 'Ahogado. Tablas.', evaluation: 'Evaluación',
   timeout: 'Se agotó el tiempo. Mejor jugada encontrada.', complete: 'Ambos modos completaron la búsqueda.', pending: 'Comparando ambos modos…',
   moves: 'Jugadas', empty: 'vacía', white: 'blanco', black: 'negro', keys: 'Las flechas navegan. Enter selecciona. R reinicia. T cambia el tema de las piezas.',
@@ -222,10 +222,10 @@ export default function ChessLab({ lang }: { lang: Lang }) {
   <dt>{t.nodes}</dt><dd className='font-mono tabular-nums'>{entry?.stats.nodes.toLocaleString(lang) ?? '…'}</dd>
   <dt>{t.pruned}</dt><dd className='font-mono tabular-nums'>{entry?.stats.pruned.toLocaleString(lang) ?? '…'}</dd>
  </dl>
- return <SceneFrame timeline={timeline} kicker='minimax.py' title={t.title} caption={t.note}>
-  <div className='grid min-w-0 gap-4 p-3 sm:p-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)]'>
+ return <SceneFrame timeline={timeline} kicker='minimax.py' title={t.title} caption={t.note} flush>
+  <div className='grid min-w-0 gap-4 px-0 py-3 sm:py-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:px-4 lg:py-4'>
    <div className='min-w-0'>
-    <div role='grid' aria-label={t.board} onKeyDown={onKey} className='mx-auto grid aspect-square w-full max-w-[480px] grid-cols-8 grid-rows-8 overflow-hidden rounded-lg'>
+    <div role='grid' aria-label={t.board} onKeyDown={onKey} className='mx-auto grid aspect-square w-full max-w-[480px] grid-cols-8 grid-rows-8 overflow-hidden rounded-none md:rounded-lg'>
      {Array.from({ length: 64 }, (_, index) => {
       const square = (7 - Math.floor(index / 8)) * 8 + index % 8
       const dark = (Math.floor(square / 8) + square % 8) % 2 === 0
@@ -242,11 +242,13 @@ export default function ChessLab({ lang }: { lang: Lang }) {
       </button>
      })}
     </div>
-    <p className='mx-auto mt-3 min-h-[3rem] max-w-[480px] text-xs leading-relaxed text-stone-600'>{t.keys}</p>
-    <p className='h-6 text-center text-sm text-[#486333]' style={{ opacity: !autoplay && pos.turn === 'w' && !result ? 1 : 0 }}>{t.you}</p>
-    <button type='button' className={`${BUTTON} mx-auto mt-2 w-full max-w-[480px] bg-[#EAEBC8]`} style={{ visibility: autoplay ? 'hidden' : 'visible', opacity: autoplay ? 0 : 1 }} onClick={() => { autoRef.current = true; setAutoplay(true); reset(); timeline.replay() }}>{t.resume}</button>
+    <div className='px-6 lg:px-0'>
+     <p className='mx-auto mt-3 min-h-[3rem] max-w-[480px] text-xs leading-relaxed text-stone-600'>{t.keys}</p>
+     <p className='h-6 text-center text-sm text-[#486333]' style={{ opacity: !autoplay && pos.turn === 'w' && !result ? 1 : 0 }}>{t.you}</p>
+     <button type='button' className={`${BUTTON} mx-auto mt-2 w-full max-w-[480px] bg-[#EAEBC8]`} style={{ visibility: autoplay ? 'hidden' : 'visible', opacity: autoplay ? 0 : 1 }} onClick={() => { autoRef.current = true; setAutoplay(true); reset(); timeline.replay() }}>{t.resume}</button>
+    </div>
    </div>
-   <aside className='min-w-0 rounded-lg border border-[#e7e5e4] bg-[#f7f6f2] p-3 sm:p-4'>
+   <aside className='mx-6 min-w-0 rounded-lg border border-[#e7e5e4] bg-[#f7f6f2] p-3 sm:p-4 lg:mx-0'>
     <p className='min-h-[4.5rem] text-sm leading-relaxed'>{t.intro}</p>
     <p role='status' className='flex h-12 items-center text-sm font-semibold text-[#486333]'>{status}</p>
     <Segmented label={t.pruning} value={textbook ? 1 : 0} options={[{ value: 0, label: t.original }, { value: 1, label: t.fixed }]} change={value => { takeover(); modeRef.current = value === 1; setTextbook(value === 1) }} />

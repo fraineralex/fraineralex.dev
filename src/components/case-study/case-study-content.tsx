@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import TradeoffsScene from './viollet/tradeoffs-scene'
+import PromoVideo from './viollet/promo-video'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { FiArrowLeft, FiExternalLink } from 'react-icons/fi'
@@ -172,6 +173,7 @@ export default function CaseStudyPageContent ({ content, lang }: Props) {
             </p>
           </div>
           <AppReplica copy={interactives.app} lang={lang} posterAlt={sections.proof.screenshotAlt} />
+          <PromoVideo lang={lang} />
         </section>
 
         <SectionBlock section={sections.context}>
